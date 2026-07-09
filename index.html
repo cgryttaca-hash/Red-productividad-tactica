@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda de Eventos</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div id="loader" aria-hidden="true">
+    <span class="loader-spinner"></span>
+  </div>
+
+  <aside id="sidebar" class="sidebar" aria-label="Menú principal">
+    <div class="sidebar-header">
+      <h2>Menú principal</h2>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <a class="active" href="index.html" data-page-name="Inicio"><span class="nav-icon">IN</span><span class="nav-label">Inicio</span></a>
+      <a href="eventos.html" data-page-name="Eventos"><span class="nav-icon">EV</span><span class="nav-label">Eventos</span></a>
+      <a href="minuta.html" data-page-name="Minutas"><span class="nav-icon">MI</span><span class="nav-label">Minuta</span></a>
+      <a href="facturas.html" data-page-name="Facturas"><span class="nav-icon">FA</span><span class="nav-label">Facturas</span></a>
+      <a href="login.html" data-page-name="Usuarios"><span class="nav-icon">US</span><span class="nav-label">Usuarios</span></a>
+      <a href="configuracion.html" data-page-name="Configuración"><span class="nav-icon">CF</span><span class="nav-label">Configuración</span></a>
+      <a href="estadisticas.html" data-page-name="Estadísticas"><span class="nav-icon">ES</span><span class="nav-label">Estadísticas</span></a>
+      <a href="#auditoria" data-page-name="Auditoría"><span class="nav-icon">AU</span><span class="nav-label">Auditoría</span></a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <strong id="dataStatusIndicator" class="data-status is-outdated"><span></span>Datos desactualizados</strong>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-title">
+      <strong>Agenda diaria</strong>
+      <span>Vista operacional de eventos</span>
+    </div>
+
+    <div class="topbar-right">
+      <div class="system-status" aria-label="Estado del sistema">
+        <span class="status-dot"></span>
+        <span>Operativo</span>
+      </div>
+      <div id="reloj" class="reloj-top"></div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="workspace-header" aria-label="Resumen operacional">
+      <div class="workspace-heading">
+        <span class="workspace-eyebrow">Vista diaria</span>
+        <h1>Agenda de hoy</h1>
+      </div>
+
+      <section class="summary-grid" aria-label="Resumen del día">
+        <article class="summary-card">
+          <small>Eventos hoy</small>
+          <strong id="kpiEventosHoy">0</strong>
+          <span>Total programado</span>
+        </article>
+
+        <article class="summary-card">
+          <small>Personas</small>
+          <strong id="kpiPersonasHoy">0</strong>
+          <span>Asistentes registrados</span>
+        </article>
+
+        <article class="summary-card">
+          <small>Segundo piso</small>
+          <strong id="kpiSegundo">0</strong>
+          <span>Eventos activos</span>
+        </article>
+
+        <article class="summary-card">
+          <small>Tercer piso</small>
+          <strong id="kpiTercero">0</strong>
+          <span>Eventos activos</span>
+        </article>
+      </section>
+    </section>
+
+    <section class="agenda-layout" aria-label="Agendas operacionales">
+      <article class="agenda-panel">
+        <div class="panel-header">
+          <div class="panel-title-block">
+            <p>Agenda operacional</p>
+            <h1>Segundo piso</h1>
+          </div>
+          <span id="badgeSegundo" class="badge">0 eventos</span>
+        </div>
+
+        <div id="listaSegundo" class="agenda-body">
+          <div class="empty-state">No hay eventos programados para segundo piso.</div>
+        </div>
+      </article>
+
+      <article class="agenda-panel">
+        <div class="panel-header">
+          <div class="panel-title-block">
+            <p>Agenda operacional</p>
+            <h1>Tercer piso</h1>
+          </div>
+          <span id="badgeTercero" class="badge">0 eventos</span>
+        </div>
+
+        <div id="listaTercero" class="agenda-body">
+          <div class="empty-state">No hay eventos programados para tercer piso.</div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <div id="modalEvento" class="modal" aria-hidden="true">
+    <div class="modal-content modal-evento-content" role="dialog" aria-modal="true" aria-labelledby="tituloModal">
+      <div class="modal-header">
+        <div>
+          <span>Ficha del evento</span>
+          <h2 id="tituloModal">Información del evento</h2>
+        </div>
+        <button type="button" onclick="cerrarModal()" aria-label="Cerrar">×</button>
+      </div>
+      <div id="detalleEvento" class="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/index.js"></script>
+</body>
+</html>
