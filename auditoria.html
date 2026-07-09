@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Auditoría del sistema</title>
+  <link rel="stylesheet" href="css/auditoria.css">
+</head>
+<body>
+  <div id="pageLoader" class="page-loader" aria-live="polite">
+    <span class="loader-ring"></span>
+    <strong>Cargando auditoría...</strong>
+  </div>
+
+  <main class="audit-shell">
+    <header class="audit-topbar">
+      <div>
+        <span>Control interno</span>
+        <h1>Auditoría</h1>
+        <p>Accesos, modificaciones, descargas, IP, fecha y hora del sistema.</p>
+      </div>
+      <div class="audit-actions">
+        <button id="btnInicio" class="btn secondary" type="button">← Volver al inicio</button>
+        <button id="btnExport" class="btn primary" type="button">Descargar Excel</button>
+      </div>
+    </header>
+
+    <section class="filters-panel" aria-label="Filtros de auditoría">
+      <label>Buscar
+        <input id="filterSearch" type="search" placeholder="Usuario, acción, módulo, IP o detalle">
+      </label>
+      <label>Fecha desde
+        <input id="filterFrom" type="date">
+      </label>
+      <label>Fecha hasta
+        <input id="filterTo" type="date">
+      </label>
+      <label>Módulo
+        <select id="filterModule"><option value="">Todos</option></select>
+      </label>
+      <label>Acción
+        <select id="filterAction"><option value="">Todas</option></select>
+      </label>
+      <button id="btnReset" class="btn clear" type="button">Limpiar filtros</button>
+    </section>
+
+    <section class="table-panel" aria-label="Tabla de auditoría">
+      <div class="table-toolbar">
+        <strong>Registro de auditoría</strong>
+        <span id="resultCount">0 registros visibles</span>
+      </div>
+      <div class="table-wrapper">
+        <table id="auditTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Hora</th>
+              <th>Usuario</th>
+              <th>Módulo</th>
+              <th>Acción</th>
+              <th>Detalle</th>
+              <th>IP</th>
+              <th>Navegador</th>
+              <th>Plataforma</th>
+              <th>URL</th>
+            </tr>
+          </thead>
+          <tbody id="auditTbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/data-core.js"></script>
+  <script src="js/auditoria.js"></script>
+</body>
+</html>

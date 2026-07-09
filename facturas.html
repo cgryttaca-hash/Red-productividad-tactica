@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eventos para facturar</title>
+  <link rel="stylesheet" href="css/facturas.css">
+</head>
+<body>
+  <div id="pageLoader" class="page-loader" aria-live="polite">
+    <span class="loader-ring"></span>
+    <strong>Cargando eventos para facturar...</strong>
+  </div>
+
+  <main class="module-shell">
+    <header class="module-topbar">
+      <div class="module-title">
+        <span>Control operativo</span>
+        <h1>Eventos para facturar</h1>
+        <p id="sourceStatus">Fuente: módulo principal de Eventos.</p>
+      </div>
+      <div class="module-actions">
+        <button id="btnInicio" class="btn secondary" type="button">← Volver al inicio</button>
+        <button id="btnExport" class="btn primary" type="button">Descargar Excel</button>
+      </div>
+    </header>
+
+    <section class="filters-panel" aria-label="Filtros de eventos para facturar">
+      <label>Buscar
+        <input id="filterSearch" type="search" placeholder="Empresa, pago, factura u observación">
+      </label>
+      <label>Fecha desde
+        <input id="filterFrom" type="date">
+      </label>
+      <label>Fecha hasta
+        <input id="filterTo" type="date">
+      </label>
+      <label>Medio de pago
+        <select id="filterPayment"><option value="">Todos</option></select>
+      </label>
+      <label>Estado factura
+        <select id="filterInvoice">
+          <option value="">Todos</option>
+          <option>Pendiente</option>
+          <option>Radicada</option>
+          <option>No aplica</option>
+          <option>Anulada</option>
+        </select>
+      </label>
+      <button id="btnReset" class="btn clear" type="button">Limpiar filtros</button>
+    </section>
+
+    <section class="table-panel" aria-label="Tabla eventos para facturar">
+      <div class="table-toolbar">
+        <strong>Tabla de seguimiento</strong>
+        <span id="resultCount">0 registros visibles</span>
+      </div>
+      <div class="table-wrapper">
+        <table id="invoiceTable">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Nombre empresa</th>
+              <th>Cantidad de personas</th>
+              <th>Medio de pago</th>
+              <th>Estado factura</th>
+              <th>N.° factura</th>
+              <th>Fecha radicada</th>
+              <th>Observación factura</th>
+            </tr>
+          </thead>
+          <tbody id="invoiceTbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/data-core.js"></script>
+  <script src="js/facturas.js"></script>
+</body>
+</html>
