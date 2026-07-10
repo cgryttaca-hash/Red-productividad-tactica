@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Auditoría</title>
+<style>
+:root{--bg:#f5f7fb;--surface:#fff;--text:#172033;--muted:#64748b;--line:#d9e2ef;--brand:#143b6d;--brand2:#1d5fd0;--danger:#b42318;--shadow:0 18px 38px rgba(15,23,42,.08)}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text)}.app{width:min(1560px,calc(100% - 28px));margin:0 auto;padding:18px 0 22px}.top{display:grid;grid-template-columns:minmax(240px,1fr) auto;gap:14px;align-items:center;margin-bottom:12px}.title h1{font-size:clamp(22px,2.2vw,32px);margin:0;letter-spacing:-.035em;color:#0f2442}.meta{margin-top:7px;color:var(--muted);font-size:13px;font-weight:650}.actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:white;color:#102033;height:38px;padding:0 14px;border-radius:12px;cursor:pointer;font-weight:800;box-shadow:0 7px 16px rgba(15,23,42,.05);white-space:nowrap}.btn:hover{border-color:#9fb0c7;transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:white;border:0}.btn.danger{background:#fff5f5;color:var(--danger);border-color:#fecaca}.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}.filters{display:grid;grid-template-columns:minmax(230px,1.8fr) repeat(5,minmax(130px,1fr)) auto;gap:10px;padding:14px;border-bottom:1px solid var(--line);align-items:end}.field{min-width:0}.field label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:900;margin-bottom:5px}.field input,.field select{width:100%;height:38px;border:1px solid var(--line);border-radius:11px;background:white;padding:0 10px;outline:none;color:#132238}.field input:focus,.field select:focus{border-color:#1d5fd0;box-shadow:0 0 0 3px rgba(29,95,208,.10)}.table-area{overflow:auto;max-height:calc(100vh - 205px);background:white}table{width:100%;min-width:1480px;border-collapse:separate;border-spacing:0;table-layout:fixed}col.fecha{width:110px}col.hora{width:105px}col.usuario{width:150px}col.equipo{width:210px}col.ip{width:145px}col.modulo{width:130px}col.accion{width:155px}col.detalle{width:360px}col.navegador{width:270px}col.url{width:120px}th{position:sticky;top:0;z-index:3;background:#f8fafc;color:#475569;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;padding:12px 10px;border-bottom:1px solid var(--line)}td{padding:9px 10px;border-bottom:1px solid #edf2f7;font-size:12.5px;vertical-align:top;overflow:hidden}tr:hover td{background:#f9fbfd}.txt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.detail{white-space:normal;line-height:1.35}.pill{display:inline-flex;align-items:center;max-width:100%;height:27px;padding:0 9px;border-radius:999px;background:#eef4ff;color:#17498c;font-weight:900;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.empty{padding:46px 18px;text-align:center;color:var(--muted)}.empty strong{display:block;color:#102033;font-size:18px;margin-bottom:7px}.toast{position:fixed;right:18px;bottom:18px;z-index:30;background:#0f172a;color:white;padding:12px 15px;border-radius:12px;opacity:0;transform:translateY(10px);transition:.2s;box-shadow:0 15px 30px rgba(15,23,42,.22)}.toast.show{opacity:1;transform:translateY(0)}@media(max-width:1100px){.top{grid-template-columns:1fr}.actions{justify-content:flex-start}.filters{grid-template-columns:1fr 1fr}.filters .field:first-child{grid-column:1/-1}.btn{flex:1}.table-area{max-height:none}}@media(max-width:640px){.app{width:min(100% - 16px,1560px)}.filters{grid-template-columns:1fr}}@media print{.top,.filters,.toast{display:none}.app{width:100%;padding:0}.panel{box-shadow:none;border:0}.table-area{max-height:none;overflow:visible}th{position:static}}
+</style>
+</head>
+<body>
+<main class="app">
+  <section class="top">
+    <div class="title"><h1>Auditoría</h1><div id="meta" class="meta">Preparando registro...</div></div>
+    <div class="actions"><button id="backBtn" class="btn">← Volver al inicio</button><button id="refreshBtn" class="btn primary">Actualizar</button><button id="deviceBtn" class="btn">Nombre equipo</button><button id="exportBtn" class="btn">Descargar Excel</button><button id="clearLogBtn" class="btn danger">Limpiar auditoría</button></div>
+  </section>
+  <section class="panel">
+    <div class="filters">
+      <div class="field"><label>Buscar</label><input id="q" placeholder="Usuario, equipo, IP, acción o detalle"></div>
+      <div class="field"><label>Desde</label><input id="from" type="date"></div>
+      <div class="field"><label>Hasta</label><input id="to" type="date"></div>
+      <div class="field"><label>Módulo</label><select id="modulo"><option value="">Todos</option></select></div>
+      <div class="field"><label>Acción</label><select id="accion"><option value="">Todas</option></select></div>
+      <div class="field"><label>Equipo</label><select id="equipo"><option value="">Todos</option></select></div>
+      <button id="clearBtn" class="btn danger">Limpiar filtros</button>
+    </div>
+    <div class="table-area">
+      <table>
+        <colgroup><col class="fecha"><col class="hora"><col class="usuario"><col class="equipo"><col class="ip"><col class="modulo"><col class="accion"><col class="detalle"><col class="navegador"><col class="url"></colgroup>
+        <thead><tr><th>Fecha</th><th>Hora</th><th>Usuario</th><th>Nombre equipo</th><th>IP</th><th>Módulo</th><th>Acción</th><th>Detalle</th><th>Navegador</th><th>URL</th></tr></thead>
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<div id="toast" class="toast"></div>
+<script>
+const APP_KEYS = {
+  source: 'EVENTOS_FUENTE_UNICA_V4',
+  sourceV5: 'EVENTOS_FUENTE_UNICA_V5',
+  sourceLegacy: 'EVENTOS_FUENTE_UNICA',
+  sourceAgenda: 'agendaEventos:fuentePrincipalEventos',
+  invoices: 'EVENTOS_FACTURAS_V5',
+  invoicesLegacy: 'EVENTOS_FACTURAS_V4',
+  deleted: 'EVENTOS_FACTURAS_OCULTOS_V5',
+  deletedLegacy: 'EVENTOS_FACTURAS_ELIMINADOS_V4',
+  audit: 'EVENTOS_AUDITORIA_V5',
+  auditLegacy: 'EVENTOS_AUDITORIA_V4',
+  deviceName: 'EVENTOS_AUDITORIA_EQUIPO_NOMBRE',
+  publicIp: 'EVENTOS_AUDITORIA_IP_PUBLICA'
+};
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function clean(v){ return String(v ?? '').replace(/\s+/g,' ').trim(); }
+function norm(v){ return clean(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase(); }
+function esc(v){ return clean(v).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function num(v){
+  if(typeof v === 'number') return Number.isFinite(v) ? v : 0;
+  const s = clean(v).replace(/\./g,'').replace(',', '.').replace(/[^0-9.-]/g,'');
+  const n = Number(s);
+  return Number.isFinite(n) ? n : 0;
+}
+function hashText(text){ let h=2166136261, s=String(text??''); for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h+= (h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24); } return (h>>>0).toString(36); }
+function safeParse(raw, fallback=null){ try{return JSON.parse(raw)}catch(e){return fallback} }
+function excelSerialToISO(v){ const n=Number(v); if(!Number.isFinite(n)) return ''; const d=new Date(Date.UTC(1899,11,30) + Math.floor(n)*86400000); return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0,10); }
+function parseDateISO(v){
+  if(v===null || v===undefined || v==='') return '';
+  if(v instanceof Date && !Number.isNaN(v.getTime())) return v.toISOString().slice(0,10);
+  if(typeof v==='number') return excelSerialToISO(v);
+  const s=clean(v); if(!s) return '';
+  if(/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0,10);
+  let m=s.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/);
+  if(m){ let d=m[1].padStart(2,'0'), mo=m[2].padStart(2,'0'), y=m[3]; if(y.length===2) y=(Number(y)>50?'19':'20')+y; return `${y.padStart(4,'0')}-${mo}-${d}`; }
+  const parsed=new Date(s); if(!Number.isNaN(parsed.getTime())) return parsed.toISOString().slice(0,10);
+  return '';
+}
+function formatDate(v){ const iso=parseDateISO(v); if(!iso) return clean(v); const [y,m,d]=iso.split('-'); return `${d}/${m}/${y}`; }
+function formatDateTime(v){
+  const iso = clean(v); if(!iso) return '';
+  if(/^\d{4}-\d{2}-\d{2}T/.test(iso)){ const hh=iso.slice(11,16); return `${formatDate(iso.slice(0,10))} ${hh}`; }
+  const d = new Date(iso); if(!Number.isNaN(d.getTime())) return d.toLocaleString('es-CO', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
+  return iso;
+}
+const aliases = {
+  fecha:['FECHA','FECHA EVENTO','DIA','DÍA','DATE'],
+  escenario:['ESCENARIO ASIGNADO','ESCENARIO','SALON','SALÓN','ESPACIO','UBICACION','UBICACIÓN','AREA','ÁREA'],
+  horario:['HORARIO DEL EVENTO','HORARIO EVENTO','HORA EVENTO','HORARIO','HORA'],
+  empresa:['NOMBRE DE LA EMPRESA','NOMBRE EMPRESA','EMPRESA','CLIENTE','NOMBRE DEL CLIENTE','ORGANIZACION','ORGANIZACIÓN'],
+  personas:['CANTIDAD DE PERSONAS','CANTIDAD PERSONAS','PERSONAS','PAX','ASISTENTES','CANTIDAD'],
+  alimentacion:['DESCRIPCION ALIMENTACION','DESCRIPCIÓN ALIMENTACIÓN','ALIMENTACION','ALIMENTACIÓN','MENU','MENÚ'],
+  acomodacion:['ACOMODACION','ACOMODACIÓN','MONTAJE'],
+  modalidad:['MODALIDAD DE SERVICIO','MODALIDAD','TIPO SERVICIO'],
+  medioPago:['MEDIO DE PAGO','MEDIO PAGO','PAGO','FORMA DE PAGO','MODALIDAD DE PAGO'],
+  observacion:['OBSERVACION','OBSERVACIÓN','OBSERVACIONES','NOTA','NOTAS'],
+  estado:['ESTADO','ESTATUS']
+};
+function getField(obj, names){
+  if(!obj || typeof obj !== 'object') return '';
+  const direct = {}; Object.keys(obj).forEach(k => { direct[norm(k)] = obj[k]; });
+  for(const n of names){ const k=norm(n); if(direct[k] !== undefined) return direct[k]; }
+  const keys = Object.keys(direct);
+  for(const k of keys){ if(names.some(n => k.includes(norm(n)) || norm(n).includes(k))) return direct[k]; }
+  return '';
+}
+function normalizeRow(row){
+  if(!row || typeof row !== 'object') return null;
+  const fechaISO = parseDateISO(row.fechaISO || row.fecha || row.Fecha || getField(row, aliases.fecha));
+  const empresa = clean(row.empresa || row.Empresa || getField(row, aliases.empresa));
+  const escenario = clean(row.escenario || row.Escenario || getField(row, aliases.escenario));
+  const horario = clean(row.horario || row.horarioEvento || getField(row, aliases.horario));
+  const personas = num(row.personas ?? row.pax ?? getField(row, aliases.personas));
+  const medioPago = clean(row.medioPago || row.medio || getField(row, aliases.medioPago));
+  const estado = clean(row.estado || getField(row, aliases.estado));
+  const observacion = clean(row.observacion || getField(row, aliases.observacion));
+  if(!fechaISO && !empresa && !escenario && !personas && !medioPago) return null;
+  const idSource = [fechaISO, empresa, escenario, horario, personas, medioPago, observacion].map(norm).join('|');
+  return { id:'EV-'+hashText(idSource), fechaISO, fecha: formatDate(fechaISO || row.fecha || getField(row, aliases.fecha)), empresa, escenario, horario, personas, medioPago, estado, observacion };
+}
+function arrayRowsToObjects(arr){
+  if(!Array.isArray(arr) || !arr.length) return [];
+  if(arr.every(x => Array.isArray(x))){
+    const headerIndex = arr.findIndex(r => Array.isArray(r) && r.some(c => ['FECHA','EMPRESA','NOMBRE DE LA EMPRESA','CANTIDAD DE PERSONAS','MEDIO DE PAGO'].includes(norm(c))));
+    if(headerIndex >= 0){
+      const headers = arr[headerIndex].map(h => clean(h));
+      return arr.slice(headerIndex+1).map(r => Object.fromEntries(headers.map((h,i)=>[h, r[i]])));
+    }
+  }
+  return arr;
+}
+function rowsFromAny(value){
+  if(!value) return [];
+  if(Array.isArray(value)) return arrayRowsToObjects(value).map(normalizeRow).filter(Boolean);
+  if(typeof value === 'object'){
+    for(const k of ['rows','data','eventos','events','items','records','registros']){
+      if(Array.isArray(value[k])) return rowsFromAny(value[k]);
+    }
+  }
+  return [];
+}
+function findArrays(x, out=[], depth=0){
+  if(depth > 5 || !x) return out;
+  if(Array.isArray(x)){ out.push(x); x.slice(0,10).forEach(v => findArrays(v,out,depth+1)); return out; }
+  if(typeof x === 'object') Object.values(x).slice(0,60).forEach(v => findArrays(v,out,depth+1));
+  return out;
+}
+function dedupeEvents(rows){
+  const seen = new Set(), out = [];
+  for(const r of rows){ const ev = normalizeRow(r); if(!ev || seen.has(ev.id)) continue; seen.add(ev.id); out.push(ev); }
+  return out.sort((a,b)=>(a.fechaISO||'9999').localeCompare(b.fechaISO||'9999') || a.empresa.localeCompare(b.empresa));
+}
+function loadEvents(){
+  const ordered=[APP_KEYS.sourceV5, APP_KEYS.source, APP_KEYS.sourceLegacy, APP_KEYS.sourceAgenda, 'agendaEventos:fuentePrincipalEventos', 'eventosGuardados', 'eventosData', 'eventos', 'events', 'excelData', 'data'];
+  let best=[], source='';
+  for(const key of ordered){
+    const raw = localStorage.getItem(key) || sessionStorage.getItem(key);
+    if(!raw) continue;
+    const parsed = safeParse(raw);
+    const rows = rowsFromAny(parsed);
+    if(rows.length > best.length){ best=rows; source=key; }
+  }
+  for(const store of [localStorage, sessionStorage]){
+    for(let i=0; i<store.length; i++){
+      const key = store.key(i); if(!key || ordered.includes(key)) continue;
+      const raw = store.getItem(key); if(!raw || raw.length < 10 || raw.length > 12000000) continue;
+      const parsed = safeParse(raw); if(!parsed) continue;
+      for(const arr of findArrays(parsed)){ const rows = rowsFromAny(arr); if(rows.length > best.length){ best=rows; source=key; } }
+    }
+  }
+  const rows = dedupeEvents(best);
+  if(rows.length) localStorage.setItem(APP_KEYS.sourceV5, JSON.stringify({updatedAt:new Date().toISOString(), source, rows}));
+  return rows;
+}
+function getInvoices(){
+  const current = safeParse(localStorage.getItem(APP_KEYS.invoices), null);
+  if(current) return current;
+  const legacy = safeParse(localStorage.getItem(APP_KEYS.invoicesLegacy), {}) || {};
+  Object.values(legacy).forEach(v => { if(v && v.estado === 'Radicada') v.estado = 'Facturada'; if(v && v.estado === 'Pagada') v.estado = 'Facturada'; if(v && v.estado === 'Anulada') v.estado = 'Nota crédito'; });
+  localStorage.setItem(APP_KEYS.invoices, JSON.stringify(legacy));
+  return legacy;
+}
+function setInvoices(map){ localStorage.setItem(APP_KEYS.invoices, JSON.stringify(map || {})); }
+function getDeleted(){
+  const current = safeParse(localStorage.getItem(APP_KEYS.deleted), null);
+  if(current) return current;
+  const legacy = safeParse(localStorage.getItem(APP_KEYS.deletedLegacy), {}) || {};
+  localStorage.setItem(APP_KEYS.deleted, JSON.stringify(legacy));
+  return legacy;
+}
+function setDeleted(map){ localStorage.setItem(APP_KEYS.deleted, JSON.stringify(map || {})); }
+function getInvoice(ev){ const inv = getInvoices()[ev.id] || {}; let estado = clean(inv.estado) || 'Pendiente'; if(!['Pendiente','Facturada','Nota crédito'].includes(estado)) estado = estado === 'Anulada' ? 'Nota crédito' : estado === 'Pagada' || estado === 'Radicada' ? 'Facturada' : 'Pendiente'; return {estado, factura: clean(inv.factura), radicada: parseDateISO(inv.radicada), observacion: clean(inv.observacion), updatedAt: inv.updatedAt || ''}; }
+function deviceName(){ return localStorage.getItem(APP_KEYS.deviceName) || `${navigator.platform || 'Equipo'} - ${screen.width}x${screen.height}`; }
+async function refreshIp(){
+  const cached = localStorage.getItem(APP_KEYS.publicIp);
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(), 2500);
+  try{
+    const r = await fetch('https://api.ipify.org?format=json', {signal: controller.signal, cache:'no-store'});
+    const j = await r.json();
+    if(j && j.ip){ localStorage.setItem(APP_KEYS.publicIp, j.ip); return j.ip; }
+  }catch(e){} finally { clearTimeout(timer); }
+  return cached || 'No disponible en modo local';
+}
+function currentIp(){ return localStorage.getItem(APP_KEYS.publicIp) || 'No disponible en modo local'; }
+function audit(modulo, accion, detalle){
+  const now = new Date();
+  const log = safeParse(localStorage.getItem(APP_KEYS.audit), null) || safeParse(localStorage.getItem(APP_KEYS.auditLegacy), []) || [];
+  log.unshift({
+    id:'AUD-'+now.toISOString().replace(/[-:.TZ]/g,'').slice(0,14)+'-'+hashText(Math.random()),
+    iso: now.toISOString(),
+    fecha: now.toLocaleDateString('es-CO', {year:'numeric', month:'2-digit', day:'2-digit'}),
+    hora: now.toLocaleTimeString('es-CO', {hour12:false}),
+    usuario: localStorage.getItem('eventosUsuarioActivo') || localStorage.getItem('usuarioActivo') || localStorage.getItem('currentUser') || 'Usuario local',
+    equipo: deviceName(),
+    ip: currentIp(),
+    modulo, accion, detalle: clean(detalle).slice(0,700),
+    navegador: (navigator.userAgent || 'No disponible').slice(0,220),
+    plataforma: navigator.platform || 'No disponible',
+    url: location.pathname.split('/').pop() || location.pathname
+  });
+  localStorage.setItem(APP_KEYS.audit, JSON.stringify(log.slice(0,6000)));
+}
+function exportExcel(filename, rows){
+  const data = rows && rows.length ? rows : [{}];
+  const cols = [...new Set(data.flatMap(r => Object.keys(r)))];
+  const table = '<table><thead><tr>'+cols.map(c=>`<th>${esc(c)}</th>`).join('')+'</tr></thead><tbody>'+data.map(r=>'<tr>'+cols.map(c=>`<td>${esc(r[c]??'')}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
+  const blob = new Blob(['\ufeff'+table], {type:'application/vnd.ms-excel;charset=utf-8;'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function toast(msg){ const t=$('#toast'); if(!t) return; t.textContent=msg; t.classList.add('show'); clearTimeout(t._timer); t._timer=setTimeout(()=>t.classList.remove('show'), 2400); }
+function uniqueSorted(rows, key){ return [...new Set(rows.map(r=>clean(r[key])).filter(Boolean))].sort((a,b)=>a.localeCompare(b)); }
+function moneyish(n){ return new Intl.NumberFormat('es-CO').format(Math.round(n || 0)); }
+refreshIp().then(ip => { if(ip && ip !== 'No disponible en modo local') localStorage.setItem(APP_KEYS.publicIp, ip); });
+let logs=[];
+function normalizeLog(r){
+  const iso = r.iso || r.fechaHora || r.createdAt || r.timestamp || r.fechaCompleta || '';
+  let d = iso && !Number.isNaN(new Date(iso).getTime()) ? new Date(iso) : new Date();
+  const fecha = r.fecha && /^\d{2}\/\d{2}\/\d{4}$/.test(r.fecha) ? r.fecha : d.toLocaleDateString('es-CO', {year:'numeric', month:'2-digit', day:'2-digit'});
+  const hora = r.hora && /^\d{1,2}:\d{2}/.test(r.hora) ? r.hora : d.toLocaleTimeString('es-CO', {hour12:false});
+  return {
+    id: r.id || 'AUD-'+hashText(JSON.stringify(r)+Math.random()),
+    iso: iso || d.toISOString(),
+    fecha,
+    hora,
+    usuario: clean(r.usuario || r.user || 'Usuario local'),
+    equipo: clean(r.equipo || r.nombreEquipo || deviceName()),
+    ip: clean(r.ip || currentIp()),
+    modulo: clean(r.modulo || r.module || 'Sistema'),
+    accion: clean(r.accion || r.action || 'Registro'),
+    detalle: clean(r.detalle || r.detail || r.descripcion || ''),
+    navegador: clean(r.navegador || r.browser || navigator.userAgent || 'No disponible'),
+    plataforma: clean(r.plataforma || navigator.platform || ''),
+    url: clean(r.url || '')
+  };
+}
+function getLogs(){
+  const a=safeParse(localStorage.getItem(APP_KEYS.audit), null) || safeParse(localStorage.getItem(APP_KEYS.auditLegacy), []) || [];
+  const normalized=a.map(normalizeLog).sort((x,y)=>(y.iso||'').localeCompare(x.iso||''));
+  localStorage.setItem(APP_KEYS.audit, JSON.stringify(normalized.slice(0,6000)));
+  return normalized;
+}
+function fillSelects(){
+  const keep={modulo:$('#modulo').value, accion:$('#accion').value, equipo:$('#equipo').value};
+  $('#modulo').innerHTML='<option value="">Todos</option>'+[...new Set(logs.map(l=>l.modulo).filter(Boolean))].sort().map(v=>`<option>${esc(v)}</option>`).join('');
+  $('#accion').innerHTML='<option value="">Todas</option>'+[...new Set(logs.map(l=>l.accion).filter(Boolean))].sort().map(v=>`<option>${esc(v)}</option>`).join('');
+  $('#equipo').innerHTML='<option value="">Todos</option>'+[...new Set(logs.map(l=>l.equipo).filter(Boolean))].sort().map(v=>`<option>${esc(v)}</option>`).join('');
+  Object.keys(keep).forEach(k=>{$('#'+k).value=keep[k]||''});
+}
+function isoDate(l){ return parseDateISO(l.iso) || parseDateISO(l.fecha); }
+function filtered(){
+  const q=norm($('#q').value), from=$('#from').value, to=$('#to').value, modulo=$('#modulo').value, accion=$('#accion').value, equipo=$('#equipo').value;
+  return logs.filter(l=>{
+    const d=isoDate(l);
+    if(q && !norm([l.fecha,l.hora,l.usuario,l.equipo,l.ip,l.modulo,l.accion,l.detalle,l.navegador,l.url].join(' ')).includes(q)) return false;
+    if(from && d && d < from) return false;
+    if(to && d && d > to) return false;
+    if(modulo && l.modulo !== modulo) return false;
+    if(accion && l.accion !== accion) return false;
+    if(equipo && l.equipo !== equipo) return false;
+    return true;
+  });
+}
+function updateMeta(){ $('#meta').textContent = `${logs.length} registros · Equipo: ${deviceName()} · IP: ${currentIp()}`; }
+function render(){
+  const rows=filtered(), body=$('#body'); updateMeta();
+  if(!rows.length){ body.innerHTML='<tr><td colspan="10"><div class="empty"><strong>No hay registros de auditoría para mostrar</strong>Use Facturas o Estadísticas para generar movimientos, o revise los filtros.</div></td></tr>'; return; }
+  body.innerHTML=rows.map(l=>`<tr><td><strong>${esc(l.fecha)}</strong></td><td>${esc(l.hora)}</td><td><div class="txt" title="${esc(l.usuario)}">${esc(l.usuario)}</div></td><td><div class="txt" title="${esc(l.equipo)}">${esc(l.equipo)}</div></td><td><span class="pill" title="${esc(l.ip)}">${esc(l.ip)}</span></td><td><span class="pill">${esc(l.modulo)}</span></td><td><div class="txt" title="${esc(l.accion)}"><strong>${esc(l.accion)}</strong></div></td><td class="detail">${esc(l.detalle)}</td><td><div class="txt" title="${esc(l.navegador)}">${esc(l.navegador)}</div></td><td><div class="txt" title="${esc(l.url)}">${esc(l.url)}</div></td></tr>`).join('');
+}
+async function refreshAll(){
+  const ip=await refreshIp();
+  logs=getLogs();
+  fillSelects();
+  render();
+  updateMeta();
+}
+['q','from','to'].forEach(id=>$('#'+id).addEventListener('input', render));
+['modulo','accion','equipo'].forEach(id=>$('#'+id).addEventListener('change', render));
+$('#backBtn').onclick=()=>location.href='index.html';
+$('#refreshBtn').onclick=()=>{ refreshAll(); toast('Auditoría actualizada'); };
+$('#deviceBtn').onclick=()=>{ const name=prompt('Nombre del equipo para auditoría:', deviceName()); if(name && clean(name)){ localStorage.setItem(APP_KEYS.deviceName, clean(name)); audit('Auditoría','Nombre equipo',`Equipo configurado como ${clean(name)}`); refreshAll(); } };
+$('#clearBtn').onclick=()=>{ ['q','from','to','modulo','accion','equipo'].forEach(id=>$('#'+id).value=''); render(); };
+$('#exportBtn').onclick=()=>{ const rows=filtered().map(l=>({'Fecha':l.fecha,'Hora':l.hora,'Usuario':l.usuario,'Nombre equipo':l.equipo,'IP':l.ip,'Módulo':l.modulo,'Acción':l.accion,'Detalle':l.detalle,'Navegador':l.navegador,'URL':l.url})); exportExcel('auditoria_eventos.xls', rows); audit('Auditoría','Descarga Excel',`Exportó ${rows.length} registros de auditoría`); refreshAll(); };
+$('#clearLogBtn').onclick=()=>{ if(confirm('¿Desea limpiar la auditoría guardada en este navegador?')){ localStorage.setItem(APP_KEYS.audit, JSON.stringify([])); audit('Auditoría','Limpieza','Se reinició la auditoría local'); refreshAll(); } };
+window.addEventListener('storage', e=>{ if(e.key===APP_KEYS.audit || e.key===APP_KEYS.auditLegacy) refreshAll(); });
+audit('Auditoría','Acceso','Ingresó a la tabla de auditoría');
+refreshAll();
+</script>
+</body>
+</html>

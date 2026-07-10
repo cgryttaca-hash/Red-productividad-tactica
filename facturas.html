@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eventos para facturar</title>
+<style>
+:root{--bg:#f5f7fb;--surface:#fff;--surface2:#f8fafc;--text:#172033;--muted:#64748b;--line:#d9e2ef;--brand:#143b6d;--brand2:#1d5fd0;--pending:#b45309;--billed:#047857;--credit:#6d28d9;--danger:#b42318;--shadow:0 18px 38px rgba(15,23,42,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--text)}
+.app{width:min(1540px,calc(100% - 28px));margin:0 auto;padding:18px 0 22px}.top{display:grid;grid-template-columns:minmax(240px,1fr) auto;gap:14px;align-items:center;margin-bottom:12px}.title h1{font-size:clamp(22px,2.2vw,32px);margin:0;letter-spacing:-.035em;color:#0f2442}.source{margin-top:7px;display:flex;gap:8px;align-items:center;color:var(--muted);font-size:13px}.dot{width:9px;height:9px;border-radius:99px;background:#f59e0b;box-shadow:0 0 0 4px #fef3c7}.dot.ok{background:#22c55e;box-shadow:0 0 0 4px #dcfce7}.dot.bad{background:#ef4444;box-shadow:0 0 0 4px #fee2e2}.actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:white;color:#102033;height:38px;padding:0 14px;border-radius:12px;cursor:pointer;font-weight:800;box-shadow:0 7px 16px rgba(15,23,42,.05);white-space:nowrap}.btn:hover{border-color:#9fb0c7;transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:white;border:0}.btn.soft{background:#f8fafc}.btn.danger{background:#fff5f5;color:var(--danger);border-color:#fecaca}.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}.statebar{display:flex;gap:10px;padding:14px 14px 6px;flex-wrap:wrap}.chip{height:38px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:0 14px;display:flex;align-items:center;gap:8px;font-weight:900;cursor:pointer;color:#334155}.chip b{min-width:26px;text-align:center;border-radius:999px;padding:3px 8px;background:#eef2f7;color:#334155}.chip.active{border-color:#1d5fd0;box-shadow:0 0 0 3px rgba(29,95,208,.10)}.chip[data-state="Pendiente"]{color:var(--pending)}.chip[data-state="Facturada"]{color:var(--billed)}.chip[data-state="Nota crédito"]{color:var(--credit)}.chip[data-state="Pendiente"] b{background:#fff7ed;color:var(--pending)}.chip[data-state="Facturada"] b{background:#ecfdf5;color:var(--billed)}.chip[data-state="Nota crédito"] b{background:#f5f3ff;color:var(--credit)}
+.filters{display:grid;grid-template-columns:minmax(230px,1.8fr) repeat(4,minmax(135px,1fr)) auto;gap:10px;padding:10px 14px 14px;border-bottom:1px solid var(--line);align-items:end}.field{min-width:0}.field label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:900;margin:0 0 5px}.field input,.field select{width:100%;height:38px;border:1px solid var(--line);border-radius:11px;background:white;padding:0 10px;outline:none;color:#132238}.field input:focus,.field select:focus{border-color:#1d5fd0;box-shadow:0 0 0 3px rgba(29,95,208,.10)}
+.table-area{overflow:auto;max-height:calc(100vh - 238px);background:white}table{width:100%;min-width:1240px;border-collapse:separate;border-spacing:0;table-layout:fixed}col.fecha{width:104px}col.empresa{width:270px}col.personas{width:96px}col.medio{width:150px}col.estado{width:165px}col.factura{width:150px}col.radicada{width:145px}col.obs{width:270px}col.accion{width:112px}th{position:sticky;top:0;z-index:3;background:#f8fafc;color:#475569;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;padding:12px 10px;border-bottom:1px solid var(--line)}td{padding:9px 10px;border-bottom:1px solid #edf2f7;font-size:13px;vertical-align:middle;overflow:hidden}tr:hover td{background:#f9fbfd}.txt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:650}.center{text-align:center}.pay{display:inline-flex;max-width:100%;justify-content:center;align-items:center;min-height:28px;padding:4px 9px;border-radius:999px;background:#eef4ff;color:#17498c;font-weight:800;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.input,.select{width:100%;height:34px;border:1px solid #d4deec;border-radius:10px;background:#fff;padding:0 9px;outline:none;font-weight:650;color:#172033}.select.estado-pendiente{background:#fff7ed;color:var(--pending);border-color:#fed7aa}.select.estado-facturada{background:#ecfdf5;color:var(--billed);border-color:#bbf7d0}.select.estado-nota-credito{background:#f5f3ff;color:var(--credit);border-color:#ddd6fe}.input:focus,.select:focus{border-color:#1d5fd0;box-shadow:0 0 0 3px rgba(29,95,208,.10)}.rowbtn{height:32px;border-radius:10px;border:1px solid #fecaca;background:#fff5f5;color:var(--danger);font-weight:900;cursor:pointer;width:100%}.rowbtn.restore{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe}.empty{padding:46px 18px;text-align:center;color:var(--muted)}.empty strong{display:block;color:#102033;font-size:18px;margin-bottom:7px}.toast{position:fixed;right:18px;bottom:18px;z-index:30;background:#0f172a;color:white;padding:12px 15px;border-radius:12px;opacity:0;transform:translateY(10px);transition:.2s;box-shadow:0 15px 30px rgba(15,23,42,.22)}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1100px){.top{grid-template-columns:1fr}.actions{justify-content:flex-start}.filters{grid-template-columns:1fr 1fr}.filters .field:first-child{grid-column:1/-1}.btn{flex:1}.table-area{max-height:none}}@media(max-width:640px){.app{width:min(100% - 16px,1540px)}.filters{grid-template-columns:1fr}.statebar{display:grid;grid-template-columns:1fr 1fr}.chip{justify-content:center}.chip:first-child{grid-column:1/-1}}
+@media print{.top,.statebar,.filters,.toast{display:none}.app{width:100%;padding:0}.panel{box-shadow:none;border:0}.table-area{max-height:none;overflow:visible}th{position:static}.input,.select{border:0;background:transparent;padding:0}.rowbtn{display:none}}
+</style>
+</head>
+<body>
+<main class="app">
+  <section class="top">
+    <div class="title">
+      <h1>Eventos para facturar</h1>
+      <div class="source"><span id="dot" class="dot"></span><span id="sourceText">Buscando datos de Eventos...</span></div>
+    </div>
+    <div class="actions">
+      <button id="backBtn" class="btn soft">← Volver al inicio</button>
+      <button id="refreshBtn" class="btn primary">Actualizar datos</button>
+      <button id="toggleHiddenBtn" class="btn soft">Ver ocultos</button>
+      <button id="exportBtn" class="btn soft">Descargar Excel</button>
+    </div>
+  </section>
+  <section class="panel">
+    <div class="statebar" id="statebar"></div>
+    <div class="filters">
+      <div class="field"><label>Buscar</label><input id="q" placeholder="Empresa, medio de pago, factura u observación"></div>
+      <div class="field"><label>Desde</label><input id="from" type="date"></div>
+      <div class="field"><label>Hasta</label><input id="to" type="date"></div>
+      <div class="field"><label>Medio de pago</label><select id="medio"><option value="">Todos</option></select></div>
+      <div class="field"><label>Empresa</label><select id="empresa"><option value="">Todas</option></select></div>
+      <button id="clearBtn" class="btn danger">Limpiar</button>
+    </div>
+    <div class="table-area">
+      <table>
+        <colgroup><col class="fecha"><col class="empresa"><col class="personas"><col class="medio"><col class="estado"><col class="factura"><col class="radicada"><col class="obs"><col class="accion"></colgroup>
+        <thead><tr><th>Fecha</th><th>Nombre empresa</th><th class="center">Personas</th><th class="center">Medio de pago</th><th>Estado factura</th><th>N.° factura</th><th>Fecha radicada</th><th>Observación factura</th><th>Acción</th></tr></thead>
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+<div id="toast" class="toast"></div>
+<script>
+const APP_KEYS = {
+  source: 'EVENTOS_FUENTE_UNICA_V4',
+  sourceV5: 'EVENTOS_FUENTE_UNICA_V5',
+  sourceLegacy: 'EVENTOS_FUENTE_UNICA',
+  sourceAgenda: 'agendaEventos:fuentePrincipalEventos',
+  invoices: 'EVENTOS_FACTURAS_V5',
+  invoicesLegacy: 'EVENTOS_FACTURAS_V4',
+  deleted: 'EVENTOS_FACTURAS_OCULTOS_V5',
+  deletedLegacy: 'EVENTOS_FACTURAS_ELIMINADOS_V4',
+  audit: 'EVENTOS_AUDITORIA_V5',
+  auditLegacy: 'EVENTOS_AUDITORIA_V4',
+  deviceName: 'EVENTOS_AUDITORIA_EQUIPO_NOMBRE',
+  publicIp: 'EVENTOS_AUDITORIA_IP_PUBLICA'
+};
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function clean(v){ return String(v ?? '').replace(/\s+/g,' ').trim(); }
+function norm(v){ return clean(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase(); }
+function esc(v){ return clean(v).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function num(v){
+  if(typeof v === 'number') return Number.isFinite(v) ? v : 0;
+  const s = clean(v).replace(/\./g,'').replace(',', '.').replace(/[^0-9.-]/g,'');
+  const n = Number(s);
+  return Number.isFinite(n) ? n : 0;
+}
+function hashText(text){ let h=2166136261, s=String(text??''); for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h+= (h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24); } return (h>>>0).toString(36); }
+function safeParse(raw, fallback=null){ try{return JSON.parse(raw)}catch(e){return fallback} }
+function excelSerialToISO(v){ const n=Number(v); if(!Number.isFinite(n)) return ''; const d=new Date(Date.UTC(1899,11,30) + Math.floor(n)*86400000); return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0,10); }
+function parseDateISO(v){
+  if(v===null || v===undefined || v==='') return '';
+  if(v instanceof Date && !Number.isNaN(v.getTime())) return v.toISOString().slice(0,10);
+  if(typeof v==='number') return excelSerialToISO(v);
+  const s=clean(v); if(!s) return '';
+  if(/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0,10);
+  let m=s.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/);
+  if(m){ let d=m[1].padStart(2,'0'), mo=m[2].padStart(2,'0'), y=m[3]; if(y.length===2) y=(Number(y)>50?'19':'20')+y; return `${y.padStart(4,'0')}-${mo}-${d}`; }
+  const parsed=new Date(s); if(!Number.isNaN(parsed.getTime())) return parsed.toISOString().slice(0,10);
+  return '';
+}
+function formatDate(v){ const iso=parseDateISO(v); if(!iso) return clean(v); const [y,m,d]=iso.split('-'); return `${d}/${m}/${y}`; }
+function formatDateTime(v){
+  const iso = clean(v); if(!iso) return '';
+  if(/^\d{4}-\d{2}-\d{2}T/.test(iso)){ const hh=iso.slice(11,16); return `${formatDate(iso.slice(0,10))} ${hh}`; }
+  const d = new Date(iso); if(!Number.isNaN(d.getTime())) return d.toLocaleString('es-CO', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
+  return iso;
+}
+const aliases = {
+  fecha:['FECHA','FECHA EVENTO','DIA','DÍA','DATE'],
+  escenario:['ESCENARIO ASIGNADO','ESCENARIO','SALON','SALÓN','ESPACIO','UBICACION','UBICACIÓN','AREA','ÁREA'],
+  horario:['HORARIO DEL EVENTO','HORARIO EVENTO','HORA EVENTO','HORARIO','HORA'],
+  empresa:['NOMBRE DE LA EMPRESA','NOMBRE EMPRESA','EMPRESA','CLIENTE','NOMBRE DEL CLIENTE','ORGANIZACION','ORGANIZACIÓN'],
+  personas:['CANTIDAD DE PERSONAS','CANTIDAD PERSONAS','PERSONAS','PAX','ASISTENTES','CANTIDAD'],
+  alimentacion:['DESCRIPCION ALIMENTACION','DESCRIPCIÓN ALIMENTACIÓN','ALIMENTACION','ALIMENTACIÓN','MENU','MENÚ'],
+  acomodacion:['ACOMODACION','ACOMODACIÓN','MONTAJE'],
+  modalidad:['MODALIDAD DE SERVICIO','MODALIDAD','TIPO SERVICIO'],
+  medioPago:['MEDIO DE PAGO','MEDIO PAGO','PAGO','FORMA DE PAGO','MODALIDAD DE PAGO'],
+  observacion:['OBSERVACION','OBSERVACIÓN','OBSERVACIONES','NOTA','NOTAS'],
+  estado:['ESTADO','ESTATUS']
+};
+function getField(obj, names){
+  if(!obj || typeof obj !== 'object') return '';
+  const direct = {}; Object.keys(obj).forEach(k => { direct[norm(k)] = obj[k]; });
+  for(const n of names){ const k=norm(n); if(direct[k] !== undefined) return direct[k]; }
+  const keys = Object.keys(direct);
+  for(const k of keys){ if(names.some(n => k.includes(norm(n)) || norm(n).includes(k))) return direct[k]; }
+  return '';
+}
+function normalizeRow(row){
+  if(!row || typeof row !== 'object') return null;
+  const fechaISO = parseDateISO(row.fechaISO || row.fecha || row.Fecha || getField(row, aliases.fecha));
+  const empresa = clean(row.empresa || row.Empresa || getField(row, aliases.empresa));
+  const escenario = clean(row.escenario || row.Escenario || getField(row, aliases.escenario));
+  const horario = clean(row.horario || row.horarioEvento || getField(row, aliases.horario));
+  const personas = num(row.personas ?? row.pax ?? getField(row, aliases.personas));
+  const medioPago = clean(row.medioPago || row.medio || getField(row, aliases.medioPago));
+  const estado = clean(row.estado || getField(row, aliases.estado));
+  const observacion = clean(row.observacion || getField(row, aliases.observacion));
+  if(!fechaISO && !empresa && !escenario && !personas && !medioPago) return null;
+  const idSource = [fechaISO, empresa, escenario, horario, personas, medioPago, observacion].map(norm).join('|');
+  return { id:'EV-'+hashText(idSource), fechaISO, fecha: formatDate(fechaISO || row.fecha || getField(row, aliases.fecha)), empresa, escenario, horario, personas, medioPago, estado, observacion };
+}
+function arrayRowsToObjects(arr){
+  if(!Array.isArray(arr) || !arr.length) return [];
+  if(arr.every(x => Array.isArray(x))){
+    const headerIndex = arr.findIndex(r => Array.isArray(r) && r.some(c => ['FECHA','EMPRESA','NOMBRE DE LA EMPRESA','CANTIDAD DE PERSONAS','MEDIO DE PAGO'].includes(norm(c))));
+    if(headerIndex >= 0){
+      const headers = arr[headerIndex].map(h => clean(h));
+      return arr.slice(headerIndex+1).map(r => Object.fromEntries(headers.map((h,i)=>[h, r[i]])));
+    }
+  }
+  return arr;
+}
+function rowsFromAny(value){
+  if(!value) return [];
+  if(Array.isArray(value)) return arrayRowsToObjects(value).map(normalizeRow).filter(Boolean);
+  if(typeof value === 'object'){
+    for(const k of ['rows','data','eventos','events','items','records','registros']){
+      if(Array.isArray(value[k])) return rowsFromAny(value[k]);
+    }
+  }
+  return [];
+}
+function findArrays(x, out=[], depth=0){
+  if(depth > 5 || !x) return out;
+  if(Array.isArray(x)){ out.push(x); x.slice(0,10).forEach(v => findArrays(v,out,depth+1)); return out; }
+  if(typeof x === 'object') Object.values(x).slice(0,60).forEach(v => findArrays(v,out,depth+1));
+  return out;
+}
+function dedupeEvents(rows){
+  const seen = new Set(), out = [];
+  for(const r of rows){ const ev = normalizeRow(r); if(!ev || seen.has(ev.id)) continue; seen.add(ev.id); out.push(ev); }
+  return out.sort((a,b)=>(a.fechaISO||'9999').localeCompare(b.fechaISO||'9999') || a.empresa.localeCompare(b.empresa));
+}
+function loadEvents(){
+  const ordered=[APP_KEYS.sourceV5, APP_KEYS.source, APP_KEYS.sourceLegacy, APP_KEYS.sourceAgenda, 'agendaEventos:fuentePrincipalEventos', 'eventosGuardados', 'eventosData', 'eventos', 'events', 'excelData', 'data'];
+  let best=[], source='';
+  for(const key of ordered){
+    const raw = localStorage.getItem(key) || sessionStorage.getItem(key);
+    if(!raw) continue;
+    const parsed = safeParse(raw);
+    const rows = rowsFromAny(parsed);
+    if(rows.length > best.length){ best=rows; source=key; }
+  }
+  for(const store of [localStorage, sessionStorage]){
+    for(let i=0; i<store.length; i++){
+      const key = store.key(i); if(!key || ordered.includes(key)) continue;
+      const raw = store.getItem(key); if(!raw || raw.length < 10 || raw.length > 12000000) continue;
+      const parsed = safeParse(raw); if(!parsed) continue;
+      for(const arr of findArrays(parsed)){ const rows = rowsFromAny(arr); if(rows.length > best.length){ best=rows; source=key; } }
+    }
+  }
+  const rows = dedupeEvents(best);
+  if(rows.length) localStorage.setItem(APP_KEYS.sourceV5, JSON.stringify({updatedAt:new Date().toISOString(), source, rows}));
+  return rows;
+}
+function getInvoices(){
+  const current = safeParse(localStorage.getItem(APP_KEYS.invoices), null);
+  if(current) return current;
+  const legacy = safeParse(localStorage.getItem(APP_KEYS.invoicesLegacy), {}) || {};
+  Object.values(legacy).forEach(v => { if(v && v.estado === 'Radicada') v.estado = 'Facturada'; if(v && v.estado === 'Pagada') v.estado = 'Facturada'; if(v && v.estado === 'Anulada') v.estado = 'Nota crédito'; });
+  localStorage.setItem(APP_KEYS.invoices, JSON.stringify(legacy));
+  return legacy;
+}
+function setInvoices(map){ localStorage.setItem(APP_KEYS.invoices, JSON.stringify(map || {})); }
+function getDeleted(){
+  const current = safeParse(localStorage.getItem(APP_KEYS.deleted), null);
+  if(current) return current;
+  const legacy = safeParse(localStorage.getItem(APP_KEYS.deletedLegacy), {}) || {};
+  localStorage.setItem(APP_KEYS.deleted, JSON.stringify(legacy));
+  return legacy;
+}
+function setDeleted(map){ localStorage.setItem(APP_KEYS.deleted, JSON.stringify(map || {})); }
+function getInvoice(ev){ const inv = getInvoices()[ev.id] || {}; let estado = clean(inv.estado) || 'Pendiente'; if(!['Pendiente','Facturada','Nota crédito'].includes(estado)) estado = estado === 'Anulada' ? 'Nota crédito' : estado === 'Pagada' || estado === 'Radicada' ? 'Facturada' : 'Pendiente'; return {estado, factura: clean(inv.factura), radicada: parseDateISO(inv.radicada), observacion: clean(inv.observacion), updatedAt: inv.updatedAt || ''}; }
+function deviceName(){ return localStorage.getItem(APP_KEYS.deviceName) || `${navigator.platform || 'Equipo'} - ${screen.width}x${screen.height}`; }
+async function refreshIp(){
+  const cached = localStorage.getItem(APP_KEYS.publicIp);
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(), 2500);
+  try{
+    const r = await fetch('https://api.ipify.org?format=json', {signal: controller.signal, cache:'no-store'});
+    const j = await r.json();
+    if(j && j.ip){ localStorage.setItem(APP_KEYS.publicIp, j.ip); return j.ip; }
+  }catch(e){} finally { clearTimeout(timer); }
+  return cached || 'No disponible en modo local';
+}
+function currentIp(){ return localStorage.getItem(APP_KEYS.publicIp) || 'No disponible en modo local'; }
+function audit(modulo, accion, detalle){
+  const now = new Date();
+  const log = safeParse(localStorage.getItem(APP_KEYS.audit), null) || safeParse(localStorage.getItem(APP_KEYS.auditLegacy), []) || [];
+  log.unshift({
+    id:'AUD-'+now.toISOString().replace(/[-:.TZ]/g,'').slice(0,14)+'-'+hashText(Math.random()),
+    iso: now.toISOString(),
+    fecha: now.toLocaleDateString('es-CO', {year:'numeric', month:'2-digit', day:'2-digit'}),
+    hora: now.toLocaleTimeString('es-CO', {hour12:false}),
+    usuario: localStorage.getItem('eventosUsuarioActivo') || localStorage.getItem('usuarioActivo') || localStorage.getItem('currentUser') || 'Usuario local',
+    equipo: deviceName(),
+    ip: currentIp(),
+    modulo, accion, detalle: clean(detalle).slice(0,700),
+    navegador: (navigator.userAgent || 'No disponible').slice(0,220),
+    plataforma: navigator.platform || 'No disponible',
+    url: location.pathname.split('/').pop() || location.pathname
+  });
+  localStorage.setItem(APP_KEYS.audit, JSON.stringify(log.slice(0,6000)));
+}
+function exportExcel(filename, rows){
+  const data = rows && rows.length ? rows : [{}];
+  const cols = [...new Set(data.flatMap(r => Object.keys(r)))];
+  const table = '<table><thead><tr>'+cols.map(c=>`<th>${esc(c)}</th>`).join('')+'</tr></thead><tbody>'+data.map(r=>'<tr>'+cols.map(c=>`<td>${esc(r[c]??'')}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
+  const blob = new Blob(['\ufeff'+table], {type:'application/vnd.ms-excel;charset=utf-8;'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function toast(msg){ const t=$('#toast'); if(!t) return; t.textContent=msg; t.classList.add('show'); clearTimeout(t._timer); t._timer=setTimeout(()=>t.classList.remove('show'), 2400); }
+function uniqueSorted(rows, key){ return [...new Set(rows.map(r=>clean(r[key])).filter(Boolean))].sort((a,b)=>a.localeCompare(b)); }
+function moneyish(n){ return new Intl.NumberFormat('es-CO').format(Math.round(n || 0)); }
+refreshIp().then(ip => { if(ip && ip !== 'No disponible en modo local') localStorage.setItem(APP_KEYS.publicIp, ip); });
+let events=[], invoices={}, hidden={}, showHidden=false, stateFilter='';
+const states=['Pendiente','Facturada','Nota crédito'];
+function invClass(state){ return 'estado-' + norm(state).toLowerCase().replace(/\s+/g,'-'); }
+function refreshAll(){
+  events=loadEvents(); invoices=getInvoices(); hidden=getDeleted();
+  fillSelects(); renderChips(); render(); updateSource();
+}
+function updateSource(){
+  const dot=$('#dot'), txt=$('#sourceText');
+  if(events.length){ dot.className='dot ok'; txt.textContent=`${events.length} eventos reconocidos desde la fuente de Eventos`; }
+  else { dot.className='dot bad'; txt.textContent='Sin datos reconocidos. Abra Eventos, cargue el Excel allí y vuelva a Actualizar datos.'; }
+}
+function activeBase(){ return events.filter(e => showHidden ? hidden[e.id] : !hidden[e.id]); }
+function countsByState(){
+  const c={Todos:activeBase().length, Pendiente:0, Facturada:0, 'Nota crédito':0};
+  activeBase().forEach(e => { const s=getInvoice(e).estado; c[s]=(c[s]||0)+1; });
+  return c;
+}
+function renderChips(){
+  const c=countsByState();
+  $('#statebar').innerHTML = [`<button class="chip ${!stateFilter?'active':''}" data-state=""><span>Todos</span><b>${c.Todos}</b></button>`]
+    .concat(states.map(s => `<button class="chip ${stateFilter===s?'active':''}" data-state="${esc(s)}"><span>${esc(s)}</span><b>${c[s]||0}</b></button>`)).join('');
+}
+function fillSelects(){
+  const oldMed=$('#medio').value, oldEmp=$('#empresa').value;
+  $('#medio').innerHTML='<option value="">Todos</option>'+uniqueSorted(events,'medioPago').map(v=>`<option>${esc(v)}</option>`).join('');
+  $('#empresa').innerHTML='<option value="">Todas</option>'+uniqueSorted(events,'empresa').map(v=>`<option>${esc(v)}</option>`).join('');
+  $('#medio').value=oldMed; $('#empresa').value=oldEmp;
+}
+function filtered(){
+  const q=norm($('#q').value), from=$('#from').value, to=$('#to').value, medio=$('#medio').value, empresa=$('#empresa').value;
+  return activeBase().filter(e => {
+    const inv=getInvoice(e);
+    if(stateFilter && inv.estado !== stateFilter) return false;
+    if(q && !norm([e.fecha,e.empresa,e.personas,e.medioPago,inv.estado,inv.factura,inv.radicada,inv.observacion].join(' ')).includes(q)) return false;
+    if(from && e.fechaISO && e.fechaISO < from) return false;
+    if(to && e.fechaISO && e.fechaISO > to) return false;
+    if(medio && e.medioPago !== medio) return false;
+    if(empresa && e.empresa !== empresa) return false;
+    return true;
+  });
+}
+function render(){
+  renderChips();
+  const rows=filtered(), body=$('#body');
+  if(!rows.length){ body.innerHTML=`<tr><td colspan="9"><div class="empty"><strong>No hay eventos para mostrar</strong>${events.length?'Revise los filtros o cambie el chip de estado.':'Primero cargue el archivo en Eventos. Este módulo no carga Excel independiente.'}</div></td></tr>`; return; }
+  body.innerHTML=rows.map(e => {
+    const inv=getInvoice(e), isHidden=!!hidden[e.id];
+    return `<tr data-id="${esc(e.id)}">
+      <td><div class="txt" title="${esc(e.fecha)}">${esc(e.fecha)}</div></td>
+      <td><div class="txt" title="${esc(e.empresa)}">${esc(e.empresa || 'Sin empresa')}</div></td>
+      <td class="center"><strong>${e.personas ? moneyish(e.personas) : ''}</strong></td>
+      <td class="center"><span class="pay" title="${esc(e.medioPago)}">${esc(e.medioPago || 'Sin pago')}</span></td>
+      <td><select class="select ${invClass(inv.estado)}" data-field="estado">${states.map(s=>`<option ${inv.estado===s?'selected':''}>${esc(s)}</option>`).join('')}</select></td>
+      <td><input class="input" data-field="factura" value="${esc(inv.factura)}" placeholder="Ej: FV-0001"></td>
+      <td><input class="input" data-field="radicada" type="date" value="${esc(inv.radicada)}"></td>
+      <td><input class="input" data-field="observacion" value="${esc(inv.observacion)}" placeholder="Nota interna"></td>
+      <td><button class="rowbtn ${isHidden?'restore':''}" data-action="${isHidden?'restore':'hide'}">${isHidden?'Restaurar':'Ocultar'}</button></td>
+    </tr>`;
+  }).join('');
+}
+function saveInvoice(id, field, value){
+  invoices[id]=invoices[id] || {estado:'Pendiente', factura:'', radicada:'', observacion:''};
+  invoices[id][field]=field === 'radicada' ? parseDateISO(value) : clean(value);
+  invoices[id].updatedAt=new Date().toISOString();
+  setInvoices(invoices);
+  const ev=events.find(e=>e.id===id);
+  audit('Facturas','Modificación',`${field} actualizado: ${ev?.empresa || id}`);
+}
+document.addEventListener('click', e => {
+  const chip=e.target.closest('.chip');
+  if(chip){ stateFilter=chip.dataset.state || ''; render(); return; }
+  const btn=e.target.closest('button[data-action]');
+  if(btn){
+    const id=btn.closest('tr').dataset.id, ev=events.find(x=>x.id===id);
+    if(btn.dataset.action==='hide'){ hidden[id]={hiddenAt:new Date().toISOString(), event:ev}; setDeleted(hidden); audit('Facturas','Ocultar evento',`Ocultó ${ev?.empresa || id}`); toast('Evento ocultado. No reaparecerá al actualizar.'); }
+    else { delete hidden[id]; setDeleted(hidden); audit('Facturas','Restaurar evento',`Restauró ${ev?.empresa || id}`); toast('Evento restaurado.'); }
+    render();
+  }
+});
+document.addEventListener('input', e => {
+  if(e.target.matches('.input')) saveInvoice(e.target.closest('tr').dataset.id, e.target.dataset.field, e.target.value);
+  if(['q','from','to'].includes(e.target.id)) render();
+});
+document.addEventListener('change', e => {
+  if(e.target.matches('select[data-field="estado"]')){ saveInvoice(e.target.closest('tr').dataset.id, 'estado', e.target.value); render(); toast('Estado actualizado'); }
+  if(['medio','empresa'].includes(e.target.id)) render();
+});
+$('#backBtn').onclick=()=>location.href='index.html';
+$('#refreshBtn').onclick=()=>{ refreshAll(); audit('Facturas','Actualizar datos',`Reconoció ${events.length} eventos`); toast('Datos actualizados'); };
+$('#toggleHiddenBtn').onclick=()=>{ showHidden=!showHidden; $('#toggleHiddenBtn').textContent=showHidden?'Ver activos':'Ver ocultos'; render(); };
+$('#clearBtn').onclick=()=>{ ['q','from','to'].forEach(id=>$('#'+id).value=''); ['medio','empresa'].forEach(id=>$('#'+id).value=''); stateFilter=''; render(); };
+$('#exportBtn').onclick=()=>{ const rows=filtered().map(e=>{ const inv=getInvoice(e); return {'Fecha':e.fecha,'Nombre empresa':e.empresa,'Cantidad de personas':e.personas,'Medio de pago':e.medioPago,'Estado factura':inv.estado,'N.° factura':inv.factura,'Fecha radicada':inv.radicada?formatDate(inv.radicada):'','Observación factura':inv.observacion}; }); exportExcel('eventos_para_facturar.xls', rows); audit('Facturas','Descarga Excel',`Exportó ${rows.length} registros`); };
+window.addEventListener('storage', e=>{ if([APP_KEYS.sourceV5,APP_KEYS.source,APP_KEYS.invoices,APP_KEYS.deleted].includes(e.key)) refreshAll(); });
+setInterval(()=>{ const latest=loadEvents(); if(latest.length !== events.length){ events=latest; fillSelects(); render(); updateSource(); } }, 4000);
+audit('Facturas','Acceso','Ingresó a Eventos para facturar');
+refreshAll();
+</script>
+</body>
+</html>

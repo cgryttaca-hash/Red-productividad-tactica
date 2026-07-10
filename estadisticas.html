@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Estadísticas ejecutivas</title>
+<style>
+:root{--bg:#eef3f8;--panel:#fff;--ink:#102033;--muted:#64748b;--line:#d8e2ee;--blue:#0f3a69;--blue2:#1e63d6;--cyan:#0891b2;--green:#047857;--amber:#b45309;--purple:#6d28d9;--red:#b42318;--shadow:0 18px 44px rgba(15,23,42,.10)}*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#dfeafe,transparent 32%),linear-gradient(135deg,#f8fafc,#eef3f8);color:var(--ink)}.app{width:min(1580px,calc(100% - 28px));margin:auto;padding:16px 0 24px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:12px}.title h1{margin:0;font-size:clamp(24px,2.4vw,36px);letter-spacing:-.04em;color:#0b2442}.title span{display:block;margin-top:5px;color:var(--muted);font-weight:650}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{height:38px;border:1px solid var(--line);border-radius:12px;padding:0 14px;background:white;color:var(--ink);font-weight:900;cursor:pointer;box-shadow:0 8px 18px rgba(15,23,42,.06);white-space:nowrap}.btn.primary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:white;border:0}.layout{display:grid;grid-template-columns:280px minmax(0,1fr);gap:14px}.filters{background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:14px;align-self:start;position:sticky;top:12px}.filters h2{font-size:15px;margin:0 0 12px}.field{margin-bottom:10px}.field label{display:block;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:900;margin-bottom:5px}.field input,.field select{width:100%;height:38px;border:1px solid var(--line);border-radius:11px;padding:0 10px;background:white;outline:none;color:#172033}.field input:focus,.field select:focus{border-color:#1e63d6;box-shadow:0 0 0 3px rgba(30,99,214,.12)}.filter-note{font-size:12px;line-height:1.45;color:var(--muted);border-top:1px solid var(--line);padding-top:11px;margin-top:12px}.canvas{display:flex;flex-direction:column;gap:14px}.kpis{display:grid;grid-template-columns:repeat(6,minmax(150px,1fr));gap:12px}.kpi{background:linear-gradient(180deg,#fff,#f9fbff);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);position:relative;overflow:hidden}.kpi:after{content:"";position:absolute;right:-20px;top:-24px;width:76px;height:76px;border-radius:50%;background:rgba(30,99,214,.08)}.kpi small{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:900}.kpi strong{display:block;font-size:clamp(24px,2.2vw,36px);letter-spacing:-.04em;margin-top:7px;color:#0b2442}.kpi span{display:block;margin-top:4px;color:#64748b;font-size:12px;font-weight:650}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.card{background:rgba(255,255,255,.97);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:14px 16px 8px}.card h3{font-size:15px;margin:0;color:#0f2442}.card p{margin:4px 0 0;color:var(--muted);font-size:12px}.chart{padding:6px 16px 16px}.bars{display:flex;flex-direction:column;gap:9px}.bar-row{display:grid;grid-template-columns:minmax(120px,220px) 1fr 68px;gap:10px;align-items:center;cursor:pointer;padding:4px;border-radius:11px}.bar-row:hover{background:#f8fafc}.bar-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;font-size:13px;color:#24364f}.bar-track{height:14px;border-radius:999px;background:#edf3fb;overflow:hidden}.bar-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue2),#22a7d7)}.bar-value{text-align:right;font-weight:900;color:#0b2442}.months{display:flex;align-items:end;gap:8px;height:230px;padding-top:14px;border-bottom:1px solid #dbe5f0}.month{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:7px;min-width:44px;cursor:pointer}.month-bar{width:100%;max-width:46px;border-radius:10px 10px 0 0;background:linear-gradient(180deg,#1e63d6,#0f3a69);min-height:8px;transition:.18s}.month:hover .month-bar{filter:brightness(1.08);transform:translateY(-2px)}.month b{font-size:12px}.month span{font-size:10px;color:var(--muted);font-weight:900}.status-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.status-box{border:1px solid var(--line);border-radius:15px;padding:13px;cursor:pointer;background:#fff}.status-box:hover{transform:translateY(-1px);box-shadow:0 10px 20px rgba(15,23,42,.07)}.status-box small{display:block;text-transform:uppercase;letter-spacing:.08em;font-weight:900;color:var(--muted);font-size:10px}.status-box strong{display:block;font-size:28px;margin:6px 0 2px}.status-box.pendiente strong{color:var(--amber)}.status-box.facturada strong{color:var(--green)}.status-box.credito strong{color:var(--purple)}.table{width:100%;border-collapse:separate;border-spacing:0}.table th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:left;border-bottom:1px solid var(--line);padding:10px}.table td{border-bottom:1px solid #edf2f7;padding:10px;font-size:13px}.table tr:hover td{background:#f8fafc}.pill{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#eef4ff;color:#17498c;min-height:28px;padding:4px 9px;font-weight:900;font-size:12px}.trend{height:260px;width:100%}.axis-label{font-size:10px;fill:#64748b;font-weight:700}.line{fill:none;stroke:#1e63d6;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.area{fill:rgba(30,99,214,.10)}.point{fill:#fff;stroke:#1e63d6;stroke-width:3;cursor:pointer}.point:hover{fill:#1e63d6}.empty{padding:36px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:18px}.toast{position:fixed;right:18px;bottom:18px;z-index:30;background:#0f172a;color:white;padding:12px 15px;border-radius:12px;opacity:0;transform:translateY(10px);transition:.2s}.toast.show{opacity:1;transform:translateY(0)}
+@media(max-width:1280px){.layout{grid-template-columns:1fr}.filters{position:static}.filters form{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.field{margin-bottom:0}.kpis{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.grid{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start;flex-direction:column}.bar-row{grid-template-columns:1fr}.bar-value{text-align:left}.filters form{grid-template-columns:1fr 1fr}}@media(max-width:600px){.app{width:calc(100% - 16px)}.kpis{grid-template-columns:1fr}.filters form{grid-template-columns:1fr}.status-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="app">
+  <section class="top"><div class="title"><h1>Estadísticas ejecutivas</h1><span id="sourceText">Tablero conectado a Eventos</span></div><div class="actions"><button id="backBtn" class="btn">← Volver al inicio</button><button id="refreshBtn" class="btn primary">Actualizar datos</button><button id="clearBtn" class="btn">Limpiar filtros</button><button id="exportBtn" class="btn">Descargar resumen</button></div></section>
+  <section class="layout">
+    <aside class="filters"><h2>Filtros interactivos</h2><form onsubmit="return false"><div class="field"><label>Desde</label><input id="from" type="date"></div><div class="field"><label>Hasta</label><input id="to" type="date"></div><div class="field"><label>Empresa</label><select id="empresa"><option value="">Todas</option></select></div><div class="field"><label>Salón / escenario</label><select id="escenario"><option value="">Todos</option></select></div><div class="field"><label>Medio de pago</label><select id="medio"><option value="">Todos</option></select></div><div class="field"><label>Estado factura</label><select id="estado"><option value="">Todos</option><option>Pendiente</option><option>Facturada</option><option>Nota crédito</option></select></div></form><div class="filter-note" id="filterNote">Haz clic en barras, estados o tendencias para filtrar el tablero.</div></aside>
+    <section class="canvas" id="canvas"><div class="empty">Cargando información...</div></section>
+  </section>
+</main>
+<div id="toast" class="toast"></div>
+<script>
+const APP_KEYS = {
+  source: 'EVENTOS_FUENTE_UNICA_V4',
+  sourceV5: 'EVENTOS_FUENTE_UNICA_V5',
+  sourceLegacy: 'EVENTOS_FUENTE_UNICA',
+  sourceAgenda: 'agendaEventos:fuentePrincipalEventos',
+  invoices: 'EVENTOS_FACTURAS_V5',
+  invoicesLegacy: 'EVENTOS_FACTURAS_V4',
+  deleted: 'EVENTOS_FACTURAS_OCULTOS_V5',
+  deletedLegacy: 'EVENTOS_FACTURAS_ELIMINADOS_V4',
+  audit: 'EVENTOS_AUDITORIA_V5',
+  auditLegacy: 'EVENTOS_AUDITORIA_V4',
+  deviceName: 'EVENTOS_AUDITORIA_EQUIPO_NOMBRE',
+  publicIp: 'EVENTOS_AUDITORIA_IP_PUBLICA'
+};
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function clean(v){ return String(v ?? '').replace(/\s+/g,' ').trim(); }
+function norm(v){ return clean(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase(); }
+function esc(v){ return clean(v).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function num(v){
+  if(typeof v === 'number') return Number.isFinite(v) ? v : 0;
+  const s = clean(v).replace(/\./g,'').replace(',', '.').replace(/[^0-9.-]/g,'');
+  const n = Number(s);
+  return Number.isFinite(n) ? n : 0;
+}
+function hashText(text){ let h=2166136261, s=String(text??''); for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h+= (h<<1)+(h<<4)+(h<<7)+(h<<8)+(h<<24); } return (h>>>0).toString(36); }
+function safeParse(raw, fallback=null){ try{return JSON.parse(raw)}catch(e){return fallback} }
+function excelSerialToISO(v){ const n=Number(v); if(!Number.isFinite(n)) return ''; const d=new Date(Date.UTC(1899,11,30) + Math.floor(n)*86400000); return Number.isNaN(d.getTime()) ? '' : d.toISOString().slice(0,10); }
+function parseDateISO(v){
+  if(v===null || v===undefined || v==='') return '';
+  if(v instanceof Date && !Number.isNaN(v.getTime())) return v.toISOString().slice(0,10);
+  if(typeof v==='number') return excelSerialToISO(v);
+  const s=clean(v); if(!s) return '';
+  if(/^\d{4}-\d{2}-\d{2}/.test(s)) return s.slice(0,10);
+  let m=s.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/);
+  if(m){ let d=m[1].padStart(2,'0'), mo=m[2].padStart(2,'0'), y=m[3]; if(y.length===2) y=(Number(y)>50?'19':'20')+y; return `${y.padStart(4,'0')}-${mo}-${d}`; }
+  const parsed=new Date(s); if(!Number.isNaN(parsed.getTime())) return parsed.toISOString().slice(0,10);
+  return '';
+}
+function formatDate(v){ const iso=parseDateISO(v); if(!iso) return clean(v); const [y,m,d]=iso.split('-'); return `${d}/${m}/${y}`; }
+function formatDateTime(v){
+  const iso = clean(v); if(!iso) return '';
+  if(/^\d{4}-\d{2}-\d{2}T/.test(iso)){ const hh=iso.slice(11,16); return `${formatDate(iso.slice(0,10))} ${hh}`; }
+  const d = new Date(iso); if(!Number.isNaN(d.getTime())) return d.toLocaleString('es-CO', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false});
+  return iso;
+}
+const aliases = {
+  fecha:['FECHA','FECHA EVENTO','DIA','DÍA','DATE'],
+  escenario:['ESCENARIO ASIGNADO','ESCENARIO','SALON','SALÓN','ESPACIO','UBICACION','UBICACIÓN','AREA','ÁREA'],
+  horario:['HORARIO DEL EVENTO','HORARIO EVENTO','HORA EVENTO','HORARIO','HORA'],
+  empresa:['NOMBRE DE LA EMPRESA','NOMBRE EMPRESA','EMPRESA','CLIENTE','NOMBRE DEL CLIENTE','ORGANIZACION','ORGANIZACIÓN'],
+  personas:['CANTIDAD DE PERSONAS','CANTIDAD PERSONAS','PERSONAS','PAX','ASISTENTES','CANTIDAD'],
+  alimentacion:['DESCRIPCION ALIMENTACION','DESCRIPCIÓN ALIMENTACIÓN','ALIMENTACION','ALIMENTACIÓN','MENU','MENÚ'],
+  acomodacion:['ACOMODACION','ACOMODACIÓN','MONTAJE'],
+  modalidad:['MODALIDAD DE SERVICIO','MODALIDAD','TIPO SERVICIO'],
+  medioPago:['MEDIO DE PAGO','MEDIO PAGO','PAGO','FORMA DE PAGO','MODALIDAD DE PAGO'],
+  observacion:['OBSERVACION','OBSERVACIÓN','OBSERVACIONES','NOTA','NOTAS'],
+  estado:['ESTADO','ESTATUS']
+};
+function getField(obj, names){
+  if(!obj || typeof obj !== 'object') return '';
+  const direct = {}; Object.keys(obj).forEach(k => { direct[norm(k)] = obj[k]; });
+  for(const n of names){ const k=norm(n); if(direct[k] !== undefined) return direct[k]; }
+  const keys = Object.keys(direct);
+  for(const k of keys){ if(names.some(n => k.includes(norm(n)) || norm(n).includes(k))) return direct[k]; }
+  return '';
+}
+function normalizeRow(row){
+  if(!row || typeof row !== 'object') return null;
+  const fechaISO = parseDateISO(row.fechaISO || row.fecha || row.Fecha || getField(row, aliases.fecha));
+  const empresa = clean(row.empresa || row.Empresa || getField(row, aliases.empresa));
+  const escenario = clean(row.escenario || row.Escenario || getField(row, aliases.escenario));
+  const horario = clean(row.horario || row.horarioEvento || getField(row, aliases.horario));
+  const personas = num(row.personas ?? row.pax ?? getField(row, aliases.personas));
+  const medioPago = clean(row.medioPago || row.medio || getField(row, aliases.medioPago));
+  const estado = clean(row.estado || getField(row, aliases.estado));
+  const observacion = clean(row.observacion || getField(row, aliases.observacion));
+  if(!fechaISO && !empresa && !escenario && !personas && !medioPago) return null;
+  const idSource = [fechaISO, empresa, escenario, horario, personas, medioPago, observacion].map(norm).join('|');
+  return { id:'EV-'+hashText(idSource), fechaISO, fecha: formatDate(fechaISO || row.fecha || getField(row, aliases.fecha)), empresa, escenario, horario, personas, medioPago, estado, observacion };
+}
+function arrayRowsToObjects(arr){
+  if(!Array.isArray(arr) || !arr.length) return [];
+  if(arr.every(x => Array.isArray(x))){
+    const headerIndex = arr.findIndex(r => Array.isArray(r) && r.some(c => ['FECHA','EMPRESA','NOMBRE DE LA EMPRESA','CANTIDAD DE PERSONAS','MEDIO DE PAGO'].includes(norm(c))));
+    if(headerIndex >= 0){
+      const headers = arr[headerIndex].map(h => clean(h));
+      return arr.slice(headerIndex+1).map(r => Object.fromEntries(headers.map((h,i)=>[h, r[i]])));
+    }
+  }
+  return arr;
+}
+function rowsFromAny(value){
+  if(!value) return [];
+  if(Array.isArray(value)) return arrayRowsToObjects(value).map(normalizeRow).filter(Boolean);
+  if(typeof value === 'object'){
+    for(const k of ['rows','data','eventos','events','items','records','registros']){
+      if(Array.isArray(value[k])) return rowsFromAny(value[k]);
+    }
+  }
+  return [];
+}
+function findArrays(x, out=[], depth=0){
+  if(depth > 5 || !x) return out;
+  if(Array.isArray(x)){ out.push(x); x.slice(0,10).forEach(v => findArrays(v,out,depth+1)); return out; }
+  if(typeof x === 'object') Object.values(x).slice(0,60).forEach(v => findArrays(v,out,depth+1));
+  return out;
+}
+function dedupeEvents(rows){
+  const seen = new Set(), out = [];
+  for(const r of rows){ const ev = normalizeRow(r); if(!ev || seen.has(ev.id)) continue; seen.add(ev.id); out.push(ev); }
+  return out.sort((a,b)=>(a.fechaISO||'9999').localeCompare(b.fechaISO||'9999') || a.empresa.localeCompare(b.empresa));
+}
+function loadEvents(){
+  const ordered=[APP_KEYS.sourceV5, APP_KEYS.source, APP_KEYS.sourceLegacy, APP_KEYS.sourceAgenda, 'agendaEventos:fuentePrincipalEventos', 'eventosGuardados', 'eventosData', 'eventos', 'events', 'excelData', 'data'];
+  let best=[], source='';
+  for(const key of ordered){
+    const raw = localStorage.getItem(key) || sessionStorage.getItem(key);
+    if(!raw) continue;
+    const parsed = safeParse(raw);
+    const rows = rowsFromAny(parsed);
+    if(rows.length > best.length){ best=rows; source=key; }
+  }
+  for(const store of [localStorage, sessionStorage]){
+    for(let i=0; i<store.length; i++){
+      const key = store.key(i); if(!key || ordered.includes(key)) continue;
+      const raw = store.getItem(key); if(!raw || raw.length < 10 || raw.length > 12000000) continue;
+      const parsed = safeParse(raw); if(!parsed) continue;
+      for(const arr of findArrays(parsed)){ const rows = rowsFromAny(arr); if(rows.length > best.length){ best=rows; source=key; } }
+    }
+  }
+  const rows = dedupeEvents(best);
+  if(rows.length) localStorage.setItem(APP_KEYS.sourceV5, JSON.stringify({updatedAt:new Date().toISOString(), source, rows}));
+  return rows;
+}
+function getInvoices(){
+  const current = safeParse(localStorage.getItem(APP_KEYS.invoices), null);
+  if(current) return current;
+  const legacy = safeParse(localStorage.getItem(APP_KEYS.invoicesLegacy), {}) || {};
+  Object.values(legacy).forEach(v => { if(v && v.estado === 'Radicada') v.estado = 'Facturada'; if(v && v.estado === 'Pagada') v.estado = 'Facturada'; if(v && v.estado === 'Anulada') v.estado = 'Nota crédito'; });
+  localStorage.setItem(APP_KEYS.invoices, JSON.stringify(legacy));
+  return legacy;
+}
+function setInvoices(map){ localStorage.setItem(APP_KEYS.invoices, JSON.stringify(map || {})); }
+function getDeleted(){
+  const current = safeParse(localStorage.getItem(APP_KEYS.deleted), null);
+  if(current) return current;
+  const legacy = safeParse(localStorage.getItem(APP_KEYS.deletedLegacy), {}) || {};
+  localStorage.setItem(APP_KEYS.deleted, JSON.stringify(legacy));
+  return legacy;
+}
+function setDeleted(map){ localStorage.setItem(APP_KEYS.deleted, JSON.stringify(map || {})); }
+function getInvoice(ev){ const inv = getInvoices()[ev.id] || {}; let estado = clean(inv.estado) || 'Pendiente'; if(!['Pendiente','Facturada','Nota crédito'].includes(estado)) estado = estado === 'Anulada' ? 'Nota crédito' : estado === 'Pagada' || estado === 'Radicada' ? 'Facturada' : 'Pendiente'; return {estado, factura: clean(inv.factura), radicada: parseDateISO(inv.radicada), observacion: clean(inv.observacion), updatedAt: inv.updatedAt || ''}; }
+function deviceName(){ return localStorage.getItem(APP_KEYS.deviceName) || `${navigator.platform || 'Equipo'} - ${screen.width}x${screen.height}`; }
+async function refreshIp(){
+  const cached = localStorage.getItem(APP_KEYS.publicIp);
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(), 2500);
+  try{
+    const r = await fetch('https://api.ipify.org?format=json', {signal: controller.signal, cache:'no-store'});
+    const j = await r.json();
+    if(j && j.ip){ localStorage.setItem(APP_KEYS.publicIp, j.ip); return j.ip; }
+  }catch(e){} finally { clearTimeout(timer); }
+  return cached || 'No disponible en modo local';
+}
+function currentIp(){ return localStorage.getItem(APP_KEYS.publicIp) || 'No disponible en modo local'; }
+function audit(modulo, accion, detalle){
+  const now = new Date();
+  const log = safeParse(localStorage.getItem(APP_KEYS.audit), null) || safeParse(localStorage.getItem(APP_KEYS.auditLegacy), []) || [];
+  log.unshift({
+    id:'AUD-'+now.toISOString().replace(/[-:.TZ]/g,'').slice(0,14)+'-'+hashText(Math.random()),
+    iso: now.toISOString(),
+    fecha: now.toLocaleDateString('es-CO', {year:'numeric', month:'2-digit', day:'2-digit'}),
+    hora: now.toLocaleTimeString('es-CO', {hour12:false}),
+    usuario: localStorage.getItem('eventosUsuarioActivo') || localStorage.getItem('usuarioActivo') || localStorage.getItem('currentUser') || 'Usuario local',
+    equipo: deviceName(),
+    ip: currentIp(),
+    modulo, accion, detalle: clean(detalle).slice(0,700),
+    navegador: (navigator.userAgent || 'No disponible').slice(0,220),
+    plataforma: navigator.platform || 'No disponible',
+    url: location.pathname.split('/').pop() || location.pathname
+  });
+  localStorage.setItem(APP_KEYS.audit, JSON.stringify(log.slice(0,6000)));
+}
+function exportExcel(filename, rows){
+  const data = rows && rows.length ? rows : [{}];
+  const cols = [...new Set(data.flatMap(r => Object.keys(r)))];
+  const table = '<table><thead><tr>'+cols.map(c=>`<th>${esc(c)}</th>`).join('')+'</tr></thead><tbody>'+data.map(r=>'<tr>'+cols.map(c=>`<td>${esc(r[c]??'')}</td>`).join('')+'</tr>').join('')+'</tbody></table>';
+  const blob = new Blob(['\ufeff'+table], {type:'application/vnd.ms-excel;charset=utf-8;'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+function toast(msg){ const t=$('#toast'); if(!t) return; t.textContent=msg; t.classList.add('show'); clearTimeout(t._timer); t._timer=setTimeout(()=>t.classList.remove('show'), 2400); }
+function uniqueSorted(rows, key){ return [...new Set(rows.map(r=>clean(r[key])).filter(Boolean))].sort((a,b)=>a.localeCompare(b)); }
+function moneyish(n){ return new Intl.NumberFormat('es-CO').format(Math.round(n || 0)); }
+refreshIp().then(ip => { if(ip && ip !== 'No disponible en modo local') localStorage.setItem(APP_KEYS.publicIp, ip); });
+let events=[], filters={month:''};
+function refreshAll(){ events=loadEvents(); fillSelects(); render(); }
+function fillSelects(){
+  const keep={empresa:$('#empresa').value, escenario:$('#escenario').value, medio:$('#medio').value};
+  $('#empresa').innerHTML='<option value="">Todas</option>'+uniqueSorted(events,'empresa').map(v=>`<option>${esc(v)}</option>`).join('');
+  $('#escenario').innerHTML='<option value="">Todos</option>'+uniqueSorted(events,'escenario').map(v=>`<option>${esc(v)}</option>`).join('');
+  $('#medio').innerHTML='<option value="">Todos</option>'+uniqueSorted(events,'medioPago').map(v=>`<option>${esc(v)}</option>`).join('');
+  Object.keys(keep).forEach(k=>{$('#'+k).value=keep[k]||''});
+}
+function filtered(){
+  const from=$('#from').value, to=$('#to').value, emp=$('#empresa').value, escn=$('#escenario').value, medio=$('#medio').value, estado=$('#estado').value;
+  return events.filter(e=>{
+    const inv=getInvoice(e);
+    if(from && e.fechaISO && e.fechaISO < from) return false;
+    if(to && e.fechaISO && e.fechaISO > to) return false;
+    if(emp && e.empresa !== emp) return false;
+    if(escn && e.escenario !== escn) return false;
+    if(medio && e.medioPago !== medio) return false;
+    if(estado && inv.estado !== estado) return false;
+    if(filters.month && (e.fechaISO || '').slice(0,7) !== filters.month) return false;
+    return true;
+  });
+}
+function group(rows, getter){ const m={}; rows.forEach(r=>{ const k=clean(getter(r)) || 'Sin dato'; m[k]=(m[k]||0)+1; }); return Object.entries(m).sort((a,b)=>b[1]-a[1]); }
+function groupPax(rows, getter){ const m={}; rows.forEach(r=>{ const k=clean(getter(r)) || 'Sin dato'; m[k]=(m[k]||0)+(r.personas||0); }); return Object.entries(m).sort((a,b)=>b[1]-a[1]); }
+function monthsData(rows){
+  const m={}; rows.forEach(r=>{ const key=(r.fechaISO || '').slice(0,7) || 'Sin fecha'; if(!m[key]) m[key]={eventos:0,pax:0}; m[key].eventos++; m[key].pax += r.personas || 0; });
+  return Object.entries(m).sort((a,b)=>a[0].localeCompare(b[0]));
+}
+function monthLabel(k){ if(k==='Sin fecha') return 'S/F'; const [y,m]=k.split('-'); return `${m}/${y.slice(2)}`; }
+function kpiHtml(label, value, sub){ return `<article class="kpi"><small>${esc(label)}</small><strong>${esc(value)}</strong><span>${esc(sub)}</span></article>`; }
+function barsHtml(data, type, label='Eventos'){
+  const max=Math.max(1,...data.map(x=>x[1]));
+  return `<div class="bars">${data.slice(0,10).map(([k,v])=>`<div class="bar-row" data-type="${type}" data-value="${esc(k)}" title="Filtrar por ${esc(k)}"><div class="bar-label">${esc(k)}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(4, v/max*100)}%"></div></div><div class="bar-value">${moneyish(v)}</div></div>`).join('') || '<div class="empty">Sin datos para mostrar</div>'}</div>`;
+}
+function monthsBars(data){
+  const max=Math.max(1,...data.map(x=>x[1].eventos));
+  return `<div class="months">${data.map(([k,o])=>`<div class="month" data-type="month" data-value="${esc(k)}" title="${esc(monthLabel(k))}: ${o.eventos} eventos / ${moneyish(o.pax)} personas"><b>${o.eventos}</b><div class="month-bar" style="height:${Math.max(8,o.eventos/max*190)}px"></div><span>${esc(monthLabel(k))}</span></div>`).join('') || '<div class="empty">Sin meses disponibles</div>'}</div>`;
+}
+function trendSvg(data){
+  if(!data.length) return '<div class="empty">Sin tendencia disponible</div>';
+  const w=720,h=260,p=34,max=Math.max(1,...data.map(x=>x[1].pax)), step=data.length>1?(w-p*2)/(data.length-1):0;
+  const pts=data.map(([k,o],i)=>[p+i*step,h-p-(o.pax/max)*(h-p*2),k,o.pax]);
+  const line=pts.map(p=>`${p[0]},${p[1]}`).join(' ');
+  const area=`${p},${h-p} ${line} ${w-p},${h-p}`;
+  return `<svg class="trend" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><polyline class="area" points="${area}"></polyline><polyline class="line" points="${line}"></polyline>${pts.map((p,i)=>`<circle class="point" data-type="month" data-value="${esc(p[2])}" cx="${p[0]}" cy="${p[1]}" r="6"><title>${esc(monthLabel(p[2]))}: ${moneyish(p[3])} personas</title></circle><text class="axis-label" x="${p[0]}" y="${h-8}" text-anchor="middle">${esc(monthLabel(p[2]))}</text>`).join('')}</svg>`;
+}
+function render(){
+  const rows=filtered();
+  const total=rows.length, pax=rows.reduce((a,r)=>a+(r.personas||0),0), avg=total?Math.round(pax/total):0;
+  const empCount=new Set(rows.map(r=>r.empresa).filter(Boolean)).size;
+  const escCount=new Set(rows.map(r=>r.escenario).filter(Boolean)).size;
+  const invStates={Pendiente:0, Facturada:0, 'Nota crédito':0}; rows.forEach(r=>{ const s=getInvoice(r).estado; invStates[s]=(invStates[s]||0)+1; });
+  $('#sourceText').textContent = events.length ? `${rows.length} de ${events.length} eventos analizados` : 'Sin datos: primero cargue Eventos';
+  $('#filterNote').textContent = filters.month ? `Filtro activo por mes: ${monthLabel(filters.month)}. Usa Limpiar filtros para quitarlo.` : 'Haz clic en barras, estados o tendencias para filtrar el tablero.';
+  if(!events.length){ $('#canvas').innerHTML='<div class="empty"><strong>Sin datos reconocidos.</strong><br>Abra el módulo Eventos, cargue el Excel allí y vuelva a esta página.</div>'; return; }
+  const mData=monthsData(rows), topEmp=group(rows,r=>r.empresa), topPax=groupPax(rows,r=>r.empresa), salones=group(rows,r=>r.escenario), medios=group(rows,r=>r.medioPago);
+  $('#canvas').innerHTML=`
+    <section class="kpis">
+      ${kpiHtml('Eventos', moneyish(total), 'Registros filtrados')}
+      ${kpiHtml('Personas atendidas', moneyish(pax), 'Total asistentes')}
+      ${kpiHtml('Ticket promedio personas', moneyish(avg), 'Personas por evento')}
+      ${kpiHtml('Empresas', moneyish(empCount), 'Clientes únicos')}
+      ${kpiHtml('Salones', moneyish(escCount), 'Escenarios usados')}
+      ${kpiHtml('Pendientes facturar', moneyish(invStates.Pendiente||0), 'Control administrativo')}
+    </section>
+    <section class="grid">
+      <article class="card"><div class="card-head"><div><h3>Eventos por mes</h3><p>Haz clic en un mes para aislar la tendencia.</p></div><span class="pill">${mData.length} meses</span></div><div class="chart">${monthsBars(mData)}</div></article>
+      <article class="card"><div class="card-head"><div><h3>Facturación por estado</h3><p>Control visual del proceso.</p></div></div><div class="chart"><div class="status-grid">${['Pendiente','Facturada','Nota crédito'].map(s=>`<div class="status-box ${s==='Pendiente'?'pendiente':s==='Facturada'?'facturada':'credito'}" data-type="estado" data-value="${esc(s)}"><small>${esc(s)}</small><strong>${moneyish(invStates[s]||0)}</strong><span>${total?Math.round((invStates[s]||0)/total*100):0}%</span></div>`).join('')}</div></div></article>
+      <article class="card"><div class="card-head"><div><h3>Empresas con más eventos</h3><p>Nombres organizados y legibles, sin perder clientes.</p></div></div><div class="chart">${barsHtml(topEmp,'empresa')}</div></article>
+      <article class="card"><div class="card-head"><div><h3>Personas por empresa</h3><p>Volumen de asistentes por cliente.</p></div></div><div class="chart">${barsHtml(topPax,'empresa','Personas')}</div></article>
+      <article class="card"><div class="card-head"><div><h3>Eventos por salón</h3><p>Distribución operacional por escenario.</p></div></div><div class="chart">${barsHtml(salones,'escenario')}</div></article>
+      <article class="card"><div class="card-head"><div><h3>Medios de pago</h3><p>Comportamiento administrativo por forma de pago.</p></div></div><div class="chart">${barsHtml(medios,'medio')}</div></article>
+      <article class="card" style="grid-column:1/-1"><div class="card-head"><div><h3>Tendencia de personas atendidas</h3><p>Lectura clara del movimiento mensual de asistentes.</p></div><span class="pill">${moneyish(pax)} personas</span></div><div class="chart">${trendSvg(mData)}</div></article>
+      <article class="card" style="grid-column:1/-1"><div class="card-head"><div><h3>Detalle ejecutivo por empresa</h3><p>Ranking consolidado para presentación gerencial.</p></div></div><div class="chart"><table class="table"><thead><tr><th>Empresa</th><th>Eventos</th><th>Personas</th><th>Promedio personas</th></tr></thead><tbody>${topEmp.slice(0,14).map(([empresa,eventos])=>{ const paxEmp=rows.filter(r=>r.empresa===empresa).reduce((a,r)=>a+(r.personas||0),0); return `<tr data-type="empresa" data-value="${esc(empresa)}"><td><strong>${esc(empresa)}</strong></td><td>${moneyish(eventos)}</td><td>${moneyish(paxEmp)}</td><td>${moneyish(eventos?Math.round(paxEmp/eventos):0)}</td></tr>`; }).join('')}</tbody></table></div></article>
+    </section>`;
+}
+document.addEventListener('click', e=>{
+  const el=e.target.closest('[data-type][data-value]'); if(!el) return;
+  const type=el.dataset.type, value=el.dataset.value;
+  if(type==='empresa') $('#empresa').value=value;
+  if(type==='escenario') $('#escenario').value=value;
+  if(type==='medio') $('#medio').value=value;
+  if(type==='estado') $('#estado').value=value;
+  if(type==='month') filters.month = value;
+  render(); audit('Estadísticas','Filtro interactivo',`${type}: ${value}`);
+});
+['from','to','empresa','escenario','medio','estado'].forEach(id => $('#'+id).addEventListener('change', render));
+$('#backBtn').onclick=()=>location.href='index.html';
+$('#refreshBtn').onclick=()=>{ refreshAll(); audit('Estadísticas','Actualizar datos',`Actualizó tablero con ${events.length} eventos`); toast('Tablero actualizado'); };
+$('#clearBtn').onclick=()=>{ ['from','to','empresa','escenario','medio','estado'].forEach(id=>$('#'+id).value=''); filters.month=''; render(); };
+$('#exportBtn').onclick=()=>{ const rows=filtered().map(e=>({'Fecha':e.fecha,'Empresa':e.empresa,'Escenario':e.escenario,'Personas':e.personas,'Medio de pago':e.medioPago,'Estado factura':getInvoice(e).estado})); exportExcel('resumen_estadisticas_eventos.xls', rows); audit('Estadísticas','Descarga Excel',`Exportó ${rows.length} registros del tablero`); };
+window.addEventListener('storage', e=>{ if([APP_KEYS.sourceV5,APP_KEYS.source,APP_KEYS.invoices].includes(e.key)) refreshAll(); });
+audit('Estadísticas','Acceso','Ingresó al tablero ejecutivo');
+refreshAll();
+</script>
+</body>
+</html>
