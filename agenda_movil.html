@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>Agenda móvil de eventos</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --surface:#ffffff;
+      --surface-2:#f8fafc;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --line:#e2e8f0;
+      --primary:#0f172a;
+      --primary-2:#1d4ed8;
+      --accent:#0ea5e9;
+      --ok:#16a34a;
+      --warn:#f59e0b;
+      --danger:#dc2626;
+      --shadow:0 18px 45px rgba(15,23,42,.12);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+    body{padding:0;overflow-x:hidden}
+    .app{min-height:100dvh;display:flex;flex-direction:column}
+    .hero{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 52%,#0369a1 100%);color:white;padding:18px 16px 14px;border-bottom-left-radius:26px;border-bottom-right-radius:26px;box-shadow:0 14px 35px rgba(15,23,42,.26)}
+    .top-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{min-width:0}
+    .brand small{display:block;letter-spacing:.08em;text-transform:uppercase;font-weight:800;font-size:10px;color:#bfdbfe;margin-bottom:3px}
+    .brand h1{font-size:21px;line-height:1.05;margin:0;font-weight:900;letter-spacing:-.04em}
+    .today-pill{flex:0 0 auto;display:grid;place-items:center;min-width:66px;border-radius:18px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:8px 10px;text-align:center;backdrop-filter:blur(12px)}
+    .today-pill strong{font-size:20px;line-height:1;font-weight:950}
+    .today-pill span{font-size:10px;text-transform:uppercase;font-weight:800;color:#dbeafe;margin-top:3px}
+    .meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}
+    .meta .mini{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.12);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;color:#eff6ff}
+    .actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px}
+    .tab{border:0;border-radius:15px;padding:11px 8px;font-weight:900;background:rgba(255,255,255,.14);color:#e0f2fe;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);cursor:pointer}
+    .tab.active{background:white;color:#0f172a;box-shadow:0 10px 24px rgba(15,23,42,.22)}
+    .tools{padding:14px 14px 0;display:grid;gap:10px}
+    .search-box{display:flex;align-items:center;gap:10px;background:white;border:1px solid var(--line);border-radius:17px;padding:10px 13px;box-shadow:0 8px 24px rgba(15,23,42,.05)}
+    .search-box span{font-size:18px;color:var(--muted)}
+    .search-box input{border:0;outline:0;width:100%;font-size:14px;background:transparent;color:var(--ink);font-weight:650}
+    .filter-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .filter-row select,.filter-row input{width:100%;border:1px solid var(--line);border-radius:15px;background:white;padding:11px 12px;color:var(--ink);font-weight:750;outline:0;min-width:0}
+    .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:13px 14px 0}
+    .summary-card{background:white;border:1px solid var(--line);border-radius:18px;padding:13px 10px;text-align:center;box-shadow:0 7px 20px rgba(15,23,42,.05)}
+    .summary-card strong{display:block;font-size:21px;font-weight:950;line-height:1;color:#0f172a}
+    .summary-card span{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:900}
+    .status-line{display:flex;align-items:center;justify-content:space-between;padding:12px 16px 0;font-size:12px;color:var(--muted);font-weight:750;gap:8px}
+    .refresh{border:1px solid var(--line);background:white;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;color:#1d4ed8;cursor:pointer}
+    .list{padding:12px 14px 92px;display:grid;gap:12px}
+    .event-card{border:1px solid var(--line);background:white;border-radius:var(--radius);box-shadow:0 13px 32px rgba(15,23,42,.08);padding:15px;display:grid;gap:11px;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;overflow:hidden}
+    .event-card:active{transform:scale(.985)}
+    .event-card:hover{border-color:#bfdbfe;box-shadow:0 18px 42px rgba(15,23,42,.12)}
+    .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+    .event-main{min-width:0}
+    .event-main h2{font-size:16px;line-height:1.13;margin:0;font-weight:950;letter-spacing:-.02em;overflow-wrap:anywhere}
+    .event-main p{margin:5px 0 0;font-size:12px;color:var(--muted);font-weight:800;overflow-wrap:anywhere}
+    .date-badge{flex:0 0 auto;display:grid;place-items:center;text-align:center;border-radius:16px;background:#eff6ff;color:#1d4ed8;border:1px solid #dbeafe;min-width:58px;padding:8px 9px}
+    .date-badge strong{font-size:18px;line-height:1;font-weight:950}
+    .date-badge span{font-size:10px;font-weight:950;text-transform:uppercase}
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .info{border-radius:14px;background:var(--surface-2);border:1px solid #eef2f7;padding:10px;min-width:0}
+    .info small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.04em;font-weight:900;margin-bottom:3px}
+    .info strong{font-size:13px;line-height:1.2;font-weight:900;display:block;overflow-wrap:anywhere}
+    .tags{display:flex;gap:7px;flex-wrap:wrap}
+    .tag{border-radius:999px;padding:7px 10px;background:#f1f5f9;border:1px solid #e2e8f0;font-size:11px;font-weight:900;color:#334155;max-width:100%;overflow-wrap:anywhere}
+    .empty{border:1px dashed #cbd5e1;background:rgba(255,255,255,.78);border-radius:22px;padding:28px 18px;text-align:center;color:var(--muted);box-shadow:0 10px 25px rgba(15,23,42,.04)}
+    .empty strong{display:block;color:#0f172a;font-size:17px;margin-bottom:7px}
+    .empty p{margin:0;font-size:13px;line-height:1.45}
+    .modal{position:fixed;inset:0;z-index:50;background:rgba(15,23,42,.54);display:none;align-items:flex-end;justify-content:center;padding:12px;backdrop-filter:blur(8px)}
+    .modal.open{display:flex}
+    .sheet{width:min(680px,100%);max-height:88dvh;overflow:auto;background:white;border-radius:26px 26px 22px 22px;box-shadow:var(--shadow);animation:slide .2s ease-out;border:1px solid rgba(255,255,255,.65)}
+    @keyframes slide{from{transform:translateY(24px);opacity:.6}to{transform:translateY(0);opacity:1}}
+    .sheet-head{position:sticky;top:0;background:white;border-bottom:1px solid var(--line);padding:15px;display:flex;justify-content:space-between;gap:12px;align-items:flex-start;z-index:2}
+    .sheet-head h3{margin:0;font-size:17px;line-height:1.15;font-weight:950;letter-spacing:-.02em;overflow-wrap:anywhere}
+    .sheet-head span{display:block;color:var(--muted);font-size:12px;font-weight:800;margin-top:4px}
+    .close{border:0;background:#f1f5f9;color:#0f172a;border-radius:14px;font-size:22px;line-height:1;width:42px;height:42px;font-weight:900;cursor:pointer;flex:0 0 auto}
+    .details{padding:14px;display:grid;gap:10px}
+    .detail{display:grid;grid-template-columns:116px 1fr;gap:10px;padding:11px 12px;border:1px solid #eef2f7;border-radius:15px;background:#f8fafc;align-items:start}
+    .detail small{font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:950}
+    .detail strong{font-size:13px;line-height:1.35;overflow-wrap:anywhere}
+    .bottom-nav{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);width:min(520px,calc(100% - 28px));display:grid;grid-template-columns:1fr 1fr;gap:8px;z-index:30}
+    .bottom-nav a,.bottom-nav button{border:0;text-decoration:none;text-align:center;border-radius:17px;padding:13px 10px;font-size:13px;font-weight:950;box-shadow:0 12px 28px rgba(15,23,42,.18);cursor:pointer}
+    .bottom-nav a{background:white;color:#0f172a;border:1px solid var(--line)}
+    .bottom-nav button{background:#0f172a;color:white}
+    @media (min-width:720px){
+      .hero,.tools,.summary,.status-line,.list{width:min(820px,100%);margin-inline:auto}.hero{margin-top:10px;border-radius:30px}.list{grid-template-columns:1fr 1fr}.event-card{min-height:220px}.bottom-nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="hero">
+      <div class="top-row">
+        <div class="brand">
+          <small>Acceso móvil</small>
+          <h1>Agenda de eventos</h1>
+        </div>
+        <div class="today-pill" aria-label="Fecha actual">
+          <strong id="todayDay">--</strong>
+          <span id="todayMonth">---</span>
+        </div>
+      </div>
+      <div class="meta">
+        <span class="mini" id="todayLong">--</span>
+        <span class="mini" id="dataSource">Sin datos</span>
+      </div>
+      <div class="actions" role="tablist" aria-label="Vista de eventos">
+        <button class="tab active" data-mode="today" type="button">Hoy</button>
+        <button class="tab" data-mode="upcoming" type="button">Próximos</button>
+        <button class="tab" data-mode="all" type="button">Todos</button>
+      </div>
+    </header>
+
+    <section class="tools" aria-label="Filtros">
+      <label class="search-box">
+        <span aria-hidden="true">⌕</span>
+        <input id="search" type="search" placeholder="Buscar empresa, salón o pago..." autocomplete="off" />
+      </label>
+      <div class="filter-row">
+        <select id="salonFilter" aria-label="Filtrar por salón">
+          <option value="">Todos los salones</option>
+        </select>
+        <input id="dateFilter" type="date" aria-label="Filtrar por fecha exacta" />
+      </div>
+    </section>
+
+    <section class="summary" aria-label="Resumen">
+      <div class="summary-card"><strong id="kpiEvents">0</strong><span>Eventos</span></div>
+      <div class="summary-card"><strong id="kpiPax">0</strong><span>Personas</span></div>
+      <div class="summary-card"><strong id="kpiFood">0</strong><span>Con alim.</span></div>
+    </section>
+
+    <div class="status-line">
+      <span id="lastUpdate">Esperando datos de Eventos</span>
+      <button id="refreshBtn" class="refresh" type="button">Actualizar</button>
+    </div>
+
+    <main id="list" class="list" aria-live="polite"></main>
+  </div>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <article class="sheet" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="sheet-head">
+        <div>
+          <h3 id="modalTitle">Detalle del evento</h3>
+          <span id="modalSub">--</span>
+        </div>
+        <button id="closeModal" class="close" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <div id="modalDetails" class="details"></div>
+    </article>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Navegación rápida">
+    <a href="eventos.html">Eventos</a>
+    <button id="bottomRefresh" type="button">Actualizar</button>
+  </nav>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const STORAGE_KEYS = [
+      'agendaMovilEventos',
+      'eventosFuenteUnica',
+      'eventosUnificados',
+      'eventosData',
+      'agendaEventos',
+      'eventos'
+    ];
+
+    const state = {
+      all: [],
+      view: [],
+      mode: 'today',
+      chartFilter: null,
+      source: 'Sin datos',
+      lastUpdate: null
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const list = $('list');
+    const search = $('search');
+    const salonFilter = $('salonFilter');
+    const dateFilter = $('dateFilter');
+
+    const MONTHS = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+    const MONTHS_LONG = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const DAYS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+
+    function normalizeText(value){
+      return String(value ?? '').trim().replace(/\s+/g,' ');
+    }
+
+    function pick(obj, labels){
+      if(!obj || typeof obj !== 'object') return '';
+      const keys = Object.keys(obj);
+      const norm = (s) => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+      for(const label of labels){
+        const wanted = norm(label);
+        const direct = keys.find(k => norm(k) === wanted);
+        if(direct !== undefined && obj[direct] !== undefined && obj[direct] !== null && String(obj[direct]).trim() !== '') return obj[direct];
+      }
+      for(const label of labels){
+        const wanted = norm(label);
+        const fuzzy = keys.find(k => norm(k).includes(wanted) || wanted.includes(norm(k)));
+        if(fuzzy !== undefined && obj[fuzzy] !== undefined && obj[fuzzy] !== null && String(obj[fuzzy]).trim() !== '') return obj[fuzzy];
+      }
+      return '';
+    }
+
+    function parseDateParts(value){
+      if(value instanceof Date && !isNaN(value)) return { y:value.getFullYear(), m:value.getMonth()+1, d:value.getDate() };
+      if(typeof value === 'number' && isFinite(value)){
+        const date = new Date(Math.round((value - 25569) * 86400 * 1000));
+        return { y:date.getUTCFullYear(), m:date.getUTCMonth()+1, d:date.getUTCDate() };
+      }
+      const raw = normalizeText(value);
+      if(!raw) return null;
+      let m;
+      m = raw.match(/^(\d{4})-(\d{2})-(\d{2})/);
+      if(m) return { y:+m[1], m:+m[2], d:+m[3] };
+      m = raw.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/);
+      if(m){
+        let y = +m[3];
+        if(y < 100) y += 2000;
+        return { y, m:+m[2], d:+m[1] };
+      }
+      const parsed = new Date(raw);
+      if(!isNaN(parsed)) return { y:parsed.getFullYear(), m:parsed.getMonth()+1, d:parsed.getDate() };
+      return null;
+    }
+
+    function toISO(value){
+      const p = parseDateParts(value);
+      if(!p) return '';
+      return `${String(p.y).padStart(4,'0')}-${String(p.m).padStart(2,'0')}-${String(p.d).padStart(2,'0')}`;
+    }
+
+    function displayDate(value){
+      const p = parseDateParts(value);
+      if(!p) return normalizeText(value) || '--';
+      return `${String(p.d).padStart(2,'0')}/${String(p.m).padStart(2,'0')}/${p.y}`;
+    }
+
+    function dayNum(value){
+      const p = parseDateParts(value);
+      return p ? p.d : '--';
+    }
+
+    function mon(value){
+      const p = parseDateParts(value);
+      return p ? MONTHS[p.m - 1] : '---';
+    }
+
+    function todayISO(){
+      const now = new Date();
+      return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+    }
+
+    function updateTodayHeader(){
+      const now = new Date();
+      $('todayDay').textContent = String(now.getDate()).padStart(2,'0');
+      $('todayMonth').textContent = MONTHS[now.getMonth()];
+      $('todayLong').textContent = `${DAYS[now.getDay()]}, ${now.getDate()} de ${MONTHS_LONG[now.getMonth()]} de ${now.getFullYear()}`;
+    }
+
+    function normalizeEvent(row, index){
+      const fechaRaw = pick(row, ['fecha','FECHA','date']);
+      const empresa = normalizeText(pick(row, ['nombre empresa','NOMBRE DE LA EMPRESA','empresa','cliente','nombre de empresa']));
+      const escenario = normalizeText(pick(row, ['escenario asignado','ESCENARIO ASIGNADO','salon','salón','espacio','ubicacion','ubicación']));
+      const paxRaw = pick(row, ['cantidad de personas','CANTIDAD DE PERSONAS','pax','personas','asistentes']);
+      const pax = Number(String(paxRaw).replace(/[^0-9.,-]/g,'').replace(',','.')) || 0;
+      const horario = normalizeText(pick(row, ['horario del evento','HORARIO DEL EVENTO','hora','horario']));
+      const ayb = normalizeText(pick(row, ['horario ayb','HORARIO AYB','hora ayb','ayb']));
+      const alimentacion = normalizeText(pick(row, ['descripcion alimentacion','DESCRIPCION ALIMENTACION','descripción alimentación','alimentacion','alimentación']));
+      const acomodacion = normalizeText(pick(row, ['acomodacion','ACOMODACION','acomodación']));
+      const servicio = normalizeText(pick(row, ['modalidad de servicio','MODALIDAD DE SERVICIO','servicio','modalidad']));
+      const pago = normalizeText(pick(row, ['medio de pago','MEDIO DE PAGO','pago','forma de pago']));
+      const observacion = normalizeText(pick(row, ['observacion','OBSERVACION','observación','nota','notas']));
+      const iso = toISO(fechaRaw);
+      return {
+        id: normalizeText(pick(row, ['id','ID'])) || `${iso}|${empresa}|${escenario}|${horario}|${index}`,
+        fechaRaw,
+        fechaISO: iso,
+        fecha: displayDate(fechaRaw),
+        empresa: empresa || 'Sin empresa registrada',
+        escenario: escenario || 'Sin espacio asignado',
+        pax,
+        horario: horario || 'Sin horario registrado',
+        ayb: ayb || 'Sin horario AYB',
+        alimentacion: alimentacion || 'Sin alimentación registrada',
+        acomodacion: acomodacion || 'Sin acomodación registrada',
+        servicio: servicio || 'Sin modalidad registrada',
+        pago: pago || 'Sin medio de pago',
+        observacion: observacion || 'Sin observación'
+      };
+    }
+
+    function parsePayload(payload){
+      if(!payload) return [];
+      if(Array.isArray(payload)) return payload;
+      if(Array.isArray(payload.eventos)) return payload.eventos;
+      if(Array.isArray(payload.data)) return payload.data;
+      if(Array.isArray(payload.rows)) return payload.rows;
+      return [];
+    }
+
+    async function loadFromJson(){
+      const urls = ['data/eventos_publicos.json','eventos_publicos.json'];
+      for(const url of urls){
+        try{
+          const res = await fetch(`${url}?_=${Date.now()}`, { cache:'no-store' });
+          if(!res.ok) continue;
+          const json = await res.json();
+          const rows = parsePayload(json);
+          if(rows.length){
+            state.source = `JSON público`;
+            state.lastUpdate = json.actualizado || json.updatedAt || new Date().toISOString();
+            return rows;
+          }
+        }catch(err){ /* sigue con la siguiente fuente */ }
+      }
+      return [];
+    }
+
+    function loadFromStorage(){
+      for(const key of STORAGE_KEYS){
+        try{
+          const raw = localStorage.getItem(key) || sessionStorage.getItem(key);
+          if(!raw) continue;
+          const json = JSON.parse(raw);
+          const rows = parsePayload(json);
+          if(rows.length){
+            state.source = `Memoria local`;
+            state.lastUpdate = json.actualizado || json.updatedAt || localStorage.getItem('agendaMovilLastUpdate') || new Date().toISOString();
+            return rows;
+          }
+        }catch(err){ /* no bloquea */ }
+      }
+      return [];
+    }
+
+    async function loadData(){
+      let rows = await loadFromJson();
+      if(!rows.length) rows = loadFromStorage();
+      state.all = rows.map(normalizeEvent).filter(ev => ev.fechaISO || ev.empresa !== 'Sin empresa registrada');
+      state.all.sort((a,b) => (a.fechaISO || '9999').localeCompare(b.fechaISO || '9999') || a.horario.localeCompare(b.horario));
+      buildSalonFilter();
+      render();
+    }
+
+    function buildSalonFilter(){
+      const current = salonFilter.value;
+      const salons = [...new Set(state.all.map(e => e.escenario).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'es'));
+      salonFilter.innerHTML = '<option value="">Todos los salones</option>' + salons.map(s => `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`).join('');
+      if(salons.includes(current)) salonFilter.value = current;
+    }
+
+    function filterEvents(){
+      const q = normalizeText(search.value).toLowerCase();
+      const salon = salonFilter.value;
+      const exactDate = dateFilter.value;
+      const today = todayISO();
+      let data = state.all.slice();
+      if(state.mode === 'today') data = data.filter(e => e.fechaISO === today);
+      if(state.mode === 'upcoming') data = data.filter(e => e.fechaISO && e.fechaISO > today);
+      if(exactDate) data = data.filter(e => e.fechaISO === exactDate);
+      if(salon) data = data.filter(e => e.escenario === salon);
+      if(q){
+        data = data.filter(e => [e.empresa,e.escenario,e.pago,e.alimentacion,e.horario,e.servicio].join(' ').toLowerCase().includes(q));
+      }
+      state.view = data;
+      return data;
+    }
+
+    function render(){
+      updateTodayHeader();
+      $('dataSource').textContent = state.source;
+      $('lastUpdate').textContent = state.lastUpdate ? `Actualizado: ${formatDateTime(state.lastUpdate)}` : 'Abra Eventos y cargue datos para alimentar esta agenda';
+      const data = filterEvents();
+      $('kpiEvents').textContent = data.length;
+      $('kpiPax').textContent = data.reduce((s,e)=>s + (Number(e.pax)||0),0).toLocaleString('es-CO');
+      $('kpiFood').textContent = data.filter(e => e.alimentacion && !/sin aliment/i.test(e.alimentacion)).length;
+
+      if(!data.length){
+        const msg = state.all.length ? 'No hay eventos con los filtros seleccionados.' : 'No hay datos disponibles todavía.';
+        const help = state.all.length ? 'Prueba otra fecha, salón o usa la vista Próximos.' : 'Carga el Excel en Eventos y publica/exporta la agenda móvil.';
+        list.innerHTML = `<div class="empty"><strong>${escapeHtml(msg)}</strong><p>${escapeHtml(help)}</p></div>`;
+        return;
+      }
+
+      list.innerHTML = data.map((ev, idx) => `
+        <article class="event-card" data-id="${escapeHtml(ev.id)}" tabindex="0" role="button" aria-label="Abrir detalle de ${escapeHtml(ev.empresa)}">
+          <div class="card-top">
+            <div class="event-main">
+              <h2>${escapeHtml(ev.empresa)}</h2>
+              <p>${escapeHtml(ev.escenario)}</p>
+            </div>
+            <div class="date-badge"><strong>${escapeHtml(dayNum(ev.fechaRaw))}</strong><span>${escapeHtml(mon(ev.fechaRaw))}</span></div>
+          </div>
+          <div class="info-grid">
+            <div class="info"><small>Horario</small><strong>${escapeHtml(ev.horario)}</strong></div>
+            <div class="info"><small>Personas</small><strong>${Number(ev.pax || 0).toLocaleString('es-CO')}</strong></div>
+            <div class="info"><small>Pago</small><strong>${escapeHtml(ev.pago)}</strong></div>
+            <div class="info"><small>AYB</small><strong>${escapeHtml(ev.ayb)}</strong></div>
+          </div>
+          <div class="tags">
+            <span class="tag">${escapeHtml(ev.fecha)}</span>
+            <span class="tag">${escapeHtml(shorten(ev.alimentacion, 42))}</span>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function shorten(text, max){
+      text = normalizeText(text);
+      return text.length > max ? text.slice(0, max - 1) + '…' : text;
+    }
+
+    function openDetail(ev){
+      $('modalTitle').textContent = ev.empresa;
+      $('modalSub').textContent = `${ev.fecha} · ${ev.escenario}`;
+      const rows = [
+        ['Fecha', ev.fecha],
+        ['Empresa', ev.empresa],
+        ['Espacio', ev.escenario],
+        ['Horario', ev.horario],
+        ['Personas', Number(ev.pax || 0).toLocaleString('es-CO')],
+        ['Medio pago', ev.pago],
+        ['Horario AYB', ev.ayb],
+        ['Alimentación', ev.alimentacion],
+        ['Acomodación', ev.acomodacion],
+        ['Servicio', ev.servicio],
+        ['Observación', ev.observacion]
+      ];
+      $('modalDetails').innerHTML = rows.map(([k,v]) => `<div class="detail"><small>${escapeHtml(k)}</small><strong>${escapeHtml(v || '--')}</strong></div>`).join('');
+      $('modal').classList.add('open');
+      $('modal').setAttribute('aria-hidden','false');
+    }
+
+    function closeDetail(){
+      $('modal').classList.remove('open');
+      $('modal').setAttribute('aria-hidden','true');
+    }
+
+    function formatDateTime(value){
+      try{
+        const d = new Date(value);
+        if(!isNaN(d)) return d.toLocaleString('es-CO', { dateStyle:'short', timeStyle:'short' });
+      }catch(err){}
+      return normalizeText(value) || '--';
+    }
+
+    function escapeHtml(value){
+      return String(value ?? '').replace(/[&<>'"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[ch]));
+    }
+
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.mode = btn.dataset.mode;
+        dateFilter.value = '';
+        render();
+      });
+    });
+
+    [search, salonFilter, dateFilter].forEach(el => el.addEventListener('input', render));
+    $('refreshBtn').addEventListener('click', loadData);
+    $('bottomRefresh').addEventListener('click', loadData);
+    $('closeModal').addEventListener('click', closeDetail);
+    $('modal').addEventListener('click', (ev) => { if(ev.target.id === 'modal') closeDetail(); });
+    document.addEventListener('keydown', (ev) => { if(ev.key === 'Escape') closeDetail(); });
+    list.addEventListener('click', (ev) => {
+      const card = ev.target.closest('.event-card');
+      if(!card) return;
+      const item = state.view.find(e => e.id === card.dataset.id);
+      if(item) openDetail(item);
+    });
+    list.addEventListener('keydown', (ev) => {
+      if(ev.key !== 'Enter' && ev.key !== ' ') return;
+      const card = ev.target.closest('.event-card');
+      if(!card) return;
+      ev.preventDefault();
+      const item = state.view.find(e => e.id === card.dataset.id);
+      if(item) openDetail(item);
+    });
+
+    window.addEventListener('storage', (ev) => {
+      if(STORAGE_KEYS.includes(ev.key)) loadData();
+    });
+
+    updateTodayHeader();
+    loadData();
+    setInterval(() => { updateTodayHeader(); if(state.mode === 'today') render(); }, 60000);
+    setInterval(loadData, 300000);
+  })();
+  </script>
+</body>
+</html>
