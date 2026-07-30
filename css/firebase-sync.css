@@ -1,0 +1,53 @@
+.firebase-cloud-control{font:inherit;border:1px solid #d8dee8;background:#fff;color:#172033;border-radius:13px;min-height:44px;padding:7px 11px;display:flex;align-items:center;gap:9px;cursor:pointer;box-shadow:0 6px 18px rgba(15,23,42,.07);transition:.18s ease;max-width:230px}
+.firebase-cloud-control:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(15,23,42,.1)}
+.firebase-cloud-control.is-floating{position:fixed;right:18px;bottom:18px;z-index:1150}
+.firebase-cloud-control.is-inline{flex:0 0 auto}
+.firebase-cloud-icon,.firebase-cloud-heading-icon{display:grid;place-items:center;width:31px;height:31px;border-radius:10px;background:#edf2f7;color:#34445f;flex:0 0 auto}
+.firebase-cloud-icon svg,.firebase-cloud-heading-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.firebase-cloud-copy{display:grid;text-align:left;min-width:0;line-height:1.05}
+.firebase-cloud-copy small{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:#778196;font-weight:800}
+.firebase-cloud-copy strong{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.firebase-cloud-dot,.firebase-cloud-status-dot{width:8px;height:8px;border-radius:50%;background:#9aa5b5;box-shadow:0 0 0 4px rgba(154,165,181,.14);flex:0 0 auto}
+.firebase-cloud-control.is-ready .firebase-cloud-dot,.firebase-cloud-status.is-ready .firebase-cloud-status-dot{background:#24745f;box-shadow:0 0 0 4px rgba(36,116,95,.13)}
+.firebase-cloud-control.is-warning .firebase-cloud-dot,.firebase-cloud-status.is-warning .firebase-cloud-status-dot{background:#a56a23;box-shadow:0 0 0 4px rgba(165,106,35,.13)}
+.firebase-cloud-control.is-syncing .firebase-cloud-dot,.firebase-cloud-status.is-syncing .firebase-cloud-status-dot{background:#456a9c;box-shadow:0 0 0 4px rgba(69,106,156,.13);animation:firebasePulse 1.2s infinite}
+.firebase-cloud-control.is-error .firebase-cloud-dot,.firebase-cloud-status.is-error .firebase-cloud-status-dot{background:#a34848;box-shadow:0 0 0 4px rgba(163,72,72,.13)}
+@keyframes firebasePulse{50%{opacity:.35;transform:scale(.78)}}
+.firebase-cloud-modal{position:fixed;inset:0;z-index:1300;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(8px)}
+.firebase-cloud-modal.is-open{display:flex}
+.firebase-cloud-dialog{width:min(600px,100%);max-height:92vh;overflow:auto;background:#fff;border:1px solid rgba(255,255,255,.7);border-radius:24px;padding:24px;box-shadow:0 28px 70px rgba(15,23,42,.24);position:relative;color:#172033}
+.firebase-cloud-close{position:absolute;right:15px;top:15px;width:38px;height:38px;border:0;border-radius:12px;background:#f1f4f8;color:#263248;font-size:24px;cursor:pointer}
+.firebase-cloud-heading{display:flex;gap:13px;padding-right:40px;margin-bottom:18px}
+.firebase-cloud-heading-icon{width:43px;height:43px;border-radius:13px;background:#e8eef6;color:#344f75}
+.firebase-cloud-heading div>span{font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:#68748a}
+.firebase-cloud-heading h2{margin:3px 0 5px;font-size:22px;letter-spacing:-.025em}
+.firebase-cloud-heading p{margin:0;color:#68748a;font-size:13px;line-height:1.45}
+.firebase-cloud-status{display:flex;align-items:center;gap:12px;border:1px solid #e1e6ee;background:#f7f9fc;border-radius:16px;padding:13px;margin-bottom:15px}
+.firebase-cloud-status>div{display:grid;gap:2px}
+.firebase-cloud-status small{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#7a8598;font-weight:900}
+.firebase-cloud-status strong{font-size:14px}
+.firebase-cloud-status span:last-child{font-size:12px;color:#69758a}
+.firebase-owner-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.firebase-owner-form label{display:grid;gap:6px;font-size:11px;font-weight:850;color:#59667c}
+.firebase-owner-form input{width:100%;border:1px solid #d9e0ea;border-radius:12px;padding:11px 12px;font:inherit;color:#172033;outline:none;background:#fff}
+.firebase-owner-form input:focus{border-color:#7d91ad;box-shadow:0 0 0 3px rgba(84,111,149,.1)}
+.firebase-owner-form button{grid-column:1/-1;border:0;border-radius:12px;padding:12px;background:#172b49;color:#fff;font-weight:850;cursor:pointer}
+.firebase-owner-session{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid #dce6e2;background:#f4f8f6;border-radius:14px;padding:11px 12px;margin:14px 0}
+.firebase-owner-session div{display:grid;gap:2px;min-width:0}
+.firebase-owner-session small{font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:#648074;font-weight:900}
+.firebase-owner-session strong{font-size:12px;overflow-wrap:anywhere}
+.firebase-owner-session button{border:1px solid #d6dee8;background:#fff;border-radius:10px;padding:8px 10px;font:inherit;font-size:11px;font-weight:800;cursor:pointer}
+.firebase-cloud-details{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:14px 0}
+.firebase-cloud-details div{border:1px solid #e4e8ef;background:#fafbfc;border-radius:13px;padding:11px;min-width:0}
+.firebase-cloud-details dt{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#7a8598;font-weight:900;margin-bottom:3px}
+.firebase-cloud-details dd{margin:0;font-size:12px;font-weight:800;overflow-wrap:anywhere}
+.firebase-cloud-message{border-radius:12px;padding:11px 12px;font-size:12px;line-height:1.4;margin:12px 0}
+.firebase-cloud-message.is-info{background:#eef3f9;color:#334f73;border:1px solid #d8e2ee}
+.firebase-cloud-message.is-success{background:#edf6f2;color:#245f4f;border:1px solid #d4e9e0}
+.firebase-cloud-message.is-error{background:#fbefef;color:#8f3838;border:1px solid #f0d5d5}
+.firebase-cloud-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+.firebase-cloud-actions button,.firebase-cloud-actions a{text-align:center;border-radius:12px;padding:12px;font:inherit;font-size:12px;font-weight:850;text-decoration:none;cursor:pointer}
+.firebase-primary-action{border:0;background:#172b49;color:#fff}
+.firebase-primary-action:disabled{opacity:.45;cursor:not-allowed}
+.firebase-secondary-action{border:1px solid #d5dde8;background:#fff;color:#24344f}
+@media(max-width:700px){.firebase-cloud-control.is-inline{max-width:190px}.firebase-cloud-copy small{display:none}.firebase-cloud-dialog{padding:19px;border-radius:20px}.firebase-owner-form,.firebase-cloud-details,.firebase-cloud-actions{grid-template-columns:1fr}.firebase-owner-form button{grid-column:auto}.firebase-cloud-heading h2{font-size:19px}}
