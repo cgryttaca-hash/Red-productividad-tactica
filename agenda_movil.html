@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#17283f">
+  <meta name="description" content="Agenda operativa de eventos en tiempo real.">
+  <title>Agenda de eventos</title>
+  <link rel="stylesheet" href="css/agenda-movil.css?v=20260801-0400">
+</head>
+<body>
+  <div id="mobileApp" class="agenda-app">
+    <header class="agenda-header">
+      <div class="header-content">
+        <div class="agenda-brand">
+          <span class="agenda-brand-mark" aria-hidden="true">PT</span>
+          <div>
+            <span>Operación en tiempo real</span>
+            <h1>Agenda de eventos</h1>
+          </div>
+        </div>
+
+        <div class="connection-card">
+          <i id="mobileConnectionDot"></i>
+          <div>
+            <strong id="mobileConnectionText">Conectando con Firebase…</strong>
+            <span id="mobileUpdatedAt">Esperando actualización</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="agenda-summary">
+        <div class="summary-date">
+          <strong id="mobileTodayDay">--</strong>
+          <span id="mobileTodayMonth">---</span>
+        </div>
+        <div>
+          <small>Programación disponible</small>
+          <strong id="mobileEventCount">0 eventos</strong>
+        </div>
+        <div class="summary-floor">
+          <small>Segundo piso</small>
+          <strong id="mobileSecondCount">0</strong>
+        </div>
+        <div class="summary-floor third">
+          <small>Tercer piso</small>
+          <strong id="mobileThirdCount">0</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="agenda-main">
+      <section class="agenda-toolbar" aria-label="Controles de agenda">
+        <div class="agenda-tabs" role="tablist">
+          <button class="agenda-tab is-active" type="button" data-view="today">Hoy</button>
+          <button class="agenda-tab" type="button" data-view="upcoming">Próximos</button>
+          <button class="agenda-tab" type="button" data-view="all">Todos</button>
+        </div>
+
+        <label class="agenda-search">
+          <span>Buscar</span>
+          <input id="mobileSearch" type="search" placeholder="Empresa o salón">
+        </label>
+
+        <label class="agenda-date-filter">
+          <span>Fecha</span>
+          <input id="mobileDateFilter" type="date">
+        </label>
+
+        <button id="mobileRefresh" class="agenda-refresh" type="button" aria-label="Actualizar agenda">
+          <svg viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6.1 9a7 7 0 0 1 11.4-2L20 9M4 15l2.5 2a7 7 0 0 0 11.4-2"/></svg>
+          <span>Actualizar</span>
+        </button>
+      </section>
+
+      <section id="mobileNotice" class="agenda-notice" hidden></section>
+      <section id="mobileAgenda" class="agenda-content" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <div id="mobileDetailModal" class="detail-modal" aria-hidden="true">
+    <div class="detail-dialog" role="dialog" aria-modal="true" aria-labelledby="mobileDetailTitle">
+      <button id="mobileCloseDetail" class="detail-close" type="button" aria-label="Cerrar">×</button>
+      <div class="detail-heading">
+        <span>Información completa del evento</span>
+        <h2 id="mobileDetailTitle">Evento</h2>
+        <p id="mobileDetailSubtitle"></p>
+      </div>
+      <div id="mobileDetailBody" class="detail-body"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/agenda-movil.js?v=20260801-0400"></script>
+</body>
+</html>
