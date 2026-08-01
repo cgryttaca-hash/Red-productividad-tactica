@@ -40,6 +40,13 @@
     return auditModulePromise;
   }
 
+  async function systemLog(entry){
+    try{
+      const module=await import('./system-log.js');
+      module.addSystemLog(entry);
+    }catch(_){}
+  }
+
   function excelColumn(index){
     let value = Number(index) + 1;
     let result = '';
@@ -52,9 +59,11 @@
   }
 
   function auditContext(){
+    let session=null;
+    try{session=JSON.parse(localStorage.getItem('rptAuthSessionV1')||'null');}catch(_){}
     return {
       host: localStorage.getItem('rpt:deviceName') || navigator.userAgentData?.platform || navigator.platform || 'Equipo',
-      user: localStorage.getItem('firebase:ownerEmail') || 'Usuario local'
+      user: session?.displayName || session?.username || localStorage.getItem('firebase:ownerEmail') || 'Usuario local'
     };
   }
 
@@ -415,8 +424,15 @@
     }
 
     import('./firebase-sync.js')
-      .then(module=>module.publishIfReady?.(next,diff,{fileName:file.name,updatedAt,hash:dataHash,auditEntries:diff.auditEntries}))
+      .then(module=>module.publishIfReady?.(next,diff,{fileName:file.name,updatedAt,hash:dataHash,auditEntries:diff.auditEntries,forceRemote:true}))
       .catch(error=>console.warn('Firebase deferred publish:',error));
+
+    systemLog({
+      source:'Excel',
+      level:'success',
+      title:'Archivo maestro actualizado',
+      detail:`${next.length} registros · ${diff.created.length} creados · ${diff.updated.length} modificados · ${diff.deleted.length} eliminados.`
+    });
 
     return {changed:true,diff,updatedAt};
   }
@@ -555,7 +571,9 @@
       return true;
     }catch(error){
       console.error('Excel sync:',error);
-      setState('error',{fileName:fileHandle?.name,message:error?.name==='NotFoundError'?'El archivo fue movido o renombrado. Usa Cambiar archivo.':error.message});
+      const message=error?.name==='NotFoundError'?'El archivo fue movido o renombrado. Usa Cambiar archivo.':error.message;
+      setState('error',{fileName:fileHandle?.name,message});
+      systemLog({source:'Excel',level:'error',title:'Error al comprobar el archivo',detail:message||'No fue posible leer el Excel.'});
       return false;
     }finally{syncInProgress=false;}
   }

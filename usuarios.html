@@ -1,21 +1,23 @@
 <!doctype html>
-<html lang="es" class="auth-pending" data-auth-page="admin">
+<html lang="es" class="auth-pending maintenance-pending" data-auth-page="admin" data-maintenance-page="usuarios">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#050505">
+  <meta name="theme-color" content="#111111">
   <title>Usuarios | Gestión de Eventos</title>
-  <style>html.auth-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260801-1200"></script>
-  <link rel="stylesheet" href="css/usuarios.css?v=20260801-1200">
+  <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/auth-guard.js?v=20260801-1600"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-1600"></script>
+  <link rel="stylesheet" href="css/usuarios.css?v=20260801-1600">
 </head>
 <body>
   <header class="users-header">
-    <a href="index.html">Gestión de Eventos</a>
+    <a href="index.html">GESTIÓN DE EVENTOS</a>
     <nav>
       <a href="index.html">Inicio</a>
       <a href="eventos.html">Eventos</a>
       <a href="minuta.html">Minuta</a>
+      <a href="configuracion.html">Configuración</a>
     </nav>
     <div class="users-session">
       <span id="currentAdmin">Administrador</span>
@@ -28,7 +30,7 @@
       <div>
         <span>ADMINISTRACIÓN LOCAL</span>
         <h1>Usuarios del sistema</h1>
-        <p>Crea, activa, desactiva o elimina usuarios para este navegador y equipo.</p>
+        <p>Crea, activa, desactiva o elimina accesos para este navegador y equipo.</p>
       </div>
       <a href="index.html">Volver al panel</a>
     </section>
@@ -81,6 +83,6 @@
     </section>
   </main>
 
-  <script type="module" src="js/usuarios.js?v=20260801-1200"></script>
+  <script type="module" src="js/usuarios.js?v=20260801-1600"></script>
 </body>
 </html>

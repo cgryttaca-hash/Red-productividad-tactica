@@ -1,273 +1,161 @@
 const $ = id => document.getElementById(id);
 const text = value => value === undefined || value === null ? '' : String(value);
 
-function normalize(value){
-  return text(value)
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,'')
-    .replace(/\s+/g,' ')
-    .trim()
-    .toUpperCase();
-}
-
-function parseDate(value){
-  if(!value) return null;
-  if(value instanceof Date && !Number.isNaN(value.getTime())){
-    return new Date(value.getFullYear(),value.getMonth(),value.getDate());
+function parseJSON(key,fallback){
+  try{
+    const value=JSON.parse(localStorage.getItem(key)||'');
+    return value ?? fallback;
+  }catch(_){
+    return fallback;
   }
-  const source = text(value).trim();
-  let match = source.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
-  if(match) return new Date(+match[1],+match[2]-1,+match[3]);
-  match = source.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
-  if(match) return new Date(+match[3],+match[2]-1,+match[1]);
-  const date = new Date(source);
-  return Number.isNaN(date.getTime()) ? null : new Date(date.getFullYear(),date.getMonth(),date.getDate());
 }
 
-function isoDate(date){
-  if(!(date instanceof Date)) return '';
-  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+function formatDate(value){
+  if(!value) return '—';
+  const date=new Date(value);
+  return Number.isNaN(date.getTime()) ? '—' : date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
 }
 
 function escapeHtml(value){
-  return text(value).replace(/[&<>"']/g,character=>({
+  return text(value).replace(/[&<>"']/g,char=>({
     '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
-  }[character]));
+  }[char]));
 }
 
-function getField(row,keys){
-  for(const key of keys){
-    if(row?.[key] !== undefined && row?.[key] !== null && text(row[key]).trim() !== '') return row[key];
-  }
-  return '';
-}
-
-function floorOf(scenario){
-  return /TERCER|PISO\s*3|\b3\d{2}\b/.test(normalize(scenario)) ? 'third' : 'second';
-}
-
-function eventFromRow(row,index){
-  const date = parseDate(getField(row,['FECHA','fecha']));
-  return {
-    id:text(row.__EVENT_ID || index),
-    date,
-    dateISO:isoDate(date),
-    company:text(getField(row,['NOMBRE DE LA EMPRESA','EMPRESA','empresa'])) || 'Empresa sin registrar',
-    scenario:text(getField(row,['ESCENARIO ASIGNADO','ESCENARIO','escenario'])) || 'Sin escenario',
-    schedule:text(getField(row,['HORARIO DEL EVENTO','HORARIO','horario'])) || 'Sin horario',
-    pax:Number(getField(row,['CANTIDAD DE PERSONAS','PAX','personas'])) || 0,
-    floor:floorOf(getField(row,['ESCENARIO ASIGNADO','ESCENARIO','escenario']))
-  };
-}
-
-function readEvents(){
+function eventCount(){
   try{
-    const rows = JSON.parse(localStorage.getItem('eventData') || '[]');
-    if(!Array.isArray(rows)) return [];
-    return rows.map(eventFromRow).filter(event=>event.date);
+    const rows=JSON.parse(localStorage.getItem('eventData')||'[]');
+    return Array.isArray(rows) ? rows.length : 0;
   }catch(_){
-    return [];
+    return 0;
   }
-}
-
-function formatDate(date,options){
-  return date instanceof Date
-    ? date.toLocaleDateString('es-CO',options)
-    : 'Fecha sin registrar';
 }
 
 function updateClock(){
-  const now = new Date();
-  $('todayLabel').textContent = now.toLocaleDateString('es-CO',{weekday:'short',day:'2-digit',month:'short'});
-  $('reloj').textContent = now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
+  const now=new Date();
+  $('todayLabel').textContent=now.toLocaleDateString('es-CO',{weekday:'short',day:'2-digit',month:'short'});
+  $('reloj').textContent=now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
 }
 
-function formatUpdatedAt(value){
-  if(!value) return 'Sin carga';
-  const date = new Date(value);
-  return Number.isNaN(date.getTime())
-    ? 'Sin carga'
-    : date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
+function renderSummary(){
+  const fileMeta=parseJSON('excelSync:fileMeta',null);
+  const diff=parseJSON('eventDataLastDiff',{});
+  const records=eventCount();
+  const published=localStorage.getItem('firebase:lastPublishedAt');
+  const remoteCount=Number(localStorage.getItem('firebase:lastRemoteCount')||0);
+
+  $('excelFileName').textContent=fileMeta?.name || localStorage.getItem('excelSync:fileName') || 'Pendiente';
+  $('excelLastCheck').textContent=formatDate(localStorage.getItem('excelSync:lastCheck'));
+  $('excelRecordCount').textContent=records.toLocaleString('es-CO');
+  $('excelSummary').textContent=records
+    ? `Archivo disponible. Comprobación automática cada 15 segundos.`
+    : 'Selecciona el archivo maestro para iniciar la sincronización.';
+
+  $('mobileLastPublish').textContent=formatDate(published);
+  $('mobileRemoteCount').textContent=remoteCount.toLocaleString('es-CO');
+  $('mobileState').textContent=published ? 'Sincronizado' : 'Pendiente';
+  $('mobileSummary').textContent=published
+    ? `Última publicación registrada correctamente.`
+    : 'La publicación comenzará cuando Firebase y el Excel estén disponibles.';
+
+  $('diffCreated').textContent=Number(diff.created||0).toLocaleString('es-CO');
+  $('diffUpdated').textContent=Number(diff.updated||0).toLocaleString('es-CO');
+  $('diffDeleted').textContent=Number(diff.deleted||0).toLocaleString('es-CO');
+  $('diffUpdatedAt').textContent=formatDate(diff.at || localStorage.getItem('eventDataUpdatedAt'));
 }
 
-function renderStatus(events){
-  const updatedAt = localStorage.getItem('eventDataUpdatedAt');
-  $('dashboardEventCount').textContent = events.length.toLocaleString('es-CO');
-  $('dashboardUpdatedAt').textContent = formatUpdatedAt(updatedAt);
-
-  const indicator = $('dataStatusIndicator');
-  const hasData = events.length > 0 && Boolean(updatedAt);
-  indicator.classList.toggle('is-current',hasData);
-  indicator.classList.toggle('is-outdated',!hasData);
-  indicator.innerHTML = `<span></span>${hasData ? 'Datos actualizados' : 'Datos sin verificar'}`;
-}
-
-function operationCard(event){
+function logItem(entry){
+  const time=formatDate(entry.timestamp);
   return `
-    <article class="operation-card">
-      <div class="operation-time">${escapeHtml(event.schedule)}</div>
-      <div class="operation-main">
-        <strong>${escapeHtml(event.company)}</strong>
-        <span>${escapeHtml(event.scenario)}</span>
+    <article class="log-item is-${escapeHtml(entry.level||'info')}">
+      <i class="log-dot"></i>
+      <div class="log-main">
+        <strong>${escapeHtml(entry.title||'Actividad')}</strong>
+        <p>${escapeHtml(entry.detail||'')}</p>
       </div>
-      <div class="operation-pax">
-        <strong>${event.pax.toLocaleString('es-CO')}</strong>
-        <small>personas</small>
-      </div>
+      <span class="log-time">${escapeHtml(time)}</span>
     </article>
   `;
 }
 
-function floorBlock(title,events,type){
-  if(!events.length) return '';
-  return `
-    <section class="floor-block ${type === 'third' ? 'is-third' : ''}">
-      <div class="floor-title">
-        <div><span class="floor-badge">${type === 'third' ? '03' : '02'}</span><h3>${title}</h3></div>
-        <span>${events.length} ${events.length === 1 ? 'evento' : 'eventos'}</span>
-      </div>
-      ${events.map(operationCard).join('')}
-    </section>
-  `;
+function empty(message){
+  return `<div class="empty-list"><strong>Sin registros</strong><span>${escapeHtml(message)}</span></div>`;
 }
 
-function renderOperations(events){
-  const today = isoDate(new Date());
-  const todayEvents = events
-    .filter(event=>event.dateISO === today)
-    .sort((a,b)=>a.floor.localeCompare(b.floor) || a.scenario.localeCompare(b.scenario,'es',{numeric:true}) || a.schedule.localeCompare(b.schedule,'es',{numeric:true}));
-
-  const list = $('operationsList');
-  if(!todayEvents.length){
-    $('operationsTitle').textContent = 'Eventos de hoy';
-    $('operationsSubtitle').textContent = 'No hay programación registrada para la fecha actual.';
-    list.innerHTML = `
-      <div class="empty-panel">
-        <strong>Sin eventos para hoy</strong>
-        <span>La programación próxima se encuentra en la sección inferior.</span>
-      </div>
-    `;
-    return;
-  }
-
-  const second = todayEvents.filter(event=>event.floor === 'second');
-  const third = todayEvents.filter(event=>event.floor === 'third');
-  $('operationsTitle').textContent = `Eventos de hoy · ${todayEvents.length}`;
-  $('operationsSubtitle').textContent = formatDate(new Date(),{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  list.innerHTML = floorBlock('Segundo piso',second,'second') + floorBlock('Tercer piso',third,'third');
-}
-
-function renderUpcoming(events){
-  const today = isoDate(new Date());
-  const upcoming = events
-    .filter(event=>event.dateISO > today)
-    .sort((a,b)=>a.date-b.date || a.scenario.localeCompare(b.scenario,'es',{numeric:true}) || a.schedule.localeCompare(b.schedule,'es',{numeric:true}))
-    .slice(0,8);
-
-  const container = $('upcomingList');
-  if(!upcoming.length){
-    container.innerHTML = `
-      <div class="empty-panel">
-        <strong>No hay próximos eventos registrados</strong>
-        <span>El listado se actualizará automáticamente cuando cambie el Excel.</span>
-      </div>
-    `;
-    return;
-  }
-
-  container.innerHTML = upcoming.map(event=>`
-    <article class="upcoming-card">
-      <span class="upcoming-date">${escapeHtml(formatDate(event.date,{weekday:'short',day:'2-digit',month:'short'}))}</span>
-      <strong>${escapeHtml(event.company)}</strong>
-      <span>${escapeHtml(event.scenario)}</span>
-      <small>${escapeHtml(event.schedule)} · ${event.pax.toLocaleString('es-CO')} personas</small>
-    </article>
-  `).join('');
-}
-
-function auditItem(entry){
-  const timestamp = new Date(entry.timestamp);
-  const time = Number.isNaN(timestamp.getTime())
-    ? '—'
-    : timestamp.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
-
-  const title = entry.type === 'creado'
-    ? `Evento creado · ${entry.company || 'Empresa sin registrar'}`
-    : entry.type === 'eliminado'
-      ? `Evento eliminado · ${entry.company || 'Empresa sin registrar'}`
-      : `${entry.field || 'Campo'} actualizado · ${entry.company || 'Empresa sin registrar'}`;
-
-  return `
-    <article class="audit-item">
-      <div class="audit-time">${escapeHtml(time)}</div>
-      <div class="audit-content">
-        <strong>${escapeHtml(title)}</strong>
-        <div class="audit-meta">
-          <span>${escapeHtml(entry.host || 'Equipo')}</span>
-          <span>${escapeHtml(entry.user || 'Usuario')}</span>
-          <span>${escapeHtml(entry.sheet || '')}</span>
-        </div>
-        ${entry.type === 'actualizado' ? `
-          <div class="audit-change">
-            <div class="audit-value">${escapeHtml(entry.before || 'Vacío')}</div>
-            <b>→</b>
-            <div class="audit-value">${escapeHtml(entry.after || 'Vacío')}</div>
-          </div>
-        ` : ''}
-        <span class="audit-cell">${escapeHtml(entry.cell || entry.field || 'Registro')}</span>
-      </div>
-    </article>
-  `;
-}
-
-async function renderAudit(){
-  const list = $('auditList');
-  list.innerHTML = '<div class="empty-panel"><strong>Cargando historial…</strong></div>';
-
+async function renderSystemLogs(){
   try{
-    const module = await import('./audit-store.js');
-    const entries = await module.getRecent(70);
-    if(!entries.length){
-      list.innerHTML = `
-        <div class="empty-panel">
-          <strong>Sin cambios registrados todavía</strong>
-          <span>Las modificaciones futuras del Excel aparecerán aquí automáticamente.</span>
-        </div>
-      `;
-      return;
-    }
-    list.innerHTML = entries.map(auditItem).join('');
+    const module=await import('./system-log.js');
+    const logs=module.getSystemLogs({limit:100});
+    const excel=logs.filter(item=>item.source==='Excel').slice(0,35);
+    const mobile=logs.filter(item=>item.source==='Firebase'||item.source==='Agenda Móvil').slice(0,35);
+    const errors=logs.filter(item=>item.level==='error'||item.level==='warning').slice(0,35);
+
+    $('excelLogCount').textContent=excel.length;
+    $('mobileLogCount').textContent=mobile.length;
+    $('errorLogCount').textContent=errors.length;
+    $('excelLogList').innerHTML=excel.length ? excel.map(logItem).join('') : empty('Los cargues y comprobaciones del Excel aparecerán aquí.');
+    $('mobileLogList').innerHTML=mobile.length ? mobile.map(logItem).join('') : empty('Las publicaciones de la Agenda Móvil aparecerán aquí.');
+    $('errorLogList').innerHTML=errors.length ? errors.map(logItem).join('') : empty('No hay errores ni advertencias registrados.');
   }catch(error){
-    list.innerHTML = `
-      <div class="empty-panel">
-        <strong>Historial no disponible</strong>
-        <span>${escapeHtml(error.message || 'No fue posible abrir la auditoría local.')}</span>
-      </div>
-    `;
+    $('errorLogList').innerHTML=empty(error.message||'No fue posible abrir el diagnóstico.');
   }
 }
 
-function refreshDashboard(){
-  const events = readEvents();
-  renderStatus(events);
-  renderOperations(events);
-  renderUpcoming(events);
+function changeItem(entry){
+  const title=entry.type==='creado'
+    ? `Registro creado · ${entry.company||'Empresa'}`
+    : entry.type==='eliminado'
+      ? `Registro eliminado · ${entry.company||'Empresa'}`
+      : `${entry.field||'Campo'} modificado · ${entry.company||'Empresa'}`;
+
+  return `
+    <article class="change-item">
+      <strong>${escapeHtml(title)}</strong>
+      <div class="change-meta">
+        <span>${escapeHtml(formatDate(entry.timestamp))}</span>
+        <span>${escapeHtml(entry.host||'Equipo')}</span>
+        <span>${escapeHtml(entry.user||'Usuario')}</span>
+        <span>${escapeHtml(entry.cell||entry.sheet||'')}</span>
+      </div>
+      ${entry.type==='actualizado' ? `
+        <div class="change-values">
+          <span>${escapeHtml(entry.before||'Vacío')}</span><b>→</b><span>${escapeHtml(entry.after||'Vacío')}</span>
+        </div>
+      ` : ''}
+    </article>
+  `;
+}
+
+async function renderChanges(){
+  try{
+    const module=await import('./audit-store.js');
+    const entries=await module.getRecent(80);
+    $('changeLogCount').textContent=entries.length;
+    $('changeLogList').innerHTML=entries.length ? entries.map(changeItem).join('') : empty('Los cambios de celdas del Excel aparecerán automáticamente.');
+  }catch(error){
+    $('changeLogList').innerHTML=empty(error.message||'No fue posible abrir la auditoría.');
+  }
+}
+
+async function refreshDashboard(){
+  renderSummary();
+  await Promise.all([renderSystemLogs(),renderChanges()]);
 }
 
 window.addEventListener('load',()=>setTimeout(()=>$('loader')?.classList.add('is-hidden'),180));
-window.addEventListener('eventDataUpdated',()=>{
-  refreshDashboard();
-  setTimeout(renderAudit,80);
-});
-window.addEventListener('eventAuditUpdated',renderAudit);
+window.addEventListener('eventDataUpdated',refreshDashboard);
+window.addEventListener('eventAuditUpdated',renderChanges);
+window.addEventListener('rptSystemLogUpdated',renderSystemLogs);
+window.addEventListener('firebaseEventsPublished',refreshDashboard);
 window.addEventListener('storage',event=>{
-  if(['eventData','eventDataUpdatedAt'].includes(event.key)) refreshDashboard();
+  if([
+    'eventData','eventDataUpdatedAt','eventDataLastDiff','excelSync:fileMeta',
+    'excelSync:lastCheck','firebase:lastPublishedAt','firebase:lastRemoteCount'
+  ].includes(event.key)) refreshDashboard();
 });
 
-$('refreshAudit').addEventListener('click',renderAudit);
-
+$('refreshDashboard').addEventListener('click',refreshDashboard);
 updateClock();
 setInterval(updateClock,30000);
 setInterval(refreshDashboard,15000);
 refreshDashboard();
-renderAudit();

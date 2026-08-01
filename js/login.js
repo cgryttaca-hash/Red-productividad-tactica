@@ -2,18 +2,26 @@ import {
   ensureDefaultAdmin,
   getSession,
   login,
-  resetDefaultAdmin,
-  getDefaultCredentials
+  resetDefaultAdmin
 } from './local-auth.js';
 
 const $ = id => document.getElementById(id);
 const returnPage = new URLSearchParams(location.search).get('return') || 'index.html';
+let recoveryTimer = null;
 
 function message(value,type='error'){
   const element=$('loginMessage');
   element.hidden=!value;
   element.className=`login-message is-${type}`;
   element.textContent=value||'';
+}
+
+function showWelcome(session){
+  const overlay=$('welcomeOverlay');
+  $('welcomeTitle').textContent=`Bienvenido, ${session.displayName || session.username}`;
+  overlay.classList.add('is-open');
+  overlay.setAttribute('aria-hidden','false');
+  setTimeout(()=>location.replace(returnPage),1250);
 }
 
 async function initialize(){
@@ -23,8 +31,6 @@ async function initialize(){
     location.replace(returnPage);
     return;
   }
-  const credentials=getDefaultCredentials();
-  $('defaultCredentials').textContent=`${credentials.username} / ${credentials.password}`;
   $('username').focus();
 }
 
@@ -35,46 +41,37 @@ $('loginForm').addEventListener('submit',async event=>{
   button.disabled=true;
   button.textContent='Verificando…';
   try{
-    await login($('username').value,$('password').value);
-    location.replace(returnPage);
+    const session=await login($('username').value,$('password').value);
+    showWelcome(session);
   }catch(error){
     message(error.message || 'No fue posible iniciar sesión.');
-  }finally{
     button.disabled=false;
     button.textContent='Ingresar al sistema';
   }
 });
 
-$('openRecovery').addEventListener('click',()=>{
-  $('recoveryModal').classList.add('is-open');
-  $('recoveryModal').setAttribute('aria-hidden','false');
-});
-
-$('closeRecovery').addEventListener('click',()=>{
-  $('recoveryModal').classList.remove('is-open');
-  $('recoveryModal').setAttribute('aria-hidden','true');
-});
-
-$('recoveryForm').addEventListener('submit',async event=>{
+document.addEventListener('keydown',event=>{
+  if(!event.ctrlKey || event.key.toLowerCase()!=='g') return;
   event.preventDefault();
-  const confirmation=$('recoveryConfirmation').value.trim().toUpperCase();
-  if(confirmation!=='RESTABLECER'){
-    $('recoveryMessage').textContent='Escribe RESTABLECER para confirmar.';
-    return;
-  }
+  const button=$('openRecovery');
+  button.hidden=false;
+  button.focus();
+  clearTimeout(recoveryTimer);
+  recoveryTimer=setTimeout(()=>{button.hidden=true;},20000);
+});
+
+$('openRecovery').addEventListener('click',async()=>{
+  const button=$('openRecovery');
+  button.disabled=true;
   try{
     await resetDefaultAdmin();
-    $('recoveryMessage').textContent='La cuenta Admin volvió a usar la contraseña Admin2026.';
-    $('recoveryMessage').className='recovery-message is-success';
-    $('recoveryConfirmation').value='';
+    message('Contraseña restablecida.','success');
   }catch(error){
-    $('recoveryMessage').textContent=error.message;
-    $('recoveryMessage').className='recovery-message is-error';
+    message(error.message || 'No fue posible restablecer la contraseña.');
+  }finally{
+    button.disabled=false;
+    button.hidden=true;
   }
-});
-
-$('recoveryModal').addEventListener('click',event=>{
-  if(event.target.id==='recoveryModal') $('closeRecovery').click();
 });
 
 initialize();

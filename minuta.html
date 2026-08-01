@@ -1,11 +1,14 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="auth-pending maintenance-pending" data-auth-page="protected" data-maintenance-page="minuta">
 <head>
+  <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/auth-guard.js?v=20260801-1600"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-1600"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minuta Diaria Operativa</title>
   <link rel="stylesheet" href="css/minuta.css?v=20260730-001">
-  <link rel="stylesheet" href="css/excel-sync.css?v=20260730-001">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-1600">
 </head>
 <body>
   <div id="loader" class="loader" aria-live="polite">
@@ -141,7 +144,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="js/excel-sync.js?v=20260730-001"></script>
+  <script src="js/excel-sync.js?v=20260801-1600"></script>
   <script src="js/minuta.js?v=20260730-001"></script>
 </body>
 </html>

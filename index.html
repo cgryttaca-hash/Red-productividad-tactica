@@ -1,152 +1,146 @@
 <!DOCTYPE html>
-<html lang="es" class="auth-pending" data-auth-page="protected">
+<html lang="es" class="auth-pending maintenance-pending" data-auth-page="protected" data-maintenance-page="index">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050505">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111111">
   <meta name="description" content="Panel operativo de gestión de eventos.">
   <title>Gestión de Eventos</title>
-  <style>html.auth-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260801-1200"></script>
+  <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/auth-guard.js?v=20260801-1600"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-1600"></script>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-1200">
-  <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-1200">
-  <link rel="stylesheet" href="css/index.css?v=20260801-1200">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-1600">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-1600">
+  <link rel="stylesheet" href="css/index.css?v=20260801-1600">
 </head>
 <body>
   <div id="loader" aria-hidden="true"><span class="loader-spinner"></span></div>
 
   <header class="app-header">
     <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Ir al inicio">
-        <span class="brand-copy">
-          <strong>GESTIÓN DE EVENTOS</strong>
-          <small>Centro operativo</small>
-        </span>
+      <a class="brand" href="index.html">
+        <strong>GESTIÓN DE EVENTOS</strong>
+        <small>Centro operativo</small>
       </a>
 
       <nav class="main-nav" aria-label="Navegación principal">
-        <a class="active" href="index.html" aria-current="page"><span>Inicio</span></a>
-        <a href="eventos.html"><span>Eventos</span></a>
-        <a href="minuta.html"><span>Minuta</span></a>
-        <a href="agenda_movil.html" target="_blank" rel="noopener"><span>Agenda móvil</span></a>
-        <a id="usersLink" href="usuarios.html" hidden><span>Usuarios</span></a>
+        <a class="active" href="index.html">Inicio</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="minuta.html">Minuta</a>
+        <a href="agenda_movil.html" target="_blank" rel="noopener">Agenda móvil</a>
+        <a id="usersLink" href="usuarios.html" hidden>Usuarios</a>
+        <a id="configLink" href="configuracion.html" hidden>Configuración</a>
       </nav>
 
       <div class="header-tools">
         <div class="session-chip">
-          <div>
-            <small id="sessionUserRole">Usuario</small>
-            <strong id="sessionUserName">—</strong>
-          </div>
+          <div><small id="sessionUserRole">Usuario</small><strong id="sessionUserName">—</strong></div>
           <button id="logoutButton" type="button">Salir</button>
         </div>
-        <div class="clock-block" aria-label="Fecha y hora actuales">
-          <span id="todayLabel">--</span>
-          <strong id="reloj">--:--</strong>
-        </div>
+        <div class="clock-block"><span id="todayLabel">--</span><strong id="reloj">--:--</strong></div>
       </div>
     </div>
   </header>
 
   <main class="dashboard-shell">
-    <section class="dashboard-intro">
+    <section class="dashboard-heading">
       <div>
-        <span class="eyebrow">Panel principal</span>
-        <h1>Operación, sincronización y seguimiento</h1>
-        <p>Consulta la programación, supervisa la fuente de datos y verifica la publicación de la Agenda Móvil desde un solo lugar.</p>
+        <span>CONTROL Y AUDITORÍA</span>
+        <h1>Estado del sistema</h1>
+        <p>Supervisa el archivo maestro, la publicación móvil y los cambios registrados sin mezclar la operación diaria.</p>
       </div>
-      <div class="intro-actions">
+      <div class="heading-actions">
         <a href="eventos.html">Abrir Eventos</a>
         <a href="minuta.html">Abrir Minuta</a>
+        <a href="configuracion.html">Configuración</a>
       </div>
     </section>
 
-    <section class="system-grid" aria-label="Estado del sistema">
-      <article class="system-card">
-        <div class="system-card-heading">
-          <div>
-            <small>Fuente de información</small>
-            <h2>Archivo maestro</h2>
-          </div>
-          <span class="card-number">01</span>
+    <section class="status-grid">
+      <article class="status-card excel-card">
+        <div class="card-heading">
+          <div><small>FUENTE DE DATOS</small><h2>Archivo Excel</h2></div>
+          <span class="card-icon">XLS</span>
         </div>
-        <p>Vinculación persistente y comprobación automática del Excel cada 15 segundos.</p>
-        <div class="system-slot" data-excel-sync-slot></div>
+        <div class="card-control" data-excel-sync-slot></div>
+        <dl class="status-metrics">
+          <div><dt>Archivo</dt><dd id="excelFileName">Pendiente</dd></div>
+          <div><dt>Última comprobación</dt><dd id="excelLastCheck">—</dd></div>
+          <div><dt>Registros cargados</dt><dd id="excelRecordCount">0</dd></div>
+        </dl>
+        <div id="excelSummary" class="card-summary">Esperando la primera comprobación.</div>
       </article>
 
-      <article class="system-card">
-        <div class="system-card-heading">
-          <div>
-            <small>Sincronización externa</small>
-            <h2>Firebase</h2>
-          </div>
-          <span class="card-number">02</span>
+      <article class="status-card mobile-card">
+        <div class="card-heading">
+          <div><small>SINCRONIZACIÓN EXTERNA</small><h2>Agenda Móvil</h2></div>
+          <span class="card-icon">RT</span>
         </div>
-        <p>Publicación incremental para que la Agenda Móvil reciba cambios en tiempo real.</p>
-        <div class="system-slot" data-firebase-sync-slot></div>
+        <div class="card-control" data-firebase-sync-slot></div>
+        <dl class="status-metrics">
+          <div><dt>Última publicación</dt><dd id="mobileLastPublish">—</dd></div>
+          <div><dt>Registros remotos</dt><dd id="mobileRemoteCount">0</dd></div>
+          <div><dt>Estado</dt><dd id="mobileState">Verificando</dd></div>
+        </dl>
+        <div id="mobileSummary" class="card-summary">La comprobación se realiza automáticamente.</div>
       </article>
 
-      <article class="system-card data-card">
-        <div class="system-card-heading">
-          <div>
-            <small>Estado local</small>
-            <h2>Información cargada</h2>
-          </div>
-          <span class="card-number">03</span>
+      <article class="status-card audit-card">
+        <div class="card-heading">
+          <div><small>CONTROL LOCAL</small><h2>Cambios detectados</h2></div>
+          <span class="card-icon">LOG</span>
         </div>
-        <div class="data-summary">
-          <div><small>Eventos disponibles</small><strong id="dashboardEventCount">0</strong></div>
-          <div><small>Última actualización</small><strong id="dashboardUpdatedAt">Sin carga</strong></div>
-        </div>
-        <strong id="dataStatusIndicator" class="data-status is-outdated"><span></span>Datos sin verificar</strong>
-      </article>
-    </section>
-
-    <section class="dashboard-content">
-      <article class="dashboard-panel operations-panel">
-        <div class="panel-heading">
-          <div>
-            <span class="eyebrow">Agenda operativa</span>
-            <h2 id="operationsTitle">Eventos de hoy</h2>
-            <p id="operationsSubtitle">Programación organizada por piso.</p>
-          </div>
-        </div>
-        <div id="operationsList" class="operations-list"></div>
-      </article>
-
-      <article class="dashboard-panel audit-panel">
-        <div class="panel-heading">
-          <div>
-            <span class="eyebrow">Auditoría automática</span>
-            <h2>Historial de cambios</h2>
-            <p>Equipo, usuario, celda y valores modificados en el Excel.</p>
-          </div>
-          <button id="refreshAudit" type="button">Actualizar</button>
-        </div>
-        <div id="auditList" class="audit-list"></div>
+        <dl class="status-metrics">
+          <div><dt>Creados</dt><dd id="diffCreated">0</dd></div>
+          <div><dt>Modificados</dt><dd id="diffUpdated">0</dd></div>
+          <div><dt>Eliminados</dt><dd id="diffDeleted">0</dd></div>
+        </dl>
+        <div class="audit-total"><small>Última actualización</small><strong id="diffUpdatedAt">—</strong></div>
+        <button id="refreshDashboard" class="refresh-button" type="button">Actualizar panel</button>
       </article>
     </section>
 
-    <section class="dashboard-panel upcoming-panel">
-      <div class="panel-heading">
-        <div>
-          <span class="eyebrow">Próxima programación</span>
-          <h2>Eventos próximos</h2>
-          <p>Primeros eventos posteriores a la fecha actual.</p>
-        </div>
-      </div>
-      <div id="upcomingList" class="upcoming-grid"></div>
+    <section class="audit-layout">
+      <article class="audit-panel">
+        <header>
+          <div><span>ARCHIVO MAESTRO</span><h2>Cargues y comprobaciones</h2></div>
+          <b id="excelLogCount">0</b>
+        </header>
+        <div id="excelLogList" class="log-list"></div>
+      </article>
+
+      <article class="audit-panel">
+        <header>
+          <div><span>AGENDA MÓVIL</span><h2>Publicaciones y conexión</h2></div>
+          <b id="mobileLogCount">0</b>
+        </header>
+        <div id="mobileLogList" class="log-list"></div>
+      </article>
+
+      <article class="audit-panel changes-panel">
+        <header>
+          <div><span>AUDITORÍA DE CELDAS</span><h2>Cambios realizados</h2></div>
+          <b id="changeLogCount">0</b>
+        </header>
+        <div id="changeLogList" class="change-list"></div>
+      </article>
+
+      <article class="audit-panel error-panel">
+        <header>
+          <div><span>DIAGNÓSTICO</span><h2>Errores y advertencias</h2></div>
+          <b id="errorLogCount">0</b>
+        </header>
+        <div id="errorLogList" class="log-list"></div>
+      </article>
     </section>
   </main>
 
-  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
-  <script src="js/excel-sync.js?v=20260801-1200" defer></script>
-  <script src="js/index.js?v=20260801-1200" defer></script>
-  <script type="module" src="js/firebase-sync.js?v=20260801-1200"></script>
-  <script type="module" src="js/session-ui.js?v=20260801-1200"></script>
+  <script src="js/excel-sync.js?v=20260801-1600" defer></script>
+  <script src="js/index.js?v=20260801-1600" defer></script>
+  <script type="module" src="js/firebase-sync.js?v=20260801-1600"></script>
+  <script type="module" src="js/session-ui.js?v=20260801-1600"></script>
 </body>
 </html>
