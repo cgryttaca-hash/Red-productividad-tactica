@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#13233a">
+  <meta name="description" content="Centro operativo de eventos, sincronización y publicación móvil.">
+  <title>Gestión de Eventos</title>
+  <link rel="stylesheet" href="css/app-shell.css?v=20260801-index3">
+  <link rel="stylesheet" href="css/index.css?v=20260801-index3">
+  <link rel="stylesheet" href="css/sync.css?v=20260801-index3">
+</head>
+<body data-page="index">
+  <div id="loader" class="page-loader" aria-hidden="true"><span></span></div>
+
+  <header class="app-header index-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <span class="brand-mark">GE</span>
+        <span class="brand-copy"><strong>Gestión de Eventos</strong><small>Centro operativo</small></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="active" href="index.html" aria-current="page"><svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v9H4v-9Z"/></svg>Inicio</a>
+        <a href="eventos.html"><svg viewBox="0 0 24 24"><path d="M5 3h14v18H5zM3 8h18M8 3v4m8-4v4"/></svg>Eventos</a>
+        <a href="minuta.html"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6m-6 4h6"/></svg>Minuta</a>
+      </nav>
+
+      <div class="index-header-side">
+        <div class="header-device">
+          <span>Equipo activo</span>
+          <strong id="headerDeviceName">Pendiente</strong>
+        </div>
+        <div class="clock-block">
+          <span id="todayLabel">—</span>
+          <strong id="reloj">—</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell index-shell">
+    <section class="executive-hero">
+      <div class="hero-copy">
+        <span class="hero-kicker"><i></i> Operación centralizada</span>
+        <h1>Información confiable para cada evento.</h1>
+        <p>Administra el archivo maestro, publica la agenda móvil y consulta la trazabilidad de los cambios desde un solo lugar.</p>
+        <div class="hero-buttons">
+          <a class="hero-button primary" href="eventos.html">
+            <svg viewBox="0 0 24 24"><path d="M5 3h14v18H5zM3 8h18M8 3v4m8-4v4M8 12h3m3 0h3M8 16h3m3 0h3"/></svg>
+            <span><strong>Consultar eventos</strong><small>Filtros y detalle completo</small></span>
+          </a>
+          <a class="hero-button" href="minuta.html">
+            <svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h6m-6 4h6"/></svg>
+            <span><strong>Abrir minuta</strong><small>Programación por fecha</small></span>
+          </a>
+          <a class="hero-button" href="agenda_movil.html" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M10 18h4"/></svg>
+            <span><strong>Agenda móvil</strong><small>Consulta de solo lectura</small></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-summary">
+        <div class="summary-badge"><span>Estado operativo</span><strong id="heroOperationalStatus">Comprobando sistema</strong></div>
+        <dl>
+          <div><dt>Equipo</dt><dd id="deviceNameLabel">Equipo sin autorizar</dd></div>
+          <div><dt>Último Excel</dt><dd id="lastLocalUpdate">Sin actualización</dd></div>
+          <div><dt>Última nube</dt><dd id="lastCloudUpdate">Sin publicación</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="status-board" aria-label="Estado del sistema">
+      <article class="status-card status-file">
+        <div class="status-card-top">
+          <span class="status-card-icon"><svg viewBox="0 0 24 24"><path d="M7 3h8l4 4v14H7zM14 3v5h5M9 13h6m-6 4h6"/></svg></span>
+          <button id="fileStatusButton" class="status-chip is-warning" type="button"><i></i><span>Archivo no vinculado</span></button>
+        </div>
+        <span class="status-overline">Archivo maestro</span>
+        <h2 id="fileCardTitle">Sin vincular</h2>
+        <p id="fileCardDescription">Selecciona el Excel una sola vez en este equipo.</p>
+        <div class="status-actions">
+          <button id="filePrimaryAction" class="btn primary" type="button">Vincular Excel</button>
+          <button id="fileRefreshAction" class="btn secondary" type="button" hidden>Actualizar ahora</button>
+        </div>
+      </article>
+
+      <article class="status-card status-cloud">
+        <div class="status-card-top">
+          <span class="status-card-icon"><svg viewBox="0 0 24 24"><path d="M7.5 18.5h10a4 4 0 0 0 .6-8A6.5 6.5 0 0 0 5.8 9a4.8 4.8 0 0 0 1.7 9.5Z"/></svg></span>
+          <button id="cloudStatusButton" class="status-chip is-warning" type="button"><i></i><span>Nube pendiente</span></button>
+        </div>
+        <span class="status-overline">Publicación móvil</span>
+        <h2 id="cloudCardTitle">Esperando conexión</h2>
+        <p id="cloudCardDescription">La sesión del propietario permanece guardada en el navegador.</p>
+        <div class="status-actions">
+          <button id="cloudPrimaryAction" class="btn primary" type="button">Ver conexión</button>
+          <button id="publishAction" class="btn secondary" type="button" hidden>Publicar ahora</button>
+        </div>
+      </article>
+
+      <article class="status-card status-data">
+        <div class="status-card-top">
+          <span class="status-card-icon"><svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M8 15l3-3 3 2 5-6"/></svg></span>
+          <strong id="dataStatusIndicator" class="status-chip is-warning"><i></i><span>Datos sin verificar</span></strong>
+        </div>
+        <span class="status-overline">Base local segura</span>
+        <h2 id="localEventCount">0 eventos</h2>
+        <p>Los eventos se almacenan en IndexedDB para evitar el límite de localStorage.</p>
+        <div class="storage-meter"><span id="storageMeterBar"></span></div>
+        <small id="storageInfo">Base local preparada</small>
+      </article>
+    </section>
+
+    <section class="activity-panel card">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Trazabilidad</span>
+          <h2>Actividad reciente</h2>
+          <p>Cargues, eventos nuevos, modificaciones y eliminaciones publicados por los equipos autorizados.</p>
+        </div>
+        <div class="activity-filters">
+          <button class="is-active" data-activity-filter="all" type="button">Todo</button>
+          <button data-activity-filter="cargue" type="button">Cargues</button>
+          <button data-activity-filter="actualizado" type="button">Modificados</button>
+          <button data-activity-filter="creado" type="button">Nuevos</button>
+          <button data-activity-filter="eliminado" type="button">Eliminados</button>
+        </div>
+      </div>
+      <div id="activityList" class="activity-list">
+        <div class="empty-state"><strong>Sin actividad publicada</strong><span>El historial aparecerá después de la próxima publicación.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="setupModal" class="modal" aria-hidden="true">
+    <div class="modal-dialog setup-dialog" role="dialog" aria-modal="true" aria-labelledby="setupTitle">
+      <div class="setup-head">
+        <span class="setup-step">PRIMER ACCESO EN ESTE EQUIPO</span>
+        <h2 id="setupTitle">Autorizar equipo y vincular archivo</h2>
+        <p>Este proceso se realiza una sola vez. La contraseña no se almacena; Firebase conserva una sesión segura.</p>
+      </div>
+      <form id="setupForm" class="setup-form">
+        <label><span>Nombre del equipo</span><input id="setupDeviceName" required placeholder="Ejemplo: Portátil administración"></label>
+        <label><span>Correo del propietario</span><input id="setupEmail" type="email" autocomplete="username" required></label>
+        <label><span>Contraseña del propietario</span><input id="setupPassword" type="password" autocomplete="current-password" required></label>
+        <label class="permission-option"><input id="setupNotifications" type="checkbox" checked><span><strong>Activar avisos de cambios</strong><small>El navegador solicitará permiso una sola vez.</small></span></label>
+        <div id="setupMessage" class="form-message" hidden></div>
+        <button class="btn primary setup-submit" type="submit">Autorizar y seleccionar Excel</button>
+      </form>
+    </div>
+  </div>
+
+  <input id="fileInput" type="file" accept=".xlsx,.xls,.csv" hidden>
+  <div id="fileModal" class="modal" aria-hidden="true"></div>
+  <div id="cloudModal" class="modal" aria-hidden="true"></div>
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="js/event-store.js?v=20260801-index3"></script>
+  <script src="js/excel-sync.js?v=20260801-index3"></script>
+  <script src="js/index.js?v=20260801-index3"></script>
+  <script type="module" src="js/firebase-owner-sync.js?v=20260801-index3"></script>
+  <script type="module" src="js/activity-feed.js?v=20260801-index3"></script>
+  <script type="module" src="js/change-notifications.js?v=20260801-index3"></script>
+</body>
+</html>

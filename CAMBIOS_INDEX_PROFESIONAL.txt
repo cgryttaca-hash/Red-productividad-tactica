@@ -1,0 +1,25 @@
+VERSIÓN INDEX PROFESIONAL Y CONEXIÓN PERSISTENTE
+================================================
+
+Cambios principales:
+- Rediseño exclusivo del index.
+- Eventos y Minuta conservan su diseño y lógica.
+- La barra superior ya no contiene los controles de sincronización amontonados.
+- Estados de Archivo, Nube y Datos aparecen en tarjetas separadas.
+- El formulario de correo y contraseña se oculta cuando el propietario ya está conectado.
+- Firebase fuerza la renovación del token antes de publicar.
+- Si Firestore no permite leer antes de publicar, el sistema intenta una publicación directa.
+- Un error de permisos no solicita nuevamente la contraseña ni elimina los datos locales.
+- Se evita repetir automáticamente el mismo intento fallido en cada apertura.
+- IndexedDB continúa siendo la fuente local para evitar el límite de localStorage.
+
+Instalación:
+1. Descomprime el ZIP.
+2. Sube el contenido de Red-productividad-tactica-main a la raíz del repositorio.
+3. Reemplaza los archivos existentes.
+4. Espera GitHub Pages y presiona Ctrl + F5.
+
+Importante:
+Las reglas incluidas en firestore.rules forman parte del proyecto. Un archivo estático no puede
+modificar reglas remotas de Firebase por sí solo. Esta versión reduce y recupera fallos desde el
+código, pero una regla remota que bloquee todas las escrituras seguirá siendo aplicada por Firebase.
