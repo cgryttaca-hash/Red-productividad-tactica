@@ -2,33 +2,77 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#111111">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
   <title>Página en actualización</title>
-  <link rel="stylesheet" href="css/mantenimiento.css?v=20260801-1600">
+  <link rel="stylesheet" href="css/mantenimiento.css?v=20260801-1800">
 </head>
 <body>
-  <header><strong>GESTIÓN DE EVENTOS</strong><span>Mantenimiento programado</span></header>
-  <main>
+  <header class="maintenance-header">
+    <strong>GESTIÓN DE EVENTOS</strong>
+    <span>Mantenimiento programado</span>
+  </header>
+
+  <main class="maintenance-shell">
     <section class="maintenance-card">
-      <div class="worker" aria-hidden="true">
-        <span class="helmet">⚒</span>
-        <span class="person">👷</span>
+      <div class="construction-scene" aria-hidden="true">
+        <span class="scene-grid"></span>
+        <svg class="worker-svg" viewBox="0 0 420 300" role="img">
+          <g class="building">
+            <rect x="42" y="108" width="212" height="142" rx="14"/>
+            <rect x="68" y="136" width="50" height="38" rx="6"/>
+            <rect x="136" y="136" width="50" height="38" rx="6"/>
+            <rect x="68" y="190" width="118" height="36" rx="6"/>
+            <path d="M30 108h238L218 62H80Z"/>
+          </g>
+          <g class="worker-body">
+            <circle cx="308" cy="116" r="34" class="skin"/>
+            <path d="M274 112c2-28 18-46 35-46 22 0 38 18 38 46Z" class="helmet-shape"/>
+            <rect x="284" y="145" width="52" height="82" rx="18" class="vest"/>
+            <rect x="286" y="223" width="18" height="54" rx="9" class="pants"/>
+            <rect x="318" y="223" width="18" height="54" rx="9" class="pants"/>
+            <path d="M294 159 252 190" class="arm-left"/>
+            <g class="hammer-arm">
+              <path d="M328 159 366 187" class="arm-right"/>
+              <rect x="361" y="157" width="9" height="52" rx="4" class="tool-handle"/>
+              <rect x="347" y="148" width="38" height="14" rx="4" class="tool-head"/>
+            </g>
+            <circle cx="252" cy="190" r="8" class="skin"/>
+            <circle cx="367" cy="188" r="8" class="skin"/>
+          </g>
+          <g class="cone cone-one">
+            <path d="M236 248h42l-15-54h-12Z"/>
+            <rect x="228" y="246" width="58" height="12" rx="4"/>
+          </g>
+          <g class="cone cone-two">
+            <path d="M346 260h32l-12-43h-9Z"/>
+            <rect x="340" y="258" width="44" height="10" rx="4"/>
+          </g>
+          <g class="spark spark-one"><circle cx="382" cy="132" r="4"/></g>
+          <g class="spark spark-two"><circle cx="398" cy="154" r="3"/></g>
+        </svg>
+        <div class="work-status"><i></i><span>Trabajando en la actualización</span></div>
       </div>
-      <span class="kicker">PÁGINA EN ACTUALIZACIÓN</span>
-      <h1 id="maintenanceTitle">Estamos realizando mejoras</h1>
-      <p id="maintenanceMessage">Esta sección estará disponible nuevamente cuando finalice el temporizador.</p>
-      <div class="countdown">
-        <div><strong id="hours">00</strong><span>Horas</span></div>
-        <b>:</b>
-        <div><strong id="minutes">00</strong><span>Minutos</span></div>
-        <b>:</b>
-        <div><strong id="seconds">00</strong><span>Segundos</span></div>
+
+      <div class="maintenance-content">
+        <span class="kicker">PÁGINA EN ACTUALIZACIÓN</span>
+        <h1 id="maintenanceTitle">Estamos realizando mejoras</h1>
+        <p id="maintenanceMessage">Esta sección estará disponible nuevamente cuando finalice el temporizador.</p>
+
+        <div class="countdown" aria-label="Tiempo restante">
+          <div><strong id="hours">00</strong><span>Horas</span></div>
+          <b>:</b>
+          <div><strong id="minutes">00</strong><span>Minutos</span></div>
+          <b>:</b>
+          <div><strong id="seconds">00</strong><span>Segundos</span></div>
+        </div>
+
+        <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+        <small id="maintenanceStatus">Comprobando el tiempo restante…</small>
       </div>
-      <div class="progress"><i id="progressBar"></i></div>
-      <small id="maintenanceStatus">Comprobando el tiempo restante…</small>
     </section>
   </main>
-  <script type="module" src="js/mantenimiento.js?v=20260801-1600"></script>
+
+  <script type="module" src="js/mantenimiento.js?v=20260801-1800"></script>
 </body>
 </html>

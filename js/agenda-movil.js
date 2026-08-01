@@ -7,7 +7,7 @@ import {
 const SDK='https://www.gstatic.com/firebasejs/12.16.0';
 const FALLBACK_INTERVAL_MS=15000;
 const CHUNK_PREFIX='agenda_chunk_';
-const CACHE_DB='agenda-movil-cache-v2';
+const CACHE_DB='agenda-movil-cache-v3';
 const CACHE_STORE='state';
 const CACHE_KEY='events';
 const $=id=>document.getElementById(id);
@@ -16,11 +16,11 @@ const state={
   all:[],
   view:'today',
   updatedAt:'',
+  cloudHash:'',
   auth:null,
   db:null,
   sdk:null,
   metaUnsubscribe:null,
-  eventsUnsubscribe:null,
   fallbackTimer:null,
   lastHash:'',
   initialized:false,
@@ -49,10 +49,14 @@ async function cacheGet(){
     const db=await openCache();
     const value=await new Promise((resolve,reject)=>{
       const request=db.transaction(CACHE_STORE,'readonly').objectStore(CACHE_STORE).get(CACHE_KEY);
-      request.onsuccess=()=>resolve(request.result||null);request.onerror=()=>reject(request.error);
+      request.onsuccess=()=>resolve(request.result||null);
+      request.onerror=()=>reject(request.error);
     });
-    db.close();return value;
-  }catch(_){return null;}
+    db.close();
+    return value;
+  }catch(_){
+    return null;
+  }
 }
 async function cacheSet(value){
   try{
@@ -60,7 +64,8 @@ async function cacheSet(value){
     await new Promise((resolve,reject)=>{
       const tx=db.transaction(CACHE_STORE,'readwrite');
       tx.objectStore(CACHE_STORE).put(value,CACHE_KEY);
-      tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);
+      tx.oncomplete=resolve;
+      tx.onerror=()=>reject(tx.error);
     });
     db.close();
   }catch(_){}
@@ -68,6 +73,9 @@ async function cacheSet(value){
 
 function dateISO(value){
   if(!value)return'';
+  if(value instanceof Date&&!Number.isNaN(value.getTime())){
+    return`${value.getFullYear()}-${String(value.getMonth()+1).padStart(2,'0')}-${String(value.getDate()).padStart(2,'0')}`;
+  }
   const source=text(value);
   let match=source.match(/^(\d{4})-(\d{2})-(\d{2})/);
   if(match)return`${match[1]}-${match[2]}-${match[3]}`;
@@ -83,7 +91,9 @@ function localDate(iso){
 }
 function todayISO(){return dateISO(new Date())}
 function valueFrom(row,keys){
-  for(const key of keys){if(row?.[key]!==undefined&&row?.[key]!==null)return row[key];}
+  for(const key of keys){
+    if(row?.[key]!==undefined&&row?.[key]!==null)return row[key];
+  }
   return'';
 }
 function eventFromRow(row,index){
@@ -134,14 +144,47 @@ function formatDateTime(value){
   return Number.isNaN(date.getTime())?'—':date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
 }
 function serviceValue(value,fallback='Sin registrar'){return text(value).trim()||fallback}
+function serviceLines(value){
+  return text(value)
+    .replace(/\r/g,'')
+    .split(/\n+/)
+    .map(item=>item.trim())
+    .filter(Boolean);
+}
 function meaningfulFood(value){
   const source=normalize(value).toUpperCase();
   if(!source)return false;
   return!/^(N\/?A|NA|NO|SIN ALIMENTACION|SIN SERVICIO|NO APLICA|CANCELADO)$/.test(source);
 }
-function hasFood(event){return meaningfulFood(event.horarioAyB)||meaningfulFood(event.descripcionAlimentacion)}
-function foodStatus(event){return hasFood(event)?'Con alimentación':'Sin alimentación'}
-function dataHash(events){return events.map(event=>[event.id,event.fechaISO,event.empresa,event.cantidadPersonas,event.escenario,event.horarioEvento,event.horarioAyB,event.descripcionAlimentacion,event.acomodacion,event.modalidadServicio,event.medioPago,event.observacion,event.estado].join('|')).join('||')}
+function hasFood(event){
+  return meaningfulFood(event.horarioAyB)||meaningfulFood(event.descripcionAlimentacion);
+}
+function foodPairs(event){
+  if(!hasFood(event))return[];
+  const times=serviceLines(event.horarioAyB);
+  const descriptions=serviceLines(event.descripcionAlimentacion);
+  const total=Math.max(times.length,descriptions.length,1);
+  return Array.from({length:total},(_,index)=>({
+    time:times[index]||'',
+    description:descriptions[index]||''
+  })).filter(item=>item.time||item.description);
+}
+function foodMarkup(event){
+  const pairs=foodPairs(event);
+  if(!pairs.length)return'<span class="food-empty">Sin alimentación</span>';
+  return`<div class="food-combo">${pairs.map(item=>`
+    <div class="food-line">
+      ${item.time?`<b>${esc(item.time)}</b>`:'<b>Servicio</b>'}
+      <span>${esc(item.description||'Alimentación registrada')}</span>
+    </div>`).join('')}</div>`;
+}
+function dataHash(events){
+  return events.map(event=>[
+    event.id,event.fechaISO,event.empresa,event.cantidadPersonas,event.escenario,event.horarioEvento,
+    event.horarioAyB,event.descripcionAlimentacion,event.acomodacion,event.modalidadServicio,
+    event.medioPago,event.observacion,event.estado
+  ].join('|')).join('||');
+}
 
 function setConnection(message,connected=false){
   $('mobileConnectionText').textContent=message;
@@ -149,16 +192,14 @@ function setConnection(message,connected=false){
 }
 function setNotice(message,type=''){
   const notice=$('mobileNotice');
-  notice.hidden=!message;notice.className=`agenda-notice ${type?`is-${type}`:''}`;notice.textContent=message||'';
+  notice.hidden=!message;
+  notice.className=`agenda-notice ${type?`is-${type}`:''}`;
+  notice.textContent=message||'';
 }
 function updateHeader(){
-  const now=new Date(),today=todayISO(),todayEvents=state.all.filter(event=>event.fechaISO===today);
-  $('mobileTodayDay').textContent=String(now.getDate()).padStart(2,'0');
-  $('mobileTodayMonth').textContent=now.toLocaleDateString('es-CO',{month:'short'}).replace('.','');
-  $('mobileEventCount').textContent=`${state.all.length.toLocaleString('es-CO')} ${state.all.length===1?'evento':'eventos'}`;
-  $('mobileSecondCount').textContent=todayEvents.filter(event=>event.piso==='Segundo piso').length.toLocaleString('es-CO');
-  $('mobileThirdCount').textContent=todayEvents.filter(event=>event.piso==='Tercer piso').length.toLocaleString('es-CO');
-  $('mobileUpdatedAt').textContent=state.updatedAt?`Actualizado ${formatDateTime(state.updatedAt)}`:'Esperando actualización';
+  $('mobileUpdatedAt').textContent=state.updatedAt
+    ?`Actualizado ${formatDateTime(state.updatedAt)}`
+    :'Esperando actualización';
 }
 function filteredEvents(){
   const query=normalize($('mobileSearch').value).toLowerCase();
@@ -168,18 +209,21 @@ function filteredEvents(){
     if(exactDate&&event.fechaISO!==exactDate)return false;
     if(!exactDate&&state.view==='today'&&event.fechaISO!==today)return false;
     if(!exactDate&&state.view==='upcoming'&&event.fechaISO<=today)return false;
-    if(query&&!`${event.empresa} ${event.escenario} ${event.estado}`.toLowerCase().includes(query))return false;
+    if(query&&!`${event.empresa} ${event.escenario} ${event.estado} ${event.acomodacion}`.toLowerCase().includes(query))return false;
     return true;
   });
 }
 function eventRows(events){
   return`<div class="event-table">
-    <div class="event-table-header" aria-hidden="true"><span>Fecha</span><span>Empresa</span><span>Ubicación</span><span>Alimentación</span><span>Personas</span></div>
+    <div class="event-table-header" aria-hidden="true">
+      <span>Fecha</span><span>Empresa</span><span>Ubicación</span><span>Acomodación</span><span>Alimentación</span><span>Personas</span>
+    </div>
     ${events.map(event=>`<button class="event-summary-row" type="button" data-id="${esc(event.id)}">
       <span class="event-summary-date">${esc(formatDate(event.fechaISO,{weekday:'short',day:'2-digit',month:'short',year:'numeric'}))}</span>
       <span class="event-summary-company">${esc(event.empresa)}</span>
       <span class="event-summary-location"><strong>${esc(event.escenario)}</strong><small>${esc(event.piso)}</small></span>
-      <span class="event-summary-food"><span class="food-status ${hasFood(event)?'has-food':''}">${foodStatus(event)}</span><small>${hasFood(event)?'Servicio registrado':'Sin servicio registrado'}</small></span>
+      <span class="event-summary-layout"><strong>Acomodación del espacio</strong><small>${esc(serviceValue(event.acomodacion,'Sin registrar'))}</small></span>
+      <span class="event-summary-food">${foodMarkup(event)}</span>
       <span class="event-summary-pax"><strong>${event.cantidadPersonas.toLocaleString('es-CO')}</strong><small>personas</small></span>
     </button>`).join('')}
   </div>`;
@@ -187,7 +231,10 @@ function eventRows(events){
 function floorSection(title,events,type){
   if(!events.length)return'';
   return`<section class="floor-section ${type==='third'?'is-third':''}">
-    <div class="floor-heading"><div><span class="floor-marker">${type==='third'?'03':'02'}</span><div><small>Programación de la fecha</small><h3>${title}</h3></div></div><b>${events.length}</b></div>
+    <div class="floor-heading">
+      <div><span class="floor-marker">${type==='third'?'03':'02'}</span><div><small>Programación de la fecha</small><h3>${title}</h3></div></div>
+      <b>${events.length}</b>
+    </div>
     ${eventRows(events)}
   </section>`;
 }
@@ -200,14 +247,24 @@ function render(){
     return;
   }
   const groups=new Map();
-  data.forEach(event=>{if(!groups.has(event.fechaISO))groups.set(event.fechaISO,[]);groups.get(event.fechaISO).push(event);});
+  data.forEach(event=>{
+    if(!groups.has(event.fechaISO))groups.set(event.fechaISO,[]);
+    groups.get(event.fechaISO).push(event);
+  });
   agenda.innerHTML=[...groups.entries()].map(([date,events])=>{
     const second=events.filter(event=>event.piso==='Segundo piso').sort(compareEvents);
     const third=events.filter(event=>event.piso==='Tercer piso').sort(compareEvents);
     const currentDate=localDate(date);
     return`<article class="date-group">
-      <header class="date-group-header"><div><span class="date-block"><strong>${String(currentDate.getDate()).padStart(2,'0')}</strong><span>${currentDate.toLocaleDateString('es-CO',{month:'short'}).replace('.','')}</span></span><div><h2>${esc(formatDate(date,{weekday:'long',day:'numeric',month:'long',year:'numeric'}))}</h2><p>Selecciona una empresa para consultar todos los detalles.</p></div></div><span class="date-group-count">${events.length} eventos</span></header>
-      ${floorSection('Segundo piso',second,'second')}${floorSection('Tercer piso',third,'third')}
+      <header class="date-group-header">
+        <div>
+          <span class="date-block"><strong>${String(currentDate.getDate()).padStart(2,'0')}</strong><span>${currentDate.toLocaleDateString('es-CO',{month:'short'}).replace('.','')}</span></span>
+          <div><h2>${esc(formatDate(date,{weekday:'long',day:'numeric',month:'long',year:'numeric'}))}</h2><p>Selecciona una empresa para consultar el detalle completo.</p></div>
+        </div>
+        <span class="date-group-count">${events.length} eventos</span>
+      </header>
+      ${floorSection('Segundo piso',second,'second')}
+      ${floorSection('Tercer piso',third,'third')}
     </article>`;
   }).join('');
 }
@@ -220,60 +277,86 @@ function openDetail(event){
   $('mobileDetailBody').innerHTML=`
     ${normalField('Fecha',formatDate(event.fechaISO,{day:'2-digit',month:'2-digit',year:'numeric'}))}
     ${normalField('Escenario asignado',event.escenario)}
+    ${normalField('Piso',event.piso)}
     ${normalField('Horario del evento',event.horarioEvento)}
-    ${normalField('Nombre de la empresa',event.empresa)}
     ${normalField('Cantidad de personas',event.cantidadPersonas.toLocaleString('es-CO'))}
-    <div class="detail-service-row">
-      ${normalField('Horario AYB',event.horarioAyB)}
-      ${normalField('Descripción Alimentación',event.descripcionAlimentacion)}
-    </div>
-    ${normalField('Acomodación',event.acomodacion)}
+    ${normalField('Acomodación del espacio',event.acomodacion)}
+    <div class="detail-food-card"><small>Alimentación</small>${foodMarkup(event)}</div>
     ${normalField('Modalidad de servicio',event.modalidadServicio)}
     ${normalField('Medio de pago',event.medioPago)}
-    ${normalField('Observación',event.observacion,true)}
     ${normalField('Estado',event.estado)}
+    ${normalField('Observación',event.observacion,true)}
     ${normalField('Desarrollo actividad',event.desarrolloActividad,true)}
   `;
-  $('mobileDetailModal').classList.add('is-open');$('mobileDetailModal').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+  $('mobileDetailModal').classList.add('is-open');
+  $('mobileDetailModal').setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
 }
 function closeDetail(){
-  $('mobileDetailModal').classList.remove('is-open');$('mobileDetailModal').setAttribute('aria-hidden','true');document.body.style.overflow='';
+  $('mobileDetailModal').classList.remove('is-open');
+  $('mobileDetailModal').setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
 }
-async function applyEvents(events,updatedAt,notify=true){
+
+async function applyEvents(events,updatedAt,notify=true,cloudHash=''){
   const normalized=events.map(eventFromRow).filter(event=>event.fechaISO);
   const nextHash=dataHash(normalized);
   const changed=Boolean(state.lastHash&&nextHash!==state.lastHash);
-  state.all=normalized;state.lastHash=nextHash;state.updatedAt=updatedAt||state.updatedAt;
-  await cacheSet({events:state.all,updatedAt:state.updatedAt,hash:state.lastHash});
-  setConnection('Sincronización en tiempo real activa',true);
+  state.all=normalized;
+  state.lastHash=nextHash;
+  state.cloudHash=cloudHash||state.cloudHash;
+  state.updatedAt=updatedAt||state.updatedAt;
+  await cacheSet({
+    events:state.all,
+    updatedAt:state.updatedAt,
+    hash:state.lastHash,
+    cloudHash:state.cloudHash
+  });
+  setConnection('Sincronización activa',true);
   setNotice(changed&&notify?'La agenda recibió una actualización automática.':'',changed?'success':'');
   render();
 }
 async function loadChunks(meta,notify=false){
   const count=Number(meta?.chunkCount)||0;
   if(!count)return false;
+  const expectedCount=Number(meta?.count)||0;
+  if(meta.dataHash&&state.cloudHash===meta.dataHash&&state.all.length===expectedCount){
+    state.updatedAt=meta.publishedAt||meta.clientPublishedAt||state.updatedAt;
+    setConnection('Sincronización activa',true);
+    render();
+    return true;
+  }
   const docs=await Promise.all(
-    Array.from({length:count},(_,index)=>state.sdk.fireMod.getDoc(state.sdk.fireMod.doc(state.db,META_COLLECTION,chunkId(index))))
+    Array.from({length:count},(_,index)=>
+      state.sdk.fireMod.getDoc(state.sdk.fireMod.doc(state.db,META_COLLECTION,chunkId(index)))
+    )
   );
   const events=[];
   docs.forEach(snapshot=>{
     if(snapshot.exists()&&Array.isArray(snapshot.data()?.events))events.push(...snapshot.data().events);
   });
-  if(!events.length&&Number(meta.count)>0)throw new Error('La publicación no contiene bloques de datos.');
-  await applyEvents(events,meta.publishedAt||meta.clientPublishedAt,notify);
+  if(!events.length&&expectedCount>0)throw new Error('La publicación no contiene bloques de datos.');
+  await applyEvents(
+    events,
+    meta.publishedAt||meta.clientPublishedAt,
+    notify,
+    meta.dataHash||''
+  );
   return true;
 }
 async function loadLegacyCollection(notify=false){
   const snapshot=await state.sdk.fireMod.getDocs(state.sdk.fireMod.collection(state.db,EVENTS_COLLECTION));
-  await applyEvents(snapshot.docs.map(doc=>({id:doc.id,...doc.data()})),state.updatedAt,notify);
+  const events=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+  await applyEvents(events,state.updatedAt,notify,`legacy:${events.length}`);
 }
-async function refreshFromCloud({notify=false}={}){
+async function refreshFromCloud({notify=false,force=false}={}){
   if(state.refreshing||!state.db)return;
   state.refreshing=true;
   try{
     const metaSnap=await state.sdk.fireMod.getDoc(state.sdk.fireMod.doc(state.db,META_COLLECTION,'publicacion'));
     const meta=metaSnap.exists()?metaSnap.data():{};
     state.meta=meta;
+    if(force)state.cloudHash='';
     const loaded=await loadChunks(meta,notify);
     if(!loaded)await loadLegacyCollection(notify);
     if(!state.all.length)setNotice('Todavía no se han publicado eventos desde el equipo principal.','');
@@ -282,19 +365,29 @@ async function refreshFromCloud({notify=false}={}){
     setConnection('Reintentando conexión…',false);
     const cached=await cacheGet();
     if(cached?.events?.length){
-      state.all=cached.events;state.updatedAt=cached.updatedAt;state.lastHash=cached.hash||dataHash(cached.events);render();
+      state.all=cached.events;
+      state.updatedAt=cached.updatedAt;
+      state.lastHash=cached.hash||dataHash(cached.events);
+      state.cloudHash=cached.cloudHash||'';
+      render();
       setNotice('Mostrando la última información guardada mientras se restablece la conexión.','');
     }else{
       setNotice('No fue posible descargar la agenda. El sistema volverá a intentarlo automáticamente.','error');
     }
-  }finally{state.refreshing=false;}
+  }finally{
+    state.refreshing=false;
+  }
 }
 async function initializeFirebase(){
   if(state.initialized)return;
   state.initialized=true;
   const cached=await cacheGet();
   if(cached?.events?.length){
-    state.all=cached.events;state.updatedAt=cached.updatedAt;state.lastHash=cached.hash||dataHash(cached.events);render();
+    state.all=cached.events;
+    state.updatedAt=cached.updatedAt;
+    state.lastHash=cached.hash||dataHash(cached.events);
+    state.cloudHash=cached.cloudHash||'';
+    render();
   }
   try{
     const [appMod,authMod,fireMod]=await Promise.all([
@@ -303,7 +396,9 @@ async function initializeFirebase(){
       import(`${SDK}/firebase-firestore.js`)
     ]);
     const app=appMod.getApps().length?appMod.getApps()[0]:appMod.initializeApp(FIREBASE_CONFIG);
-    state.auth=authMod.getAuth(app);state.db=fireMod.getFirestore(app);state.sdk={appMod,authMod,fireMod};
+    state.auth=authMod.getAuth(app);
+    state.db=fireMod.getFirestore(app);
+    state.sdk={appMod,authMod,fireMod};
     try{await authMod.setPersistence(state.auth,authMod.browserLocalPersistence);}catch(_){}
     if(!state.auth.currentUser){
       try{await authMod.signInAnonymously(state.auth);}catch(error){console.warn('Anonymous auth:',error);}
@@ -317,34 +412,55 @@ async function initializeFirebase(){
         if(!loaded)await loadLegacyCollection(true);
       }catch(error){
         console.warn('Realtime agenda:',error);
-        refreshFromCloud({notify:true});
+        refreshFromCloud({notify:true,force:true});
       }
     },error=>{
       console.warn('Meta listener:',error);
       refreshFromCloud();
     });
     await refreshFromCloud();
-    state.fallbackTimer=setInterval(()=>{if(!document.hidden)refreshFromCloud();},FALLBACK_INTERVAL_MS);
+    state.fallbackTimer=setInterval(()=>{
+      if(!document.hidden)refreshFromCloud();
+    },FALLBACK_INTERVAL_MS);
     window.addEventListener('focus',()=>refreshFromCloud(),{passive:true});
-    document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshFromCloud();});
+    document.addEventListener('visibilitychange',()=>{
+      if(!document.hidden)refreshFromCloud();
+    });
   }catch(error){
     console.error('Firebase móvil:',error);
     setConnection('Firebase no pudo iniciar',false);
     setNotice('No fue posible iniciar la agenda. Se volverá a intentar automáticamente.','error');
   }
 }
+
 document.querySelectorAll('.agenda-tab').forEach(button=>button.addEventListener('click',()=>{
   document.querySelectorAll('.agenda-tab').forEach(item=>item.classList.remove('is-active'));
-  button.classList.add('is-active');state.view=button.dataset.view;$('mobileDateFilter').value='';render();
+  button.classList.add('is-active');
+  state.view=button.dataset.view;
+  $('mobileDateFilter').value='';
+  render();
 }));
 $('mobileSearch').addEventListener('input',render);
 $('mobileDateFilter').addEventListener('change',render);
-$('mobileRefresh').addEventListener('click',()=>refreshFromCloud({notify:true}));
+$('mobileRefresh').addEventListener('click',()=>refreshFromCloud({notify:true,force:true}));
 $('mobileAgenda').addEventListener('click',event=>{
-  const row=event.target.closest('.event-summary-row');if(!row)return;
-  const item=state.all.find(record=>record.id===row.dataset.id);if(item)openDetail(item);
+  const row=event.target.closest('.event-summary-row');
+  if(!row)return;
+  const item=state.all.find(record=>record.id===row.dataset.id);
+  if(item)openDetail(item);
 });
 $('mobileCloseDetail').addEventListener('click',closeDetail);
-$('mobileDetailModal').addEventListener('click',event=>{if(event.target.id==='mobileDetailModal')closeDetail();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape')closeDetail();});
-updateHeader();render();initializeFirebase();
+$('mobileDetailModal').addEventListener('click',event=>{
+  if(event.target.id==='mobileDetailModal')closeDetail();
+});
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape')closeDetail();
+});
+window.addEventListener('pagehide',()=>{
+  state.metaUnsubscribe?.();
+  clearInterval(state.fallbackTimer);
+},{once:true});
+
+updateHeader();
+render();
+initializeFirebase();

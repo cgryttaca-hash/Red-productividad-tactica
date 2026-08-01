@@ -1,19 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" class="auth-pending maintenance-pending" data-auth-page="protected" data-maintenance-page="index">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#111111">
+  <meta name="theme-color" content="#111827">
   <meta name="description" content="Panel operativo de gestión de eventos.">
   <title>Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260801-1600"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260801-1600"></script>
+  <script src="js/auth-guard.js?v=20260801-1800"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-1800"></script>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-1600">
-  <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-1600">
-  <link rel="stylesheet" href="css/index.css?v=20260801-1600">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-1800">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-1800">
+  <link rel="stylesheet" href="css/index.css?v=20260801-1800">
 </head>
 <body>
   <div id="loader" aria-hidden="true"><span class="loader-spinner"></span></div>
@@ -45,102 +45,121 @@
   </header>
 
   <main class="dashboard-shell">
-    <section class="dashboard-heading">
+    <section class="dashboard-overview">
       <div>
-        <span>CONTROL Y AUDITORÍA</span>
-        <h1>Estado del sistema</h1>
-        <p>Supervisa el archivo maestro, la publicación móvil y los cambios registrados sin mezclar la operación diaria.</p>
+        <span class="eyebrow">PANEL OPERATIVO</span>
+        <h1>Estado y sincronización</h1>
+        <p>Controla el archivo maestro, la publicación móvil y la auditoría desde una sola vista.</p>
       </div>
-      <div class="heading-actions">
-        <a href="eventos.html">Abrir Eventos</a>
+      <div class="overview-actions">
+        <a class="primary-action" href="eventos.html">Abrir Eventos</a>
         <a href="minuta.html">Abrir Minuta</a>
-        <a href="configuracion.html">Configuración</a>
+        <a href="agenda_movil.html" target="_blank" rel="noopener">Ver Agenda</a>
       </div>
     </section>
 
-    <section class="status-grid">
-      <article class="status-card excel-card">
-        <div class="card-heading">
-          <div><small>FUENTE DE DATOS</small><h2>Archivo Excel</h2></div>
-          <span class="card-icon">XLS</span>
-        </div>
-        <div class="card-control" data-excel-sync-slot></div>
-        <dl class="status-metrics">
-          <div><dt>Archivo</dt><dd id="excelFileName">Pendiente</dd></div>
-          <div><dt>Última comprobación</dt><dd id="excelLastCheck">—</dd></div>
-          <div><dt>Registros cargados</dt><dd id="excelRecordCount">0</dd></div>
-        </dl>
-        <div id="excelSummary" class="card-summary">Esperando la primera comprobación.</div>
+    <section class="summary-strip" aria-label="Resumen del sistema">
+      <article>
+        <small>Registros locales</small>
+        <strong id="excelRecordCount">0</strong>
+        <span id="dataHealthText">Esperando información</span>
       </article>
-
-      <article class="status-card mobile-card">
-        <div class="card-heading">
-          <div><small>SINCRONIZACIÓN EXTERNA</small><h2>Agenda Móvil</h2></div>
-          <span class="card-icon">RT</span>
-        </div>
-        <div class="card-control" data-firebase-sync-slot></div>
-        <dl class="status-metrics">
-          <div><dt>Última publicación</dt><dd id="mobileLastPublish">—</dd></div>
-          <div><dt>Registros remotos</dt><dd id="mobileRemoteCount">0</dd></div>
-          <div><dt>Estado</dt><dd id="mobileState">Verificando</dd></div>
-        </dl>
-        <div id="mobileSummary" class="card-summary">La comprobación se realiza automáticamente.</div>
+      <article>
+        <small>Archivo maestro</small>
+        <strong id="excelFileName">Pendiente</strong>
+        <span id="excelLastCheck">Sin comprobación</span>
       </article>
-
-      <article class="status-card audit-card">
-        <div class="card-heading">
-          <div><small>CONTROL LOCAL</small><h2>Cambios detectados</h2></div>
-          <span class="card-icon">LOG</span>
-        </div>
-        <dl class="status-metrics">
-          <div><dt>Creados</dt><dd id="diffCreated">0</dd></div>
-          <div><dt>Modificados</dt><dd id="diffUpdated">0</dd></div>
-          <div><dt>Eliminados</dt><dd id="diffDeleted">0</dd></div>
-        </dl>
-        <div class="audit-total"><small>Última actualización</small><strong id="diffUpdatedAt">—</strong></div>
-        <button id="refreshDashboard" class="refresh-button" type="button">Actualizar panel</button>
+      <article>
+        <small>Agenda móvil</small>
+        <strong id="mobileState">Verificando</strong>
+        <span id="mobileLastPublish">Sin publicación</span>
+      </article>
+      <article>
+        <small>Cambios recientes</small>
+        <strong id="changeTotal">0</strong>
+        <span id="diffUpdatedAt">Sin cambios</span>
       </article>
     </section>
 
-    <section class="audit-layout">
-      <article class="audit-panel">
+    <section class="sync-grid">
+      <article class="sync-card">
         <header>
-          <div><span>ARCHIVO MAESTRO</span><h2>Cargues y comprobaciones</h2></div>
-          <b id="excelLogCount">0</b>
+          <div><span>FUENTE DE DATOS</span><h2>Archivo Excel</h2></div>
+          <b>XLS</b>
         </header>
-        <div id="excelLogList" class="log-list"></div>
+        <p>Detección automática del archivo y comprobación periódica de cambios.</p>
+        <div class="sync-control-slot" data-excel-sync-slot></div>
+        <dl>
+          <div><dt>Última comprobación</dt><dd id="excelCheckDetail">—</dd></div>
+          <div><dt>Registros cargados</dt><dd id="excelRecordDetail">0</dd></div>
+        </dl>
+        <div id="excelSummary" class="sync-summary">Esperando la primera comprobación.</div>
       </article>
 
-      <article class="audit-panel">
+      <article class="sync-card">
         <header>
-          <div><span>AGENDA MÓVIL</span><h2>Publicaciones y conexión</h2></div>
-          <b id="mobileLogCount">0</b>
+          <div><span>TIEMPO REAL</span><h2>Agenda Móvil</h2></div>
+          <b>RT</b>
         </header>
-        <div id="mobileLogList" class="log-list"></div>
+        <p>Publicación automática y actualización en todos los dispositivos conectados.</p>
+        <div class="sync-control-slot" data-firebase-sync-slot></div>
+        <dl>
+          <div><dt>Registros remotos</dt><dd id="mobileRemoteCount">0</dd></div>
+          <div><dt>Última publicación</dt><dd id="mobilePublishDetail">—</dd></div>
+        </dl>
+        <div id="mobileSummary" class="sync-summary">La comprobación se realiza automáticamente.</div>
       </article>
 
-      <article class="audit-panel changes-panel">
+      <article class="sync-card audit-summary-card">
         <header>
-          <div><span>AUDITORÍA DE CELDAS</span><h2>Cambios realizados</h2></div>
-          <b id="changeLogCount">0</b>
+          <div><span>AUDITORÍA</span><h2>Última actualización</h2></div>
+          <b>LOG</b>
         </header>
-        <div id="changeLogList" class="change-list"></div>
+        <div class="diff-grid">
+          <div><small>Creados</small><strong id="diffCreated">0</strong></div>
+          <div><small>Modificados</small><strong id="diffUpdated">0</strong></div>
+          <div><small>Eliminados</small><strong id="diffDeleted">0</strong></div>
+        </div>
+        <button id="refreshDashboard" class="refresh-button" type="button">Actualizar panel</button>
+        <a class="config-shortcut" href="configuracion.html">Programar mantenimiento</a>
       </article>
+    </section>
 
-      <article class="audit-panel error-panel">
-        <header>
-          <div><span>DIAGNÓSTICO</span><h2>Errores y advertencias</h2></div>
-          <b id="errorLogCount">0</b>
-        </header>
-        <div id="errorLogList" class="log-list"></div>
-      </article>
+    <section class="activity-panel">
+      <header class="activity-header">
+        <div>
+          <span>ACTIVIDAD DEL SISTEMA</span>
+          <h2>Auditoría y diagnóstico</h2>
+        </div>
+        <div class="activity-tabs" role="tablist" aria-label="Tipo de actividad">
+          <button class="is-active" type="button" data-activity-tab="excel">Excel <b id="excelLogCount">0</b></button>
+          <button type="button" data-activity-tab="mobile">Agenda <b id="mobileLogCount">0</b></button>
+          <button type="button" data-activity-tab="changes">Cambios <b id="changeLogCount">0</b></button>
+          <button type="button" data-activity-tab="errors">Errores <b id="errorLogCount">0</b></button>
+        </div>
+      </header>
+
+      <div class="activity-body">
+        <section class="activity-view is-active" data-activity-view="excel">
+          <div id="excelLogList" class="log-list"></div>
+        </section>
+        <section class="activity-view" data-activity-view="mobile">
+          <div id="mobileLogList" class="log-list"></div>
+        </section>
+        <section class="activity-view" data-activity-view="changes">
+          <div id="changeLogList" class="change-list"></div>
+        </section>
+        <section class="activity-view" data-activity-view="errors">
+          <div id="errorLogList" class="log-list"></div>
+        </section>
+      </div>
     </section>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
-  <script src="js/excel-sync.js?v=20260801-1600" defer></script>
-  <script src="js/index.js?v=20260801-1600" defer></script>
-  <script type="module" src="js/firebase-sync.js?v=20260801-1600"></script>
-  <script type="module" src="js/session-ui.js?v=20260801-1600"></script>
+  <script src="js/excel-sync.js?v=20260801-1800" defer></script>
+  <script src="js/index.js?v=20260801-1800" defer></script>
+  <script type="module" src="js/firebase-sync.js?v=20260801-1800"></script>
+  <script type="module" src="js/session-ui.js?v=20260801-1800"></script>
 </body>
 </html>

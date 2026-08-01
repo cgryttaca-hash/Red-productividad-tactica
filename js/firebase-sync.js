@@ -12,8 +12,10 @@ const LAST_HASH_KEY='firebase:lastPublishedHash';
 const LAST_REMOTE_COUNT_KEY='firebase:lastRemoteCount';
 const OWNER_EMAIL_KEY='firebase:ownerEmail';
 const CHUNK_PREFIX='agenda_chunk_';
-const CHUNK_SIZE=20;
-const VERIFY_INTERVAL_MS=60000;
+const CHUNK_SIZE=75;
+const VERIFY_INTERVAL_MS=15000;
+const CHUNK_VERIFY_INTERVAL_MS=120000;
+const LAST_CHUNK_VERIFY_KEY='firebase:lastChunkVerify';
 
 let sdkPromise=null;
 let authReadyPromise=null;
@@ -243,18 +245,49 @@ function chunksOf(events){
   for(let i=0;i<events.length;i+=CHUNK_SIZE)chunks.push(events.slice(i,i+CHUNK_SIZE));
   return chunks;
 }
-async function publishChunks(events,dataHash,previousChunkCount,fireMod){
+async function publishChunks(events,dataHash,remoteMeta,fireMod){
   const chunks=chunksOf(events);
-  const operations=chunks.map((items,index)=>({
-    type:'set',
-    ref:fireMod.doc(db,META_COLLECTION,chunkId(index)),
-    data:{index,count:items.length,dataHash,events:items,updatedAt:fireMod.serverTimestamp()}
-  }));
-  for(let index=chunks.length;index<Number(previousChunkCount||0);index++){
+  const previousHashes=Array.isArray(remoteMeta?.chunkHashes)?remoteMeta.chunkHashes:[];
+  const chunkHashes=chunks.map(items=>hash(JSON.stringify(items)));
+  const operations=[];
+
+  chunks.forEach((items,index)=>{
+    if(previousHashes[index]===chunkHashes[index]&&remoteMeta?.dataHash===dataHash)return;
+    operations.push({
+      type:'set',
+      ref:fireMod.doc(db,META_COLLECTION,chunkId(index)),
+      data:{
+        index,
+        count:items.length,
+        dataHash,
+        chunkHash:chunkHashes[index],
+        events:items,
+        updatedAt:fireMod.serverTimestamp()
+      }
+    });
+  });
+
+  for(let index=chunks.length;index<Number(remoteMeta?.chunkCount||0);index++){
     operations.push({type:'delete',ref:fireMod.doc(db,META_COLLECTION,chunkId(index))});
   }
-  await commit(operations,fireMod);
-  return chunks.length;
+
+  if(operations.length)await commit(operations,fireMod);
+  return{chunkCount:chunks.length,chunkHashes,changedChunks:operations.length};
+}
+
+async function chunkDocumentsValid(remoteMeta,fireMod){
+  const count=Number(remoteMeta?.chunkCount)||0;
+  if(!count)return false;
+  const snapshots=await Promise.all(
+    Array.from({length:count},(_,index)=>
+      fireMod.getDoc(fireMod.doc(db,META_COLLECTION,chunkId(index)))
+    )
+  );
+  return snapshots.every(snapshot=>{
+    if(!snapshot.exists())return false;
+    const data=snapshot.data()||{};
+    return data.dataHash===remoteMeta.dataHash&&Array.isArray(data.events);
+  });
 }
 async function syncEventDocuments(events,fireMod){
   const remote=await fireMod.getDocs(fireMod.collection(db,EVENTS_COLLECTION));
@@ -296,47 +329,72 @@ export async function publishIfReady(rows=null,diff=null,meta={}){
     const metaRef=fireMod.doc(db,META_COLLECTION,'publicacion');
     const remoteMetaSnap=await fireMod.getDoc(metaRef);
     const remoteMeta=remoteMetaSnap.exists()?remoteMetaSnap.data():{};
-    const chunksValid=remoteMeta.dataHash===dataHash&&Number(remoteMeta.count)===events.length&&Number(remoteMeta.chunkCount)>0;
-    const needsPublish=Boolean(meta.manual||meta.forceRemote||!chunksValid||localStorage.getItem(LAST_HASH_KEY)!==dataHash);
+    let chunksValid=remoteMeta.dataHash===dataHash&&Number(remoteMeta.count)===events.length&&Number(remoteMeta.chunkCount)>0;
+
+    const lastChunkVerify=Number(localStorage.getItem(LAST_CHUNK_VERIFY_KEY)||0);
+    const mustVerify=Boolean(meta.forceRemote||Date.now()-lastChunkVerify>CHUNK_VERIFY_INTERVAL_MS);
+    if(chunksValid&&mustVerify){
+      chunksValid=await chunkDocumentsValid(remoteMeta,fireMod);
+      localStorage.setItem(LAST_CHUNK_VERIFY_KEY,String(Date.now()));
+    }
+
+    const needsPublish=Boolean(meta.manual||!chunksValid||localStorage.getItem(LAST_HASH_KEY)!==dataHash);
 
     if(!needsPublish){
-      localStorage.setItem(LAST_REMOTE_COUNT_KEY,String(events.length));
+      localStorage.setItem(LAST_REMOTE_COUNT_KEY,String(Number(remoteMeta.count)||events.length));
+      localStorage.setItem(LAST_HASH_KEY,dataHash);
       setState('ready','Nube conectada','Sin cambios pendientes');
+      refreshMetrics();
       return true;
     }
 
     setState('syncing','Publicando Agenda Móvil',`${events.length} registros`);
-    const chunkCount=await publishChunks(events,dataHash,remoteMeta.chunkCount,fireMod);
-
-    let documentChanges=0;
-    try{documentChanges=await syncEventDocuments(events,fireMod);}
-    catch(error){
-      await systemLog({source:'Firebase',level:'warning',title:'Colección detallada no sincronizada',detail:'La Agenda Móvil continúa disponible mediante los bloques optimizados.'});
-      console.warn('Event documents fallback:',error);
-    }
-
+    const chunkResult=await publishChunks(events,dataHash,remoteMeta,fireMod);
     const publishedAt=new Date().toISOString();
+
     await fireMod.setDoc(metaRef,{
       count:events.length,
-      chunkCount,
+      chunkCount:chunkResult.chunkCount,
       chunkSize:CHUNK_SIZE,
+      chunkHashes:chunkResult.chunkHashes,
       dataHash,
       publishedAt:fireMod.serverTimestamp(),
       clientPublishedAt:publishedAt,
       fileName:meta.fileName||localStorage.getItem('excelSync:fileName')||'',
       ownerUid:currentUser.uid,
-      documentChanges
+      changedChunks:chunkResult.changedChunks
     },{merge:false});
 
-    await writeAudit(meta.auditEntries||diff?.auditEntries||[],fireMod);
     localStorage.setItem(LAST_PUBLISHED_KEY,publishedAt);
     localStorage.setItem(LAST_HASH_KEY,dataHash);
     localStorage.setItem(LAST_REMOTE_COUNT_KEY,String(events.length));
+    localStorage.setItem(LAST_CHUNK_VERIFY_KEY,String(Date.now()));
     setState('ready','Nube conectada',`${events.length} registros disponibles`);
     showMessage('Agenda Móvil actualizada.','success');
     refreshMetrics();
-    await systemLog({source:'Firebase',level:'success',title:'Agenda Móvil publicada',detail:`${events.length} registros · ${chunkCount} bloques sincronizados.`});
-    window.dispatchEvent(new CustomEvent('firebaseEventsPublished',{detail:{total:events.length,chunkCount,documentChanges}}));
+
+    const backgroundTasks=async()=>{
+      let documentChanges=0;
+      try{
+        documentChanges=await syncEventDocuments(events,fireMod);
+      }catch(error){
+        console.warn('Event documents fallback:',error);
+      }
+      try{
+        await writeAudit(meta.auditEntries||diff?.auditEntries||[],fireMod);
+      }catch(_){}
+      await systemLog({
+        source:'Firebase',
+        level:'success',
+        title:'Agenda Móvil publicada',
+        detail:`${events.length} registros · ${chunkResult.changedChunks} bloques modificados · ${documentChanges} documentos detallados.`
+      });
+    };
+    setTimeout(()=>backgroundTasks().catch(error=>console.warn('Firebase background sync:',error)),0);
+
+    window.dispatchEvent(new CustomEvent('firebaseEventsPublished',{
+      detail:{total:events.length,chunkCount:chunkResult.chunkCount,changedChunks:chunkResult.changedChunks}
+    }));
     return true;
   }catch(error){
     const message=friendlyError(error);
@@ -369,7 +427,7 @@ window.addEventListener('eventDataUpdated',event=>{
   if(!isOwner(currentUser))return;
   const detail=event.detail||{};
   publishIfReady(Array.isArray(detail.rowsData)?detail.rowsData:currentRows(),detail.diff,{
-    fileName:detail.fileName,updatedAt:detail.updatedAt,hash:detail.hash,auditEntries:detail.auditEntries,forceRemote:true
+    fileName:detail.fileName,updatedAt:detail.updatedAt,hash:detail.hash,auditEntries:detail.auditEntries,forceRemote:false
   });
 });
 window.FirebaseEventPublisher={publish:()=>publishIfReady(currentRows(),null,{manual:true,forceRemote:true}),openPanel};

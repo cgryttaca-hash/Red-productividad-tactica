@@ -424,7 +424,7 @@
     }
 
     import('./firebase-sync.js')
-      .then(module=>module.publishIfReady?.(next,diff,{fileName:file.name,updatedAt,hash:dataHash,auditEntries:diff.auditEntries,forceRemote:true}))
+      .then(module=>module.publishIfReady?.(next,diff,{fileName:file.name,updatedAt,hash:dataHash,auditEntries:diff.auditEntries,forceRemote:false}))
       .catch(error=>console.warn('Firebase deferred publish:',error));
 
     systemLog({
