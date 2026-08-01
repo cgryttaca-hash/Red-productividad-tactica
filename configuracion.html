@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es" class="auth-pending maintenance-pending" data-auth-page="admin" data-maintenance-page="configuracion">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>Configuración | Gestión de Eventos</title>
+  <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/auth-guard.js?v=20260801-1600"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-1600"></script>
+  <link rel="stylesheet" href="css/configuracion.css?v=20260801-1600">
+</head>
+<body>
+  <header class="config-header">
+    <a href="index.html">GESTIÓN DE EVENTOS</a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="usuarios.html">Usuarios</a>
+      <a class="active" href="configuracion.html">Configuración</a>
+    </nav>
+    <a class="back-link" href="index.html">Volver</a>
+  </header>
+
+  <main class="config-shell">
+    <section class="config-title">
+      <div>
+        <span>ADMINISTRACIÓN DEL SISTEMA</span>
+        <h1>Configuración</h1>
+        <p>Programa el mantenimiento temporal de una página y permite que vuelva a funcionar automáticamente cuando el temporizador llegue a cero.</p>
+      </div>
+      <div id="cloudOwnerState" class="owner-state is-pending">
+        <i></i><div><small>Firebase</small><strong>Verificando sesión…</strong><span>La configuración global necesita la cuenta propietaria.</span></div>
+      </div>
+    </section>
+
+    <section id="ownerLoginPanel" class="owner-login" hidden>
+      <div>
+        <span>CONEXIÓN DE ADMINISTRADOR</span>
+        <h2>Conectar Firebase una sola vez</h2>
+        <p>La sesión quedará guardada en este navegador.</p>
+      </div>
+      <form id="ownerLoginForm">
+        <input id="ownerEmail" type="email" autocomplete="username" required value="cgryttaca@gmail.com" placeholder="Correo Firebase">
+        <input id="ownerPassword" type="password" autocomplete="current-password" required placeholder="Contraseña Firebase">
+        <button id="ownerLoginButton" type="submit">Conectar</button>
+      </form>
+      <div id="ownerLoginMessage" class="config-message" hidden></div>
+    </section>
+
+    <section class="config-grid">
+      <article class="config-panel">
+        <header><span>NUEVO BLOQUEO</span><h2>Programar actualización</h2></header>
+        <form id="maintenanceForm" class="maintenance-form">
+          <label>
+            <span>Página</span>
+            <select id="maintenancePage">
+              <option value="index">Inicio</option>
+              <option value="eventos">Eventos</option>
+              <option value="minuta">Minuta</option>
+              <option value="agenda_movil">Agenda Móvil</option>
+              <option value="usuarios">Usuarios</option>
+            </select>
+          </label>
+          <label>
+            <span>Duración en minutos</span>
+            <input id="maintenanceMinutes" type="number" min="1" max="10080" value="30" required>
+          </label>
+          <label class="full-field">
+            <span>Mensaje para los usuarios</span>
+            <textarea id="maintenanceMessage" rows="4" maxlength="240" placeholder="Estamos realizando mejoras en esta página."></textarea>
+          </label>
+          <button id="activateMaintenance" type="submit">Activar mantenimiento</button>
+        </form>
+        <div id="configMessage" class="config-message" hidden></div>
+      </article>
+
+      <article class="config-panel status-panel">
+        <header><span>ESTADO ACTUAL</span><h2>Páginas programadas</h2></header>
+        <div id="maintenanceList" class="maintenance-list"></div>
+      </article>
+    </section>
+  </main>
+
+  <script type="module" src="js/configuracion.js?v=20260801-1600"></script>
+</body>
+</html>

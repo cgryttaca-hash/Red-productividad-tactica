@@ -1,0 +1,28 @@
+CORRECCIÓN ESPECÍFICA APLICADA
+================================
+
+Archivos de Eventos y Minuta:
+- No fueron modificados.
+- Se verificó su integridad mediante SHA-256.
+
+Index:
+- Eliminado el banner duplicado.
+- Navegación solamente en la barra superior.
+- Tarjetas y textos más grandes y visibles.
+- Distribución amplia para monitores.
+- Actualización visual cada 15 segundos.
+
+Agenda móvil:
+- Eliminado el formulario de correo y contraseña.
+- Acceso automático mediante sesión anónima de Firebase.
+- Actualización en tiempo real y comprobación adicional cada 15 segundos.
+- Lista reducida a Fecha, Empresa y Cantidad de personas.
+- Detalle completo al seleccionar el evento.
+- Horario AYB y Descripción Alimentación permanecen lado a lado y en ese orden.
+- Textos completos, saltos de línea preservados.
+- Vista de escritorio a pantalla completa y vista móvil adaptada.
+
+Excel:
+- La referencia del archivo vinculado se conserva.
+- Comprobación automática cada 15 segundos.
+- Solo procesa y publica cuando detecta cambios.
