@@ -12,17 +12,17 @@ service cloud.firestore {
     }
 
     match /eventos_publicos/{eventoId} {
-      allow read: if signedIn();
+      allow read: if true;
       allow create, update, delete: if isOwner();
     }
 
     match /eventos_meta/{documentoId} {
-      allow read: if signedIn();
+      allow read: if true;
       allow create, update, delete: if isOwner();
     }
 
     match /eventos_cambios/{cambioId} {
-      allow read: if signedIn();
+      allow read: if true;
       allow create, update, delete: if isOwner();
     }
 
