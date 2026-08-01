@@ -1,0 +1,52 @@
+VERSIÓN OPTIMIZADA — 2026-08-01
+================================
+
+MÓDULOS CONSERVADOS SIN REDISEÑO
+- eventos.html
+- js/eventos.js
+- css/eventos.css
+- minuta.html
+- js/minuta.js
+- css/minuta.css
+
+MEJORAS APLICADAS
+1. INDEX
+   - Recupera una escala amplia para monitores de escritorio.
+   - Calendario, textos, controles y tarjetas más grandes.
+   - Aprovecha hasta 1640 px de ancho.
+   - Controles de Excel y Firebase ubicados fuera de la navegación principal.
+
+2. EXCEL
+   - Conserva el selector y el File System Access API.
+   - Comprueba primero nombre, tamaño y fecha de modificación.
+   - No vuelve a interpretar el archivo cuando no existen cambios.
+   - Comprobación cada 15 segundos, al recuperar foco y al regresar a la pestaña.
+   - Reconocimiento automático de hojas mensuales.
+   - Identificadores estables por hoja y fila.
+   - Calcula altas, modificaciones y eliminaciones.
+   - Solo notifica a los módulos cuando los datos realmente cambian.
+   - Mantiene eventData en localStorage para conservar compatibilidad con Eventos y Minuta.
+
+3. FIREBASE
+   - Carga diferida para no retrasar la apertura inicial.
+   - Sesión del propietario persistente.
+   - Publicación incremental: solo documentos nuevos o modificados.
+   - El historial es complementario y no bloquea la publicación principal.
+   - Agenda móvil recibe cambios mediante onSnapshot.
+
+4. AGENDA MÓVIL
+   - Rediseño completo con tipografía y tarjetas más grandes.
+   - Secciones separadas por fecha, segundo piso y tercer piso.
+   - Segundo piso ordenado: Salón 1, Salón 2, Salón 3, Salón 2+3 y Completo.
+   - Tercer piso ordenado por número/nombre de salón.
+   - Respeta el orden del Excel:
+       Horario AYB
+       Descripción Alimentación
+   - Los dos campos permanecen juntos dentro del mismo bloque de servicio.
+   - Vista de detalle respeta el orden original de las columnas del Excel.
+   - Solo lectura; no contiene funciones de edición.
+
+IMPORTANTE SOBRE FIRESTORE
+El archivo firestore.rules está incluido. Una página estática de GitHub Pages no puede
+cambiar por sí sola las reglas remotas del proyecto Firebase. Si las reglas publicadas
+son diferentes, deben publicarse una vez desde Firebase Console o Firebase CLI.
