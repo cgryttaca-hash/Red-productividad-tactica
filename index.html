@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" class="auth-pending" data-auth-page="protected">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="Panel operativo de gestión de eventos.">
+  <title>Gestión de Eventos</title>
+  <style>html.auth-pending body{visibility:hidden}</style>
+  <script src="js/auth-guard.js?v=20260801-1200"></script>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-1200">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-1200">
+  <link rel="stylesheet" href="css/index.css?v=20260801-1200">
+</head>
+<body>
+  <div id="loader" aria-hidden="true"><span class="loader-spinner"></span></div>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <span class="brand-copy">
+          <strong>GESTIÓN DE EVENTOS</strong>
+          <small>Centro operativo</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="active" href="index.html" aria-current="page"><span>Inicio</span></a>
+        <a href="eventos.html"><span>Eventos</span></a>
+        <a href="minuta.html"><span>Minuta</span></a>
+        <a href="agenda_movil.html" target="_blank" rel="noopener"><span>Agenda móvil</span></a>
+        <a id="usersLink" href="usuarios.html" hidden><span>Usuarios</span></a>
+      </nav>
+
+      <div class="header-tools">
+        <div class="session-chip">
+          <div>
+            <small id="sessionUserRole">Usuario</small>
+            <strong id="sessionUserName">—</strong>
+          </div>
+          <button id="logoutButton" type="button">Salir</button>
+        </div>
+        <div class="clock-block" aria-label="Fecha y hora actuales">
+          <span id="todayLabel">--</span>
+          <strong id="reloj">--:--</strong>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-shell">
+    <section class="dashboard-intro">
+      <div>
+        <span class="eyebrow">Panel principal</span>
+        <h1>Operación, sincronización y seguimiento</h1>
+        <p>Consulta la programación, supervisa la fuente de datos y verifica la publicación de la Agenda Móvil desde un solo lugar.</p>
+      </div>
+      <div class="intro-actions">
+        <a href="eventos.html">Abrir Eventos</a>
+        <a href="minuta.html">Abrir Minuta</a>
+      </div>
+    </section>
+
+    <section class="system-grid" aria-label="Estado del sistema">
+      <article class="system-card">
+        <div class="system-card-heading">
+          <div>
+            <small>Fuente de información</small>
+            <h2>Archivo maestro</h2>
+          </div>
+          <span class="card-number">01</span>
+        </div>
+        <p>Vinculación persistente y comprobación automática del Excel cada 15 segundos.</p>
+        <div class="system-slot" data-excel-sync-slot></div>
+      </article>
+
+      <article class="system-card">
+        <div class="system-card-heading">
+          <div>
+            <small>Sincronización externa</small>
+            <h2>Firebase</h2>
+          </div>
+          <span class="card-number">02</span>
+        </div>
+        <p>Publicación incremental para que la Agenda Móvil reciba cambios en tiempo real.</p>
+        <div class="system-slot" data-firebase-sync-slot></div>
+      </article>
+
+      <article class="system-card data-card">
+        <div class="system-card-heading">
+          <div>
+            <small>Estado local</small>
+            <h2>Información cargada</h2>
+          </div>
+          <span class="card-number">03</span>
+        </div>
+        <div class="data-summary">
+          <div><small>Eventos disponibles</small><strong id="dashboardEventCount">0</strong></div>
+          <div><small>Última actualización</small><strong id="dashboardUpdatedAt">Sin carga</strong></div>
+        </div>
+        <strong id="dataStatusIndicator" class="data-status is-outdated"><span></span>Datos sin verificar</strong>
+      </article>
+    </section>
+
+    <section class="dashboard-content">
+      <article class="dashboard-panel operations-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Agenda operativa</span>
+            <h2 id="operationsTitle">Eventos de hoy</h2>
+            <p id="operationsSubtitle">Programación organizada por piso.</p>
+          </div>
+        </div>
+        <div id="operationsList" class="operations-list"></div>
+      </article>
+
+      <article class="dashboard-panel audit-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Auditoría automática</span>
+            <h2>Historial de cambios</h2>
+            <p>Equipo, usuario, celda y valores modificados en el Excel.</p>
+          </div>
+          <button id="refreshAudit" type="button">Actualizar</button>
+        </div>
+        <div id="auditList" class="audit-list"></div>
+      </article>
+    </section>
+
+    <section class="dashboard-panel upcoming-panel">
+      <div class="panel-heading">
+        <div>
+          <span class="eyebrow">Próxima programación</span>
+          <h2>Eventos próximos</h2>
+          <p>Primeros eventos posteriores a la fecha actual.</p>
+        </div>
+      </div>
+      <div id="upcomingList" class="upcoming-grid"></div>
+    </section>
+  </main>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+  <script src="js/excel-sync.js?v=20260801-1200" defer></script>
+  <script src="js/index.js?v=20260801-1200" defer></script>
+  <script type="module" src="js/firebase-sync.js?v=20260801-1200"></script>
+  <script type="module" src="js/session-ui.js?v=20260801-1200"></script>
+</body>
+</html>

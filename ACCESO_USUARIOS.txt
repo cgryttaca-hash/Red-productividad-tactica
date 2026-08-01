@@ -1,0 +1,22 @@
+ACCESO Y USUARIOS
+==================
+
+Primer acceso:
+  Usuario: Admin
+  Contraseña: Admin2026
+
+Funcionamiento:
+- El Index solicita acceso solamente la primera vez en cada navegador/equipo.
+- La sesión permanece guardada hasta pulsar Salir o borrar los datos del navegador.
+- El módulo Usuarios permite crear, activar, desactivar, eliminar y cambiar contraseñas.
+- Los usuarios se guardan localmente en ese navegador. No se envían a Firebase.
+- La Agenda Móvil no solicita esta contraseña y continúa leyendo Firebase en tiempo real.
+
+Recuperación:
+- En login.html pulsa Recuperar contraseña.
+- Escribe RESTABLECER.
+- La cuenta Admin vuelve a usar Admin2026.
+
+Nota de seguridad:
+Este control protege la navegación normal dentro de una aplicación estática de GitHub Pages.
+No sustituye una autenticación de servidor para información altamente confidencial.

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  <title>Acceso | Gestión de Eventos</title>
+  <link rel="stylesheet" href="css/login.css?v=20260801-1200">
+</head>
+<body>
+  <main class="login-shell">
+    <section class="login-side">
+      <span class="login-kicker">CONTROL DE ACCESO</span>
+      <h1>Gestión de Eventos</h1>
+      <p>Accede al centro operativo desde este equipo. La sesión se recordará en este navegador hasta que cierres sesión.</p>
+      <div class="login-points">
+        <span>Archivo maestro vinculado</span>
+        <span>Sincronización Firebase</span>
+        <span>Agenda móvil en tiempo real</span>
+      </div>
+    </section>
+
+    <section class="login-card">
+      <div class="login-card-heading">
+        <span>INICIO DE SESIÓN</span>
+        <h2>Bienvenido</h2>
+        <p>Ingresa tu usuario y contraseña para continuar.</p>
+      </div>
+
+      <form id="loginForm">
+        <label>
+          <span>Usuario</span>
+          <input id="username" name="username" autocomplete="username" required placeholder="Escribe tu usuario">
+        </label>
+        <label>
+          <span>Contraseña</span>
+          <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••">
+        </label>
+        <button id="loginButton" type="submit">Ingresar al sistema</button>
+      </form>
+
+      <div id="loginMessage" class="login-message" hidden></div>
+
+      <button id="openRecovery" class="recovery-link" type="button">Recuperar contraseña</button>
+
+      <div class="first-access">
+        <small></small>
+        <strong id="defaultCredentials"></strong>
+        <span></span>
+      </div>
+    </section>
+  </main>
+
+  <div id="recoveryModal" class="recovery-modal" aria-hidden="true">
+    <div class="recovery-dialog" role="dialog" aria-modal="true" aria-labelledby="recoveryTitle">
+      <button id="closeRecovery" type="button" class="recovery-close">×</button>
+      <span>RECUPERACIÓN LOCAL</span>
+      <h2 id="recoveryTitle">Restablecer cuenta Admin</h2>
+      <p>Esta opción restablece la cuenta principal a la contraseña inicial <strong>Admin2026</strong>.</p>
+      <form id="recoveryForm">
+        <label>
+          <span>Confirmación</span>
+          <input id="recoveryConfirmation" required placeholder="Escribe RESTABLECER">
+        </label>
+        <button type="submit">Restablecer contraseña</button>
+      </form>
+      <div id="recoveryMessage" class="recovery-message"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/login.js?v=20260801-1200"></script>
+</body>
+</html>

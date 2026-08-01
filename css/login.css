@@ -1,0 +1,39 @@
+:root{--bg:#050505;--surface:#111114;--surface2:#18181c;--line:#303038;--text:#fff;--muted:#a6a6b0;--danger:#ff9b9b;--success:#74ddb3}
+*{box-sizing:border-box}
+html{font-family:Inter,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--text)}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 20% 10%,rgba(255,255,255,.08),transparent 28%),#050505}
+button,input{font:inherit}
+.login-shell{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.65fr);align-items:center;gap:50px;width:min(1320px,100%);margin:auto;padding:48px}
+.login-side{max-width:700px}
+.login-kicker,.login-card-heading>span,.recovery-dialog>span{font-size:10px;font-weight:900;letter-spacing:.16em;color:#c2c2ca}
+.login-side h1{margin:14px 0 16px;font-size:clamp(46px,6vw,82px);line-height:.95;letter-spacing:-.055em}
+.login-side p{max-width:620px;color:var(--muted);font-size:16px;line-height:1.7}
+.login-points{display:flex;flex-wrap:wrap;gap:9px;margin-top:28px}
+.login-points span{padding:10px 13px;border:1px solid var(--line);border-radius:999px;background:#101013;color:#d8d8df;font-size:11px;font-weight:750}
+.login-card{padding:34px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(160deg,#17171b,#0e0e11);box-shadow:0 30px 90px rgba(0,0,0,.42)}
+.login-card-heading h2{margin:8px 0 6px;font-size:32px}
+.login-card-heading p{margin:0;color:var(--muted);font-size:13px}
+#loginForm{display:grid;gap:14px;margin-top:27px}
+#loginForm label,.recovery-dialog label{display:grid;gap:7px}
+#loginForm label>span,.recovery-dialog label>span{color:#b8b8c1;font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.08em}
+#loginForm input,.recovery-dialog input{width:100%;min-height:50px;padding:0 14px;border:1px solid #34343d;border-radius:12px;background:#0a0a0c;color:#fff;outline:none}
+#loginForm input:focus,.recovery-dialog input:focus{border-color:#777783;box-shadow:0 0 0 3px rgba(255,255,255,.05)}
+#loginButton,.recovery-dialog form button{min-height:52px;border:0;border-radius:12px;background:#fff;color:#070707;font-weight:900;cursor:pointer}
+#loginButton:disabled{opacity:.55}
+.login-message,.recovery-message{margin-top:13px;padding:11px 12px;border-radius:10px;font-size:12px;line-height:1.45}
+.login-message.is-error,.recovery-message.is-error{border:1px solid #56363a;background:#281619;color:#ffb2b7}
+.recovery-message.is-success{border:1px solid #295343;background:#10271f;color:#8be7bd}
+.recovery-link{width:100%;margin-top:12px;min-height:42px;border:1px solid #34343d;border-radius:11px;background:transparent;color:#d8d8df;font-weight:800;cursor:pointer}
+.first-access{margin-top:22px;padding:15px;border:1px solid #2f2f36;border-radius:13px;background:#0b0b0e;display:grid;gap:4px}
+.first-access small{font-size:8px;color:var(--muted);text-transform:uppercase;font-weight:900;letter-spacing:.1em}
+.first-access strong{font-size:13px}
+.first-access span{font-size:10px;color:var(--muted)}
+.recovery-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}
+.recovery-modal.is-open{display:flex}
+.recovery-dialog{position:relative;width:min(500px,100%);padding:28px;border:1px solid var(--line);border-radius:22px;background:#111114;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+.recovery-close{position:absolute;right:14px;top:14px;width:36px;height:36px;border:0;border-radius:10px;background:#24242a;color:#fff;font-size:24px;cursor:pointer}
+.recovery-dialog h2{margin:9px 0 8px;font-size:25px}
+.recovery-dialog p{color:var(--muted);font-size:13px;line-height:1.55}
+.recovery-dialog form{display:grid;gap:12px;margin-top:20px}
+@media(max-width:900px){.login-shell{grid-template-columns:1fr;gap:30px;padding:28px}.login-side h1{font-size:52px}.login-card{max-width:600px;width:100%}}
+@media(max-width:520px){.login-shell{padding:18px}.login-side h1{font-size:42px}.login-side p{font-size:14px}.login-card{padding:24px 20px;border-radius:18px}}
