@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f8fb">
+  <title>Gestión de Eventos</title>
+  <link rel="stylesheet" href="css/index.css?v=20260730-quota1">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260730-quota1">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260730-quota1">
+</head>
+<body>
+  <div id="loader" aria-hidden="true"><span class="loader-spinner"></span></div>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="Inicio">
+        <span class="brand-mark">GE</span>
+        <span class="brand-copy"><strong>Gestión de Eventos</strong><small>Control operativo</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="active" href="index.html" aria-current="page">Inicio</a>
+        <a href="eventos.html">Eventos</a>
+        <a href="minuta.html">Minuta</a>
+      </nav>
+      <div class="header-tools" data-sync-slot>
+        <strong id="dataStatusIndicator" class="data-status is-outdated"><i></i><span>Datos sin verificar</span></strong>
+        <div class="clock-block"><span id="todayLabel">—</span><strong id="reloj">—</strong></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero-panel">
+      <div>
+        <span class="eyebrow">Actividad del sistema</span>
+        <h1>Centro de actualizaciones</h1>
+        <p>Consulta cada cargue, quién lo publicó, desde qué equipo y qué información cambió antes de abrir la operación.</p>
+      </div>
+      <div class="hero-actions">
+        <a class="action primary" href="eventos.html"><strong>Abrir eventos</strong><span>Consultar y filtrar la hoja</span></a>
+        <a class="action secondary" href="minuta.html"><strong>Abrir minuta</strong><span>Programación por fecha</span></a>
+      </div>
+    </section>
+
+    <section class="status-grid">
+      <article class="status-card">
+        <small>Equipo autorizado</small>
+        <strong id="currentDeviceName">Sin identificar</strong>
+        <span>Este nombre aparecerá en el historial.</span>
+      </article>
+      <article class="status-card">
+        <small>Último archivo local</small>
+        <strong id="localUpdatedAt">Sin carga</strong>
+        <span id="localFileName">Archivo maestro pendiente</span>
+      </article>
+      <article class="status-card">
+        <small>Última publicación móvil</small>
+        <strong id="cloudPublishedAt">Sin publicación</strong>
+        <span id="cloudPublishedCount">Agenda móvil pendiente</span>
+      </article>
+    </section>
+
+    <section class="activity-card">
+      <div class="section-heading">
+        <div><span class="eyebrow">Trazabilidad</span><h2>Historial de cambios</h2><p>Se muestran cargues, eventos nuevos, modificaciones y eliminaciones.</p></div>
+        <div class="activity-filters">
+          <button class="is-active" data-activity-filter="all" type="button">Todos</button>
+          <button data-activity-filter="cargue" type="button">Cargues</button>
+          <button data-activity-filter="actualizado" type="button">Modificados</button>
+          <button data-activity-filter="creado" type="button">Nuevos</button>
+          <button data-activity-filter="eliminado" type="button">Eliminados</button>
+        </div>
+      </div>
+      <div class="activity-summary"><strong id="updateCount">0</strong><span>registros visibles</span></div>
+      <div id="activityList" class="activity-list">
+        <div class="activity-empty"><strong>Esperando actividad</strong><span>El historial aparecerá después de publicar el primer cargue.</span></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="js/event-store.js?v=20260730-quota1"></script>
+  <script src="js/excel-sync.js?v=20260730-quota1"></script>
+  <script src="js/index.js?v=20260730-quota1"></script>
+  <script type="module" src="js/firebase-owner-sync.js?v=20260730-quota1"></script>
+  <script type="module" src="js/activity-feed.js?v=20260730-quota1"></script>
+  <script type="module" src="js/change-notifications.js?v=20260730-quota1"></script>
+</body>
+</html>
