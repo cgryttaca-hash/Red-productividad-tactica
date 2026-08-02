@@ -25,17 +25,45 @@ function render(){
   const until=new Date(item.until).getTime();
   const remaining=Math.max(0,until-Date.now());
   if(!remaining){goBack();return;}
+
   const total=Math.max(1000,Number(item.durationMs)||remaining);
+  const completed=Math.min(100,Math.max(0,100-(remaining/total)*100));
   const hours=Math.floor(remaining/3600000);
   const minutes=Math.floor((remaining%3600000)/60000);
   const seconds=Math.floor((remaining%60000)/1000);
+  const totalMinutes=Math.max(1,Math.ceil(remaining/60000));
+  const moduleLabel=labels[page]||'Página';
+
   document.getElementById('hours').textContent=String(hours).padStart(2,'0');
   document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');
   document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
-  document.getElementById('maintenanceTitle').textContent=`${labels[page]||'Página'} en actualización`;
-  document.getElementById('maintenanceMessage').textContent=item.message||'Esta sección estará disponible nuevamente cuando finalice el temporizador.';
+  document.getElementById('maintenanceTitle').textContent=`${moduleLabel} en actualización`;
+  document.getElementById('maintenanceModule').textContent=moduleLabel;
+  document.getElementById('maintenanceMessage').textContent=item.message||'Estamos aplicando mejoras técnicas para ofrecer una experiencia más rápida y estable.';
   document.getElementById('maintenanceStatus').textContent=`Regreso automático: ${new Date(until).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'})}`;
-  document.getElementById('progressBar').style.width=`${Math.min(100,Math.max(0,(remaining/total)*100))}%`;
+  document.getElementById('progressBar').style.width=`${completed.toFixed(1)}%`;
+  document.getElementById('progressPercent').textContent=`${Math.round(completed)}%`;
+  document.getElementById('estimatedTime').textContent=hours?`${hours} h ${minutes} min`:`${totalMinutes} min`;
+
+  const now=new Date();
+  [1,2,3,4,5].forEach((index)=>{
+    const value=new Date(now.getTime()-(5-index)*60000);
+    const target=document.getElementById(`activityTime${index}`);
+    if(target)target.textContent=value.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
+  });
+
+  const cpu=Math.round(35+completed*.18);
+  const memory=Math.round(48+completed*.15);
+  const disk=Math.round(28+completed*.12);
+  const network=Math.round(62+completed*.24);
+  [
+    ['cpu',cpu],['memory',memory],['disk',disk],['network',network]
+  ].forEach(([name,value])=>{
+    const label=document.getElementById(`${name}Value`);
+    const bar=document.getElementById(`${name}Bar`);
+    if(label)label.textContent=`${value}%`;
+    if(bar)bar.style.width=`${value}%`;
+  });
 }
 async function connect(){
   config=readCache()||{pages:{}};

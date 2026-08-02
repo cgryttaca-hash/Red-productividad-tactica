@@ -144,12 +144,37 @@ function formatDateTime(value){
   return Number.isNaN(date.getTime())?'—':date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
 }
 function serviceValue(value,fallback='Sin registrar'){return text(value).trim()||fallback}
+function compactSpaces(value){
+  return text(value)
+    .replace(/\u00a0/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
 function serviceLines(value){
   return text(value)
     .replace(/\r/g,'')
     .split(/\n+/)
-    .map(item=>item.trim())
+    .map(compactSpaces)
     .filter(Boolean);
+}
+function scheduleEntries(value){
+  const source=text(value).replace(/\r/g,'\n').trim();
+  if(!source)return[];
+  const timeStart=/^\s*\d{1,2}:\d{2}\s*(?:A\.?\s*M\.?|P\.?\s*M\.?)\s*-/i;
+  const entries=[];
+  let current='';
+  serviceLines(source).forEach(line=>{
+    if(timeStart.test(line)){
+      if(current)entries.push(compactSpaces(current));
+      current=line;
+    }else if(current){
+      current=`${current} ${line}`;
+    }else{
+      current=line;
+    }
+  });
+  if(current)entries.push(compactSpaces(current));
+  return entries;
 }
 function meaningfulFood(value){
   const source=normalize(value).toUpperCase();
@@ -161,21 +186,26 @@ function hasFood(event){
 }
 function foodPairs(event){
   if(!hasFood(event))return[];
-  const times=serviceLines(event.horarioAyB);
+  const schedules=scheduleEntries(event.horarioAyB);
   const descriptions=serviceLines(event.descripcionAlimentacion);
-  const total=Math.max(times.length,descriptions.length,1);
+  const total=Math.max(schedules.length,descriptions.length,1);
   return Array.from({length:total},(_,index)=>({
-    time:times[index]||'',
-    description:descriptions[index]||''
+    time:compactSpaces(schedules[index]||'Servicio'),
+    description:compactSpaces(descriptions[index]||'Alimentación registrada')
   })).filter(item=>item.time||item.description);
+}
+function foodStatusMarkup(event){
+  return hasFood(event)
+    ?'<span class="food-status is-with"><i></i>Con alimentación</span>'
+    :'<span class="food-status is-without"><i></i>Sin alimentación</span>';
 }
 function foodMarkup(event){
   const pairs=foodPairs(event);
-  if(!pairs.length)return'<span class="food-empty">Sin alimentación</span>';
+  if(!pairs.length)return'<div class="food-empty-detail">Sin alimentación registrada para este evento.</div>';
   return`<div class="food-combo">${pairs.map(item=>`
     <div class="food-line">
-      ${item.time?`<b>${esc(item.time)}</b>`:'<b>Servicio</b>'}
-      <span>${esc(item.description||'Alimentación registrada')}</span>
+      <b>${esc(item.time)}</b>
+      <span>${esc(item.description)}</span>
     </div>`).join('')}</div>`;
 }
 function dataHash(events){
@@ -216,15 +246,26 @@ function filteredEvents(){
 function eventRows(events){
   return`<div class="event-table">
     <div class="event-table-header" aria-hidden="true">
-      <span>Fecha</span><span>Empresa</span><span>Ubicación</span><span>Acomodación</span><span>Alimentación</span><span>Personas</span>
+      <span>Empresa</span><span>Salón y piso</span><span>Acomodación</span><span>Personas</span><span>Servicio</span>
     </div>
     ${events.map(event=>`<button class="event-summary-row" type="button" data-id="${esc(event.id)}">
-      <span class="event-summary-date">${esc(formatDate(event.fechaISO,{weekday:'short',day:'2-digit',month:'short',year:'numeric'}))}</span>
-      <span class="event-summary-company">${esc(event.empresa)}</span>
-      <span class="event-summary-location"><strong>${esc(event.escenario)}</strong><small>${esc(event.piso)}</small></span>
-      <span class="event-summary-layout"><strong>Acomodación del espacio</strong><small>${esc(serviceValue(event.acomodacion,'Sin registrar'))}</small></span>
-      <span class="event-summary-food">${foodMarkup(event)}</span>
-      <span class="event-summary-pax"><strong>${event.cantidadPersonas.toLocaleString('es-CO')}</strong><small>personas</small></span>
+      <span class="event-summary-company">
+        <strong>${esc(event.empresa)}</strong>
+        <small>Ver detalle completo</small>
+      </span>
+      <span class="event-summary-location">
+        <strong>${esc(event.escenario)}</strong>
+        <small>${esc(event.piso)}</small>
+      </span>
+      <span class="event-summary-layout">
+        <small>Acomodación</small>
+        <strong>${esc(serviceValue(event.acomodacion,'Sin registrar'))}</strong>
+      </span>
+      <span class="event-summary-pax">
+        <strong>${event.cantidadPersonas.toLocaleString('es-CO')}</strong>
+        <small>personas</small>
+      </span>
+      <span class="event-summary-food">${foodStatusMarkup(event)}</span>
     </button>`).join('')}
   </div>`;
 }
@@ -281,7 +322,7 @@ function openDetail(event){
     ${normalField('Horario del evento',event.horarioEvento)}
     ${normalField('Cantidad de personas',event.cantidadPersonas.toLocaleString('es-CO'))}
     ${normalField('Acomodación del espacio',event.acomodacion)}
-    <div class="detail-food-card"><small>Alimentación</small>${foodMarkup(event)}</div>
+    <div class="detail-food-card"><div class="detail-food-heading"><small>Alimentación</small>${foodStatusMarkup(event)}</div>${foodMarkup(event)}</div>
     ${normalField('Modalidad de servicio',event.modalidadServicio)}
     ${normalField('Medio de pago',event.medioPago)}
     ${normalField('Estado',event.estado)}
