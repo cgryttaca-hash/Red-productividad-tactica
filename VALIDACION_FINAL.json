@@ -1,0 +1,16 @@
+{
+  "version": "3.0.0",
+  "javascript_validated": 37,
+  "html_validated": 15,
+  "css_validated": 13,
+  "pwa_assets_validated": 69,
+  "protected_modules_unchanged": [
+    "eventos.html",
+    "js/eventos.js",
+    "css/eventos.css",
+    "minuta.html",
+    "js/minuta.js",
+    "css/minuta.css"
+  ],
+  "result": "OK"
+}

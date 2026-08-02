@@ -17,8 +17,10 @@ function writeCache(value){
 function activeConfig(config){
   const item=config?.pages?.[pageId];
   if(!item?.active || !item.until) return null;
-  const until=new Date(item.until);
-  if(Number.isNaN(until.getTime()) || until.getTime()<=Date.now()) return null;
+  const now=Date.now();
+  const startsAt=item.startsAt?new Date(item.startsAt).getTime():0;
+  const until=new Date(item.until).getTime();
+  if(Number.isNaN(until) || until<=now || (startsAt && startsAt>now)) return null;
   return {...item,until:item.until};
 }
 function release(){

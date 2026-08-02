@@ -48,6 +48,7 @@ async function loadSdk(){
         import(`${SDK}/firebase-firestore.js`)
       ]);
       const app=appMod.getApps().length?appMod.getApps()[0]:appMod.initializeApp(FIREBASE_CONFIG);
+      import('./firebase-app-check.js').then(module=>module.initializeAppCheck()).catch(()=>{});
       auth=authMod.getAuth(app);
       db=fireMod.getFirestore(app);
       if(!auth||!db)throw new Error('Firebase no pudo inicializarse.');
@@ -316,6 +317,7 @@ async function writeAudit(entries,fireMod){
 
 export async function publishIfReady(rows=null,diff=null,meta={}){
   if(publishing)return false;
+  const operationStarted=performance.now();
   publishing=true;updateUi();
   try{
     const {fireMod}=await loadSdk();
@@ -345,6 +347,9 @@ export async function publishIfReady(rows=null,diff=null,meta={}){
       localStorage.setItem(LAST_HASH_KEY,dataHash);
       setState('ready','Nube conectada','Sin cambios pendientes');
       refreshMetrics();
+      import('./performance-monitor.js').then(module=>module.markOperation(
+        'Comprobación Firebase sin cambios',performance.now()-operationStarted,{rows:events.length}
+      )).catch(()=>{});
       return true;
     }
 
@@ -395,9 +400,16 @@ export async function publishIfReady(rows=null,diff=null,meta={}){
     window.dispatchEvent(new CustomEvent('firebaseEventsPublished',{
       detail:{total:events.length,chunkCount:chunkResult.chunkCount,changedChunks:chunkResult.changedChunks}
     }));
+    import('./performance-monitor.js').then(module=>module.markOperation(
+      'Publicación incremental Firebase',performance.now()-operationStarted,
+      {rows:events.length,chunks:chunkResult.changedChunks,totalChunks:chunkResult.chunkCount}
+    )).catch(()=>{});
     return true;
   }catch(error){
     const message=friendlyError(error);
+    import('./performance-monitor.js').then(module=>module.markOperation(
+      'Error de publicación Firebase',performance.now()-operationStarted,{message}
+    )).catch(()=>{});
     setState('error','No fue posible publicar',message);
     await systemLog({source:'Firebase',level:'error',title:'Error de publicación',detail:message});
     if(meta.manual){openPanel();showMessage(message,'error');}

@@ -10,7 +10,8 @@ const labels={
   eventos:'Eventos',
   minuta:'Minuta',
   agenda_movil:'Agenda Móvil',
-  usuarios:'Usuarios'
+  usuarios:'Usuarios',
+  diagnostico:'Diagnóstico',respaldos:'Respaldos',auditoria:'Auditoría',equipos:'Equipos',validacion:'Validación',laboratorio:'Laboratorio'
 };
 let config=null;
 let timer=null;
@@ -22,8 +23,11 @@ function goBack(){location.replace(returnPage);}
 function render(){
   const item=currentItem();
   if(!item?.active || !item.until){goBack();return;}
+  const nowTime=Date.now();
+  const startsAt=item.startsAt?new Date(item.startsAt).getTime():0;
+  if(startsAt&&startsAt>nowTime){goBack();return;}
   const until=new Date(item.until).getTime();
-  const remaining=Math.max(0,until-Date.now());
+  const remaining=Math.max(0,until-nowTime);
   if(!remaining){goBack();return;}
 
   const total=Math.max(1000,Number(item.durationMs)||remaining);

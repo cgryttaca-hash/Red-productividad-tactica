@@ -1,0 +1,11 @@
+GESTIÓN DE EVENTOS
+Versión: 3.0.0
+Fecha: 2026-08-01
+Nombre: Plataforma operativa estable
+
+Módulos protegidos:
+- Eventos
+- Minuta
+
+Objetivo:
+Estabilidad, diagnóstico, respaldo, auditoría, PWA y operación móvil.

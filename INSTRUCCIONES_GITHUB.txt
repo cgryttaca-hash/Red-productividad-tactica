@@ -1,25 +1,28 @@
-ACTUALIZACIÓN DEL REPOSITORIO
-=============================
+PUBLICACIÓN EN GITHUB PAGES
+===========================
 
-1. Descomprime este paquete.
-2. Copia todo el contenido de la carpeta Red-productividad-tactica-main dentro de tu repositorio.
-3. Reemplaza los archivos existentes cuando GitHub lo solicite.
-4. Confirma los cambios y espera a que GitHub Pages publique la nueva versión.
-5. Abre el enlace de GitHub Pages en Google Chrome o Microsoft Edge.
-6. La primera vez, selecciona el archivo Excel maestro.
-7. Conserva el Excel en la misma carpeta y con el mismo nombre.
+1. Descomprime el ZIP.
+2. Abre la carpeta Red-productividad-tactica-main.
+3. Sube TODO el contenido a la raíz del repositorio.
+4. Reemplaza los archivos actuales.
+5. Confirma el commit.
+6. Espera la publicación de GitHub Pages.
+7. Abre el sitio y presiona Ctrl + F5 una sola vez.
 
-FUNCIONAMIENTO
---------------
-- Comprueba el Excel al abrir la página.
-- Comprueba nuevamente al regresar a la pestaña.
-- Comprueba cambios cada 30 segundos.
-- Solo procesa el archivo cuando cambia su tamaño o fecha de modificación.
-- Actualiza Inicio, Eventos y Minuta.
-- El archivo no se sube a GitHub ni se envía a internet.
+FIREBASE
+--------
+Después de subir los archivos:
+1. Abre Firebase Console.
+2. Firestore Database > Reglas.
+3. Copia el contenido de firestore.rules.
+4. Presiona Publicar.
 
-IMPORTANTE
-----------
-La selección inicial no puede omitirse porque los navegadores bloquean el acceso directo
-a los archivos del computador. En algunos equipos el navegador puede volver a pedir permiso;
-en ese caso, pulsa "Autorizar acceso".
+VERIFICACIÓN
+------------
+Abre:
+- /diagnostico.html
+- /laboratorio.html
+- /agenda_movil.html
+
+No borres los datos del navegador antes de comprobar que el sistema recuperó
+el archivo Excel y la sesión.

@@ -26,6 +26,8 @@ function showWelcome(session){
 
 async function initialize(){
   await ensureDefaultAdmin();
+  const revoked=localStorage.getItem('rptRevokedMessageV1');
+  if(revoked){message(revoked,'error');localStorage.removeItem('rptRevokedMessageV1');}
   const session=getSession();
   if(session){
     location.replace(returnPage);

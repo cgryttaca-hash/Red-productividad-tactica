@@ -117,7 +117,12 @@ export function isAuthenticated(){
 }
 
 export function logout(){
+  const session=getSession();
   localStorage.removeItem(SESSION_KEY);
+  import('./system-log.js').then(module=>module.addSystemLog({
+    source:'Acceso',level:'info',title:'Sesión cerrada',
+    detail:session?`${session.displayName||session.username} cerró sesión.`:'Sesión finalizada.'
+  })).catch(()=>{});
 }
 
 export async function login(username, password){
@@ -144,6 +149,15 @@ export async function login(username, password){
     loginAt:now
   };
   writeJson(SESSION_KEY, session);
+  if(!localStorage.getItem('rpt:deviceName')){
+    const platform=navigator.userAgentData?.platform||navigator.platform||'Equipo';
+    const browser=navigator.userAgent.includes('Edg/')?'Edge':navigator.userAgent.includes('Chrome/')?'Chrome':navigator.userAgent.includes('Firefox/')?'Firefox':'Navegador';
+    localStorage.setItem('rpt:deviceName',`${platform} · ${browser}`);
+  }
+  import('./system-log.js').then(module=>module.addSystemLog({
+    source:'Acceso',level:'success',title:'Inicio de sesión',
+    detail:`${user.displayName||user.username} ingresó desde ${localStorage.getItem('rpt:deviceName')||'este equipo'}.`
+  })).catch(()=>{});
   return {...session, user:cleanUser(users[userIndex])};
 }
 

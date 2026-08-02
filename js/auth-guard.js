@@ -8,7 +8,8 @@
   const users=read(USERS_KEY) || [];
   const user=session ? users.find(item=>item.id===session.userId && item.active) : null;
   const page=document.documentElement.dataset.authPage || 'protected';
-  const valid=Boolean(session && device && session.deviceId===device && user);
+  const revoked=localStorage.getItem('rptDeviceRevokedV1')==='1';
+  const valid=Boolean(!revoked && session && device && session.deviceId===device && user);
 
   if(!valid){
     localStorage.removeItem(SESSION_KEY);

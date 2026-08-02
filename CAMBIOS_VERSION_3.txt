@@ -1,0 +1,65 @@
+GESTIÓN DE EVENTOS — ACTUALIZACIÓN 3.0.0
+========================================
+
+MÓDULOS PROTEGIDOS
+------------------
+Eventos y Minuta conservaron exactamente sus archivos HTML, CSS y JavaScript.
+
+ESTABILIDAD Y RENDIMIENTO
+-------------------------
+- Diagnóstico integral del sistema.
+- Validación del Excel antes de sustituir datos.
+- Comparación incremental y publicación selectiva.
+- Métricas de lectura, renderizado y publicación.
+- Caché PWA y funcionamiento con última información disponible.
+- Herramientas de reparación sin borrar usuarios ni el archivo vinculado.
+
+RESPALDOS
+---------
+- Copias automáticas de las últimas importaciones válidas.
+- Respaldo manual.
+- Descarga e importación JSON.
+- Restauración con copia preventiva anterior a la restauración.
+
+AUDITORÍA
+---------
+- Filtros por fecha, usuario, empresa, campo y equipo.
+- Exportación CSV.
+- Impresión o PDF.
+- Historial únicamente de lectura.
+
+ADMINISTRACIÓN
+--------------
+- Diagnóstico.
+- Respaldos.
+- Validación.
+- Auditoría.
+- Equipos autorizados y revocación.
+- Laboratorio para probar un Excel sin afectar producción.
+- Mantenimiento programado.
+- Número de versión y archivos protegidos verificables.
+
+AGENDA MÓVIL
+-------------
+- Tiempo real.
+- Últimos datos disponibles sin conexión.
+- Filtros por fecha, piso, alimentación y estado.
+- Texto ampliable.
+- Copiar detalles.
+- Notificaciones con la aplicación abierta o instalada.
+- Conservación de filtros y evento seleccionado.
+
+PWA
+---
+- Instalación en computador o teléfono.
+- Acceso directo a Agenda, Eventos y Minuta.
+- Página offline.
+- Caché actualizable mediante service worker.
+
+PASOS DE PUBLICACIÓN
+--------------------
+1. Reemplazar el contenido del repositorio por esta carpeta.
+2. Publicar firestore.rules en Firebase Console.
+3. Abrir el Index y forzar una actualización con Ctrl + F5 una vez.
+4. Ejecutar Diagnóstico.
+5. Vincular el Excel únicamente si el navegador solicita autorización.

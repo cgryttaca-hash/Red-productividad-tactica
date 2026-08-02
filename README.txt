@@ -1,35 +1,61 @@
-AGENDA OPERATIVA DE EVENTOS
+GESTIÓN DE EVENTOS — VERSIÓN 3.0.0
+======================================
 
-Módulos activos:
-- index.html: panel principal con navegación superior, indicadores y agenda del día.
-- eventos.html: carga del archivo principal, búsqueda y filtros por rango de fechas.
-- minuta.html: minuta operativa con selección libre de fecha, día anterior y día siguiente.
-- agenda_movil.html: consulta móvil complementaria.
+MÓDULOS OPERATIVOS PROTEGIDOS
+-----------------------------
+- eventos.html
+- js/eventos.js
+- css/eventos.css
+- minuta.html
+- js/minuta.js
+- css/minuta.css
 
-Archivos principales:
-- css/index.css, css/eventos.css, css/minuta.css
-- js/index.js, js/eventos.js, js/minuta.js
+No fueron modificados en esta actualización.
 
-Cambios de esta versión:
-- Se retiraron los módulos Facturas, Auditoría y Estadísticas con sus archivos HTML, CSS y JS.
-- Se retiraron del menú los accesos a Usuarios y Configuración.
-- El antiguo menú lateral del inicio fue reemplazado por una barra superior adaptable.
-- El rango de fechas de Eventos permite consultar fechas anteriores y futuras.
-- Minuta permite seleccionar cualquier fecha y actualizar automáticamente sus tablas.
+PÁGINAS PRINCIPALES
+-------------------
+index.html          Panel operativo y sincronización.
+eventos.html        Módulo de Eventos.
+minuta.html         Minuta.
+agenda_movil.html   Agenda en tiempo real.
+login.html          Acceso local por equipo.
+usuarios.html       Usuarios locales.
+configuracion.html  Mantenimiento, avisos y PWA.
 
-La información de Eventos se conserva en localStorage bajo la clave eventData y es utilizada por Inicio y Minuta.
+HERRAMIENTAS NUEVAS
+-------------------
+diagnostico.html    Estado de Excel, Firebase, almacenamiento y PWA.
+validacion.html     Informe de calidad del Excel.
+respaldos.html      Copias automáticas, descarga y restauración.
+auditoria.html      Historial de cambios y exportación CSV/PDF.
+equipos.html        Registro y revocación de dispositivos.
+laboratorio.html    Prueba un Excel sin modificar producción.
 
-SINCRONIZACIÓN AUTOMÁTICA DEL EXCEL (GITHUB PAGES)
---------------------------------------------------
-1. Publica el repositorio mediante GitHub Pages con HTTPS.
-2. Abre el sistema preferiblemente en Google Chrome o Microsoft Edge.
-3. La primera vez, pulsa "Seleccionar Excel" y elige el archivo maestro.
-4. El navegador guardará la referencia del archivo solo en ese equipo y navegador.
-5. El sistema revisa cambios al abrir, al regresar a la pestaña y cada 30 segundos.
-6. Cuando el Excel cambie y se guarde, se actualizan Inicio, Eventos y Minuta.
-7. Si el navegador solicita permiso otra vez, pulsa "Autorizar acceso".
-8. Si el archivo fue movido o renombrado, usa "Cambiar archivo".
+FUNCIONES
+---------
+- Comprobación automática del Excel.
+- Publicación incremental en Firebase.
+- Agenda Móvil en tiempo real y offline.
+- Últimas cinco importaciones válidas en IndexedDB.
+- Validación de fechas, empresas, escenarios, duplicados y alimentación.
+- Auditoría por hoja, fila y celda.
+- PWA instalable.
+- Mantenimiento programable.
+- Métricas de rendimiento.
+- Registro de equipos.
+- Notificaciones mientras la aplicación está abierta o instalada.
 
-La referencia se almacena en IndexedDB. Los datos procesados siguen guardándose en
-localStorage con las claves eventData, eventDataSheets y eventDataUpdatedAt.
-El archivo Excel no se sube al repositorio ni se envía a internet.
+INSTALACIÓN
+-----------
+1. Sube todos los archivos a la raíz del repositorio.
+2. Publica firestore.rules en Firebase Console.
+3. Abre el Index y presiona Ctrl + F5 una sola vez.
+4. Ejecuta diagnostico.html.
+5. Vincula el Excel si el navegador solicita autorización.
+
+SEGURIDAD
+---------
+Los usuarios del sistema son locales a cada navegador y usan PBKDF2.
+Las contraseñas no se envían a Firebase.
+Consulta CONFIGURACION_SEGURIDAD_AVANZADA.txt para App Check, FCM y
+centralización mediante backend.

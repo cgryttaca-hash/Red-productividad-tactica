@@ -25,13 +25,33 @@ const state={
   lastHash:'',
   initialized:false,
   refreshing:false,
-  meta:null
+  meta:null,
+  selected:null
 };
 
 const text=value=>value===undefined||value===null?'':String(value);
 const normalize=value=>text(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
 const esc=value=>text(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
 const chunkId=index=>`${CHUNK_PREFIX}${String(index).padStart(4,'0')}`;
+const FILTER_KEY='rptAgendaFiltersV1';
+function readFilters(){try{return JSON.parse(localStorage.getItem(FILTER_KEY)||'null')||{};}catch(_){return{};}}
+function saveFilters(){
+  const value={
+    floor:$('mobileFloorFilter')?.value||'',food:$('mobileFoodFilter')?.value||'',
+    status:$('mobileStatusFilter')?.value||'',view:state.view
+  };
+  try{localStorage.setItem(FILTER_KEY,JSON.stringify(value));}catch(_){}
+}
+function relativeTime(value){
+  const date=value?.toDate?value.toDate():new Date(value);
+  if(Number.isNaN(date.getTime()))return'Esperando actualización';
+  const seconds=Math.max(0,Math.round((Date.now()-date.getTime())/1000));
+  if(seconds<45)return'Actualizado hace unos segundos';
+  const minutes=Math.floor(seconds/60);if(minutes<60)return`Actualizado hace ${minutes} min`;
+  const hours=Math.floor(minutes/60);if(hours<24)return`Actualizado hace ${hours} h`;
+  return`Actualizado ${formatDateTime(value)}`;
+}
+
 
 function openCache(){
   return new Promise((resolve,reject)=>{
@@ -227,19 +247,24 @@ function setNotice(message,type=''){
   notice.textContent=message||'';
 }
 function updateHeader(){
-  $('mobileUpdatedAt').textContent=state.updatedAt
-    ?`Actualizado ${formatDateTime(state.updatedAt)}`
-    :'Esperando actualización';
+  $('mobileUpdatedAt').textContent=state.updatedAt?relativeTime(state.updatedAt):'Esperando actualización';
 }
 function filteredEvents(){
   const query=normalize($('mobileSearch').value).toLowerCase();
   const exactDate=$('mobileDateFilter').value;
+  const floor=$('mobileFloorFilter')?.value||'';
+  const food=$('mobileFoodFilter')?.value||'';
+  const status=$('mobileStatusFilter')?.value||'';
   const today=todayISO();
   return state.all.filter(event=>{
     if(exactDate&&event.fechaISO!==exactDate)return false;
     if(!exactDate&&state.view==='today'&&event.fechaISO!==today)return false;
     if(!exactDate&&state.view==='upcoming'&&event.fechaISO<=today)return false;
     if(query&&!`${event.empresa} ${event.escenario} ${event.estado} ${event.acomodacion}`.toLowerCase().includes(query))return false;
+    if(floor&&event.piso!==floor)return false;
+    if(food==='with'&&!hasFood(event))return false;
+    if(food==='without'&&hasFood(event))return false;
+    if(status&&normalize(event.estado).toLowerCase()!==normalize(status).toLowerCase())return false;
     return true;
   });
 }
@@ -313,6 +338,7 @@ function normalField(label,value,wide=false){
   return`<div class="detail-field ${wide?'is-wide':''}"><small>${esc(label)}</small><strong>${esc(serviceValue(value))}</strong></div>`;
 }
 function openDetail(event){
+  state.selected=event;
   $('mobileDetailTitle').textContent=event.empresa;
   $('mobileDetailSubtitle').textContent=`${formatDate(event.fechaISO,{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${event.escenario}`;
   $('mobileDetailBody').innerHTML=`
@@ -334,6 +360,7 @@ function openDetail(event){
   document.body.style.overflow='hidden';
 }
 function closeDetail(){
+  state.selected=null;
   $('mobileDetailModal').classList.remove('is-open');
   $('mobileDetailModal').setAttribute('aria-hidden','true');
   document.body.style.overflow='';
@@ -355,6 +382,13 @@ async function applyEvents(events,updatedAt,notify=true,cloudHash=''){
   });
   setConnection('Sincronización activa',true);
   setNotice(changed&&notify?'La agenda recibió una actualización automática.':'',changed?'success':'');
+  if(changed&&notify){
+    import('./notifications.js').then(module=>module.showNotification(
+      'Agenda actualizada',
+      `${normalized.length} eventos disponibles. Consulta los cambios recientes.`,
+      {tag:'agenda-realtime',url:'./agenda_movil.html',renotify:true}
+    )).catch(()=>{});
+  }
   render();
 }
 async function loadChunks(meta,notify=false){
@@ -437,6 +471,7 @@ async function initializeFirebase(){
       import(`${SDK}/firebase-firestore.js`)
     ]);
     const app=appMod.getApps().length?appMod.getApps()[0]:appMod.initializeApp(FIREBASE_CONFIG);
+    import('./firebase-app-check.js').then(module=>module.initializeAppCheck()).catch(()=>{});
     state.auth=authMod.getAuth(app);
     state.db=fireMod.getFirestore(app);
     state.sdk={appMod,authMod,fireMod};
@@ -479,16 +514,41 @@ document.querySelectorAll('.agenda-tab').forEach(button=>button.addEventListener
   button.classList.add('is-active');
   state.view=button.dataset.view;
   $('mobileDateFilter').value='';
+  saveFilters();
   render();
 }));
 $('mobileSearch').addEventListener('input',render);
 $('mobileDateFilter').addEventListener('change',render);
+['mobileFloorFilter','mobileFoodFilter','mobileStatusFilter'].forEach(id=>{
+  $(id)?.addEventListener('change',()=>{saveFilters();render();});
+});
+const largeText=localStorage.getItem('rptAgendaLargeTextV1')==='1';
+document.body.classList.toggle('is-large-text',largeText);
+$('mobileTextSize').classList.toggle('is-active',largeText);
+$('mobileTextSize').addEventListener('click',()=>{
+  const active=!document.body.classList.contains('is-large-text');
+  document.body.classList.toggle('is-large-text',active);
+  $('mobileTextSize').classList.toggle('is-active',active);
+  localStorage.setItem('rptAgendaLargeTextV1',active?'1':'0');
+});
 $('mobileRefresh').addEventListener('click',()=>refreshFromCloud({notify:true,force:true}));
 $('mobileAgenda').addEventListener('click',event=>{
   const row=event.target.closest('.event-summary-row');
   if(!row)return;
   const item=state.all.find(record=>record.id===row.dataset.id);
   if(item)openDetail(item);
+});
+$('mobileCopyDetail').addEventListener('click',async()=>{
+  const event=state.selected;if(!event)return;
+  const food=foodPairs(event).map(item=>`${item.time} — ${item.description}`).join('\n')||'Sin alimentación';
+  const detail=[
+    event.empresa,formatDate(event.fechaISO,{weekday:'long',day:'numeric',month:'long',year:'numeric'}),
+    `${event.escenario} · ${event.piso}`,`Horario: ${event.horarioEvento||'Sin registrar'}`,
+    `Personas: ${event.cantidadPersonas}`,`Acomodación: ${serviceValue(event.acomodacion)}`,
+    `Alimentación:\n${food}`,`Estado: ${serviceValue(event.estado)}`
+  ].join('\n');
+  try{await navigator.clipboard.writeText(detail);$('mobileCopyDetail').textContent='Detalle copiado';setTimeout(()=>$('mobileCopyDetail').textContent='Copiar detalle',1400);}
+  catch(_){$('mobileCopyDetail').textContent='No fue posible copiar';}
 });
 $('mobileCloseDetail').addEventListener('click',closeDetail);
 $('mobileDetailModal').addEventListener('click',event=>{
@@ -502,6 +562,15 @@ window.addEventListener('pagehide',()=>{
   clearInterval(state.fallbackTimer);
 },{once:true});
 
+const savedFilters=readFilters();
+if(savedFilters.floor&&$('mobileFloorFilter'))$('mobileFloorFilter').value=savedFilters.floor;
+if(savedFilters.food&&$('mobileFoodFilter'))$('mobileFoodFilter').value=savedFilters.food;
+if(savedFilters.status&&$('mobileStatusFilter'))$('mobileStatusFilter').value=savedFilters.status;
+if(savedFilters.view&&['today','upcoming','all'].includes(savedFilters.view)){
+  state.view=savedFilters.view;
+  document.querySelectorAll('.agenda-tab').forEach(button=>button.classList.toggle('is-active',button.dataset.view===state.view));
+}
+setInterval(updateHeader,30000);
 updateHeader();
 render();
 initializeFirebase();

@@ -6,9 +6,10 @@
   <meta name="theme-color" content="#111111">
   <title>Usuarios | Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260801-1600"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260801-1600"></script>
-  <link rel="stylesheet" href="css/usuarios.css?v=20260801-1600">
+  <script src="js/auth-guard.js?v=20260801-2300"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/usuarios.css?v=20260801-2300">
 </head>
 <body>
   <header class="users-header">
@@ -18,6 +19,8 @@
       <a href="eventos.html">Eventos</a>
       <a href="minuta.html">Minuta</a>
       <a href="configuracion.html">Configuración</a>
+      <a href="equipos.html">Equipos</a>
+      <a href="respaldos.html">Respaldos</a>
     </nav>
     <div class="users-session">
       <span id="currentAdmin">Administrador</span>
@@ -83,6 +86,8 @@
     </section>
   </main>
 
-  <script type="module" src="js/usuarios.js?v=20260801-1600"></script>
+  <script type="module" src="js/usuarios.js?v=20260801-2300"></script>
+  <script type="module" src="js/pwa.js?v=20260801-2300"></script>
+  <script type="module" src="js/device-heartbeat.js?v=20260801-2300"></script>
 </body>
 </html>

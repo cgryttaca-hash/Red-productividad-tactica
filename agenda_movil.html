@@ -7,8 +7,9 @@
   <meta name="description" content="Agenda operativa de eventos en tiempo real.">
   <title>Agenda de eventos</title>
   <style>html.maintenance-pending body{visibility:hidden}</style>
-  <script type="module" src="js/maintenance-guard.js?v=20260801-1800"></script>
-  <link rel="stylesheet" href="css/agenda-movil.css?v=20260801-1915">
+  <script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/agenda-movil.css?v=20260801-2300">
 </head>
 <body>
   <div class="agenda-app">
@@ -27,6 +28,7 @@
               <span id="mobileUpdatedAt">Esperando actualización</span>
             </div>
           </div>
+          <button id="mobileTextSize" class="agenda-text-size" type="button" aria-label="Aumentar tamaño del texto" title="Tamaño de texto">A+</button>
           <button id="mobileRefresh" class="agenda-refresh" type="button" aria-label="Actualizar agenda" title="Actualizar agenda">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.1 9a7 7 0 0 1 11.4-2L20 9M4 15l2.5 2a7 7 0 0 0 11.4-2"/></svg>
             <span>Actualizar</span>
@@ -50,6 +52,18 @@
           <span>Fecha</span>
           <input id="mobileDateFilter" type="date">
         </label>
+        <label class="agenda-compact-filter">
+          <span>Piso</span>
+          <select id="mobileFloorFilter"><option value="">Todos</option><option value="Segundo piso">Segundo piso</option><option value="Tercer piso">Tercer piso</option></select>
+        </label>
+        <label class="agenda-compact-filter">
+          <span>Alimentación</span>
+          <select id="mobileFoodFilter"><option value="">Todos</option><option value="with">Con alimentación</option><option value="without">Sin alimentación</option></select>
+        </label>
+        <label class="agenda-compact-filter">
+          <span>Estado</span>
+          <select id="mobileStatusFilter"><option value="">Todos</option><option value="Confirmado">Confirmado</option><option value="Programado">Programado</option><option value="Tentativo o pendiente">Pendiente</option><option value="Cancelado">Cancelado</option></select>
+        </label>
       </section>
 
       <section id="mobileNotice" class="agenda-notice" hidden></section>
@@ -64,11 +78,15 @@
         <span>DETALLE OPERATIVO</span>
         <h2 id="mobileDetailTitle">Evento</h2>
         <p id="mobileDetailSubtitle"></p>
+        <button id="mobileCopyDetail" class="detail-copy" type="button">Copiar detalle</button>
       </div>
       <div id="mobileDetailBody" class="detail-body"></div>
     </div>
   </div>
 
-  <script type="module" src="js/agenda-movil.js?v=20260801-1915"></script>
+  <script type="module" src="js/agenda-movil.js?v=20260801-2300"></script>
+  <script type="module" src="js/pwa.js?v=20260801-2300"></script>
+  <script type="module" src="js/notifications.js?v=20260801-2300"></script>
+  <script type="module" src="js/performance-monitor.js?v=20260801-2300"></script>
 </body>
 </html>

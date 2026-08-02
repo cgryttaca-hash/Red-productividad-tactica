@@ -1,13 +1,30 @@
-REGLAS FIREBASE
-================
+REGLAS FIREBASE — VERSIÓN 3.0
+=============================
 
-El proyecto mantiene las colecciones:
+Colecciones utilizadas:
 - eventos_publicos
 - eventos_meta
 - eventos_cambios
+- equipos_autorizados
 
-La agenda móvil tiene únicamente lectura pública.
-Solo el UID propietario configurado puede crear, modificar o eliminar.
+PERMISOS
+--------
+- La Agenda Móvil utiliza una sesión anónima de Firebase y tiene solo lectura.
+- El UID propietario puede crear, modificar y eliminar eventos, metadata y auditoría.
+- Cada dispositivo anónimo puede registrar únicamente su propio documento.
+- Solo el propietario puede listar, revocar o eliminar equipos.
 
-Para que las reglas remotas coincidan con el proyecto, publica una vez el contenido
-del archivo firestore.rules en Firebase Console > Firestore Database > Reglas.
+PUBLICACIÓN OBLIGATORIA
+-----------------------
+1. Abre Firebase Console.
+2. Firestore Database > Reglas.
+3. Copia TODO el contenido de firestore.rules.
+4. Presiona Publicar.
+
+AUTHENTICATION
+--------------
+Mantén habilitados:
+- Correo electrónico/contraseña.
+- Anónimo.
+
+No compartas la contraseña del propietario.

@@ -7,13 +7,14 @@
   <meta name="description" content="Panel operativo de gestión de eventos.">
   <title>Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260801-1800"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260801-1800"></script>
+  <script src="js/auth-guard.js?v=20260801-2300"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-1800">
-  <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-1800">
-  <link rel="stylesheet" href="css/index.css?v=20260801-1800">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-2300">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-2300">
+  <link rel="stylesheet" href="css/index.css?v=20260801-2300">
 </head>
 <body>
   <div id="loader" aria-hidden="true"><span class="loader-spinner"></span></div>
@@ -32,6 +33,7 @@
         <a href="agenda_movil.html" target="_blank" rel="noopener">Agenda móvil</a>
         <a id="usersLink" href="usuarios.html" hidden>Usuarios</a>
         <a id="configLink" href="configuracion.html" hidden>Configuración</a>
+        <a href="diagnostico.html" data-admin-link hidden>Herramientas</a>
       </nav>
 
       <div class="header-tools">
@@ -55,6 +57,7 @@
         <a class="primary-action" href="eventos.html">Abrir Eventos</a>
         <a href="minuta.html">Abrir Minuta</a>
         <a href="agenda_movil.html" target="_blank" rel="noopener">Ver Agenda</a>
+        <button class="install-action" data-install-app hidden type="button">Instalar aplicación</button>
       </div>
     </section>
 
@@ -154,12 +157,31 @@
         </section>
       </div>
     </section>
+<section class="admin-tools-panel" data-admin-only hidden>
+  <header>
+    <div><span>HERRAMIENTAS ADMINISTRATIVAS</span><h2>Estabilidad, seguridad y control</h2><p>Accesos separados para diagnosticar, respaldar y auditar sin alterar Eventos ni Minuta.</p></div>
+  </header>
+  <div class="admin-tools-grid">
+    <a href="diagnostico.html"><strong>Diagnóstico</strong><span>Comprueba Excel, Firebase, PWA y almacenamiento.</span></a>
+    <a href="respaldos.html"><strong>Respaldos</strong><span>Conserva y restaura importaciones válidas.</span></a>
+    <a href="auditoria.html"><strong>Auditoría</strong><span>Consulta celda, usuario, equipo y valores.</span></a>
+    <a href="equipos.html"><strong>Equipos</strong><span>Revisa dispositivos y revoca accesos.</span></a>
+    <a href="validacion.html"><strong>Validación Excel</strong><span>Detecta errores, duplicados y campos incompletos.</span></a>
+        <a href="laboratorio.html"><strong>Laboratorio</strong><span>Prueba otro Excel sin modificar producción.</span></a>
+    <a href="configuracion.html"><strong>Configuración</strong><span>Mantenimiento, notificaciones e instalación.</span></a>
+  </div>
+</section>
+<footer class="dashboard-version"><span>Gestión de Eventos · Versión 3.0.0</span><span>Eventos y Minuta protegidos</span></footer>
   </main>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
-  <script src="js/excel-sync.js?v=20260801-1800" defer></script>
-  <script src="js/index.js?v=20260801-1800" defer></script>
-  <script type="module" src="js/firebase-sync.js?v=20260801-1800"></script>
-  <script type="module" src="js/session-ui.js?v=20260801-1800"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" defer></script>
+  <script src="js/excel-sync.js?v=20260801-2300" defer></script>
+  <script src="js/index.js?v=20260801-2300" defer></script>
+  <script type="module" src="js/firebase-sync.js?v=20260801-2300"></script>
+  <script type="module" src="js/session-ui.js?v=20260801-2300"></script>
+  <script type="module" src="js/pwa.js?v=20260801-2300"></script>
+  <script type="module" src="js/performance-monitor.js?v=20260801-2300"></script>
+  <script type="module" src="js/notifications.js?v=20260801-2300"></script>
+  <script type="module" src="js/device-heartbeat.js?v=20260801-2300"></script>
 </body>
 </html>

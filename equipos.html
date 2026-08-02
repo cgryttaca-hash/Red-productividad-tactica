@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es" class="auth-pending maintenance-pending" data-auth-page="admin" data-maintenance-page="equipos">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111318"><title>Equipos | Gestión de Eventos</title>
+  <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/auth-guard.js?v=20260801-2300"></script><script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
+  <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/admin-tools.css?v=20260801-2300">
+</head>
+<body>
+<header class="tool-header"><div class="tool-header-inner">
+<a class="tool-brand" href="index.html"><strong>GESTIÓN DE EVENTOS</strong><small>Equipos autorizados</small></a>
+<nav class="tool-nav"><a href="index.html">Inicio</a><a href="diagnostico.html">Diagnóstico</a><a href="respaldos.html">Respaldos</a><a href="auditoria.html">Auditoría</a><a class="active" href="equipos.html">Equipos</a></nav>
+<div class="tool-session"><span id="sessionName">Administrador</span><button id="logoutButton" type="button">Salir</button></div>
+</div></header>
+<main class="tool-shell">
+<section class="tool-hero"><div><span class="tool-eyebrow">SEGURIDAD POR DISPOSITIVO</span><h1>Equipos registrados</h1><p>Consulta los navegadores que accedieron al sistema, su último usuario local y revoca dispositivos que ya no deban utilizarlo.</p></div>
+<div class="tool-actions"><button id="refreshDevices" class="btn primary" type="button">Actualizar lista</button></div></section>
+<section id="firebaseOwnerLogin" class="card" style="margin-top:20px" hidden>
+<header class="card-header"><div><span>CUENTA PROPIETARIA</span><h2>Conectar Firebase</h2><p>Esta sesión se recuerda en el navegador.</p></div></header>
+<div class="card-body"><form id="ownerLoginForm" class="form-grid">
+<label class="field"><span>Correo</span><input id="ownerEmail" type="email" value="cgryttaca@gmail.com" required></label>
+<label class="field"><span>Contraseña</span><input id="ownerPassword" type="password" required></label>
+<div class="full"><button class="btn primary" type="submit">Conectar y consultar equipos</button></div></form>
+<div id="ownerMessage" class="message info" hidden></div></div></section>
+<section class="grid cols-4">
+<article class="card metric"><small>Equipos registrados</small><strong id="deviceCount">0</strong><span>Total conocido por Firebase</span></article>
+<article class="card metric"><small>Activos</small><strong id="activeDevices">0</strong><span>Acceso permitido</span></article>
+<article class="card metric"><small>Revocados</small><strong id="revokedDevices">0</strong><span>Acceso bloqueado al regresar al Index</span></article>
+<article class="card metric"><small>Equipo actual</small><strong id="currentDevice">—</strong><span>Identificador local</span></article>
+</section>
+<section class="card" style="margin-top:20px">
+<header class="card-header"><div><span>INVENTARIO</span><h2>Navegadores y dispositivos</h2><p>La revocación se comprueba automáticamente cuando el dispositivo vuelve a utilizar el sistema.</p></div></header>
+<div class="table-wrap"><table><thead><tr><th>Equipo</th><th>Usuario local</th><th>Navegador</th><th>Última actividad</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="devicesBody"></tbody></table></div>
+<div id="devicesEmpty" class="empty" hidden><strong>No hay equipos disponibles</strong><span>Conecta la cuenta propietaria o abre el Index desde otro equipo.</span></div>
+<div id="devicesMessage" class="message info" hidden style="margin:16px 20px"></div>
+</section>
+<footer class="version-footer"><span>Registro de equipos mediante Firebase.</span><span>Las contraseñas locales nunca se envían a Firebase.</span></footer>
+</main>
+<script type="module" src="js/equipos.js?v=20260801-2300"></script><script type="module" src="js/pwa.js?v=20260801-2300"></script>
+<script type="module" src="js/device-heartbeat.js?v=20260801-2300"></script>
+</body></html>

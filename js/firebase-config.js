@@ -10,3 +10,6 @@ export const FIREBASE_OWNER_UID = "Nxsbigjez6eBRMiZZdTzHv3oINn1";
 export const EVENTS_COLLECTION = "eventos_publicos";
 export const META_COLLECTION = "eventos_meta";
 export const CHANGES_COLLECTION = "eventos_cambios";
+
+export const FIREBASE_VAPID_KEY = '';
+export const FIREBASE_APP_CHECK_SITE_KEY = '';

@@ -349,10 +349,17 @@
     return {created,updated,deleted,total:next.length,auditEntries,batchId,timestamp};
   }
 
-  function saveParsedData(parsed,file){
+  async function saveParsedData(parsed,file){
     cleanupLegacyStorage();
     const previous=safeParse('eventData',[]);
     const next=parsed.rows;
+    const operationStarted=performance.now();
+    const validationModule=await import('./validation.js');
+    const validationReport=validationModule.validateRows(next,{sheets:parsed.sheets,fileName:file.name,columnMaps:parsed.columnMaps});
+    validationModule.saveValidationReport(validationReport);
+    if(validationReport.totalRows>0 && validationReport.validRows===0){
+      throw new Error('El archivo no contiene registros válidos. Se conservó la última información correcta.');
+    }
     const serialized=JSON.stringify(next);
     const dataHash=hashString(serialized);
     const previousHash=localStorage.getItem(DATA_HASH_KEY);
@@ -364,7 +371,11 @@
     localStorage.setItem(LAST_CHECK_KEY,updatedAt);
 
     if(previousHash===dataHash){
-      return {changed:false,diff:{created:[],updated:[],deleted:[],auditEntries:[],total:next.length},updatedAt};
+      try{
+        const performanceModule=await import('./performance-monitor.js');
+        performanceModule.markOperation('Comprobación del Excel sin cambios',performance.now()-operationStarted,{rows:next.length});
+      }catch(_){}
+      return {changed:false,diff:{created:[],updated:[],deleted:[],auditEntries:[],total:next.length},updatedAt,validationReport};
     }
 
     const diff=diffRows(previous,next,parsed.columnMaps||{});
@@ -434,7 +445,25 @@
       detail:`${next.length} registros · ${diff.created.length} creados · ${diff.updated.length} modificados · ${diff.deleted.length} eliminados.`
     });
 
-    return {changed:true,diff,updatedAt};
+    const idle=window.requestIdleCallback||((callback)=>setTimeout(callback,20));
+    idle(async()=>{
+      try{
+        const backupModule=await import('./backup-store.js');
+        await backupModule.createSnapshot({
+          kind:'automatic',
+          reason:`Importación válida de ${file.name}`,
+          includeUsers:false
+        });
+      }catch(error){console.warn('Automatic backup unavailable:',error);}
+      try{
+        const performanceModule=await import('./performance-monitor.js');
+        performanceModule.markOperation('Lectura y actualización del Excel',performance.now()-operationStarted,{
+          rows:next.length,created:diff.created.length,updated:diff.updated.length,deleted:diff.deleted.length
+        });
+      }catch(_){}
+    });
+
+    return {changed:true,diff,updatedAt,validationReport};
   }
 
   function getStoredMeta(){ return safeParse(META_KEY,null); }
@@ -484,7 +513,7 @@
       try{
         setState('syncing',{fileName:file.name});
         const parsed=parseWorkbookBuffer(await file.arrayBuffer());
-        const result=saveParsedData(parsed,file);
+        const result=await saveParsedData(parsed,file);
         setState('fallback',{fileName:file.name,message:result.changed?`${parsed.rows.length} eventos actualizados.`:'El archivo no contiene cambios.'});
       }catch(error){setState('error',{message:error.message});}
       finally{event.target.value='';}
@@ -566,7 +595,7 @@
       localStorage.setItem(LAST_CHECK_KEY,new Date().toISOString());
       if(!force&&sameFileVersion(file,storedMeta)){setState('ready',{fileName:file.name});return true;}
       const parsed=parseWorkbookBuffer(await file.arrayBuffer());
-      const result=saveParsedData(parsed,file);
+      const result=await saveParsedData(parsed,file);
       setState('ready',{fileName:file.name,statusText:`${parsed.rows.length} eventos · ${result.changed?'cambios aplicados':'sin cambios'}`,message:showSuccess?(result.changed?'Información actualizada correctamente.':'No se encontraron cambios.') : ''});
       return true;
     }catch(error){
@@ -626,9 +655,11 @@
 
   window.ExcelFileSync={
     init:initialize,openPanel,chooseFile,refresh:()=>synchronize({force:true,requestPermission:true,showSuccess:true}),
-    unlink:unlinkFile,parseWorkbookBuffer,importFile:async file=>{const parsed=parseWorkbookBuffer(await file.arrayBuffer());saveParsedData(parsed,file);return parsed;},
+    unlink:unlinkFile,parseWorkbookBuffer,importFile:async file=>{const parsed=parseWorkbookBuffer(await file.arrayBuffer());await saveParsedData(parsed,file);return parsed;},
     getHandle:()=>fileHandle
   };
 
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initialize,{once:true}); else initialize();
+  if(document.documentElement.dataset.excelSyncDisabled!=='true'){
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initialize,{once:true}); else initialize();
+  }
 })();
