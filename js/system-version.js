@@ -1,6 +1,6 @@
-export const SYSTEM_VERSION = '3.0.0';
-export const RELEASE_DATE = '2026-08-01';
-export const RELEASE_NAME = 'Plataforma operativa estable';
+export const SYSTEM_VERSION = '3.1.0';
+export const RELEASE_DATE = '2026-08-26';
+export const RELEASE_NAME = 'Interfaz ligera y agenda en tiempo real';
 export const PROTECTED_MODULES = Object.freeze({
   "eventos.html": "c887ab4a6562a9fd02e04638ddfceeaa524b827de1ca5d5fdc10fce3a803a57d",
   "js/eventos.js": "c8af2388c832ecebbecfe80a5b37af4818ab04ba1334f6e5588efce552313395",

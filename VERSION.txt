@@ -1,11 +1,11 @@
 GESTIÓN DE EVENTOS
-Versión: 3.0.0
-Fecha: 2026-08-01
-Nombre: Plataforma operativa estable
+Versión: 3.1.1
+Fecha: 2026-08-26
+Nombre: Interfaz ligera y agenda en tiempo real
 
 Módulos protegidos:
 - Eventos
 - Minuta
 
 Objetivo:
-Estabilidad, diagnóstico, respaldo, auditoría, PWA y operación móvil.
+Carga inicial más rápida, auditoría visual, temas administrables, PWA ligera y Agenda Móvil optimizada.

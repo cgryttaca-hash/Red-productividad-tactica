@@ -59,20 +59,27 @@ document.addEventListener('keydown',event=>{
   button.hidden=false;
   button.focus();
   clearTimeout(recoveryTimer);
-  recoveryTimer=setTimeout(()=>{button.hidden=true;},20000);
 });
 
 $('openRecovery').addEventListener('click',async()=>{
   const button=$('openRecovery');
+  const confirmation=prompt('Para restablecer únicamente la cuenta local Admin, escribe RESTABLECER.');
+  if(confirmation===null) return;
+  if(confirmation.trim().toUpperCase()!=='RESTABLECER'){
+    message('No se realizó ningún cambio. Escribe RESTABLECER para confirmar.');
+    return;
+  }
   button.disabled=true;
   try{
     await resetDefaultAdmin();
-    message('Contraseña restablecida.','success');
+    $('username').value='Admin';
+    $('password').value='';
+    message('Acceso restablecido. Usuario: Admin · contraseña inicial: Admin2026','success');
+    $('password').focus();
   }catch(error){
     message(error.message || 'No fue posible restablecer la contraseña.');
   }finally{
     button.disabled=false;
-    button.hidden=true;
   }
 });
 

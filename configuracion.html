@@ -5,7 +5,7 @@
   <meta name="theme-color" content="#111318"><title>Configuración | Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
   <script src="js/auth-guard.js?v=20260801-2300"></script><script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
-  <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/admin-tools.css?v=20260801-2300">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/admin-tools.css?v=20260826-1"><link rel="stylesheet" href="css/themes.css?v=20260826-1">
 </head>
 <body>
 <header class="tool-header"><div class="tool-header-inner">
@@ -45,6 +45,17 @@
 </div><div class="tool-actions" style="justify-content:flex-start;margin-top:14px"><button id="enableNotifications" class="btn primary" type="button">Autorizar notificaciones</button><button id="saveNotifications" class="btn" type="button">Guardar preferencias</button></div><div id="notificationMessage" class="message info" hidden></div></div></article>
 </section>
 
+
+<section class="card" style="margin-top:20px">
+<header class="card-header"><div><span>APARIENCIA</span><h2>Tema visual por página</h2><p>Define un tema general y, si lo necesitas, una apariencia distinta para Inicio o Agenda Móvil. No modifica Eventos ni Minuta.</p></div><span id="appearanceState" class="status info">Local</span></header>
+<div class="card-body"><div class="form-grid">
+<label class="field"><span>Tema general</span><select id="globalTheme"><option value="classic">Clásico</option><option value="ocean">Azul profesional</option><option value="forest">Verde operativo</option><option value="sand">Arena cálida</option></select></label>
+<label class="field"><span>Inicio</span><select id="indexTheme"><option value="inherit">Usar tema general</option><option value="classic">Clásico</option><option value="ocean">Azul profesional</option><option value="forest">Verde operativo</option><option value="sand">Arena cálida</option></select></label>
+<label class="field"><span>Agenda Móvil</span><select id="agendaTheme"><option value="inherit">Usar tema general</option><option value="classic">Clásico</option><option value="ocean">Azul profesional</option><option value="forest">Verde operativo</option><option value="sand">Arena cálida</option></select></label>
+<label class="field"><span>Configuración</span><select id="configTheme"><option value="inherit">Usar tema general</option><option value="classic">Clásico</option><option value="ocean">Azul profesional</option><option value="forest">Verde operativo</option><option value="sand">Arena cálida</option></select></label>
+<div class="full tool-actions" style="justify-content:flex-start"><button id="saveAppearance" class="btn primary" type="button">Guardar para todos</button></div>
+</div><div id="appearanceMessage" class="message info" hidden></div></div></section>
+
 <section class="card" style="margin-top:20px">
 <header class="card-header"><div><span>ESTADO ACTUAL</span><h2>Páginas programadas</h2><p>Puedes finalizar o extender un mantenimiento activo.</p></div></header>
 <div class="card-body"><div id="maintenanceList" class="list"></div></div></section>
@@ -56,5 +67,5 @@
 </section>
 <footer class="version-footer"><span>Configuración protegida para administradores.</span><span>Los cambios de mantenimiento se guardan en Firebase.</span></footer>
 </main>
-<script type="module" src="js/configuracion.js?v=20260801-2300"></script><script type="module" src="js/pwa.js?v=20260801-2300"></script><script type="module" src="js/device-heartbeat.js?v=20260801-2300"></script>
+<script type="module" src="js/configuracion.js?v=20260826-1"></script><script type="module" src="js/pwa.js?v=20260826-1"></script><script type="module" src="js/device-heartbeat.js?v=20260826-1"></script>
 </body></html>

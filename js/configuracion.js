@@ -2,6 +2,7 @@ import {FIREBASE_CONFIG,FIREBASE_OWNER_UID,META_COLLECTION} from './firebase-con
 import {getSession,logout} from './local-auth.js';
 import {getNotificationSettings,setNotificationSettings,requestNotificationPermission,showNotification} from './notifications.js';
 import {SYSTEM_VERSION,RELEASE_NAME} from './system-version.js';
+import {THEME_DOC_ID,applyAppearance,readAppearanceCache,writeAppearanceCache,normalizeAppearance} from './theme-settings.js';
 
 const SDK='https://www.gstatic.com/firebasejs/12.16.0';
 const CACHE_KEY='rptMaintenanceCacheV1';
@@ -17,7 +18,8 @@ const templates={
   datos:'Estamos optimizando los datos y la sincronización del módulo.',
   personalizado:''
 };
-let sdk=null,auth=null,db=null,currentUser=null,config={pages:{}},unsubscribe=null,ticker=null;
+let sdk=null,auth=null,db=null,currentUser=null,config={pages:{}},appearance=readAppearanceCache(),unsubscribe=null,appearanceUnsubscribe=null,ticker=null;
+applyAppearance('configuracion',appearance);
 
 function message(value,type='info',target='configMessage'){
   const el=$(target);if(!el)return;el.hidden=!value;el.className=`message ${type}`;el.textContent=value||'';
@@ -37,6 +39,24 @@ function remaining(until){
   const h=Math.floor(ms/3600000),m=Math.floor((ms%3600000)/60000),s=Math.floor((ms%60000)/1000);
   return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
+function renderAppearance(){
+  appearance=normalizeAppearance(appearance||{});
+  if($('globalTheme'))$('globalTheme').value=appearance.global||'classic';
+  if($('indexTheme'))$('indexTheme').value=appearance.pages?.index||'inherit';
+  if($('agendaTheme'))$('agendaTheme').value=appearance.pages?.agenda_movil||'inherit';
+  if($('configTheme'))$('configTheme').value=appearance.pages?.configuracion||'inherit';
+  const badge=$('appearanceState');if(badge){badge.className='status ok';badge.textContent='Sincronizada';}
+  applyAppearance('configuracion',appearance);
+}
+async function saveAppearance(){
+  if(!isOwner())throw new Error('Conecta la cuenta propietaria de Firebase.');
+  const next=normalizeAppearance({global:$('globalTheme').value,pages:{index:$('indexTheme').value,agenda_movil:$('agendaTheme').value,configuracion:$('configTheme').value}});
+  await sdk.fireMod.setDoc(sdk.fireMod.doc(db,META_COLLECTION,THEME_DOC_ID),{
+    global:next.global,pages:next.pages,updatedAt:sdk.fireMod.serverTimestamp(),clientUpdatedAt:new Date().toISOString(),updatedBy:currentUser.email||''
+  },{merge:false});
+  appearance=writeAppearanceCache(next);renderAppearance();
+}
+
 function renderOwner(){
   const owner=isOwner();
   $('ownerLoginPanel').hidden=owner;
@@ -80,6 +100,10 @@ async function initializeFirebase(){
   const ref=fireMod.doc(db,META_COLLECTION,DOC_ID);
   const snap=await fireMod.getDoc(ref);config=snap.exists()?snap.data():{pages:{}};cache(config);renderList();
   unsubscribe=fireMod.onSnapshot(ref,next=>{config=next.exists()?next.data():{pages:{}};cache(config);renderList();});
+  const appearanceRef=fireMod.doc(db,META_COLLECTION,THEME_DOC_ID);
+  const appearanceSnap=await fireMod.getDoc(appearanceRef);
+  if(appearanceSnap.exists()){appearance=writeAppearanceCache(appearanceSnap.data()||{});renderAppearance();}
+  appearanceUnsubscribe=fireMod.onSnapshot(appearanceRef,next=>{if(!next.exists())return;appearance=writeAppearanceCache(next.data()||{});renderAppearance();});
 }
 function setDefaultStart(){
   const date=new Date(Date.now()+60000);date.setSeconds(0,0);
@@ -143,6 +167,10 @@ $('enableNotifications').addEventListener('click',async()=>{
   try{const permission=await requestNotificationPermission();renderNotifications();message(permission==='granted'?'Notificaciones autorizadas.':'El navegador no concedió el permiso.',permission==='granted'?'success':'error','notificationMessage');}
   catch(error){message(error.message,'error','notificationMessage');}
 });
+$('saveAppearance')?.addEventListener('click',async()=>{
+  try{await saveAppearance();message('Apariencia guardada para Inicio y Agenda Móvil.','success','appearanceMessage');}
+  catch(error){message(error.message||'No fue posible guardar la apariencia.','error','appearanceMessage');}
+});
 $('saveNotifications').addEventListener('click',()=>{
   setNotificationSettings({excel:$('notifyExcel').checked,mobile:$('notifyMobile').checked,maintenance:$('notifyMaintenance').checked});
   message('Preferencias guardadas.','success','notificationMessage');
@@ -152,6 +180,6 @@ $('logoutButton').addEventListener('click',()=>{logout();location.replace('login
 $('systemVersion').textContent=SYSTEM_VERSION;$('releaseLabel').textContent=RELEASE_NAME;
 $('pwaState').textContent=window.matchMedia('(display-mode: standalone)').matches?'Instalada':'Web';
 $('pwaDetail').textContent=window.matchMedia('(display-mode: standalone)').matches?'Ejecutándose como aplicación':'Puedes instalarla desde este panel';
-setDefaultStart();renderNotifications();renderList();ticker=setInterval(renderList,1000);
-window.addEventListener('pagehide',()=>{unsubscribe?.();clearInterval(ticker);},{once:true});
+setDefaultStart();renderNotifications();renderList();renderAppearance();ticker=setInterval(renderList,1000);
+window.addEventListener('pagehide',()=>{unsubscribe?.();appearanceUnsubscribe?.();clearInterval(ticker);},{once:true});
 initializeFirebase().catch(error=>{message(error.message||'Firebase no disponible.','error','ownerLoginMessage');$('ownerLoginPanel').hidden=false;});

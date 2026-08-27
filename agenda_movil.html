@@ -9,7 +9,8 @@
   <style>html.maintenance-pending body{visibility:hidden}</style>
   <script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/agenda-movil.css?v=20260801-2300">
+  <link rel="stylesheet" href="css/agenda-movil.css?v=20260826-1">
+  <link rel="stylesheet" href="css/themes.css?v=20260826-1">
 </head>
 <body>
   <div class="agenda-app">
@@ -28,6 +29,8 @@
               <span id="mobileUpdatedAt">Esperando actualización</span>
             </div>
           </div>
+          <button id="mobileChangesToggle" class="agenda-utility" type="button" aria-controls="mobileChangesPanel" aria-expanded="false"><span>Cambios</span><b id="mobileChangesCount">0</b></button>
+          <button class="agenda-utility" data-install-app hidden type="button">Instalar</button>
           <button id="mobileTextSize" class="agenda-text-size" type="button" aria-label="Aumentar tamaño del texto" title="Tamaño de texto">A+</button>
           <button id="mobileRefresh" class="agenda-refresh" type="button" aria-label="Actualizar agenda" title="Actualizar agenda">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.1 9a7 7 0 0 1 11.4-2L20 9M4 15l2.5 2a7 7 0 0 0 11.4-2"/></svg>
@@ -67,9 +70,17 @@
       </section>
 
       <section id="mobileNotice" class="agenda-notice" hidden></section>
+      <section id="mobileBoot" class="agenda-boot" role="status"><span></span><div><strong>Sincronizando agenda</strong><small>Mostrando primero la información guardada…</small></div></section>
       <section id="mobileAgenda" class="agenda-content" aria-live="polite"></section>
     </main>
   </div>
+
+  <aside id="mobileChangesPanel" class="changes-panel" aria-hidden="true" aria-label="Cambios recientes">
+    <header><div><span>ACTUALIZACIONES</span><h2>Cambios recientes</h2><p>Actividad publicada desde el Excel maestro.</p></div><button id="mobileChangesClose" type="button" aria-label="Cerrar cambios">×</button></header>
+    <div id="mobileChangesList" class="changes-list"><div class="changes-empty">Sin cambios recientes.</div></div>
+    <footer>Se muestra fecha, usuario/equipo y el campo modificado. La IP pública no se recopila.</footer>
+  </aside>
+  <div id="mobileChangesBackdrop" class="changes-backdrop" hidden></div>
 
   <div id="mobileDetailModal" class="detail-modal" aria-hidden="true">
     <div class="detail-dialog" role="dialog" aria-modal="true" aria-labelledby="mobileDetailTitle">
@@ -84,9 +95,9 @@
     </div>
   </div>
 
-  <script type="module" src="js/agenda-movil.js?v=20260801-2300"></script>
-  <script type="module" src="js/pwa.js?v=20260801-2300"></script>
-  <script type="module" src="js/notifications.js?v=20260801-2300"></script>
-  <script type="module" src="js/performance-monitor.js?v=20260801-2300"></script>
+  <script type="module" src="js/agenda-movil.js?v=20260826-1"></script>
+  <script type="module" src="js/pwa.js?v=20260826-1"></script>
+  <script type="module" src="js/notifications.js?v=20260826-1"></script>
+  <script type="module" src="js/performance-monitor.js?v=20260826-1"></script>
 </body>
 </html>

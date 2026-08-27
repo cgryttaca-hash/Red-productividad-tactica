@@ -241,3 +241,24 @@ body.is-large-text .event-summary-layout strong{font-size:13px}
 body.is-large-text .food-status{font-size:10px}
 body.is-large-text .detail-field strong{font-size:14px}
 @media(max-width:620px){.agenda-text-size{width:44px;height:44px}}
+
+/* Agenda móvil profesional — actividad, instalación y carga */
+.agenda-utility{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 12px;border:1px solid rgba(255,255,255,.2);border-radius:10px;background:rgba(255,255,255,.09);color:#fff;font-size:9px;font-weight:900}
+.agenda-utility b{min-width:20px;height:20px;display:grid;place-items:center;border-radius:999px;background:#fff;color:var(--header);font-size:8px}
+.agenda-utility:hover{background:rgba(255,255,255,.16)}
+.agenda-boot{min-height:78px;margin-top:12px;display:flex;align-items:center;gap:13px;padding:14px 16px;border:1px solid var(--line);border-radius:13px;background:#fff;box-shadow:0 8px 22px rgba(15,23,42,.04)}
+.agenda-boot>span{width:30px;height:30px;border:3px solid #e3e9ef;border-top-color:var(--second);border-radius:50%;animation:agenda-spin .7s linear infinite;flex:0 0 auto}
+.agenda-boot div{display:grid;gap:4px}.agenda-boot strong{font-size:11px}.agenda-boot small{color:var(--muted);font-size:9px}
+.agenda-boot.is-hidden{display:none}@keyframes agenda-spin{to{transform:rotate(360deg)}}
+.changes-backdrop{position:fixed;inset:0;z-index:119;background:rgba(10,18,28,.34);backdrop-filter:blur(2px)}
+.changes-panel{position:fixed;z-index:120;top:0;right:0;width:min(430px,94vw);height:100dvh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:#fff;box-shadow:-18px 0 54px rgba(15,23,42,.2);transform:translateX(104%);transition:transform .22s ease}
+.changes-panel.is-open{transform:translateX(0)}
+.changes-panel>header{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:22px 20px 17px;border-bottom:1px solid var(--line);background:#fbfcfd}
+.changes-panel>header span{color:#667085;font-size:8px;font-weight:900;letter-spacing:.12em}.changes-panel h2{margin:5px 0 4px;font-size:23px}.changes-panel p{margin:0;color:var(--muted);font-size:9px}
+.changes-panel>header button{width:36px;height:36px;border:1px solid var(--line);border-radius:9px;background:#fff;color:#334155;font-size:20px}
+.changes-list{overflow:auto;padding:8px 17px 18px}.change-mobile-item{padding:13px 2px;border-bottom:1px solid var(--line-soft)}
+.change-mobile-item small{display:block;color:#7b8798;font-size:8px}.change-mobile-item strong{display:block;margin-top:5px;font-size:11px;line-height:1.35}.change-mobile-item p{margin:5px 0 0;color:#667085;font-size:8.5px;line-height:1.5;overflow-wrap:anywhere}
+.change-mobile-values{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center;margin-top:8px}.change-mobile-values span{padding:7px;border:1px solid var(--line);border-radius:7px;background:#f7f9fb;color:#526074;font-size:8px;overflow-wrap:anywhere}.change-mobile-values b{font-size:9px;color:#8a95a3}
+.changes-empty{min-height:180px;display:grid;place-items:center;color:#7b8798;font-size:10px;text-align:center}.changes-panel>footer{padding:12px 17px;border-top:1px solid var(--line);background:#fafbfc;color:#7a8495;font-size:7.8px;line-height:1.5}
+@media(max-width:760px){.agenda-live{flex-wrap:wrap;justify-content:flex-end}.connection-card{order:1;width:100%;min-width:0}.agenda-utility,.agenda-text-size,.agenda-refresh{order:2}.agenda-refresh span{display:none}.agenda-topbar{align-items:flex-start}.changes-panel{width:100%}}
+@media(max-width:430px){.agenda-utility{padding:0 9px}.agenda-utility span{display:none}.changes-panel>header{padding:18px 15px}.changes-list{padding:6px 13px 16px}.change-mobile-values{grid-template-columns:1fr}.change-mobile-values b{display:none}}

@@ -1,8 +1,10 @@
 import {
   FIREBASE_CONFIG,
   EVENTS_COLLECTION,
-  META_COLLECTION
+  META_COLLECTION,
+  CHANGES_COLLECTION
 } from './firebase-config.js';
+import {applyAppearance,readAppearanceCache,writeAppearanceCache,THEME_DOC_ID} from './theme-settings.js';
 
 const SDK='https://www.gstatic.com/firebasejs/12.16.0';
 const FALLBACK_INTERVAL_MS=15000;
@@ -11,6 +13,7 @@ const CACHE_DB='agenda-movil-cache-v3';
 const CACHE_STORE='state';
 const CACHE_KEY='events';
 const $=id=>document.getElementById(id);
+applyAppearance('agenda_movil',readAppearanceCache());
 
 const state={
   all:[],
@@ -21,12 +24,16 @@ const state={
   db:null,
   sdk:null,
   metaUnsubscribe:null,
+  changesUnsubscribe:null,
+  themeUnsubscribe:null,
   fallbackTimer:null,
   lastHash:'',
   initialized:false,
   refreshing:false,
   meta:null,
-  selected:null
+  selected:null,
+  recentChanges:[],
+  changesInitialized:false
 };
 
 const text=value=>value===undefined||value===null?'':String(value);
@@ -42,6 +49,65 @@ function saveFilters(){
   };
   try{localStorage.setItem(FILTER_KEY,JSON.stringify(value));}catch(_){}
 }
+function hideBoot(){const boot=$('mobileBoot');if(boot)boot.classList.add('is-hidden');}
+function formatAuditDate(value){
+  const date=value?.toDate?value.toDate():new Date(value);
+  return Number.isNaN(date.getTime())?'Sin fecha':date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
+}
+function auditTitle(entry){
+  if(entry.type==='creado')return `Evento creado · ${entry.company||'Empresa'}`;
+  if(entry.type==='eliminado')return `Evento eliminado · ${entry.company||'Empresa'}`;
+  return `${entry.field||'Campo'} actualizado · ${entry.company||'Empresa'}`;
+}
+function renderRecentChanges(){
+  const list=$('mobileChangesList');if(!list)return;
+  $('mobileChangesCount').textContent=String(state.recentChanges.length);
+  list.innerHTML=state.recentChanges.length?state.recentChanges.map(entry=>`<article class="change-mobile-item">
+    <small>${esc(formatAuditDate(entry.timestamp||entry.publishedAt))}</small>
+    <strong>${esc(auditTitle(entry))}</strong>
+    <p>${esc([entry.user,entry.host,entry.sheet,entry.cell].filter(Boolean).join(' · ')||'Cambio publicado desde el archivo maestro')}</p>
+    ${entry.type==='actualizado'?`<div class="change-mobile-values"><span>${esc(entry.before||'Vacío')}</span><b>→</b><span>${esc(entry.after||'Vacío')}</span></div>`:''}
+  </article>`).join(''):'<div class="changes-empty">Sin cambios recientes.</div>';
+}
+function openChanges(){
+  $('mobileChangesPanel')?.classList.add('is-open');$('mobileChangesPanel')?.setAttribute('aria-hidden','false');
+  if($('mobileChangesBackdrop'))$('mobileChangesBackdrop').hidden=false;
+  $('mobileChangesToggle')?.setAttribute('aria-expanded','true');
+}
+function closeChanges(){
+  $('mobileChangesPanel')?.classList.remove('is-open');$('mobileChangesPanel')?.setAttribute('aria-hidden','true');
+  if($('mobileChangesBackdrop'))$('mobileChangesBackdrop').hidden=true;
+  $('mobileChangesToggle')?.setAttribute('aria-expanded','false');
+}
+function bindRealtimeChanges(fireMod){
+  try{
+    const query=fireMod.query(fireMod.collection(state.db,CHANGES_COLLECTION),fireMod.orderBy('timestamp','desc'),fireMod.limit(18));
+    state.changesUnsubscribe?.();
+    state.changesUnsubscribe=fireMod.onSnapshot(query,snapshot=>{
+      const added=state.changesInitialized?snapshot.docChanges().filter(change=>change.type==='added').map(change=>({id:change.doc.id,...change.doc.data()})):[];
+      state.recentChanges=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+      renderRecentChanges();
+      if(added.length){
+        const latest=added[0];
+        setNotice(`${auditTitle(latest)}.`, 'success');
+        import('./notifications.js').then(module=>module.showNotification('Cambio en la agenda',auditTitle(latest),{tag:'agenda-change',url:'./agenda_movil.html',renotify:true})).catch(()=>{});
+      }
+      state.changesInitialized=true;
+    },error=>console.warn('Agenda changes:',error));
+  }catch(error){console.warn('Agenda changes query:',error);}
+}
+function bindRemoteAppearance(fireMod){
+  try{
+    const ref=fireMod.doc(state.db,META_COLLECTION,THEME_DOC_ID);
+    state.themeUnsubscribe?.();
+    state.themeUnsubscribe=fireMod.onSnapshot(ref,snapshot=>{
+      if(!snapshot.exists())return;
+      const value=writeAppearanceCache(snapshot.data()||{});
+      applyAppearance('agenda_movil',value);
+    },()=>{});
+  }catch(_){}
+}
+
 function relativeTime(value){
   const date=value?.toDate?value.toDate():new Date(value);
   if(Number.isNaN(date.getTime()))return'Esperando actualización';
@@ -463,6 +529,7 @@ async function initializeFirebase(){
     state.lastHash=cached.hash||dataHash(cached.events);
     state.cloudHash=cached.cloudHash||'';
     render();
+    hideBoot();
   }
   try{
     const [appMod,authMod,fireMod]=await Promise.all([
@@ -494,7 +561,10 @@ async function initializeFirebase(){
       console.warn('Meta listener:',error);
       refreshFromCloud();
     });
+    bindRealtimeChanges(fireMod);
+    bindRemoteAppearance(fireMod);
     await refreshFromCloud();
+    hideBoot();
     state.fallbackTimer=setInterval(()=>{
       if(!document.hidden)refreshFromCloud();
     },FALLBACK_INTERVAL_MS);
@@ -503,6 +573,7 @@ async function initializeFirebase(){
       if(!document.hidden)refreshFromCloud();
     });
   }catch(error){
+    hideBoot();
     console.error('Firebase móvil:',error);
     setConnection('Firebase no pudo iniciar',false);
     setNotice('No fue posible iniciar la agenda. Se volverá a intentar automáticamente.','error');
@@ -532,6 +603,9 @@ $('mobileTextSize').addEventListener('click',()=>{
   localStorage.setItem('rptAgendaLargeTextV1',active?'1':'0');
 });
 $('mobileRefresh').addEventListener('click',()=>refreshFromCloud({notify:true,force:true}));
+$('mobileChangesToggle')?.addEventListener('click',openChanges);
+$('mobileChangesClose')?.addEventListener('click',closeChanges);
+$('mobileChangesBackdrop')?.addEventListener('click',closeChanges);
 $('mobileAgenda').addEventListener('click',event=>{
   const row=event.target.closest('.event-summary-row');
   if(!row)return;
@@ -559,6 +633,8 @@ document.addEventListener('keydown',event=>{
 });
 window.addEventListener('pagehide',()=>{
   state.metaUnsubscribe?.();
+  state.changesUnsubscribe?.();
+  state.themeUnsubscribe?.();
   clearInterval(state.fallbackTimer);
 },{once:true});
 
