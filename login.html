@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>Acceso | Gestión de Eventos</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/login.css?v=20260826-2">
+</head>
+<body>
+  <header class="login-banner">
+    <strong>GESTIÓN DE EVENTOS</strong>
+    <span>Acceso seguro por equipo</span>
+  </header>
+
+  <main class="login-shell">
+    <section class="login-copy">
+      <span>CONTROL DE ACCESO</span>
+      <h1>Gestión de Eventos</h1>
+      <p>Accede al centro operativo desde este equipo. La sesión se recordará en este navegador hasta que cierres sesión.</p>
+      <div class="login-features" aria-label="Características del acceso">
+        <article><strong>Sesión local</strong><span>Se solicita una sola vez por navegador.</span></article>
+        <article><strong>Acceso protegido</strong><span>Index, Eventos, Minuta, Usuarios y Configuración.</span></article>
+        <article><strong>Agenda pública</strong><span>La Agenda Móvil no solicita esta contraseña.</span></article>
+      </div>
+    </section>
+
+    <section class="login-card">
+      <div class="login-card-heading">
+        <span>INICIO DE SESIÓN</span>
+        <h2>Bienvenido</h2>
+        <p>Ingresa tu usuario y contraseña para continuar.</p>
+      </div>
+
+      <form id="loginForm">
+        <label>
+          <span>Usuario</span>
+          <input id="username" name="username" autocomplete="username" required placeholder="Escribe tu usuario">
+        </label>
+        <label>
+          <span>Contraseña</span>
+          <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••">
+        </label>
+        <button id="loginButton" type="submit">Ingresar al sistema</button>
+      </form>
+
+      <div id="loginMessage" class="login-message" hidden></div>
+      <button id="openRecovery" class="recovery-link" type="button">Recuperar acceso de administrador</button>
+      <p class="login-help">La recuperación restablece únicamente la cuenta local Admin y requiere escribir RESTABLECER.</p>
+    </section>
+  </main>
+
+  <div id="welcomeOverlay" class="welcome-overlay" aria-hidden="true">
+    <div class="welcome-card">
+      <span class="welcome-spinner"></span>
+      <small>ACCESO CONCEDIDO</small>
+      <h2 id="welcomeTitle">Bienvenido</h2>
+      <p>Preparando el centro operativo…</p>
+    </div>
+  </div>
+
+  <script type="module" src="js/login.js?v=20260826-2"></script>
+  <script type="module" src="js/pwa.js?v=20260826-2"></script>
+</body>
+</html>

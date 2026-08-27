@@ -1,0 +1,28 @@
+PUBLICACIÓN EN GITHUB PAGES
+===========================
+
+1. Descomprime el ZIP.
+2. Abre la carpeta Red-productividad-tactica-main.
+3. Sube TODO el contenido a la raíz del repositorio.
+4. Reemplaza los archivos actuales.
+5. Confirma el commit.
+6. Espera la publicación de GitHub Pages.
+7. Abre el sitio y presiona Ctrl + F5 una sola vez.
+
+FIREBASE
+--------
+Después de subir los archivos:
+1. Abre Firebase Console.
+2. Firestore Database > Reglas.
+3. Copia el contenido de firestore.rules.
+4. Presiona Publicar.
+
+VERIFICACIÓN
+------------
+Abre:
+- /diagnostico.html
+- /laboratorio.html
+- /agenda_movil.html
+
+No borres los datos del navegador antes de comprobar que el sistema recuperó
+el archivo Excel y la sesión.

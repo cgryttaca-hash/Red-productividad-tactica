@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es" class="auth-pending maintenance-pending" data-auth-page="admin" data-maintenance-page="laboratorio" data-excel-sync-disabled="true">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111318"><title>Laboratorio | Gestión de Eventos</title>
+  <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/auth-guard.js?v=20260801-2300"></script><script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
+  <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/admin-tools.css?v=20260801-2300">
+</head>
+<body>
+<header class="tool-header"><div class="tool-header-inner">
+<a class="tool-brand" href="index.html"><strong>GESTIÓN DE EVENTOS</strong><small>Entorno de pruebas</small></a>
+<nav class="tool-nav"><a href="index.html">Inicio</a><a href="diagnostico.html">Diagnóstico</a><a class="active" href="laboratorio.html">Laboratorio</a><a href="validacion.html">Validación</a><a href="configuracion.html">Configuración</a></nav>
+<div class="tool-session"><span id="sessionName">Administrador</span><button id="logoutButton" type="button">Salir</button></div>
+</div></header>
+<main class="tool-shell">
+<section class="tool-hero"><div><span class="tool-eyebrow">PRUEBA SIN PUBLICAR</span><h1>Laboratorio del Excel</h1><p>Analiza un archivo de prueba con el mismo lector del sistema sin reemplazar Eventos, Minuta, Firebase ni el archivo maestro vinculado.</p></div>
+<div class="tool-actions"><label class="btn primary">Seleccionar Excel<input id="labFile" type="file" accept=".xlsx,.xls,.csv" hidden></label></div></section>
+<section class="grid cols-4">
+<article class="card metric"><small>Registros detectados</small><strong id="labRows">0</strong><span>Sin guardar</span></article>
+<article class="card metric"><small>Hojas mensuales</small><strong id="labSheets">0</strong><span id="labSheetNames">Sin análisis</span></article>
+<article class="card metric"><small>Errores</small><strong id="labErrors">0</strong><span>Bloqueos encontrados</span></article>
+<article class="card metric"><small>Advertencias</small><strong id="labWarnings">0</strong><span>Revisión recomendada</span></article>
+</section>
+<section class="grid cols-2">
+<article class="card"><header class="card-header"><div><span>RESULTADO</span><h2>Informe de prueba</h2><p>La información no se guarda ni se publica.</p></div></header><div class="card-body" id="labReport"><div class="empty"><strong>Selecciona un archivo</strong><span>Se utilizará el mismo parser del sistema productivo.</span></div></div></article>
+<article class="card"><header class="card-header"><div><span>VISTA PREVIA</span><h2>Primeros registros</h2><p>Máximo 20 filas para comprobación visual.</p></div></header><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Empresa</th><th>Escenario</th><th>PAX</th><th>Estado</th></tr></thead><tbody id="labPreview"></tbody></table></div></article>
+</section>
+<div id="labMessage" class="message info" hidden></div>
+<footer class="version-footer"><span>Entorno local de pruebas.</span><span>Ningún dato se envía a Firebase.</span></footer>
+</main>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="js/excel-sync.js?v=20260801-2300"></script>
+<script type="module" src="js/laboratorio.js?v=20260801-2300"></script><script type="module" src="js/pwa.js?v=20260801-2300"></script><script type="module" src="js/device-heartbeat.js?v=20260801-2300"></script>
+</body></html>

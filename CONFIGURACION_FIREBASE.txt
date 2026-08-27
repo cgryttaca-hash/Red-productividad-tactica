@@ -1,0 +1,30 @@
+REGLAS FIREBASE — VERSIÓN 3.0
+=============================
+
+Colecciones utilizadas:
+- eventos_publicos
+- eventos_meta
+- eventos_cambios
+- equipos_autorizados
+
+PERMISOS
+--------
+- La Agenda Móvil utiliza una sesión anónima de Firebase y tiene solo lectura.
+- El UID propietario puede crear, modificar y eliminar eventos, metadata y auditoría.
+- Cada dispositivo anónimo puede registrar únicamente su propio documento.
+- Solo el propietario puede listar, revocar o eliminar equipos.
+
+PUBLICACIÓN OBLIGATORIA
+-----------------------
+1. Abre Firebase Console.
+2. Firestore Database > Reglas.
+3. Copia TODO el contenido de firestore.rules.
+4. Presiona Publicar.
+
+AUTHENTICATION
+--------------
+Mantén habilitados:
+- Correo electrónico/contraseña.
+- Anónimo.
+
+No compartas la contraseña del propietario.
