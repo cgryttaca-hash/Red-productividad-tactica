@@ -126,3 +126,8 @@ body{margin:0;min-height:100vh;display:grid;place-items:center;padding:22px;back
   .maintenance-sidebar section+section{padding:22px 0 0;border-left:0;border-top:1px solid rgba(255,255,255,.1)}
   .countdown>div{min-width:65px}
 }
+
+/* 3.3 · ajuste para pantallas pequeñas y horizontales */
+.maintenance-window{max-width:calc(100vw - 12px)}
+@media(max-width:420px){body{padding:0}.maintenance-window{max-width:none}.maintenance-main{padding-inline:10px}.maintenance-checks{gap:7px}.maintenance-checks article{min-height:96px;padding:10px}.countdown{gap:5px}.countdown>div{min-width:58px;padding:8px 5px}.countdown strong{font-size:19px}.technical-animation{height:180px}.maintenance-sidebar{padding-inline:12px}}
+@media(orientation:landscape) and (max-height:560px){body{display:block}.maintenance-window{max-width:none;border-radius:0}.maintenance-main{padding-top:20px}.technical-animation{height:150px}.maintenance-checks{margin-top:18px}.maintenance-layout{min-height:0}}

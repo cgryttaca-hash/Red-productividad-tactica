@@ -1,5 +1,17 @@
 # Historial de cambios
 
+## 3.3.0 — 2026-08-26
+- Inicio simplificado: solo deja visibles accesos principales, estado general y resumen del último Excel.
+- Sincronización detallada, actividad, auditoría y administración se agrupan en un Centro de herramientas desplegable.
+- La actividad del Inicio ya no se renderiza hasta abrir el Centro de herramientas, reduciendo trabajo inicial de DOM.
+- Responsive reforzado desde 280 px hasta escritorio grande para Inicio, Agenda Móvil, Login, Usuarios, Mantenimiento y todas las herramientas administrativas.
+- Agenda Móvil añade autorización de notificaciones directamente en la propia Agenda, avisos visuales tipo toast, contador de cambios no leídos y badge de la PWA cuando el navegador lo permite.
+- Las notificaciones de cambios se agrupan para evitar duplicados y muestran el cambio más reciente más el número de cambios adicionales.
+- Auditoría, Diagnóstico, Respaldos, Equipos, Validación, Laboratorio y Configuración comparten una interfaz administrativa más compacta y adaptable.
+- Pantalla offline renovada y utilizable desde teléfonos muy pequeños.
+- Caché PWA renovada a 3.3.0.
+- Eventos y Minuta permanecen byte a byte sin modificaciones.
+
 ## 3.2.0 — 2026-08-26
 - Rediseño completo del Inicio con barra lateral, centro de control, métricas y flujo visual Excel → Firebase.
 - Rediseño completo de Agenda Móvil con resumen del día, buscador fijo, filtros en panel, navegación inferior y vista adaptada a teléfonos.

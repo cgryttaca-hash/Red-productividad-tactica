@@ -33,7 +33,10 @@ const state={
   meta:null,
   selected:null,
   recentChanges:[],
-  changesInitialized:false
+  changesInitialized:false,
+  unreadChanges:0,
+  lastReadChangeId:'',
+  notificationModule:null
 };
 
 const text=value=>value===undefined||value===null?'':String(value);
@@ -41,6 +44,7 @@ const normalize=value=>text(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'
 const esc=value=>text(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
 const chunkId=index=>`${CHUNK_PREFIX}${String(index).padStart(4,'0')}`;
 const FILTER_KEY='rptAgendaFiltersV1';
+const READ_CHANGE_KEY='rptAgendaLastReadChangeV1';
 function readFilters(){try{return JSON.parse(localStorage.getItem(FILTER_KEY)||'null')||{};}catch(_){return{};}}
 function saveFilters(){
   const value={
@@ -59,9 +63,67 @@ function auditTitle(entry){
   if(entry.type==='eliminado')return `Evento eliminado · ${entry.company||'Empresa'}`;
   return `${entry.field||'Campo'} actualizado · ${entry.company||'Empresa'}`;
 }
+function updateUnreadBadge(){
+  const count=Math.max(0,Number(state.unreadChanges)||0);
+  if($('mobileChangesCount')){$('mobileChangesCount').textContent=String(count);$('mobileChangesCount').hidden=count===0;}
+  if($('mobileBottomUnread')){$('mobileBottomUnread').textContent=String(count);$('mobileBottomUnread').hidden=count===0;}
+  $('mobileChangesToggle')?.classList.toggle('has-unread',count>0);
+  try{
+    if(count>0&&navigator.setAppBadge)navigator.setAppBadge(count).catch(()=>{});
+    else if(count===0&&navigator.clearAppBadge)navigator.clearAppBadge().catch(()=>{});
+  }catch(_){}
+}
+function markChangesRead(){
+  state.unreadChanges=0;
+  const newest=state.recentChanges[0]?.id||'';
+  if(newest){state.lastReadChangeId=newest;try{localStorage.setItem(READ_CHANGE_KEY,newest);}catch(_){}}
+  updateUnreadBadge();
+}
+function showMobileToast(title,detail='',type='success'){
+  const stack=$('mobileToastStack');if(!stack)return;
+  const toast=document.createElement('article');toast.className=`mobile-toast is-${type}`;
+  toast.innerHTML=`<span class="mobile-toast__dot"></span><div><strong>${esc(title)}</strong>${detail?`<small>${esc(detail)}</small>`:''}</div><button type="button" aria-label="Cerrar aviso">×</button>`;
+  toast.querySelector('button')?.addEventListener('click',()=>toast.remove());stack.prepend(toast);
+  while(stack.children.length>3)stack.lastElementChild?.remove();
+  setTimeout(()=>{toast.classList.add('is-leaving');setTimeout(()=>toast.remove(),220);},5200);
+}
+async function getNotificationModule(){
+  if(!state.notificationModule)state.notificationModule=import('./notifications.js').catch(()=>null);
+  return state.notificationModule;
+}
+async function syncNotificationUI(){
+  const button=$('mobileNotifyButton');const prompt=$('mobileNotificationPrompt');
+  if(!button)return;
+  if(!('Notification'in window)){
+    button.classList.add('is-unavailable');button.querySelector('strong').textContent='Sin avisos';button.title='Este navegador no admite notificaciones';
+    if(prompt)prompt.hidden=true;return;
+  }
+  const module=await getNotificationModule();const settings=module?.getNotificationSettings?.()||{};
+  const enabled=Notification.permission==='granted'&&settings.enabled!==false&&settings.mobile!==false;
+  button.classList.toggle('is-enabled',enabled);button.classList.toggle('is-denied',Notification.permission==='denied');
+  button.querySelector('strong').textContent=enabled?'Avisos activos':Notification.permission==='denied'?'Avisos bloqueados':'Activar avisos';
+  button.title=enabled?'Notificaciones activas para la Agenda':'Configurar notificaciones de la Agenda';
+  if(prompt)prompt.hidden=enabled||Notification.permission==='denied';
+}
+async function enableAgendaNotifications(){
+  if(!('Notification'in window)){showMobileToast('Avisos no disponibles','Este navegador no admite notificaciones.','warning');return;}
+  if(Notification.permission==='denied'){
+    showMobileToast('Notificaciones bloqueadas','Actívalas desde los permisos del sitio en el navegador.','warning');syncNotificationUI();return;
+  }
+  const module=await getNotificationModule();if(!module)return;
+  try{
+    const permission=Notification.permission==='granted'?'granted':await module.requestNotificationPermission();
+    if(permission==='granted'){
+      module.setNotificationSettings?.({enabled:true,mobile:true});
+      showMobileToast('Avisos activados','La Agenda te avisará cuando detecte nuevos cambios.');
+      module.showNotification?.('Avisos de Agenda activados','Las notificaciones quedaron listas en este dispositivo.',{tag:'agenda-notifications-ready',url:'./agenda_movil.html'});
+    }
+  }catch(error){showMobileToast('No fue posible activar avisos',error?.message||'Revisa los permisos del navegador.','warning');}
+  syncNotificationUI();
+}
 function renderRecentChanges(){
   const list=$('mobileChangesList');if(!list)return;
-  $('mobileChangesCount').textContent=String(state.recentChanges.length);
+  updateUnreadBadge();
   list.innerHTML=state.recentChanges.length?state.recentChanges.map(entry=>`<article class="change-mobile-item">
     <small>${esc(formatAuditDate(entry.timestamp||entry.publishedAt))}</small>
     <strong>${esc(auditTitle(entry))}</strong>
@@ -70,6 +132,7 @@ function renderRecentChanges(){
   </article>`).join(''):'<div class="changes-empty">Sin cambios recientes.</div>';
 }
 function openChanges(){
+  markChangesRead();
   $('mobileChangesPanel')?.classList.add('is-open');$('mobileChangesPanel')?.setAttribute('aria-hidden','false');
   if($('mobileChangesBackdrop'))$('mobileChangesBackdrop').hidden=false;
   $('mobileChangesToggle')?.setAttribute('aria-expanded','true');
@@ -86,12 +149,23 @@ function bindRealtimeChanges(fireMod){
     state.changesUnsubscribe=fireMod.onSnapshot(query,snapshot=>{
       const added=state.changesInitialized?snapshot.docChanges().filter(change=>change.type==='added').map(change=>({id:change.doc.id,...change.doc.data()})):[];
       state.recentChanges=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
-      renderRecentChanges();
-      if(added.length){
-        const latest=added[0];
-        setNotice(`${auditTitle(latest)}.`, 'success');
-        import('./notifications.js').then(module=>module.showNotification('Cambio en la agenda',auditTitle(latest),{tag:'agenda-change',url:'./agenda_movil.html',renotify:true})).catch(()=>{});
+      if(!state.changesInitialized){
+        try{state.lastReadChangeId=localStorage.getItem(READ_CHANGE_KEY)||'';}catch(_){state.lastReadChangeId='';}
+        if(state.lastReadChangeId){
+          const index=state.recentChanges.findIndex(entry=>entry.id===state.lastReadChangeId);
+          state.unreadChanges=index>0?index:0;
+        }else state.unreadChanges=0;
       }
+      if(added.length){
+        state.unreadChanges=Math.min(99,state.unreadChanges+added.length);
+        const latest=added[0];
+        const context=[latest.user,latest.host,latest.sheet,latest.cell].filter(Boolean).join(' · ');
+        setNotice(`${auditTitle(latest)}.`, 'success');
+        showMobileToast(auditTitle(latest),context||'Cambio publicado desde el archivo maestro');
+        const notificationBody=added.length>1?`${auditTitle(latest)} · ${added.length-1} cambio${added.length-1===1?'':'s'} más.`:auditTitle(latest);
+        getNotificationModule().then(module=>module?.showNotification?.('Cambio en la agenda',notificationBody,{tag:'agenda-change-latest',url:'./agenda_movil.html',renotify:true})).catch(()=>{});
+      }
+      renderRecentChanges();
       state.changesInitialized=true;
     },error=>console.warn('Agenda changes:',error));
   }catch(error){console.warn('Agenda changes query:',error);}
@@ -479,13 +553,7 @@ async function applyEvents(events,updatedAt,notify=true,cloudHash=''){
   });
   setConnection('Sincronización activa',true);
   setNotice(changed&&notify?'La agenda recibió una actualización automática.':'',changed?'success':'');
-  if(changed&&notify){
-    import('./notifications.js').then(module=>module.showNotification(
-      'Agenda actualizada',
-      `${normalized.length} eventos disponibles. Consulta los cambios recientes.`,
-      {tag:'agenda-realtime',url:'./agenda_movil.html',renotify:true}
-    )).catch(()=>{});
-  }
+  if(changed&&notify)showMobileToast('Agenda actualizada',`${normalized.length} eventos disponibles. Revisa Cambios para ver el detalle.`);
   render();
 }
 async function loadChunks(meta,notify=false){
@@ -641,6 +709,10 @@ $('mobileTextSize').addEventListener('click',()=>{
 });
 $('mobileRefresh').addEventListener('click',()=>refreshFromCloud({notify:true,force:true}));
 $('mobileChangesToggle')?.addEventListener('click',openChanges);
+$('mobileNotifyButton')?.addEventListener('click',enableAgendaNotifications);
+$('mobileNotificationPromptButton')?.addEventListener('click',enableAgendaNotifications);
+document.querySelectorAll('[data-mobile-notify]').forEach(button=>button.addEventListener('click',enableAgendaNotifications));
+window.addEventListener('rptNotificationSettingsChanged',syncNotificationUI);
 document.querySelectorAll('[data-mobile-open-changes]').forEach(button=>button.addEventListener('click',openChanges));
 $('mobileChangesClose')?.addEventListener('click',closeChanges);
 $('mobileChangesBackdrop')?.addEventListener('click',closeChanges);
@@ -687,4 +759,5 @@ document.querySelectorAll('.agenda-view-button').forEach(button=>button.classLis
 setInterval(updateHeader,30000);
 updateHeader();
 render();
+syncNotificationUI();
 initializeFirebase();

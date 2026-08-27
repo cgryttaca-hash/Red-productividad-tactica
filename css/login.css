@@ -62,3 +62,10 @@ button,input{font:inherit}
   .login-features{grid-template-columns:1fr}
   .login-card{padding:25px 20px;border-radius:18px}
 }
+
+/* 3.3 · ajuste fluido */
+.login-shell{width:min(1480px,calc(100% - 24px));padding-left:clamp(16px,3vw,34px);padding-right:clamp(16px,3vw,34px)}
+.login-card{width:100%}.login-features article{min-width:0}.login-features span{overflow-wrap:anywhere}
+@media(max-width:760px){.login-banner{min-height:60px}.login-shell{min-height:calc(100vh - 60px);align-content:start;width:100%;padding-top:28px}.login-copy h1{font-size:clamp(38px,12vw,55px)}.login-features{grid-template-columns:repeat(3,minmax(0,1fr));overflow-x:auto;padding-bottom:4px}.login-features article{min-width:180px}.login-card{max-width:none}}
+@media(max-width:480px){.login-copy>p{font-size:13px}.login-features{grid-template-columns:1fr;overflow:visible}.login-features article{min-width:0}.login-card{padding:21px 16px}.login-card-heading h2{font-size:28px}.login-shell{gap:22px}}
+@media(max-width:330px){.login-banner{padding-inline:12px}.login-shell{padding-inline:10px}.login-copy h1{font-size:35px}.login-card{border-radius:15px}}

@@ -9,10 +9,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Agenda Eventos">
   <title>Agenda móvil | Gestión de Eventos</title>
-  <script type="module" src="js/maintenance-guard.js?v=20260826-2"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260826-3"></script>
   <link rel="manifest" href="agenda.webmanifest">
-  <link rel="stylesheet" href="css/agenda-movil.css?v=20260826-2">
-  <link rel="stylesheet" href="css/themes.css?v=20260826-2">
+  <link rel="stylesheet" href="css/agenda-movil.css?v=20260826-3">
+  <link rel="stylesheet" href="css/themes.css?v=20260826-3">
 </head>
 <body>
   <div class="agenda-shell">
@@ -21,6 +21,7 @@
       <div class="mobile-header-actions">
         <div class="live-pill"><i id="mobileConnectionDot"></i><span id="mobileConnectionText">Conectando…</span></div>
         <button id="mobileChangesToggle" class="icon-button changes-button" type="button" aria-controls="mobileChangesPanel" aria-expanded="false" title="Cambios recientes"><span>↻</span><b id="mobileChangesCount">0</b></button>
+        <button id="mobileNotifyButton" class="notify-button" type="button" title="Activar notificaciones" aria-label="Configurar notificaciones"><span aria-hidden="true">AV</span><strong>Avisos</strong></button>
         <button class="install-button" data-install-app hidden type="button">Instalar</button>
         <button id="mobileTextSize" class="icon-button" type="button" aria-label="Cambiar tamaño del texto" title="Tamaño de texto">A+</button>
         <button id="mobileRefresh" class="icon-button" type="button" aria-label="Actualizar agenda" title="Actualizar agenda">↻</button>
@@ -53,6 +54,10 @@
       </section>
 
       <section id="mobileNotice" class="agenda-notice" hidden></section>
+      <section id="mobileNotificationPrompt" class="notification-prompt" hidden>
+        <div><span class="notification-prompt__icon">AV</span><div><strong>Activa los avisos de la Agenda</strong><small>Recibe notificaciones cuando el Excel publique cambios mientras la Agenda esté abierta o ejecutándose como PWA.</small></div></div>
+        <button id="mobileNotificationPromptButton" type="button">Activar avisos</button>
+      </section>
       <section id="mobileBoot" class="agenda-boot" role="status"><span class="boot-spinner"></span><div><strong>Sincronizando agenda</strong><small>Mostrando primero la información guardada…</small></div></section>
       <section class="results-bar"><span id="agendaVisibleCount">0 eventos</span><small>Selecciona un evento para ver el detalle completo.</small></section>
       <section id="mobileAgenda" class="agenda-content" aria-live="polite"></section>
@@ -77,12 +82,13 @@
     <footer>Fecha y hora · usuario/equipo · hoja/celda · valor anterior y nuevo cuando aplica.</footer>
   </aside>
   <div id="mobileChangesBackdrop" class="drawer-backdrop" hidden></div>
+  <div id="mobileToastStack" class="mobile-toast-stack" role="status" aria-live="polite" aria-atomic="false"></div>
 
   <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
     <button class="agenda-view-button is-active" type="button" data-view="today"><i>HO</i><span>Hoy</span></button>
     <button class="agenda-view-button" type="button" data-view="upcoming"><i>PR</i><span>Próximos</span></button>
-    <button type="button" data-mobile-open-changes><i>CH</i><span>Cambios</span></button>
-    <button type="button" data-install-app hidden><i>APP</i><span>Instalar</span></button>
+    <button type="button" data-mobile-open-changes><i>CH</i><span>Cambios</span><b class="bottom-unread" id="mobileBottomUnread" hidden>0</b></button>
+    <button type="button" data-mobile-notify><i>AV</i><span>Avisos</span></button>
   </nav>
 
   <div id="mobileDetailModal" class="detail-modal" aria-hidden="true">
@@ -93,8 +99,8 @@
     </div>
   </div>
 
-  <script type="module" src="js/agenda-movil.js?v=20260826-2"></script>
-  <script type="module" src="js/pwa.js?v=20260826-2"></script>
-  <script type="module" src="js/notifications.js?v=20260826-2"></script>
+  <script type="module" src="js/agenda-movil.js?v=20260826-3"></script>
+  <script type="module" src="js/pwa.js?v=20260826-3"></script>
+  <script type="module" src="js/notifications.js?v=20260826-3"></script>
 </body>
 </html>

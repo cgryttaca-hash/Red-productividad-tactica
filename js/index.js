@@ -98,7 +98,7 @@ function idle(task,timeout=900){if('requestIdleCallback'in window)requestIdleCal
 function loadScript(src){return new Promise((resolve,reject)=>{const found=document.querySelector(`script[data-runtime-src="${src}"]`);if(found){if(found.dataset.loaded==='1')resolve();else found.addEventListener('load',resolve,{once:true});return;}const script=document.createElement('script');script.src=src;script.defer=true;script.dataset.runtimeSrc=src;script.addEventListener('load',()=>{script.dataset.loaded='1';resolve();},{once:true});script.addEventListener('error',()=>reject(new Error(`No se pudo cargar ${src}`)),{once:true});document.head.appendChild(script);});}
 async function loadExcelRuntime(){
   if(excelRuntimePromise)return excelRuntimePromise;
-  excelRuntimePromise=(async()=>{const placeholder=document.querySelector('[data-excel-sync-slot] .runtime-placeholder');try{if(!window.XLSX){try{await loadScript('https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js');}catch(_){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');}}await loadScript('js/excel-sync.js?v=20260826-2');placeholder?.remove();}catch(error){if(placeholder)placeholder.innerHTML='<div><strong>Excel no pudo iniciar</strong><small>Pulsa Gestionar Excel para reintentar.</small></div>';excelRuntimePromise=null;console.error(error);}})();
+  excelRuntimePromise=(async()=>{const placeholder=document.querySelector('[data-excel-sync-slot] .runtime-placeholder');try{if(!window.XLSX){try{await loadScript('https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js');}catch(_){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');}}await loadScript('js/excel-sync.js?v=20260826-3');placeholder?.remove();}catch(error){if(placeholder)placeholder.innerHTML='<div><strong>Excel no pudo iniciar</strong><small>Pulsa Gestionar Excel para reintentar.</small></div>';excelRuntimePromise=null;console.error(error);}})();
   return excelRuntimePromise;
 }
 async function startOperationalModules(){
@@ -115,12 +115,14 @@ async function openExcel(){await loadExcelRuntime();document.getElementById('exc
 
 for(const button of document.querySelectorAll('[data-activity-tab]'))button.addEventListener('click',()=>activateTab(button.dataset.activityTab));
 $('refreshDashboard')?.addEventListener('click',()=>{scheduleRefresh(true);startOperationalModules();window.ExcelFileSync?.refresh?.();});
-$('quickExcelButton')?.addEventListener('click',openExcel);$('sidebarToggle')?.addEventListener('click',openSidebar);$('sidebarClose')?.addEventListener('click',closeSidebar);$('sidebarBackdrop')?.addEventListener('click',closeSidebar);
-window.addEventListener('resize',()=>{if(innerWidth>880)closeSidebar();},{passive:true});
+$('quickExcelButton')?.addEventListener('click',openExcel);
+$('toolCenter')?.addEventListener('toggle',event=>{if(event.currentTarget.open){startOperationalModules();renderActivity(true);}});
+$('sidebarToggle')?.addEventListener('click',openSidebar);$('sidebarClose')?.addEventListener('click',closeSidebar);$('sidebarBackdrop')?.addEventListener('click',closeSidebar);
+window.addEventListener('resize',()=>{if(innerWidth>960)closeSidebar();},{passive:true});
 ['eventDataUpdated','eventAuditUpdated','firebaseEventsPublished','rptSystemLogUpdated'].forEach(name=>window.addEventListener(name,()=>scheduleRefresh(true)));
 window.addEventListener('storage',event=>{if(!event.key||/eventData|excelSync|firebase|rptSystemLog/.test(event.key))scheduleRefresh(false);});
 
 updateClock();renderSummary();
 requestAnimationFrame(()=>requestAnimationFrame(hideLoader));
 Promise.allSettled([import('./session-ui.js'),import('./pwa.js')]);
-setInterval(updateClock,30000);setInterval(()=>scheduleRefresh(false),60000);idle(startOperationalModules,850);idle(()=>renderActivity(true),1500);
+setInterval(updateClock,30000);setInterval(()=>scheduleRefresh(false),60000);idle(startOperationalModules,1400);

@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
-  <meta name="description" content="Centro de control para la operación, sincronización y auditoría de eventos.">
-  <title>Centro de control | Gestión de Eventos</title>
-  <script src="js/auth-guard.js?v=20260826-2"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260826-2"></script>
+  <meta name="theme-color" content="#0b1220">
+  <meta name="description" content="Centro operativo liviano para eventos, Excel, Firebase y Agenda Móvil.">
+  <title>Inicio | Gestión de Eventos</title>
+  <script src="js/auth-guard.js?v=20260826-3"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260826-3"></script>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/excel-sync.css?v=20260826-2">
-  <link rel="stylesheet" href="css/firebase-sync.css?v=20260826-2">
-  <link rel="stylesheet" href="css/index.css?v=20260826-2">
-  <link rel="stylesheet" href="css/themes.css?v=20260826-2">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260826-3">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260826-3">
+  <link rel="stylesheet" href="css/index.css?v=20260826-3">
+  <link rel="stylesheet" href="css/themes.css?v=20260826-3">
 </head>
 <body>
   <div id="loader" class="app-loader" role="status" aria-live="polite">
     <div class="app-loader__panel">
       <span class="app-loader__logo">GE</span>
-      <div><strong>Centro de control</strong><small id="loaderText">Preparando la interfaz…</small></div>
+      <div><strong>Gestión de Eventos</strong><small id="loaderText">Preparando el panel…</small></div>
       <span class="app-loader__bar"><i></i></span>
     </div>
   </div>
@@ -26,29 +26,33 @@
   <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
   <aside id="appSidebar" class="app-sidebar" aria-label="Navegación principal">
     <div class="sidebar-brand">
-      <a href="index.html" aria-label="Ir al inicio"><span class="brand-mark">GE</span><span><strong>Gestión de Eventos</strong><small>Centro operativo</small></span></a>
+      <a href="index.html"><span class="brand-mark">GE</span><span><strong>Gestión de Eventos</strong><small>Centro operativo</small></span></a>
       <button id="sidebarClose" class="sidebar-close" type="button" aria-label="Cerrar menú">×</button>
     </div>
 
     <nav class="sidebar-nav">
-      <span class="nav-caption">OPERACIÓN</span>
+      <span class="nav-caption">TRABAJO</span>
       <a class="is-active" href="index.html"><i>IN</i><span>Inicio</span></a>
       <a href="eventos.html"><i>EV</i><span>Eventos</span></a>
       <a href="minuta.html"><i>MI</i><span>Minuta</span></a>
       <a href="agenda_movil.html" target="_blank" rel="noopener"><i>AG</i><span>Agenda móvil</span><b>LIVE</b></a>
 
-      <div class="admin-nav" data-admin-only hidden>
-        <span class="nav-caption">ADMINISTRACIÓN</span>
-        <a id="usersLink" href="usuarios.html"><i>US</i><span>Usuarios</span></a>
-        <a id="configLink" href="configuracion.html"><i>CF</i><span>Configuración</span></a>
-        <a href="auditoria.html" data-admin-link><i>AU</i><span>Auditoría</span></a>
-        <a href="diagnostico.html" data-admin-link><i>DX</i><span>Diagnóstico</span></a>
-        <a href="respaldos.html" data-admin-link><i>BK</i><span>Respaldos</span></a>
-      </div>
+      <details class="sidebar-group" data-admin-only hidden>
+        <summary><span>ADMINISTRACIÓN</span><b>+</b></summary>
+        <div>
+          <a id="usersLink" href="usuarios.html"><i>US</i><span>Usuarios</span></a>
+          <a id="configLink" href="configuracion.html"><i>CF</i><span>Configuración</span></a>
+          <a href="auditoria.html" data-admin-link><i>AU</i><span>Auditoría</span></a>
+          <a href="diagnostico.html" data-admin-link><i>DX</i><span>Diagnóstico</span></a>
+          <a href="respaldos.html" data-admin-link><i>BK</i><span>Respaldos</span></a>
+          <a href="equipos.html" data-admin-link><i>EQ</i><span>Equipos</span></a>
+          <a href="validacion.html" data-admin-link><i>VA</i><span>Validación</span></a>
+        </div>
+      </details>
     </nav>
 
     <div class="sidebar-footer">
-      <div class="sidebar-online"><span></span><div><strong>Sistema disponible</strong><small id="sidebarSyncText">Sincronización iniciando</small></div></div>
+      <div class="sidebar-online"><span></span><div><strong id="topSystemStatus">Preparando</strong><small id="sidebarSyncText">Sincronización iniciando</small></div></div>
       <button class="sidebar-install" data-install-app hidden type="button">Instalar aplicación</button>
     </div>
   </aside>
@@ -57,113 +61,99 @@
     <header class="topbar">
       <div class="topbar-left">
         <button id="sidebarToggle" class="menu-button" type="button" aria-label="Abrir menú" aria-controls="appSidebar" aria-expanded="false"><span></span><span></span><span></span></button>
-        <div class="page-title"><small>OPERACIÓN GENERAL</small><strong>Centro de control</strong></div>
+        <div class="page-title"><small>INICIO</small><strong>Panel operativo</strong></div>
       </div>
       <div class="topbar-right">
-        <div class="top-status"><span class="top-status__dot"></span><div><small>Estado</small><strong id="topSystemStatus">Operativo</strong></div></div>
         <div class="clock-block"><span id="todayLabel">--</span><strong id="reloj">--:--</strong></div>
-        <div class="session-menu">
-          <div class="session-avatar" aria-hidden="true">AD</div>
-          <div><small id="sessionUserRole">Usuario</small><strong id="sessionUserName">—</strong></div>
-          <button id="logoutButton" type="button">Salir</button>
-        </div>
+        <div class="session-menu"><div class="session-avatar" aria-hidden="true">AD</div><div><small id="sessionUserRole">Usuario</small><strong id="sessionUserName">—</strong></div><button id="logoutButton" type="button">Salir</button></div>
       </div>
     </header>
 
     <main class="dashboard">
-      <section class="hero-panel">
-        <div class="hero-copy">
-          <span class="hero-kicker"><i></i> PANEL EN TIEMPO REAL</span>
-          <h1>Todo lo importante,<br><em>sin ruido.</em></h1>
-          <p>Consulta el estado del Excel, la publicación móvil y los últimos cambios desde una sola vista rápida.</p>
-          <div class="hero-actions">
+      <section class="welcome-panel">
+        <div class="welcome-copy">
+          <span class="eyebrow"><i></i> OPERACIÓN EN TIEMPO REAL</span>
+          <h1>Lo importante primero.</h1>
+          <p>Abre tus módulos de trabajo y revisa el estado general sin tener que recorrer todos los controles técnicos.</p>
+          <div class="primary-actions">
             <a class="button button--primary" href="eventos.html">Abrir eventos</a>
-            <a class="button button--ghost" href="agenda_movil.html" target="_blank" rel="noopener">Ver agenda móvil</a>
-            <button id="quickExcelButton" class="button button--ghost" type="button">Gestionar Excel</button>
+            <a class="button" href="agenda_movil.html" target="_blank" rel="noopener">Agenda móvil</a>
+            <button id="quickExcelButton" class="button" type="button">Actualizar Excel</button>
           </div>
         </div>
-        <div class="hero-health" aria-label="Estado de sincronización">
-          <div class="health-ring"><span id="healthPercent">--</span><small>ESTADO</small></div>
-          <div class="health-copy"><small>SINCRONIZACIÓN</small><strong id="healthTitle">Preparando sistema</strong><span id="healthDetail">Verificando datos locales y nube.</span></div>
+        <div class="health-card">
+          <div class="health-ring"><strong id="healthPercent">--</strong><span>salud</span></div>
+          <div><small>ESTADO GENERAL</small><strong id="healthTitle">Preparando sistema</strong><p id="healthDetail">Verificando datos locales y nube.</p></div>
         </div>
       </section>
 
-      <section class="metric-grid" aria-label="Resumen operativo">
-        <article class="metric-card">
-          <div class="metric-icon metric-icon--blue">DB</div><div class="metric-copy"><small>REGISTROS LOCALES</small><strong id="excelRecordCount">0</strong><span id="dataHealthText">Esperando información</span></div>
+      <section class="status-grid" aria-label="Estado principal">
+        <article class="status-card">
+          <span class="status-icon">DB</span><div><small>REGISTROS</small><strong id="excelRecordCount">0</strong><p id="dataHealthText">Esperando información</p></div>
         </article>
-        <article class="metric-card">
-          <div class="metric-icon metric-icon--violet">XL</div><div class="metric-copy"><small>ARCHIVO MAESTRO</small><strong id="excelFileName">Pendiente</strong><span id="excelLastCheck">Sin comprobación</span></div>
+        <article class="status-card">
+          <span class="status-icon">XL</span><div><small>EXCEL MAESTRO</small><strong id="excelFileName">Pendiente</strong><p id="excelLastCheck">Sin comprobación</p></div>
         </article>
-        <article class="metric-card">
-          <div class="metric-icon metric-icon--green">RT</div><div class="metric-copy"><small>AGENDA MÓVIL</small><strong id="mobileState">Verificando</strong><span id="mobileLastPublish">Sin publicación</span></div>
+        <article class="status-card">
+          <span class="status-icon">AG</span><div><small>AGENDA MÓVIL</small><strong id="mobileState">Verificando</strong><p id="mobileLastPublish">Sin publicación</p></div>
         </article>
-        <article class="metric-card">
-          <div class="metric-icon metric-icon--amber">CH</div><div class="metric-copy"><small>ÚLTIMOS CAMBIOS</small><strong id="changeTotal">0</strong><span id="diffUpdatedAt">Sin cambios</span></div>
-        </article>
-      </section>
-
-      <section class="workspace-grid">
-        <article class="panel sync-center">
-          <header class="panel-header"><div><span>FLUJO DE DATOS</span><h2>Sincronización</h2><p>Los componentes pesados se cargan después de la interfaz.</p></div><button id="refreshDashboard" class="icon-action" type="button" aria-label="Actualizar panel">↻</button></header>
-
-          <div class="sync-lane">
-            <div class="sync-lane__head"><span class="lane-number">01</span><div><small>ORIGEN</small><strong>Archivo Excel</strong></div><span class="lane-state" id="excelLaneState">Preparando</span></div>
-            <div class="sync-runtime" data-excel-sync-slot><div class="runtime-placeholder"><span></span><div><strong>Activando lector Excel</strong><small>Se cargará en segundo plano.</small></div></div></div>
-            <dl class="sync-meta"><div><dt>Última comprobación</dt><dd id="excelCheckDetail">—</dd></div><div><dt>Registros</dt><dd id="excelRecordDetail">0</dd></div></dl>
-            <p id="excelSummary" class="sync-note">Esperando la primera comprobación.</p>
-          </div>
-
-          <div class="sync-connector"><span></span><b>PUBLICACIÓN AUTOMÁTICA</b><span></span></div>
-
-          <div class="sync-lane">
-            <div class="sync-lane__head"><span class="lane-number">02</span><div><small>DESTINO</small><strong>Firebase · Agenda móvil</strong></div><span class="lane-state" id="firebaseLaneState">Conectando</span></div>
-            <div class="sync-runtime" data-firebase-sync-slot><div class="runtime-placeholder"><span></span><div><strong>Conectando Firebase</strong><small>La interfaz permanece disponible.</small></div></div></div>
-            <dl class="sync-meta"><div><dt>Registros remotos</dt><dd id="mobileRemoteCount">0</dd></div><div><dt>Última publicación</dt><dd id="mobilePublishDetail">—</dd></div></dl>
-            <p id="mobileSummary" class="sync-note">La comprobación se realiza automáticamente.</p>
-          </div>
-        </article>
-
-        <article class="panel change-center" id="activityPanel">
-          <header class="panel-header panel-header--stack"><div><span>TRAZABILIDAD</span><h2>Actividad reciente</h2><p>Solo se dibujan los registros visibles para ahorrar memoria.</p></div>
-            <div class="activity-tabs" role="tablist" aria-label="Tipo de actividad">
-              <button class="is-active" type="button" data-activity-tab="changes">Cambios <b id="changeLogCount">0</b></button>
-              <button type="button" data-activity-tab="excel">Excel <b id="excelLogCount">0</b></button>
-              <button type="button" data-activity-tab="mobile">Agenda <b id="mobileLogCount">0</b></button>
-              <button type="button" data-activity-tab="errors">Alertas <b id="errorLogCount">0</b></button>
-            </div>
-          </header>
-          <div class="activity-body">
-            <section class="activity-view is-active" data-activity-view="changes"><div id="changeLogList" class="change-list"></div></section>
-            <section class="activity-view" data-activity-view="excel"><div id="excelLogList" class="log-list"></div></section>
-            <section class="activity-view" data-activity-view="mobile"><div id="mobileLogList" class="log-list"></div></section>
-            <section class="activity-view" data-activity-view="errors"><div id="errorLogList" class="log-list"></div></section>
-          </div>
-          <footer class="panel-footer" data-admin-only hidden><a href="auditoria.html" data-admin-link>Ver auditoría completa →</a></footer>
+        <article class="status-card">
+          <span class="status-icon">CH</span><div><small>ÚLTIMO CAMBIO</small><strong id="changeTotal">0</strong><p id="diffUpdatedAt">Sin cambios</p></div>
         </article>
       </section>
 
-      <section class="lower-grid">
-        <article class="panel audit-card">
-          <div class="audit-heading"><div><span>AUDITORÍA DEL ÚLTIMO EXCEL</span><h2>Qué cambió</h2></div><span class="audit-badge">LOG</span></div>
-          <div class="diff-grid"><div><small>CREADOS</small><strong id="diffCreated">0</strong><span>nuevos registros</span></div><div><small>MODIFICADOS</small><strong id="diffUpdated">0</strong><span>campos actualizados</span></div><div><small>ELIMINADOS</small><strong id="diffDeleted">0</strong><span>registros retirados</span></div></div>
+      <section class="focus-grid">
+        <article class="focus-card">
+          <div class="focus-heading"><div><span>ÚLTIMA ACTUALIZACIÓN</span><h2>Cambios del Excel</h2></div><button id="refreshDashboard" class="icon-action" type="button" aria-label="Actualizar panel">↻</button></div>
+          <div class="diff-grid"><div><small>CREADOS</small><strong id="diffCreated">0</strong></div><div><small>MODIFICADOS</small><strong id="diffUpdated">0</strong></div><div><small>ELIMINADOS</small><strong id="diffDeleted">0</strong></div></div>
+          <p>El detalle completo se conserva en Auditoría; aquí solo se muestra el resumen necesario.</p>
         </article>
-
-        <article class="panel quick-links" data-admin-only hidden>
-          <div class="audit-heading"><div><span>ADMINISTRACIÓN</span><h2>Accesos rápidos</h2></div></div>
-          <div class="quick-link-grid">
-            <a href="configuracion.html"><strong>Configuración</strong><span>Temas, PWA y notificaciones</span></a>
-            <a href="diagnostico.html"><strong>Diagnóstico</strong><span>Comprobar Excel y Firebase</span></a>
-            <a href="respaldos.html"><strong>Respaldos</strong><span>Recuperación de información</span></a>
-            <a href="auditoria.html"><strong>Auditoría</strong><span>Historial detallado</span></a>
-          </div>
+        <article class="focus-card focus-card--action">
+          <div><span>ACCESO RÁPIDO</span><h2>¿Qué necesitas hacer?</h2><p>El Inicio queda limpio; las funciones avanzadas siguen disponibles abajo.</p></div>
+          <div class="quick-work"><a href="minuta.html"><strong>Minuta</strong><span>Registro operativo</span></a><a href="agenda_movil.html"><strong>Agenda</strong><span>Vista móvil</span></a><a href="configuracion.html" data-admin-only hidden><strong>Configurar</strong><span>Sistema y temas</span></a></div>
         </article>
       </section>
 
-      <footer class="dashboard-footer"><span>Gestión de Eventos · 3.2</span><span>Eventos y Minuta permanecen sin modificaciones.</span></footer>
+      <details class="tool-center" id="toolCenter">
+        <summary><span><small>FUNCIONES AVANZADAS</small><strong>Centro de herramientas</strong><em>Sincronización, actividad, auditoría y administración</em></span><b>+</b></summary>
+        <div class="tool-center__body">
+          <section class="workspace-grid">
+            <article class="panel sync-center">
+              <header class="panel-header"><div><span>SINCRONIZACIÓN</span><h2>Excel → Firebase</h2><p>Los componentes pesados se cargan después de la interfaz.</p></div></header>
+              <div class="sync-lane">
+                <div class="sync-lane__head"><span class="lane-number">01</span><div><small>ORIGEN</small><strong>Archivo Excel</strong></div><span class="lane-state" id="excelLaneState">Preparando</span></div>
+                <div class="sync-runtime" data-excel-sync-slot><div class="runtime-placeholder"><span></span><div><strong>Activando lector Excel</strong><small>Se cargará en segundo plano.</small></div></div></div>
+                <dl class="sync-meta"><div><dt>Última comprobación</dt><dd id="excelCheckDetail">—</dd></div><div><dt>Registros</dt><dd id="excelRecordDetail">0</dd></div></dl>
+                <p id="excelSummary" class="sync-note">Esperando la primera comprobación.</p>
+              </div>
+              <div class="sync-connector"><span></span><b>PUBLICACIÓN AUTOMÁTICA</b><span></span></div>
+              <div class="sync-lane">
+                <div class="sync-lane__head"><span class="lane-number">02</span><div><small>DESTINO</small><strong>Firebase · Agenda móvil</strong></div><span class="lane-state" id="firebaseLaneState">Conectando</span></div>
+                <div class="sync-runtime" data-firebase-sync-slot><div class="runtime-placeholder"><span></span><div><strong>Conectando Firebase</strong><small>La interfaz permanece disponible.</small></div></div></div>
+                <dl class="sync-meta"><div><dt>Registros remotos</dt><dd id="mobileRemoteCount">0</dd></div><div><dt>Última publicación</dt><dd id="mobilePublishDetail">—</dd></div></dl>
+                <p id="mobileSummary" class="sync-note">La comprobación se realiza automáticamente.</p>
+              </div>
+            </article>
+
+            <article class="panel change-center" id="activityPanel">
+              <header class="panel-header panel-header--stack"><div><span>TRAZABILIDAD</span><h2>Actividad reciente</h2><p>Solo se dibujan los registros visibles.</p></div>
+                <div class="activity-tabs" role="tablist" aria-label="Tipo de actividad"><button class="is-active" type="button" data-activity-tab="changes">Cambios <b id="changeLogCount">0</b></button><button type="button" data-activity-tab="excel">Excel <b id="excelLogCount">0</b></button><button type="button" data-activity-tab="mobile">Agenda <b id="mobileLogCount">0</b></button><button type="button" data-activity-tab="errors">Alertas <b id="errorLogCount">0</b></button></div>
+              </header>
+              <div class="activity-body"><section class="activity-view is-active" data-activity-view="changes"><div id="changeLogList" class="change-list"></div></section><section class="activity-view" data-activity-view="excel"><div id="excelLogList" class="log-list"></div></section><section class="activity-view" data-activity-view="mobile"><div id="mobileLogList" class="log-list"></div></section><section class="activity-view" data-activity-view="errors"><div id="errorLogList" class="log-list"></div></section></div>
+              <footer class="panel-footer" data-admin-only hidden><a href="auditoria.html" data-admin-link>Ver auditoría completa →</a></footer>
+            </article>
+          </section>
+
+          <section class="admin-tools" data-admin-only hidden>
+            <a href="configuracion.html"><strong>Configuración</strong><span>Temas, PWA y notificaciones</span></a><a href="diagnostico.html"><strong>Diagnóstico</strong><span>Revisar Excel y Firebase</span></a><a href="respaldos.html"><strong>Respaldos</strong><span>Recuperar información</span></a><a href="auditoria.html"><strong>Auditoría</strong><span>Historial detallado</span></a><a href="equipos.html"><strong>Equipos</strong><span>Dispositivos registrados</span></a><a href="validacion.html"><strong>Validación</strong><span>Calidad del Excel</span></a>
+          </section>
+        </div>
+      </details>
+
+      <footer class="dashboard-footer"><span>Gestión de Eventos · 3.3</span><span>Eventos y Minuta conservan su lógica original.</span></footer>
     </main>
   </div>
 
-  <script type="module" src="js/index.js?v=20260826-2"></script>
+  <script type="module" src="js/index.js?v=20260826-3"></script>
 </body>
 </html>

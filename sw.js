@@ -1,4 +1,4 @@
-const CACHE='rpt-shell-3.2.0';
+const CACHE='rpt-shell-3.3.0';
 const OFFLINE='./offline.html';
 const CORE=[
   './','./index.html','./login.html','./agenda_movil.html','./offline.html','./manifest.webmanifest','./agenda.webmanifest',
