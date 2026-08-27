@@ -132,7 +132,7 @@ $('maintenanceForm').addEventListener('submit',async event=>{
     next.pages[page]={
       active:true,startsAt:new Date(startsAt).toISOString(),startedAt:new Date().toISOString(),
       until:new Date(startsAt+minutes*60000).toISOString(),durationMs:minutes*60000,
-      message:$('maintenanceMessage').value.trim()||templates.mejoras,template:$('maintenanceTemplate').value
+      message:($('maintenanceMessage').value||'').replace(/&#x20;|&nbsp;/gi,' ').replace(/\\+/g,' ').replace(/\s{2,}/g,' ').trim()||templates.mejoras,template:$('maintenanceTemplate').value
     };
     await saveConfig(next);
     message(`Mantenimiento ${startsAt>Date.now()+30000?'programado':'activado'} para ${labels[page]}.`,'success');

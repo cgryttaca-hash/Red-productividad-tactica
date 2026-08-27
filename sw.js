@@ -1,9 +1,9 @@
-const CACHE='rpt-shell-3.3.0';
+const CACHE='rpt-shell-3.4.0';
 const OFFLINE='./offline.html';
 const CORE=[
   './','./index.html','./login.html','./agenda_movil.html','./offline.html','./manifest.webmanifest','./agenda.webmanifest',
-  './assets/icon-192.png','./assets/icon-512.png',
-  './css/index.css','./css/login.css','./css/agenda-movil.css','./css/excel-sync.css','./css/firebase-sync.css','./css/themes.css',
+  './assets/icon-180.png','./assets/icon-192.png','./assets/icon-512.png','./assets/app-icon.svg',
+  './css/index.css','./css/login.css','./css/agenda-movil.css','./css/offline.css','./css/excel-sync.css','./css/firebase-sync.css','./css/themes.css',
   './js/index.js','./js/login.js','./js/agenda-movil.js','./js/pwa.js','./js/notifications.js','./js/theme-settings.js',
   './js/firebase-config.js','./js/maintenance-guard.js','./js/auth-guard.js','./js/local-auth.js','./js/session-ui.js'
 ];

@@ -1,3 +1,17 @@
+# Changelog
+
+## 3.4.0 — 2026-08-26
+
+- Rediseño visual completo del Inicio con jerarquía más clara, navegación lateral y panel técnico colapsable.
+- Agenda Móvil rediseñada para móvil, tablet, portátil y escritorio, manteniendo filtros, detalle, cambios y sincronización en tiempo real.
+- Notificaciones de Agenda reforzadas con avisos visuales, contador de no leídos y notificaciones del sistema cuando el navegador lo permite.
+- Nueva identidad visual e icono PWA dinámico en 180, 192 y 512 px.
+- Pantalla de mantenimiento renovada con animación de despliegue y limpieza de caracteres literales como \ y &#x20;.
+- Auditoría, Configuración, Diagnóstico, Respaldos, Equipos, Validación, Laboratorio y Usuarios pasan a una suite administrativa con sidebar responsive.
+- Login y modo sin conexión rediseñados.
+- Service Worker actualizado a caché 3.4.0.
+- Eventos y Minuta permanecen byte por byte sin cambios.
+
 # Historial de cambios
 
 ## 3.3.0 — 2026-08-26

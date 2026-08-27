@@ -1,3 +1,31 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1220"><title>Sin conexión | Gestión de Eventos</title><style>
-*{box-sizing:border-box}html{background:#f3f6fa;font-family:Inter,"Segoe UI",Arial,sans-serif}body{margin:0;min-width:280px;min-height:100dvh;display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:radial-gradient(circle at 50% 0,#fff 0,#f3f6fa 55%);color:#101828}main{width:min(520px,100%);padding:clamp(22px,6vw,36px);border:1px solid #dfe5ec;border-radius:22px;background:#fff;box-shadow:0 24px 65px rgba(16,24,40,.1);text-align:center}.mark{width:58px;height:58px;display:grid;place-items:center;margin:auto;border-radius:17px;background:#0b1220;color:#fff;font-weight:900;font-size:12px}small{display:block;margin-top:18px;color:#7b8798;font-size:8px;font-weight:900;letter-spacing:.13em}h1{margin:7px 0 9px;font-size:clamp(27px,8vw,34px);letter-spacing:-.04em}p{margin:0;color:#667085;font-size:12px;line-height:1.65}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}.actions a,.actions button{min-height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #dfe5ec;border-radius:11px;background:#fff;color:#172033;text-decoration:none;font-size:9px;font-weight:850}.actions button{border-color:#0b1220;background:#0b1220;color:#fff}@media(max-width:390px){main{border-radius:17px}.actions{grid-template-columns:1fr}}
-</style></head><body><main><div class="mark">GE</div><small>MODO SIN CONEXIÓN</small><h1>No hay internet</h1><p>La aplicación no puede actualizarse ahora. Puedes intentar de nuevo o abrir la última Agenda Móvil que haya quedado guardada en este dispositivo.</p><div class="actions"><button type="button" onclick="location.reload()">Reintentar</button><a href="agenda_movil.html">Abrir Agenda</a></div></main></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#071423">
+  <title>Sin conexión | Gestión de Eventos</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <link rel="icon" href="assets/icon-192.png" type="image/png">
+  <link rel="stylesheet" href="css/offline.css?v=20260826-4">
+</head>
+<body>
+  <main class="offline-shell">
+    <section class="offline-card">
+      <div class="offline-visual" aria-hidden="true">
+        <span class="orbit orbit-a"></span><span class="orbit orbit-b"></span>
+        <img src="assets/icon-512.png" alt="">
+        <i></i>
+      </div>
+      <div class="offline-copy">
+        <span class="offline-kicker">MODO SIN CONEXIÓN</span>
+        <h1>La red no está disponible.</h1>
+        <p>La aplicación conserva los recursos esenciales. Puedes reintentar la conexión o abrir la última Agenda Móvil disponible en este dispositivo.</p>
+        <div class="offline-actions"><button type="button" onclick="location.reload()">Reintentar conexión</button><a href="agenda_movil.html">Abrir Agenda Móvil</a></div>
+        <small>Los cambios en tiempo real se reanudarán automáticamente cuando vuelva Internet.</small>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

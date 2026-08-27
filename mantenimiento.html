@@ -3,16 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0f1d33">
+  <meta name="theme-color" content="#071423">
   <title>Página en actualización</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/mantenimiento.css?v=20260826-3">
+  <link rel="stylesheet" href="css/mantenimiento.css?v=20260826-4">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <link rel="icon" href="assets/icon-192.png" type="image/png">
 </head>
 <body>
   <main class="maintenance-window">
     <header class="window-bar">
       <div class="site-name">
-        <span class="site-gear" aria-hidden="true">⚙</span>
+        <span class="site-gear" aria-hidden="true"><img src="assets/icon-192.png" alt=""></span>
         <div><strong>Gestión de Eventos</strong><small id="maintenanceModule">Módulo en actualización</small></div>
       </div>
       <div class="window-actions" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -25,33 +27,18 @@
           <h1 id="maintenanceTitle">Página en actualización</h1>
 
           <div class="technical-animation" aria-hidden="true">
-            <span class="tech-grid"></span>
-            <span class="orbit orbit-one"></span>
-            <span class="orbit orbit-two"></span>
-            <svg viewBox="0 0 360 250" class="tech-svg">
-              <g class="server-rack">
-                <rect x="24" y="54" width="118" height="146" rx="15"/>
-                <rect x="39" y="72" width="88" height="28" rx="7"/>
-                <rect x="39" y="111" width="88" height="28" rx="7"/>
-                <rect x="39" y="150" width="88" height="28" rx="7"/>
-                <circle cx="52" cy="86" r="4"/><circle cx="64" cy="86" r="4"/>
-                <circle cx="52" cy="125" r="4"/><circle cx="64" cy="125" r="4"/>
-                <circle cx="52" cy="164" r="4"/><circle cx="64" cy="164" r="4"/>
-              </g>
-              <g class="central-gear">
-                <path d="M235 57 248 61 255 51 267 58 265 71 276 78 287 72 294 84 285 94 289 107 302 111 300 125 287 128 280 140 286 151 274 159 264 150 251 154 247 167 233 165 230 152 218 145 207 151 199 139 208 129 204 116 191 112 193 98 206 95 213 83 207 72 219 64 229 73Z"/>
-                <circle cx="247" cy="109" r="32"/>
-                <circle cx="247" cy="109" r="12"/>
-              </g>
-              <g class="wrench-tool">
-                <path d="M298 45c-13 2-23 14-21 28l-40 40 15 15 40-40c14 2 27-8 29-21l-14 8-12-12Z"/>
-                <path d="m236 113-36 36 15 15 36-36Z"/>
-              </g>
-              <g class="signal-lines">
-                <path d="M153 88h30"/><path d="M153 112h44"/><path d="M153 136h26"/>
-              </g>
-            </svg>
-            <div class="scan-line"></div>
+            <div class="deploy-stage">
+              <span class="deploy-ring ring-a"></span>
+              <span class="deploy-ring ring-b"></span>
+              <span class="deploy-ring ring-c"></span>
+              <span class="deploy-node node-a"></span>
+              <span class="deploy-node node-b"></span>
+              <span class="deploy-node node-c"></span>
+              <span class="deploy-pulse"></span>
+              <div class="deploy-icon"><img src="assets/icon-512.png" alt=""></div>
+              <span class="deploy-scan"></span>
+            </div>
+            <div class="deploy-caption"><i></i><span>Actualización activa</span><b id="maintenanceVisualModule">Módulo</b></div>
           </div>
 
           <p id="maintenanceMessage">Estamos aplicando mejoras técnicas para ofrecer una experiencia más rápida y estable.</p>
@@ -125,7 +112,7 @@
     </section>
   </main>
 
-  <script type="module" src="js/mantenimiento.js?v=20260826-3"></script>
-  <script type="module" src="js/pwa.js?v=20260826-3"></script>
+  <script type="module" src="js/mantenimiento.js?v=20260826-4"></script>
+  <script type="module" src="js/pwa.js?v=20260826-4"></script>
 </body>
 </html>

@@ -6,18 +6,20 @@
   <meta name="theme-color" content="#0b1220">
   <meta name="description" content="Centro operativo liviano para eventos, Excel, Firebase y Agenda Móvil.">
   <title>Inicio | Gestión de Eventos</title>
-  <script src="js/auth-guard.js?v=20260826-3"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260826-3"></script>
+  <script src="js/auth-guard.js?v=20260826-4"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260826-4"></script>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/excel-sync.css?v=20260826-3">
-  <link rel="stylesheet" href="css/firebase-sync.css?v=20260826-3">
-  <link rel="stylesheet" href="css/index.css?v=20260826-3">
-  <link rel="stylesheet" href="css/themes.css?v=20260826-3">
+  <link rel="apple-touch-icon" href="assets/icon-180.png">
+  <link rel="icon" href="assets/icon-192.png" type="image/png">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260826-4">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260826-4">
+  <link rel="stylesheet" href="css/index.css?v=20260826-4">
+  <link rel="stylesheet" href="css/themes.css?v=20260826-4">
 </head>
 <body>
   <div id="loader" class="app-loader" role="status" aria-live="polite">
     <div class="app-loader__panel">
-      <span class="app-loader__logo">GE</span>
+      <span class="app-loader__logo"><img src="assets/icon-192.png" alt=""></span>
       <div><strong>Gestión de Eventos</strong><small id="loaderText">Preparando el panel…</small></div>
       <span class="app-loader__bar"><i></i></span>
     </div>
@@ -26,7 +28,7 @@
   <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
   <aside id="appSidebar" class="app-sidebar" aria-label="Navegación principal">
     <div class="sidebar-brand">
-      <a href="index.html"><span class="brand-mark">GE</span><span><strong>Gestión de Eventos</strong><small>Centro operativo</small></span></a>
+      <a href="index.html"><span class="brand-mark"><img src="assets/icon-192.png" alt=""></span><span><strong>Gestión de Eventos</strong><small>Centro operativo</small></span></a>
       <button id="sidebarClose" class="sidebar-close" type="button" aria-label="Cerrar menú">×</button>
     </div>
 
@@ -154,6 +156,6 @@
     </main>
   </div>
 
-  <script type="module" src="js/index.js?v=20260826-3"></script>
+  <script type="module" src="js/index.js?v=20260826-4"></script>
 </body>
 </html>
