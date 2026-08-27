@@ -1,4 +1,4 @@
-GESTIÓN DE EVENTOS — VERSIÓN 3.0.0
+GESTIÓN DE EVENTOS — VERSIÓN 3.5.0
 ======================================
 
 MÓDULOS OPERATIVOS PROTEGIDOS
@@ -14,12 +14,12 @@ No fueron modificados en esta actualización.
 
 PÁGINAS PRINCIPALES
 -------------------
-index.html          Panel operativo y sincronización.
+index.html          Panel completo para Admin y portal simplificado para Usuario.
 eventos.html        Módulo de Eventos.
 minuta.html         Minuta.
 agenda_movil.html   Agenda en tiempo real.
 login.html          Acceso local por equipo.
-usuarios.html       Usuarios locales.
+usuarios.html       Usuarios locales y administración de roles.
 configuracion.html  Mantenimiento, avisos y PWA.
 
 HERRAMIENTAS NUEVAS

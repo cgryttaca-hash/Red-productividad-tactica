@@ -98,7 +98,7 @@ function idle(task,timeout=900){if('requestIdleCallback'in window)requestIdleCal
 function loadScript(src){return new Promise((resolve,reject)=>{const found=document.querySelector(`script[data-runtime-src="${src}"]`);if(found){if(found.dataset.loaded==='1')resolve();else found.addEventListener('load',resolve,{once:true});return;}const script=document.createElement('script');script.src=src;script.defer=true;script.dataset.runtimeSrc=src;script.addEventListener('load',()=>{script.dataset.loaded='1';resolve();},{once:true});script.addEventListener('error',()=>reject(new Error(`No se pudo cargar ${src}`)),{once:true});document.head.appendChild(script);});}
 async function loadExcelRuntime(){
   if(excelRuntimePromise)return excelRuntimePromise;
-  excelRuntimePromise=(async()=>{const placeholder=document.querySelector('[data-excel-sync-slot] .runtime-placeholder');try{if(!window.XLSX){try{await loadScript('https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js');}catch(_){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');}}await loadScript('js/excel-sync.js?v=20260826-4');placeholder?.remove();}catch(error){if(placeholder)placeholder.innerHTML='<div><strong>Excel no pudo iniciar</strong><small>Pulsa Gestionar Excel para reintentar.</small></div>';excelRuntimePromise=null;console.error(error);}})();
+  excelRuntimePromise=(async()=>{const placeholder=document.querySelector('[data-excel-sync-slot] .runtime-placeholder');try{if(!window.XLSX){try{await loadScript('https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js');}catch(_){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');}}await loadScript('js/excel-sync.js?v=20260827-5');placeholder?.remove();}catch(error){if(placeholder)placeholder.innerHTML='<div><strong>Excel no pudo iniciar</strong><small>Pulsa Gestionar Excel para reintentar.</small></div>';excelRuntimePromise=null;console.error(error);}})();
   return excelRuntimePromise;
 }
 async function startOperationalModules(){
@@ -113,16 +113,52 @@ function openSidebar(){const sidebar=$('appSidebar');sidebar?.classList.add('is-
 function closeSidebar(){const sidebar=$('appSidebar');sidebar?.classList.remove('is-open');$('sidebarToggle')?.setAttribute('aria-expanded','false');if($('sidebarBackdrop'))$('sidebarBackdrop').hidden=true;}
 async function openExcel(){await loadExcelRuntime();document.getElementById('excelSyncControl')?.click();}
 
-for(const button of document.querySelectorAll('[data-activity-tab]'))button.addEventListener('click',()=>activateTab(button.dataset.activityTab));
-$('refreshDashboard')?.addEventListener('click',()=>{scheduleRefresh(true);startOperationalModules();window.ExcelFileSync?.refresh?.();});
-$('quickExcelButton')?.addEventListener('click',openExcel);
-$('toolCenter')?.addEventListener('toggle',event=>{if(event.currentTarget.open){startOperationalModules();renderActivity(true);}});
-$('sidebarToggle')?.addEventListener('click',openSidebar);$('sidebarClose')?.addEventListener('click',closeSidebar);$('sidebarBackdrop')?.addEventListener('click',closeSidebar);
-window.addEventListener('resize',()=>{if(innerWidth>960)closeSidebar();},{passive:true});
-['eventDataUpdated','eventAuditUpdated','firebaseEventsPublished','rptSystemLogUpdated'].forEach(name=>window.addEventListener(name,()=>scheduleRefresh(true)));
-window.addEventListener('storage',event=>{if(!event.key||/eventData|excelSync|firebase|rptSystemLog/.test(event.key))scheduleRefresh(false);});
+const session=window.__RPT_AUTH_SESSION__||{};
+const isViewer=session.role!=='admin';
 
-updateClock();renderSummary();
-requestAnimationFrame(()=>requestAnimationFrame(hideLoader));
-Promise.allSettled([import('./session-ui.js'),import('./pwa.js')]);
-setInterval(updateClock,30000);setInterval(()=>scheduleRefresh(false),60000);idle(startOperationalModules,1400);
+function dailyMessage(){
+  const messages=[
+    'Cada detalle bien hecho hace que el evento se sienta extraordinario.',
+    'La excelencia se construye con pequeños cuidados repetidos cada día.',
+    'Un equipo coordinado convierte una agenda exigente en una gran experiencia.',
+    'Hoy es una nueva oportunidad para hacer el trabajo con calma, precisión y orgullo.',
+    'Cuando la información está clara, el servicio fluye y las personas lo sienten.',
+    'Lo profesional también se nota en lo simple: puntualidad, orden y atención.',
+    'Cada evento es una oportunidad para dejar una impresión positiva y duradera.',
+    'Organizar bien hoy hace que mañana sea más fácil para todo el equipo.',
+    'La actitud transforma una tarea cotidiana en un servicio memorable.',
+    'Avanza paso a paso: lo importante es mantener la calidad en cada decisión.',
+    'Tu trabajo suma. Cada dato correcto ayuda a que todo el equipo funcione mejor.',
+    'La mejor operación es la que se siente sencilla porque detrás hubo buen trabajo.'
+  ];
+  const now=new Date();
+  const seed=Number(`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`);
+  return messages[seed%messages.length];
+}
+function initViewer(){
+  const now=new Date();
+  const hour=now.getHours();
+  setText('viewerUserName',session.displayName||session.username||'Usuario');
+  setText('viewerGreeting',`${hour<12?'Buenos días':hour<18?'Buenas tardes':'Buenas noches'}, ${session.displayName||session.username||'equipo'}.`);
+  setText('viewerDate',now.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long',year:'numeric'}));
+  setText('viewerDailyMessage',dailyMessage());
+  $('viewerLogoutButton')?.addEventListener('click',()=>import('./local-auth.js').then(module=>{module.logout();location.replace('login.html');}));
+  requestAnimationFrame(()=>requestAnimationFrame(hideLoader));
+  import('./pwa.js').catch(()=>{});
+}
+function initAdmin(){
+  for(const button of document.querySelectorAll('[data-activity-tab]'))button.addEventListener('click',()=>activateTab(button.dataset.activityTab));
+  $('refreshDashboard')?.addEventListener('click',()=>{scheduleRefresh(true);startOperationalModules();window.ExcelFileSync?.refresh?.();});
+  $('quickExcelButton')?.addEventListener('click',openExcel);
+  $('toolCenter')?.addEventListener('toggle',event=>{if(event.currentTarget.open){startOperationalModules();renderActivity(true);}});
+  $('sidebarToggle')?.addEventListener('click',openSidebar);$('sidebarClose')?.addEventListener('click',closeSidebar);$('sidebarBackdrop')?.addEventListener('click',closeSidebar);
+  window.addEventListener('resize',()=>{if(innerWidth>960)closeSidebar();},{passive:true});
+  ['eventDataUpdated','eventAuditUpdated','firebaseEventsPublished','rptSystemLogUpdated'].forEach(name=>window.addEventListener(name,()=>scheduleRefresh(true)));
+  window.addEventListener('storage',event=>{if(!event.key||/eventData|excelSync|firebase|rptSystemLog/.test(event.key))scheduleRefresh(false);});
+  updateClock();renderSummary();
+  requestAnimationFrame(()=>requestAnimationFrame(hideLoader));
+  Promise.allSettled([import('./session-ui.js'),import('./pwa.js')]);
+  setInterval(updateClock,30000);setInterval(()=>scheduleRefresh(false),60000);idle(startOperationalModules,1400);
+}
+
+if(isViewer)initViewer();else initAdmin();

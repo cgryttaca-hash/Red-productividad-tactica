@@ -6,15 +6,15 @@
   <meta name="theme-color" content="#0b1220">
   <meta name="description" content="Centro operativo liviano para eventos, Excel, Firebase y Agenda Móvil.">
   <title>Inicio | Gestión de Eventos</title>
-  <script src="js/auth-guard.js?v=20260826-4"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260826-4"></script>
+  <script src="js/auth-guard.js?v=20260827-5"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260827-5"></script>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
   <link rel="icon" href="assets/icon-192.png" type="image/png">
-  <link rel="stylesheet" href="css/excel-sync.css?v=20260826-4">
-  <link rel="stylesheet" href="css/firebase-sync.css?v=20260826-4">
-  <link rel="stylesheet" href="css/index.css?v=20260826-4">
-  <link rel="stylesheet" href="css/themes.css?v=20260826-4">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260827-5">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260827-5">
+  <link rel="stylesheet" href="css/index.css?v=20260827-5">
+  <link rel="stylesheet" href="css/themes.css?v=20260827-5">
 </head>
 <body>
   <div id="loader" class="app-loader" role="status" aria-live="polite">
@@ -24,6 +24,63 @@
       <span class="app-loader__bar"><i></i></span>
     </div>
   </div>
+
+  <main id="viewerHome" class="viewer-home" aria-label="Inicio de usuario">
+    <header class="viewer-topbar">
+      <a class="viewer-brand" href="index.html"><img src="assets/icon-192.png" alt=""><span><strong>Gestión de Eventos</strong><small>Espacio de trabajo</small></span></a>
+      <div class="viewer-session">
+        <div><small id="viewerRoleLabel">USUARIO</small><strong id="viewerUserName">—</strong></div>
+        <button id="viewerNotificationButton" class="viewer-notify" type="button"><span>●</span><strong>Activar notificaciones</strong><b id="viewerNotificationCount" hidden>0</b></button>
+        <button id="viewerLogoutButton" class="viewer-logout" type="button">Cerrar sesión</button>
+      </div>
+    </header>
+
+    <section class="viewer-stage">
+      <div class="viewer-stage__glow" aria-hidden="true"></div>
+      <div class="viewer-intro">
+        <span class="viewer-eyebrow"><i></i> INFORMACIÓN SINCRONIZADA AUTOMÁTICAMENTE</span>
+        <h1 id="viewerGreeting">Buen día.</h1>
+        <p>Tu espacio está diseñado para entrar, trabajar y salir. No necesitas actualizar archivos ni configurar el sistema.</p>
+      </div>
+
+      <section class="viewer-modules" aria-label="Módulos disponibles">
+        <a class="viewer-module viewer-module--events" href="eventos.html">
+          <span class="viewer-module__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v3M19 3v3M4 8h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/><path d="M7 12h4M7 16h7"/></svg></span>
+          <span class="viewer-module__copy"><small>OPERACIÓN</small><strong>Eventos</strong><em>Consulta la programación y los detalles del servicio.</em></span>
+          <span class="viewer-module__arrow">→</span>
+        </a>
+        <a class="viewer-module viewer-module--minutes" href="minuta.html">
+          <span class="viewer-module__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h8l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M14 3v5h5M9 12h6M9 16h6"/></svg></span>
+          <span class="viewer-module__copy"><small>REGISTRO</small><strong>Minuta</strong><em>Abre el registro operativo con la información vigente.</em></span>
+          <span class="viewer-module__arrow">→</span>
+        </a>
+      </section>
+
+      <a class="viewer-agenda" href="agenda_movil.html" target="_blank" rel="noopener">
+        <span class="viewer-agenda__pulse"></span>
+        <span><small>AGENDA MÓVIL</small><strong>Consulta rápida en tiempo real</strong></span>
+        <em>Abrir agenda →</em>
+      </a>
+
+      <section class="viewer-bottom">
+        <article id="viewerCloudStatus" class="viewer-cloud is-syncing">
+          <span class="viewer-cloud__dot"></span>
+          <div><small>ACTUALIZACIÓN AUTOMÁTICA</small><strong id="viewerSyncState">Conectando…</strong><p id="viewerSyncDetail">Buscando la última publicación del administrador.</p></div>
+          <time id="viewerLastSync">—</time>
+        </article>
+        <article class="viewer-daily">
+          <span>HOY</span>
+          <blockquote id="viewerDailyMessage">Cada detalle bien hecho hace que el evento se sienta extraordinario.</blockquote>
+          <small id="viewerDate">—</small>
+        </article>
+      </section>
+
+      <footer class="viewer-footer">
+        <span>Los datos se actualizan automáticamente desde Administración.</span>
+        <button id="viewerNotificationClear" type="button">Marcar avisos como leídos</button>
+      </footer>
+    </section>
+  </main>
 
   <div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
   <aside id="appSidebar" class="app-sidebar" aria-label="Navegación principal">
@@ -152,10 +209,10 @@
         </div>
       </details>
 
-      <footer class="dashboard-footer"><span>Gestión de Eventos · 3.3</span><span>Eventos y Minuta conservan su lógica original.</span></footer>
+      <footer class="dashboard-footer"><span>Gestión de Eventos · 3.5</span><span>Eventos y Minuta conservan su lógica original.</span></footer>
     </main>
   </div>
 
-  <script type="module" src="js/index.js?v=20260826-4"></script>
+  <script type="module" src="js/index.js?v=20260827-5"></script>
 </body>
 </html>

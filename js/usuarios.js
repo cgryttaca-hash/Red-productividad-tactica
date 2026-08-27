@@ -10,6 +10,7 @@ import {
 
 const $=id=>document.getElementById(id);
 let users=[];
+let passwordTarget=null;
 
 function esc(value){
   return String(value??'').replace(/[&<>"']/g,char=>({
@@ -87,10 +88,13 @@ $('usersTableBody').addEventListener('click',async event=>{
 
   try{
     if(button.dataset.action==='password'){
-      const password=prompt(`Nueva contraseña para ${user.username}:`);
-      if(password===null) return;
-      await changePassword(user.id,password);
-      showMessage(`Contraseña actualizada para ${user.username}.`);
+      passwordTarget=user;
+      $('passwordDialogUser').textContent=`${user.displayName || user.username} · @${user.username}`;
+      $('userPasswordInput').value='';
+      $('userPasswordConfirm').value='';
+      $('userPasswordDialog').showModal();
+      setTimeout(()=>$('userPasswordInput').focus(),60);
+      return;
     }
     if(button.dataset.action==='toggle'){
       await updateUser(user.id,{active:!user.active});
@@ -124,5 +128,28 @@ $('logoutButton').addEventListener('click',()=>{
   logout();
   location.replace('login.html');
 });
+
+
+$('userPasswordForm')?.addEventListener('submit',async event=>{
+  event.preventDefault();
+  if(!passwordTarget)return;
+  const password=$('userPasswordInput').value;
+  const confirmPassword=$('userPasswordConfirm').value;
+  if(password!==confirmPassword){
+    showMessage('Las contraseñas no coinciden.','error');
+    $('userPasswordConfirm').focus();
+    return;
+  }
+  try{
+    await changePassword(passwordTarget.id,password);
+    const username=passwordTarget.username;
+    passwordTarget=null;
+    $('userPasswordDialog').close();
+    showMessage(`Contraseña actualizada correctamente para ${username}.`);
+  }catch(error){showMessage(error.message,'error');}
+});
+$('closePasswordDialog')?.addEventListener('click',()=>{$('userPasswordDialog').close();passwordTarget=null;});
+$('cancelPasswordDialog')?.addEventListener('click',()=>{$('userPasswordDialog').close();passwordTarget=null;});
+$('userPasswordDialog')?.addEventListener('click',event=>{if(event.target===event.currentTarget){event.currentTarget.close();passwordTarget=null;}});
 
 refresh();

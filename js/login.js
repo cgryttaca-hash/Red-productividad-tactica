@@ -1,13 +1,17 @@
 import {
   ensureDefaultAdmin,
   getSession,
-  login,
-  resetDefaultAdmin
+  login
 } from './local-auth.js';
 
 const $ = id => document.getElementById(id);
-const returnPage = new URLSearchParams(location.search).get('return') || 'index.html';
-let recoveryTimer = null;
+const requestedReturn = new URLSearchParams(location.search).get('return') || 'index.html';
+
+function safeReturnPage(value){
+  const allowed=new Set(['index.html','eventos.html','minuta.html','usuarios.html','configuracion.html','auditoria.html','diagnostico.html','respaldos.html','equipos.html','validacion.html','laboratorio.html','mantenimiento.html']);
+  return allowed.has(value)?value:'index.html';
+}
+const returnPage=safeReturnPage(requestedReturn);
 
 function message(value,type='error'){
   const element=$('loginMessage');
@@ -16,21 +20,30 @@ function message(value,type='error'){
   element.textContent=value||'';
 }
 
+function destinationFor(session){
+  if(session?.role!=='admin') return 'index.html';
+  if(session?.user?.mustChangePassword) return 'usuarios.html';
+  return returnPage;
+}
+
 function showWelcome(session){
   const overlay=$('welcomeOverlay');
   $('welcomeTitle').textContent=`Bienvenido, ${session.displayName || session.username}`;
+  $('welcomeSubtitle').textContent=session.role==='admin'?'Preparando el centro administrativo…':'Preparando tu espacio de trabajo…';
   overlay.classList.add('is-open');
   overlay.setAttribute('aria-hidden','false');
-  setTimeout(()=>location.replace(returnPage),1250);
+  setTimeout(()=>location.replace(destinationFor(session)),900);
 }
 
 async function initialize(){
   await ensureDefaultAdmin();
   const revoked=localStorage.getItem('rptRevokedMessageV1');
+  const sessionNotice=localStorage.getItem('rptSessionNoticeV1');
   if(revoked){message(revoked,'error');localStorage.removeItem('rptRevokedMessageV1');}
+  else if(sessionNotice){message(sessionNotice,'info');localStorage.removeItem('rptSessionNoticeV1');}
   const session=getSession();
   if(session){
-    location.replace(returnPage);
+    location.replace(destinationFor(session));
     return;
   }
   $('username').focus();
@@ -49,37 +62,6 @@ $('loginForm').addEventListener('submit',async event=>{
     message(error.message || 'No fue posible iniciar sesión.');
     button.disabled=false;
     button.textContent='Ingresar al sistema';
-  }
-});
-
-document.addEventListener('keydown',event=>{
-  if(!event.ctrlKey || event.key.toLowerCase()!=='g') return;
-  event.preventDefault();
-  const button=$('openRecovery');
-  button.hidden=false;
-  button.focus();
-  clearTimeout(recoveryTimer);
-});
-
-$('openRecovery').addEventListener('click',async()=>{
-  const button=$('openRecovery');
-  const confirmation=prompt('Para restablecer únicamente la cuenta local Admin, escribe RESTABLECER.');
-  if(confirmation===null) return;
-  if(confirmation.trim().toUpperCase()!=='RESTABLECER'){
-    message('No se realizó ningún cambio. Escribe RESTABLECER para confirmar.');
-    return;
-  }
-  button.disabled=true;
-  try{
-    await resetDefaultAdmin();
-    $('username').value='Admin';
-    $('password').value='';
-    message('Acceso restablecido. Usuario: Admin · contraseña inicial: Admin2026','success');
-    $('password').focus();
-  }catch(error){
-    message(error.message || 'No fue posible restablecer la contraseña.');
-  }finally{
-    button.disabled=false;
   }
 });
 

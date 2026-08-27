@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.5.0 — 2026-08-27
+
+- Se elimina la recuperación pública de Administrador del login y cualquier mensaje que revele una contraseña después de crearla o cambiarla.
+- El cambio de contraseña de usuarios usa un diálogo con campos protegidos; mínimo 8 caracteres.
+- El rol Administrador conserva el sistema completo. El rol Usuario recibe un Inicio independiente sin sidebar ni herramientas técnicas.
+- El Inicio de Usuario muestra dos accesos principales, Eventos y Minuta, más acceso a Agenda Móvil, mensaje diario y notificaciones generales.
+- Usuarios normales sincronizan automáticamente la última publicación de Firebase hacia `eventData`; Eventos y Minuta reciben las actualizaciones sin modificar sus archivos protegidos.
+- Cierre de sesión automático a medianoche y después de 1 hora de inactividad, con aviso y cuenta regresiva cinco minutos antes.
+- Cambios de estado o rol se reflejan entre pestañas del mismo navegador sin recarga manual.
+- Service Worker actualizado a caché 3.5.0.
+- Eventos y Minuta permanecen byte por byte sin cambios.
+
 ## 3.4.0 — 2026-08-26
 
 - Rediseño visual completo del Inicio con jerarquía más clara, navegación lateral y panel técnico colapsable.
@@ -40,7 +52,7 @@
 ## 3.1.1 — 2026-08-26
 - Corrección de acceso local de administrador con migración de usuarios guardados por versiones anteriores.
 - Inicio de sesión ahora reconoce `username` aunque falte el campo interno `normalizedUsername`.
-- Recuperación visible y confirmada de la cuenta local `Admin`; restablece a `Admin2026` solo cuando el administrador lo solicita.
+- La recuperación pública de la cuenta Administrador fue retirada; las contraseñas se administran solo desde una sesión autorizada.
 - Caché PWA actualizada para evitar conservar una pantalla de acceso antigua.
 - Eventos y Minuta permanecen sin modificaciones.
 

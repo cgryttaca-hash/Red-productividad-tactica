@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#071423">
   <title>Acceso | Gestión de Eventos</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/login.css?v=20260826-4">
+  <link rel="stylesheet" href="css/login.css?v=20260827-5">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
   <link rel="icon" href="assets/icon-192.png" type="image/png">
 </head>
@@ -21,11 +21,11 @@
       <div class="login-orbit" aria-hidden="true"><span></span><i></i><b></b></div>
       <span>CONTROL DE ACCESO</span>
       <h1>Gestión de Eventos</h1>
-      <p>Accede al centro operativo desde este equipo. La sesión se recordará en este navegador hasta que cierres sesión.</p>
+      <p>Accede al centro operativo desde este equipo. La sesión se protege por dispositivo y se cierra automáticamente a medianoche o después de 1 hora sin actividad.</p>
       <div class="login-features" aria-label="Características del acceso">
-        <article><strong>Sesión local</strong><span>Se solicita una sola vez por navegador.</span></article>
+        <article><strong>Sesión controlada</strong><span>Cierre automático por inactividad y a medianoche.</span></article>
         <article><strong>Acceso protegido</strong><span>Index, Eventos, Minuta, Usuarios y Configuración.</span></article>
-        <article><strong>Agenda pública</strong><span>La Agenda Móvil no solicita esta contraseña.</span></article>
+        <article><strong>Acceso por rol</strong><span>Administradores y usuarios reciben una experiencia diferente.</span></article>
       </div>
     </section>
 
@@ -49,8 +49,7 @@
       </form>
 
       <div id="loginMessage" class="login-message" hidden></div>
-      <button id="openRecovery" class="recovery-link" type="button">Recuperar acceso de administrador</button>
-      <p class="login-help">La recuperación restablece únicamente la cuenta local Admin y requiere escribir RESTABLECER.</p>
+      <p class="login-help login-help--secure">Las contraseñas nunca se muestran después de guardarlas. Los cambios de acceso se realizan únicamente desde una sesión de Administrador.</p>
     </section>
   </main>
 
@@ -59,11 +58,11 @@
       <span class="welcome-spinner"></span>
       <small>ACCESO CONCEDIDO</small>
       <h2 id="welcomeTitle">Bienvenido</h2>
-      <p>Preparando el centro operativo…</p>
+      <p id="welcomeSubtitle">Preparando tu espacio de trabajo…</p>
     </div>
   </div>
 
-  <script type="module" src="js/login.js?v=20260826-4"></script>
-  <script type="module" src="js/pwa.js?v=20260826-4"></script>
+  <script type="module" src="js/login.js?v=20260827-5"></script>
+  <script type="module" src="js/pwa.js?v=20260827-5"></script>
 </body>
 </html>
