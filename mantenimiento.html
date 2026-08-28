@@ -3,128 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0f1d33">
-  <title>Página en actualización</title>
+  <meta name="theme-color" content="#102b49">
+  <title>Sistema en actualización</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/mantenimiento.css?v=20260801-2300">
+  <link rel="stylesheet" href="css/mantenimiento.css?v=20260827-1">
 </head>
 <body>
-  <main class="maintenance-window">
-    <header class="window-bar">
-      <div class="site-name">
-        <span class="site-gear" aria-hidden="true">⚙</span>
-        <div><strong>Gestión de Eventos</strong><small id="maintenanceModule">Módulo en actualización</small></div>
+  <main class="maintenance-shell">
+    <header class="maintenance-topbar">
+      <div class="system-brand">
+        <span class="brand-mark" aria-hidden="true">GE</span>
+        <div><strong>Gestión de Eventos</strong><small>Centro operativo</small></div>
       </div>
-      <div class="window-actions" aria-hidden="true"><i></i><i></i><i></i></div>
+      <span class="environment-badge">ACTUALIZACIÓN EN CURSO</span>
     </header>
 
-    <section class="maintenance-layout">
-      <div class="maintenance-main">
-        <div class="maintenance-hero">
-          <span class="kicker">MANTENIMIENTO PROGRAMADO</span>
-          <h1 id="maintenanceTitle">Página en actualización</h1>
+    <section class="maintenance-card">
+      <div class="maintenance-content">
+        <div class="status-line"><span class="pulse-dot"></span><span>Despliegue controlado</span></div>
+        <span class="kicker">MANTENIMIENTO PROGRAMADO</span>
+        <h1 id="maintenanceTitle">Página en actualización</h1>
+        <p id="maintenanceMessage">Estamos aplicando mejoras técnicas para ofrecer una experiencia más rápida y estable.</p>
 
-          <div class="technical-animation" aria-hidden="true">
-            <span class="tech-grid"></span>
-            <span class="orbit orbit-one"></span>
-            <span class="orbit orbit-two"></span>
-            <svg viewBox="0 0 360 250" class="tech-svg">
-              <g class="server-rack">
-                <rect x="24" y="54" width="118" height="146" rx="15"/>
-                <rect x="39" y="72" width="88" height="28" rx="7"/>
-                <rect x="39" y="111" width="88" height="28" rx="7"/>
-                <rect x="39" y="150" width="88" height="28" rx="7"/>
-                <circle cx="52" cy="86" r="4"/><circle cx="64" cy="86" r="4"/>
-                <circle cx="52" cy="125" r="4"/><circle cx="64" cy="125" r="4"/>
-                <circle cx="52" cy="164" r="4"/><circle cx="64" cy="164" r="4"/>
-              </g>
-              <g class="central-gear">
-                <path d="M235 57 248 61 255 51 267 58 265 71 276 78 287 72 294 84 285 94 289 107 302 111 300 125 287 128 280 140 286 151 274 159 264 150 251 154 247 167 233 165 230 152 218 145 207 151 199 139 208 129 204 116 191 112 193 98 206 95 213 83 207 72 219 64 229 73Z"/>
-                <circle cx="247" cy="109" r="32"/>
-                <circle cx="247" cy="109" r="12"/>
-              </g>
-              <g class="wrench-tool">
-                <path d="M298 45c-13 2-23 14-21 28l-40 40 15 15 40-40c14 2 27-8 29-21l-14 8-12-12Z"/>
-                <path d="m236 113-36 36 15 15 36-36Z"/>
-              </g>
-              <g class="signal-lines">
-                <path d="M153 88h30"/><path d="M153 112h44"/><path d="M153 136h26"/>
-              </g>
-            </svg>
-            <div class="scan-line"></div>
-          </div>
-
-          <p id="maintenanceMessage">Estamos aplicando mejoras técnicas para ofrecer una experiencia más rápida y estable.</p>
-
-          <div class="progress-summary">
-            <div><strong id="progressPercent">0%</strong><span>Avance estimado</span></div>
-            <div><strong id="estimatedTime">—</strong><span>Tiempo restante</span></div>
-          </div>
-          <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
-
-          <div class="countdown" aria-label="Tiempo restante">
-            <div><strong id="hours">00</strong><span>Horas</span></div>
-            <b>:</b>
-            <div><strong id="minutes">00</strong><span>Minutos</span></div>
-            <b>:</b>
-            <div><strong id="seconds">00</strong><span>Segundos</span></div>
-          </div>
-
-          <small id="maintenanceStatus">Comprobando el tiempo restante…</small>
+        <div class="module-row">
+          <div><small>Módulo</small><strong id="maintenanceModule">Módulo en actualización</strong></div>
+          <div><small>Estado</small><strong>Actualizando</strong></div>
         </div>
 
-        <div class="maintenance-checks">
-          <article>
-            <span class="check-icon code-icon">&lt;/&gt;</span>
-            <div><strong>Código</strong><small>Verificación de archivos</small></div>
-            <i></i>
-          </article>
-          <article>
-            <span class="check-icon server-icon">▦</span>
-            <div><strong>Servidor</strong><small>Estado de conexión</small></div>
-            <i></i>
-          </article>
-          <article>
-            <span class="check-icon speed-icon">◴</span>
-            <div><strong>Optimización</strong><small>Mejora de rendimiento</small></div>
-            <i></i>
-          </article>
-          <article>
-            <span class="check-icon shield-icon">◇</span>
-            <div><strong>Seguridad</strong><small>Validación de acceso</small></div>
-            <i></i>
-          </article>
+        <div class="progress-block">
+          <div class="progress-heading"><span>Progreso estimado</span><strong id="progressPercent">0%</strong></div>
+          <div class="progress" aria-label="Progreso estimado"><i id="progressBar"></i></div>
+          <div class="progress-foot"><span>Tiempo restante aproximado</span><strong id="estimatedTime">—</strong></div>
         </div>
+
+        <div class="countdown" aria-label="Tiempo restante">
+          <div><strong id="hours">00</strong><span>horas</span></div>
+          <i>:</i>
+          <div><strong id="minutes">00</strong><span>minutos</span></div>
+          <i>:</i>
+          <div><strong id="seconds">00</strong><span>segundos</span></div>
+        </div>
+        <p class="return-status" id="maintenanceStatus">Comprobando el tiempo restante…</p>
       </div>
 
-      <aside class="maintenance-sidebar">
-        <section>
-          <header><span>REGISTRO DE ACTIVIDAD</span><b class="live-dot"></b></header>
-          <ol class="activity-list">
-            <li><time id="activityTime1">—</time><span>Conectando al servicio</span><i></i></li>
-            <li><time id="activityTime2">—</time><span>Verificando integridad</span><i></i></li>
-            <li><time id="activityTime3">—</time><span>Optimizando datos</span><i></i></li>
-            <li><time id="activityTime4">—</time><span>Actualizando recursos</span><i></i></li>
-            <li><time id="activityTime5">—</time><span>Validando seguridad</span><i></i></li>
-          </ol>
-        </section>
-
-        <section class="resources">
-          <header><span>RECURSOS DEL SISTEMA</span></header>
-          <div class="resource-row"><div><span>CPU</span><b id="cpuValue">42%</b></div><i><em id="cpuBar"></em></i></div>
-          <div class="resource-row"><div><span>MEMORIA</span><b id="memoryValue">58%</b></div><i><em id="memoryBar"></em></i></div>
-          <div class="resource-row"><div><span>DISCO</span><b id="diskValue">34%</b></div><i><em id="diskBar"></em></i></div>
-          <div class="resource-row"><div><span>RED</span><b id="networkValue">76%</b></div><i><em id="networkBar"></em></i></div>
-        </section>
-
-        <footer>
-          <i></i>
-          <div><strong>Proceso supervisado</strong><span>La página volverá automáticamente.</span></div>
-        </footer>
+      <aside class="maintenance-aside">
+        <span class="aside-title">ETAPAS DEL PROCESO</span>
+        <ol class="deployment-steps">
+          <li class="done"><b>01</b><div><strong>Preparación</strong><span>Validación de configuración</span></div></li>
+          <li class="active"><b>02</b><div><strong>Actualización</strong><span>Aplicando cambios del sistema</span></div></li>
+          <li><b>03</b><div><strong>Verificación</strong><span>Pruebas de integridad y acceso</span></div></li>
+          <li><b>04</b><div><strong>Restablecimiento</strong><span>Retorno automático del módulo</span></div></li>
+        </ol>
+        <div class="service-note"><strong>El servicio volverá automáticamente</strong><span>No necesitas actualizar esta página manualmente.</span></div>
       </aside>
     </section>
-  </main>
 
+    <footer class="maintenance-footer"><span>Operación supervisada</span><span>Gestión de Eventos · Sistema interno</span></footer>
+  </main>
   <script type="module" src="js/mantenimiento.js?v=20260801-2300"></script>
   <script type="module" src="js/pwa.js?v=20260801-2300"></script>
 </body>

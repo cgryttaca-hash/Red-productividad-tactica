@@ -1,4 +1,4 @@
-const CACHE='rpt-shell-3.6.1-restored';
+const CACHE='rpt-shell-3.6.2-visual';
 const OFFLINE='./offline.html';
 const ASSETS=[
   "./",
@@ -17,6 +17,7 @@ const ASSETS=[
   "./css/index.css",
   "./css/login.css",
   "./css/mantenimiento.css",
+  "./css/professional-ui.css",
   "./css/minuta.css",
   "./css/nav-clean.css",
   "./css/usuarios.css",

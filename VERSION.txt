@@ -1,1 +1,2 @@
-3.6.1-restaurado
+3.6.2
+Visual profesional sobre base funcional 3.6.1.
