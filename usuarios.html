@@ -2,32 +2,39 @@
 <html lang="es" class="auth-pending maintenance-pending" data-auth-page="admin" data-maintenance-page="usuarios">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#071423">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111111">
   <title>Usuarios | Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260827-5"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260827-5"></script>
+  <script src="js/auth-guard.js?v=20260827-3600"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260827-3600"></script>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/admin-tools.css?v=20260827-5">
-  <link rel="stylesheet" href="css/usuarios.css?v=20260827-5">
-  <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <link rel="icon" href="assets/icon-192.png" type="image/png">
-  <script src="js/admin-shell.js?v=20260827-5" defer></script>
+  <link rel="stylesheet" href="css/usuarios.css?v=20260827-3600">
+  <link rel="stylesheet" href="css/pro-suite.css?v=20260827-3600">
 </head>
 <body>
-  <header class="tool-header"><div class="tool-header-inner">
-    <a class="tool-brand" href="index.html"><strong>GESTIÓN DE EVENTOS</strong><small>Usuarios y accesos</small></a>
-    <nav class="tool-nav" aria-label="Navegación administrativa"></nav>
-    <div class="tool-session"><span id="currentAdmin">Administrador</span><button id="logoutButton" type="button">Salir</button></div>
-  </div></header>
+  <header class="users-header">
+    <a href="index.html">GESTIÓN DE EVENTOS</a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="minuta.html">Minuta</a>
+      <a href="configuracion.html">Configuración</a>
+      <a href="equipos.html">Equipos</a>
+      <a href="respaldos.html">Respaldos</a>
+    </nav>
+    <div class="users-session">
+      <span id="currentAdmin">Administrador</span>
+      <button id="logoutButton" type="button">Cerrar sesión</button>
+    </div>
+  </header>
 
   <main class="users-shell">
     <section class="users-title">
       <div>
-        <span>ADMINISTRACIÓN LOCAL</span>
+        <span>ACCESOS SINCRONIZADOS</span>
         <h1>Usuarios del sistema</h1>
-        <p>Crea y administra accesos. Los usuarios normales reciben un inicio simplificado y sincronización automática con la publicación del Administrador.</p>
+        <p>Crea usuarios que conservan su rol al ingresar desde otros computadores o celulares.</p>
       </div>
       <a href="index.html">Volver al panel</a>
     </section>
@@ -36,6 +43,16 @@
       <article><small>Total usuarios</small><strong id="userCount">0</strong></article>
       <article><small>Usuarios activos</small><strong id="activeCount">0</strong></article>
       <article><small>Administradores</small><strong id="adminCount">0</strong></article>
+    </section>
+
+    <section class="cloud-access-panel">
+      <div><span>FIREBASE AUTH</span><h2>Usuarios disponibles en todos los equipos</h2><p>Conecta la cuenta propietaria una vez en este navegador para crear y administrar accesos sincronizados.</p></div>
+      <form id="cloudOwnerForm" class="cloud-owner-form">
+        <input id="cloudOwnerEmail" type="email" autocomplete="username" placeholder="Correo administrador de Firebase" required>
+        <input id="cloudOwnerPassword" type="password" autocomplete="current-password" placeholder="Contraseña de Firebase" required>
+        <button type="submit">Conectar administración</button>
+      </form>
+      <div id="cloudOwnerState" class="cloud-owner-state">Comprobando conexión…</div>
     </section>
 
     <section class="users-grid">
@@ -49,19 +66,9 @@
           <label><span>Usuario</span><input id="newUsername" required placeholder="Ejemplo: Recepcion"></label>
           <label><span>Contraseña</span><input id="newPassword" type="password" required minlength="8" placeholder="Mínimo 8 caracteres"></label>
           <label><span>Rol</span><select id="newRole"><option value="viewer">Usuario</option><option value="admin">Administrador</option></select></label>
-          <button type="submit">Crear usuario</button>
+          <button id="createUserButton" type="submit">Crear usuario sincronizado</button>
         </form>
 
-        <div class="own-password">
-          <div class="panel-heading">
-            <span>SEGURIDAD</span>
-            <h2>Cambiar mi contraseña</h2>
-          </div>
-          <form id="changeOwnPasswordForm">
-            <input id="ownNewPassword" type="password" required minlength="8" placeholder="Nueva contraseña · mínimo 8 caracteres">
-            <button type="submit">Actualizar</button>
-          </form>
-        </div>
       </article>
 
       <article class="users-panel users-list-panel">
@@ -80,8 +87,8 @@
     </section>
   </main>
 
-  <script type="module" src="js/usuarios.js?v=20260827-5"></script>
-  <script type="module" src="js/pwa.js?v=20260827-5"></script>
-  <script type="module" src="js/device-heartbeat.js?v=20260827-5"></script>
+  <script type="module" src="js/usuarios.js?v=20260827-3600"></script>
+  <script type="module" src="js/pwa.js?v=20260827-3600"></script>
+  <script type="module" src="js/device-heartbeat.js?v=20260827-3600"></script>
 </body>
 </html>

@@ -2,10 +2,7 @@ const USERS_KEY = 'rptAuthUsersV1';
 const SESSION_KEY = 'rptAuthSessionV1';
 const DEVICE_KEY = 'rptAuthDeviceV1';
 const DEFAULT_ADMIN_USERNAME = 'Admin';
-const DEFAULT_ADMIN_SALT = 'dp+InP2S+cMrYC8HI9/DLw==';
-const DEFAULT_ADMIN_HASH = 'qTokt9mPvrEJb3H/VHDm1jNeVOYNNjZXlhNeuVqwsRY=';
 const PBKDF2_ITERATIONS = 120000;
-const MAX_INACTIVITY_MS = 60 * 60 * 1000;
 
 const encoder = new TextEncoder();
 
@@ -26,21 +23,6 @@ function writeJson(key, value){
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-function readUsers(){
-  const raw = readJson(USERS_KEY, []);
-  if(!Array.isArray(raw)) return [];
-  let changed = false;
-  const users = raw.map(user => {
-    if(!user || typeof user !== 'object') return user;
-    const normalizedUsername = normalizeUsername(user.normalizedUsername || user.username);
-    if(user.normalizedUsername === normalizedUsername) return user;
-    changed = true;
-    return {...user, normalizedUsername};
-  }).filter(Boolean);
-  if(changed) writeJson(USERS_KEY, users);
-  return users;
-}
-
 function bytesToBase64(bytes){
   let binary = '';
   bytes.forEach(byte => { binary += String.fromCharCode(byte); });
@@ -59,9 +41,6 @@ function randomSalt(){
 }
 
 async function deriveHash(password, saltBase64){
-  if(!globalThis.crypto?.subtle){
-    throw new Error('El acceso seguro requiere HTTPS o localhost. Abre el sistema desde GitHub Pages o un servidor local.');
-  }
   const keyMaterial = await crypto.subtle.importKey(
     'raw',
     encoder.encode(String(password)),
@@ -98,95 +77,68 @@ function cleanUser(user){
   return safe;
 }
 
-function nextMidnightTimestamp(){
-  const now = new Date();
-  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
-  return midnight.getTime();
-}
-
-function sessionIsCurrent(session){
-  if(!session || session.deviceId !== deviceId()) return false;
-  const now = Date.now();
-  if(Number(session.expiresAt) && now >= Number(session.expiresAt)) return false;
-  const lastActivity = Number(session.lastActivityAt || new Date(session.loginAt || 0).getTime() || 0);
-  if(lastActivity && now - lastActivity >= MAX_INACTIVITY_MS) return false;
-  return true;
-}
-
-function requireSession(){
-  const session = getSession();
-  if(!session) throw new Error('La sesión ya no está activa. Ingresa nuevamente.');
-  return session;
-}
-
-function requireAdmin(){
-  const session = requireSession();
-  if(session.role !== 'admin') throw new Error('Solo un administrador puede realizar esta acción.');
-  return session;
-}
-
 export async function ensureDefaultAdmin(){
-  const users = readUsers();
-  if(users.some(user => normalizeUsername(user.normalizedUsername || user.username) === normalizeUsername(DEFAULT_ADMIN_USERNAME))){
-    return;
-  }
-  const salt = DEFAULT_ADMIN_SALT;
-  const passwordHash = DEFAULT_ADMIN_HASH;
-  const now = new Date().toISOString();
-  users.push({
+  const users = readJson(USERS_KEY, []);
+  return users.some(user => user.role === 'admin' && user.active);
+}
+
+export function hasLocalUsers(){
+  return readJson(USERS_KEY, []).length > 0;
+}
+
+export async function setupInitialAdmin({username='Admin', displayName='Administrador', password}){
+  const users=readJson(USERS_KEY, []);
+  if(users.length) throw new Error('El administrador inicial ya fue configurado en este navegador.');
+  if(String(password).length < 8) throw new Error('La contraseña debe tener al menos 8 caracteres.');
+  const normalizedUsername=normalizeUsername(username || 'Admin');
+  const salt=randomSalt();
+  const passwordHash=await deriveHash(password,salt);
+  const now=new Date().toISOString();
+  const user={
     id:`usr_${Date.now().toString(36)}`,
-    username:DEFAULT_ADMIN_USERNAME,
-    normalizedUsername:normalizeUsername(DEFAULT_ADMIN_USERNAME),
-    displayName:'Administrador',
-    role:'admin',
-    active:true,
-    salt,
-    passwordHash,
-    createdAt:now,
-    updatedAt:now,
-    lastLoginAt:null,
-    passwordChangedAt:null,
-    mustChangePassword:true
-  });
-  writeJson(USERS_KEY, users);
+    username:String(username||'Admin').trim(),
+    normalizedUsername,
+    displayName:String(displayName||'Administrador').trim(),
+    role:'admin',active:true,salt,passwordHash,createdAt:now,updatedAt:now,lastLoginAt:null,passwordChangedAt:null
+  };
+  writeJson(USERS_KEY,[user]);
+  return cleanUser(user);
 }
 
 export function getSession(){
   const session = readJson(SESSION_KEY, null);
-  if(!sessionIsCurrent(session)) return null;
-  const users = readUsers();
+  if(!session) return null;
+  if(session.source === 'cloud'){
+    if(session.active === false) return null;
+    return {...session,user:{id:session.userId,authUid:session.authUid,username:session.username,displayName:session.displayName,role:session.role,active:true,source:'cloud'}};
+  }
+  if(session.deviceId !== deviceId()) return null;
+  const users = readJson(USERS_KEY, []);
   const user = users.find(item => item.id === session.userId && item.active);
   if(!user) return null;
-  return {...session, role:user.role, displayName:user.displayName, username:user.username, user:cleanUser(user)};
+  return {...session, source:'local', user:cleanUser(user)};
 }
 
 export function isAuthenticated(){
   return Boolean(getSession());
 }
 
-export function logout(reason='manual'){
+export function logout(){
   const session=getSession();
   localStorage.removeItem(SESSION_KEY);
+  if(session?.source==='cloud') import('./cloud-auth.js').then(module=>module.signOutCloud()).catch(()=>{});
   import('./system-log.js').then(module=>module.addSystemLog({
     source:'Acceso',level:'info',title:'Sesión cerrada',
-    detail:reason==='manual' && session ? `${session.displayName||session.username} cerró sesión.` : 'Sesión finalizada.'
+    detail:session?`${session.displayName||session.username} cerró sesión.`:'Sesión finalizada.'
   })).catch(()=>{});
-}
-
-export function touchSession(){
-  const session = readJson(SESSION_KEY, null);
-  if(!sessionIsCurrent(session)) return null;
-  const next = {...session, lastActivityAt:Date.now()};
-  writeJson(SESSION_KEY, next);
-  return next;
 }
 
 export async function login(username, password){
   await ensureDefaultAdmin();
-  const users = readUsers();
+  const users = readJson(USERS_KEY, []);
   const normalizedUsername = normalizeUsername(username);
-  const userIndex = users.findIndex(item => normalizeUsername(item.normalizedUsername || item.username) === normalizedUsername);
-  if(userIndex === -1) throw new Error('Usuario o contraseña incorrectos.');
+  const userIndex = users.findIndex(item => item.normalizedUsername === normalizedUsername);
+  if(userIndex === -1) throw new Error('El usuario no existe.');
   const user = users[userIndex];
   if(!user.active) throw new Error('Este usuario está desactivado.');
   const passwordHash = await deriveHash(password, user.salt);
@@ -197,14 +149,13 @@ export async function login(username, password){
   writeJson(USERS_KEY, users);
 
   const session = {
+    source:'local',
     userId:user.id,
     username:user.username,
     displayName:user.displayName,
     role:user.role,
     deviceId:deviceId(),
-    loginAt:now,
-    lastActivityAt:Date.now(),
-    expiresAt:nextMidnightTimestamp()
+    loginAt:now
   };
   writeJson(SESSION_KEY, session);
   if(!localStorage.getItem('rpt:deviceName')){
@@ -220,18 +171,16 @@ export async function login(username, password){
 }
 
 export async function listUsers(){
-  requireAdmin();
   await ensureDefaultAdmin();
-  return readUsers().map(cleanUser);
+  return readJson(USERS_KEY, []).map(cleanUser);
 }
 
 export async function createUser({username, displayName, password, role='viewer'}){
-  requireAdmin();
   await ensureDefaultAdmin();
-  const users = readUsers();
+  const users = readJson(USERS_KEY, []);
   const normalizedUsername = normalizeUsername(username);
   if(!normalizedUsername) throw new Error('Escribe un nombre de usuario.');
-  if(users.some(item => normalizeUsername(item.normalizedUsername || item.username) === normalizedUsername)){
+  if(users.some(item => item.normalizedUsername === normalizedUsername)){
     throw new Error('Ese usuario ya existe.');
   }
   if(String(password).length < 8) throw new Error('La contraseña debe tener al menos 8 caracteres.');
@@ -250,8 +199,7 @@ export async function createUser({username, displayName, password, role='viewer'
     createdAt:now,
     updatedAt:now,
     lastLoginAt:null,
-    passwordChangedAt:now,
-    mustChangePassword:false
+    passwordChangedAt:null
   };
   users.push(user);
   writeJson(USERS_KEY, users);
@@ -259,10 +207,8 @@ export async function createUser({username, displayName, password, role='viewer'
 }
 
 export async function changePassword(userId, password){
-  const session = requireSession();
-  if(session.userId !== userId && session.role !== 'admin') throw new Error('No tienes permiso para cambiar esa contraseña.');
   if(String(password).length < 8) throw new Error('La contraseña debe tener al menos 8 caracteres.');
-  const users = readUsers();
+  const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.id === userId);
   if(index === -1) throw new Error('Usuario no encontrado.');
   const salt = randomSalt();
@@ -273,7 +219,6 @@ export async function changePassword(userId, password){
     salt,
     passwordHash,
     passwordChangedAt:now,
-    mustChangePassword:false,
     updatedAt:now
   };
   writeJson(USERS_KEY, users);
@@ -281,15 +226,14 @@ export async function changePassword(userId, password){
 }
 
 export async function updateUser(userId, changes){
-  requireAdmin();
-  const users = readUsers();
+  const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.id === userId);
   if(index === -1) throw new Error('Usuario no encontrado.');
   const current = users[index];
   const nextUsername = changes.username !== undefined ? String(changes.username).trim() : current.username;
   const normalizedUsername = normalizeUsername(nextUsername);
   if(!normalizedUsername) throw new Error('El usuario no puede quedar vacío.');
-  if(users.some(item => item.id !== userId && normalizeUsername(item.normalizedUsername || item.username) === normalizedUsername)){
+  if(users.some(item => item.id !== userId && item.normalizedUsername === normalizedUsername)){
     throw new Error('Ese usuario ya existe.');
   }
   const nextRole = changes.role === 'admin' ? 'admin' : changes.role === 'viewer' ? 'viewer' : current.role;
@@ -312,9 +256,9 @@ export async function updateUser(userId, changes){
 }
 
 export async function deleteUser(userId){
-  const session=requireAdmin();
-  if(session.userId === userId) throw new Error('No puedes eliminar tu propia sesión.');
-  const users = readUsers();
+  const session = getSession();
+  if(session?.userId === userId) throw new Error('No puedes eliminar tu propia sesión.');
+  const users = readJson(USERS_KEY, []);
   const target = users.find(item => item.id === userId);
   if(!target) throw new Error('Usuario no encontrado.');
   const adminCount = users.filter(item => item.role === 'admin' && item.active).length;

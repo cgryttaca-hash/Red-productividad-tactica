@@ -37,15 +37,13 @@ function render(){
   const seconds=Math.floor((remaining%60000)/1000);
   const totalMinutes=Math.max(1,Math.ceil(remaining/60000));
   const moduleLabel=labels[page]||'Página';
-  const cleanText=value=>String(value||'').replace(/&#x20;|&nbsp;/gi,' ').replace(/\\+/g,' ').replace(/\s{2,}/g,' ').trim();
 
   document.getElementById('hours').textContent=String(hours).padStart(2,'0');
   document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');
   document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
   document.getElementById('maintenanceTitle').textContent=`${moduleLabel} en actualización`;
   document.getElementById('maintenanceModule').textContent=moduleLabel;
-  document.getElementById('maintenanceMessage').textContent=cleanText(item.message)||'Estamos aplicando mejoras técnicas para ofrecer una experiencia más rápida y estable.';
-  const visualModule=document.getElementById('maintenanceVisualModule');if(visualModule)visualModule.textContent=moduleLabel;
+  document.getElementById('maintenanceMessage').textContent=item.message||'Estamos aplicando mejoras técnicas para ofrecer una experiencia más rápida y estable.';
   document.getElementById('maintenanceStatus').textContent=`Regreso automático: ${new Date(until).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'})}`;
   document.getElementById('progressBar').style.width=`${completed.toFixed(1)}%`;
   document.getElementById('progressPercent').textContent=`${Math.round(completed)}%`;

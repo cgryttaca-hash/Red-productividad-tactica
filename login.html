@@ -2,30 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#071423">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111111">
   <title>Acceso | Gestión de Eventos</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/login.css?v=20260827-5">
-  <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <link rel="icon" href="assets/icon-192.png" type="image/png">
+  <link rel="stylesheet" href="css/login.css?v=20260827-3600">
+  <link rel="stylesheet" href="css/pro-suite.css?v=20260827-3600">
 </head>
 <body>
   <header class="login-banner">
-    <div class="login-brand"><img src="assets/icon-192.png" alt=""><div><strong>GESTIÓN DE EVENTOS</strong><small>Centro operativo</small></div></div>
+    <strong>GESTIÓN DE EVENTOS</strong>
     <span>Acceso seguro por equipo</span>
   </header>
 
   <main class="login-shell">
     <section class="login-copy">
-      <div class="login-orbit" aria-hidden="true"><span></span><i></i><b></b></div>
       <span>CONTROL DE ACCESO</span>
       <h1>Gestión de Eventos</h1>
-      <p>Accede al centro operativo desde este equipo. La sesión se protege por dispositivo y se cierra automáticamente a medianoche o después de 1 hora sin actividad.</p>
+      <p>Accede con tu cuenta. Los usuarios publicados por el administrador funcionan en cualquier equipo conectado.</p>
       <div class="login-features" aria-label="Características del acceso">
-        <article><strong>Sesión controlada</strong><span>Cierre automático por inactividad y a medianoche.</span></article>
+        <article><strong>Acceso sincronizado</strong><span>Los usuarios operativos pueden ingresar desde otros equipos.</span></article>
         <article><strong>Acceso protegido</strong><span>Index, Eventos, Minuta, Usuarios y Configuración.</span></article>
-        <article><strong>Acceso por rol</strong><span>Administradores y usuarios reciben una experiencia diferente.</span></article>
+        <article><strong>Sesión protegida</strong><span>Cierre automático por inactividad y al finalizar el día.</span></article>
       </div>
     </section>
 
@@ -49,7 +47,15 @@
       </form>
 
       <div id="loginMessage" class="login-message" hidden></div>
-      <p class="login-help login-help--secure">Las contraseñas nunca se muestran después de guardarlas. Los cambios de acceso se realizan únicamente desde una sesión de Administrador.</p>
+      <section id="initialSetup" class="initial-setup" hidden>
+        <div class="initial-setup-copy"><strong>Configuración inicial</strong><span>Este navegador no tiene un administrador local. Crea uno sin usar contraseñas predeterminadas.</span></div>
+        <form id="initialSetupForm">
+          <label><span>Usuario administrador</span><input id="setupUsername" autocomplete="username" value="Admin" required></label>
+          <label><span>Nueva contraseña</span><input id="setupPassword" type="password" autocomplete="new-password" minlength="8" required placeholder="Mínimo 8 caracteres"></label>
+          <button type="submit">Crear administrador local</button>
+        </form>
+      </section>
+      <p class="login-help">Las contraseñas nunca se muestran después de guardarlas.</p>
     </section>
   </main>
 
@@ -58,11 +64,11 @@
       <span class="welcome-spinner"></span>
       <small>ACCESO CONCEDIDO</small>
       <h2 id="welcomeTitle">Bienvenido</h2>
-      <p id="welcomeSubtitle">Preparando tu espacio de trabajo…</p>
+      <p>Preparando el centro operativo…</p>
     </div>
   </div>
 
-  <script type="module" src="js/login.js?v=20260827-5"></script>
-  <script type="module" src="js/pwa.js?v=20260827-5"></script>
+  <script type="module" src="js/login.js?v=20260827-3600"></script>
+  <script type="module" src="js/pwa.js?v=20260827-3600"></script>
 </body>
 </html>

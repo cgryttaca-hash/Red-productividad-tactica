@@ -12,7 +12,7 @@ export async function requestNotificationPermission(){
 }
 export async function showNotification(title,body,{tag='rpt-update',url='./agenda_movil.html',renotify=false}={}){
   const settings=read();
-  if(!settings.enabled||!('Notification'in window)||Notification.permission!=='granted')return false;
+  if(!settings.enabled||Notification.permission!=='granted')return false;
   const registration=await navigator.serviceWorker?.getRegistration?.();
   if(registration?.active){
     registration.active.postMessage({type:'SHOW_NOTIFICATION',payload:{title,body,tag,renotify,data:{url}}});
@@ -23,13 +23,8 @@ export async function showNotification(title,body,{tag='rpt-update',url='./agend
 }
 function excelMessage(detail={}){
   const diff=detail.diff||{};
-  const base=`${diff.created?.length||0} nuevos · ${diff.updated?.length||0} modificados · ${diff.deleted?.length||0} eliminados.`;
-  const change=detail.auditEntries?.[0];
-  if(!change)return base;
-  const action=change.type==='actualizado'?`${change.field||'Campo'} actualizado`:change.type==='creado'?'Evento creado':'Evento eliminado';
-  return `${base} ${action}${change.company?` · ${change.company}`:''}.`;
+  return `${diff.created?.length||0} nuevos · ${diff.updated?.length||0} modificados · ${diff.deleted?.length||0} eliminados.`;
 }
-
 window.addEventListener('eventDataUpdated',event=>{
   const settings=read();if(!settings.excel)return;
   showNotification('Archivo Excel actualizado',excelMessage(event.detail||{}),{tag:'rpt-excel',url:'./index.html'});

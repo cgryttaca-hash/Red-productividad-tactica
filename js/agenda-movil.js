@@ -1,19 +1,16 @@
 import {
   FIREBASE_CONFIG,
   EVENTS_COLLECTION,
-  META_COLLECTION,
-  CHANGES_COLLECTION
+  META_COLLECTION
 } from './firebase-config.js';
-import {applyAppearance,readAppearanceCache,writeAppearanceCache,THEME_DOC_ID} from './theme-settings.js';
 
 const SDK='https://www.gstatic.com/firebasejs/12.16.0';
-const FALLBACK_INTERVAL_MS=15000;
+const FALLBACK_INTERVAL_MS=120000;
 const CHUNK_PREFIX='agenda_chunk_';
 const CACHE_DB='agenda-movil-cache-v3';
 const CACHE_STORE='state';
 const CACHE_KEY='events';
 const $=id=>document.getElementById(id);
-applyAppearance('agenda_movil',readAppearanceCache());
 
 const state={
   all:[],
@@ -24,19 +21,12 @@ const state={
   db:null,
   sdk:null,
   metaUnsubscribe:null,
-  changesUnsubscribe:null,
-  themeUnsubscribe:null,
   fallbackTimer:null,
   lastHash:'',
   initialized:false,
   refreshing:false,
   meta:null,
-  selected:null,
-  recentChanges:[],
-  changesInitialized:false,
-  unreadChanges:0,
-  lastReadChangeId:'',
-  notificationModule:null
+  selected:null
 };
 
 const text=value=>value===undefined||value===null?'':String(value);
@@ -44,7 +34,6 @@ const normalize=value=>text(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'
 const esc=value=>text(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
 const chunkId=index=>`${CHUNK_PREFIX}${String(index).padStart(4,'0')}`;
 const FILTER_KEY='rptAgendaFiltersV1';
-const READ_CHANGE_KEY='rptAgendaLastReadChangeV1';
 function readFilters(){try{return JSON.parse(localStorage.getItem(FILTER_KEY)||'null')||{};}catch(_){return{};}}
 function saveFilters(){
   const value={
@@ -53,135 +42,6 @@ function saveFilters(){
   };
   try{localStorage.setItem(FILTER_KEY,JSON.stringify(value));}catch(_){}
 }
-function hideBoot(){const boot=$('mobileBoot');if(boot)boot.classList.add('is-hidden');}
-function formatAuditDate(value){
-  const date=value?.toDate?value.toDate():new Date(value);
-  return Number.isNaN(date.getTime())?'Sin fecha':date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
-}
-function auditTitle(entry){
-  if(entry.type==='creado')return `Evento creado · ${entry.company||'Empresa'}`;
-  if(entry.type==='eliminado')return `Evento eliminado · ${entry.company||'Empresa'}`;
-  return `${entry.field||'Campo'} actualizado · ${entry.company||'Empresa'}`;
-}
-function updateUnreadBadge(){
-  const count=Math.max(0,Number(state.unreadChanges)||0);
-  if($('mobileChangesCount')){$('mobileChangesCount').textContent=String(count);$('mobileChangesCount').hidden=count===0;}
-  if($('mobileBottomUnread')){$('mobileBottomUnread').textContent=String(count);$('mobileBottomUnread').hidden=count===0;}
-  $('mobileChangesToggle')?.classList.toggle('has-unread',count>0);
-  try{
-    if(count>0&&navigator.setAppBadge)navigator.setAppBadge(count).catch(()=>{});
-    else if(count===0&&navigator.clearAppBadge)navigator.clearAppBadge().catch(()=>{});
-  }catch(_){}
-}
-function markChangesRead(){
-  state.unreadChanges=0;
-  const newest=state.recentChanges[0]?.id||'';
-  if(newest){state.lastReadChangeId=newest;try{localStorage.setItem(READ_CHANGE_KEY,newest);}catch(_){}}
-  updateUnreadBadge();
-}
-function showMobileToast(title,detail='',type='success'){
-  const stack=$('mobileToastStack');if(!stack)return;
-  const toast=document.createElement('article');toast.className=`mobile-toast is-${type}`;
-  toast.innerHTML=`<span class="mobile-toast__dot"></span><div><strong>${esc(title)}</strong>${detail?`<small>${esc(detail)}</small>`:''}</div><button type="button" aria-label="Cerrar aviso">×</button>`;
-  toast.querySelector('button')?.addEventListener('click',()=>toast.remove());stack.prepend(toast);
-  while(stack.children.length>3)stack.lastElementChild?.remove();
-  setTimeout(()=>{toast.classList.add('is-leaving');setTimeout(()=>toast.remove(),220);},5200);
-}
-async function getNotificationModule(){
-  if(!state.notificationModule)state.notificationModule=import('./notifications.js').catch(()=>null);
-  return state.notificationModule;
-}
-async function syncNotificationUI(){
-  const button=$('mobileNotifyButton');const prompt=$('mobileNotificationPrompt');
-  if(!button)return;
-  if(!('Notification'in window)){
-    button.classList.add('is-unavailable');button.querySelector('strong').textContent='Sin avisos';button.title='Este navegador no admite notificaciones';
-    if(prompt)prompt.hidden=true;return;
-  }
-  const module=await getNotificationModule();const settings=module?.getNotificationSettings?.()||{};
-  const enabled=Notification.permission==='granted'&&settings.enabled!==false&&settings.mobile!==false;
-  button.classList.toggle('is-enabled',enabled);button.classList.toggle('is-denied',Notification.permission==='denied');
-  button.querySelector('strong').textContent=enabled?'Avisos activos':Notification.permission==='denied'?'Avisos bloqueados':'Activar avisos';
-  button.title=enabled?'Notificaciones activas para la Agenda':'Configurar notificaciones de la Agenda';
-  if(prompt)prompt.hidden=enabled||Notification.permission==='denied';
-}
-async function enableAgendaNotifications(){
-  if(!('Notification'in window)){showMobileToast('Avisos no disponibles','Este navegador no admite notificaciones.','warning');return;}
-  if(Notification.permission==='denied'){
-    showMobileToast('Notificaciones bloqueadas','Actívalas desde los permisos del sitio en el navegador.','warning');syncNotificationUI();return;
-  }
-  const module=await getNotificationModule();if(!module)return;
-  try{
-    const permission=Notification.permission==='granted'?'granted':await module.requestNotificationPermission();
-    if(permission==='granted'){
-      module.setNotificationSettings?.({enabled:true,mobile:true});
-      showMobileToast('Avisos activados','La Agenda te avisará cuando detecte nuevos cambios.');
-      module.showNotification?.('Avisos de Agenda activados','Las notificaciones quedaron listas en este dispositivo.',{tag:'agenda-notifications-ready',url:'./agenda_movil.html'});
-    }
-  }catch(error){showMobileToast('No fue posible activar avisos',error?.message||'Revisa los permisos del navegador.','warning');}
-  syncNotificationUI();
-}
-function renderRecentChanges(){
-  const list=$('mobileChangesList');if(!list)return;
-  updateUnreadBadge();
-  list.innerHTML=state.recentChanges.length?state.recentChanges.map(entry=>`<article class="change-mobile-item">
-    <small>${esc(formatAuditDate(entry.timestamp||entry.publishedAt))}</small>
-    <strong>${esc(auditTitle(entry))}</strong>
-    <p>${esc([entry.user,entry.host,entry.sheet,entry.cell].filter(Boolean).join(' · ')||'Cambio publicado desde el archivo maestro')}</p>
-    ${entry.type==='actualizado'?`<div class="change-mobile-values"><span>${esc(entry.before||'Vacío')}</span><b>→</b><span>${esc(entry.after||'Vacío')}</span></div>`:''}
-  </article>`).join(''):'<div class="changes-empty">Sin cambios recientes.</div>';
-}
-function openChanges(){
-  markChangesRead();
-  $('mobileChangesPanel')?.classList.add('is-open');$('mobileChangesPanel')?.setAttribute('aria-hidden','false');
-  if($('mobileChangesBackdrop'))$('mobileChangesBackdrop').hidden=false;
-  $('mobileChangesToggle')?.setAttribute('aria-expanded','true');
-}
-function closeChanges(){
-  $('mobileChangesPanel')?.classList.remove('is-open');$('mobileChangesPanel')?.setAttribute('aria-hidden','true');
-  if($('mobileChangesBackdrop'))$('mobileChangesBackdrop').hidden=true;
-  $('mobileChangesToggle')?.setAttribute('aria-expanded','false');
-}
-function bindRealtimeChanges(fireMod){
-  try{
-    const query=fireMod.query(fireMod.collection(state.db,CHANGES_COLLECTION),fireMod.orderBy('timestamp','desc'),fireMod.limit(18));
-    state.changesUnsubscribe?.();
-    state.changesUnsubscribe=fireMod.onSnapshot(query,snapshot=>{
-      const added=state.changesInitialized?snapshot.docChanges().filter(change=>change.type==='added').map(change=>({id:change.doc.id,...change.doc.data()})):[];
-      state.recentChanges=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
-      if(!state.changesInitialized){
-        try{state.lastReadChangeId=localStorage.getItem(READ_CHANGE_KEY)||'';}catch(_){state.lastReadChangeId='';}
-        if(state.lastReadChangeId){
-          const index=state.recentChanges.findIndex(entry=>entry.id===state.lastReadChangeId);
-          state.unreadChanges=index>0?index:0;
-        }else state.unreadChanges=0;
-      }
-      if(added.length){
-        state.unreadChanges=Math.min(99,state.unreadChanges+added.length);
-        const latest=added[0];
-        const context=[latest.user,latest.host,latest.sheet,latest.cell].filter(Boolean).join(' · ');
-        setNotice(`${auditTitle(latest)}.`, 'success');
-        showMobileToast(auditTitle(latest),context||'Cambio publicado desde el archivo maestro');
-        const notificationBody=added.length>1?`${auditTitle(latest)} · ${added.length-1} cambio${added.length-1===1?'':'s'} más.`:auditTitle(latest);
-        getNotificationModule().then(module=>module?.showNotification?.('Cambio en la agenda',notificationBody,{tag:'agenda-change-latest',url:'./agenda_movil.html',renotify:true})).catch(()=>{});
-      }
-      renderRecentChanges();
-      state.changesInitialized=true;
-    },error=>console.warn('Agenda changes:',error));
-  }catch(error){console.warn('Agenda changes query:',error);}
-}
-function bindRemoteAppearance(fireMod){
-  try{
-    const ref=fireMod.doc(state.db,META_COLLECTION,THEME_DOC_ID);
-    state.themeUnsubscribe?.();
-    state.themeUnsubscribe=fireMod.onSnapshot(ref,snapshot=>{
-      if(!snapshot.exists())return;
-      const value=writeAppearanceCache(snapshot.data()||{});
-      applyAppearance('agenda_movil',value);
-    },()=>{});
-  }catch(_){}
-}
-
 function relativeTime(value){
   const date=value?.toDate?value.toDate():new Date(value);
   if(Number.isNaN(date.getTime()))return'Esperando actualización';
@@ -389,36 +249,6 @@ function setNotice(message,type=''){
 function updateHeader(){
   $('mobileUpdatedAt').textContent=state.updatedAt?relativeTime(state.updatedAt):'Esperando actualización';
 }
-function activeFilterCount(){
-  return [
-    $('mobileDateFilter')?.value,
-    $('mobileFloorFilter')?.value,
-    $('mobileFoodFilter')?.value,
-    $('mobileStatusFilter')?.value,
-    $('mobileSearch')?.value?.trim()
-  ].filter(Boolean).length;
-}
-function renderStats(events){
-  const people=events.reduce((total,event)=>total+(Number(event.cantidadPersonas)||0),0);
-  const food=events.filter(hasFood).length;
-  const label=state.view==='today'?'Agenda de hoy':state.view==='upcoming'?'Próximos eventos':'Agenda completa';
-  if($('agendaTodayLabel'))$('agendaTodayLabel').textContent=$('mobileDateFilter')?.value?formatDate($('mobileDateFilter').value,{weekday:'long',day:'numeric',month:'long'}):label;
-  if($('agendaEventCount'))$('agendaEventCount').textContent=events.length.toLocaleString('es-CO');
-  if($('agendaPeopleCount'))$('agendaPeopleCount').textContent=people.toLocaleString('es-CO');
-  if($('agendaFoodCount'))$('agendaFoodCount').textContent=food.toLocaleString('es-CO');
-  if($('agendaVisibleCount'))$('agendaVisibleCount').textContent=`${events.length.toLocaleString('es-CO')} ${events.length===1?'evento':'eventos'}`;
-  if($('mobileActiveFilters'))$('mobileActiveFilters').textContent=String(activeFilterCount());
-}
-function openFilters(){
-  $('mobileFilterPanel')?.classList.add('is-open');$('mobileFilterPanel')?.setAttribute('aria-hidden','false');
-  if($('mobileFilterBackdrop'))$('mobileFilterBackdrop').hidden=false;
-  $('mobileFilterToggle')?.setAttribute('aria-expanded','true');
-}
-function closeFilters(){
-  $('mobileFilterPanel')?.classList.remove('is-open');$('mobileFilterPanel')?.setAttribute('aria-hidden','true');
-  if($('mobileFilterBackdrop'))$('mobileFilterBackdrop').hidden=true;
-  $('mobileFilterToggle')?.setAttribute('aria-expanded','false');
-}
 function filteredEvents(){
   const query=normalize($('mobileSearch').value).toLowerCase();
   const exactDate=$('mobileDateFilter').value;
@@ -441,12 +271,12 @@ function filteredEvents(){
 function eventRows(events){
   return`<div class="event-table">
     <div class="event-table-header" aria-hidden="true">
-      <span>Empresa / horario</span><span>Salón y piso</span><span>Acomodación</span><span>Personas</span><span>Servicio</span>
+      <span>Empresa</span><span>Salón y piso</span><span>Acomodación</span><span>Personas</span><span>Servicio</span>
     </div>
     ${events.map(event=>`<button class="event-summary-row" type="button" data-id="${esc(event.id)}">
       <span class="event-summary-company">
         <strong>${esc(event.empresa)}</strong>
-        <small>${esc(serviceValue(event.horarioEvento,'Horario sin registrar'))}${event.estado?` · ${esc(event.estado)}`:''}</small>
+        <small>Ver detalle completo</small>
       </span>
       <span class="event-summary-location">
         <strong>${esc(event.escenario)}</strong>
@@ -477,7 +307,6 @@ function floorSection(title,events,type){
 function render(){
   updateHeader();
   const data=filteredEvents().sort((a,b)=>a.fechaISO.localeCompare(b.fechaISO)||compareEvents(a,b));
-  renderStats(data);
   const agenda=$('mobileAgenda');
   if(!data.length){
     agenda.innerHTML=`<div class="agenda-empty"><strong>${state.all.length?'No hay eventos para los filtros seleccionados.':'Aún no hay información publicada.'}</strong><p>${state.all.length?'Selecciona otra vista, fecha o búsqueda.':'La agenda se actualizará automáticamente cuando el equipo principal publique el Excel.'}</p></div>`;
@@ -553,7 +382,13 @@ async function applyEvents(events,updatedAt,notify=true,cloudHash=''){
   });
   setConnection('Sincronización activa',true);
   setNotice(changed&&notify?'La agenda recibió una actualización automática.':'',changed?'success':'');
-  if(changed&&notify)showMobileToast('Agenda actualizada',`${normalized.length} eventos disponibles. Revisa Cambios para ver el detalle.`);
+  if(changed&&notify){
+    import('./notifications.js').then(module=>module.showNotification(
+      'Agenda actualizada',
+      `${normalized.length} eventos disponibles. Consulta los cambios recientes.`,
+      {tag:'agenda-realtime',url:'./agenda_movil.html',renotify:true}
+    )).catch(()=>{});
+  }
   render();
 }
 async function loadChunks(meta,notify=false){
@@ -615,7 +450,7 @@ async function refreshFromCloud({notify=false,force=false}={}){
       setNotice('No fue posible descargar la agenda. El sistema volverá a intentarlo automáticamente.','error');
     }
   }finally{
-    state.refreshing=false;
+    state.refreshing=false;state._lastRefreshAt=Date.now();
   }
 }
 async function initializeFirebase(){
@@ -628,7 +463,6 @@ async function initializeFirebase(){
     state.lastHash=cached.hash||dataHash(cached.events);
     state.cloudHash=cached.cloudHash||'';
     render();
-    hideBoot();
   }
   try{
     const [appMod,authMod,fireMod]=await Promise.all([
@@ -660,43 +494,33 @@ async function initializeFirebase(){
       console.warn('Meta listener:',error);
       refreshFromCloud();
     });
-    bindRealtimeChanges(fireMod);
-    bindRemoteAppearance(fireMod);
     await refreshFromCloud();
-    hideBoot();
     state.fallbackTimer=setInterval(()=>{
       if(!document.hidden)refreshFromCloud();
     },FALLBACK_INTERVAL_MS);
-    window.addEventListener('focus',()=>refreshFromCloud(),{passive:true});
+    window.addEventListener('focus',()=>{if(Date.now()-(state._lastRefreshAt||0)>60000)refreshFromCloud();},{passive:true});
     document.addEventListener('visibilitychange',()=>{
-      if(!document.hidden)refreshFromCloud();
+      if(!document.hidden&&Date.now()-(state._lastRefreshAt||0)>60000)refreshFromCloud();
     });
   }catch(error){
-    hideBoot();
     console.error('Firebase móvil:',error);
     setConnection('Firebase no pudo iniciar',false);
     setNotice('No fue posible iniciar la agenda. Se volverá a intentar automáticamente.','error');
   }
 }
 
-document.querySelectorAll('.agenda-view-button').forEach(button=>button.addEventListener('click',()=>{
+document.querySelectorAll('.agenda-tab').forEach(button=>button.addEventListener('click',()=>{
+  document.querySelectorAll('.agenda-tab').forEach(item=>item.classList.remove('is-active'));
+  button.classList.add('is-active');
   state.view=button.dataset.view;
-  document.querySelectorAll('.agenda-view-button').forEach(item=>item.classList.toggle('is-active',item.dataset.view===state.view));
   $('mobileDateFilter').value='';
   saveFilters();
   render();
 }));
-let searchFrame=0;
-$('mobileSearch').addEventListener('input',()=>{cancelAnimationFrame(searchFrame);searchFrame=requestAnimationFrame(render);});
-$('mobileDateFilter').addEventListener('change',()=>{saveFilters();render();});
-['mobileFloorFilter','mobileFoodFilter','mobileStatusFilter'].forEach(id=>{$(id)?.addEventListener('change',()=>{saveFilters();render();});});
-$('mobileFilterToggle')?.addEventListener('click',openFilters);
-$('mobileFilterClose')?.addEventListener('click',closeFilters);
-$('mobileFilterBackdrop')?.addEventListener('click',closeFilters);
-$('mobileApplyFilters')?.addEventListener('click',()=>{saveFilters();render();closeFilters();});
-$('mobileClearFilters')?.addEventListener('click',()=>{
-  $('mobileDateFilter').value='';$('mobileFloorFilter').value='';$('mobileFoodFilter').value='';$('mobileStatusFilter').value='';$('mobileSearch').value='';
-  saveFilters();render();
+$('mobileSearch').addEventListener('input',render);
+$('mobileDateFilter').addEventListener('change',render);
+['mobileFloorFilter','mobileFoodFilter','mobileStatusFilter'].forEach(id=>{
+  $(id)?.addEventListener('change',()=>{saveFilters();render();});
 });
 const largeText=localStorage.getItem('rptAgendaLargeTextV1')==='1';
 document.body.classList.toggle('is-large-text',largeText);
@@ -708,14 +532,6 @@ $('mobileTextSize').addEventListener('click',()=>{
   localStorage.setItem('rptAgendaLargeTextV1',active?'1':'0');
 });
 $('mobileRefresh').addEventListener('click',()=>refreshFromCloud({notify:true,force:true}));
-$('mobileChangesToggle')?.addEventListener('click',openChanges);
-$('mobileNotifyButton')?.addEventListener('click',enableAgendaNotifications);
-$('mobileNotificationPromptButton')?.addEventListener('click',enableAgendaNotifications);
-document.querySelectorAll('[data-mobile-notify]').forEach(button=>button.addEventListener('click',enableAgendaNotifications));
-window.addEventListener('rptNotificationSettingsChanged',syncNotificationUI);
-document.querySelectorAll('[data-mobile-open-changes]').forEach(button=>button.addEventListener('click',openChanges));
-$('mobileChangesClose')?.addEventListener('click',closeChanges);
-$('mobileChangesBackdrop')?.addEventListener('click',closeChanges);
 $('mobileAgenda').addEventListener('click',event=>{
   const row=event.target.closest('.event-summary-row');
   if(!row)return;
@@ -739,12 +555,10 @@ $('mobileDetailModal').addEventListener('click',event=>{
   if(event.target.id==='mobileDetailModal')closeDetail();
 });
 document.addEventListener('keydown',event=>{
-  if(event.key==='Escape'){closeDetail();closeChanges();closeFilters();}
+  if(event.key==='Escape')closeDetail();
 });
 window.addEventListener('pagehide',()=>{
   state.metaUnsubscribe?.();
-  state.changesUnsubscribe?.();
-  state.themeUnsubscribe?.();
   clearInterval(state.fallbackTimer);
 },{once:true});
 
@@ -752,12 +566,11 @@ const savedFilters=readFilters();
 if(savedFilters.floor&&$('mobileFloorFilter'))$('mobileFloorFilter').value=savedFilters.floor;
 if(savedFilters.food&&$('mobileFoodFilter'))$('mobileFoodFilter').value=savedFilters.food;
 if(savedFilters.status&&$('mobileStatusFilter'))$('mobileStatusFilter').value=savedFilters.status;
-const urlView=new URLSearchParams(location.search).get('view');
-const initialView=['today','upcoming','all'].includes(urlView)?urlView:savedFilters.view;
-if(initialView&&['today','upcoming','all'].includes(initialView))state.view=initialView;
-document.querySelectorAll('.agenda-view-button').forEach(button=>button.classList.toggle('is-active',button.dataset.view===state.view));
+if(savedFilters.view&&['today','upcoming','all'].includes(savedFilters.view)){
+  state.view=savedFilters.view;
+  document.querySelectorAll('.agenda-tab').forEach(button=>button.classList.toggle('is-active',button.dataset.view===state.view));
+}
 setInterval(updateHeader,30000);
 updateHeader();
 render();
-syncNotificationUI();
 initializeFirebase();

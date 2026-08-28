@@ -3,106 +3,91 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0f172a">
-  <meta name="description" content="Agenda móvil operativa de eventos en tiempo real.">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Agenda Eventos">
-  <title>Agenda móvil | Gestión de Eventos</title>
-  <script type="module" src="js/maintenance-guard.js?v=20260827-5"></script>
-  <link rel="manifest" href="agenda.webmanifest">
+  <meta name="theme-color" content="#101827">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <link rel="icon" href="assets/icon-192.png" type="image/png">
-  <link rel="stylesheet" href="css/agenda-movil.css?v=20260827-5">
-  <link rel="stylesheet" href="css/themes.css?v=20260827-5">
+  <meta name="description" content="Agenda operativa de eventos en tiempo real.">
+  <title>Agenda de eventos</title>
+  <style>html.maintenance-pending body{visibility:hidden}</style>
+  <script type="module" src="js/maintenance-guard.js?v=20260827-3600"></script>
+  <link rel="manifest" href="agenda.webmanifest">
+  <link rel="stylesheet" href="css/agenda-movil.css?v=20260827-3600">
 </head>
 <body>
-  <div class="agenda-shell">
-    <header class="mobile-header">
-      <a class="mobile-brand" href="agenda_movil.html"><span><img src="assets/icon-192.png" alt=""></span><div><small>GESTIÓN DE EVENTOS</small><strong>Agenda móvil</strong></div></a>
-      <div class="mobile-header-actions">
-        <div class="live-pill"><i id="mobileConnectionDot"></i><span id="mobileConnectionText">Conectando…</span></div>
-        <button id="mobileChangesToggle" class="icon-button changes-button" type="button" aria-controls="mobileChangesPanel" aria-expanded="false" title="Cambios recientes"><span>↻</span><b id="mobileChangesCount">0</b></button>
-        <button id="mobileNotifyButton" class="notify-button" type="button" title="Activar notificaciones" aria-label="Configurar notificaciones"><span aria-hidden="true">AV</span><strong>Avisos</strong></button>
-        <button class="install-button" data-install-app hidden type="button">Instalar</button>
-        <button id="mobileTextSize" class="icon-button" type="button" aria-label="Cambiar tamaño del texto" title="Tamaño de texto">A+</button>
-        <button id="mobileRefresh" class="icon-button" type="button" aria-label="Actualizar agenda" title="Actualizar agenda">↻</button>
+  <div class="agenda-app">
+    <header class="agenda-header">
+      <div class="agenda-topbar">
+        <div class="agenda-brand">
+          <span>OPERACIÓN EN TIEMPO REAL</span>
+          <h1>Agenda de eventos</h1>
+          <p>Vista operativa clara para consultar salones y servicios.</p>
+        </div>
+        <div class="agenda-live">
+          <div class="connection-card">
+            <i id="mobileConnectionDot"></i>
+            <div>
+              <strong id="mobileConnectionText">Conectando…</strong>
+              <span id="mobileUpdatedAt">Esperando actualización</span>
+            </div>
+          </div>
+          <button id="mobileTextSize" class="agenda-text-size" type="button" aria-label="Aumentar tamaño del texto" title="Tamaño de texto">A+</button>
+          <button id="mobileRefresh" class="agenda-refresh" type="button" aria-label="Actualizar agenda" title="Actualizar agenda">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.1 9a7 7 0 0 1 11.4-2L20 9M4 15l2.5 2a7 7 0 0 0 11.4-2"/></svg>
+            <span>Actualizar</span>
+          </button>
+        </div>
       </div>
     </header>
 
     <main class="agenda-main">
-      <section class="today-hero">
-        <div class="today-hero__copy">
-          <span class="today-kicker">AGENDA OPERATIVA · EN TIEMPO REAL</span>
-          <h1 id="agendaTodayLabel">Agenda de hoy</h1>
-          <p>Consulta rápidamente empresa, salón, horario, personas y alimentación.</p>
-          <span id="mobileUpdatedAt" class="updated-chip">Esperando actualización</span>
+      <section class="agenda-toolbar" aria-label="Filtros de la agenda">
+        <div class="agenda-tabs" role="group" aria-label="Periodo">
+          <button class="agenda-tab is-active" type="button" data-view="today">Hoy</button>
+          <button class="agenda-tab" type="button" data-view="upcoming">Próximos</button>
+          <button class="agenda-tab" type="button" data-view="all">Todos</button>
         </div>
-        <div class="today-stats" aria-label="Resumen de agenda">
-          <article><small>EVENTOS</small><strong id="agendaEventCount">0</strong><span>visibles</span></article>
-          <article><small>PERSONAS</small><strong id="agendaPeopleCount">0</strong><span>programadas</span></article>
-          <article><small>ALIMENTACIÓN</small><strong id="agendaFoodCount">0</strong><span>servicios</span></article>
-        </div>
-      </section>
-
-      <section class="agenda-commandbar" aria-label="Controles de agenda">
-        <div class="view-switcher" role="group" aria-label="Periodo">
-          <button class="agenda-view-button is-active" type="button" data-view="today">Hoy</button>
-          <button class="agenda-view-button" type="button" data-view="upcoming">Próximos</button>
-          <button class="agenda-view-button" type="button" data-view="all">Todos</button>
-        </div>
-        <label class="search-box"><span aria-hidden="true">⌕</span><input id="mobileSearch" type="search" placeholder="Buscar empresa, salón o estado" autocomplete="off"></label>
-        <button id="mobileFilterToggle" class="filter-button" type="button" aria-controls="mobileFilterPanel" aria-expanded="false">Filtros <b id="mobileActiveFilters">0</b></button>
+        <label class="agenda-search">
+          <span>Buscar</span>
+          <input id="mobileSearch" type="search" placeholder="Buscar empresa o salón">
+        </label>
+        <label class="agenda-date-filter">
+          <span>Fecha</span>
+          <input id="mobileDateFilter" type="date">
+        </label>
+        <label class="agenda-compact-filter">
+          <span>Piso</span>
+          <select id="mobileFloorFilter"><option value="">Todos</option><option value="Segundo piso">Segundo piso</option><option value="Tercer piso">Tercer piso</option></select>
+        </label>
+        <label class="agenda-compact-filter">
+          <span>Alimentación</span>
+          <select id="mobileFoodFilter"><option value="">Todos</option><option value="with">Con alimentación</option><option value="without">Sin alimentación</option></select>
+        </label>
+        <label class="agenda-compact-filter">
+          <span>Estado</span>
+          <select id="mobileStatusFilter"><option value="">Todos</option><option value="Confirmado">Confirmado</option><option value="Programado">Programado</option><option value="Tentativo o pendiente">Pendiente</option><option value="Cancelado">Cancelado</option></select>
+        </label>
       </section>
 
       <section id="mobileNotice" class="agenda-notice" hidden></section>
-      <section id="mobileNotificationPrompt" class="notification-prompt" hidden>
-        <div><span class="notification-prompt__icon">AV</span><div><strong>Activa los avisos de la Agenda</strong><small>Recibe notificaciones cuando el Excel publique cambios mientras la Agenda esté abierta o ejecutándose como PWA.</small></div></div>
-        <button id="mobileNotificationPromptButton" type="button">Activar avisos</button>
-      </section>
-      <section id="mobileBoot" class="agenda-boot" role="status"><span class="boot-spinner"></span><div><strong>Sincronizando agenda</strong><small>Mostrando primero la información guardada…</small></div></section>
-      <section class="results-bar"><span id="agendaVisibleCount">0 eventos</span><small>Selecciona un evento para ver el detalle completo.</small></section>
       <section id="mobileAgenda" class="agenda-content" aria-live="polite"></section>
     </main>
   </div>
 
-  <aside id="mobileFilterPanel" class="filter-panel" aria-hidden="true" aria-label="Filtros de agenda">
-    <header><div><span>FILTROS</span><h2>Refinar agenda</h2><p>Los filtros se recuerdan en este dispositivo.</p></div><button id="mobileFilterClose" type="button" aria-label="Cerrar filtros">×</button></header>
-    <div class="filter-panel__body">
-      <label><span>Fecha exacta</span><input id="mobileDateFilter" type="date"></label>
-      <label><span>Piso</span><select id="mobileFloorFilter"><option value="">Todos los pisos</option><option value="Segundo piso">Segundo piso</option><option value="Tercer piso">Tercer piso</option></select></label>
-      <label><span>Alimentación</span><select id="mobileFoodFilter"><option value="">Todos</option><option value="with">Con alimentación</option><option value="without">Sin alimentación</option></select></label>
-      <label><span>Estado</span><select id="mobileStatusFilter"><option value="">Todos los estados</option><option value="Confirmado">Confirmado</option><option value="Programado">Programado</option><option value="Tentativo o pendiente">Pendiente</option><option value="Cancelado">Cancelado</option></select></label>
-    </div>
-    <footer><button id="mobileClearFilters" class="clear-filter-button" type="button">Limpiar filtros</button><button id="mobileApplyFilters" class="apply-filter-button" type="button">Ver resultados</button></footer>
-  </aside>
-  <div id="mobileFilterBackdrop" class="drawer-backdrop" hidden></div>
-
-  <aside id="mobileChangesPanel" class="changes-panel" aria-hidden="true" aria-label="Cambios recientes">
-    <header><div><span>TRAZABILIDAD</span><h2>Cambios recientes</h2><p>Actualizaciones detectadas desde el archivo maestro.</p></div><button id="mobileChangesClose" type="button" aria-label="Cerrar cambios">×</button></header>
-    <div id="mobileChangesList" class="changes-list"><div class="changes-empty">Sin cambios recientes.</div></div>
-    <footer>Fecha y hora · usuario/equipo · hoja/celda · valor anterior y nuevo cuando aplica.</footer>
-  </aside>
-  <div id="mobileChangesBackdrop" class="drawer-backdrop" hidden></div>
-  <div id="mobileToastStack" class="mobile-toast-stack" role="status" aria-live="polite" aria-atomic="false"></div>
-
-  <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
-    <button class="agenda-view-button is-active" type="button" data-view="today"><i>HO</i><span>Hoy</span></button>
-    <button class="agenda-view-button" type="button" data-view="upcoming"><i>PR</i><span>Próximos</span></button>
-    <button type="button" data-mobile-open-changes><i>CH</i><span>Cambios</span><b class="bottom-unread" id="mobileBottomUnread" hidden>0</b></button>
-    <button type="button" data-mobile-notify><i>AV</i><span>Avisos</span></button>
-  </nav>
-
   <div id="mobileDetailModal" class="detail-modal" aria-hidden="true">
     <div class="detail-dialog" role="dialog" aria-modal="true" aria-labelledby="mobileDetailTitle">
       <button id="mobileCloseDetail" class="detail-close" type="button" aria-label="Cerrar">×</button>
-      <div class="detail-heading"><span>DETALLE OPERATIVO</span><h2 id="mobileDetailTitle">Evento</h2><p id="mobileDetailSubtitle"></p><button id="mobileCopyDetail" class="detail-copy" type="button">Copiar detalle</button></div>
+      <div class="detail-heading">
+        <span>DETALLE OPERATIVO</span>
+        <h2 id="mobileDetailTitle">Evento</h2>
+        <p id="mobileDetailSubtitle"></p>
+        <button id="mobileCopyDetail" class="detail-copy" type="button">Copiar detalle</button>
+      </div>
       <div id="mobileDetailBody" class="detail-body"></div>
     </div>
   </div>
 
-  <script type="module" src="js/agenda-movil.js?v=20260827-5"></script>
-  <script type="module" src="js/pwa.js?v=20260827-5"></script>
-  <script type="module" src="js/notifications.js?v=20260827-5"></script>
+  <script type="module" src="js/agenda-movil.js?v=20260827-3600"></script>
+  <script type="module" src="js/pwa.js?v=20260827-3600"></script>
+  <script type="module" src="js/notifications.js?v=20260827-3600"></script>
+  <script type="module" src="js/performance-monitor.js?v=20260827-3600"></script>
 </body>
 </html>

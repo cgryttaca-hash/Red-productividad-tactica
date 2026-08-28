@@ -1,14 +1,12 @@
 <!doctype html>
 <html lang="es" class="auth-pending maintenance-pending" data-auth-page="admin" data-maintenance-page="configuracion">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#071423"><title>Configuración | Gestión de Eventos</title>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111318"><title>Configuración | Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260827-5"></script><script type="module" src="js/maintenance-guard.js?v=20260827-5"></script>
-  <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/admin-tools.css?v=20260827-5"><link rel="stylesheet" href="css/themes.css?v=20260827-5">
-  <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <link rel="icon" href="assets/icon-192.png" type="image/png">
-  <script src="js/admin-shell.js?v=20260827-5" defer></script>
+  <script src="js/auth-guard.js?v=20260827-3600"></script><script type="module" src="js/maintenance-guard.js?v=20260827-3600"></script>
+  <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/admin-tools.css?v=20260827-3600">
+  <link rel="stylesheet" href="css/pro-suite.css?v=20260827-3600">
 </head>
 <body>
 <header class="tool-header"><div class="tool-header-inner">
@@ -48,27 +46,16 @@
 </div><div class="tool-actions" style="justify-content:flex-start;margin-top:14px"><button id="enableNotifications" class="btn primary" type="button">Autorizar notificaciones</button><button id="saveNotifications" class="btn" type="button">Guardar preferencias</button></div><div id="notificationMessage" class="message info" hidden></div></div></article>
 </section>
 
-
-<section class="card" style="margin-top:20px">
-<header class="card-header"><div><span>APARIENCIA</span><h2>Tema visual por página</h2><p>Define un tema general y, si lo necesitas, una apariencia distinta para Inicio o Agenda Móvil. No modifica Eventos ni Minuta.</p></div><span id="appearanceState" class="status info">Local</span></header>
-<div class="card-body"><div class="form-grid">
-<label class="field"><span>Tema general</span><select id="globalTheme"><option value="classic">Clásico</option><option value="ocean">Azul profesional</option><option value="forest">Verde operativo</option><option value="sand">Arena cálida</option><option value="night">Oscuro profesional</option></select></label>
-<label class="field"><span>Inicio</span><select id="indexTheme"><option value="inherit">Usar tema general</option><option value="classic">Clásico</option><option value="ocean">Azul profesional</option><option value="forest">Verde operativo</option><option value="sand">Arena cálida</option><option value="night">Oscuro profesional</option></select></label>
-<label class="field"><span>Agenda Móvil</span><select id="agendaTheme"><option value="inherit">Usar tema general</option><option value="classic">Clásico</option><option value="ocean">Azul profesional</option><option value="forest">Verde operativo</option><option value="sand">Arena cálida</option><option value="night">Oscuro profesional</option></select></label>
-<label class="field"><span>Configuración</span><select id="configTheme"><option value="inherit">Usar tema general</option><option value="classic">Clásico</option><option value="ocean">Azul profesional</option><option value="forest">Verde operativo</option><option value="sand">Arena cálida</option><option value="night">Oscuro profesional</option></select></label>
-<div class="full tool-actions" style="justify-content:flex-start"><button id="saveAppearance" class="btn primary" type="button">Guardar para todos</button></div>
-</div><div id="appearanceMessage" class="message info" hidden></div></div></section>
-
 <section class="card" style="margin-top:20px">
 <header class="card-header"><div><span>ESTADO ACTUAL</span><h2>Páginas programadas</h2><p>Puedes finalizar o extender un mantenimiento activo.</p></div></header>
 <div class="card-body"><div id="maintenanceList" class="list"></div></div></section>
 
 <section class="grid cols-3">
-<article class="card metric"><small>Versión instalada</small><strong id="systemVersion">3.4.0</strong><span id="releaseLabel">Plataforma operativa estable</span></article>
+<article class="card metric"><small>Versión instalada</small><strong id="systemVersion">3.0.0</strong><span id="releaseLabel">Plataforma operativa estable</span></article>
 <article class="card metric"><small>Aplicación</small><strong id="pwaState">Web</strong><span id="pwaDetail">Verificando instalación</span></article>
 <article class="card metric"><small>Entorno</small><strong>Producción</strong><span>Repositorio principal de GitHub Pages</span></article>
 </section>
 <footer class="version-footer"><span>Configuración protegida para administradores.</span><span>Los cambios de mantenimiento se guardan en Firebase.</span></footer>
 </main>
-<script type="module" src="js/configuracion.js?v=20260827-5"></script><script type="module" src="js/pwa.js?v=20260827-5"></script><script type="module" src="js/device-heartbeat.js?v=20260827-5"></script>
+<script type="module" src="js/configuracion.js?v=20260827-3600"></script><script type="module" src="js/pwa.js?v=20260827-3600"></script><script type="module" src="js/device-heartbeat.js?v=20260827-3600"></script>
 </body></html>

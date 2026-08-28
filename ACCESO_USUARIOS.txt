@@ -1,42 +1,18 @@
-ACCESO Y USUARIOS — 3.5.0
-===========================
+ACCESO Y USUARIOS
+=================
 
-ROLES
------
-Administrador:
-- Accede al panel completo, sincronización, usuarios y herramientas administrativas.
-- Puede crear usuarios, asignar rol Administrador/Usuario, activar/desactivar y cambiar contraseñas.
+Funcionamiento:
+- El sistema solicita acceso la primera vez en cada navegador o equipo.
+- La sesión permanece guardada hasta pulsar Salir o borrar los datos del navegador.
+- El módulo Usuarios permite crear, activar, desactivar, eliminar y cambiar contraseñas.
+- Los usuarios se guardan localmente en ese navegador.
+- La Agenda Móvil no solicita esta contraseña y continúa leyendo Firebase en tiempo real.
 
-Usuario:
-- El Inicio muestra únicamente Eventos, Minuta y Agenda Móvil.
-- No se muestran menú lateral, Excel, Firebase administrativo, auditoría ni configuración.
-- La información publicada por el Administrador se descarga automáticamente desde Firebase.
-- Las notificaciones generales pueden activarse desde el Inicio.
+Recuperación:
+- En login.html presiona Ctrl + G.
+- El botón Recuperar contraseña aparecerá temporalmente.
+- Al usarlo, la página solo mostrará: Contraseña restablecida.
 
-CONTRASEÑAS
------------
-- La recuperación pública desde login.html fue eliminada.
-- Después de crear o cambiar una contraseña, la interfaz nunca vuelve a mostrarla.
-- El cambio de contraseña de otra cuenta requiere una sesión con rol Administrador.
-- Las contraseñas se guardan localmente mediante PBKDF2 y no se publican en Firebase.
-
-SESIONES
---------
-- Cierre automático al llegar la medianoche local del dispositivo.
-- Cierre automático después de 1 hora sin actividad.
-- Cinco minutos antes se muestra un aviso con cuenta regresiva.
-- La actividad se comparte entre pestañas del mismo navegador.
-- Si un Administrador desactiva un usuario o cambia su rol en otra pestaña, la sesión se actualiza o se cierra automáticamente.
-
-SINCRONIZACIÓN DEL USUARIO
---------------------------
-- El usuario normal no necesita seleccionar ni actualizar el Excel.
-- El sistema escucha la publicación de Firebase y actualiza eventData automáticamente.
-- Eventos y Minuta continúan usando su lógica original y reciben el evento eventDataUpdated.
-
-NOTA SOBRE CUENTAS
-------------------
-Las cuentas de acceso continúan siendo locales al navegador actual. La información operativa
-(Eventos/Minuta/Agenda) sí se mantiene sincronizada desde Firebase. Para cuentas compartidas
-entre dispositivos se requiere autenticación centralizada mediante backend/Firebase Auth con
-roles administrados de forma segura.
+Nota:
+La cuenta inicial se crea internamente durante el primer uso. Sus datos no se muestran
+en la interfaz principal.

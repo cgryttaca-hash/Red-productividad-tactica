@@ -108,9 +108,9 @@ function markRead(){
 async function initialize(){
   try{
     const [appMod,authMod,fireMod]=await Promise.all([import(`${SDK}/firebase-app.js`),import(`${SDK}/firebase-auth.js`),import(`${SDK}/firebase-firestore.js`)]);
-    let app=appMod.getApps().find(item=>item.name==='rpt-viewer-auto');if(!app)app=appMod.initializeApp(FIREBASE_CONFIG,'rpt-viewer-auto');
+    let app=appMod.getApps()[0];if(!app)app=appMod.initializeApp(FIREBASE_CONFIG);
     const auth=authMod.getAuth(app);const db=fireMod.getFirestore(app);try{await authMod.setPersistence(auth,authMod.browserLocalPersistence);}catch(_){ }
-    if(typeof auth.authStateReady==='function')await auth.authStateReady();if(!auth.currentUser)await authMod.signInAnonymously(auth);
+    if(typeof auth.authStateReady==='function')await auth.authStateReady();if(!auth.currentUser){try{await authMod.signInAnonymously(auth);}catch(_){throw new Error('Inicia sesión nuevamente para sincronizar la agenda.');}}
     state={...state,db,auth,fireMod};
     setStatus('Conectado','Sincronización automática activa','online');
     const metaRef=fireMod.doc(db,META_COLLECTION,'publicacion');

@@ -1,12 +1,12 @@
 {
-  "name": "Gestión de Eventos · Agenda Operativa",
-  "short_name": "Agenda Eventos",
-  "description": "Centro operativo y agenda móvil de eventos con sincronización en tiempo real.",
+  "name": "Gestión de Eventos",
+  "short_name": "Eventos",
+  "description": "Gestión operativa, agenda móvil, auditoría y sincronización.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#edf4f8",
-  "theme_color": "#071423",
+  "background_color": "#f3f6f9",
+  "theme_color": "#111318",
   "orientation": "any",
   "icons": [
     {
@@ -53,15 +53,5 @@
         }
       ]
     }
-  ],
-  "id": "./",
-  "display_override": [
-    "standalone",
-    "minimal-ui"
-  ],
-  "categories": [
-    "business",
-    "productivity"
-  ],
-  "prefer_related_applications": false
+  ]
 }

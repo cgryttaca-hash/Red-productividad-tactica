@@ -1,23 +1,15 @@
 {
-  "name": "Agenda Móvil · Gestión de Eventos",
-  "short_name": "Agenda Eventos",
-  "description": "Agenda operativa de eventos con actualización en tiempo real.",
-  "id": "./agenda_movil.html",
-  "start_url": "./agenda_movil.html",
-  "scope": "./",
-  "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
-  "background_color": "#edf4f8",
-  "theme_color": "#071423",
-  "orientation": "any",
-  "categories": ["business", "productivity"],
-  "icons": [
+  "name":"Agenda Móvil · Gestión de Eventos",
+  "short_name":"Agenda",
+  "description":"Agenda operativa de eventos en tiempo real.",
+  "start_url":"./agenda_movil.html",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#0b1220",
+  "theme_color":"#101827",
+  "orientation":"any",
+  "icons":[
     {"src":"assets/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
     {"src":"assets/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
-  ],
-  "shortcuts": [
-    {"name":"Agenda de hoy","short_name":"Hoy","url":"./agenda_movil.html?view=today","icons":[{"src":"assets/icon-192.png","sizes":"192x192"}]},
-    {"name":"Próximos eventos","short_name":"Próximos","url":"./agenda_movil.html?view=upcoming","icons":[{"src":"assets/icon-192.png","sizes":"192x192"}]}
-  ],
-  "prefer_related_applications": false
+  ]
 }

@@ -1,39 +1,103 @@
-import {applyAppearance,readAppearanceCache} from './theme-settings.js';
+const SESSION=window.__RPT_AUTH_SESSION__||{};
+const IS_ADMIN=SESSION.role==='admin';
+
+function loadScript(src,{module=false}={}){
+  return new Promise((resolve,reject)=>{
+    const script=document.createElement('script');script.src=src;if(module)script.type='module';else script.defer=true;
+    script.onload=()=>resolve();script.onerror=()=>reject(new Error(`No fue posible cargar ${src}`));document.body.appendChild(script);
+  });
+}
+function dailyMessage(){
+  const messages=[
+    'Que cada detalle de hoy haga más fácil el trabajo de todo el equipo.',
+    'Un servicio bien coordinado comienza con información clara y a tiempo.',
+    'Hoy es una buena oportunidad para convertir la organización en tranquilidad.',
+    'Los grandes resultados también se construyen con pequeños detalles bien hechos.',
+    'Que el trabajo de hoy fluya con calma, precisión y buena energía.',
+    'Cada evento es una nueva oportunidad para hacer las cosas extraordinariamente bien.',
+    'La mejor operación es la que el equipo siente simple, clara y coordinada.'
+  ];
+  const now=new Date();const seed=Math.floor(new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime()/86400000);
+  return messages[Math.abs(seed)%messages.length];
+}
+function bootViewer(){
+  document.body.classList.add('is-viewer-home');
+  document.getElementById('adminDashboard').hidden=true;
+  const home=document.getElementById('viewerHome');home.hidden=false;
+  document.querySelector('.main-nav')?.setAttribute('hidden','');
+  document.querySelector('.brand small')?.replaceChildren(document.createTextNode('Acceso operativo'));
+  document.getElementById('viewerGreeting').textContent=`Hola, ${SESSION.displayName||SESSION.username||'Usuario'}`;
+  document.getElementById('viewerDailyMessage').textContent=dailyMessage();
+  document.getElementById('viewerToday').textContent=new Date().toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long'});
+  const updated=localStorage.getItem('eventDataUpdatedAt');if(updated){try{document.getElementById('viewerLastSync').textContent=new Date(updated).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});}catch(_){}}
+  import('./viewer-sync.js').catch(error=>console.warn('Sincronización de usuario:',error));
+  window.addEventListener('eventDataUpdated',event=>{const value=event.detail?.updatedAt||localStorage.getItem('eventDataUpdatedAt');if(value)document.getElementById('viewerLastSync').textContent=new Date(value).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});});
+  document.getElementById('loader')?.classList.add('is-hidden');
+}
+function bootAdminTools(){
+  Promise.resolve().then(()=>loadScript('https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js')).then(()=>loadScript('js/excel-sync.js?v=20260827-3600')).catch(error=>console.warn(error));
+  loadScript('js/firebase-sync.js?v=20260827-3600',{module:true}).catch(error=>console.warn(error));
+  loadScript('js/device-heartbeat.js?v=20260827-3600',{module:true}).catch(()=>{});
+}
+
+if(!IS_ADMIN){
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootViewer,{once:true});else bootViewer();
+}else{
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootAdminTools,{once:true});else bootAdminTools();
+}
 
 const $=id=>document.getElementById(id);
 const text=value=>value===undefined||value===null?'':String(value);
-const ACTIVITY_LIMIT=16;
+
 let refreshPending=false;
 let lastFingerprint='';
 let eventCountCache={stamp:'',count:0};
-let activityTab='changes';
-let operationalModulesStarted=false;
-let activityLoaded=false;
-let excelRuntimePromise=null;
+let activityTab='excel';
 
-applyAppearance('index',readAppearanceCache());
-
-function safeJson(key,fallback){try{const value=JSON.parse(localStorage.getItem(key)||'null');return value??fallback;}catch(_){return fallback;}}
+function safeJson(key,fallback){
+  try{
+    const value=JSON.parse(localStorage.getItem(key)||'null');
+    return value??fallback;
+  }catch(_){
+    return fallback;
+  }
+}
 function formatDateTime(value,fallback='—'){
-  if(!value)return fallback;const source=value?.toDate?value.toDate():new Date(value);
-  return Number.isNaN(source.getTime())?fallback:source.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
+  if(!value)return fallback;
+  const date=new Date(value);
+  return Number.isNaN(date.getTime())
+    ?fallback
+    :date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
 }
 function updateClock(){
   const now=new Date();
-  if($('todayLabel'))$('todayLabel').textContent=now.toLocaleDateString('es-CO',{weekday:'short',day:'2-digit',month:'short'});
-  if($('reloj'))$('reloj').textContent=now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
+  $('todayLabel').textContent=now.toLocaleDateString('es-CO',{weekday:'short',day:'2-digit',month:'short'});
+  $('reloj').textContent=now.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
 }
 function getEventCount(){
   const stamp=localStorage.getItem('eventDataUpdatedAt')||'';
   if(eventCountCache.stamp===stamp)return eventCountCache.count;
-  let count=0;try{const rows=JSON.parse(localStorage.getItem('eventData')||'[]');count=Array.isArray(rows)?rows.length:0;}catch(_){}
-  eventCountCache={stamp,count};return count;
+  let count=0;
+  try{
+    const rows=JSON.parse(localStorage.getItem('eventData')||'[]');
+    count=Array.isArray(rows)?rows.length:0;
+  }catch(_){
+    count=0;
+  }
+  eventCountCache={stamp,count};
+  return count;
 }
-function currentFingerprint(){return[
-  localStorage.getItem('eventDataUpdatedAt'),localStorage.getItem('excelSync:fileName'),localStorage.getItem('excelSync:lastCheck'),
-  localStorage.getItem('eventDataLastDiff'),localStorage.getItem('firebase:lastPublishedAt'),localStorage.getItem('firebase:lastRemoteCount'),localStorage.getItem('rptSystemLogV2')
-].join('|');}
-function setText(id,value){const node=$(id);if(node)node.textContent=value;}
+function currentFingerprint(){
+  return[
+    localStorage.getItem('eventDataUpdatedAt'),
+    localStorage.getItem('excelSync:fileName'),
+    localStorage.getItem('excelSync:lastCheck'),
+    localStorage.getItem('eventDataLastDiff'),
+    localStorage.getItem('firebase:lastPublishedAt'),
+    localStorage.getItem('firebase:lastRemoteCount'),
+    localStorage.getItem('rptSystemLogV2')
+  ].join('|');
+}
 function renderSummary(){
   const count=getEventCount();
   const fileName=localStorage.getItem('excelSync:fileName')||'Pendiente';
@@ -43,122 +107,142 @@ function renderSummary(){
   const remoteCount=Number(localStorage.getItem('firebase:lastRemoteCount')||0);
   const diff=safeJson('eventDataLastDiff',{created:0,updated:0,deleted:0,total:count,at:''});
   const changeTotal=Number(diff.created||0)+Number(diff.updated||0)+Number(diff.deleted||0);
-  const excelReady=Boolean(count&&fileName!=='Pendiente');
-  const cloudReady=Boolean(lastPublished&&remoteCount>=0);
-  const health=Math.round((excelReady?50:count?30:10)+(cloudReady?50:lastPublished?30:10));
-  const status=excelReady&&cloudReady?'Operativo':count?'Parcial':'Preparando';
 
-  const values={
-    excelRecordCount:count.toLocaleString('es-CO'),excelRecordDetail:count.toLocaleString('es-CO'),excelFileName:fileName,
-    excelLastCheck:formatDateTime(lastCheck,'Sin comprobación'),excelCheckDetail:formatDateTime(lastCheck,'—'),
-    dataHealthText:count?'Información disponible':'Esperando información',
-    excelSummary:count?`Última carga válida ${formatDateTime(updatedAt,'sin fecha registrada')}.`:'Vincula el archivo maestro para iniciar la actualización automática.',
-    mobileRemoteCount:remoteCount.toLocaleString('es-CO'),mobileLastPublish:formatDateTime(lastPublished,'Sin publicación'),
-    mobilePublishDetail:formatDateTime(lastPublished,'—'),mobileState:lastPublished&&remoteCount>0?'Sincronizada':lastPublished?'Verificando':'Pendiente',
-    mobileSummary:lastPublished?`${remoteCount.toLocaleString('es-CO')} registros publicados en la Agenda Móvil.`:'La publicación se activará cuando Firebase y el archivo maestro estén disponibles.',
-    diffCreated:Number(diff.created||0).toLocaleString('es-CO'),diffUpdated:Number(diff.updated||0).toLocaleString('es-CO'),diffDeleted:Number(diff.deleted||0).toLocaleString('es-CO'),
-    changeTotal:changeTotal.toLocaleString('es-CO'),diffUpdatedAt:formatDateTime(diff.at,'Sin cambios'),healthPercent:`${health}%`,healthTitle:status,
-    healthDetail:excelReady&&cloudReady?'Excel y Agenda Móvil están disponibles.':count?'Los datos locales están listos; verificando nube.':'Esperando el archivo maestro.',
-    topSystemStatus:status,sidebarSyncText:cloudReady?'Agenda conectada':excelReady?'Excel disponible':'Sincronización iniciando',
-    excelLaneState:excelReady?'Listo':count?'Datos locales':'Preparando',firebaseLaneState:cloudReady?'En línea':lastPublished?'Verificando':'Conectando'
-  };
-  Object.entries(values).forEach(([id,value])=>setText(id,value));
-  $('excelLaneState')?.classList.toggle('is-ready',excelReady);$('firebaseLaneState')?.classList.toggle('is-ready',cloudReady);
-  $('excelLaneState')?.classList.toggle('is-warning',!excelReady);$('firebaseLaneState')?.classList.toggle('is-warning',!cloudReady);
+  $('excelRecordCount').textContent=count.toLocaleString('es-CO');
+  $('excelRecordDetail').textContent=count.toLocaleString('es-CO');
+  $('excelFileName').textContent=fileName;
+  $('excelLastCheck').textContent=formatDateTime(lastCheck,'Sin comprobación');
+  $('excelCheckDetail').textContent=formatDateTime(lastCheck,'—');
+  $('dataHealthText').textContent=count?'Información disponible':'Esperando información';
+  $('excelSummary').textContent=count
+    ?`Última carga válida ${formatDateTime(updatedAt,'sin fecha registrada')}.`
+    :'Vincula el archivo maestro para iniciar la actualización automática.';
+
+  $('mobileRemoteCount').textContent=remoteCount.toLocaleString('es-CO');
+  $('mobileLastPublish').textContent=formatDateTime(lastPublished,'Sin publicación');
+  $('mobilePublishDetail').textContent=formatDateTime(lastPublished,'—');
+  $('mobileState').textContent=lastPublished&&remoteCount>0?'Sincronizada':lastPublished?'Verificando':'Pendiente';
+  $('mobileSummary').textContent=lastPublished
+    ?`${remoteCount.toLocaleString('es-CO')} registros publicados en la Agenda Móvil.`
+    :'La publicación se activará cuando Firebase y el archivo maestro estén disponibles.';
+
+  $('diffCreated').textContent=Number(diff.created||0).toLocaleString('es-CO');
+  $('diffUpdated').textContent=Number(diff.updated||0).toLocaleString('es-CO');
+  $('diffDeleted').textContent=Number(diff.deleted||0).toLocaleString('es-CO');
+  $('changeTotal').textContent=changeTotal.toLocaleString('es-CO');
+  $('diffUpdatedAt').textContent=formatDateTime(diff.at,'Sin cambios');
 }
-function escapeHtml(value){return text(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));}
-function emptyLog(title,detail){return`<div class="empty-log"><div><strong>${escapeHtml(title)}</strong><span>${escapeHtml(detail)}</span></div></div>`;}
-function logItem(entry){return`<article class="log-item is-${escapeHtml(entry.level||'info')}"><div class="log-time">${escapeHtml(formatDateTime(entry.timestamp,'—'))}</div><div class="log-content"><strong>${escapeHtml(entry.title||'Actividad registrada')}</strong><p>${escapeHtml(entry.detail||'')}</p></div><span class="log-source">${escapeHtml(entry.source||'Sistema')}</span></article>`;}
+function logItem(entry){
+  const time=formatDateTime(entry.timestamp,'—');
+  return`<article class="log-item is-${entry.level||'info'}">
+    <div class="log-time">${time}</div>
+    <div class="log-content">
+      <strong>${escapeHtml(entry.title||'Actividad registrada')}</strong>
+      <p>${escapeHtml(entry.detail||'')}</p>
+    </div>
+    <span class="log-source">${escapeHtml(entry.source||'Sistema')}</span>
+  </article>`;
+}
+function escapeHtml(value){
+  return text(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+}
+function emptyLog(title,detail){
+  return`<div class="empty-log"><strong>${escapeHtml(title)}</strong><span>${escapeHtml(detail)}</span></div>`;
+}
+function renderLogList(id,entries,emptyTitle){
+  const target=$(id);
+  target.innerHTML=entries.length
+    ?entries.map(logItem).join('')
+    :emptyLog(emptyTitle,'La actividad aparecerá aquí automáticamente.');
+}
 function changeItem(entry){
-  const title=entry.type==='creado'?`Evento creado · ${entry.company||'Empresa'}`:entry.type==='eliminado'?`Evento eliminado · ${entry.company||'Empresa'}`:`${entry.field||'Campo'} actualizado · ${entry.company||'Empresa'}`;
-  const context=[entry.user,entry.host,entry.sheet,entry.cell].filter(Boolean).join(' · ');
-  return`<article class="change-item"><div class="log-time">${escapeHtml(formatDateTime(entry.timestamp,'—'))}</div><div class="log-content"><strong>${escapeHtml(title)}</strong><p>${escapeHtml(context||'Cambio detectado en el archivo maestro')}</p>${entry.type==='actualizado'?`<div class="change-values"><span title="${escapeHtml(entry.before||'Vacío')}">${escapeHtml(entry.before||'Vacío')}</span><b>→</b><span title="${escapeHtml(entry.after||'Vacío')}">${escapeHtml(entry.after||'Vacío')}</span></div>`:''}</div><span class="log-source">${escapeHtml(entry.type||'Excel')}</span></article>`;
+  const time=formatDateTime(entry.timestamp,'—');
+  const title=entry.type==='creado'
+    ?`Evento creado · ${entry.company||'Empresa'}`
+    :entry.type==='eliminado'
+      ?`Evento eliminado · ${entry.company||'Empresa'}`
+      :`${entry.field||'Campo'} actualizado · ${entry.company||'Empresa'}`;
+  return`<article class="change-item">
+    <div class="log-time">${time}</div>
+    <div class="log-content">
+      <strong>${escapeHtml(title)}</strong>
+      <p>${escapeHtml([entry.host,entry.user,entry.cell].filter(Boolean).join(' · '))}</p>
+      ${entry.type==='actualizado'?`<div class="change-values"><span>${escapeHtml(entry.before||'Vacío')}</span><b>→</b><span>${escapeHtml(entry.after||'Vacío')}</span></div>`:''}
+    </div>
+    <span class="log-source">${escapeHtml(entry.sheet||'Excel')}</span>
+  </article>`;
 }
-async function renderActivity(force=false){
-  if(!force&&document.hidden)return;
+async function renderActivity(){
   try{
-    if(activityTab==='changes'){
-      const audit=await import('./audit-store.js');const changes=await audit.getRecent(ACTIVITY_LIMIT);
-      $('changeLogList').innerHTML=changes.length?changes.map(changeItem).join(''):emptyLog('Sin cambios recientes','Las modificaciones del Excel aparecerán aquí.');setText('changeLogCount',changes.length);
-    }else{
-      const logModule=await import('./system-log.js');
-      const logs=logModule.getSystemLogs({limit:48}).filter(entry=>!/recuperando|documentos faltantes/i.test(`${entry.title} ${entry.detail}`));
-      const groups={excel:logs.filter(entry=>entry.source==='Excel'&&entry.level!=='error').slice(0,ACTIVITY_LIMIT),mobile:logs.filter(entry=>entry.source==='Firebase'&&entry.level!=='error').slice(0,ACTIVITY_LIMIT),errors:logs.filter(entry=>entry.level==='error'||entry.level==='warning').slice(0,ACTIVITY_LIMIT)};
-      const entries=groups[activityTab]||[];const id=activityTab==='excel'?'excelLogList':activityTab==='mobile'?'mobileLogList':'errorLogList';const countId=activityTab==='excel'?'excelLogCount':activityTab==='mobile'?'mobileLogCount':'errorLogCount';
-      const emptyTitle=activityTab==='excel'?'Sin cargues registrados':activityTab==='mobile'?'Sin publicaciones registradas':'Sin alertas recientes';
-      $(id).innerHTML=entries.length?entries.map(logItem).join(''):emptyLog(emptyTitle,'La actividad aparecerá aquí automáticamente.');setText(countId,entries.length);
-    }
-    activityLoaded=true;
-  }catch(error){const current=document.querySelector('[data-activity-view].is-active .log-list,[data-activity-view].is-active .change-list');if(current)current.innerHTML=emptyLog('No fue posible leer la actividad',error.message||'Error desconocido');}
-}
-async function refreshDashboard(force=false){const fingerprint=currentFingerprint();if(!force&&fingerprint===lastFingerprint)return;lastFingerprint=fingerprint;renderSummary();if(activityLoaded||force)await renderActivity(force);}
-function scheduleRefresh(force=false){if(refreshPending)return;refreshPending=true;requestAnimationFrame(async()=>{refreshPending=false;await refreshDashboard(force);});}
-function activateTab(tab){activityTab=tab;document.querySelectorAll('[data-activity-tab]').forEach(button=>button.classList.toggle('is-active',button.dataset.activityTab===tab));document.querySelectorAll('[data-activity-view]').forEach(view=>view.classList.toggle('is-active',view.dataset.activityView===tab));renderActivity(true);}
-function idle(task,timeout=900){if('requestIdleCallback'in window)requestIdleCallback(()=>task(),{timeout});else setTimeout(task,180);}
-function loadScript(src){return new Promise((resolve,reject)=>{const found=document.querySelector(`script[data-runtime-src="${src}"]`);if(found){if(found.dataset.loaded==='1')resolve();else found.addEventListener('load',resolve,{once:true});return;}const script=document.createElement('script');script.src=src;script.defer=true;script.dataset.runtimeSrc=src;script.addEventListener('load',()=>{script.dataset.loaded='1';resolve();},{once:true});script.addEventListener('error',()=>reject(new Error(`No se pudo cargar ${src}`)),{once:true});document.head.appendChild(script);});}
-async function loadExcelRuntime(){
-  if(excelRuntimePromise)return excelRuntimePromise;
-  excelRuntimePromise=(async()=>{const placeholder=document.querySelector('[data-excel-sync-slot] .runtime-placeholder');try{if(!window.XLSX){try{await loadScript('https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js');}catch(_){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');}}await loadScript('js/excel-sync.js?v=20260827-5');placeholder?.remove();}catch(error){if(placeholder)placeholder.innerHTML='<div><strong>Excel no pudo iniciar</strong><small>Pulsa Gestionar Excel para reintentar.</small></div>';excelRuntimePromise=null;console.error(error);}})();
-  return excelRuntimePromise;
-}
-async function startOperationalModules(){
-  if(operationalModulesStarted)return;operationalModulesStarted=true;
-  const cloudPlaceholder=document.querySelector('[data-firebase-sync-slot] .runtime-placeholder');
-  loadExcelRuntime();
-  import('./firebase-sync.js').then(()=>cloudPlaceholder?.remove()).catch(error=>{if(cloudPlaceholder)cloudPlaceholder.innerHTML='<div><strong>Firebase no pudo iniciar</strong><small>Comprueba la conexión.</small></div>';console.error(error);});
-  idle(()=>import('./notifications.js').catch(()=>{}),1400);idle(()=>import('./device-heartbeat.js').catch(()=>{}),1800);idle(()=>import('./theme-cloud.js').then(module=>module.watchCloudAppearance('index')).catch(()=>{}),2000);
-}
-function hideLoader(){const loader=$('loader');if(!loader)return;loader.classList.add('is-hidden');setTimeout(()=>loader.remove(),260);}
-function openSidebar(){const sidebar=$('appSidebar');sidebar?.classList.add('is-open');$('sidebarToggle')?.setAttribute('aria-expanded','true');if($('sidebarBackdrop'))$('sidebarBackdrop').hidden=false;}
-function closeSidebar(){const sidebar=$('appSidebar');sidebar?.classList.remove('is-open');$('sidebarToggle')?.setAttribute('aria-expanded','false');if($('sidebarBackdrop'))$('sidebarBackdrop').hidden=true;}
-async function openExcel(){await loadExcelRuntime();document.getElementById('excelSyncControl')?.click();}
+    const [logModule,auditModule]=await Promise.all([
+      import('./system-log.js'),
+      import('./audit-store.js')
+    ]);
+    const rawLogs=logModule.getSystemLogs({limit:100})
+      .filter(entry=>!/recuperando|documentos faltantes/i.test(`${entry.title} ${entry.detail}`));
+    const excel=rawLogs.filter(entry=>entry.source==='Excel'&&entry.level!=='error');
+    const mobile=rawLogs.filter(entry=>entry.source==='Firebase'&&entry.level!=='error');
+    const errors=rawLogs.filter(entry=>entry.level==='error'||entry.level==='warning');
+    const changes=await auditModule.getRecent(100);
 
-const session=window.__RPT_AUTH_SESSION__||{};
-const isViewer=session.role!=='admin';
+    renderLogList('excelLogList',excel,'Sin cargues registrados');
+    renderLogList('mobileLogList',mobile,'Sin publicaciones registradas');
+    renderLogList('errorLogList',errors,'Sin errores ni advertencias');
+    $('changeLogList').innerHTML=changes.length
+      ?changes.map(changeItem).join('')
+      :emptyLog('Sin cambios de celdas','Las modificaciones del Excel aparecerán aquí.');
 
-function dailyMessage(){
-  const messages=[
-    'Cada detalle bien hecho hace que el evento se sienta extraordinario.',
-    'La excelencia se construye con pequeños cuidados repetidos cada día.',
-    'Un equipo coordinado convierte una agenda exigente en una gran experiencia.',
-    'Hoy es una nueva oportunidad para hacer el trabajo con calma, precisión y orgullo.',
-    'Cuando la información está clara, el servicio fluye y las personas lo sienten.',
-    'Lo profesional también se nota en lo simple: puntualidad, orden y atención.',
-    'Cada evento es una oportunidad para dejar una impresión positiva y duradera.',
-    'Organizar bien hoy hace que mañana sea más fácil para todo el equipo.',
-    'La actitud transforma una tarea cotidiana en un servicio memorable.',
-    'Avanza paso a paso: lo importante es mantener la calidad en cada decisión.',
-    'Tu trabajo suma. Cada dato correcto ayuda a que todo el equipo funcione mejor.',
-    'La mejor operación es la que se siente sencilla porque detrás hubo buen trabajo.'
-  ];
-  const now=new Date();
-  const seed=Number(`${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}`);
-  return messages[seed%messages.length];
+    $('excelLogCount').textContent=excel.length;
+    $('mobileLogCount').textContent=mobile.length;
+    $('errorLogCount').textContent=errors.length;
+    $('changeLogCount').textContent=changes.length;
+  }catch(error){
+    $('errorLogList').innerHTML=emptyLog('No fue posible leer la auditoría',error.message||'Error desconocido');
+  }
 }
-function initViewer(){
-  const now=new Date();
-  const hour=now.getHours();
-  setText('viewerUserName',session.displayName||session.username||'Usuario');
-  setText('viewerGreeting',`${hour<12?'Buenos días':hour<18?'Buenas tardes':'Buenas noches'}, ${session.displayName||session.username||'equipo'}.`);
-  setText('viewerDate',now.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long',year:'numeric'}));
-  setText('viewerDailyMessage',dailyMessage());
-  $('viewerLogoutButton')?.addEventListener('click',()=>import('./local-auth.js').then(module=>{module.logout();location.replace('login.html');}));
-  requestAnimationFrame(()=>requestAnimationFrame(hideLoader));
-  import('./pwa.js').catch(()=>{});
+async function refreshDashboard(force=false){
+  const fingerprint=currentFingerprint();
+  if(!force&&fingerprint===lastFingerprint)return;
+  lastFingerprint=fingerprint;
+  renderSummary();
+  await renderActivity();
 }
-function initAdmin(){
-  for(const button of document.querySelectorAll('[data-activity-tab]'))button.addEventListener('click',()=>activateTab(button.dataset.activityTab));
-  $('refreshDashboard')?.addEventListener('click',()=>{scheduleRefresh(true);startOperationalModules();window.ExcelFileSync?.refresh?.();});
-  $('quickExcelButton')?.addEventListener('click',openExcel);
-  $('toolCenter')?.addEventListener('toggle',event=>{if(event.currentTarget.open){startOperationalModules();renderActivity(true);}});
-  $('sidebarToggle')?.addEventListener('click',openSidebar);$('sidebarClose')?.addEventListener('click',closeSidebar);$('sidebarBackdrop')?.addEventListener('click',closeSidebar);
-  window.addEventListener('resize',()=>{if(innerWidth>960)closeSidebar();},{passive:true});
-  ['eventDataUpdated','eventAuditUpdated','firebaseEventsPublished','rptSystemLogUpdated'].forEach(name=>window.addEventListener(name,()=>scheduleRefresh(true)));
-  window.addEventListener('storage',event=>{if(!event.key||/eventData|excelSync|firebase|rptSystemLog/.test(event.key))scheduleRefresh(false);});
-  updateClock();renderSummary();
-  requestAnimationFrame(()=>requestAnimationFrame(hideLoader));
-  Promise.allSettled([import('./session-ui.js'),import('./pwa.js')]);
-  setInterval(updateClock,30000);setInterval(()=>scheduleRefresh(false),60000);idle(startOperationalModules,1400);
+function scheduleRefresh(force=false){
+  if(refreshPending&&!force)return;
+  refreshPending=true;
+  requestAnimationFrame(async()=>{
+    refreshPending=false;
+    await refreshDashboard(force);
+  });
+}
+function activateTab(tab){
+  activityTab=tab;
+  if(IS_ADMIN){
+document.querySelectorAll('[data-activity-tab]').forEach(button=>{
+    button.classList.toggle('is-active',button.dataset.activityTab===tab);
+  });
+  document.querySelectorAll('[data-activity-view]').forEach(view=>{
+    view.classList.toggle('is-active',view.dataset.activityView===tab);
+  });
 }
 
-if(isViewer)initViewer();else initAdmin();
+document.querySelectorAll('[data-activity-tab]').forEach(button=>{
+  button.addEventListener('click',()=>activateTab(button.dataset.activityTab));
+});
+$('refreshDashboard').addEventListener('click',()=>scheduleRefresh(true));
+window.addEventListener('eventDataUpdated',()=>scheduleRefresh(true));
+window.addEventListener('eventAuditUpdated',()=>scheduleRefresh(true));
+window.addEventListener('firebaseEventsPublished',()=>scheduleRefresh(true));
+window.addEventListener('rptSystemLogUpdated',()=>scheduleRefresh(true));
+window.addEventListener('storage',()=>scheduleRefresh(true));
+window.addEventListener('load',()=>{
+  setTimeout(()=>$('loader')?.classList.add('is-hidden'),160);
+});
+
+updateClock();
+setInterval(updateClock,30000);
+setInterval(()=>scheduleRefresh(false),15000);
+activateTab(activityTab);
+scheduleRefresh(true);
+
+}
