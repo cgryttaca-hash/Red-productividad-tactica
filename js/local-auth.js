@@ -2,6 +2,7 @@ const USERS_KEY = 'rptAuthUsersV1';
 const SESSION_KEY = 'rptAuthSessionV1';
 const DEVICE_KEY = 'rptAuthDeviceV1';
 const DEFAULT_ADMIN_USERNAME = 'Admin';
+const DEFAULT_ADMIN_PASSWORD = 'Admin2026';
 const PBKDF2_ITERATIONS = 120000;
 
 const encoder = new TextEncoder();
@@ -79,44 +80,36 @@ function cleanUser(user){
 
 export async function ensureDefaultAdmin(){
   const users = readJson(USERS_KEY, []);
-  return users.some(user => user.role === 'admin' && user.active);
-}
-
-export function hasLocalUsers(){
-  return readJson(USERS_KEY, []).length > 0;
-}
-
-export async function setupInitialAdmin({username='Admin', displayName='Administrador', password}){
-  const users=readJson(USERS_KEY, []);
-  if(users.length) throw new Error('El administrador inicial ya fue configurado en este navegador.');
-  if(String(password).length < 8) throw new Error('La contraseña debe tener al menos 8 caracteres.');
-  const normalizedUsername=normalizeUsername(username || 'Admin');
-  const salt=randomSalt();
-  const passwordHash=await deriveHash(password,salt);
-  const now=new Date().toISOString();
-  const user={
+  if(users.some(user => normalizeUsername(user.username) === normalizeUsername(DEFAULT_ADMIN_USERNAME))){
+    return;
+  }
+  const salt = randomSalt();
+  const passwordHash = await deriveHash(DEFAULT_ADMIN_PASSWORD, salt);
+  const now = new Date().toISOString();
+  users.push({
     id:`usr_${Date.now().toString(36)}`,
-    username:String(username||'Admin').trim(),
-    normalizedUsername,
-    displayName:String(displayName||'Administrador').trim(),
-    role:'admin',active:true,salt,passwordHash,createdAt:now,updatedAt:now,lastLoginAt:null,passwordChangedAt:null
-  };
-  writeJson(USERS_KEY,[user]);
-  return cleanUser(user);
+    username:DEFAULT_ADMIN_USERNAME,
+    normalizedUsername:normalizeUsername(DEFAULT_ADMIN_USERNAME),
+    displayName:'Administrador',
+    role:'admin',
+    active:true,
+    salt,
+    passwordHash,
+    createdAt:now,
+    updatedAt:now,
+    lastLoginAt:null,
+    passwordChangedAt:null
+  });
+  writeJson(USERS_KEY, users);
 }
 
 export function getSession(){
   const session = readJson(SESSION_KEY, null);
-  if(!session) return null;
-  if(session.source === 'cloud'){
-    if(session.active === false) return null;
-    return {...session,user:{id:session.userId,authUid:session.authUid,username:session.username,displayName:session.displayName,role:session.role,active:true,source:'cloud'}};
-  }
-  if(session.deviceId !== deviceId()) return null;
+  if(!session || session.deviceId !== deviceId()) return null;
   const users = readJson(USERS_KEY, []);
   const user = users.find(item => item.id === session.userId && item.active);
   if(!user) return null;
-  return {...session, source:'local', user:cleanUser(user)};
+  return {...session, user:cleanUser(user)};
 }
 
 export function isAuthenticated(){
@@ -126,7 +119,6 @@ export function isAuthenticated(){
 export function logout(){
   const session=getSession();
   localStorage.removeItem(SESSION_KEY);
-  if(session?.source==='cloud') import('./cloud-auth.js').then(module=>module.signOutCloud()).catch(()=>{});
   import('./system-log.js').then(module=>module.addSystemLog({
     source:'Acceso',level:'info',title:'Sesión cerrada',
     detail:session?`${session.displayName||session.username} cerró sesión.`:'Sesión finalizada.'
@@ -149,7 +141,6 @@ export async function login(username, password){
   writeJson(USERS_KEY, users);
 
   const session = {
-    source:'local',
     userId:user.id,
     username:user.username,
     displayName:user.displayName,
@@ -183,7 +174,7 @@ export async function createUser({username, displayName, password, role='viewer'
   if(users.some(item => item.normalizedUsername === normalizedUsername)){
     throw new Error('Ese usuario ya existe.');
   }
-  if(String(password).length < 8) throw new Error('La contraseña debe tener al menos 8 caracteres.');
+  if(String(password).length < 6) throw new Error('La contraseña debe tener al menos 6 caracteres.');
   const salt = randomSalt();
   const passwordHash = await deriveHash(password, salt);
   const now = new Date().toISOString();
@@ -207,7 +198,7 @@ export async function createUser({username, displayName, password, role='viewer'
 }
 
 export async function changePassword(userId, password){
-  if(String(password).length < 8) throw new Error('La contraseña debe tener al menos 8 caracteres.');
+  if(String(password).length < 6) throw new Error('La contraseña debe tener al menos 6 caracteres.');
   const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.id === userId);
   if(index === -1) throw new Error('Usuario no encontrado.');
@@ -266,4 +257,32 @@ export async function deleteUser(userId){
     throw new Error('No puedes eliminar el único administrador.');
   }
   writeJson(USERS_KEY, users.filter(item => item.id !== userId));
+}
+
+export async function resetDefaultAdmin(){
+  await ensureDefaultAdmin();
+  const users = readJson(USERS_KEY, []);
+  const index = users.findIndex(item => item.normalizedUsername === normalizeUsername(DEFAULT_ADMIN_USERNAME));
+  if(index === -1) throw new Error('No se encontró el usuario Admin.');
+  const salt = randomSalt();
+  const passwordHash = await deriveHash(DEFAULT_ADMIN_PASSWORD, salt);
+  const now = new Date().toISOString();
+  users[index] = {
+    ...users[index],
+    username:DEFAULT_ADMIN_USERNAME,
+    normalizedUsername:normalizeUsername(DEFAULT_ADMIN_USERNAME),
+    displayName:users[index].displayName || 'Administrador',
+    role:'admin',
+    active:true,
+    salt,
+    passwordHash,
+    passwordChangedAt:now,
+    updatedAt:now
+  };
+  writeJson(USERS_KEY, users);
+  return cleanUser(users[index]);
+}
+
+export function getDefaultCredentials(){
+  return {username:DEFAULT_ADMIN_USERNAME, password:DEFAULT_ADMIN_PASSWORD};
 }

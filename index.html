@@ -7,15 +7,14 @@
   <meta name="description" content="Panel operativo de gestión de eventos.">
   <title>Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260827-3600"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260827-3600"></script>
+  <script src="js/auth-guard.js?v=20260801-2300"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/excel-sync.css?v=20260827-3600">
-  <link rel="stylesheet" href="css/firebase-sync.css?v=20260827-3600">
-  <link rel="stylesheet" href="css/index.css?v=20260827-3600">
-  <link rel="stylesheet" href="css/pro-suite.css?v=20260827-3600">
+  <link rel="stylesheet" href="css/excel-sync.css?v=20260801-2300">
+  <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-2300">
+  <link rel="stylesheet" href="css/index.css?v=20260801-2300">
 </head>
 <body>
   <div id="loader" aria-hidden="true"><span class="loader-spinner"></span></div>
@@ -48,25 +47,6 @@
   </header>
 
   <main class="dashboard-shell">
-    <section id="viewerHome" class="viewer-home" hidden>
-      <div class="viewer-ambient viewer-ambient-one"></div><div class="viewer-ambient viewer-ambient-two"></div>
-      <header class="viewer-welcome">
-        <span class="viewer-kicker">CENTRO OPERATIVO</span>
-        <h1 id="viewerGreeting">Bienvenido</h1>
-        <p id="viewerDailyMessage">Que hoy cada detalle salga mejor que ayer.</p>
-      </header>
-      <div class="viewer-primary-actions">
-        <a class="viewer-action is-events" href="eventos.html"><span class="viewer-action-icon">E</span><div><small>OPERACIÓN</small><strong>Eventos</strong><p>Consulta programación, espacios y estado general.</p></div><b>→</b></a>
-        <a class="viewer-action is-minutes" href="minuta.html"><span class="viewer-action-icon">M</span><div><small>SERVICIO</small><strong>Minuta</strong><p>Revisa alimentación y detalle operativo del día.</p></div><b>→</b></a>
-      </div>
-      <a class="viewer-agenda-link" href="agenda_movil.html"><span>Agenda Móvil</span><strong>Vista rápida para celular</strong><b>ABRIR →</b></a>
-      <div class="viewer-status-row">
-        <div id="viewerCloudStatus" class="viewer-cloud-status is-syncing"><i></i><div><small>Sincronización</small><strong id="viewerSyncState">Conectando</strong><span id="viewerSyncDetail">Preparando actualización automática</span></div></div>
-        <button id="viewerNotificationButton" class="viewer-notification-button" type="button"><span>◉</span><div><small>AVISOS</small><strong>Activar notificaciones</strong></div><b id="viewerNotificationCount" hidden>0</b></button>
-      </div>
-      <footer class="viewer-footer"><span id="viewerToday">—</span><span>Última sincronización: <b id="viewerLastSync">pendiente</b></span><button id="viewerNotificationClear" type="button">Marcar avisos leídos</button></footer>
-    </section>
-    <div id="adminDashboard">
     <section class="dashboard-overview">
       <div>
         <span class="eyebrow">PANEL OPERATIVO</span>
@@ -191,13 +171,17 @@
     <a href="configuracion.html"><strong>Configuración</strong><span>Mantenimiento, notificaciones e instalación.</span></a>
   </div>
 </section>
-<footer class="dashboard-version"><span>Gestión de Eventos · Versión 3.6.0</span><span>Eventos y Minuta protegidos</span></footer>
-      </div>
-</main>
+<footer class="dashboard-version"><span>Gestión de Eventos · Versión 3.0.0</span><span>Eventos y Minuta protegidos</span></footer>
+  </main>
 
-  <script src="js/index.js?v=20260827-3600" defer></script>
-  <script type="module" src="js/session-ui.js?v=20260827-3600"></script>
-  <script type="module" src="js/pwa.js?v=20260827-3600"></script>
-  <script type="module" src="js/notifications.js?v=20260827-3600"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" defer></script>
+  <script src="js/excel-sync.js?v=20260801-2300" defer></script>
+  <script src="js/index.js?v=20260801-2300" defer></script>
+  <script type="module" src="js/firebase-sync.js?v=20260801-2300"></script>
+  <script type="module" src="js/session-ui.js?v=20260801-2300"></script>
+  <script type="module" src="js/pwa.js?v=20260801-2300"></script>
+  <script type="module" src="js/performance-monitor.js?v=20260801-2300"></script>
+  <script type="module" src="js/notifications.js?v=20260801-2300"></script>
+  <script type="module" src="js/device-heartbeat.js?v=20260801-2300"></script>
 </body>
 </html>

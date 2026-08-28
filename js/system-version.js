@@ -1,4 +1,4 @@
-export const SYSTEM_VERSION = '3.6.0';
+export const SYSTEM_VERSION = '3.0.0';
 export const RELEASE_DATE = '2026-08-01';
 export const RELEASE_NAME = 'Plataforma operativa estable';
 export const PROTECTED_MODULES = Object.freeze({

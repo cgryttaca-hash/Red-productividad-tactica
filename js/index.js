@@ -1,51 +1,3 @@
-const SESSION=window.__RPT_AUTH_SESSION__||{};
-const IS_ADMIN=SESSION.role==='admin';
-
-function loadScript(src,{module=false}={}){
-  return new Promise((resolve,reject)=>{
-    const script=document.createElement('script');script.src=src;if(module)script.type='module';else script.defer=true;
-    script.onload=()=>resolve();script.onerror=()=>reject(new Error(`No fue posible cargar ${src}`));document.body.appendChild(script);
-  });
-}
-function dailyMessage(){
-  const messages=[
-    'Que cada detalle de hoy haga más fácil el trabajo de todo el equipo.',
-    'Un servicio bien coordinado comienza con información clara y a tiempo.',
-    'Hoy es una buena oportunidad para convertir la organización en tranquilidad.',
-    'Los grandes resultados también se construyen con pequeños detalles bien hechos.',
-    'Que el trabajo de hoy fluya con calma, precisión y buena energía.',
-    'Cada evento es una nueva oportunidad para hacer las cosas extraordinariamente bien.',
-    'La mejor operación es la que el equipo siente simple, clara y coordinada.'
-  ];
-  const now=new Date();const seed=Math.floor(new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime()/86400000);
-  return messages[Math.abs(seed)%messages.length];
-}
-function bootViewer(){
-  document.body.classList.add('is-viewer-home');
-  document.getElementById('adminDashboard').hidden=true;
-  const home=document.getElementById('viewerHome');home.hidden=false;
-  document.querySelector('.main-nav')?.setAttribute('hidden','');
-  document.querySelector('.brand small')?.replaceChildren(document.createTextNode('Acceso operativo'));
-  document.getElementById('viewerGreeting').textContent=`Hola, ${SESSION.displayName||SESSION.username||'Usuario'}`;
-  document.getElementById('viewerDailyMessage').textContent=dailyMessage();
-  document.getElementById('viewerToday').textContent=new Date().toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long'});
-  const updated=localStorage.getItem('eventDataUpdatedAt');if(updated){try{document.getElementById('viewerLastSync').textContent=new Date(updated).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});}catch(_){}}
-  import('./viewer-sync.js').catch(error=>console.warn('Sincronización de usuario:',error));
-  window.addEventListener('eventDataUpdated',event=>{const value=event.detail?.updatedAt||localStorage.getItem('eventDataUpdatedAt');if(value)document.getElementById('viewerLastSync').textContent=new Date(value).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});});
-  document.getElementById('loader')?.classList.add('is-hidden');
-}
-function bootAdminTools(){
-  Promise.resolve().then(()=>loadScript('https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js')).then(()=>loadScript('js/excel-sync.js?v=20260827-3600')).catch(error=>console.warn(error));
-  loadScript('js/firebase-sync.js?v=20260827-3600',{module:true}).catch(error=>console.warn(error));
-  loadScript('js/device-heartbeat.js?v=20260827-3600',{module:true}).catch(()=>{});
-}
-
-if(!IS_ADMIN){
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootViewer,{once:true});else bootViewer();
-}else{
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootAdminTools,{once:true});else bootAdminTools();
-}
-
 const $=id=>document.getElementById(id);
 const text=value=>value===undefined||value===null?'':String(value);
 
@@ -217,8 +169,7 @@ function scheduleRefresh(force=false){
 }
 function activateTab(tab){
   activityTab=tab;
-  if(IS_ADMIN){
-document.querySelectorAll('[data-activity-tab]').forEach(button=>{
+  document.querySelectorAll('[data-activity-tab]').forEach(button=>{
     button.classList.toggle('is-active',button.dataset.activityTab===tab);
   });
   document.querySelectorAll('[data-activity-view]').forEach(view=>{
@@ -244,5 +195,3 @@ setInterval(updateClock,30000);
 setInterval(()=>scheduleRefresh(false),15000);
 activateTab(activityTab);
 scheduleRefresh(true);
-
-}

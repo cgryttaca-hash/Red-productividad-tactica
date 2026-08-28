@@ -6,11 +6,10 @@
   <meta name="theme-color" content="#111111">
   <title>Usuarios | Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/auth-guard.js?v=20260827-3600"></script>
-  <script type="module" src="js/maintenance-guard.js?v=20260827-3600"></script>
+  <script src="js/auth-guard.js?v=20260801-2300"></script>
+  <script type="module" src="js/maintenance-guard.js?v=20260801-2300"></script>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/usuarios.css?v=20260827-3600">
-  <link rel="stylesheet" href="css/pro-suite.css?v=20260827-3600">
+  <link rel="stylesheet" href="css/usuarios.css?v=20260801-2300">
 </head>
 <body>
   <header class="users-header">
@@ -32,9 +31,9 @@
   <main class="users-shell">
     <section class="users-title">
       <div>
-        <span>ACCESOS SINCRONIZADOS</span>
+        <span>ADMINISTRACIÓN LOCAL</span>
         <h1>Usuarios del sistema</h1>
-        <p>Crea usuarios que conservan su rol al ingresar desde otros computadores o celulares.</p>
+        <p>Crea, activa, desactiva o elimina accesos para este navegador y equipo.</p>
       </div>
       <a href="index.html">Volver al panel</a>
     </section>
@@ -43,16 +42,6 @@
       <article><small>Total usuarios</small><strong id="userCount">0</strong></article>
       <article><small>Usuarios activos</small><strong id="activeCount">0</strong></article>
       <article><small>Administradores</small><strong id="adminCount">0</strong></article>
-    </section>
-
-    <section class="cloud-access-panel">
-      <div><span>FIREBASE AUTH</span><h2>Usuarios disponibles en todos los equipos</h2><p>Conecta la cuenta propietaria una vez en este navegador para crear y administrar accesos sincronizados.</p></div>
-      <form id="cloudOwnerForm" class="cloud-owner-form">
-        <input id="cloudOwnerEmail" type="email" autocomplete="username" placeholder="Correo administrador de Firebase" required>
-        <input id="cloudOwnerPassword" type="password" autocomplete="current-password" placeholder="Contraseña de Firebase" required>
-        <button type="submit">Conectar administración</button>
-      </form>
-      <div id="cloudOwnerState" class="cloud-owner-state">Comprobando conexión…</div>
     </section>
 
     <section class="users-grid">
@@ -64,11 +53,21 @@
         <form id="createUserForm" class="user-form">
           <label><span>Nombre completo</span><input id="newDisplayName" required placeholder="Nombre del usuario"></label>
           <label><span>Usuario</span><input id="newUsername" required placeholder="Ejemplo: Recepcion"></label>
-          <label><span>Contraseña</span><input id="newPassword" type="password" required minlength="8" placeholder="Mínimo 8 caracteres"></label>
+          <label><span>Contraseña</span><input id="newPassword" type="password" required minlength="6" placeholder="Mínimo 6 caracteres"></label>
           <label><span>Rol</span><select id="newRole"><option value="viewer">Usuario</option><option value="admin">Administrador</option></select></label>
-          <button id="createUserButton" type="submit">Crear usuario sincronizado</button>
+          <button type="submit">Crear usuario</button>
         </form>
 
+        <div class="own-password">
+          <div class="panel-heading">
+            <span>SEGURIDAD</span>
+            <h2>Cambiar mi contraseña</h2>
+          </div>
+          <form id="changeOwnPasswordForm">
+            <input id="ownNewPassword" type="password" required minlength="6" placeholder="Nueva contraseña">
+            <button type="submit">Actualizar</button>
+          </form>
+        </div>
       </article>
 
       <article class="users-panel users-list-panel">
@@ -87,8 +86,8 @@
     </section>
   </main>
 
-  <script type="module" src="js/usuarios.js?v=20260827-3600"></script>
-  <script type="module" src="js/pwa.js?v=20260827-3600"></script>
-  <script type="module" src="js/device-heartbeat.js?v=20260827-3600"></script>
+  <script type="module" src="js/usuarios.js?v=20260801-2300"></script>
+  <script type="module" src="js/pwa.js?v=20260801-2300"></script>
+  <script type="module" src="js/device-heartbeat.js?v=20260801-2300"></script>
 </body>
 </html>

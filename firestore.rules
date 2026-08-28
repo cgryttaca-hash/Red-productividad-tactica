@@ -1,36 +1,54 @@
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    function signedIn(){ return request.auth != null; }
-    function isOwner(){ return signedIn() && request.auth.uid == "Nxsbigjez6eBRMiZZdTzHv3oINn1"; }
-    function myProfile(){ return get(/databases/$(database)/documents/app_users/$(request.auth.uid)); }
-    function isAppAdmin(){ return signedIn() && exists(/databases/$(database)/documents/app_users/$(request.auth.uid)) && myProfile().data.active == true && myProfile().data.role == 'admin'; }
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner() {
+      return signedIn()
+        && request.auth.uid == "Nxsbigjez6eBRMiZZdTzHv3oINn1";
+    }
 
     match /eventos_publicos/{documento} {
       allow read: if signedIn();
       allow create, update, delete: if isOwner();
     }
+
     match /eventos_meta/{documento} {
       allow read: if signedIn();
       allow create, update, delete: if isOwner();
     }
+
     match /eventos_cambios/{documento} {
       allow read: if signedIn();
       allow create, update, delete: if isOwner();
     }
-    match /app_users/{uid} {
-      allow get: if signedIn() && (request.auth.uid == uid || isOwner() || isAppAdmin());
-      allow list: if isOwner() || isAppAdmin();
-      allow create, update: if isOwner() || isAppAdmin();
-      allow delete: if false;
-    }
+
     match /equipos_autorizados/{deviceId} {
-      allow create: if signedIn() && request.resource.data.authUid == request.auth.uid && request.resource.data.revoked == false;
-      allow get: if isOwner() || (signedIn() && resource.data.authUid == request.auth.uid);
+      allow create: if signedIn()
+        && request.resource.data.authUid == request.auth.uid
+        && request.resource.data.revoked == false;
+
+      allow get: if isOwner()
+        || (signedIn() && resource.data.authUid == request.auth.uid);
+
       allow list: if isOwner();
-      allow update: if isOwner() || (signedIn() && resource.data.authUid == request.auth.uid && request.resource.data.authUid == request.auth.uid && request.resource.data.revoked == resource.data.revoked);
+
+      allow update: if isOwner()
+        || (
+          signedIn()
+          && resource.data.authUid == request.auth.uid
+          && request.resource.data.authUid == request.auth.uid
+          && request.resource.data.revoked == resource.data.revoked
+        );
+
       allow delete: if isOwner();
     }
-    match /{document=**} { allow read, write: if false; }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
   }
 }

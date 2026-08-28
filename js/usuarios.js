@@ -1,40 +1,128 @@
-import {getSession,logout} from './local-auth.js';
-import {connectOwner,listCloudUsers,createCloudUser,updateCloudUser} from './cloud-auth.js';
+import {
+  getSession,
+  listUsers,
+  createUser,
+  updateUser,
+  changePassword,
+  deleteUser,
+  logout
+} from './local-auth.js';
 
-const $=id=>document.getElementById(id);let users=[];let connected=false;
-const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-function formatDate(value){if(!value)return'Nunca';const d=new Date(value);return Number.isNaN(d.getTime())?'Nunca':d.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});}
-function msg(value,type='success'){const el=$('usersMessage');el.hidden=!value;el.className=`users-message is-${type}`;el.textContent=value||'';}
-function state(value,type=''){const el=$('cloudOwnerState');el.textContent=value;el.className=`cloud-owner-state ${type?`is-${type}`:''}`;}
+const $=id=>document.getElementById(id);
+let users=[];
+
+function esc(value){
+  return String(value??'').replace(/[&<>"']/g,char=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+  }[char]));
+}
+
+function formatDate(value){
+  if(!value) return 'Nunca';
+  const date=new Date(value);
+  return Number.isNaN(date.getTime()) ? 'Nunca' : date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
+}
+
+function showMessage(value,type='success'){
+  const element=$('usersMessage');
+  element.hidden=!value;
+  element.className=`users-message is-${type}`;
+  element.textContent=value||'';
+}
+
 function render(){
-  const session=getSession();$('currentAdmin').textContent=session?.displayName||session?.username||'Administrador';
-  $('userCount').textContent=users.length;$('activeCount').textContent=users.filter(u=>u.active).length;$('adminCount').textContent=users.filter(u=>u.role==='admin').length;
-  $('createUserButton').disabled=!connected;
-  $('usersTableBody').innerHTML=users.length?users.map(user=>`<tr><td><strong>${esc(user.displayName||user.username)}</strong><span>@${esc(user.username)}</span></td><td><span class="role-badge ${user.role==='admin'?'is-admin':''}">${user.role==='admin'?'Administrador':'Usuario'}</span></td><td><span class="state-badge ${user.active?'is-active':'is-inactive'}">${user.active?'Activo':'Inactivo'}</span></td><td>${esc(formatDate(user.lastLoginAt))}</td><td class="user-actions"><button type="button" data-action="role" data-id="${esc(user.id)}">${user.role==='admin'?'Hacer usuario':'Hacer admin'}</button><button type="button" data-action="toggle" data-id="${esc(user.id)}">${user.active?'Desactivar':'Activar'}</button></td></tr>`).join(''):`<tr><td colspan="5"><strong>No hay usuarios sincronizados.</strong><span>Conecta Firebase y crea el primer acceso operativo.</span></td></tr>`;
+  const session=getSession();
+  $('currentAdmin').textContent=session?.displayName || session?.username || 'Administrador';
+  $('userCount').textContent=users.length;
+  $('activeCount').textContent=users.filter(user=>user.active).length;
+  $('adminCount').textContent=users.filter(user=>user.role==='admin').length;
+
+  $('usersTableBody').innerHTML=users.map(user=>`
+    <tr>
+      <td>
+        <strong>${esc(user.displayName || user.username)}</strong>
+        <span>@${esc(user.username)}</span>
+      </td>
+      <td><span class="role-badge ${user.role==='admin'?'is-admin':''}">${user.role==='admin'?'Administrador':'Usuario'}</span></td>
+      <td><span class="state-badge ${user.active?'is-active':'is-inactive'}">${user.active?'Activo':'Inactivo'}</span></td>
+      <td>${esc(formatDate(user.lastLoginAt))}</td>
+      <td class="user-actions">
+        <button type="button" data-action="password" data-id="${esc(user.id)}">Contraseña</button>
+        <button type="button" data-action="toggle" data-id="${esc(user.id)}">${user.active?'Desactivar':'Activar'}</button>
+        <button type="button" data-action="delete" data-id="${esc(user.id)}" class="danger">Eliminar</button>
+      </td>
+    </tr>
+  `).join('');
 }
+
 async function refresh(){
-  try{users=await listCloudUsers();connected=true;state('Administración Firebase conectada. Los permisos se sincronizan entre equipos.','success');$('cloudOwnerForm').hidden=true;render();}
-  catch(error){connected=false;users=[];state('Conecta la cuenta propietaria de Firebase para administrar usuarios.','warning');$('cloudOwnerForm').hidden=false;render();}
+  users=await listUsers();
+  render();
 }
-$('cloudOwnerForm').addEventListener('submit',async event=>{
-  event.preventDefault();msg('');const button=event.currentTarget.querySelector('button');button.disabled=true;state('Conectando…');
-  try{await connectOwner($('cloudOwnerEmail').value,$('cloudOwnerPassword').value);$('cloudOwnerPassword').value='';await refresh();}
-  catch(error){state(error.message||'No fue posible conectar Firebase.','error');}
-  finally{button.disabled=false;}
-});
+
 $('createUserForm').addEventListener('submit',async event=>{
-  event.preventDefault();msg('');
-  try{await createCloudUser({username:$('newUsername').value,displayName:$('newDisplayName').value,password:$('newPassword').value,role:$('newRole').value});event.currentTarget.reset();await refresh();msg('Usuario creado y sincronizado. Ya puede ingresar desde otro equipo.');}
-  catch(error){msg(error.message||'No fue posible crear el usuario.','error');}
-});
-$('usersTableBody').addEventListener('click',async event=>{
-  const button=event.target.closest('button[data-action]');if(!button)return;const user=users.find(u=>u.id===button.dataset.id);if(!user)return;msg('');button.disabled=true;
+  event.preventDefault();
+  showMessage('');
   try{
-    if(button.dataset.action==='toggle')await updateCloudUser(user.id,{active:!user.active});
-    if(button.dataset.action==='role')await updateCloudUser(user.id,{role:user.role==='admin'?'viewer':'admin'});
-    await refresh();msg('Permisos actualizados. El cambio se aplicará automáticamente en las sesiones abiertas.');
-  }catch(error){msg(error.message||'No fue posible actualizar el usuario.','error');}
-  finally{button.disabled=false;}
+    await createUser({
+      username:$('newUsername').value,
+      displayName:$('newDisplayName').value,
+      password:$('newPassword').value,
+      role:$('newRole').value
+    });
+    event.target.reset();
+    await refresh();
+    showMessage('Usuario creado correctamente.');
+  }catch(error){
+    showMessage(error.message,'error');
+  }
 });
-$('logoutButton').addEventListener('click',()=>{logout();location.replace('login.html');});
+
+$('usersTableBody').addEventListener('click',async event=>{
+  const button=event.target.closest('button[data-action]');
+  if(!button) return;
+  const user=users.find(item=>item.id===button.dataset.id);
+  if(!user) return;
+  showMessage('');
+
+  try{
+    if(button.dataset.action==='password'){
+      const password=prompt(`Nueva contraseña para ${user.username}:`);
+      if(password===null) return;
+      await changePassword(user.id,password);
+      showMessage(`Contraseña actualizada para ${user.username}.`);
+    }
+    if(button.dataset.action==='toggle'){
+      await updateUser(user.id,{active:!user.active});
+      showMessage(`Usuario ${user.active?'desactivado':'activado'} correctamente.`);
+    }
+    if(button.dataset.action==='delete'){
+      if(!confirm(`¿Eliminar al usuario ${user.username}?`)) return;
+      await deleteUser(user.id);
+      showMessage('Usuario eliminado.');
+    }
+    await refresh();
+  }catch(error){
+    showMessage(error.message,'error');
+  }
+});
+
+$('changeOwnPasswordForm').addEventListener('submit',async event=>{
+  event.preventDefault();
+  const session=getSession();
+  if(!session) return;
+  try{
+    await changePassword(session.userId,$('ownNewPassword').value);
+    event.target.reset();
+    showMessage('Tu contraseña fue actualizada.');
+  }catch(error){
+    showMessage(error.message,'error');
+  }
+});
+
+$('logoutButton').addEventListener('click',()=>{
+  logout();
+  location.replace('login.html');
+});
+
 refresh();
