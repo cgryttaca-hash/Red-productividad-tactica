@@ -1,4 +1,4 @@
-const CACHE='rpt-shell-3.6.3-agenda-alerts';
+const CACHE='rpt-shell-3.6.4-notifications-only';
 const OFFLINE='./offline.html';
 const ASSETS=[
   "./",

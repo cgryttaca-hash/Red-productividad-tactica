@@ -45,15 +45,6 @@ function eventEnd(event){
   const times=timeMatches(event.horarioEvento);if(!times.length)return null;
   return combine(event.fechaISO,times[times.length-1]);
 }
-function speak(message){
-  if(document.hidden||!('speechSynthesis'in window)||!('SpeechSynthesisUtterance'in window))return;
-  try{
-    speechSynthesis.cancel();
-    const utterance=new SpeechSynthesisUtterance(message);
-    utterance.lang='es-CO';utterance.rate=.96;utterance.pitch=1;utterance.volume=1;
-    speechSynthesis.speak(utterance);
-  }catch(_){ }
-}
 function once(history,key,callback){
   if(history[key])return false;
   history[key]=Date.now();saveHistory(history);callback();return true;
@@ -77,7 +68,6 @@ async function check(){
           const label=item.label&&item.label.length<120?item.label:'servicio de alimentación';
           const message=`Recordatorio: ${company(event)} tiene ${label} en aproximadamente 15 minutos.`;
           showNotification('Alimentación en 15 minutos',message,{tag:key,url:'./agenda_movil.html',renotify:true});
-          speak(message);
           window.dispatchEvent(new CustomEvent('rptAgendaReminder',{detail:{type:'food',message,event}}));
         });
       }

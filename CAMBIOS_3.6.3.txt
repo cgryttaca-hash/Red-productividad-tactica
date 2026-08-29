@@ -5,7 +5,7 @@ VERSIÓN 3.6.3 — CONTRASTE Y RECORDATORIOS DE AGENDA
 - Agenda Móvil bloqueada hasta abrirse como PWA instalada y autorizar notificaciones.
 - Guía especial de instalación para iPhone/iPad.
 - Recordatorio 15 minutos antes de cada servicio de alimentación detectado en HORARIO A&B.
-- El recordatorio de alimentación genera notificación y voz en español cuando la PWA está activa.
+- El recordatorio de alimentación genera únicamente una notificación cuando la PWA está activa.
 - Notificación al finalizar cada evento según el último horario registrado.
 - Después del último evento del día, notificación resumen de eventos publicados para el día siguiente.
 - Historial local evita repetir un mismo recordatorio.
