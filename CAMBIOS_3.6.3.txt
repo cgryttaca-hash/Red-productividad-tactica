@@ -1,0 +1,16 @@
+VERSIÓN 3.6.3 — CONTRASTE Y RECORDATORIOS DE AGENDA
+
+- Nueva paleta visual verde corporativo + arena para las páginas administrativas y actualización.
+- Agenda Móvil: Segundo piso se muestra antes de Tercer piso.
+- Agenda Móvil bloqueada hasta abrirse como PWA instalada y autorizar notificaciones.
+- Guía especial de instalación para iPhone/iPad.
+- Recordatorio 15 minutos antes de cada servicio de alimentación detectado en HORARIO A&B.
+- El recordatorio de alimentación genera notificación y voz en español cuando la PWA está activa.
+- Notificación al finalizar cada evento según el último horario registrado.
+- Después del último evento del día, notificación resumen de eventos publicados para el día siguiente.
+- Historial local evita repetir un mismo recordatorio.
+- Firebase y Excel no se modificaron.
+- Eventos y Minuta no se modificaron.
+
+IMPORTANTE:
+Los navegadores móviles no garantizan temporizadores exactos cuando una PWA está completamente cerrada o el sistema la suspende. Para notificaciones exactas en segundo plano se requiere Firebase Cloud Messaging/backend programado.

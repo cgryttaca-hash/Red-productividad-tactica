@@ -1,4 +1,4 @@
-const CACHE='rpt-shell-3.6.2-visual';
+const CACHE='rpt-shell-3.6.3-agenda-alerts';
 const OFFLINE='./offline.html';
 const ASSETS=[
   "./",
@@ -27,6 +27,8 @@ const ASSETS=[
   "./eventos.html",
   "./index.html",
   "./js/agenda-movil.js",
+  "./js/agenda-requirements.js",
+  "./js/agenda-reminders.js",
   "./js/app.js",
   "./js/audit-store.js",
   "./js/auditoria.js",

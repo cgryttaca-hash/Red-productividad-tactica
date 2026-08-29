@@ -1,15 +1,25 @@
 {
-  "name":"Agenda Móvil · Gestión de Eventos",
-  "short_name":"Agenda",
-  "description":"Agenda operativa de eventos en tiempo real.",
-  "start_url":"./agenda_movil.html",
-  "scope":"./",
-  "display":"standalone",
-  "background_color":"#0b1220",
-  "theme_color":"#101827",
-  "orientation":"any",
-  "icons":[
-    {"src":"assets/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
-    {"src":"assets/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  "name": "Agenda Móvil · Gestión de Eventos",
+  "short_name": "Agenda",
+  "description": "Agenda operativa de eventos en tiempo real.",
+  "start_url": "./agenda_movil.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f1e8",
+  "theme_color": "#285044",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }

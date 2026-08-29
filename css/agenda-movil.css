@@ -250,3 +250,36 @@ body.is-large-text .detail-field strong{font-size:14px}
   .event-summary-row{padding:16px 14px}.detail-heading h2{font-size:26px}.detail-field strong{font-size:13px}.detail-field small{font-size:9px}
 }
 @media(max-width:360px){.agenda-main{padding-left:6px;padding-right:6px}.agenda-brand h1{font-size:28px}.event-summary-company strong{font-size:16px}}
+
+/* Agenda 3.6.3 — contraste verde corporativo / arena */
+:root{
+  --ink:#26322c;
+  --muted:#6c756f;
+  --line:#dcd6ca;
+  --line-soft:#ece7de;
+  --surface:#fffdf8;
+  --surface-soft:#f8f3e9;
+  --brand:#285044;
+  --brand-2:#3f6e5c;
+  --accent:#bd8530;
+  --food:#2f7858;
+  --food-soft:#eaf5ee;
+  --no-food:#97651f;
+  --no-food-soft:#fbf0dc;
+}
+body{background:#f5f1e8;color:var(--ink)}
+.agenda-header{background:linear-gradient(135deg,#285044 0%,#3f6e5c 67%,#587e6d 100%)!important}
+.agenda-brand>span{color:#f0c77f!important}.agenda-brand p{color:#e5eee9!important}.connection-card{background:rgba(255,255,255,.10)!important;border-color:rgba(255,255,255,.22)!important}.agenda-refresh,.agenda-text-size{background:#fff9ef!important;color:#285044!important;border-color:#eee0ca!important}.agenda-text-size.is-active{background:#bd8530!important;color:#fff!important}
+.agenda-toolbar,.date-group,.event-table,.event-summary-row,.detail-dialog{background:#fffdf8!important}.agenda-tab.is-active{background:#285044!important;color:#fff!important}.agenda-tabs{background:#eee8dc!important}.agenda-search input,.agenda-date-filter input,.agenda-compact-filter select{background:#fffdf8!important;border-color:#d8d0c2!important}.agenda-search input:focus,.agenda-date-filter input:focus,.agenda-compact-filter select:focus{border-color:#bd8530!important;box-shadow:0 0 0 3px rgba(189,133,48,.14)!important}.date-group-header{background:#f9f4eb!important}.date-block{background:#285044!important;color:#fff!important}.floor-section{background:#fffdf8!important}.floor-section.is-third{background:#fbf8f1!important}.floor-marker{background:#efe6d7!important;color:#765326!important}.floor-section.is-third .floor-marker{background:#e5efe9!important;color:#285044!important}.event-summary-row:hover{background:#fbf5e9!important}.detail-close{background:#285044!important}.detail-field{background:#faf6ee!important}.detail-food-card{background:#f4f7f2!important}.agenda-notice.is-success{background:#eaf5ee!important;border-color:#bdd8c8!important;color:#286148!important}
+/* Orden de piso reforzado incluso ante reglas externas */
+.date-group{display:block!important}.floor-section:not(.is-third){order:1!important}.floor-section.is-third{order:2!important}
+
+/* Requisitos obligatorios de Agenda instalada + notificaciones */
+.agenda-requirements-pending .agenda-app{filter:blur(4px);pointer-events:none;user-select:none}
+.agenda-requirements-gate{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:20px;background:rgba(38,50,44,.82);backdrop-filter:blur(8px)}
+.agenda-requirements-gate[hidden]{display:none!important}
+.agenda-gate-card{width:min(620px,100%);padding:28px;border:1px solid rgba(255,255,255,.32);border-radius:24px;background:#fffdf8;box-shadow:0 28px 90px rgba(25,40,32,.35)}
+.agenda-gate-brand>span{color:#9a6b2d;font-size:9px;font-weight:950;letter-spacing:.15em}.agenda-gate-brand h2{margin:8px 0 8px;color:#26322c;font-size:30px;letter-spacing:-.035em}.agenda-gate-brand p{margin:0;color:#68716c;font-size:13px;line-height:1.65}
+.agenda-gate-status{display:grid;gap:10px;margin:24px 0}.agenda-gate-status article{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:center;padding:14px;border:1px solid #ded8cb;border-radius:14px;background:#faf6ee}.agenda-gate-status article>b{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:#eee6d8;color:#765326;font-size:14px}.agenda-gate-status article.is-ready{border-color:#b9d4c3;background:#eef7f1}.agenda-gate-status article.is-ready>b{background:#285044;color:#fff}.agenda-gate-status strong{display:block;color:#26322c;font-size:13px}.agenda-gate-status span{display:block;margin-top:4px;color:#6d746f;font-size:11px;line-height:1.45}
+.agenda-gate-actions{display:flex;gap:10px;flex-wrap:wrap}.agenda-gate-actions button{flex:1 1 210px;min-height:48px;border:0;border-radius:12px;background:#285044;color:#fff;font-weight:900;cursor:pointer}.agenda-gate-actions button:first-child{background:#bd8530}.agenda-gate-actions button:disabled{opacity:.55;cursor:not-allowed}.agenda-gate-help{margin:14px 0 0;color:#7a817d;font-size:10px;line-height:1.5}
+@media(max-width:560px){.agenda-requirements-gate{padding:12px}.agenda-gate-card{padding:21px 17px;border-radius:19px}.agenda-gate-brand h2{font-size:25px}.agenda-gate-brand p{font-size:12px}.agenda-gate-actions{display:grid}.agenda-gate-actions button{width:100%}}

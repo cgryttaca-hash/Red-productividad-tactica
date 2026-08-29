@@ -389,6 +389,8 @@ async function applyEvents(events,updatedAt,notify=true,cloudHash=''){
       {tag:'agenda-realtime',url:'./agenda_movil.html',renotify:true}
     )).catch(()=>{});
   }
+  window.__RPT_AGENDA_EVENTS__=state.all;
+  window.dispatchEvent(new CustomEvent('rptAgendaDataReady',{detail:{events:state.all,updatedAt:state.updatedAt}}));
   render();
 }
 async function loadChunks(meta,notify=false){
@@ -462,6 +464,8 @@ async function initializeFirebase(){
     state.updatedAt=cached.updatedAt;
     state.lastHash=cached.hash||dataHash(cached.events);
     state.cloudHash=cached.cloudHash||'';
+    window.__RPT_AGENDA_EVENTS__=state.all;
+    window.dispatchEvent(new CustomEvent('rptAgendaDataReady',{detail:{events:state.all,updatedAt:state.updatedAt}}));
     render();
   }
   try{
@@ -556,6 +560,10 @@ $('mobileDetailModal').addEventListener('click',event=>{
 });
 document.addEventListener('keydown',event=>{
   if(event.key==='Escape')closeDetail();
+});
+window.addEventListener('rptAgendaReminder',event=>{
+  const message=event.detail?.message||'';
+  if(message)setNotice(message,'success');
 });
 window.addEventListener('pagehide',()=>{
   state.metaUnsubscribe?.();

@@ -24,3 +24,36 @@ input,select,textarea{border:1px solid #cfd8e5!important;border-radius:10px!impo
 @media(max-width:1050px){.summary-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}.sync-grid{grid-template-columns:1fr 1fr!important}.sync-grid>*:last-child{grid-column:1/-1}.admin-tools-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.users-header{flex-wrap:wrap!important}.users-session{margin-left:0!important}}
 @media(max-width:720px){.tool-shell,.users-shell,.dashboard-shell{width:min(100% - 20px,1440px)!important;padding-top:16px!important}.tool-header-inner,.header-inner{padding:12px!important}.tool-nav,.main-nav,.users-header nav{overflow-x:auto!important;flex-wrap:nowrap!important;max-width:100%!important;padding-bottom:4px!important;scrollbar-width:none}.tool-nav::-webkit-scrollbar,.main-nav::-webkit-scrollbar,.users-header nav::-webkit-scrollbar{display:none}.tool-nav a,.main-nav a,.users-header nav a{white-space:nowrap!important}.dashboard-overview{border-radius:18px!important;padding:22px!important}.summary-strip,.sync-grid,.admin-tools-grid,.users-stats,.users-grid{grid-template-columns:1fr!important}.sync-grid>*:last-child{grid-column:auto}.activity-header{align-items:flex-start!important}.activity-tabs{overflow-x:auto!important;max-width:100%!important}.card-header{gap:10px!important;align-items:flex-start!important}.users-title{padding:20px!important}.users-header{padding:12px!important}.clock-block{display:none!important}th,td{padding:11px 12px!important}.table-wrap,.users-table-wrap{max-width:100%!important}.overview-actions{width:100%!important}.overview-actions a,.overview-actions button{flex:1 1 140px!important;text-align:center!important}}
 @media(max-width:380px){.tool-shell,.users-shell,.dashboard-shell{width:calc(100% - 14px)!important}.dashboard-overview{padding:18px!important}.dashboard-overview h1{font-size:27px!important}.summary-strip article,.sync-card{padding:15px!important}}
+
+/* Identidad visual 3.6.3 — verde corporativo + arena cálida (sin azul/negro dominante) */
+:root{
+  --ui-bg:#f5f1e8;
+  --ui-surface:#fffdf8;
+  --ui-surface-2:#f8f3e9;
+  --ui-ink:#26322c;
+  --ui-muted:#6d746f;
+  --ui-line:#ded8cb;
+  --ui-brand:#285044;
+  --ui-brand-2:#3f6e5c;
+  --ui-accent:#bd8530;
+  --ui-good:#2f7858;
+  --ui-warn:#a36c1f;
+  --ui-bad:#a9473e;
+  --ui-shadow:0 16px 42px rgba(55,65,58,.10);
+}
+html{background:var(--ui-bg)!important}
+body{background:linear-gradient(180deg,#eee7d9 0,#faf7f0 245px,#f5f1e8 100%)!important;color:var(--ui-ink)!important}
+.tool-header,.users-header,.app-header,.login-banner{background:#285044!important;color:#fff!important;box-shadow:0 8px 28px rgba(40,80,68,.22)!important}
+.brand small,.tool-header small,.login-banner span{color:#d8e4de!important}
+.tool-nav a,.main-nav a,.users-header nav a{color:#edf4f0!important}
+.tool-nav a:hover,.main-nav a:hover,.users-header nav a:hover,.tool-nav a.active,.main-nav a.active{background:rgba(255,255,255,.14)!important}
+.dashboard-overview,.users-title{background:linear-gradient(135deg,#285044 0%,#3f6e5c 62%,#5c806f 100%)!important;box-shadow:0 22px 55px rgba(40,80,68,.22)!important}
+.dashboard-overview p,.users-title p{color:#e6eee9!important}.dashboard-overview .eyebrow,.users-title span{color:#f0c77f!important}
+.overview-actions .primary-action,.users-title a{background:#fff8ec!important;color:#285044!important}
+.card,.users-panel,.sync-card,.activity-panel,.admin-tools-panel,.summary-strip article{background:rgba(255,253,248,.98)!important;border-color:var(--ui-line)!important}
+.card-header,.panel-heading,.activity-header{background:#fbf7ef!important;border-color:#e7dfd1!important}.card-header span,.panel-heading>span,.eyebrow{color:#8f6329!important}
+.btn.primary,button[type=submit],.primary-action{background:linear-gradient(135deg,#285044,#3f6e5c)!important;box-shadow:0 8px 18px rgba(40,80,68,.2)!important}
+input,select,textarea{background:#fffdf8!important;border-color:#d8d0c2!important;color:#26322c!important}input:focus,select:focus,textarea:focus{border-color:#b4874a!important;box-shadow:0 0 0 3px rgba(189,133,48,.14)!important}
+th{background:#eee8dc!important;color:#4d5a52!important}th,td{border-color:#e8e0d4!important}tbody tr:hover{background:#fbf5e9!important}
+.sync-card header b{background:#efe6d7!important;color:#7f5a28!important}.admin-tools-grid a{background:#fffaf1!important;border-color:#e2d9ca!important}.admin-tools-grid a:hover{background:#f7eddd!important;border-color:#c9aa77!important}.activity-tabs button.is-active{background:#285044!important}.log-item.is-success .log-source{background:#eaf5ee!important;color:#2f7858!important}
+.login-shell h1,.login-card-heading h2{color:#2b3d35!important}.login-shell button,#loginButton{background:linear-gradient(135deg,#285044,#3f6e5c)!important}.login-copy>span,.login-card-heading>span{color:#9a6b2d!important}.login-card{background:#fffdf8!important;border-color:#ded8cb!important;box-shadow:0 24px 70px rgba(40,80,68,.14)!important}

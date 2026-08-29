@@ -3,16 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#101827">
+  <meta name="theme-color" content="#285044">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
   <meta name="description" content="Agenda operativa de eventos en tiempo real.">
   <title>Agenda de eventos</title>
   <style>html.maintenance-pending body{visibility:hidden}</style>
   <script type="module" src="js/maintenance-guard.js?v=20260827-3600"></script>
   <link rel="manifest" href="agenda.webmanifest">
-  <link rel="stylesheet" href="css/agenda-movil.css?v=20260827-3600">
+  <link rel="stylesheet" href="css/agenda-movil.css?v=20260828-3630">
 </head>
-<body>
+<body class="agenda-requirements-pending">
+  <div id="agendaRequirementsGate" class="agenda-requirements-gate" role="dialog" aria-modal="true" aria-labelledby="agendaGateTitle">
+    <div class="agenda-gate-card">
+      <div class="agenda-gate-brand"><span>ACCESO OPERATIVO SEGURO</span><h2 id="agendaGateTitle">Configura la Agenda Móvil</h2><p>Para usar esta agenda debes instalarla como aplicación y permitir las notificaciones. Esto garantiza que recibas los recordatorios operativos.</p></div>
+      <div class="agenda-gate-status">
+        <article id="agendaInstallStatus"><b>1</b><div><strong>Instalar aplicación</strong><span id="agendaInstallText">Comprobando instalación…</span></div></article>
+        <article id="agendaNotifyStatus"><b>2</b><div><strong>Activar notificaciones</strong><span id="agendaNotifyText">Comprobando permisos…</span></div></article>
+      </div>
+      <div class="agenda-gate-actions">
+        <button id="agendaInstallButton" type="button" hidden>Instalar Agenda Móvil</button>
+        <button id="agendaNotifyButton" type="button">Activar notificaciones</button>
+      </div>
+      <p id="agendaGateHelp" class="agenda-gate-help">La Agenda se habilitará automáticamente cuando se cumplan ambos requisitos.</p>
+    </div>
+  </div>
   <div class="agenda-app">
     <header class="agenda-header">
       <div class="agenda-topbar">
@@ -85,9 +99,11 @@
     </div>
   </div>
 
-  <script type="module" src="js/agenda-movil.js?v=20260827-3600"></script>
-  <script type="module" src="js/pwa.js?v=20260827-3600"></script>
-  <script type="module" src="js/notifications.js?v=20260827-3600"></script>
-  <script type="module" src="js/performance-monitor.js?v=20260827-3600"></script>
+  <script type="module" src="js/agenda-requirements.js?v=20260828-3630"></script>
+  <script type="module" src="js/agenda-reminders.js?v=20260828-3630"></script>
+  <script type="module" src="js/agenda-movil.js?v=20260828-3630"></script>
+  <script type="module" src="js/pwa.js?v=20260828-3630"></script>
+  <script type="module" src="js/notifications.js?v=20260828-3630"></script>
+  <script type="module" src="js/performance-monitor.js?v=20260828-3630"></script>
 </body>
 </html>
