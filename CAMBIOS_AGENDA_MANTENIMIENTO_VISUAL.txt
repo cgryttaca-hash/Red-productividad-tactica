@@ -1,0 +1,28 @@
+CORRECCIÓN VISUAL DE AGENDA MÓVIL Y MANTENIMIENTO
+==================================================
+
+ARCHIVOS MODIFICADOS
+- agenda_movil.html
+- css/agenda-movil.css
+- js/agenda-movil.js
+- mantenimiento.html
+- css/mantenimiento.css
+- js/mantenimiento.js
+
+AGENDA MÓVIL
+- La tarjeta principal muestra empresa, salón/piso, acomodación, personas y estado de alimentación.
+- Se eliminó el menú completo de alimentación de la tarjeta principal.
+- Se agregó distintivo Con alimentación / Sin alimentación.
+- Tipografía más oscura, grande y legible.
+- En el detalle, Horario AYB y Descripción Alimentación aparecen en una sola fila por servicio.
+- Se compactan saltos de línea internos para evitar textos desordenados.
+- Vista responsive para computadora, tableta y teléfono.
+
+MANTENIMIENTO
+- Nuevo panel técnico profesional.
+- Animación de engranaje, llave, escaneo y actividad.
+- Barra de progreso, temporizador, recursos del sistema y registro de actividad.
+- Regreso automático al finalizar el temporizador.
+
+ARCHIVOS NO MODIFICADOS
+- Eventos y Minuta conservaron exactamente sus HTML, CSS y JavaScript.
