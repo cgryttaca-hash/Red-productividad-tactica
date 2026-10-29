@@ -3,11 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#285044">
+  <meta name="theme-color" content="#10283f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Agenda">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/agenda-brand/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/agenda-brand/favicon.svg">
+  <link rel="icon" sizes="any" href="assets/agenda-brand/favicon.ico">
   <meta name="description" content="Agenda operativa de eventos en tiempo real.">
   <title>Agenda de eventos</title>
   <style>html.maintenance-pending body{visibility:hidden}</style>
@@ -15,11 +17,12 @@
   <link rel="manifest" href="agenda.webmanifest">
   <link rel="stylesheet" href="css/agenda-movil.css?v=20260828-3630">
   <link rel="stylesheet" href="css/pwa-compat.css?v=20261028" media="screen">
+  <link rel="stylesheet" href="css/agenda-premium.css?v=20261028-premium1" media="screen">
 </head>
 <body class="agenda-requirements-pending">
   <div id="agendaRequirementsGate" class="agenda-requirements-gate" role="dialog" aria-modal="true" aria-labelledby="agendaGateTitle">
     <div class="agenda-gate-card">
-      <div class="agenda-gate-brand"><span>ACCESO OPERATIVO SEGURO</span><h2 id="agendaGateTitle">Configura la Agenda Móvil</h2><p>Instala y abre la agenda como aplicación y autoriza las notificaciones. Los recordatorios actuales funcionan con la agenda abierta; los avisos en segundo plano se configuran dentro de la aplicación.</p></div>
+      <div class="agenda-gate-brand"><img class="agenda-gate-logo" src="assets/agenda-brand/logo-full-light.svg" alt="Agenda Móvil · Gestión de eventos" width="500" height="126"><span>ACCESO OPERATIVO SEGURO</span><h2 id="agendaGateTitle">Configura la Agenda Móvil</h2><p>Instala y abre la agenda como aplicación y autoriza las notificaciones. Los avisos de alimentación en segundo plano se activan dentro de la aplicación.</p></div>
       <div class="agenda-gate-status">
         <article id="agendaInstallStatus"><b>1</b><div><strong>Instalar aplicación</strong><span id="agendaInstallText">Comprobando instalación…</span></div></article>
         <article id="agendaNotifyStatus"><b>2</b><div><strong>Activar notificaciones</strong><span id="agendaNotifyText">Comprobando permisos…</span></div></article>
@@ -35,8 +38,8 @@
     <header class="agenda-header">
       <div class="agenda-topbar">
         <div class="agenda-brand">
-          <span>OPERACIÓN EN TIEMPO REAL</span>
-          <h1>Agenda de eventos</h1>
+          <img class="agenda-wordmark" src="assets/agenda-brand/logo-full-light.svg" alt="Agenda Móvil · Gestión de eventos" width="500" height="126">
+          <h1 class="agenda-accessible-title">Agenda de eventos</h1>
           <p>Vista operativa clara para consultar salones y servicios.</p>
         </div>
         <div class="agenda-live">

@@ -51,7 +51,7 @@ function createHandler({ store, verifyToken, getConfig }) {
       response.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
       if (request.method === 'OPTIONS') { response.status(204).send(''); return; }
       const route = request.path.replace(/\/$/, '') || '/';
-      if (request.method === 'GET' && route === '/config') { response.json({ publicKey: configuration.publicKey }); return; }
+      if (request.method === 'GET' && route === '/config') { response.json({ publicKey: configuration.publicKey, fcmEnabled: true, timeZone: 'America/Bogota', foodLeadMinutes: 15 }); return; }
       if (!['POST', 'DELETE'].includes(request.method) || !['/subscriptions', '/status'].includes(route)) throw failure('Ruta no disponible.', 404);
       if (!String(request.get('Content-Type') || '').startsWith('application/json')) throw failure('Se requiere contenido JSON.', 415);
       if (JSON.stringify(request.body || {}).length > 8000) throw failure('La solicitud es demasiado grande.', 413);
@@ -73,15 +73,18 @@ function createHandler({ store, verifyToken, getConfig }) {
         return;
       }
       const subscription = validateSubscription(body.subscription);
-      await store.save(subscriptionId(subscription.endpoint), { uid: identity.uid, origin, agendaUrl: agendaUrl(body.scope, origin), subscription, updatedAt: Date.now() });
-      response.json({ registered: true });
+      const transport = body.transport === 'fcm' ? 'fcm' : 'webpush';
+      const fcmToken = transport === 'fcm' ? body.fcmToken : '';
+      if (transport === 'fcm' && (typeof fcmToken !== 'string' || fcmToken.length < 30 || fcmToken.length > 4096 || !/^[A-Za-z0-9_:\-]+$/.test(fcmToken))) throw failure('El token FCM no es válido.');
+      await store.save(subscriptionId(subscription.endpoint), { uid: identity.uid, origin, agendaUrl: agendaUrl(body.scope, origin), subscription, transport, fcmToken, updatedAt: Date.now() });
+      response.json({ registered: true, transport });
     } catch (error) {
       response.status(error.status || 503).json({ error: error.status ? error.message : 'El servicio de avisos no está disponible. Reintenta más tarde.' });
     }
   };
 }
 
-async function sendPublication({ publication, previous, current, store, send }) {
+async function sendPublication({ publication, previous, current, store, send, sendDevice }) {
   const fingerprint = value => String(value?.dataHash || value?.clientPublishedAt || '');
   const hash = fingerprint(publication);
   if (!hash || hash === fingerprint(previous) || hash !== fingerprint(current)) return { sent: 0, skipped: true };
@@ -91,11 +94,13 @@ async function sendPublication({ publication, previous, current, store, send }) 
     for (const record of batch) {
       if (record.lastPublicationHash === hash) continue;
       try {
-        await send(record.subscription, JSON.stringify({ title: 'Agenda Móvil actualizada', body: `${Number(publication.count) || 0} eventos disponibles. Abre la agenda para consultar la información actual.`, tag: 'rpt-publication', url: record.agendaUrl }));
+        const payload = { title: 'Agenda Móvil actualizada', body: `${Number(publication.count) || 0} eventos disponibles. Abre la agenda para consultar la información actual.`, kind: 'technical', tag: 'rpt-publication', url: record.agendaUrl };
+        if (sendDevice) await sendDevice(record, payload);
+        else await send(record.subscription, JSON.stringify(payload));
         await store.delivered(record.id, hash);
         sent++;
       } catch (error) {
-        if ([400, 404, 410].includes(error.statusCode)) await store.expire(record.id);
+        if ([400, 404, 410].includes(error.statusCode) || ['messaging/registration-token-not-registered', 'messaging/invalid-registration-token'].includes(error.code)) await store.expire(record.id);
         else failed++;
       }
     }

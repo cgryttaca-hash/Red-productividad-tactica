@@ -1,0 +1,219 @@
+{
+  "fecha_entrega": "2026-10-29",
+  "zona_confirmada": "America/Bogota",
+  "base": "Red-productividad-tactica-main-Agendas-PWA.zip",
+  "archivos_aplicacion": 133,
+  "identicos": 93,
+  "modificados": 13,
+  "nuevos": 27,
+  "eliminados": 0,
+  "sintaxis_correcta": 47,
+  "referencias_locales_existentes": 145,
+  "checks": [
+    {
+      "prueba": "Cálculo exacto a −15 minutos, America/Bogota, medianoche y rechazo de fechas/horas imposibles o ambiguas",
+      "resultado": "PASS",
+      "grupo": "pruebas-alimentacion.json"
+    },
+    {
+      "prueba": "Datos reales de empresa/servicio/salón; sin horario general de respaldo, sin alertas de cancelados o sin alimentación",
+      "resultado": "PASS",
+      "grupo": "pruebas-alimentacion.json"
+    },
+    {
+      "prueba": "Repositorio transaccional y coordinador: tarea exacta, concurrencia segura, prioridad alta, registro de aceptación y una solicitud por dispositivo",
+      "resultado": "PASS",
+      "grupo": "pruebas-alimentacion.json"
+    },
+    {
+      "prueba": "Reprogramación, cancelación, retirada de alimentación, reactivación con generación nueva y rechazo de tareas viejas o vencidas",
+      "resultado": "PASS",
+      "grupo": "pruebas-alimentacion.json"
+    },
+    {
+      "prueba": "Resultado desconocido sin reenvío ciego; reintento solo tras rechazo explícito; tokens inválidos retirados, horizonte de tareas y bloques obsoletos rechazados",
+      "resultado": "PASS",
+      "grupo": "pruebas-alimentacion.json"
+    },
+    {
+      "prueba": "Proveedor FCM data-only sin doble visualización automática, TTL/urgencia correctos y compatibilidad Web Push con VAPID solo en backend",
+      "resultado": "PASS",
+      "grupo": "pruebas-alimentacion.json"
+    },
+    {
+      "prueba": "Generación sin mutaciones, fechas estables, cero asistentes, horarios exactos, multilínea y exclusión de datos internos",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Campos ausentes y horarios ambiguos sin datos inventados ni secciones opcionales vacías",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Selección única por identificador; rechazo de registros borrados o ambiguos y compatibilidad con fechas del render original",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Validación push: proveedores HTTPS, claves y ámbito; rechazo de destinos internos, falsos proveedores y orígenes ajenos",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Construcción real del mensaje Web Push: cifrado aes128gcm y autenticación VAPID, sin enviar a una red externa",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "API autenticada: alta idempotente, estado, baja, permisos por sesión y CORS; sin duplicar suscripciones",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Envío por publicación: omite versiones antiguas y entregadas, y elimina suscripciones expiradas 410",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Backend Firebase cargado con dependencias reales y cuatro funciones exportadas",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Handlers push estándar y FCM: solicitud de visualización y navegación limitada al ámbito de la aplicación",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Manifiestos instalables con identidades estables e iconos PNG de dimensiones correctas",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Worker: precarga completa de rutas existentes, primera activación y actualización en espera; limpieza limitada a sus cachés",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Worker: versiones de recursos coherentes, datos públicos actualizados desde red y aceptación explícita de actualización",
+      "resultado": "PASS",
+      "grupo": "pruebas-core.json"
+    },
+    {
+      "prueba": "Regresión comparativa: filtros y datos de Eventos, fechas/coworking de Minuta y vistas/filtros/detalle de Agenda Móvil idénticos",
+      "resultado": "PASS",
+      "grupo": "pruebas-browser.json"
+    },
+    {
+      "prueba": "Agenda desde el evento correcto: modal, copia real en texto y HTML, saltos de línea y registro original sin alteraciones",
+      "resultado": "PASS",
+      "grupo": "pruebas-browser.json"
+    },
+    {
+      "prueba": "Datos actuales al copiar y alternativa manual con texto seleccionado cuando el portapapeles está bloqueado",
+      "resultado": "PASS",
+      "grupo": "pruebas-browser.json"
+    },
+    {
+      "prueba": "Nuevo módulo Agendas: lista compartida, búsqueda, fecha e impresión aislada del evento seleccionado",
+      "resultado": "PASS",
+      "grupo": "pruebas-browser.json"
+    },
+    {
+      "prueba": "Importación XLSX real: cinco identificadores originales únicos, hoja mensual y generación del evento correcto después de cargar el archivo",
+      "resultado": "PASS",
+      "grupo": "pruebas-browser.json"
+    },
+    {
+      "prueba": "40 revisiones de pantalla y cinco tamaños del modal sin desbordamiento; cuatro módulos principales y secciones retiradas ausentes",
+      "resultado": "PASS",
+      "grupo": "pruebas-browser.json"
+    },
+    {
+      "prueba": "PWA real: instalación del único worker, recursos versionados y manifest cacheados; Agenda Móvil visible con datos offline y mantenimiento vigente respetado",
+      "resultado": "PASS",
+      "grupo": "pruebas-browser.json"
+    },
+    {
+      "prueba": "Sin excepciones JavaScript ni recursos locales inexistentes en la prueba principal",
+      "resultado": "PASS",
+      "grupo": "pruebas-browser.json"
+    },
+    {
+      "prueba": "Cliente push con API controlada: permiso solo tras clic real, suscripción única y estado activo solo con confirmación del servidor",
+      "resultado": "PASS",
+      "grupo": "pruebas-compatibilidad.json"
+    },
+    {
+      "prueba": "Cliente push: error de registro sin falso activo, baja real en el flujo controlado y permiso denegado sin solicitudes automáticas",
+      "resultado": "PASS",
+      "grupo": "pruebas-compatibilidad.json"
+    },
+    {
+      "prueba": "WebKit: instrucciones de instalación en perfiles iPhone y iPad con identificación de escritorio; acceso instalado detectado por capacidades",
+      "resultado": "PASS",
+      "grupo": "pruebas-compatibilidad.json"
+    },
+    {
+      "prueba": "WebKit: agenda instalada simulada, consulta, detalle, campos sin zoom, modal Agendas y copia/fallback sin excepciones",
+      "resultado": "PASS",
+      "grupo": "pruebas-compatibilidad.json"
+    },
+    {
+      "prueba": "19 recursos de identidad reales; dimensiones e ICO válidos; símbolo maskable en círculo seguro; manifiesto y caché coherentes; 14 archivos operativos protegidos idénticos",
+      "resultado": "PASS",
+      "grupo": "pruebas-premium.json"
+    },
+    {
+      "prueba": "Carga inicial: una lectura de bloques y un listener, sin consulta meta duplicada; refresco sin reconstruir tarjetas; reutilización de bloques idénticos y copia guardada identificada",
+      "resultado": "PASS",
+      "grupo": "pruebas-premium.json"
+    },
+    {
+      "prueba": "FCM controlado: getToken con VAPID y el único worker existente, persistencia en backend, renovación y deleteToken al desactivar",
+      "resultado": "PASS",
+      "grupo": "pruebas-premium.json"
+    },
+    {
+      "prueba": "Respaldo local: alimentación única con datos reales recientes; suprimida con push activo, datos guardados, empresa ausente, cancelación o alerta vencida",
+      "resultado": "PASS",
+      "grupo": "pruebas-premium.json"
+    },
+    {
+      "prueba": "Worker e IndexedDB reales: dos solicitudes concurrentes provocan una solicitud de visualización; alimentación vencida y aviso de finalización descartados",
+      "resultado": "PASS",
+      "grupo": "pruebas-premium.json"
+    }
+  ],
+  "impresion": [
+    {
+      "modulo": "minuta",
+      "pagina": "1",
+      "pixeles": "idénticos",
+      "sha256": "443fc434a8d220dbe345ecc4d39a3e2af0e9a931359316aa37c5c5c86c9836bb"
+    },
+    {
+      "modulo": "eventos",
+      "pagina": "1",
+      "pixeles": "idénticos",
+      "sha256": "2dc06d7188c168ecf2d4b272d4241417007b5f080ae516be77a60bf734473450"
+    }
+  ],
+  "lecturas": {
+    "baseline": {
+      "eventos_meta/mantenimiento": 1,
+      "eventos_meta/publicacion": 1,
+      "eventos_meta/agenda_chunk_0000": 2
+    },
+    "premium": {
+      "eventos_meta/mantenimiento": 1,
+      "eventos_meta/agenda_chunk_0000": 1
+    },
+    "scope": "Carga inicial con cinco eventos, un bloque y Firebase controlado"
+  },
+  "despliegue_real": false,
+  "dispositivos_fisicos_probados": [],
+  "vapid_real_configurado": false,
+  "nota": "Las pruebas de proveedores y de Firestore usan servicios controlados. Aceptado por proveedor no equivale a recibido. No se modificó producción."
+}

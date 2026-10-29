@@ -34,6 +34,15 @@ const normalize=value=>text(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'
 const esc=value=>text(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
 const chunkId=index=>`${CHUNK_PREFIX}${String(index).padStart(4,'0')}`;
 const FILTER_KEY='rptAgendaFiltersV1';
+const pendingChunks=new Map();
+const chunkCache=new Map();
+let latestPublication='';
+function freshness(live){
+  window.__RPT_AGENDA_FRESHNESS__={live:Boolean(live&&navigator.onLine),checkedAt:Date.now()};
+  state._lastRefreshAt=Date.now();
+  setConnection(window.__RPT_AGENDA_FRESHNESS__.live?'Sincronización activa':'Última agenda guardada',window.__RPT_AGENDA_FRESHNESS__.live);
+  updateHeader();
+}
 function readFilters(){try{return JSON.parse(localStorage.getItem(FILTER_KEY)||'null')||{};}catch(_){return{};}}
 function saveFilters(){
   const value={
@@ -247,7 +256,7 @@ function setNotice(message,type=''){
   notice.textContent=message||'';
 }
 function updateHeader(){
-  $('mobileUpdatedAt').textContent=state.updatedAt?relativeTime(state.updatedAt):'Esperando actualización';
+  $('mobileUpdatedAt').textContent=state.updatedAt?`${window.__RPT_AGENDA_FRESHNESS__?.live?'':'Copia guardada · '}${relativeTime(state.updatedAt)}`:'Esperando actualización';
 }
 function filteredEvents(){
   const query=normalize($('mobileSearch').value).toLowerCase();
@@ -366,7 +375,7 @@ function closeDetail(){
   document.body.style.overflow='';
 }
 
-async function applyEvents(events,updatedAt,notify=true,cloudHash=''){
+async function applyEvents(events,updatedAt,notify=true,cloudHash='',live=true){
   const normalized=events.map(eventFromRow).filter(event=>event.fechaISO);
   const nextHash=dataHash(normalized);
   const changed=Boolean(state.lastHash&&nextHash!==state.lastHash);
@@ -374,13 +383,18 @@ async function applyEvents(events,updatedAt,notify=true,cloudHash=''){
   state.lastHash=nextHash;
   state.cloudHash=cloudHash||state.cloudHash;
   state.updatedAt=updatedAt||state.updatedAt;
-  await cacheSet({
+  freshness(live);
+  const renderKey=JSON.stringify(normalized);
+  window.__RPT_AGENDA_ALERT_EVENTS__=events;
+  if(!changed&&state._renderedHash===renderKey){updateHeader();return;}
+  state._renderedHash=renderKey;
+  cacheSet({
     events:state.all,
+    alertEvents:events,
     updatedAt:state.updatedAt,
     hash:state.lastHash,
     cloudHash:state.cloudHash
   });
-  setConnection('Sincronización activa',true);
   setNotice(changed&&notify?'La agenda recibió una actualización automática.':'',changed?'success':'');
   if(changed&&notify){
     import('./notifications.js').then(module=>module.showNotification(
@@ -393,52 +407,68 @@ async function applyEvents(events,updatedAt,notify=true,cloudHash=''){
   window.dispatchEvent(new CustomEvent('rptAgendaDataReady',{detail:{events:state.all,updatedAt:state.updatedAt}}));
   render();
 }
-async function loadChunks(meta,notify=false){
+async function loadChunks(meta,notify=false,live=true){
   const count=Number(meta?.chunkCount)||0;
   if(!count)return false;
   const expectedCount=Number(meta?.count)||0;
-  if(meta.dataHash&&state.cloudHash===meta.dataHash&&state.all.length===expectedCount){
+  const publication=`${meta.dataHash||''}:${count}:${expectedCount}`;
+  latestPublication=publication;
+  if(meta.dataHash&&state.cloudHash===meta.dataHash&&state.all.length===expectedCount&&window.__RPT_AGENDA_ALERT_EVENTS__?.length===expectedCount){
     state.updatedAt=meta.publishedAt||meta.clientPublishedAt||state.updatedAt;
-    setConnection('Sincronización activa',true);
-    render();
+    freshness(live);
     return true;
   }
+  if(pendingChunks.has(publication)){const pending=pendingChunks.get(publication);pending.live=pending.live||live;return pending.promise;}
+  const pending={live,promise:null};
+  const loading=(async()=>{
   const docs=await Promise.all(
-    Array.from({length:count},(_,index)=>
-      state.sdk.fireMod.getDoc(state.sdk.fireMod.doc(state.db,META_COLLECTION,chunkId(index)))
-    )
+    Array.from({length:count},async(_,index)=>{
+      const expectedHash=meta.chunkHashes?.[index];
+      const cached=chunkCache.get(index);
+      if(expectedHash&&cached?.chunkHash===expectedHash)return{exists:()=>true,data:()=>({...cached,dataHash:meta.dataHash})};
+      return state.sdk.fireMod.getDoc(state.sdk.fireMod.doc(state.db,META_COLLECTION,chunkId(index)));
+    })
   );
   const events=[];
-  docs.forEach(snapshot=>{
-    if(snapshot.exists()&&Array.isArray(snapshot.data()?.events))events.push(...snapshot.data().events);
+  docs.forEach((snapshot,index)=>{
+    const block=snapshot.data();
+    if(!snapshot.exists()||!Array.isArray(block?.events)||(block.dataHash&&block.dataHash!==meta.dataHash)||(meta.chunkHashes?.[index]&&block.chunkHash!==meta.chunkHashes[index]))throw new Error('La publicación está cambiando. Se volverá a consultar.');
+    events.push(...block.events);
+    if(block.chunkHash)chunkCache.set(index,{chunkHash:block.chunkHash,events:block.events});
   });
-  if(!events.length&&expectedCount>0)throw new Error('La publicación no contiene bloques de datos.');
+  if(events.length!==expectedCount)throw new Error('La publicación no contiene todos los eventos.');
+  if(latestPublication!==publication)return true;
   await applyEvents(
     events,
     meta.publishedAt||meta.clientPublishedAt,
     notify,
-    meta.dataHash||''
+    meta.dataHash||'',pending.live
   );
   return true;
+  })().finally(()=>pendingChunks.delete(publication));
+  pending.promise=loading;
+  pendingChunks.set(publication,pending);
+  return loading;
 }
-async function loadLegacyCollection(notify=false){
+async function loadLegacyCollection(notify=false,live=true){
   const snapshot=await state.sdk.fireMod.getDocs(state.sdk.fireMod.collection(state.db,EVENTS_COLLECTION));
   const events=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
-  await applyEvents(events,state.updatedAt,notify,`legacy:${events.length}`);
+  await applyEvents(events,state.updatedAt,notify,`legacy:${events.length}`,live&&!snapshot.metadata?.fromCache);
 }
 async function refreshFromCloud({notify=false,force=false}={}){
   if(state.refreshing||!state.db)return;
   state.refreshing=true;
   try{
-    const metaSnap=await state.sdk.fireMod.getDoc(state.sdk.fireMod.doc(state.db,META_COLLECTION,'publicacion'));
+    const read=state.sdk.fireMod.getDocFromServer||state.sdk.fireMod.getDoc;
+    const metaSnap=await read(state.sdk.fireMod.doc(state.db,META_COLLECTION,'publicacion'));
     const meta=metaSnap.exists()?metaSnap.data():{};
     state.meta=meta;
-    if(force)state.cloudHash='';
     const loaded=await loadChunks(meta,notify);
     if(!loaded)await loadLegacyCollection(notify);
     if(!state.all.length)setNotice('Todavía no se han publicado eventos desde el equipo principal.','');
   }catch(error){
     console.warn('Agenda refresh:',error);
+    freshness(false);
     setConnection('Reintentando conexión…',false);
     const cached=await cacheGet();
     if(cached?.events?.length){
@@ -465,8 +495,10 @@ async function initializeFirebase(){
     state.lastHash=cached.hash||dataHash(cached.events);
     state.cloudHash=cached.cloudHash||'';
     window.__RPT_AGENDA_EVENTS__=state.all;
+    window.__RPT_AGENDA_ALERT_EVENTS__=cached.alertEvents||[];
     window.dispatchEvent(new CustomEvent('rptAgendaDataReady',{detail:{events:state.all,updatedAt:state.updatedAt}}));
     render();
+    freshness(false);
   }
   try{
     const [appMod,authMod,fireMod]=await Promise.all([
@@ -484,32 +516,35 @@ async function initializeFirebase(){
       try{await authMod.signInAnonymously(state.auth);}catch(error){console.warn('Anonymous auth:',error);}
     }
     const metaRef=fireMod.doc(state.db,META_COLLECTION,'publicacion');
-    state.metaUnsubscribe=fireMod.onSnapshot(metaRef,async snapshot=>{
+    let firstSnapshot=false;
+    const initialFallback=setTimeout(()=>{if(!firstSnapshot)refreshFromCloud();},8000);
+    state.initialFallback=initialFallback;
+    state.metaUnsubscribe=fireMod.onSnapshot(metaRef,{includeMetadataChanges:true},async snapshot=>{
+      firstSnapshot=true;
+      clearTimeout(initialFallback);
       const meta=snapshot.exists()?snapshot.data():{};
       state.meta=meta;
       try{
-        const loaded=await loadChunks(meta,true);
-        if(!loaded)await loadLegacyCollection(true);
+        const loaded=await loadChunks(meta,true,!snapshot.metadata?.fromCache);
+        if(!loaded)await loadLegacyCollection(true,!snapshot.metadata?.fromCache);
       }catch(error){
         console.warn('Realtime agenda:',error);
+        freshness(false);
         refreshFromCloud({notify:true,force:true});
       }
     },error=>{
       console.warn('Meta listener:',error);
       refreshFromCloud();
     });
-    await refreshFromCloud();
     state.fallbackTimer=setInterval(()=>{
       if(!document.hidden)refreshFromCloud();
     },FALLBACK_INTERVAL_MS);
-    window.addEventListener('focus',()=>{if(Date.now()-(state._lastRefreshAt||0)>60000)refreshFromCloud();},{passive:true});
-    document.addEventListener('visibilitychange',()=>{
-      if(!document.hidden&&Date.now()-(state._lastRefreshAt||0)>60000)refreshFromCloud();
-    });
   }catch(error){
     console.error('Firebase móvil:',error);
     setConnection('Firebase no pudo iniciar',false);
     setNotice('No fue posible iniciar la agenda. Se volverá a intentar automáticamente.','error');
+    state.initialized=false;
+    setTimeout(initializeFirebase,30000);
   }
 }
 
@@ -565,10 +600,17 @@ window.addEventListener('rptAgendaReminder',event=>{
   const message=event.detail?.message||'';
   if(message)setNotice(message,'success');
 });
+window.addEventListener('offline',()=>freshness(false));
+window.addEventListener('online',()=>refreshFromCloud());
+window.addEventListener('focus',()=>{if(Date.now()-(state._lastRefreshAt||0)>60000)refreshFromCloud();},{passive:true});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-(state._lastRefreshAt||0)>60000)refreshFromCloud();});
+window.addEventListener('pageshow',event=>{if(event.persisted&&!state.metaUnsubscribe){state.initialized=false;initializeFirebase();}});
 window.addEventListener('pagehide',()=>{
   state.metaUnsubscribe?.();
+  state.metaUnsubscribe=null;
   clearInterval(state.fallbackTimer);
-},{once:true});
+  clearTimeout(state.initialFallback);
+});
 
 const savedFilters=readFilters();
 if(savedFilters.floor&&$('mobileFloorFilter'))$('mobileFloorFilter').value=savedFilters.floor;

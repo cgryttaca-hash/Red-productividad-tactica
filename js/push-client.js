@@ -4,6 +4,34 @@ import { FIREBASE_CONFIG } from './firebase-config.js';
 const SDK = 'https://www.gstatic.com/firebasejs/12.16.0';
 let authPromise;
 let enabling;
+let messagingPromise;
+let configurationPromise;
+
+async function configuration() {
+  if (!configurationPromise) configurationPromise = request('/config').catch(error => { configurationPromise = null; throw error; });
+  return configurationPromise;
+}
+
+async function messagingContext() {
+  if (!messagingPromise) messagingPromise = (async () => {
+    const [appModule, messagingModule] = await Promise.all([import(`${SDK}/firebase-app.js`), import(`${SDK}/firebase-messaging.js`)]);
+    if (!await messagingModule.isSupported()) return null;
+    const app = appModule.getApps().length ? appModule.getApps()[0] : appModule.initializeApp(FIREBASE_CONFIG);
+    return { messaging: messagingModule.getMessaging(app), messagingModule };
+  })().catch(error => { messagingPromise = null; throw error; });
+  return messagingPromise;
+}
+
+async function subscriptionBody(worker, settings) {
+  let fcmToken = '';
+  if (settings.fcmEnabled) {
+    const context = await messagingContext();
+    if (context) fcmToken = await context.messagingModule.getToken(context.messaging, { vapidKey: settings.publicKey, serviceWorkerRegistration: worker });
+  }
+  const subscription = await worker.pushManager.getSubscription();
+  if (!subscription) throw new Error('El navegador no confirmó una suscripción push.');
+  return { subscription: subscription.toJSON(), scope: worker.scope, transport: fcmToken ? 'fcm' : 'webpush', ...(fcmToken ? { fcmToken } : {}) };
+}
 
 export function pushCapabilities() {
   return { secure: window.isSecureContext, notifications: 'Notification' in window, serviceWorker: 'serviceWorker' in navigator, push: 'PushManager' in window, installed: window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true };
@@ -66,7 +94,8 @@ export async function inspectPush({ synchronize = false } = {}) {
   const worker = await registration();
   const subscription = await worker.pushManager.getSubscription();
   if (!subscription || permission !== 'granted') return { state: permission === 'denied' ? 'denied' : 'inactive', permission, subscribed: false, registered: false };
-  const value = await request(synchronize ? '/subscriptions' : '/status', { method: 'POST', token: await token(), body: synchronize ? { subscription: subscription.toJSON(), scope: worker.scope } : { endpoint: subscription.endpoint } });
+  const body = synchronize ? await subscriptionBody(worker, await configuration()) : { endpoint: subscription.endpoint };
+  const value = await request(synchronize ? '/subscriptions' : '/status', { method: 'POST', token: await token(), body });
   return { state: value.registered ? 'active' : 'unregistered', permission, subscribed: true, registered: value.registered === true };
 }
 
@@ -78,8 +107,8 @@ export function enablePush() {
   const permission = Notification.permission === 'default' ? Notification.requestPermission() : Promise.resolve(Notification.permission);
   enabling = (async () => {
     if (await permission !== 'granted') throw new Error('El navegador no autorizó las notificaciones. Puedes cambiar el permiso en los ajustes del sitio.');
-    const configuration = await request('/config');
-    const key = applicationKey(configuration.publicKey);
+    const settings = await configuration();
+    const key = applicationKey(settings.publicKey);
     const worker = await registration();
     let subscription = await worker.pushManager.getSubscription();
     if (subscription?.options?.applicationServerKey && String(new Uint8Array(subscription.options.applicationServerKey)) !== String(key)) {
@@ -88,9 +117,9 @@ export function enablePush() {
       subscription = null;
     }
     if (!subscription) subscription = await worker.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: key });
-    const value = await request('/subscriptions', { method: 'POST', token: await token(), body: { subscription: subscription.toJSON(), scope: worker.scope } });
+    const value = await request('/subscriptions', { method: 'POST', token: await token(), body: await subscriptionBody(worker, settings) });
     if (value.registered !== true) throw new Error('La suscripción existe en el navegador pero no quedó confirmada por el servidor.');
-    return { state: 'active', permission: 'granted', subscribed: true, registered: true };
+    return { state: 'active', permission: 'granted', subscribed: true, registered: true, transport: value.transport };
   })().finally(() => { enabling = null; });
   return enabling;
 }
@@ -100,7 +129,12 @@ export async function disablePush() {
   const subscription = await worker.pushManager.getSubscription();
   if (subscription) {
     await request('/subscriptions', { method: 'DELETE', token: await token(), body: { endpoint: subscription.endpoint } });
-    if (!await subscription.unsubscribe()) throw new Error('El navegador no confirmó la desactivación. Comprueba el permiso del sitio.');
+    const settings = await configuration();
+    if (settings.fcmEnabled) {
+      const context = await messagingContext();
+      if (context) await context.messagingModule.deleteToken(context.messaging);
+    }
+    if (await worker.pushManager.getSubscription() && !await subscription.unsubscribe()) throw new Error('El navegador no confirmó la desactivación. Comprueba el permiso del sitio.');
   }
   return { state: 'inactive', subscribed: false, registered: false };
 }

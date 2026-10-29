@@ -46,7 +46,7 @@ function updateUI(){
     setRow('agendaNotifyStatus',false,'Permiso bloqueado. Activa Notificaciones para este sitio desde la configuración del navegador.');
     $('agendaNotifyButton').textContent='Revisar permiso de notificaciones';
   }else{
-    setRow('agendaNotifyStatus',false,'Autoriza los recordatorios de alimentación, finalización y agenda del día siguiente mientras la aplicación está abierta.');
+    setRow('agendaNotifyStatus',false,'Autoriza las alertas de alimentación y los avisos de actualización de la agenda.');
     $('agendaNotifyButton').hidden=false;
     $('agendaNotifyButton').textContent='Activar notificaciones';
   }

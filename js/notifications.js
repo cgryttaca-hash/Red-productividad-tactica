@@ -10,14 +10,15 @@ export async function requestNotificationPermission(){
   setNotificationSettings({enabled});
   return permission;
 }
-export async function showNotification(title,body,{tag='rpt-update',url='./agenda_movil.html',renotify=false}={}){
+export async function showNotification(title,body,{tag='rpt-update',url='./agenda_movil.html',renotify=false,data={}}={}){
   const settings=read();
   if(!settings.enabled||!('Notification'in window)||Notification.permission!=='granted')return false;
   const registration=await navigator.serviceWorker?.getRegistration?.();
   if(registration?.active){
-    registration.active.postMessage({type:'SHOW_NOTIFICATION',payload:{title,body,tag,renotify,data:{url}}});
+    registration.active.postMessage({type:'SHOW_NOTIFICATION',payload:{title,body,tag,renotify,data:{url,...data}}});
     return true;
   }
+  if(data.kind==='food')return false;
   try{new Notification(title,{body,tag,renotify,icon:'./assets/icon-192.png'});return true;}catch(_){return false;}
 }
 function excelMessage(detail={}){

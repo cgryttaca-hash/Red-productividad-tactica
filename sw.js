@@ -1,10 +1,25 @@
-const CACHE='rpt-shell-20261028-agendas-pwa-v1';
+const CACHE='rpt-shell-20261028-agenda-premium-v2';
 const OFFLINE='./offline.html';
 const ASSETS=[
   "./",
   "./agenda_movil.html",
   "./agendas.html",
   "./agenda.webmanifest",
+  "./css/agenda-premium.css",
+  "./js/food-alerts-core.js",
+  "./assets/agenda-brand/logo-full-light.svg",
+  "./assets/agenda-brand/logo-full-dark.svg",
+  "./assets/agenda-brand/logo-symbol-dark.svg",
+  "./assets/agenda-brand/logo-small.svg",
+  "./assets/agenda-brand/favicon.svg",
+  "./assets/agenda-brand/favicon.ico",
+  "./assets/agenda-brand/apple-touch-icon.png",
+  "./assets/agenda-brand/icon-192.png",
+  "./assets/agenda-brand/icon-96.png",
+  "./assets/agenda-brand/badge-96.png",
+  "./assets/agenda-brand/icon-512.png",
+  "./assets/agenda-brand/icon-maskable-192.png",
+  "./assets/agenda-brand/icon-maskable-512.png",
   "./assets/icon-180.png",
   "./assets/icon-192.png",
   "./assets/icon-512.png",
@@ -124,14 +139,7 @@ self.addEventListener('message',event=>{
   if(event.data?.type==='SKIP_WAITING')self.skipWaiting();
   if(event.data?.type==='SHOW_NOTIFICATION'){
     const payload=event.data.payload||{};
-    self.registration.showNotification(payload.title||'Gestión de Eventos',{
-      body:payload.body||'La información fue actualizada.',
-      icon:'./assets/icon-192.png',
-      badge:'./assets/icon-192.png',
-      tag:payload.tag||'rpt-update',
-      renotify:Boolean(payload.renotify),
-      data:payload.data||{url:'./agenda_movil.html'}
-    });
+    event.waitUntil(displayNotification({...payload,...payload.data}));
   }
 });
 
@@ -143,16 +151,48 @@ function notificationUrl(value){
   return new URL('./agenda_movil.html',self.registration.scope).href;
 }
 
+async function claimFoodReceipt(payload) {
+  return new Promise(resolve=>{
+    const request=indexedDB.open('agenda-notification-receipts',1);
+    request.onupgradeneeded=()=>{const records=request.result.createObjectStore('food',{keyPath:'id'});records.createIndex('expiresOn','expiresOn');};
+    request.onerror=()=>resolve(false);
+    request.onsuccess=()=>{
+      const database=request.result;
+      const transaction=database.transaction('food','readwrite');
+      const records=transaction.objectStore('food');
+      let claimed=false;
+      const existing=records.get(payload.alertId);
+      existing.onsuccess=()=>{if(!existing.result){records.put({id:payload.alertId,expiresOn:Number(payload.foodAt)+86400000});claimed=true;}};
+      const expired=records.index('expiresOn').openCursor(IDBKeyRange.upperBound(Date.now()));
+      expired.onsuccess=()=>{const cursor=expired.result;if(cursor){cursor.delete();cursor.continue();}};
+      transaction.oncomplete=()=>{database.close();resolve(claimed);};
+      transaction.onerror=transaction.onabort=()=>{database.close();resolve(false);};
+    };
+  });
+}
+
+async function displayNotification(payload) {
+  if(['end','tomorrow','upcoming'].includes(payload.kind)||/^(end|tomorrow):/.test(payload.tag||''))return;
+  const isFood=payload.kind==='food';
+  if(isFood){
+    const now=Date.now();
+    const alertAt=Number(payload.alertAt),foodAt=Number(payload.foodAt),expiresAt=Number(payload.expiresAt);
+    if(typeof payload.alertId!=='string'||!payload.alertId.startsWith('food_')||![alertAt,foodAt,expiresAt].every(Number.isFinite)||foodAt-alertAt!==900000||expiresAt-alertAt!==45000||now<alertAt||now>expiresAt||now>=foodAt)return;
+    if(!await claimFoodReceipt(payload)||Date.now()>expiresAt)return;
+  }
+  const title=typeof payload.title==='string'?payload.title.slice(0,120):'Agenda de eventos';
+  const body=typeof payload.body==='string'?payload.body.slice(0,1000):'Hay información disponible en la agenda.';
+  return self.registration.showNotification(title,{
+    body,icon:'./assets/agenda-brand/icon-192.png',badge:'./assets/agenda-brand/badge-96.png',
+    tag:isFood?payload.alertId:typeof payload.tag==='string'?payload.tag.slice(0,100):'rpt-push-update',
+    data:{url:notificationUrl(payload.url),...(isFood?{alertId:payload.alertId,kind:'food'}:{})},renotify:false
+  });
+}
+
 self.addEventListener('push',event=>{
   let payload={};
   try{payload=event.data?.json()||{};}catch(_){}
-  const title=typeof payload.title==='string'?payload.title.slice(0,120):'Agenda de eventos';
-  const body=typeof payload.body==='string'?payload.body.slice(0,500):'Hay información disponible en la agenda.';
-  event.waitUntil(self.registration.showNotification(title,{
-    body,icon:'./assets/icon-192.png',badge:'./assets/icon-192.png',
-    tag:typeof payload.tag==='string'?payload.tag.slice(0,100):'rpt-push-update',
-    data:{url:notificationUrl(payload.url)},renotify:false
-  }));
+  event.waitUntil(displayNotification(payload.data&&typeof payload.data==='object'?payload.data:payload));
 });
 
 self.addEventListener('pushsubscriptionchange',event=>{

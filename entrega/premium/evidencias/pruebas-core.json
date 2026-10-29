@@ -1,0 +1,17 @@
+{
+  "passed": [
+    "Generación sin mutaciones, fechas estables, cero asistentes, horarios exactos, multilínea y exclusión de datos internos",
+    "Campos ausentes y horarios ambiguos sin datos inventados ni secciones opcionales vacías",
+    "Selección única por identificador; rechazo de registros borrados o ambiguos y compatibilidad con fechas del render original",
+    "Validación push: proveedores HTTPS, claves y ámbito; rechazo de destinos internos, falsos proveedores y orígenes ajenos",
+    "Construcción real del mensaje Web Push: cifrado aes128gcm y autenticación VAPID, sin enviar a una red externa",
+    "API autenticada: alta idempotente, estado, baja, permisos por sesión y CORS; sin duplicar suscripciones",
+    "Envío por publicación: omite versiones antiguas y entregadas, y elimina suscripciones expiradas 410",
+    "Backend Firebase cargado con dependencias reales y cuatro funciones exportadas",
+    "Handlers push estándar y FCM: solicitud de visualización y navegación limitada al ámbito de la aplicación",
+    "Manifiestos instalables con identidades estables e iconos PNG de dimensiones correctas",
+    "Worker: precarga completa de rutas existentes, primera activación y actualización en espera; limpieza limitada a sus cachés",
+    "Worker: versiones de recursos coherentes, datos públicos actualizados desde red y aceptación explícita de actualización"
+  ],
+  "note": "La API usa almacén y tokens controlados en estas pruebas. Se comprueba cifrado real, sin envío a APNs/FCM ni credenciales productivas."
+}

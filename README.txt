@@ -1,3 +1,10 @@
+GESTIÓN DE EVENTOS — AGENDA MÓVIL PREMIUM
+Actualización vigente: LEER_PRIMERO_AGENDA_PREMIUM.md
+Informe y despliegue: entrega/premium/
+La documentación que sigue corresponde a la entrega anterior conservada
+como historial. La versión premium amplía FCM, programación de alimentación
+y diseño móvil; su despliegue real requiere completar la guía vigente.
+
 GESTIÓN DE EVENTOS — AGENDAS Y PWA MULTIPLATAFORMA
 Entrega: 28 de octubre de 2026
 
