@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es" class="auth-pending maintenance-pending" data-auth-page="protected" data-maintenance-page="minuta" data-visual-theme="premium">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10283f">
+  <title>Compartir Minuta</title>
+  <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/auth-guard.js?v=20260801-1600"></script>
+  <script type="module" src="js/maintenance-guard.js"></script>
+  <link rel="icon" type="image/svg+xml" href="assets/agenda-brand/favicon.svg">
+  <link rel="stylesheet" href="css/premium-system.css" media="screen">
+  <link rel="stylesheet" href="css/minuta-share.css">
+</head>
+<body>
+  <header class="share-header"><div><span>MINUTA DE EVENTOS</span><h1>Revisar y compartir</h1><p id="shareDate">Preparando la fecha…</p></div><button id="closeShare" type="button">Cerrar</button></header>
+  <main class="share-shell">
+    <p id="shareStatus" class="share-status" role="status" aria-live="polite">Generando una copia de impresión a color…</p>
+    <section id="shareControls" class="share-controls" hidden>
+      <div class="share-message"><label for="shareMessage">Mensaje preparado · hora de Colombia</label><textarea id="shareMessage" readonly rows="4"></textarea><div class="share-actions"><button id="nativeShare" type="button" hidden>Compartir imágenes y texto</button><button id="copyMessage" type="button">Copiar mensaje</button><a id="openWhatsApp" href="https://wa.me/" target="_blank" rel="noopener noreferrer">Abrir WhatsApp con el texto</a></div></div>
+      <p id="shareHelp">Revisa el contenido y elige el chat o grupo. El sistema no envía mensajes automáticamente.</p>
+      <p id="coworkNotice">La imagen incluye todas las filas de Coworking, también las de otras fechas o sin fecha, igual que la impresión actual.</p>
+    </section>
+    <section id="shareImages" class="share-images" aria-label="Imágenes de la Minuta"></section>
+  </main>
+  <script src="js/minuta-time.js"></script>
+  <script type="module" src="js/minuta-share-preview.js"></script>
+</body>
+</html>

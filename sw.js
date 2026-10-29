@@ -1,6 +1,12 @@
-const CACHE='rpt-shell-20261029-pwa-premium-v3';
+const CACHE='rpt-shell-20261029-minuta-share-v5';
 const OFFLINE='./offline.html';
 const ASSETS=[
+  "./minuta_compartir.html",
+  "./css/minuta-share.css",
+  "./js/minuta-time.js",
+  "./js/minuta-raster.js",
+  "./js/minuta-share.js",
+  "./js/minuta-share-preview.js",
   "./css/premium-system.css",
   "./css/agenda-compact.css",
   "./js/pwa-context.js",

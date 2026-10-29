@@ -1,0 +1,99 @@
+{
+  "base": "Red-productividad-tactica-main-PWA-Corregida-Premium.zip",
+  "inputZipSHA256": "04d100d2a91ae6c832e745a05c94dd42fac44ea3fddad6f78cbe5d98ae1ed933",
+  "removed": [],
+  "originalFilesUnchanged": 297,
+  "modified": [
+    {
+      "file": "PROTECTED_MODULES.json",
+      "before": "b6fb9f40f1fbdeeb2d7e6c97a370527983c095408c5b7ecf6c724c656276c12c",
+      "sha256": "a3bb831d57226cc9f05796682a2f93a47634877ce00c284f1692636998b99849",
+      "bytes": 524
+    },
+    {
+      "file": "js/minuta.js",
+      "before": "5cf2f7fc3af195651be8b4595822b01762bd883da0f6876e3a7d56dc5c7b2933",
+      "sha256": "7cff23054925c8563d8314366aaf79e21f751dffffdf2dd1b5c9ebd43e098cdd",
+      "bytes": 23549
+    },
+    {
+      "file": "js/system-version.js",
+      "before": "bc47f106777d0b14181a8c676534d924c34e8e04c5d584221f7e3a612cb9b1eb",
+      "sha256": "51eefefc2e82ce44ba3ef175864f97de4bf57052448456145d86c5d2f20d3ec8",
+      "bytes": 806
+    },
+    {
+      "file": "minuta.html",
+      "before": "6bf152c3a8462a17216acc60affd963344db4c8b2b58c210111948dd755141ea",
+      "sha256": "dc3484aa3db5a901d65f1fa47c5724b002aee9e3346a02cf33f8d7c5911d047f",
+      "bytes": 7608
+    },
+    {
+      "file": "sw.js",
+      "before": "4f92fbdf644de0bc648dd2e4390db0df445de96fbf92d1d9f4d9ce45641b7d4b",
+      "sha256": "e17ada5bca922e59185bf31ce8fee3694bffadb53bc8e5da088e44837668457d",
+      "bytes": 8185
+    }
+  ],
+  "added": [
+    {
+      "file": "LEER_PRIMERO_MINUTA_WHATSAPP.md",
+      "sha256": "8ed37a690509d3f921b3fa825ceb62bee79fcf1aafcc0e86213367aa3d7cdfe1",
+      "bytes": 6847
+    },
+    {
+      "file": "css/minuta-share.css",
+      "sha256": "2ec5a8d8fc5ff6f2ac1111ddb1ca4dceb10343fc9a80f308de671d3a5d556662",
+      "bytes": 2791
+    },
+    {
+      "file": "entrega/minuta-whatsapp/INFORME.md",
+      "sha256": "56eb0a627adcd71b30bf9bb6bc2b6c3661dad19a284461422a2f643134766ed0",
+      "bytes": 7262
+    },
+    {
+      "file": "entrega/minuta-whatsapp/ejemplo-minuta.png",
+      "sha256": "e59550561ad00dc22d49bd0b3188a7333eca8a2578f51aab28cc64d22ea08ecc",
+      "bytes": 333686
+    },
+    {
+      "file": "entrega/minuta-whatsapp/pruebas.json",
+      "sha256": "da496dbbae4015d19a0a72167724b15c1a834bc8b212a68c063b3f5217a22b30",
+      "bytes": 9056
+    },
+    {
+      "file": "entrega/minuta-whatsapp/revision-compartir.png",
+      "sha256": "6e1a8d7fead99d31c22ce29a697d1c8d5683a26fb0405bf1610a1276137837c4",
+      "bytes": 137091
+    },
+    {
+      "file": "js/minuta-raster.js",
+      "sha256": "a90f8cf6cb2781a5649d8b4dd5539ef179a863659a246d1419ca0c03f36c673d",
+      "bytes": 12611
+    },
+    {
+      "file": "js/minuta-share-preview.js",
+      "sha256": "c896bdc93cead02e0f894c0370f6b111cd6d617b590ba247ac197eb77a71c1ce",
+      "bytes": 6584
+    },
+    {
+      "file": "js/minuta-share.js",
+      "sha256": "d91273338b2c5a9b1c76bbe583633e5764fe2fefe0f1b48fae11594f4454f8a3",
+      "bytes": 4488
+    },
+    {
+      "file": "js/minuta-time.js",
+      "sha256": "815b29200aa6589c755ea54fa6cc42707d0228658a31cbf3d07f94da0af25ee4",
+      "bytes": 3044
+    },
+    {
+      "file": "minuta_compartir.html",
+      "sha256": "432bd8fb65d71429f6d31c216ee8fb349323219152edf286709bb19e0383da71",
+      "bytes": 2204
+    }
+  ],
+  "inventoryFile": {
+    "file": "entrega/minuta-whatsapp/archivos.json",
+    "note": "Inventario sin huella de sí mismo para evitar una referencia circular. El ZIP se verifica por separado."
+  }
+}

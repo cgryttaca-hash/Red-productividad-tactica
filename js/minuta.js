@@ -353,14 +353,18 @@ function sortForMinute(a,b){
   return text(a.horario).localeCompare(text(b.horario), 'es', {sensitivity:'base', numeric:true});
 }
 
+function minuteEventsForDate(events, targetDate){
+  return events
+    .filter(evt => evt.fecha instanceof Date && evt.fecha.getTime() === targetDate.getTime())
+    .filter(evt => !isCancelled(evt.raw || evt))
+    .sort(sortForMinute);
+}
+
 function renderMinute(){
   const targetDate = startOfDay(selectedMinuteDate || addDays(new Date(), 1));
   selectedMinuteDate = targetDate;
 
-  tomorrowEvents = allEvents
-    .filter(evt => evt.fecha instanceof Date && evt.fecha.getTime() === targetDate.getTime())
-    .filter(evt => !isCancelled(evt.raw || evt))
-    .sort(sortForMinute);
+  tomorrowEvents = minuteEventsForDate(allEvents, targetDate);
 
   const segundo = tomorrowEvents.filter(e => e.piso === 'segundo').sort(sortForMinute);
   const zona = tomorrowEvents.filter(e => e.piso === 'zona').sort(sortForMinute);
@@ -432,16 +436,17 @@ function saveCoworking(){
 function loadCoworking(){
   const tbody = $('tbodyCoworking');
   const stored = localStorage.getItem(STORAGE_COWORK);
-  if(!stored) return;
+  if(!stored) return false;
   try{
     const rows = JSON.parse(stored);
-    if(!Array.isArray(rows) || !rows.length) return;
+    if(!Array.isArray(rows) || !rows.length) return false;
     tbody.innerHTML = '';
     rows.forEach(values => addCoworkRow(values));
-  }catch(error){ console.error(error); }
+    return true;
+  }catch(error){ console.error(error); return false; }
 }
 
-function addCoworkRow(values=[]){
+function addCoworkRow(values=null){
   const tbody = $('tbodyCoworking');
   const tr = document.createElement('tr');
   const labels = ['Fecha','Cliente','Hora inicio','Hora final','Escenario','PAX','Pago'];
@@ -450,7 +455,7 @@ function addCoworkRow(values=[]){
     const cell = document.createElement('td');
     cell.contentEditable = 'true';
     cell.dataset.label = label;
-    cell.textContent = values[index] || '';
+    cell.textContent = values ? (values[index] || '') : index === 0 ? window.RPTMinuteTime.displayDate(window.RPTMinuteTime.tomorrowISO()) : '';
     tr.appendChild(cell);
   });
 
@@ -462,6 +467,14 @@ function addCoworkRow(values=[]){
 }
 
 
+function minutePrintDensity(eventRows, coworkRows){
+  const totalRows = Math.max(1, eventRows + coworkRows);
+  if(totalRows > 18) return 'print-ultra';
+  if(totalRows > 13) return 'print-dense';
+  if(totalRows > 8) return 'print-compact';
+  return '';
+}
+
 function preparePrintFit(){
   const root = $('printRoot');
   if(!root) return;
@@ -471,14 +484,46 @@ function preparePrintFit(){
 
   const eventRows = document.querySelectorAll('.minute-events-table tbody tr').length;
   const coworkRows = document.querySelectorAll('#tbodyCoworking tr').length;
-  const totalRows = Math.max(1, eventRows + coworkRows);
-
-  // Ajuste por densidad: mantiene el reporte dentro de carta horizontal
-  // sin convertir la minuta en texto ilegible. Solo afecta impresión.
-  if(totalRows > 18) document.body.classList.add('print-ultra');
-  else if(totalRows > 13) document.body.classList.add('print-dense');
-  else if(totalRows > 8) document.body.classList.add('print-compact');
+  const density = minutePrintDensity(eventRows, coworkRows);
+  if(density) document.body.classList.add(density);
 }
+
+function createMinutePrintSnapshot(dateISO, generatedAt=Date.now()){
+  let source;
+  try{
+    const stored = localStorage.getItem(STORAGE_EVENTOS);
+    if(stored === null) throw new Error('missing');
+    source = JSON.parse(stored);
+    if(!Array.isArray(source)) throw new Error('invalid');
+  }catch(_){
+    throw new Error('No se pudieron leer los eventos guardados. Comprueba el Excel antes de compartir la Minuta.');
+  }
+  const targetDate = window.RPTMinuteTime.localDate(dateISO);
+  const events = minuteEventsForDate(source.map(normalizeEvent).filter(event => event.fecha), targetDate);
+  const clone = $('printRoot').cloneNode(true);
+  const second = events.filter(event => event.piso === 'segundo').sort(sortForMinute);
+  const third = events.filter(event => event.piso === 'tercero' || event.piso === 'zona').sort(sortForMinute);
+  for(const [id, rows] of [['listaSegundo', second], ['listaTercero', third]]){
+    clone.querySelector(`#${id}`).replaceChildren(rows.length ? renderEventsTable(rows) : createEmpty('Sin eventos programados para esta sección.'));
+  }
+  clone.querySelector('#badgeSegundo').textContent = `${second.length} eventos`;
+  clone.querySelector('#badgeTercero').textContent = `${third.length} eventos`;
+  clone.querySelector('#targetDateLabel').textContent = formatLongDate(targetDate).toUpperCase();
+  clone.querySelector('#minuteDatePicker').value = dateISO;
+  clone.querySelector('#summaryTotal').textContent = String(events.length);
+  clone.querySelector('#summaryPax').textContent = String(events.reduce((total, event) => total + (parseInt(event.pax, 10) || 0), 0));
+  clone.querySelector('#generatedAt').textContent = `Generado: ${new Date(generatedAt).toLocaleString('es-CO', {timeZone:window.RPTMinuteTime.TIME_ZONE})}`;
+  const coworkRows = clone.querySelectorAll('#tbodyCoworking tr').length;
+  if(!coworkRows){
+    const row = document.createElement('tr');
+    const cell = document.createElement('td'); cell.colSpan = 7; cell.textContent = 'Sin registros de Coworking.'; row.append(cell);
+    clone.querySelector('#tbodyCoworking').append(row);
+  }
+  const density = minutePrintDensity(events.length, Math.max(1, coworkRows));
+  return {node:clone, dateISO, generatedAt, eventCount:events.length, coworkRows, bodyClass:`printing-events ${density}`};
+}
+
+window.RPTMinuteExport = Object.freeze({snapshot:createMinutePrintSnapshot, notify:showToast});
 
 window.addEventListener('afterprint', () => {
   document.body.classList.remove('printing-events', 'print-compact', 'print-dense', 'print-ultra');
@@ -576,6 +621,7 @@ function bindEvents(){
       const rows = document.querySelectorAll('#tbodyCoworking tr');
       if(rows.length <= 1){
         event.target.closest('tr').querySelectorAll('[contenteditable="true"]').forEach(td => td.textContent = '');
+        event.target.closest('tr').querySelector('td[contenteditable="true"]').textContent = window.RPTMinuteTime.displayDate(window.RPTMinuteTime.tomorrowISO());
       } else {
         event.target.closest('tr').remove();
       }
@@ -600,7 +646,10 @@ function bindEvents(){
 document.addEventListener('DOMContentLoaded', () => {
   selectedMinuteDate = addDays(new Date(), 1);
   bindEvents();
-  loadCoworking();
+  if(!loadCoworking()){
+    $('tbodyCoworking').replaceChildren();
+    addCoworkRow();
+  }
   loadFromEventStorage(false);
   hideLoader();
 });
