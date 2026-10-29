@@ -1,9 +1,12 @@
+import { isInstalledContext } from './pwa-context.js';
 const KEY='rptNotificationsV1';
 function read(){try{return JSON.parse(localStorage.getItem(KEY)||'null')||{enabled:false,excel:true,mobile:true,maintenance:true};}catch(_){return{enabled:false,excel:true,mobile:true,maintenance:true};}}
 function write(value){localStorage.setItem(KEY,JSON.stringify(value));window.dispatchEvent(new CustomEvent('rptNotificationSettingsChanged',{detail:value}));return value;}
 export function getNotificationSettings(){return read();}
 export function setNotificationSettings(changes){return write({...read(),...changes});}
 export async function requestNotificationPermission(){
+  if(!isInstalledContext())throw new Error('Instala la aplicación y ábrela desde su icono para activar notificaciones. Puedes seguir utilizando el sitio en el navegador.');
+  if(!window.isSecureContext)throw new Error('Las notificaciones requieren abrir la aplicación mediante HTTPS.');
   if(!('Notification'in window))throw new Error('Este navegador no admite notificaciones.');
   const permission=await Notification.requestPermission();
   const enabled=permission==='granted';
@@ -11,6 +14,7 @@ export async function requestNotificationPermission(){
   return permission;
 }
 export async function showNotification(title,body,{tag='rpt-update',url='./agenda_movil.html',renotify=false,data={}}={}){
+  if(!isInstalledContext())return false;
   const settings=read();
   if(!settings.enabled||!('Notification'in window)||Notification.permission!=='granted')return false;
   const registration=await navigator.serviceWorker?.getRegistration?.();

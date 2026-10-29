@@ -9,6 +9,7 @@ const { onTaskDispatched } = require('firebase-functions/v2/tasks');
 const { onSchedule } = require('firebase-functions/v2/scheduler');
 const { defineSecret, defineString } = require('firebase-functions/params');
 const webPush = require('web-push');
+const { createECDH, randomUUID } = require('node:crypto');
 const { createHandler, failure, sendPublication } = require('./push-service');
 const { createFoodCoordinator } = require('./food-coordinator');
 const { createFoodStore, loadPublishedFeed } = require('./food-store');
@@ -21,9 +22,19 @@ const contact = defineString('PUSH_CONTACT', { default: '' });
 const origins = defineString('PUSH_ALLOWED_ORIGINS', { default: '' });
 const COLLECTION = 'agenda_push_subscriptions';
 
-function configuration() {
-  const value = { publicKey: publicKey.value(), privateKey: privateKey.value(), contact: contact.value(), origins: origins.value().split(',').map(origin => origin.trim()).filter(Boolean) };
-  if (!value.publicKey || !value.privateKey || !value.contact || !value.origins.length) throw new Error('Falta configurar Web Push.');
+function configuration(validate = true) {
+  const value = { publicKey: publicKey.value(), privateKey: privateKey.value(), contact: contact.value(), origins: origins.value().split(',').map(origin => origin.trim()).filter(Boolean), projectId: process.env.GCLOUD_PROJECT || process.env.GOOGLE_CLOUD_PROJECT || '' };
+  value.missing = [['PUSH_VAPID_PUBLIC_KEY', value.publicKey], ['PUSH_VAPID_PRIVATE_KEY', value.privateKey], ['PUSH_CONTACT', value.contact], ['PUSH_ALLOWED_ORIGINS', value.origins.length]].filter(([, configured]) => !configured).map(([name]) => name);
+  if (validate && value.missing.length) throw failure(`Falta configurar: ${value.missing.join(', ')}.`, 503);
+  if (!value.missing.length) {
+    try {
+      const key = createECDH('prime256v1'); key.setPrivateKey(Buffer.from(value.privateKey, 'base64url'));
+      if (key.getPublicKey().toString('base64url') !== value.publicKey.replace(/=+$/, '')) throw new Error('mismatch');
+    } catch (_) {
+      value.configurationError = 'El par VAPID del servidor no es válido o sus claves no coinciden.';
+      if (validate) throw failure(value.configurationError, 503);
+    }
+  }
   return value;
 }
 
@@ -41,7 +52,9 @@ function store() {
           const registered = await transaction.get(subscriptions.where('uid', '==', value.uid).limit(20));
           if (registered.size >= 20) throw failure('Se alcanzó el límite de dispositivos de esta sesión.', 429);
         }
-        transaction.set(reference, { ...value, createdAt: snapshot.exists ? snapshot.data().createdAt : Date.now() }, { merge: true });
+        const previous = snapshot.exists ? snapshot.data() : {};
+        const changed = previous.transport !== value.transport || previous.fcmToken !== value.fcmToken || JSON.stringify(previous.subscription) !== JSON.stringify(value.subscription);
+        transaction.set(reference, { ...value, createdAt: snapshot.exists ? previous.createdAt : Date.now(), ...(changed ? { lastTestStatus: 'not-tested', lastTestAt: 0, testClaim: '' } : {}) }, { merge: true });
       });
     },
     async remove(id, uid) {
@@ -64,11 +77,34 @@ function store() {
       }
     },
     async delivered(id, hash) { await subscriptions.doc(id).update({ lastPublicationHash: hash, lastAcceptedAt: Date.now() }); },
+    async claimTest(id, uid, timestamp) {
+      return database.runTransaction(async transaction => {
+        const reference = subscriptions.doc(id);
+        const snapshot = await transaction.get(reference);
+        if (!snapshot.exists || snapshot.data().uid !== uid) throw failure('La suscripción ya no pertenece a esta sesión.', 403);
+        const record = snapshot.data();
+        if (timestamp - Number(record.lastTestAt || 0) < 60000) {
+          if (record.lastTestStatus === 'accepted') return { cached: true };
+          throw failure('Espera un minuto antes de repetir la prueba de envío.', 429);
+        }
+        const claim = randomUUID();
+        transaction.update(reference, { testClaim: claim, lastTestAt: timestamp, lastTestStatus: 'requested' });
+        return { record: { id, ...record }, claim };
+      });
+    },
+    async completeTest(id, claim, result) {
+      await database.runTransaction(async transaction => {
+        const reference = subscriptions.doc(id);
+        const snapshot = await transaction.get(reference);
+        if (snapshot.exists && snapshot.data().testClaim === claim) transaction.update(reference, { lastTestStatus: result.status, lastTestResultAt: result.at, lastTestProviderId: result.providerId || '', lastTestCode: result.code || '' });
+      });
+      await database.collection('agenda_push_logs').add({ kind: 'device-test', subscriptionId: id, ...result, expiresOn: new Date(Date.now() + 30 * 86400000) });
+    },
     async expire(id) { await subscriptions.doc(id).delete(); }
   };
 }
 
-exports.agendaPush = onRequest({ region: 'us-central1', secrets: [privateKey], maxInstances: 3, timeoutSeconds: 30, cors: false }, (request, response) => createHandler({ store: store(), verifyToken: token => getAuth().verifyIdToken(token, true), getConfig: configuration })(request, response));
+exports.agendaPush = onRequest({ region: 'us-central1', secrets: [privateKey], maxInstances: 3, timeoutSeconds: 30, cors: false }, (request, response) => createHandler({ store: store(), verifyToken: token => getAuth().verifyIdToken(token, true), getConfig: () => configuration(false), sendDevice: (device, payload, options) => createDeviceSender({ messaging: getMessaging(), webPush, settings: configuration() })(device, payload, options) })(request, response));
 
 function coordinator() {
   const database = getFirestore();

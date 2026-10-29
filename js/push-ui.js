@@ -1,44 +1,70 @@
-import { disablePush, enablePush, inspectPush } from './push-client.js';
+import { enablePush, disablePush, inspectPush, preparePush, testPush } from './push-client.js';
+import { isInstalledContext } from './pwa-context.js';
 
 const status = document.getElementById('agendaPushStatus');
 const summary = document.getElementById('agendaPushSummary');
 const enableButton = document.getElementById('agendaEnablePush');
 const disableButton = document.getElementById('agendaDisablePush');
+const testButton = document.getElementById('agendaTestPush');
+const checkButton = document.getElementById('agendaCheckPush');
 let busy = false;
+let readiness;
+let lastCheck = 0;
 
-function show(value, error = false) {
+function show(value) {
   const descriptions = {
-    active: 'Dispositivo registrado para alertas de alimentación, 15 minutos antes del servicio (hora de Colombia). La recepción depende de la conexión y del dispositivo.',
-    inactive: 'Avisos en segundo plano desactivados. La agenda abierta puede mostrar alertas de alimentación cuando tiene datos recientes.',
-    unconfigured: 'Los avisos en segundo plano necesitan la configuración del servicio de envío. El permiso de notificaciones por sí solo no los activa.',
-    unregistered: 'Existe una suscripción en el navegador, pero el servicio de envío no la ha confirmado. Actívala de nuevo.',
-    denied: 'El permiso está bloqueado. Cámbialo en los ajustes del sitio o de la aplicación antes de activar los avisos.',
-    unsupported: 'Web Push no está disponible en este contexto. En iPhone o iPad, abre la aplicación añadida a Inicio en una versión compatible.'
+    'not-installed': 'Puedes consultar la agenda en este navegador. Para activar notificaciones, instala la aplicación y ábrela desde su icono.',
+    inactive: 'Notificaciones no activadas. Si quieres recibir alertas de alimentación, pulsa Activar notificaciones.',
+    configuring: 'Comprobando la configuración del servicio…',
+    active: 'Avisos activos: registro confirmado y envío aceptado por el servicio. La recepción depende de la conexión y del dispositivo.',
+    registered: 'Dispositivo registrado. Falta comprobar el envío: pulsa Enviar aviso de prueba.',
+    unregistered: 'Las notificaciones necesitan volver a activarse en este dispositivo.',
+    denied: 'Permiso bloqueado. Habilita Notificaciones para esta aplicación en los ajustes del navegador o del sistema y vuelve a abrirla.',
+    unsupported: 'Este contexto no admite notificaciones. En iPhone/iPad usa una PWA de Inicio y una versión compatible.',
+    unconfigured: 'El administrador debe conectar el servicio de avisos. La agenda sigue disponible.',
+    error: 'No fue posible comprobar los avisos. Puedes seguir consultando la agenda.'
   };
-  status.textContent = typeof value === 'string' ? value : descriptions[value.state] || 'No fue posible comprobar los avisos.';
-  summary.textContent = value.state === 'active' ? 'Avisos en segundo plano: activos' : 'Instalación y avisos';
-  status.classList.toggle('push-status-error', error);
-  if (typeof value !== 'string') disableButton.hidden = !value.subscribed;
-  if (typeof value !== 'string') {
-    window.__RPT_PUSH_STATUS__ = value;
-    window.dispatchEvent(new CustomEvent('rptPushStateChanged', { detail: value }));
-  }
+  window.__RPT_PUSH_STATUS__ = value;
+  status.textContent = `${descriptions[value.state] || descriptions.error}${value.detail ? ` ${value.detail}` : ''}`;
+  status.classList.toggle('push-status-error', ['error', 'unconfigured'].includes(value.state));
+  status.dataset.state = value.state;
+  summary.textContent = value.state === 'active' ? 'Notificaciones activas' : value.state === 'registered' ? 'Notificaciones: comprobar envío' : 'Instalación y notificaciones';
+  const installed = isInstalledContext();
+  document.getElementById('agendaPushActions').hidden = !installed;
+  enableButton.hidden = ['active', 'registered', 'denied', 'unsupported'].includes(value.state);
+  enableButton.disabled = busy || !readiness?.ready;
+  disableButton.hidden = !value.subscribed;
+  disableButton.disabled = busy;
+  testButton.hidden = !value.registered;
+  testButton.disabled = busy;
+  checkButton.disabled = busy;
+  window.dispatchEvent(new CustomEvent('rptPushStateChanged', { detail: value }));
 }
 
 async function run(operation) {
   if (busy) return;
   busy = true;
-  enableButton.disabled = true;
-  disableButton.disabled = true;
+  show({ ...(window.__RPT_PUSH_STATUS__ || {}), state: 'configuring' });
   try { show(await operation()); }
-  catch (error) { show(error.message || 'No fue posible completar la operación. Inténtalo de nuevo.', true); }
-  finally { busy = false; enableButton.disabled = false; disableButton.disabled = false; }
+  catch (error) { show({ state: error.code === 'configuration' ? 'unconfigured' : 'error', detail: error.message, subscribed: Boolean(window.__RPT_PUSH_STATUS__?.subscribed) }); }
+  finally { busy = false; show(window.__RPT_PUSH_STATUS__); }
+}
+
+async function check({ synchronize = false } = {}) {
+  if (!isInstalledContext()) { readiness = null; return { state: 'not-installed', registered: false, subscribed: false }; }
+  readiness = await preparePush({ force: synchronize });
+  if (!readiness.ready) return readiness;
+  return inspectPush({ synchronize });
 }
 
 enableButton.addEventListener('click', () => run(enablePush));
 disableButton.addEventListener('click', () => run(disablePush));
-document.getElementById('agendaCheckPush').addEventListener('click', () => run(() => inspectPush({ synchronize: true })));
-window.addEventListener('rptPwaReady', () => run(() => inspectPush({ synchronize: true })));
-document.addEventListener('visibilitychange', () => { if (!document.hidden) run(() => inspectPush({ synchronize: true })); });
-navigator.serviceWorker?.addEventListener('message', event => { if (event.data?.type === 'RPT_PUSH_SUBSCRIPTION_CHANGED') run(() => inspectPush({ synchronize: true })); });
-run(() => inspectPush());
+testButton.addEventListener('click', () => run(testPush));
+checkButton.addEventListener('click', () => run(() => check({ synchronize: true })));
+function resume() { if (!document.hidden && Date.now() - lastCheck > 60000) { lastCheck = Date.now(); run(() => check({ synchronize: true })); } }
+window.addEventListener('rptPwaReady', resume);
+window.addEventListener('rptPwaStateChanged', () => { if (!isInstalledContext()) show({ state: 'not-installed' }); else { lastCheck = 0; resume(); } });
+document.addEventListener('visibilitychange', resume);
+navigator.serviceWorker?.addEventListener('message', event => { if (event.data?.type === 'RPT_PUSH_SUBSCRIPTION_CHANGED' && isInstalledContext()) run(() => check({ synchronize: true })); });
+lastCheck = Date.now();
+run(() => check());

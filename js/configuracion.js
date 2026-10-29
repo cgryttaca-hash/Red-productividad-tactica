@@ -1,6 +1,7 @@
 import {FIREBASE_CONFIG,FIREBASE_OWNER_UID,META_COLLECTION} from './firebase-config.js';
 import {getSession,logout} from './local-auth.js';
 import {getNotificationSettings,setNotificationSettings,requestNotificationPermission,showNotification} from './notifications.js';
+import {isInstalledContext} from './pwa-context.js';
 import {SYSTEM_VERSION,RELEASE_NAME} from './system-version.js';
 
 const SDK='https://www.gstatic.com/firebasejs/12.16.0';
@@ -135,9 +136,13 @@ $('maintenanceList').addEventListener('click',async event=>{
 function renderNotifications(){
   const settings=getNotificationSettings();
   $('notifyExcel').checked=settings.excel!==false;$('notifyMobile').checked=settings.mobile!==false;$('notifyMaintenance').checked=settings.maintenance!==false;
-  const allowed='Notification'in window&&Notification.permission==='granted';
-  $('notificationState').className=`status ${allowed?'ok':Notification.permission==='denied'?'error':'info'}`;
-  $('notificationState').textContent=allowed?'Autorizadas':Notification.permission==='denied'?'Bloqueadas':'Sin autorizar';
+  const installed=isInstalledContext();
+  $('enableNotifications').disabled=!installed;
+  const allowed=installed&&'Notification'in window&&Notification.permission==='granted';
+  const denied='Notification'in window&&Notification.permission==='denied';
+  $('notificationState').className=`status ${allowed?'ok':denied?'error':'info'}`;
+  $('notificationState').textContent=!installed?'Disponible al instalar':allowed?'Autorizadas':denied?'Bloqueadas':'Sin autorizar';
+  if(!installed)message('Puedes guardar tus preferencias. Abre la aplicación instalada desde su icono para autorizar notificaciones.','info','notificationMessage');
 }
 $('enableNotifications').addEventListener('click',async()=>{
   try{const permission=await requestNotificationPermission();renderNotifications();message(permission==='granted'?'Notificaciones autorizadas.':'El navegador no concedió el permiso.',permission==='granted'?'success':'error','notificationMessage');}
@@ -150,8 +155,13 @@ $('saveNotifications').addEventListener('click',()=>{
 const session=getSession();$('sessionName').textContent=session?.displayName||session?.username||'Administrador';
 $('logoutButton').addEventListener('click',()=>{logout();location.replace('login.html')});
 $('systemVersion').textContent=SYSTEM_VERSION;$('releaseLabel').textContent=RELEASE_NAME;
-$('pwaState').textContent=window.matchMedia('(display-mode: standalone)').matches?'Instalada':'Web';
-$('pwaDetail').textContent=window.matchMedia('(display-mode: standalone)').matches?'Ejecutándose como aplicación':'Puedes instalarla desde este panel';
+function renderInstallation(){
+  $('pwaState').textContent=isInstalledContext()?'Instalada':'Web';
+  $('pwaDetail').textContent=isInstalledContext()?'Ejecutándose como aplicación':'Puedes instalarla desde el menú del navegador';
+  renderNotifications();
+}
+renderInstallation();
+window.addEventListener('rptPwaStateChanged',renderInstallation);
 setDefaultStart();renderNotifications();renderList();ticker=setInterval(renderList,1000);
 window.addEventListener('pagehide',()=>{unsubscribe?.();clearInterval(ticker);},{once:true});
 initializeFirebase().catch(error=>{message(error.message||'Firebase no disponible.','error','ownerLoginMessage');$('ownerLoginPanel').hidden=false;});

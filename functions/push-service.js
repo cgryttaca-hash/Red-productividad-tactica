@@ -38,7 +38,7 @@ function agendaUrl(scope, origin) {
   return new URL('agenda_movil.html', url).href;
 }
 
-function createHandler({ store, verifyToken, getConfig }) {
+function createHandler({ store, verifyToken, getConfig, sendDevice, now = Date.now }) {
   return async (request, response) => {
     response.set('Cache-Control', 'no-store');
     response.set('Vary', 'Origin');
@@ -50,9 +50,11 @@ function createHandler({ store, verifyToken, getConfig }) {
       response.set('Access-Control-Allow-Headers', 'Authorization, Content-Type');
       response.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
       if (request.method === 'OPTIONS') { response.status(204).send(''); return; }
+      if (configuration.missing?.length) throw failure(`El administrador debe configurar: ${configuration.missing.join(', ')}.`, 503);
+      if (configuration.configurationError) throw failure(configuration.configurationError, 503);
       const route = request.path.replace(/\/$/, '') || '/';
-      if (request.method === 'GET' && route === '/config') { response.json({ publicKey: configuration.publicKey, fcmEnabled: true, timeZone: 'America/Bogota', foodLeadMinutes: 15 }); return; }
-      if (!['POST', 'DELETE'].includes(request.method) || !['/subscriptions', '/status'].includes(route)) throw failure('Ruta no disponible.', 404);
+      if (request.method === 'GET' && route === '/config') { response.json({ publicKey: configuration.publicKey, fcmEnabled: true, timeZone: 'America/Bogota', foodLeadMinutes: 15, service: 'agenda-push', projectId: configuration.projectId }); return; }
+      if (!['POST', 'DELETE'].includes(request.method) || !['/subscriptions', '/status', '/test'].includes(route)) throw failure('Ruta no disponible.', 404);
       if (!String(request.get('Content-Type') || '').startsWith('application/json')) throw failure('Se requiere contenido JSON.', 415);
       if (JSON.stringify(request.body || {}).length > 8000) throw failure('La solicitud es demasiado grande.', 413);
       const bearer = /^Bearer ([^\s]+)$/.exec(request.get('Authorization') || '');
@@ -64,7 +66,28 @@ function createHandler({ store, verifyToken, getConfig }) {
       if (route === '/status') {
         if (request.method !== 'POST') throw failure('Método no permitido.', 405);
         const record = await store.get(subscriptionId(validateEndpoint(body.endpoint)));
-        response.json({ registered: Boolean(record && record.uid === identity.uid && record.origin === origin) });
+        const registered = Boolean(record && record.uid === identity.uid && record.origin === origin);
+        response.json({ registered, sendVerified: Boolean(registered && record.lastTestStatus === 'accepted') });
+        return;
+      }
+      if (route === '/test') {
+        if (request.method !== 'POST') throw failure('Método no permitido.', 405);
+        const id = subscriptionId(validateEndpoint(body.endpoint));
+        const stored = await store.get(id);
+        if (!stored || stored.uid !== identity.uid || stored.origin !== origin) throw failure('Este dispositivo no está registrado en la sesión actual.', 403);
+        if (!sendDevice || !store.claimTest) throw failure('Actualiza el backend para verificar los envíos.', 503);
+        const attempt = await store.claimTest(id, identity.uid, now());
+        if (attempt.cached) { response.json({ accepted: true, cached: true }); return; }
+        try {
+          const result = await sendDevice(attempt.record, { kind: 'technical', title: 'Prueba de Agenda Móvil', body: 'El servicio aceptó esta prueba. Si puedes leerla en tu dispositivo, has comprobado su recepción.', tag: 'rpt-push-test', url: attempt.record.agendaUrl }, { urgency: 'normal', ttl: 60 });
+          const providerId = String(result?.messageId || result?.statusCode || 'accepted');
+          await store.completeTest(id, attempt.claim, { status: 'accepted', providerId, at: now() });
+          response.json({ accepted: true, providerId });
+        } catch (error) {
+          await store.completeTest(id, attempt.claim, { status: 'failed', code: error.code || String(error.statusCode || 'unconfirmed'), at: now() });
+          if ([404, 410].includes(error.statusCode) || ['messaging/registration-token-not-registered', 'messaging/invalid-registration-token'].includes(error.code)) await store.expire(id);
+          throw failure('El proveedor no confirmó el envío. Revisa los registros del backend y vuelve a comprobar el dispositivo.', 502);
+        }
         return;
       }
       if (request.method === 'DELETE') {
@@ -77,7 +100,8 @@ function createHandler({ store, verifyToken, getConfig }) {
       const fcmToken = transport === 'fcm' ? body.fcmToken : '';
       if (transport === 'fcm' && (typeof fcmToken !== 'string' || fcmToken.length < 30 || fcmToken.length > 4096 || !/^[A-Za-z0-9_:\-]+$/.test(fcmToken))) throw failure('El token FCM no es válido.');
       await store.save(subscriptionId(subscription.endpoint), { uid: identity.uid, origin, agendaUrl: agendaUrl(body.scope, origin), subscription, transport, fcmToken, updatedAt: Date.now() });
-      response.json({ registered: true, transport });
+      const saved = await store.get(subscriptionId(subscription.endpoint));
+      response.json({ registered: true, transport, sendVerified: saved?.lastTestStatus === 'accepted' });
     } catch (error) {
       response.status(error.status || 503).json({ error: error.status ? error.message : 'El servicio de avisos no está disponible. Reintenta más tarde.' });
     }

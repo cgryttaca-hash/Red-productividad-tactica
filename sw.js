@@ -1,6 +1,9 @@
-const CACHE='rpt-shell-20261028-agenda-premium-v2';
+const CACHE='rpt-shell-20261029-pwa-premium-v3';
 const OFFLINE='./offline.html';
 const ASSETS=[
+  "./css/premium-system.css",
+  "./css/agenda-compact.css",
+  "./js/pwa-context.js",
   "./",
   "./agenda_movil.html",
   "./agendas.html",
@@ -122,7 +125,8 @@ self.addEventListener('fetch',event=>{
     const cache=await caches.open(CACHE);
     const cached=await cache.match(assetUrl.href);
     const isPublicData=assetUrl.pathname.endsWith('/data/eventos_publicos.json');
-    if(cached&&!isPublicData)return cached;
+    const isPushConfiguration=assetUrl.pathname.endsWith('/js/push-config.js');
+    if(cached&&!isPublicData&&!isPushConfiguration)return cached;
     try{
       const response=await fetch(request);
       if(response.ok)await cache.put(assetUrl.href,response.clone());

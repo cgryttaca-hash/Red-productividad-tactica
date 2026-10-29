@@ -6,21 +6,33 @@
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#eef3f7",
-  "theme_color": "#143c50",
+  "background_color": "#f4f7fb",
+  "theme_color": "#10283f",
   "orientation": "any",
   "icons": [
     {
-      "src": "assets/icon-192.png",
+      "src": "assets/agenda-brand/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "assets/icon-512.png",
+      "src": "assets/agenda-brand/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "assets/agenda-brand/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/agenda-brand/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [
@@ -29,7 +41,7 @@
       "url": "./agenda_movil.html",
       "icons": [
         {
-          "src": "assets/icon-192.png",
+          "src": "assets/agenda-brand/icon-192.png",
           "sizes": "192x192"
         }
       ]
@@ -39,7 +51,7 @@
       "url": "./eventos.html",
       "icons": [
         {
-          "src": "assets/icon-192.png",
+          "src": "assets/agenda-brand/icon-192.png",
           "sizes": "192x192"
         }
       ]
@@ -49,7 +61,7 @@
       "url": "./minuta.html",
       "icons": [
         {
-          "src": "assets/icon-192.png",
+          "src": "assets/agenda-brand/icon-192.png",
           "sizes": "192x192"
         }
       ]

@@ -1,0 +1,1039 @@
+[
+  {
+    "file": "ACCESO_USUARIOS.txt",
+    "bytes": 746,
+    "sha256": "46c969cd0794f298b1c6302a20e5786c493f89761d665844695fe1672f7ac5ee",
+    "references": []
+  },
+  {
+    "file": "ACTIVACION_FUNCIONES_AVANZADAS.txt",
+    "bytes": 1263,
+    "sha256": "caa6217496286b5728acd751d43881828ebac8d2448f92ad4382c39b4ccba012",
+    "references": []
+  },
+  {
+    "file": "ACTUALIZACION_CONFIGURACION_MANTENIMIENTO.txt",
+    "bytes": 1791,
+    "sha256": "3c5a72b13014c49779264486bfc704479bf7ea40e6de81831d8e9d335f19c3bc",
+    "references": []
+  },
+  {
+    "file": "ACTUALIZACION_DIRIGIDA.txt",
+    "bytes": 2387,
+    "sha256": "15fc8f0cdf338504d9bccbb564c278c2a8a7d7551f0960f4da3a5e1178589b83",
+    "references": []
+  },
+  {
+    "file": "agenda.webmanifest",
+    "bytes": 882,
+    "sha256": "1056bb0bb5b9123577d0bbc86a4b530ca36397e37c3401f1f4dcd4393f2ada97",
+    "references": []
+  },
+  {
+    "file": "agendas.html",
+    "bytes": 3095,
+    "sha256": "8ca689a85c3b9817a639461f549f75e8e5c5dfb0448ebddf821ed07cd120753f",
+    "references": [
+      "js/auth-guard.js?v=20260801-2300",
+      "js/maintenance-guard.js?v=20261028",
+      "manifest.webmanifest",
+      "css/admin-tools.css?v=20260801-2300",
+      "css/corporate-ui.css?v=20261028",
+      "css/agendas.css?v=20261028",
+      "index.html",
+      "index.html",
+      "eventos.html",
+      "minuta.html",
+      "agendas.html",
+      "agenda_movil.html",
+      "eventos.html",
+      "js/agendas.js?v=20261028",
+      "js/session-ui.js?v=20260801-2300",
+      "js/pwa.js?v=20261028"
+    ]
+  },
+  {
+    "file": "agenda_movil.html",
+    "bytes": 8340,
+    "sha256": "f729e69d9c162db16c6e90f4243ee6088072d71600dde39d34d8b7121a51c9a3",
+    "references": [
+      "assets/agenda-brand/apple-touch-icon.png",
+      "assets/agenda-brand/favicon.svg",
+      "assets/agenda-brand/favicon.ico",
+      "js/maintenance-guard.js?v=20261028",
+      "agenda.webmanifest",
+      "css/agenda-movil.css?v=20260828-3630",
+      "css/pwa-compat.css?v=20261028",
+      "css/agenda-premium.css?v=20261028-premium1",
+      "assets/agenda-brand/logo-full-light.svg",
+      "assets/agenda-brand/logo-full-light.svg",
+      "js/agenda-requirements.js?v=20261028",
+      "js/agenda-reminders.js?v=20260828-3630",
+      "js/agenda-movil.js?v=20260828-3630",
+      "js/pwa.js?v=20261028",
+      "js/notifications.js?v=20261028",
+      "js/push-ui.js?v=20261028",
+      "js/performance-monitor.js?v=20260828-3630"
+    ]
+  },
+  {
+    "file": "assets/agenda-brand/apple-touch-icon.png",
+    "bytes": 4033,
+    "sha256": "9f6d4821e49fffd4a3667d5979e5505c460a09f189db1d698807fdbd928f94b4",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/badge-96.png",
+    "bytes": 1416,
+    "sha256": "cf58c8064e7c396dc55750afcafb5c30ef715f8b4f4df46e5671703b63863a34",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/favicon.ico",
+    "bytes": 4688,
+    "sha256": "42d9fcae3502d8fae9c07fa4066589eab046b10153dd0940ca7cf0ea2a12629b",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/favicon.svg",
+    "bytes": 598,
+    "sha256": "a2aaee907f8b362c8eddef62d75bfd255f21e2e7529752af6a5553af01abba0d",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/icon-192.png",
+    "bytes": 4007,
+    "sha256": "77aa4bbbc5828a07f9153465ffcb674ecfa0d46c2bb3ec1d42efa007e53d7e37",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/icon-512.png",
+    "bytes": 11732,
+    "sha256": "45f05069506bafb0010096b9444d36f1a56caaf3827c4140ef4cd5cbf24718f5",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/icon-96.png",
+    "bytes": 2084,
+    "sha256": "fda8ff22a13e517684bc385c4e802dc3c98c714662ee23e6cddcbaeb72a157b4",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/icon-maskable-192.png",
+    "bytes": 3917,
+    "sha256": "5a011503a32b2cabfb1695945dabeb13cc9c2d430f6372bd25045e13d31d5ce5",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/icon-maskable-512.png",
+    "bytes": 11517,
+    "sha256": "9573bad4ac3772d15f1d5dd48aeb2d14c10b3e54b387d042f6ed949ceebfd148",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-full-dark.png",
+    "bytes": 28348,
+    "sha256": "caa597b1464df37092eaa2106f4b74586b2d90f00482c3c235980a27f67faa63",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-full-dark.svg",
+    "bytes": 14170,
+    "sha256": "7b60f02585794156a227f5c7b64d928d37bf05b7abdda6b6611421d85a109027",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-full-light.png",
+    "bytes": 25304,
+    "sha256": "ae064cce8eb59ba17ff75101c1546524cec8e56b85085c72970d208822ce409e",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-full-light.svg",
+    "bytes": 14170,
+    "sha256": "14f6d0974ad2ba6c07479fbd9f86b516185c62ad2be0d0550e473236a55355d0",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-full-mono.png",
+    "bytes": 27541,
+    "sha256": "e7daf470ef18bae1dbc69f415db24c201a5ca8c3e699e87edca64b487b78e9dc",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-full-mono.svg",
+    "bytes": 14170,
+    "sha256": "1bdd96904ca918eb884d9856931a842f4d90cd6325ebbebfe45ec9c2cb8ecc17",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-small.svg",
+    "bytes": 544,
+    "sha256": "6bcb8f7b6dc4de94de022d6f20d6f117cae78cd801586f6a555aab1d955c9941",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-symbol-dark.svg",
+    "bytes": 615,
+    "sha256": "6e49f9a91d93f430d9e7f85ce66e86b62ee7c0c2b39f879b5afd1520574a0c98",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-symbol-light.svg",
+    "bytes": 615,
+    "sha256": "e8a03a69bdeb0006359edc1aa4b029ff3ef569be8ec91a941985d71fa088f759",
+    "references": []
+  },
+  {
+    "file": "assets/agenda-brand/logo-symbol-mono.svg",
+    "bytes": 615,
+    "sha256": "6c1f4b3de80cfb5d390684fdbbee1fd8056718689511a367154f5e784a9a32b8",
+    "references": []
+  },
+  {
+    "file": "assets/icon-180.png",
+    "bytes": 21236,
+    "sha256": "d3b6af6c161716b28f4d62118b2d6ee826df1b8a034f3df0ef04e1fec75d78bb",
+    "references": []
+  },
+  {
+    "file": "assets/icon-192.png",
+    "bytes": 23015,
+    "sha256": "e18a6f8708dd3eeefa3778c680e6437c7407afaf0fd941a7d0d2585cfcbe838c",
+    "references": []
+  },
+  {
+    "file": "assets/icon-512.png",
+    "bytes": 45646,
+    "sha256": "c98cecdfbd4b957b4234016f790dd5c34b827acd2929d300fb42293896274d31",
+    "references": []
+  },
+  {
+    "file": "CAMBIOS_3.6.3.txt",
+    "bytes": 1113,
+    "sha256": "e1dd9744d5a325dfe48a69c4d73728a5422fbe2e6652b5d9bde4e34ce7452553",
+    "references": []
+  },
+  {
+    "file": "CAMBIOS_ACCESO_ESTILO.txt",
+    "bytes": 1075,
+    "sha256": "66f243a983bcad24c29f7dc62be58bf9de4c0a3f71db1616f9cdc9f18269bcd8",
+    "references": []
+  },
+  {
+    "file": "CAMBIOS_AGENDA_INDEX_MANTENIMIENTO.txt",
+    "bytes": 1237,
+    "sha256": "8969539754da3514bb55a9576965c99212ec0720566ab8465ddfcfc7590a84fb",
+    "references": []
+  },
+  {
+    "file": "CAMBIOS_AGENDA_MANTENIMIENTO_VISUAL.txt",
+    "bytes": 1121,
+    "sha256": "304ef73bf30b8bcde604f5e9c593604c586be509cbf4f5155c4dc5ee99f56a59",
+    "references": []
+  },
+  {
+    "file": "CAMBIOS_APLICADOS.txt",
+    "bytes": 2234,
+    "sha256": "1ef9c0b04ff26d2b6c3717665bab35302dd2c2d0bf5576df3af03132e7a3e20d",
+    "references": []
+  },
+  {
+    "file": "CAMBIOS_CORRECCION_INDEX_AGENDA.txt",
+    "bytes": 1041,
+    "sha256": "a808518459be94f295d81b996c14e58d2a6fa6ed3544af492b64929d0128011b",
+    "references": []
+  },
+  {
+    "file": "CAMBIOS_VERSION_3.txt",
+    "bytes": 1985,
+    "sha256": "e0b25a802613e462d240f71e5e623aa2a594129ad6c6ecc36162fb97107954b4",
+    "references": []
+  },
+  {
+    "file": "CHANGELOG.md",
+    "bytes": 443,
+    "sha256": "2fad1f90983fa0e60a156a58a686e2a87f054da75c9974aa8bd50fc42e900317",
+    "references": []
+  },
+  {
+    "file": "configuracion.html",
+    "bytes": 6843,
+    "sha256": "00ae861739740063ee8b77253a2335e4eecc9c8ff0e04ce79125bb8c386ddc32",
+    "references": [
+      "js/auth-guard.js?v=20260801-2300",
+      "js/maintenance-guard.js?v=20260801-2300",
+      "manifest.webmanifest",
+      "css/admin-tools.css?v=20260801-2300",
+      "css/professional-ui.css?v=20260828-3630",
+      "css/corporate-ui.css?v=20261027",
+      "index.html",
+      "index.html",
+      "usuarios.html",
+      "validacion.html",
+      "laboratorio.html",
+      "configuracion.html",
+      "js/configuracion.js?v=20260801-2300",
+      "js/pwa.js?v=20260801-2300",
+      "js/device-heartbeat.js?v=20260801-2300"
+    ]
+  },
+  {
+    "file": "CONFIGURACION_FIREBASE.txt",
+    "bytes": 813,
+    "sha256": "fb6dee984ce326f0d2344c2703e0c10820baf86bfe5ad157ba854147ebdb1ab1",
+    "references": []
+  },
+  {
+    "file": "CONFIGURACION_SEGURIDAD_AVANZADA.txt",
+    "bytes": 1286,
+    "sha256": "fd9cdddfa7ed60b12a0d7e4aeab0cccde7aa2b7301be3798fde681d7b0fae2aa",
+    "references": []
+  },
+  {
+    "file": "CORRECCION_CARGA_AGENDA_MOVIL.txt",
+    "bytes": 872,
+    "sha256": "ed8fe430335ac66cabf42f0f67512e9e3fd2bc559d741a14fdc29b88002ffc19",
+    "references": []
+  },
+  {
+    "file": "css/admin-tools.css",
+    "bytes": 7825,
+    "sha256": "e78663c82abd0a173308024639bd0fb11ea474a58c636630b013aed932e9557b",
+    "references": []
+  },
+  {
+    "file": "css/agenda-movil.css",
+    "bytes": 22459,
+    "sha256": "a66558d230ad4ea23d2b4f5e9843ace6e70b60690820cd4e1220b57cd2043343",
+    "references": []
+  },
+  {
+    "file": "css/agenda-premium.css",
+    "bytes": 12369,
+    "sha256": "65f6479850748bc22cfd5a4822e7158929fe43956947b8909b8d37cad43971e1",
+    "references": []
+  },
+  {
+    "file": "css/agendas.css",
+    "bytes": 5055,
+    "sha256": "b23068b79a06c8ea7682914dc64fed33700a41a4367ff9703fe79a7b278dcdf6",
+    "references": []
+  },
+  {
+    "file": "css/configuracion.css",
+    "bytes": 5757,
+    "sha256": "babf1f8b1097cc82e193129556aab3ea1f2ca82c5d9b97e17477057ba56aa80e",
+    "references": []
+  },
+  {
+    "file": "css/corporate-ui.css",
+    "bytes": 30783,
+    "sha256": "450370f00cc10db258854b71adec459ed7d20ec6cb45f3d8e75a039d07a45e8f",
+    "references": []
+  },
+  {
+    "file": "css/estilos.css",
+    "bytes": 10661,
+    "sha256": "dd0eafa2ab97e1e1e1951147c59d72e21de83454b07a74c8f5cfe9cadf54a125",
+    "references": []
+  },
+  {
+    "file": "css/eventos.css",
+    "bytes": 21755,
+    "sha256": "9f01c8cc6b63fce8add3694d8a81c5d47a7859b394f622be0097b5c516aecba9",
+    "references": []
+  },
+  {
+    "file": "css/excel-sync.css",
+    "bytes": 7766,
+    "sha256": "477da471392bfb42366e0c2979b30bd73d586d01f449633d66e0902655baf284",
+    "references": []
+  },
+  {
+    "file": "css/firebase-sync.css",
+    "bytes": 5184,
+    "sha256": "2a6fc621fb000de49c8a10a01e49a810216349978bf1d31aa72ebc2d7172eefe",
+    "references": []
+  },
+  {
+    "file": "css/index.css",
+    "bytes": 12665,
+    "sha256": "52c427d0c444c0f5b688b1ebb33c82e317de91376714fbf7c4fd63f867e5dc86",
+    "references": []
+  },
+  {
+    "file": "css/login.css",
+    "bytes": 4127,
+    "sha256": "8b6d23f613591401660ed283a4eb523fc337b8026a038a3e8890c41cd248dfa9",
+    "references": []
+  },
+  {
+    "file": "css/mantenimiento.css",
+    "bytes": 6968,
+    "sha256": "ad7376e488be3467234b54d413b24844490467c10e48267736ba27af87e8066c",
+    "references": []
+  },
+  {
+    "file": "css/minuta.css",
+    "bytes": 38218,
+    "sha256": "9c9074cfc87e5334ac936f8c91662568658356a535f9fac2fe0eea279d21cbd3",
+    "references": []
+  },
+  {
+    "file": "css/nav-clean.css",
+    "bytes": 1594,
+    "sha256": "c1585a6e0664a448b2a8cce8983df9aa00d02b58f8fd1c59a752d1a728e8e550",
+    "references": []
+  },
+  {
+    "file": "css/professional-ui.css",
+    "bytes": 12343,
+    "sha256": "f27d9e36ffffd2a8b236cc6710b3e8a5adaa75eca82c1958de397f408851d8b5",
+    "references": []
+  },
+  {
+    "file": "css/pwa-compat.css",
+    "bytes": 2761,
+    "sha256": "599cc0ae23eae12e65893bfd6670b9eeeb3fb32b0ba419ac8254e8d628357894",
+    "references": []
+  },
+  {
+    "file": "css/usuarios.css",
+    "bytes": 5759,
+    "sha256": "53b912522e019f1682820006038c7f43b455fd5472766d88c6f1d920fd939947",
+    "references": []
+  },
+  {
+    "file": "data/eventos_publicos.json",
+    "bytes": 78,
+    "sha256": "fc9861c6849388891cc23932113f9829609130e2ce309cbacd6ffd6cc311834d",
+    "references": []
+  },
+  {
+    "file": "eventos.html",
+    "bytes": 6160,
+    "sha256": "b207681e3e25dc73ad83821cf347275dcf9697278078aad0eed97a138f142e00",
+    "references": [
+      "js/auth-guard.js?v=20260801-1600",
+      "js/maintenance-guard.js?v=20260801-1600",
+      "css/eventos.css?v=20260730-001",
+      "css/excel-sync.css?v=20260801-1600",
+      "css/corporate-ui.css?v=20261027",
+      "css/agendas.css?v=20261028",
+      "https://actions.google.com/sounds/v1/alarms/beep_short.ogg",
+      "https://cdn.jsdelivr.net/npm/chart.js",
+      "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2",
+      "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
+      "js/excel-sync.js?v=20260801-1600",
+      "js/eventos.js?v=20260730-001",
+      "js/agendas.js?v=20261028"
+    ]
+  },
+  {
+    "file": "firebase.json",
+    "bytes": 245,
+    "sha256": "37994896eabd010c900db9b87e39f03cd85884fd57b5da078038506377aa647b",
+    "references": []
+  },
+  {
+    "file": "firestore.indexes.json",
+    "bytes": 469,
+    "sha256": "34281d4f028c27186af556ac00ca238f6b44146afc5e181cdb487c5374d76a84",
+    "references": []
+  },
+  {
+    "file": "firestore.rules",
+    "bytes": 1373,
+    "sha256": "3e131989f1067996eb0ae1e2d809f88ea2bf77b1214c0acfbdeafcb9e1d97112",
+    "references": []
+  },
+  {
+    "file": "functions/.env.example",
+    "bytes": 59,
+    "sha256": "fdaaefccc14d25b4dc7d0f8c2606160139d488637dc38d9c62f7bff356cd94a9",
+    "references": []
+  },
+  {
+    "file": "functions/.gitignore",
+    "bytes": 67,
+    "sha256": "3f267b8528765c39d81bcf5b0eec7eddbaee297a747694c49b3572f2ad49815c",
+    "references": []
+  },
+  {
+    "file": "functions/food-alerts-core.mjs",
+    "bytes": 7628,
+    "sha256": "9fd589ccdec78b04f86940c8c3ac4d73deaa794911a7e3b4b64a6f381727b07e",
+    "references": []
+  },
+  {
+    "file": "functions/food-coordinator.js",
+    "bytes": 6754,
+    "sha256": "98235eecfd69a491c03289585126f6e71bb72b69131da94425fabaa8178b42a9",
+    "references": [
+      "./food-alerts-core.mjs"
+    ]
+  },
+  {
+    "file": "functions/food-store.js",
+    "bytes": 8372,
+    "sha256": "58f85bc8ec22dddd4ce53c06dc52538cdaf59142b5e4cd632a8c66353e8b5fc9",
+    "references": []
+  },
+  {
+    "file": "functions/index.js",
+    "bytes": 6156,
+    "sha256": "bb1946cf90b0d3ba17b21e49d90e289386bdb4bda860cfbf75bf78b6ccca9858",
+    "references": []
+  },
+  {
+    "file": "functions/package-lock.json",
+    "bytes": 113582,
+    "sha256": "d72d21a25f68ea90080cf92e8215fbf6ccd9373cdc59031803e776404039bfd9",
+    "references": []
+  },
+  {
+    "file": "functions/package.json",
+    "bytes": 254,
+    "sha256": "99df86f7fe0dca5d0f1e4ae0aa3a91a1f0c6f659c8dcdffb6b9f9ab8ba8d305f",
+    "references": []
+  },
+  {
+    "file": "functions/push-provider.js",
+    "bytes": 903,
+    "sha256": "14c3c4abe426e4448b8b88310d1edbc8cb0ffa149d176abc8da686459a3c3f3b",
+    "references": []
+  },
+  {
+    "file": "functions/push-service.js",
+    "bytes": 6782,
+    "sha256": "7f244452999ed1c55a173194bca14f4ab6d85ce9dba5d6266f8e9b2d9eeaa7ae",
+    "references": []
+  },
+  {
+    "file": "index.html",
+    "bytes": 9835,
+    "sha256": "fe39e15b25041965bb171a131827888a900b42d57df12eb25bff047ffd138cb5",
+    "references": [
+      "js/auth-guard.js?v=20260801-2300",
+      "js/maintenance-guard.js?v=20260801-2300",
+      "manifest.webmanifest",
+      "https://cdnjs.cloudflare.com",
+      "https://www.gstatic.com",
+      "css/excel-sync.css?v=20260801-2300",
+      "css/firebase-sync.css?v=20260801-2300",
+      "css/index.css?v=20260801-2300",
+      "css/professional-ui.css?v=20260828-3630",
+      "css/corporate-ui.css?v=20261028",
+      "index.html",
+      "index.html",
+      "usuarios.html",
+      "configuracion.html",
+      "eventos.html",
+      "minuta.html",
+      "agendas.html",
+      "agenda_movil.html",
+      "validacion.html",
+      "laboratorio.html",
+      "https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js",
+      "js/excel-sync.js?v=20260801-2300",
+      "js/index.js?v=20260801-2300",
+      "js/firebase-sync.js?v=20260801-2300",
+      "js/session-ui.js?v=20260801-2300",
+      "js/pwa.js?v=20260801-2300",
+      "js/performance-monitor.js?v=20260801-2300",
+      "js/notifications.js?v=20260801-2300",
+      "js/device-heartbeat.js?v=20260801-2300"
+    ]
+  },
+  {
+    "file": "INSTRUCCIONES_GITHUB.txt",
+    "bytes": 718,
+    "sha256": "01ec9a4ee0323f0570b43b0bef082e86c73a2a0d4e6cabc811cf181494861aa2",
+    "references": []
+  },
+  {
+    "file": "js/agenda-content.js",
+    "bytes": 5430,
+    "sha256": "e166c0779ecea44dd43d8378250c415cf19a57fc36f8d1287743e3f45f10dac8",
+    "references": []
+  },
+  {
+    "file": "js/agenda-movil.js",
+    "bytes": 27903,
+    "sha256": "21366d72b429a356971add3c4eaf9a98f984ff337e689374e33f7c79d22a3db4",
+    "references": [
+      "./firebase-config.js",
+      "./notifications.js",
+      "./firebase-app-check.js"
+    ]
+  },
+  {
+    "file": "js/agenda-reminders.js",
+    "bytes": 1327,
+    "sha256": "7b66bb90e92c0f0d9db7ad91eb81c3a2f6f92683a18df20e9ca0f9b3d2ac397e",
+    "references": [
+      "./notifications.js",
+      "./food-alerts-core.js"
+    ]
+  },
+  {
+    "file": "js/agenda-requirements.js",
+    "bytes": 4588,
+    "sha256": "be16aae38be11a66694d4729487566aed24cfea248affc30f56cc08c99434885",
+    "references": [
+      "./notifications.js"
+    ]
+  },
+  {
+    "file": "js/agendas.js",
+    "bytes": 10426,
+    "sha256": "2b0f4d2f6c2606173350258a21b8ee5ca99516174a8ecde84ba40b2fca8c6fb1",
+    "references": [
+      "./agenda-content.js"
+    ]
+  },
+  {
+    "file": "js/app.js",
+    "bytes": 13994,
+    "sha256": "65d5f7249a9e8b130401b4f114d293cb1fd551445a5c106050254df387ecdbd9",
+    "references": []
+  },
+  {
+    "file": "js/audit-store.js",
+    "bytes": 4400,
+    "sha256": "e1f1ae415aab2982d2225dcf3b8d78ca72ef3f8da1f7254d751d21cd54023fc6",
+    "references": []
+  },
+  {
+    "file": "js/auth-guard.js",
+    "bytes": 1274,
+    "sha256": "745317a97be685bd28608ad836163de1a87f58781daccc42ea30a360d689deda",
+    "references": []
+  },
+  {
+    "file": "js/backup-store.js",
+    "bytes": 6367,
+    "sha256": "6a86e72cc49e652feab7f8928638a2497a61e5bec64564ee53eeeabbcde2117c",
+    "references": [
+      "./audit-store.js",
+      "./audit-store.js"
+    ]
+  },
+  {
+    "file": "js/configuracion.js",
+    "bytes": 10375,
+    "sha256": "616f4db8ce2f51fe7445f90d99d8989d91853bd46d4e247f9660de33ea8e5d85",
+    "references": [
+      "./firebase-config.js",
+      "./local-auth.js",
+      "./notifications.js",
+      "./system-version.js",
+      "./firebase-app-check.js"
+    ]
+  },
+  {
+    "file": "js/data-core.js",
+    "bytes": 15314,
+    "sha256": "3759b9bea374d28d3f7d2d8f5f970a54c3748484eb42e1bf418653c57719cbdd",
+    "references": []
+  },
+  {
+    "file": "js/device-heartbeat.js",
+    "bytes": 838,
+    "sha256": "9659f70c51ca272470c9fd60b346a3bae392d7420b0a29c1fc0877ff7dd4faa2",
+    "references": [
+      "./local-auth.js",
+      "./device-registry.js"
+    ]
+  },
+  {
+    "file": "js/device-registry.js",
+    "bytes": 5142,
+    "sha256": "dcbad70993ffd76f8f493ea9e0b736ff5449e3ab2374031d5db0de8e1f89bcac",
+    "references": [
+      "./firebase-config.js"
+    ]
+  },
+  {
+    "file": "js/eventos.js",
+    "bytes": 31446,
+    "sha256": "c9bb432e971ba7c62c720b31178aa2e30f3f827f016aabad0820494041dd8867",
+    "references": []
+  },
+  {
+    "file": "js/excel-sync.js",
+    "bytes": 32741,
+    "sha256": "3525cb5f2dedef491ebfddcc251649956d2d00067430bcbdbaae878334621de1",
+    "references": [
+      "./audit-store.js",
+      "./system-log.js",
+      "./validation.js",
+      "./performance-monitor.js",
+      "./firebase-sync.js",
+      "./backup-store.js",
+      "./performance-monitor.js"
+    ]
+  },
+  {
+    "file": "js/firebase-app-check.js",
+    "bytes": 787,
+    "sha256": "927ec989938e83a95560d3e1995d9ad5c1b7cc58f39d4c4607defa4cfa786b12",
+    "references": [
+      "./firebase-config.js"
+    ]
+  },
+  {
+    "file": "js/firebase-config.js",
+    "bytes": 666,
+    "sha256": "6baa8b537bc22c5a560f989d0f76275f31d8dc8f063dd18f94938951e53cc805",
+    "references": []
+  },
+  {
+    "file": "js/firebase-sync.js",
+    "bytes": 20420,
+    "sha256": "3a050beecd9059260fc08485b62b7046d603655b743dc799421cd4bf334dc40b",
+    "references": [
+      "./firebase-config.js",
+      "./system-log.js",
+      "./firebase-app-check.js",
+      "agenda_movil.html",
+      "./performance-monitor.js",
+      "./performance-monitor.js",
+      "./performance-monitor.js"
+    ]
+  },
+  {
+    "file": "js/food-alerts-core.js",
+    "bytes": 7628,
+    "sha256": "9fd589ccdec78b04f86940c8c3ac4d73deaa794911a7e3b4b64a6f381727b07e",
+    "references": []
+  },
+  {
+    "file": "js/index.js",
+    "bytes": 6527,
+    "sha256": "fdee27343e07c88f6077fd32737777950ab9b86b78dfbc1b883465e21dd3f628",
+    "references": [
+      "./system-log.js"
+    ]
+  },
+  {
+    "file": "js/laboratorio.js",
+    "bytes": 2829,
+    "sha256": "e7131087cbad186f01d2e6ac450a7330cc8b4b03f6bf7f9e877113a586f89777",
+    "references": [
+      "./validation.js",
+      "./local-auth.js"
+    ]
+  },
+  {
+    "file": "js/loader-guard.js",
+    "bytes": 1548,
+    "sha256": "f981f78b4e4b0d901a2f66481b083e4c41dc3641f8b094262d288fb4f4e42642",
+    "references": []
+  },
+  {
+    "file": "js/local-auth.js",
+    "bytes": 9908,
+    "sha256": "b534f90b2f83ad7b2ceefd684dffbefbf31556b40b145d0b6de31f7e6c803075",
+    "references": [
+      "./system-log.js",
+      "./system-log.js"
+    ]
+  },
+  {
+    "file": "js/login.js",
+    "bytes": 1499,
+    "sha256": "9ce59278661314c19e0bfade6a30004d0814b3f4d5545de098c937a79884bbef",
+    "references": [
+      "./local-auth.js"
+    ]
+  },
+  {
+    "file": "js/maintenance-guard.js",
+    "bytes": 2846,
+    "sha256": "ea56bdf9166fdea618a70ed596b4072fa42b6e6aa4396045f8de56b3ba97a7dd",
+    "references": [
+      "./firebase-config.js"
+    ]
+  },
+  {
+    "file": "js/mantenimiento.js",
+    "bytes": 4335,
+    "sha256": "5269c03dc117ae7b4ebdad4f881b387ba80d2f27e04e197d27a58edc132dce2e",
+    "references": [
+      "./firebase-config.js"
+    ]
+  },
+  {
+    "file": "js/minuta.js",
+    "bytes": 20711,
+    "sha256": "5cf2f7fc3af195651be8b4595822b01762bd883da0f6876e3a7d56dc5c7b2933",
+    "references": []
+  },
+  {
+    "file": "js/notifications.js",
+    "bytes": 2203,
+    "sha256": "845a9ba09922d2b32756452e9366d4d5ada8717d8f00e3cde57e9b8475c1774a",
+    "references": []
+  },
+  {
+    "file": "js/performance-monitor.js",
+    "bytes": 1823,
+    "sha256": "2f5f33d4b1f758d94c144c9d239f24ddd7e34825624d42f19d4f5719f785e979",
+    "references": []
+  },
+  {
+    "file": "js/puente_movil_eventos.js",
+    "bytes": 4755,
+    "sha256": "2c5496cbb09fe7356ebe9c55ffbe20a565150278ebf025c01d5e92b5b37c5618",
+    "references": [
+      "js/puente_movil_eventos.js"
+    ]
+  },
+  {
+    "file": "js/push-client.js",
+    "bytes": 8612,
+    "sha256": "16dc580ad929055a9255f083567116002cdfa04da301c94d47707454c37ecb49",
+    "references": [
+      "./push-config.js",
+      "./firebase-config.js"
+    ]
+  },
+  {
+    "file": "js/push-config.js",
+    "bytes": 64,
+    "sha256": "d84aa1867add43cea04a6e966997a9e04dd2eb0ffcfc27ece919a8bfd72a614e",
+    "references": []
+  },
+  {
+    "file": "js/push-ui.js",
+    "bytes": 2882,
+    "sha256": "41f38bae8fcfd30cb818fd99efc23455c22f79531f08030c1848d3ed3dfe89e8",
+    "references": [
+      "./push-client.js"
+    ]
+  },
+  {
+    "file": "js/pwa.js",
+    "bytes": 2717,
+    "sha256": "383155b2cf4e8cae106b282c48f69d0a55d401af9c48d048f883b0cc1487add5",
+    "references": []
+  },
+  {
+    "file": "js/session-ui.js",
+    "bytes": 1018,
+    "sha256": "eeb8b9755967fcdbe548ff965fe807d456f5d1b1a32e97d2c37aa8d65bf61163",
+    "references": [
+      "./local-auth.js"
+    ]
+  },
+  {
+    "file": "js/system-log.js",
+    "bytes": 1408,
+    "sha256": "2343065a46cb04b6e1ece5af6f3fb72db090dae9cf61f9a2f4bc515a53fef350",
+    "references": []
+  },
+  {
+    "file": "js/system-version.js",
+    "bytes": 806,
+    "sha256": "8153d1f9912fe50dbe42fa352ee16a46539f6885d171f994b511df468f605df6",
+    "references": []
+  },
+  {
+    "file": "js/usuarios.js",
+    "bytes": 3976,
+    "sha256": "bfa092680ef3467aee772aaf91428287326b28e11bff6f72f1a8775d332922d5",
+    "references": [
+      "./local-auth.js"
+    ]
+  },
+  {
+    "file": "js/validacion-page.js",
+    "bytes": 2437,
+    "sha256": "8fb5701919b5a8c2f9f1a27945bcb7022afa77ad2523993ced3e64c469c7758e",
+    "references": [
+      "./validation.js",
+      "./local-auth.js"
+    ]
+  },
+  {
+    "file": "js/validation.js",
+    "bytes": 4097,
+    "sha256": "adfedd17a6e9a0854c4eb8a93a0275171e440bde0bf82170ced291eb3e48ab68",
+    "references": []
+  },
+  {
+    "file": "laboratorio.html",
+    "bytes": 3773,
+    "sha256": "31da7a85a93c500ac33e9a77c3c01b4f2a8cae8ed62f14e25e1bfefe5aa1bcfd",
+    "references": [
+      "js/auth-guard.js?v=20260801-2300",
+      "js/maintenance-guard.js?v=20260801-2300",
+      "manifest.webmanifest",
+      "css/admin-tools.css?v=20260801-2300",
+      "css/professional-ui.css?v=20260828-3630",
+      "css/corporate-ui.css?v=20261027",
+      "index.html",
+      "index.html",
+      "laboratorio.html",
+      "validacion.html",
+      "configuracion.html",
+      "https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js",
+      "js/excel-sync.js?v=20260801-2300",
+      "js/laboratorio.js?v=20260801-2300",
+      "js/pwa.js?v=20260801-2300",
+      "js/device-heartbeat.js?v=20260801-2300"
+    ]
+  },
+  {
+    "file": "LEER_PRIMERO_AGENDA_PREMIUM.md",
+    "bytes": 2168,
+    "sha256": "e626515372d16abeec08cce9f8323a353192a8ca6d6372255898497117f82e3b",
+    "references": []
+  },
+  {
+    "file": "LICENSE",
+    "bytes": 11357,
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "references": []
+  },
+  {
+    "file": "login.html",
+    "bytes": 2656,
+    "sha256": "d4c01b6ce7154bf418040980c95514cec50a1bb95e082d638ffbc815a96f2260",
+    "references": [
+      "manifest.webmanifest",
+      "css/login.css?v=20260801-2300",
+      "css/professional-ui.css?v=20260828-3630",
+      "css/corporate-ui.css?v=20261027",
+      "js/login.js?v=20260801-2300",
+      "js/pwa.js?v=20260801-2300"
+    ]
+  },
+  {
+    "file": "manifest.webmanifest",
+    "bytes": 1192,
+    "sha256": "a1be48c459a0253b9edc5916bdb1b5965967b1082845e9efcd530900bff3a04b",
+    "references": []
+  },
+  {
+    "file": "mantenimiento.html",
+    "bytes": 3356,
+    "sha256": "bb13cd5379949a8d8e93d1511feead75a7bad86f38e83945a9e3843cc572b512",
+    "references": [
+      "manifest.webmanifest",
+      "css/mantenimiento.css?v=20260828-3630",
+      "js/mantenimiento.js?v=20260801-2300",
+      "js/pwa.js?v=20260801-2300"
+    ]
+  },
+  {
+    "file": "minuta.html",
+    "bytes": 6733,
+    "sha256": "d02bec58ee1001fa6de94ce7c4ff1bcd0209f333c8c8b433afb8c71cd62d3168",
+    "references": [
+      "js/auth-guard.js?v=20260801-1600",
+      "js/maintenance-guard.js?v=20260801-1600",
+      "css/minuta.css?v=20260730-001",
+      "css/excel-sync.css?v=20260801-1600",
+      "css/corporate-ui.css?v=20261027",
+      "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js",
+      "js/excel-sync.js?v=20260801-1600",
+      "js/minuta.js?v=20260730-001"
+    ]
+  },
+  {
+    "file": "offline.html",
+    "bytes": 1236,
+    "sha256": "720346bc943cb9048abdfad164b04271d68c0f2b6fe39ad32dc4faf99f0a4c38",
+    "references": [
+      "css/professional-ui.css?v=20260828-3630"
+    ]
+  },
+  {
+    "file": "PROTECTED_MODULES.json",
+    "bytes": 524,
+    "sha256": "b31b15099f00ffd63c4097a68f1f6738359d3f227aa1841ecf1abb3a05364920",
+    "references": []
+  },
+  {
+    "file": "PUBLICACION_SEGURA.md",
+    "bytes": 556,
+    "sha256": "8d43c8d3113ada1cde3d52773b47e373b9974010cdd5e94e0465b050092cd914",
+    "references": []
+  },
+  {
+    "file": "README.txt",
+    "bytes": 4387,
+    "sha256": "1478fa6c55dfa1cd37e780864df354b1d73e7f1eaf346216b7e82e77ad82b28c",
+    "references": []
+  },
+  {
+    "file": "REPARACION_3.6.1.txt",
+    "bytes": 564,
+    "sha256": "09228d6b438d4392fb248589bc8c37be5723cf8159a49c4263c15200dd1f2f46",
+    "references": []
+  },
+  {
+    "file": "sw.js",
+    "bytes": 7831,
+    "sha256": "a0ceb7cecf6d127fbbc18c31b6aac48554c350e1e8e127c75088616017c38b58",
+    "references": []
+  },
+  {
+    "file": "usuarios.html",
+    "bytes": 4032,
+    "sha256": "a13478bd5aa62e88ae5ed4f203485d0ec4af3ac6787b3f84115391b5be2e70a8",
+    "references": [
+      "js/auth-guard.js?v=20260801-2300",
+      "js/maintenance-guard.js?v=20260801-2300",
+      "manifest.webmanifest",
+      "css/usuarios.css?v=20260801-2300",
+      "css/professional-ui.css?v=20260828-3630",
+      "css/corporate-ui.css?v=20261027",
+      "index.html",
+      "index.html",
+      "eventos.html",
+      "minuta.html",
+      "configuracion.html",
+      "index.html",
+      "js/usuarios.js?v=20260801-2300",
+      "js/pwa.js?v=20260801-2300",
+      "js/device-heartbeat.js?v=20260801-2300"
+    ]
+  },
+  {
+    "file": "validacion.html",
+    "bytes": 3627,
+    "sha256": "acef473062eb002f4f2ea3daed6cd288bf06ca44ac839aa92e63faf4a99c5b89",
+    "references": [
+      "js/auth-guard.js?v=20260801-2300",
+      "js/maintenance-guard.js?v=20260801-2300",
+      "manifest.webmanifest",
+      "css/admin-tools.css?v=20260801-2300",
+      "css/professional-ui.css?v=20260828-3630",
+      "css/corporate-ui.css?v=20261027",
+      "index.html",
+      "index.html",
+      "validacion.html",
+      "laboratorio.html",
+      "configuracion.html",
+      "js/validacion-page.js?v=20260801-2300",
+      "js/pwa.js?v=20260801-2300",
+      "js/device-heartbeat.js?v=20260801-2300"
+    ]
+  },
+  {
+    "file": "VALIDACION_FINAL.json",
+    "bytes": 313,
+    "sha256": "772a49c2fc257b30c809940123700cff2b1878454f45a35811cf9cec9fe5de80",
+    "references": []
+  },
+  {
+    "file": "VERSION.txt",
+    "bytes": 6,
+    "sha256": "9a989ebd95efe334f4248db1d63432eaa07e6fbe0e1234e47c91e5fc88906ca1",
+    "references": []
+  }
+]
