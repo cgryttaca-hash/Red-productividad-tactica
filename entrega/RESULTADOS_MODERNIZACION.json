@@ -1,0 +1,65 @@
+{
+  "fecha": "2026-10-28",
+  "base": "Entrega actualizada del 27 de octubre de 2026",
+  "archivos_base": 91,
+  "archivos_aplicacion": 106,
+  "identicos": 73,
+  "modificados": 18,
+  "nuevos": 15,
+  "eliminados_adicionales": 0,
+  "archivos_protegidos_comparados": [
+    "minuta.html",
+    "js/minuta.js",
+    "css/minuta.css",
+    "js/agenda-movil.js",
+    "css/agenda-movil.css",
+    "js/agenda-reminders.js",
+    "js/excel-sync.js",
+    "js/firebase-sync.js",
+    "js/firebase-config.js",
+    "js/local-auth.js",
+    "js/auth-guard.js",
+    "js/data-core.js",
+    "firestore.rules",
+    "data/eventos_publicos.json",
+    "assets/icon-180.png",
+    "assets/icon-192.png",
+    "assets/icon-512.png"
+  ],
+  "integracion_eventos": "Una única señal de interfaz; código restante idéntico al normalizar finales de línea.",
+  "grupos_verificados": 24,
+  "grupos_contenido_backend_worker": 12,
+  "grupos_navegador_integracion": 8,
+  "grupos_push_y_webkit": 4,
+  "combinaciones_pantalla": 40,
+  "tamanos_modal": 5,
+  "javascript_sintaxis_valida": 42,
+  "excepciones_prueba_conectada": 0,
+  "errores_consola_prueba_conectada": 0,
+  "recursos_locales_faltantes": 0,
+  "impresion": [
+    {
+      "modulo": "eventos",
+      "identicos": true,
+      "sha256_base": "8a88809599f6e2f51aa2927260e36abd340fce94aea884230250b23d78efe685",
+      "sha256_entrega": "8a88809599f6e2f51aa2927260e36abd340fce94aea884230250b23d78efe685",
+      "resolucion_ppp": 110
+    },
+    {
+      "modulo": "minuta",
+      "identicos": true,
+      "sha256_base": "aa832788b0f9630ecb460ff0ca6e202c16efe9901fdbad974a762f28bb0657d6",
+      "sha256_entrega": "aa832788b0f9630ecb460ff0ca6e202c16efe9901fdbad974a762f28bb0657d6",
+      "resolucion_ppp": 110
+    }
+  ],
+  "backend_dependencias": {
+    "firebase-admin": "14.5.0",
+    "firebase-functions": "7.4.0",
+    "web-push": "3.6.7"
+  },
+  "push_produccion": "Pendiente de claves VAPID, contacto, orígenes, URL y despliegue.",
+  "telefonos_fisicos": "No probados. WebKit de escritorio no acredita instalación o recepción en iPhone/iPad.",
+  "excel_maestro": "No incluido. Se verificó un XLSX de cinco registros sintéticos.",
+  "copia_recuperable": "Version-anterior-27-10-2026.zip"
+}

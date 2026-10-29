@@ -1,6 +1,7 @@
 {
   "name": "Agenda Móvil · Gestión de Eventos",
   "short_name": "Agenda",
+  "id": "./agenda_movil.html",
   "description": "Agenda operativa de eventos en tiempo real.",
   "start_url": "./agenda_movil.html",
   "scope": "./",

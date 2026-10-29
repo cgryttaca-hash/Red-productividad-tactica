@@ -9,7 +9,7 @@ const DOC_ID='mantenimiento';
 const $=id=>document.getElementById(id);
 const labels={
   index:'Inicio',eventos:'Eventos',minuta:'Minuta',agenda_movil:'Agenda Móvil',usuarios:'Usuarios',
-  validacion:'Validación Excel',laboratorio:'Laboratorio'
+  validacion:'Validación Excel',laboratorio:'Laboratorio',agendas:'Agendas'
 };
 const templates={
   mejoras:'Estamos realizando mejoras técnicas para ofrecer una experiencia más rápida y estable.',

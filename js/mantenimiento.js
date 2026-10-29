@@ -11,7 +11,7 @@ const labels={
   minuta:'Minuta',
   agenda_movil:'Agenda Móvil',
   usuarios:'Usuarios',
-  diagnostico:'Diagnóstico',respaldos:'Respaldos',auditoria:'Auditoría',equipos:'Equipos',validacion:'Validación',laboratorio:'Laboratorio'
+  validacion:'Validación',laboratorio:'Laboratorio',agendas:'Agendas'
 };
 let config=null;
 let timer=null;

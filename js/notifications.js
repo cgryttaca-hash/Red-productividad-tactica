@@ -12,14 +12,13 @@ export async function requestNotificationPermission(){
 }
 export async function showNotification(title,body,{tag='rpt-update',url='./agenda_movil.html',renotify=false}={}){
   const settings=read();
-  if(!settings.enabled||Notification.permission!=='granted')return false;
+  if(!settings.enabled||!('Notification'in window)||Notification.permission!=='granted')return false;
   const registration=await navigator.serviceWorker?.getRegistration?.();
   if(registration?.active){
     registration.active.postMessage({type:'SHOW_NOTIFICATION',payload:{title,body,tag,renotify,data:{url}}});
     return true;
   }
-  new Notification(title,{body,tag,renotify,icon:'./assets/icon-192.png'});
-  return true;
+  try{new Notification(title,{body,tag,renotify,icon:'./assets/icon-192.png'});return true;}catch(_){return false;}
 }
 function excelMessage(detail={}){
   const diff=detail.diff||{};

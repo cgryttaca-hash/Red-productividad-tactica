@@ -1,6 +1,7 @@
 {
   "name": "Gestión de Eventos",
   "short_name": "Eventos",
+  "id": "./index.html",
   "description": "Gestión operativa, minuta, agenda móvil y sincronización.",
   "start_url": "./index.html",
   "scope": "./",

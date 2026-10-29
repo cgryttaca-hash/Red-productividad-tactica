@@ -151,6 +151,7 @@ function renderTable(rows){
     tbody.appendChild(tr);
   });
   syncPreviewTable();
+  window.dispatchEvent(new CustomEvent('rptEventRowsRendered', { detail: { rows } }));
 }
 
 function updateDashboard(rows){

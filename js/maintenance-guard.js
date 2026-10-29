@@ -52,6 +52,12 @@ async function initialize(){
   if(!pageId){release();return;}
   const cached=readCache();
   if(redirectIfNeeded(cached)) return;
+  if(!navigator.onLine){
+    release();
+    window.addEventListener('online',initialize,{once:true});
+    return;
+  }
+  const visibilityTimer=setTimeout(release,8000);
 
   try{
     const [appMod,authMod,fireMod]=await Promise.all([
@@ -79,6 +85,8 @@ async function initialize(){
     },()=>release());
   }catch(_){
     release();
+  }finally{
+    clearTimeout(visibilityTimer);
   }
 }
 initialize();

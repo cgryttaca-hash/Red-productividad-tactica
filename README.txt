@@ -1,17 +1,21 @@
-GESTIÓN DE EVENTOS — REDISEÑO CORPORATIVO
-Entrega: 27 de octubre de 2026
+GESTIÓN DE EVENTOS — AGENDAS Y PWA MULTIPLATAFORMA
+Entrega: 28 de octubre de 2026
 
 El proyecto conserva su arquitectura HTML/CSS/JavaScript, sus datos y sus
 bibliotecas originales. El rediseño se activa exclusivamente en las páginas
 administrativas mediante data-ui="corporate" y css/corporate-ui.css.
 Esta hoja solo se aplica en pantalla; la impresión conserva sus estilos.
+Agendas genera documentos desde eventData sin duplicar ni editar eventos.
+La ampliación PWA conserva la consulta móvil y añade compatibilidad Apple,
+caché versionada y Web Push con backend separado, pendiente de configurar.
 
 PÁGINAS DISPONIBLES
 ------------------
 index.html          Centro operativo, módulos y sincronización.
 eventos.html        Agenda de eventos, filtros, búsquedas y vista previa.
 minuta.html         Minuta diaria, próximos eventos, coworking e impresión.
-agenda_movil.html   Agenda Móvil original, sin modificaciones.
+agendas.html        Generación, copia e impresión de agendas operativas.
+agenda_movil.html   Agenda Móvil con instalación Android/iOS y estado push.
 login.html          Acceso local del sistema.
 usuarios.html       Administración de usuarios locales.
 configuracion.html  Mantenimiento, notificaciones e instalación.
@@ -28,13 +32,14 @@ estos servicios compartidos. No tienen acceso administrativo propio.
 
 AGENDA MÓVIL E IMPRESIÓN
 -----------------------
-La Agenda Móvil, su manifest, iconos, CSS, JavaScript, requisitos de acceso,
-recordatorios y dependencias compartidas permanecen idénticos al original.
-También se conservan la página de mantenimiento y la pantalla offline que
-pueden abrirse desde la Agenda. El service worker solo cambia su nombre de
-caché y la lista de recursos para distribuir el diseño y retirar las rutas
-eliminadas; su lógica de offline y notificaciones permanece idéntica.
-Los JavaScript y CSS originales de Eventos y Minuta no se modificaron.
+El CSS, JavaScript de datos y recordatorios originales de Agenda Móvil
+permanecen intactos. Los ajustes de compatibilidad están en pwa-compat.css.
+El único service worker integra caché atómica, actualización voluntaria y
+recepción push; reconoce las versiones de los recursos y conserva datos
+en desconexión. El mantenimiento en caché vigente continúa respetándose.
+Los archivos de Minuta y los CSS originales de impresión no se modifican.
+Eventos añade únicamente una señal de interfaz al terminar de representar
+la tabla, utilizada por el nuevo botón Generar agenda.
 
 ACTUALIZACIÓN
 -------------
@@ -53,9 +58,12 @@ ACTUALIZACIÓN
 
 VERIFICACIÓN Y RECUPERACIÓN
 --------------------------
-Consulta entrega/INFORME_REDISENO.md para el inventario de cambios, pruebas,
-resultados y límites de la verificación. Las evidencias se incluyen en esa
-misma carpeta. PROTECTED_MODULES.json y js/system-version.js actualizan solo
-las dos huellas HTML afectadas por el enlace al nuevo CSS.
-Los documentos de actualizaciones anteriores se conservan como historial.
-El ZIP original se entrega por separado como copia recuperable.
+Consulta entrega/INFORME_MODERNIZACION.md para cambios, pruebas y límites.
+Consulta entrega/GUIA_AGENDAS_PWA.md para uso e instalación Android/iPhone.
+Consulta entrega/DESPLIEGUE_PUSH.md para configurar las funciones Firebase,
+VAPID y HTTPS. Push no se declara activo sin una suscripción confirmada.
+La interfaz funciona sin configurar ese backend y conserva sus avisos
+locales; las notificaciones reales de fondo requieren completar la guía.
+PROTECTED_MODULES.json y js/system-version.js reflejan las huellas actuales.
+Los informes y documentos anteriores se conservan como historial fechado.
+Se entrega por separado el ZIP de la versión anterior como recuperación.

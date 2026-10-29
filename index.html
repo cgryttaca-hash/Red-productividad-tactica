@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="css/firebase-sync.css?v=20260801-2300">
   <link rel="stylesheet" href="css/index.css?v=20260801-2300">
   <link rel="stylesheet" href="css/professional-ui.css?v=20260828-3630" media="print">
-  <link rel="stylesheet" href="css/corporate-ui.css?v=20261027" media="screen">
+  <link rel="stylesheet" href="css/corporate-ui.css?v=20261028" media="screen">
 </head>
 <body>
   <div id="loader" aria-hidden="true"><span class="loader-spinner"></span></div>
@@ -33,9 +33,6 @@
 
       <nav class="main-nav" aria-label="Navegación principal">
         <a class="active" href="index.html">Inicio</a>
-        <a href="eventos.html">Eventos</a>
-        <a href="minuta.html">Minuta</a>
-        <a href="agenda_movil.html" target="_blank" rel="noopener">Agenda móvil</a>
         <a id="usersLink" href="usuarios.html" hidden>Usuarios</a>
         <a id="configLink" href="configuracion.html" hidden>Configuración</a>
       </nav>
@@ -54,15 +51,15 @@
     <section class="dashboard-overview">
       <div>
         <span class="eyebrow">CENTRO DE OPERACIONES</span>
-        <h1>Cada evento, bajo control.</h1>
-        <p>Organiza la jornada, consulta la minuta y mantén tu agenda al día.</p>
+        <h1>Tu operación, bien organizada.</h1>
+        <p>Consulta, prepara y comparte la información de cada evento.</p>
       </div>
       <div class="overview-actions">
         <button class="install-action" data-install-app hidden type="button">Instalar aplicación</button>
       </div>
     </section>
 
-    <nav class="module-grid" aria-label="Módulos operativos">
+    <nav class="module-grid operations-menu" aria-label="Módulos operativos">
       <a class="module-card module-primary" href="eventos.html">
         <span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h3m3 0h2m-8 3h3"/></svg></span>
         <span class="module-copy"><small>PLANIFICACIÓN</small><strong>Agenda de eventos</strong><span>Consulta eventos, salones y servicios.</span></span>
@@ -71,6 +68,11 @@
       <a class="module-card" href="minuta.html">
         <span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Zm0 0v6h6M8 13h8m-8 4h6"/></svg></span>
         <span class="module-copy"><small>OPERACIÓN DIARIA</small><strong>Minuta</strong><span>Revisa la jornada y prepara la impresión.</span></span>
+        <span class="module-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="module-card" href="agendas.html">
+        <span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5H5v16h14V5h-3M9 3h6v4H9Zm-1 9h8m-8 4h6"/></svg></span>
+        <span class="module-copy"><small>PREPARAR Y COMPARTIR</small><strong>Agendas</strong><span>Genera la agenda operativa de un evento.</span></span>
         <span class="module-arrow" aria-hidden="true">↗</span>
       </a>
       <a class="module-card" href="agenda_movil.html" target="_blank" rel="noopener">
@@ -163,7 +165,6 @@
   <div class="admin-tools-grid">
     <a href="validacion.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Zm0 0v6h6m-12 6 3 3 5-6"/></svg><strong>Validación Excel</strong><span>Detecta errores, duplicados y campos incompletos.</span></a>
     <a href="laboratorio.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6m-5 0v6l-6 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-9V3M7 15h10"/></svg><strong>Laboratorio</strong><span>Prueba otro Excel sin modificar producción.</span></a>
-    <a href="configuracion.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></svg><strong>Configuración</strong><span>Mantenimiento, notificaciones e instalación.</span></a>
   </div>
 </section>
 <footer class="dashboard-version"><span>Gestión de Eventos · Centro operativo</span><span>Planificación · Operación · Consulta</span></footer>

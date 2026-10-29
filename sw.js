@@ -1,13 +1,18 @@
-const CACHE='rpt-shell-3.6.4-corporate-20261027';
+const CACHE='rpt-shell-20261028-agendas-pwa-v1';
 const OFFLINE='./offline.html';
 const ASSETS=[
   "./",
   "./agenda_movil.html",
+  "./agendas.html",
+  "./agenda.webmanifest",
+  "./assets/icon-180.png",
   "./assets/icon-192.png",
   "./assets/icon-512.png",
   "./configuracion.html",
   "./css/admin-tools.css",
   "./css/agenda-movil.css",
+  "./css/agendas.css",
+  "./css/pwa-compat.css",
   "./css/configuracion.css",
   "./css/corporate-ui.css",
   "./css/estilos.css",
@@ -25,6 +30,11 @@ const ASSETS=[
   "./eventos.html",
   "./index.html",
   "./js/agenda-movil.js",
+  "./js/agenda-content.js",
+  "./js/agendas.js",
+  "./js/push-config.js",
+  "./js/push-client.js",
+  "./js/push-ui.js",
   "./js/agenda-requirements.js",
   "./js/agenda-reminders.js",
   "./js/app.js",
@@ -65,52 +75,49 @@ const ASSETS=[
   "./minuta.html",
   "./offline.html",
   "./usuarios.html",
-  "./validacion.html",
-  "./sw.js"
+  "./validacion.html"
 ];
 
 self.addEventListener('install',event=>{
   event.waitUntil(
-    caches.open(CACHE).then(cache=>Promise.allSettled(ASSETS.map(asset=>cache.add(asset))))
+    caches.open(CACHE).then(cache=>cache.addAll(ASSETS.map(asset=>new Request(asset,{cache:'reload'}))))
   );
-  self.skipWaiting();
+  if(!self.registration.active)self.skipWaiting();
 });
 
 self.addEventListener('activate',event=>{
   event.waitUntil(
     caches.keys().then(keys=>Promise.all(
       keys.filter(key=>key.startsWith('rpt-shell-')&&key!==CACHE).map(key=>caches.delete(key))
-    ))
+    )).then(()=>self.clients.claim())
   );
-  self.clients.claim();
 });
+
+const STATIC_URLS=new Set(ASSETS.map(asset=>new URL(asset,self.registration.scope).href));
 
 self.addEventListener('fetch',event=>{
   const request=event.request;
   const url=new URL(request.url);
   if(request.method!=='GET'||url.origin!==location.origin)return;
-  const isHtml=request.mode==='navigate'||request.headers.get('accept')?.includes('text/html');
-  if(isHtml){
-    event.respondWith(
-      fetch(request).then(response=>{
-        if(response.ok){
-          const clone=response.clone();
-          caches.open(CACHE).then(cache=>cache.put(request,clone));
-        }
-        return response;
-      }).catch(async()=>await caches.match(request)||await caches.match(OFFLINE))
-    );
-    return;
-  }
-  event.respondWith(
-    caches.match(request).then(cached=>{
-      const network=fetch(request).then(response=>{
-        if(response.ok)caches.open(CACHE).then(cache=>cache.put(request,response.clone()));
-        return response;
-      }).catch(()=>cached);
-      return cached||network;
-    })
-  );
+  const assetUrl=new URL(url);
+  assetUrl.search='';
+  assetUrl.hash='';
+  if(!STATIC_URLS.has(assetUrl.href))return;
+  event.respondWith((async()=>{
+    const cache=await caches.open(CACHE);
+    const cached=await cache.match(assetUrl.href);
+    const isPublicData=assetUrl.pathname.endsWith('/data/eventos_publicos.json');
+    if(cached&&!isPublicData)return cached;
+    try{
+      const response=await fetch(request);
+      if(response.ok)await cache.put(assetUrl.href,response.clone());
+      return response;
+    }catch(_){
+      if(cached)return cached;
+      if(request.mode==='navigate')return await cache.match(OFFLINE)||Response.error();
+      return Response.error();
+    }
+  })());
 });
 
 self.addEventListener('message',event=>{
@@ -128,12 +135,38 @@ self.addEventListener('message',event=>{
   }
 });
 
+function notificationUrl(value){
+  try{
+    const url=new URL(value||'./agenda_movil.html',self.registration.scope);
+    if(url.origin===location.origin&&url.pathname.startsWith(new URL(self.registration.scope).pathname))return url.href;
+  }catch(_){}
+  return new URL('./agenda_movil.html',self.registration.scope).href;
+}
+
+self.addEventListener('push',event=>{
+  let payload={};
+  try{payload=event.data?.json()||{};}catch(_){}
+  const title=typeof payload.title==='string'?payload.title.slice(0,120):'Agenda de eventos';
+  const body=typeof payload.body==='string'?payload.body.slice(0,500):'Hay información disponible en la agenda.';
+  event.waitUntil(self.registration.showNotification(title,{
+    body,icon:'./assets/icon-192.png',badge:'./assets/icon-192.png',
+    tag:typeof payload.tag==='string'?payload.tag.slice(0,100):'rpt-push-update',
+    data:{url:notificationUrl(payload.url)},renotify:false
+  }));
+});
+
+self.addEventListener('pushsubscriptionchange',event=>{
+  event.waitUntil(self.clients.matchAll({type:'window',includeUncontrolled:true}).then(list=>{
+    list.forEach(client=>client.postMessage({type:'RPT_PUSH_SUBSCRIPTION_CHANGED'}));
+  }));
+});
+
 self.addEventListener('notificationclick',event=>{
   event.notification.close();
-  const url=event.notification.data?.url||'./agenda_movil.html';
+  const url=notificationUrl(event.notification.data?.url);
   event.waitUntil(
     clients.matchAll({type:'window',includeUncontrolled:true}).then(list=>{
-      const match=list.find(client=>client.url.includes(url.replace('./','')));
+      const match=list.find(client=>new URL(client.url).pathname===new URL(url).pathname);
       return match?match.focus():clients.openWindow(url);
     })
   );

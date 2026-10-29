@@ -2,7 +2,8 @@ import {requestNotificationPermission,setNotificationSettings} from './notificat
 
 const $=id=>document.getElementById(id);
 let installPrompt=null;
-const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const isiOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+document.documentElement.classList.toggle('is-apple-mobile',isiOS);
 const isStandalone=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
 
 function notificationReady(){return 'Notification' in window&&Notification.permission==='granted';}
@@ -32,24 +33,28 @@ function updateUI(){
     setRow('agendaInstallStatus',true,'Agenda instalada y abierta como aplicación.');
     $('agendaInstallButton').hidden=true;
   }else{
-    setRow('agendaInstallStatus',false,isiOS?'Instálala desde Compartir → Añadir a pantalla de inicio y ábrela desde su icono.':'Debes instalar y abrir la Agenda como aplicación.');
+    setRow('agendaInstallStatus',false,isiOS?'En Safari: Compartir → Añadir a pantalla de inicio. Si aparece, activa «Abrir como app web». Después abre el icono Agenda.':'Debes instalar y abrir la Agenda como aplicación. Usa Instalar aplicación o Añadir a pantalla de inicio en el menú del navegador.');
     $('agendaInstallButton').hidden=!(installPrompt&&!isiOS);
   }
   if(!('Notification'in window)){
-    setRow('agendaNotifyStatus',false,'Este navegador no admite notificaciones. Usa un navegador compatible.');
+    setRow('agendaNotifyStatus',false,isiOS&&!installed?'Primero instala y abre Agenda desde su icono. Las notificaciones requieren iOS/iPadOS 16.4 o posterior y un dispositivo compatible.':'Este contexto no admite notificaciones. Usa una aplicación instalada y un navegador compatible.');
     $('agendaNotifyButton').disabled=true;
   }else if(Notification.permission==='granted'){
-    setRow('agendaNotifyStatus',true,'Notificaciones autorizadas.');
+    setRow('agendaNotifyStatus',true,'Permiso autorizado para los avisos locales. Los avisos push de fondo se comprueban dentro de la agenda.');
     $('agendaNotifyButton').hidden=true;
   }else if(Notification.permission==='denied'){
     setRow('agendaNotifyStatus',false,'Permiso bloqueado. Activa Notificaciones para este sitio desde la configuración del navegador.');
     $('agendaNotifyButton').textContent='Revisar permiso de notificaciones';
   }else{
-    setRow('agendaNotifyStatus',false,'Autoriza los avisos para alimentación, finalización y agenda del día siguiente.');
+    setRow('agendaNotifyStatus',false,'Autoriza los recordatorios de alimentación, finalización y agenda del día siguiente mientras la aplicación está abierta.');
     $('agendaNotifyButton').hidden=false;
     $('agendaNotifyButton').textContent='Activar notificaciones';
   }
   unlockIfReady();
+  if(!window.isSecureContext){
+    $('agendaGateHelp').textContent='Abre la agenda mediante HTTPS para instalarla y utilizar notificaciones.';
+    $('agendaNotifyButton').disabled=true;
+  }
 }
 
 window.addEventListener('beforeinstallprompt',event=>{
