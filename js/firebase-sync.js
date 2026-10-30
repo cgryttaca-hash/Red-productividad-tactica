@@ -1,3 +1,4 @@
+import {eventFoodServices,foodFields} from './food-alerts-core.js';
 import {
   FIREBASE_CONFIG,
   FIREBASE_OWNER_UID,
@@ -87,6 +88,7 @@ function normalizeDate(value){
 }
 
 function publicEvent(row,index){
+  const food=eventFoodServices(row);
   const id=row.__EVENT_ID||hash(`${row.HOJA_ORIGEN||''}|${row.__FILA_ORIGEN||index}|${row['NOMBRE DE LA EMPRESA']||''}`);
   const event={
     id,
@@ -95,8 +97,8 @@ function publicEvent(row,index){
     horarioEvento:text(row['HORARIO DEL EVENTO']),
     empresa:text(row['NOMBRE DE LA EMPRESA']),
     cantidadPersonas:Number(row['CANTIDAD DE PERSONAS'])||0,
-    horarioAyB:text(row['HORARIO AYB']),
-    descripcionAlimentacion:text(row['DESCRIPCION ALIMENTACION']),
+    horarioAyB:food.schedule,
+    descripcionAlimentacion:food.description,foodGroups:foodFields(row),
     acomodacion:text(row.ACOMODACION),
     medioPago:text(row['MEDIO DE PAGO']),
     modalidadServicio:text(row['MODALIDAD DE SERVICIO']),
@@ -316,6 +318,7 @@ async function writeAudit(entries,fireMod){
 }
 
 export async function publishIfReady(rows=null,diff=null,meta={}){
+  if(window.RPTNavigation?.mobile())return false;
   if(publishing||window.RPTUpdateGuard?.locked)return false;
   const operationStarted=performance.now();
   publishing=true;window.__RPT_FIREBASE_PUBLISHING__=true;updateUi();window.RPTUpdateGuard?.setBusy('firebase-publish',true);
@@ -418,6 +421,7 @@ export async function publishIfReady(rows=null,diff=null,meta={}){
 }
 
 async function initialize(){
+  if(window.RPTNavigation?.mobile())return;
   ensureUi();setState('syncing','Inicializando Firebase','Espera un momento…');
   try{
     await loadSdk();await authReadyPromise;updateUi();
@@ -442,5 +446,5 @@ window.addEventListener('eventDataUpdated',event=>{
     fileName:detail.fileName,updatedAt:detail.updatedAt,hash:detail.hash,auditEntries:detail.auditEntries,forceRemote:false
   });
 });
-window.FirebaseEventPublisher={publish:()=>publishIfReady(currentRows(),null,{manual:true,forceRemote:true}),openPanel};
+if(!window.RPTNavigation?.mobile())window.FirebaseEventPublisher={publish:()=>publishIfReady(currentRows(),null,{manual:true,forceRemote:true}),openPanel};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initialize,{once:true});else initialize();

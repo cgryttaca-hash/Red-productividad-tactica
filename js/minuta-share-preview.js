@@ -13,9 +13,9 @@ function waitForResult() { clearTimeout(waiting); waiting = setTimeout(() => set
 function setStatus(message, error = false) { status.textContent = message; status.classList.toggle('is-error', error); }
 function refreshMessage() {
   if (!payload) return '';
-  const text = window.RPTMinuteTime.message(payload.dateISO);
+  const text = window.RPTMinuteTime.message(payload.dateISO)+(payload.text?'\n\n'+payload.text:'');
   messageField.value = text;
-  document.getElementById('openWhatsApp').href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  document.getElementById('openWhatsApp').href = text.length>12000?'https://web.whatsapp.com/':`https://web.whatsapp.com/send?text=${encodeURIComponent(text)}`;
   return text;
 }
 function canShare(value) { try { return typeof navigator.share === 'function' && typeof navigator.canShare === 'function' && navigator.canShare(value); } catch (_) { return false; } }
@@ -30,7 +30,7 @@ function display(result) {
   nativeButton.hidden = !together && !canShare({ files });
   nativeButton.textContent = together ? 'Compartir imágenes y texto' : 'Compartir imágenes';
   document.getElementById('shareHelp').textContent = nativeButton.hidden
-    ? 'Descarga las imágenes en orden, copia el mensaje y abre WhatsApp. Adjunta los PNG antes de enviar; el enlace solo prepara el texto. Envíalos como documento o usa la opción de calidad alta para conservar nitidez.'
+    ? 'Descarga las imágenes en orden, copia el mensaje y abre WhatsApp Web. Adjunta los PNG antes de enviar; el enlace solo prepara el texto. Envíalos como documento o usa la opción de calidad alta para conservar nitidez.'
     : 'Elige WhatsApp en el menú del sistema y revisa el chat o grupo antes de confirmar. Algunas versiones separan imagen y texto: puedes copiar el mensaje y adjuntar los PNG descargados. Compartir desde aquí no confirma la recepción.';
   const images = document.getElementById('shareImages'); images.replaceChildren();
   result.images.forEach((image, index) => {
@@ -63,7 +63,7 @@ document.getElementById('copyMessage').addEventListener('click', async () => {
   try { if (!navigator.clipboard?.writeText) throw new Error('clipboard'); await navigator.clipboard.writeText(text); setStatus('Mensaje copiado. Puedes pegarlo en WhatsApp antes de enviar.'); }
   catch (_) { messageField.focus(); messageField.select(); setStatus('El navegador bloqueó la copia. El mensaje está seleccionado: utiliza Copiar o Ctrl + C.'); }
 });
-document.getElementById('openWhatsApp').addEventListener('click', () => { refreshMessage(); setStatus('WhatsApp abrirá solo el texto. Adjunta también los PNG y confirma el envío en el chat elegido.'); });
+document.getElementById('openWhatsApp').addEventListener('click', () => { const text=refreshMessage();setStatus(text.length>12000?'WhatsApp Web se abrirá. Copia el mensaje completo con el botón disponible y pégalo en el chat; adjunta los PNG.':'Se abrirá WhatsApp Web con el texto preparado. Adjunta los PNG y confirma el envío en el chat elegido.'); });
 document.getElementById('closeShare').addEventListener('click', () => window.close());
 document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshMessage(); });
 window.addEventListener('pagehide', () => {

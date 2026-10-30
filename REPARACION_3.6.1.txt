@@ -1,0 +1,6 @@
+REPARACION 3.6.1
+- Restaurados desde la base original estable: Index, Login, Usuarios, Configuracion, Auditoria, Diagnostico, Respaldos, Equipos, Validacion, Firebase, Firestore rules y sincronizacion Excel.
+- Se retiro la capa Cloud Auth/viewer-sync de 3.6 que interferia con el flujo original.
+- Se conserva la Agenda Movil de 3.6 (HTML/CSS/JS) y su manifest/iconos porque esa interfaz fue aprobada.
+- Service Worker usa una cache nueva para eliminar recursos rotos de versiones anteriores.
+- La recuperacion publica de contrasena del Login queda deshabilitada.

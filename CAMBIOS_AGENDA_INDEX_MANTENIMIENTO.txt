@@ -1,0 +1,32 @@
+ACTUALIZACIÓN DE AGENDA MÓVIL, INDEX Y MANTENIMIENTO
+====================================================
+
+Archivos de Eventos y Minuta:
+- No se modificaron sus HTML, CSS ni JavaScript.
+
+Agenda Móvil:
+- Se eliminaron los KPI superiores.
+- Encabezado y filtros más compactos para teléfono.
+- Vista adaptable para escritorio y móvil.
+- Alimentación unificada por líneas: horario + descripción.
+- Se agregó Acomodación del espacio.
+- Detalle completo al seleccionar el evento.
+- Actualización en tiempo real y respaldo cada 15 segundos.
+- Se redujeron lecturas repetidas usando hash de publicación.
+
+Index:
+- Fondo claro y banner negro.
+- Controles ordenados en tres paneles.
+- Auditoría reunida en pestañas para reducir desorden.
+- Renderizado condicionado a cambios y actualización cada 15 segundos.
+
+Firebase:
+- Bloques de publicación ampliados para reducir lecturas.
+- Solo se reescriben los bloques modificados.
+- Verificación de bloques faltantes sin republicar todo innecesariamente.
+- Sincronización detallada y auditoría se completan en segundo plano.
+
+Mantenimiento:
+- Nueva ilustración animada de trabajador.
+- Cuenta regresiva, progreso y retorno automático conservados.
+- Diseño adaptable y profesional.

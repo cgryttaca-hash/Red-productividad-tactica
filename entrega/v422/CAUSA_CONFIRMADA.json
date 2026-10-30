@@ -1,0 +1,608 @@
+{
+  "url": "https://cgryttaca-hash.github.io/Red-productividad-tactica/",
+  "checkedAt": "2026-10-30T11:49:02.584Z",
+  "version": "4.2.0",
+  "manifestMatchesDeliveredV42": true,
+  "failedResources": 30,
+  "lineEndingOnly": 30,
+  "otherChanges": 0,
+  "resources": [
+    {
+      "resource": "agenda_movil.html",
+      "expected": "03364223443265beece03a4aecceac17a7721ac37d15bda42a67831872c0a239",
+      "received": "af1f4db8ed6872c707e1b2a57adbf967fca7ffa5e346bae513f5e9f87d8ccf50",
+      "localHash": "03364223443265beece03a4aecceac17a7721ac37d15bda42a67831872c0a239",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 119,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1eb2\""
+    },
+    {
+      "resource": "asistente.html",
+      "expected": "90d15146d3937203f1aa5778fa28957f95b2336c02896af18a344f12cf56b34a",
+      "received": "e7194536f9fa39afad4eb9c809a08668a435178f49405eae4cf263b1afc33ec8",
+      "localHash": "90d15146d3937203f1aa5778fa28957f95b2336c02896af18a344f12cf56b34a",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 22,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1844\""
+    },
+    {
+      "resource": "agendas.html",
+      "expected": "d5cea4c587a4dfd7a0e359d3ecbdb977e2e65d7dc7a5670a27a08b195805ebb2",
+      "received": "c5dae556ab190652f89bdc6f41c305ca8ca7877e9a3f9206e5940fcf1ebf70b3",
+      "localHash": "d5cea4c587a4dfd7a0e359d3ecbdb977e2e65d7dc7a5670a27a08b195805ebb2",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 50,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1249\""
+    },
+    {
+      "resource": "configuracion.html",
+      "expected": "6163bf56bf295336d6847a776aae44fbe9f0f9014477a7aa4ca69a02eff2f225",
+      "received": "a36eaadcc256de30bfcc66752939775496a82fc3b687de2254e0aa58b0e0e788",
+      "localHash": "6163bf56bf295336d6847a776aae44fbe9f0f9014477a7aa4ca69a02eff2f225",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 70,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1ceb\""
+    },
+    {
+      "resource": "css/enterprise-refinements.css",
+      "expected": "155682b2f20990cb226e94196c48ac04418e35fa35c0b6d29a262505c0bcb54e",
+      "received": "24a953109d35d683924ec86a4f4c42bcd3aad6cf338482958d16cf06384ac2a6",
+      "localHash": "155682b2f20990cb226e94196c48ac04418e35fa35c0b6d29a262505c0bcb54e",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 28,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-2a0d\""
+    },
+    {
+      "resource": "eventos.html",
+      "expected": "e9ee3849a980f973cd134055a0c7f34e261d7d31d58ad1e4cada927627222609",
+      "received": "53a6c1eab51345b374221083bdb571f328c5fdee22e9a66261d1e6c255427472",
+      "localHash": "e9ee3849a980f973cd134055a0c7f34e261d7d31d58ad1e4cada927627222609",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 148,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1b8d\""
+    },
+    {
+      "resource": "index.html",
+      "expected": "dbc92a5ba4daf19cba10b1861d024017f60a513883c3f31ac68b0d2a9bcdb0d4",
+      "received": "6912a93a148cf389b91bd33b1889170081089dddf8ced7ba17335d258dc97895",
+      "localHash": "dbc92a5ba4daf19cba10b1861d024017f60a513883c3f31ac68b0d2a9bcdb0d4",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 188,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-2703\""
+    },
+    {
+      "resource": "js/agenda-dialog.js",
+      "expected": "2cb2586623b7610eb92164e44a7715510f8d1fa42c6023d88d8ee8964af36487",
+      "received": "4f4227c996e981a2cedc0429a78489efaba27074f4bbd1dae556511bad79cbe3",
+      "localHash": "2cb2586623b7610eb92164e44a7715510f8d1fa42c6023d88d8ee8964af36487",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 51,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-3330\""
+    },
+    {
+      "resource": "js/agenda-page.js",
+      "expected": "6fca849a97eb2ae488977738dc8dfb4fbb89f45543bb1d9703e102ec1ac0d132",
+      "received": "0725b1248af318731571825469d2c99a1ec688a973b0c3c1cf42616b1c4d940b",
+      "localHash": "6fca849a97eb2ae488977738dc8dfb4fbb89f45543bb1d9703e102ec1ac0d132",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 27,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1326\""
+    },
+    {
+      "resource": "js/agenda-movil.js",
+      "expected": "a3b593e7497b0e458e0830ee0a2f33599aeff5d48930f51f6c861933278262db",
+      "received": "5edfc8a88ee987c8ade5717e20ffc90ecf676581c05fef8306bd4e0ed8901def",
+      "localHash": "a3b593e7497b0e458e0830ee0a2f33599aeff5d48930f51f6c861933278262db",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 620,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-6c1f\""
+    },
+    {
+      "resource": "js/agenda-reminders.js",
+      "expected": "338ea3a38c7d44e910fda3f7d3df7e27e7fcb7bc0cc07644bd62656d8d91cc33",
+      "received": "207478af450737864bd84d9e516c44f0062cf14b8d15f42e59e17dee42cbfbf6",
+      "localHash": "338ea3a38c7d44e910fda3f7d3df7e27e7fcb7bc0cc07644bd62656d8d91cc33",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 36,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-760\""
+    },
+    {
+      "resource": "js/configuracion.js",
+      "expected": "6e6b46486ef8d78fe9c828d375aa215288b3f5294901ceae78554dce8cd87b62",
+      "received": "6284b5b36f01e7a94b3b3710dc481b2f542d8e2455f6cfcbf92fcdabeb402595",
+      "localHash": "6e6b46486ef8d78fe9c828d375aa215288b3f5294901ceae78554dce8cd87b62",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 157,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-279f\""
+    },
+    {
+      "resource": "js/food-alerts-core.js",
+      "expected": "2138d9ad9c470cc032c05d79ee02fc5bec38edb653ee3964e8c543cff9751df9",
+      "received": "8fddcfc12452eae94ae57592b5b51343be797a08537754a9c372ba10f85d3976",
+      "localHash": "2138d9ad9c470cc032c05d79ee02fc5bec38edb653ee3964e8c543cff9751df9",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 145,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-2471\""
+    },
+    {
+      "resource": "js/login.js",
+      "expected": "541f7d3ae3b367532dec71d6fb43247ef0bd08f4be70a8558b0e603f02bc009b",
+      "received": "48c96588231fc7e7f5d73e538b0140a3599b9709a390b1f7003c7eb7c63d9f89",
+      "localHash": "541f7d3ae3b367532dec71d6fb43247ef0bd08f4be70a8558b0e603f02bc009b",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 9,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-725\""
+    },
+    {
+      "resource": "js/maintenance-guard.js",
+      "expected": "f2ff286e436a2ce76ce95889c75d62ef019b6727846b4a91b3ea3bde63772a65",
+      "received": "a6d831f42abe06605a5eec559d638e1d5636b58663584b99e967d781aa555201",
+      "localHash": "f2ff286e436a2ce76ce95889c75d62ef019b6727846b4a91b3ea3bde63772a65",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 93,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-b67\""
+    },
+    {
+      "resource": "js/mantenimiento.js",
+      "expected": "85e6b958d73edea4f3bc45ebc2cf939620ee9cde7e46237f4af8e5da7d869aee",
+      "received": "a3afc9bcdea732273d3eb6fea1f3a9a8d5fdf68d6838c68edf451ec926bc3a94",
+      "localHash": "85e6b958d73edea4f3bc45ebc2cf939620ee9cde7e46237f4af8e5da7d869aee",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 97,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1100\""
+    },
+    {
+      "resource": "js/notifications.js",
+      "expected": "ae9bbc2ba5acee9e656581eb7f6d94446658f29b1320880a46b6cac3e60005dc",
+      "received": "f8090e291b2ab89060d06797b0ecf17a34f75fbe170ee996f05754da0f20eab6",
+      "localHash": "ae9bbc2ba5acee9e656581eb7f6d94446658f29b1320880a46b6cac3e60005dc",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 27,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-77b\""
+    },
+    {
+      "resource": "js/pwa-release.js",
+      "expected": "7ef2a03469a01db0c406056420a8792934978addc816561d0d935a1f576775d0",
+      "received": "c708b4ce19b480fc0cbd922cdb43196894865925029602a9937099fce610e878",
+      "localHash": "7ef2a03469a01db0c406056420a8792934978addc816561d0d935a1f576775d0",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 40,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-2df5\""
+    },
+    {
+      "resource": "js/push-ui.js",
+      "expected": "c1cf392cbf344267ef9aabdef7d6b1051172e31c59d97a3f6aee95c39d5e5465",
+      "received": "961d8858786266201a847c7328993826ea02c94e868d2e567cfb371d32c1713a",
+      "localHash": "c1cf392cbf344267ef9aabdef7d6b1051172e31c59d97a3f6aee95c39d5e5465",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 69,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-122c\""
+    },
+    {
+      "resource": "js/release-worker.js",
+      "expected": "39d100bdd8309239452836e54d0762b9a38687cc3afd74cbccff0bbe8efad519",
+      "received": "7ad622b6f544fc41b31567f0848c96167ce0de92f355cad26ac4397e3149743c",
+      "localHash": "39d100bdd8309239452836e54d0762b9a38687cc3afd74cbccff0bbe8efad519",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 84,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-28da\""
+    },
+    {
+      "resource": "js/update-page.js",
+      "expected": "5e6e3a87dae72f67ebb988aa8397311f6f99bd10fb89a1bd2c1500a69c513a54",
+      "received": "0f50cc5164836c24b77a90c55993580878542dacd880c37978b9337466b49e23",
+      "localHash": "5e6e3a87dae72f67ebb988aa8397311f6f99bd10fb89a1bd2c1500a69c513a54",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 11,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-d10\""
+    },
+    {
+      "resource": "js/update-safety.js",
+      "expected": "50eb6f18f2123b6d854d2e18648bea3c4ba071463d3bac985a508b75ed222d4a",
+      "received": "ef58cd09eaecf58f5a55f1c75cd147e216b4fbba93a4120c18bc1c60787e0612",
+      "localHash": "50eb6f18f2123b6d854d2e18648bea3c4ba071463d3bac985a508b75ed222d4a",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 22,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-12e7\""
+    },
+    {
+      "resource": "laboratorio.html",
+      "expected": "24e9ff3ff68582c432a6cb2c67e1b90627953184d7747bd33d2ecc8bbbde00bd",
+      "received": "e77e79d114147a5679c42ced02d8ca2d235325d4cca4523e8845927d3ef7d20d",
+      "localHash": "24e9ff3ff68582c432a6cb2c67e1b90627953184d7747bd33d2ecc8bbbde00bd",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 48,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-11a8\""
+    },
+    {
+      "resource": "login.html",
+      "expected": "5d259d7147a855a74920a4b4002b95a820936486115f7361f33acf41db552660",
+      "received": "0c643c092d3b91c857b757e2085999bf042c153a263fbd15ec1823384c24c1ed",
+      "localHash": "5d259d7147a855a74920a4b4002b95a820936486115f7361f33acf41db552660",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 21,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-8f7\""
+    },
+    {
+      "resource": "mantenimiento.html",
+      "expected": "804ed25cca573ec308982cf37efac47e878abeabd133ab9b8b1c6f6736783dd8",
+      "received": "a3c28c65e0b79bbe631da0293d63f274a3f6b99577ece5c4d964b049bf7ca2e0",
+      "localHash": "804ed25cca573ec308982cf37efac47e878abeabd133ab9b8b1c6f6736783dd8",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 76,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1020\""
+    },
+    {
+      "resource": "minuta.html",
+      "expected": "0020b67444f7ef48b47a0bd765a5978ff1763807bee88d647ed2b4e45fd26ed2",
+      "received": "251fdb9ebcb9facf019eff4e5b620d46b68cbc35e60c5b7300774bddaf943046",
+      "localHash": "0020b67444f7ef48b47a0bd765a5978ff1763807bee88d647ed2b4e45fd26ed2",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 167,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1e48\""
+    },
+    {
+      "resource": "minuta_compartir.html",
+      "expected": "68a4f51f5387824ea3e559137f6ab70aca5a5ee6ee68a27d271aa398325222c8",
+      "received": "57ca6a613f7447b34bc6294b318a5ac3ea5503dd4d1eb06ee98cff5ef5c937ed",
+      "localHash": "68a4f51f5387824ea3e559137f6ab70aca5a5ee6ee68a27d271aa398325222c8",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 38,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-ab9\""
+    },
+    {
+      "resource": "offline.html",
+      "expected": "d9e004383f39c30e5bfbebcffbb516ba0e7c64213bb30dd2bbe25c18649bba33",
+      "received": "1e0aca9e0ef482510aefef72378b63f65d9f1874987c0bf813bd6dbe61988358",
+      "localHash": "d9e004383f39c30e5bfbebcffbb516ba0e7c64213bb30dd2bbe25c18649bba33",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 21,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-869\""
+    },
+    {
+      "resource": "usuarios.html",
+      "expected": "20b8993f339eb6a9684d83cf56b8cea372b4362e34d83a9fc2a5b67db8ec8fb6",
+      "received": "180cbeab3b56761e634af8ff8aa0b8c2e065a40f8b9d2afc59c1c6517eb10d0a",
+      "localHash": "20b8993f339eb6a9684d83cf56b8cea372b4362e34d83a9fc2a5b67db8ec8fb6",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 104,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-12b5\""
+    },
+    {
+      "resource": "validacion.html",
+      "expected": "b33075c83405c7f28d65f20bb527c02e258b05bdcc63bf76c3832c152122c3c0",
+      "received": "1710ab17469e0b4cdcd512a584b8d713cd68a28269c0cd7b4c2f7496bbf3955c",
+      "localHash": "b33075c83405c7f28d65f20bb527c02e258b05bdcc63bf76c3832c152122c3c0",
+      "matchesLocal": false,
+      "matchesLocalAfterLFConversion": true,
+      "localCRLF": 48,
+      "remoteCRLF": 0,
+      "status": 200,
+      "etag": "W/\"6ae47dd9-1136\""
+    }
+  ],
+  "repositoryEvidence": [
+    {
+      "path": "agenda_movil.html",
+      "url": "https://raw.githubusercontent.com/cgryttaca-hash/Red-productividad-tactica/main/agenda_movil.html",
+      "status": 200,
+      "sha256": "af1f4db8ed6872c707e1b2a57adbf967fca7ffa5e346bae513f5e9f87d8ccf50",
+      "crlf": 0
+    },
+    {
+      "path": "dist/agenda_movil.html",
+      "url": "https://raw.githubusercontent.com/cgryttaca-hash/Red-productividad-tactica/main/dist/agenda_movil.html",
+      "status": 404,
+      "sha256": "d5558cd419c8d46bdc958064cb97f963d1ea793866414c025906ec15033512ed",
+      "crlf": 0
+    },
+    {
+      "path": ".github/workflows/publish.yml",
+      "url": "https://raw.githubusercontent.com/cgryttaca-hash/Red-productividad-tactica/main/.github/workflows/publish.yml",
+      "status": 200,
+      "sha256": "bd4687047f752548206aa48f2c40c6fd1266e19bc9913d2178fad1090bc32d56",
+      "crlf": 0,
+      "text": "name: Publicar versión aprobada\non:\n  workflow_dispatch:\n    inputs:\n      version:\n        description: Versión que se publicará, por ejemplo 4.0.0\n        required: true\n        type: string\n      approved:\n        description: He revisado pruebas y cambios y autorizo publicar este commit\n        required: true\n        type: boolean\n        default: false\npermissions:\n  contents: read\nconcurrency:\n  group: publicar-eventos\n  cancel-in-progress: false\njobs:\n  prepare:\n    if: inputs.approved == true\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n      - uses: pnpm/action-setup@v4\n        with:\n          version: '10.11.0'\n      - run: pnpm install --frozen-lockfile --ignore-scripts\n      - run: node tools/build-release.cjs --version \"$RELEASE_VERSION\"\n        env:\n          RELEASE_VERSION: ${{ inputs.version }}\n      - run: pnpm check\n      - run: pnpm test\n      - run: pnpm exec playwright install --with-deps chromium\n      - run: pnpm test:updates\n      - uses: actions/upload-pages-artifact@v3\n        with:\n          path: dist\n  publish:\n    needs: prepare\n    runs-on: ubuntu-latest\n    permissions:\n      pages: write\n      id-token: write\n    environment:\n      name: production\n      url: ${{ steps.deployment.outputs.page_url }}\n    steps:\n      - name: Publicar artefacto verificado\n        id: deployment\n        uses: actions/deploy-pages@v4\n"
+    }
+  ],
+  "repositoryResources": [
+    {
+      "resource": "agenda_movil.html",
+      "status": 200,
+      "sha256": "af1f4db8ed6872c707e1b2a57adbf967fca7ffa5e346bae513f5e9f87d8ccf50",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "agendas.html",
+      "status": 200,
+      "sha256": "c5dae556ab190652f89bdc6f41c305ca8ca7877e9a3f9206e5940fcf1ebf70b3",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "asistente.html",
+      "status": 200,
+      "sha256": "e7194536f9fa39afad4eb9c809a08668a435178f49405eae4cf263b1afc33ec8",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "configuracion.html",
+      "status": 200,
+      "sha256": "a36eaadcc256de30bfcc66752939775496a82fc3b687de2254e0aa58b0e0e788",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "css/enterprise-refinements.css",
+      "status": 200,
+      "sha256": "24a953109d35d683924ec86a4f4c42bcd3aad6cf338482958d16cf06384ac2a6",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/agenda-page.js",
+      "status": 200,
+      "sha256": "0725b1248af318731571825469d2c99a1ec688a973b0c3c1cf42616b1c4d940b",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "eventos.html",
+      "status": 200,
+      "sha256": "53a6c1eab51345b374221083bdb571f328c5fdee22e9a66261d1e6c255427472",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "index.html",
+      "status": 200,
+      "sha256": "6912a93a148cf389b91bd33b1889170081089dddf8ced7ba17335d258dc97895",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/agenda-dialog.js",
+      "status": 200,
+      "sha256": "4f4227c996e981a2cedc0429a78489efaba27074f4bbd1dae556511bad79cbe3",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/agenda-reminders.js",
+      "status": 200,
+      "sha256": "207478af450737864bd84d9e516c44f0062cf14b8d15f42e59e17dee42cbfbf6",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/configuracion.js",
+      "status": 200,
+      "sha256": "6284b5b36f01e7a94b3b3710dc481b2f542d8e2455f6cfcbf92fcdabeb402595",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/food-alerts-core.js",
+      "status": 200,
+      "sha256": "8fddcfc12452eae94ae57592b5b51343be797a08537754a9c372ba10f85d3976",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/agenda-movil.js",
+      "status": 200,
+      "sha256": "5edfc8a88ee987c8ade5717e20ffc90ecf676581c05fef8306bd4e0ed8901def",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/login.js",
+      "status": 200,
+      "sha256": "48c96588231fc7e7f5d73e538b0140a3599b9709a390b1f7003c7eb7c63d9f89",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/maintenance-guard.js",
+      "status": 200,
+      "sha256": "a6d831f42abe06605a5eec559d638e1d5636b58663584b99e967d781aa555201",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/notifications.js",
+      "status": 200,
+      "sha256": "f8090e291b2ab89060d06797b0ecf17a34f75fbe170ee996f05754da0f20eab6",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/mantenimiento.js",
+      "status": 200,
+      "sha256": "a3afc9bcdea732273d3eb6fea1f3a9a8d5fdf68d6838c68edf451ec926bc3a94",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/push-ui.js",
+      "status": 200,
+      "sha256": "961d8858786266201a847c7328993826ea02c94e868d2e567cfb371d32c1713a",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/update-page.js",
+      "status": 200,
+      "sha256": "0f50cc5164836c24b77a90c55993580878542dacd880c37978b9337466b49e23",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/release-worker.js",
+      "status": 200,
+      "sha256": "7ad622b6f544fc41b31567f0848c96167ce0de92f355cad26ac4397e3149743c",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/pwa-release.js",
+      "status": 200,
+      "sha256": "c708b4ce19b480fc0cbd922cdb43196894865925029602a9937099fce610e878",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "js/update-safety.js",
+      "status": 200,
+      "sha256": "ef58cd09eaecf58f5a55f1c75cd147e216b4fbba93a4120c18bc1c60787e0612",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "laboratorio.html",
+      "status": 200,
+      "sha256": "e77e79d114147a5679c42ced02d8ca2d235325d4cca4523e8845927d3ef7d20d",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "login.html",
+      "status": 200,
+      "sha256": "0c643c092d3b91c857b757e2085999bf042c153a263fbd15ec1823384c24c1ed",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "mantenimiento.html",
+      "status": 200,
+      "sha256": "a3c28c65e0b79bbe631da0293d63f274a3f6b99577ece5c4d964b049bf7ca2e0",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "offline.html",
+      "status": 200,
+      "sha256": "1e0aca9e0ef482510aefef72378b63f65d9f1874987c0bf813bd6dbe61988358",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "minuta.html",
+      "status": 200,
+      "sha256": "251fdb9ebcb9facf019eff4e5b620d46b68cbc35e60c5b7300774bddaf943046",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "minuta_compartir.html",
+      "status": 200,
+      "sha256": "57ca6a613f7447b34bc6294b318a5ac3ea5503dd4d1eb06ee98cff5ef5c937ed",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "usuarios.html",
+      "status": 200,
+      "sha256": "180cbeab3b56761e634af8ff8aa0b8c2e065a40f8b9d2afc59c1c6517eb10d0a",
+      "matchesPages": true,
+      "crlf": 0
+    },
+    {
+      "resource": "validacion.html",
+      "status": 200,
+      "sha256": "1710ab17469e0b4cdcd512a584b8d713cd68a28269c0cd7b4c2f7496bbf3955c",
+      "matchesPages": true,
+      "crlf": 0
+    }
+  ],
+  "alreadyChangedInRepository": 30
+}

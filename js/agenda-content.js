@@ -1,3 +1,4 @@
+import {eventFoodServices} from './food-alerts-core.js';
 const asText = value => value === undefined || value === null ? '' : String(value).replace(/\r\n?/g, '\n').trim();
 const normalized = value => asText(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').toUpperCase();
 const escapeHtml = value => asText(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
@@ -37,11 +38,12 @@ export function displayDate(value) {
 }
 
 export function executiveForEvent(record){
-  return{
+  if(record.__agendaContacts)return record.__agendaContacts;
+  const result={
     name:field(record,['NOMBRE COMPLETO DEL EJECUTIVO','NOMBRE DEL EJECUTIVO','NOMBRE EJECUTIVO','EJECUTIVO','ASESOR COMERCIAL']),
     email:field(record,['CORREO ELECTRONICO DEL EJECUTIVO','CORREO ELECTRONICO EJECUTIVO','CORREO DEL EJECUTIVO','CORREO EJECUTIVO','EMAIL EJECUTIVO','EMAIL DEL EJECUTIVO','EMAIL ASESOR']),
     phone:field(record,['TELEFONO DEL EJECUTIVO','TELEFONO EJECUTIVO','CELULAR DEL EJECUTIVO','CELULAR EJECUTIVO','TELEFONO ASESOR'])
-  };
+  };for(const key of Object.keys(result))if(/^(no registrado|sin registrar)$/i.test(result[key]))result[key]='';return result;
 }
 
 export function buildAgenda(record) {
@@ -50,6 +52,7 @@ export function buildAgenda(record) {
   const room = field(record, ['ESCENARIO ASIGNADO', 'ESCENARIO', 'SALON']);
   const attendees = field(record, ['CANTIDAD DE PERSONAS', 'PAX']);
   const schedule = field(record, ['HORARIO DEL EVENTO', 'HORARIO']);
+  const food=eventFoodServices(record),executive=executiveForEvent(record);
   const sections = [];
   const missing = [];
   const required = (label, value) => {
@@ -60,11 +63,11 @@ export function buildAgenda(record) {
     const populated = entries.filter(entry => entry.value !== '');
     if (populated.length) sections.push({ title, entries: populated });
   };
-  add('Información general', [required('Empresa o cliente', company), required('Fecha', displayDate(date)), required('Lugar o salón', room), required('Cantidad de asistentes', attendees), { label: 'Tipo de evento', value: field(record, ['TIPO DE EVENTO', 'TIPO EVENTO']) }]);
+  add('Información general', [required('Empresa o cliente', company), required('Fecha', displayDate(date)), required('Lugar o salón', room), required('Cantidad de asistentes', attendees), { label: 'Tipo de evento', value: field(record, ['TIPO DE EVENTO', 'TIPO EVENTO']) }, {label:'Ejecutivo',value:executive.name},{label:'Correo',value:executive.email},{label:'Teléfono',value:executive.phone}]);
   const times = schedule.match(/^\s*(\d{1,2}:\d{2}\s*(?:[AP]\.?\s*M\.?)?)\s*[-–—]\s*(\d{1,2}:\d{2}\s*(?:[AP]\.?\s*M\.?)?)\s*$/i);
-  add('Programación y horarios', [required('Horario del evento', schedule), ...(times ? [{ label: 'Hora de inicio', value: times[1].trim() }, { label: 'Hora de finalización', value: times[2].trim() }] : []), { label: 'Horarios A/B', value: field(record, ['HORARIO AYB', 'HORARIO A&B', 'HORARIO A Y B']) }, { label: 'Actividades registradas', value: field(record, ['DESARROLLO ACTIVIDAD', 'DESARROLLO DE ACTIVIDAD', 'PROGRAMACION']) }]);
+  add('Programación y horarios', [required('Horario del evento', schedule), ...(times ? [{ label: 'Hora de inicio', value: times[1].trim() }, { label: 'Hora de finalización', value: times[2].trim() }] : []), { label: 'Horarios A/B', value: food.schedule }, { label: 'Actividades registradas', value: field(record, ['DESARROLLO ACTIVIDAD', 'DESARROLLO DE ACTIVIDAD', 'PROGRAMACION']) }]);
   add('Montaje y acomodación', [{ label: 'Acomodación o montaje', value: field(record, ['ACOMODACION', 'TIPO DE MONTAJE', 'MONTAJE']) }]);
-  add('Alimentación y servicios', [{ label: 'Descripción de alimentos', value: field(record, ['DESCRIPCION ALIMENTACION', 'ALIMENTACION']) }, { label: 'Modalidad de servicio', value: field(record, ['MODALIDAD DE SERVICIO', 'MODALIDAD', 'TIPO DE SERVICIO']) }, { label: 'Requerimientos registrados', value: field(record, ['REQUERIMIENTOS OPERATIVOS', 'REQUERIMIENTOS']) }]);
+  add('Alimentación y servicios', [{ label: 'Descripción de alimentos', value: food.description }, { label: 'Modalidad de servicio', value: field(record, ['MODALIDAD DE SERVICIO', 'MODALIDAD', 'TIPO DE SERVICIO']) }, { label: 'Requerimientos registrados', value: field(record, ['REQUERIMIENTOS OPERATIVOS', 'REQUERIMIENTOS']) }]);
   add('Observaciones y pendientes', [{ label: 'Observaciones operativas', value: field(record, ['OBSERVACION', 'OBSERVACIONES']) }, { label: 'Información pendiente de confirmar', value: missing.join('; ') }]);
   add('Control del evento', [{ label: 'Estado', value: field(record, ['ESTADO']) || 'No registrado' }, { label: 'Medio de pago', value: field(record, ['MEDIO DE PAGO', 'FORMA DE PAGO']) }]);
   const title = 'AGENDA OPERATIVA DEL EVENTO';

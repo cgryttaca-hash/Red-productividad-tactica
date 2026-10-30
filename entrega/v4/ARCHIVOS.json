@@ -1,0 +1,1053 @@
+{
+  "base": "Red-productividad-tactica-main-Minuta-WhatsApp-v2.zip",
+  "inputSHA256": "1dc9538219293f8a21a6ea7d505cb58b5448ead42dee30451e30e889fa9396bb",
+  "version": "4.0.0",
+  "releaseDigest": "f48578de140cc99724a5d79850bcd85cd06d0045754ecc79c77285bc3b0bd4cb",
+  "removed": [],
+  "modified": [
+    {
+      "file": "CHANGELOG.md",
+      "before": "2fad1f90983fa0e60a156a58a686e2a87f054da75c9974aa8bd50fc42e900317",
+      "sha256": "220e04143fe2f334c27720ea3dfd79a30e5bfacc94b19e655dc9b1d0288bbe55",
+      "bytes": 1015
+    },
+    {
+      "file": "PROTECTED_MODULES.json",
+      "before": "a3bb831d57226cc9f05796682a2f93a47634877ce00c284f1692636998b99849",
+      "sha256": "022d1be7da677fe54bdc41f48c0d38fdd3f4f0d8a57b6d4eead04056ffd4135a",
+      "bytes": 524
+    },
+    {
+      "file": "README.txt",
+      "before": "1448273b59aac84af72f26d07e86ffb9c1d5c2c57de16d1250e0ea53bce763ae",
+      "sha256": "3d09146232d323f92fc56e1a660c1475503f67dded5a2ecab7030ca70e6c2bee",
+      "bytes": 4804
+    },
+    {
+      "file": "VALIDACION_FINAL.json",
+      "before": "772a49c2fc257b30c809940123700cff2b1878454f45a35811cf9cec9fe5de80",
+      "sha256": "95c66c8b0d7d9a4cd0ee237ba4ae9c9d9cb0ed0a522f807919ad41093835a888",
+      "bytes": 191
+    },
+    {
+      "file": "VERSION.txt",
+      "before": "9a989ebd95efe334f4248db1d63432eaa07e6fbe0e1234e47c91e5fc88906ca1",
+      "sha256": "e1d49c569ae09b2ede16e2d83820a3809b35eb6c44c13ba9b5330598d6b8f43c",
+      "bytes": 6
+    },
+    {
+      "file": "agenda_movil.html",
+      "before": "fc866b80aa15ba7a4b436ddc2b59b3d434a3abdc93d72e9c47db60a0494faa80",
+      "sha256": "b5751c02602a877d22ca020616831b7e4e350118d2cf90ec583ee3df282e2b1b",
+      "bytes": 7685
+    },
+    {
+      "file": "agendas.html",
+      "before": "0c522391ebe8550dbe53b7c7059a744965c945b9399b7415524f1e05612a8e57",
+      "sha256": "95be1cc7696b2761ca6c46e3c4e1219840826dbbfe1368c6b5515d3217493f3f",
+      "bytes": 3764
+    },
+    {
+      "file": "configuracion.html",
+      "before": "faf1a9d24326301a9c456cae207cf75f4be5aee17b281e010b76e684e7a871e4",
+      "sha256": "c35137631fa50ae89e194553deb4bad96e52bfc5246a3ccc88b78240fa918219",
+      "bytes": 8499
+    },
+    {
+      "file": "eventos.html",
+      "before": "7578841e926b73ce4ee705c0722b047078625d63228f50be830f24905a23547a",
+      "sha256": "e5a189bb555e11521dcbb04882820ca98dc2438a6159b73df01b2be730f35d0a",
+      "bytes": 6946
+    },
+    {
+      "file": "firebase.json",
+      "before": "37994896eabd010c900db9b87e39f03cd85884fd57b5da078038506377aa647b",
+      "sha256": "0821dfd3f7521220a3e8473b14c9c8845e76be7ed360798c874020669c947723",
+      "bytes": 862
+    },
+    {
+      "file": "functions/.gitignore",
+      "before": "3f267b8528765c39d81bcf5b0eec7eddbaee297a747694c49b3572f2ad49815c",
+      "sha256": "7497b18a7a9347b3567d3e405178d2fa956c9e8f7ab177d4c018ecd822367348",
+      "bytes": 84
+    },
+    {
+      "file": "functions/index.js",
+      "before": "b1d2a9abc87bee4a3bbfb8f21f9a67715ae6ff70bd21b2d85b6ab9e93acd45f1",
+      "sha256": "563c59df9a0e1341508377ce65ea8d75b09cd76c4459f609c6309482dcedd9e8",
+      "bytes": 9871
+    },
+    {
+      "file": "index.html",
+      "before": "8d1b9ef107662e06c636c203bf993b7b7e992a6f4e15e9e893b157bedebd0293",
+      "sha256": "bb6a6b4351bef9e08d280fcebef8fb8989cb9b728e7beebe79a4e5ce66694e96",
+      "bytes": 10549
+    },
+    {
+      "file": "js/configuracion.js",
+      "before": "685c5fe02fb25d72059b2e0abe301841cce72e8bb6984eed63edc03490cd34a5",
+      "sha256": "de39b7aa8ddaa541f33c45bee18874ca74bc312affba8a41a0f057b8a1550021",
+      "bytes": 11838
+    },
+    {
+      "file": "js/excel-sync.js",
+      "before": "3525cb5f2dedef491ebfddcc251649956d2d00067430bcbdbaae878334621de1",
+      "sha256": "438b7507760aa0db02fd98d72eebfc258ee545c92420818f62b16b259bdac58e",
+      "bytes": 33055
+    },
+    {
+      "file": "js/firebase-app-check.js",
+      "before": "927ec989938e83a95560d3e1995d9ad5c1b7cc58f39d4c4607defa4cfa786b12",
+      "sha256": "3df234cf891ec6bccb94dfaed4c616802004ce9573fd516eb294c72ab27abbe9",
+      "bytes": 848
+    },
+    {
+      "file": "js/firebase-sync.js",
+      "before": "3a050beecd9059260fc08485b62b7046d603655b743dc799421cd4bf334dc40b",
+      "sha256": "88e6712fcc9835a48bb8d9c2f1083f8eff351e8469b04a19abd8389013021c14",
+      "bytes": 20645
+    },
+    {
+      "file": "js/laboratorio.js",
+      "before": "e7131087cbad186f01d2e6ac450a7330cc8b4b03f6bf7f9e877113a586f89777",
+      "sha256": "0bfb056284c51ae1df9ea0798d0217de5be2084f205e1ad0cf2aa95c9dfcb6d1",
+      "bytes": 2834
+    },
+    {
+      "file": "js/pwa.js",
+      "before": "239c94abedc439db4ac2de0fe8d04542f16e1c4d1b1ca8a45862675912ae3fc7",
+      "sha256": "5e6c24ff1e933ec5c0882ddb88654f9478b0294fe65e3c6feadc090b82941f89",
+      "bytes": 27
+    },
+    {
+      "file": "js/system-version.js",
+      "before": "51eefefc2e82ce44ba3ef175864f97de4bf57052448456145d86c5d2f20d3ec8",
+      "sha256": "57ef2fc2baf96c291883ccf73f59c3bb8d5cd1b723a2e73362d1e159b4443f5a",
+      "bytes": 819
+    },
+    {
+      "file": "laboratorio.html",
+      "before": "d2ac706bf7f9ba1146ba0d9951872cab2608d0e447654b80d6312b8427af4b2d",
+      "sha256": "4324aa1ef9ac848cf4f1166f9a9fbbb86bd59320e6b060d7bce40e243905fdaf",
+      "bytes": 4418
+    },
+    {
+      "file": "login.html",
+      "before": "f4dea040e5de28888aa353d71dedb079f29c335cf1cede6575826659879c68e9",
+      "sha256": "43b1bed41f480037f7d718a3a26f5ef08aa939f5ddbba4dd9bd37c9e9ef32e19",
+      "bytes": 3340
+    },
+    {
+      "file": "mantenimiento.html",
+      "before": "98d986b72727a7eac81d04eda6c3fbf70efb78b9580051499a0c736a8c0c95d2",
+      "sha256": "b44eed1dbac85046465e95b1dc44e9323f7a71c155e90c260beedc4b5be45ecf",
+      "bytes": 4029
+    },
+    {
+      "file": "minuta.html",
+      "before": "dc3484aa3db5a901d65f1fa47c5724b002aee9e3346a02cf33f8d7c5911d047f",
+      "sha256": "4c7f28e71638eb035c65305bee39fa1c843f5038532d94faf80c2bcc500f3e13",
+      "bytes": 7650
+    },
+    {
+      "file": "minuta_compartir.html",
+      "before": "432bd8fb65d71429f6d31c216ee8fb349323219152edf286709bb19e0383da71",
+      "sha256": "484d4ebd12776bf92950d751273eef0045ddd6b93027c69675a79f24883b45eb",
+      "bytes": 2643
+    },
+    {
+      "file": "offline.html",
+      "before": "e25f40a230a15b9c5aac1a3e08d6746294ee8bfed0f1079d7a6e49e9f616f59d",
+      "sha256": "b273d28c270692855f3f6f19911d77532c4d77e644ba53cf63b3df514699a2ad",
+      "bytes": 2054
+    },
+    {
+      "file": "sw.js",
+      "before": "e17ada5bca922e59185bf31ce8fee3694bffadb53bc8e5da088e44837668457d",
+      "sha256": "01915475074207809d51ac60c3146a051f26135b8877af2af7c165375f84108a",
+      "bytes": 16843
+    },
+    {
+      "file": "usuarios.html",
+      "before": "95a5be780bb9c41c5aee4efb7bdcd91619ae1fa760e88e45d4a32d515d49bc77",
+      "sha256": "2403df634368d4d83d3868ab09459eab735e2591873e2e466e9890691322a7c1",
+      "bytes": 4687
+    },
+    {
+      "file": "validacion.html",
+      "before": "23425e8910d26f0d5c87c674caae884d2044006b7c0798521a205b824401d431",
+      "sha256": "8a3803cb453855365e2e0e1a9637127aec7c625c86a808a5980bed3ba2690424",
+      "bytes": 4304
+    }
+  ],
+  "added": [
+    {
+      "file": ".github/workflows/publish.yml",
+      "sha256": "bd4687047f752548206aa48f2c40c6fd1266e19bc9913d2178fad1090bc32d56",
+      "bytes": 1478
+    },
+    {
+      "file": ".github/workflows/verify.yml",
+      "sha256": "24142a177ad1c205b96806745ba07737dc8541b468d6cc3997e27a63056835ff",
+      "bytes": 769
+    },
+    {
+      "file": ".gitignore",
+      "sha256": "92e4c4921c460fcbe04e97648c72fd7b197531dc8189d73f777dfbdca7b230df",
+      "bytes": 204
+    },
+    {
+      "file": "LEER_PRIMERO_V4.md",
+      "sha256": "7232abf442c9cba1e4dcb4881c4f6bc8598aede3829626ac54f413aa6389e582",
+      "bytes": 5699
+    },
+    {
+      "file": "asistente.html",
+      "sha256": "3255c2c9e030d3c43672015e3b0ad3df61cf37835c77006cadcf7847af33de7c",
+      "bytes": 6109
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "sha256": "41a84aa2caba645f966a18d9c2056b73e6d3a81d80bc0046bc0011a2634d4cce",
+      "bytes": 1093
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "sha256": "075bb10eabebc9356311ffca1b18fdd470fca8e5c2ce0f6e098430c81c59a624",
+      "bytes": 1110
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64",
+      "bytes": 11355
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "sha256": "87364cc2b2a76a6684929e7d6b80b18a897794db38400caff1fcf1791c6925d2",
+      "bytes": 210082
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "sha256": "20c08f3d9c6d2ef76df6d6a6f1127c0013339fe32add24222276c398c6308c38",
+      "bytes": 12937
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+      "bytes": 951904
+    },
+    {
+      "file": "css/assistant.css",
+      "sha256": "ea35cce2c0ea4b4aed25777b50043764f1a94c5f29ff910d0f88f86d42eb7a64",
+      "bytes": 1347
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "sha256": "69c7b0e9419ed3ef5b8f136b9accb783f7299f1343c2b2f84d8092740aa410cd",
+      "bytes": 1959
+    },
+    {
+      "file": "dist/agenda.webmanifest",
+      "sha256": "1056bb0bb5b9123577d0bbc86a4b530ca36397e37c3401f1f4dcd4393f2ada97",
+      "bytes": 882
+    },
+    {
+      "file": "dist/agenda_movil.html",
+      "sha256": "b5751c02602a877d22ca020616831b7e4e350118d2cf90ec583ee3df282e2b1b",
+      "bytes": 7685
+    },
+    {
+      "file": "dist/agendas.html",
+      "sha256": "95be1cc7696b2761ca6c46e3c4e1219840826dbbfe1368c6b5515d3217493f3f",
+      "bytes": 3764
+    },
+    {
+      "file": "dist/asistente.html",
+      "sha256": "3255c2c9e030d3c43672015e3b0ad3df61cf37835c77006cadcf7847af33de7c",
+      "bytes": 6109
+    },
+    {
+      "file": "dist/assets/agenda-brand/apple-touch-icon.png",
+      "sha256": "9f6d4821e49fffd4a3667d5979e5505c460a09f189db1d698807fdbd928f94b4",
+      "bytes": 4033
+    },
+    {
+      "file": "dist/assets/agenda-brand/badge-96.png",
+      "sha256": "cf58c8064e7c396dc55750afcafb5c30ef715f8b4f4df46e5671703b63863a34",
+      "bytes": 1416
+    },
+    {
+      "file": "dist/assets/agenda-brand/favicon.ico",
+      "sha256": "42d9fcae3502d8fae9c07fa4066589eab046b10153dd0940ca7cf0ea2a12629b",
+      "bytes": 4688
+    },
+    {
+      "file": "dist/assets/agenda-brand/favicon.svg",
+      "sha256": "a2aaee907f8b362c8eddef62d75bfd255f21e2e7529752af6a5553af01abba0d",
+      "bytes": 598
+    },
+    {
+      "file": "dist/assets/agenda-brand/icon-192.png",
+      "sha256": "77aa4bbbc5828a07f9153465ffcb674ecfa0d46c2bb3ec1d42efa007e53d7e37",
+      "bytes": 4007
+    },
+    {
+      "file": "dist/assets/agenda-brand/icon-512.png",
+      "sha256": "45f05069506bafb0010096b9444d36f1a56caaf3827c4140ef4cd5cbf24718f5",
+      "bytes": 11732
+    },
+    {
+      "file": "dist/assets/agenda-brand/icon-96.png",
+      "sha256": "fda8ff22a13e517684bc385c4e802dc3c98c714662ee23e6cddcbaeb72a157b4",
+      "bytes": 2084
+    },
+    {
+      "file": "dist/assets/agenda-brand/icon-maskable-192.png",
+      "sha256": "5a011503a32b2cabfb1695945dabeb13cc9c2d430f6372bd25045e13d31d5ce5",
+      "bytes": 3917
+    },
+    {
+      "file": "dist/assets/agenda-brand/icon-maskable-512.png",
+      "sha256": "9573bad4ac3772d15f1d5dd48aeb2d14c10b3e54b387d042f6ed949ceebfd148",
+      "bytes": 11517
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-full-dark.png",
+      "sha256": "caa597b1464df37092eaa2106f4b74586b2d90f00482c3c235980a27f67faa63",
+      "bytes": 28348
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-full-dark.svg",
+      "sha256": "7b60f02585794156a227f5c7b64d928d37bf05b7abdda6b6611421d85a109027",
+      "bytes": 14170
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-full-light.png",
+      "sha256": "ae064cce8eb59ba17ff75101c1546524cec8e56b85085c72970d208822ce409e",
+      "bytes": 25304
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-full-light.svg",
+      "sha256": "14f6d0974ad2ba6c07479fbd9f86b516185c62ad2be0d0550e473236a55355d0",
+      "bytes": 14170
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-full-mono.png",
+      "sha256": "e7daf470ef18bae1dbc69f415db24c201a5ca8c3e699e87edca64b487b78e9dc",
+      "bytes": 27541
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-full-mono.svg",
+      "sha256": "1bdd96904ca918eb884d9856931a842f4d90cd6325ebbebfe45ec9c2cb8ecc17",
+      "bytes": 14170
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-small.svg",
+      "sha256": "6bcb8f7b6dc4de94de022d6f20d6f117cae78cd801586f6a555aab1d955c9941",
+      "bytes": 544
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-symbol-dark.svg",
+      "sha256": "6e49f9a91d93f430d9e7f85ce66e86b62ee7c0c2b39f879b5afd1520574a0c98",
+      "bytes": 615
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-symbol-light.svg",
+      "sha256": "e8a03a69bdeb0006359edc1aa4b029ff3ef569be8ec91a941985d71fa088f759",
+      "bytes": 615
+    },
+    {
+      "file": "dist/assets/agenda-brand/logo-symbol-mono.svg",
+      "sha256": "6c1f4b3de80cfb5d390684fdbbee1fd8056718689511a367154f5e784a9a32b8",
+      "bytes": 615
+    },
+    {
+      "file": "dist/assets/icon-180.png",
+      "sha256": "d3b6af6c161716b28f4d62118b2d6ee826df1b8a034f3df0ef04e1fec75d78bb",
+      "bytes": 21236
+    },
+    {
+      "file": "dist/assets/icon-192.png",
+      "sha256": "e18a6f8708dd3eeefa3778c680e6437c7407afaf0fd941a7d0d2585cfcbe838c",
+      "bytes": 23015
+    },
+    {
+      "file": "dist/assets/icon-512.png",
+      "sha256": "c98cecdfbd4b957b4234016f790dd5c34b827acd2929d300fb42293896274d31",
+      "bytes": 45646
+    },
+    {
+      "file": "dist/assets/vendor/LICENSE-chartjs.txt",
+      "sha256": "41a84aa2caba645f966a18d9c2056b73e6d3a81d80bc0046bc0011a2634d4cce",
+      "bytes": 1093
+    },
+    {
+      "file": "dist/assets/vendor/LICENSE-datalabels.txt",
+      "sha256": "075bb10eabebc9356311ffca1b18fdd470fca8e5c2ce0f6e098430c81c59a624",
+      "bytes": 1110
+    },
+    {
+      "file": "dist/assets/vendor/LICENSE-sheetjs.txt",
+      "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64",
+      "bytes": 11355
+    },
+    {
+      "file": "dist/assets/vendor/chart-4.6.1.min.js",
+      "sha256": "87364cc2b2a76a6684929e7d6b80b18a897794db38400caff1fcf1791c6925d2",
+      "bytes": 210082
+    },
+    {
+      "file": "dist/assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "sha256": "20c08f3d9c6d2ef76df6d6a6f1127c0013339fe32add24222276c398c6308c38",
+      "bytes": 12937
+    },
+    {
+      "file": "dist/assets/vendor/xlsx-0.20.3.min.js",
+      "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+      "bytes": 951904
+    },
+    {
+      "file": "dist/configuracion.html",
+      "sha256": "c35137631fa50ae89e194553deb4bad96e52bfc5246a3ccc88b78240fa918219",
+      "bytes": 8499
+    },
+    {
+      "file": "dist/css/admin-tools.css",
+      "sha256": "e78663c82abd0a173308024639bd0fb11ea474a58c636630b013aed932e9557b",
+      "bytes": 7825
+    },
+    {
+      "file": "dist/css/agenda-compact.css",
+      "sha256": "18768cd82d69a81ace6ad2841f62267142d632d99037e078c9de310b138ae376",
+      "bytes": 8704
+    },
+    {
+      "file": "dist/css/agenda-movil.css",
+      "sha256": "a66558d230ad4ea23d2b4f5e9843ace6e70b60690820cd4e1220b57cd2043343",
+      "bytes": 22459
+    },
+    {
+      "file": "dist/css/agenda-premium.css",
+      "sha256": "65f6479850748bc22cfd5a4822e7158929fe43956947b8909b8d37cad43971e1",
+      "bytes": 12369
+    },
+    {
+      "file": "dist/css/agendas.css",
+      "sha256": "b23068b79a06c8ea7682914dc64fed33700a41a4367ff9703fe79a7b278dcdf6",
+      "bytes": 5055
+    },
+    {
+      "file": "dist/css/assistant.css",
+      "sha256": "ea35cce2c0ea4b4aed25777b50043764f1a94c5f29ff910d0f88f86d42eb7a64",
+      "bytes": 1347
+    },
+    {
+      "file": "dist/css/configuracion.css",
+      "sha256": "babf1f8b1097cc82e193129556aab3ea1f2ca82c5d9b97e17477057ba56aa80e",
+      "bytes": 5757
+    },
+    {
+      "file": "dist/css/corporate-ui.css",
+      "sha256": "450370f00cc10db258854b71adec459ed7d20ec6cb45f3d8e75a039d07a45e8f",
+      "bytes": 30783
+    },
+    {
+      "file": "dist/css/enterprise-refinements.css",
+      "sha256": "69c7b0e9419ed3ef5b8f136b9accb783f7299f1343c2b2f84d8092740aa410cd",
+      "bytes": 1959
+    },
+    {
+      "file": "dist/css/estilos.css",
+      "sha256": "dd0eafa2ab97e1e1e1951147c59d72e21de83454b07a74c8f5cfe9cadf54a125",
+      "bytes": 10661
+    },
+    {
+      "file": "dist/css/eventos.css",
+      "sha256": "9f01c8cc6b63fce8add3694d8a81c5d47a7859b394f622be0097b5c516aecba9",
+      "bytes": 21755
+    },
+    {
+      "file": "dist/css/excel-sync.css",
+      "sha256": "477da471392bfb42366e0c2979b30bd73d586d01f449633d66e0902655baf284",
+      "bytes": 7766
+    },
+    {
+      "file": "dist/css/firebase-sync.css",
+      "sha256": "2a6fc621fb000de49c8a10a01e49a810216349978bf1d31aa72ebc2d7172eefe",
+      "bytes": 5184
+    },
+    {
+      "file": "dist/css/index.css",
+      "sha256": "52c427d0c444c0f5b688b1ebb33c82e317de91376714fbf7c4fd63f867e5dc86",
+      "bytes": 12665
+    },
+    {
+      "file": "dist/css/login.css",
+      "sha256": "8b6d23f613591401660ed283a4eb523fc337b8026a038a3e8890c41cd248dfa9",
+      "bytes": 4127
+    },
+    {
+      "file": "dist/css/mantenimiento.css",
+      "sha256": "ad7376e488be3467234b54d413b24844490467c10e48267736ba27af87e8066c",
+      "bytes": 6968
+    },
+    {
+      "file": "dist/css/minuta-share.css",
+      "sha256": "2ec5a8d8fc5ff6f2ac1111ddb1ca4dceb10343fc9a80f308de671d3a5d556662",
+      "bytes": 2791
+    },
+    {
+      "file": "dist/css/minuta.css",
+      "sha256": "9c9074cfc87e5334ac936f8c91662568658356a535f9fac2fe0eea279d21cbd3",
+      "bytes": 38218
+    },
+    {
+      "file": "dist/css/nav-clean.css",
+      "sha256": "c1585a6e0664a448b2a8cce8983df9aa00d02b58f8fd1c59a752d1a728e8e550",
+      "bytes": 1594
+    },
+    {
+      "file": "dist/css/premium-system.css",
+      "sha256": "dad48f5b8a725a743415ae6deaed007b68e5118902d9992ab35a22ea9a227cd4",
+      "bytes": 8795
+    },
+    {
+      "file": "dist/css/professional-ui.css",
+      "sha256": "f27d9e36ffffd2a8b236cc6710b3e8a5adaa75eca82c1958de397f408851d8b5",
+      "bytes": 12343
+    },
+    {
+      "file": "dist/css/pwa-compat.css",
+      "sha256": "599cc0ae23eae12e65893bfd6670b9eeeb3fb32b0ba419ac8254e8d628357894",
+      "bytes": 2761
+    },
+    {
+      "file": "dist/css/usuarios.css",
+      "sha256": "53b912522e019f1682820006038c7f43b455fd5472766d88c6f1d920fd939947",
+      "bytes": 5759
+    },
+    {
+      "file": "dist/data/eventos_publicos.json",
+      "sha256": "fc9861c6849388891cc23932113f9829609130e2ce309cbacd6ffd6cc311834d",
+      "bytes": 78
+    },
+    {
+      "file": "dist/eventos.html",
+      "sha256": "e5a189bb555e11521dcbb04882820ca98dc2438a6159b73df01b2be730f35d0a",
+      "bytes": 6946
+    },
+    {
+      "file": "dist/index.html",
+      "sha256": "bb6a6b4351bef9e08d280fcebef8fb8989cb9b728e7beebe79a4e5ce66694e96",
+      "bytes": 10549
+    },
+    {
+      "file": "dist/js/agenda-content.js",
+      "sha256": "e166c0779ecea44dd43d8378250c415cf19a57fc36f8d1287743e3f45f10dac8",
+      "bytes": 5430
+    },
+    {
+      "file": "dist/js/agenda-movil.js",
+      "sha256": "21366d72b429a356971add3c4eaf9a98f984ff337e689374e33f7c79d22a3db4",
+      "bytes": 27903
+    },
+    {
+      "file": "dist/js/agenda-reminders.js",
+      "sha256": "7b66bb90e92c0f0d9db7ad91eb81c3a2f6f92683a18df20e9ca0f9b3d2ac397e",
+      "bytes": 1327
+    },
+    {
+      "file": "dist/js/agenda-requirements.js",
+      "sha256": "8b5daeb97c02165d0d3a6d507d65327d70ae875b5c0ec2d98f88fc5dd29a1082",
+      "bytes": 1237
+    },
+    {
+      "file": "dist/js/agendas.js",
+      "sha256": "2b0f4d2f6c2606173350258a21b8ee5ca99516174a8ecde84ba40b2fca8c6fb1",
+      "bytes": 10426
+    },
+    {
+      "file": "dist/js/app.js",
+      "sha256": "65d5f7249a9e8b130401b4f114d293cb1fd551445a5c106050254df387ecdbd9",
+      "bytes": 13994
+    },
+    {
+      "file": "dist/js/assistant-config.js",
+      "sha256": "e1404d5b70ae1cef5dcfeae48df0d0f7b5ab3253ff00cf0af31d64f923a0102e",
+      "bytes": 76
+    },
+    {
+      "file": "dist/js/assistant-core.js",
+      "sha256": "ac70e391acb77d2c54dc17a30f135b0125793429c103e01d636d268fdbcc10ac",
+      "bytes": 7738
+    },
+    {
+      "file": "dist/js/assistant.js",
+      "sha256": "93adc3cbdcd3490cc11e5c332fc6ed191a491d2d6a518e812bce6b542a4907af",
+      "bytes": 8278
+    },
+    {
+      "file": "dist/js/audit-store.js",
+      "sha256": "e1f1ae415aab2982d2225dcf3b8d78ca72ef3f8da1f7254d751d21cd54023fc6",
+      "bytes": 4400
+    },
+    {
+      "file": "dist/js/auth-guard.js",
+      "sha256": "745317a97be685bd28608ad836163de1a87f58781daccc42ea30a360d689deda",
+      "bytes": 1274
+    },
+    {
+      "file": "dist/js/backup-store.js",
+      "sha256": "6a86e72cc49e652feab7f8928638a2497a61e5bec64564ee53eeeabbcde2117c",
+      "bytes": 6367
+    },
+    {
+      "file": "dist/js/configuracion.js",
+      "sha256": "de39b7aa8ddaa541f33c45bee18874ca74bc312affba8a41a0f057b8a1550021",
+      "bytes": 11838
+    },
+    {
+      "file": "dist/js/data-core.js",
+      "sha256": "3759b9bea374d28d3f7d2d8f5f970a54c3748484eb42e1bf418653c57719cbdd",
+      "bytes": 15314
+    },
+    {
+      "file": "dist/js/device-heartbeat.js",
+      "sha256": "9659f70c51ca272470c9fd60b346a3bae392d7420b0a29c1fc0877ff7dd4faa2",
+      "bytes": 838
+    },
+    {
+      "file": "dist/js/device-registry.js",
+      "sha256": "dcbad70993ffd76f8f493ea9e0b736ff5449e3ab2374031d5db0de8e1f89bcac",
+      "bytes": 5142
+    },
+    {
+      "file": "dist/js/eventos.js",
+      "sha256": "c9bb432e971ba7c62c720b31178aa2e30f3f827f016aabad0820494041dd8867",
+      "bytes": 31446
+    },
+    {
+      "file": "dist/js/excel-sync.js",
+      "sha256": "438b7507760aa0db02fd98d72eebfc258ee545c92420818f62b16b259bdac58e",
+      "bytes": 33055
+    },
+    {
+      "file": "dist/js/firebase-app-check.js",
+      "sha256": "3df234cf891ec6bccb94dfaed4c616802004ce9573fd516eb294c72ab27abbe9",
+      "bytes": 848
+    },
+    {
+      "file": "dist/js/firebase-config.js",
+      "sha256": "6baa8b537bc22c5a560f989d0f76275f31d8dc8f063dd18f94938951e53cc805",
+      "bytes": 666
+    },
+    {
+      "file": "dist/js/firebase-sync.js",
+      "sha256": "88e6712fcc9835a48bb8d9c2f1083f8eff351e8469b04a19abd8389013021c14",
+      "bytes": 20645
+    },
+    {
+      "file": "dist/js/food-alerts-core.js",
+      "sha256": "9fd589ccdec78b04f86940c8c3ac4d73deaa794911a7e3b4b64a6f381727b07e",
+      "bytes": 7628
+    },
+    {
+      "file": "dist/js/index.js",
+      "sha256": "fdee27343e07c88f6077fd32737777950ab9b86b78dfbc1b883465e21dd3f628",
+      "bytes": 6527
+    },
+    {
+      "file": "dist/js/laboratorio.js",
+      "sha256": "0bfb056284c51ae1df9ea0798d0217de5be2084f205e1ad0cf2aa95c9dfcb6d1",
+      "bytes": 2834
+    },
+    {
+      "file": "dist/js/loader-guard.js",
+      "sha256": "f981f78b4e4b0d901a2f66481b083e4c41dc3641f8b094262d288fb4f4e42642",
+      "bytes": 1548
+    },
+    {
+      "file": "dist/js/local-auth.js",
+      "sha256": "b534f90b2f83ad7b2ceefd684dffbefbf31556b40b145d0b6de31f7e6c803075",
+      "bytes": 9908
+    },
+    {
+      "file": "dist/js/login.js",
+      "sha256": "9ce59278661314c19e0bfade6a30004d0814b3f4d5545de098c937a79884bbef",
+      "bytes": 1499
+    },
+    {
+      "file": "dist/js/maintenance-guard.js",
+      "sha256": "ea56bdf9166fdea618a70ed596b4072fa42b6e6aa4396045f8de56b3ba97a7dd",
+      "bytes": 2846
+    },
+    {
+      "file": "dist/js/mantenimiento.js",
+      "sha256": "5269c03dc117ae7b4ebdad4f881b387ba80d2f27e04e197d27a58edc132dce2e",
+      "bytes": 4335
+    },
+    {
+      "file": "dist/js/minuta-raster.js",
+      "sha256": "a90f8cf6cb2781a5649d8b4dd5539ef179a863659a246d1419ca0c03f36c673d",
+      "bytes": 12611
+    },
+    {
+      "file": "dist/js/minuta-share-preview.js",
+      "sha256": "c896bdc93cead02e0f894c0370f6b111cd6d617b590ba247ac197eb77a71c1ce",
+      "bytes": 6584
+    },
+    {
+      "file": "dist/js/minuta-share.js",
+      "sha256": "d91273338b2c5a9b1c76bbe583633e5764fe2fefe0f1b48fae11594f4454f8a3",
+      "bytes": 4488
+    },
+    {
+      "file": "dist/js/minuta-time.js",
+      "sha256": "815b29200aa6589c755ea54fa6cc42707d0228658a31cbf3d07f94da0af25ee4",
+      "bytes": 3044
+    },
+    {
+      "file": "dist/js/minuta.js",
+      "sha256": "7cff23054925c8563d8314366aaf79e21f751dffffdf2dd1b5c9ebd43e098cdd",
+      "bytes": 23549
+    },
+    {
+      "file": "dist/js/notifications.js",
+      "sha256": "5cd41f1cb5e203886a05ca3b2e2161e9e023873d3eefc2feed64b080749ad4ff",
+      "bytes": 2589
+    },
+    {
+      "file": "dist/js/performance-monitor.js",
+      "sha256": "2f5f33d4b1f758d94c144c9d239f24ddd7e34825624d42f19d4f5719f785e979",
+      "bytes": 1823
+    },
+    {
+      "file": "dist/js/puente_movil_eventos.js",
+      "sha256": "2c5496cbb09fe7356ebe9c55ffbe20a565150278ebf025c01d5e92b5b37c5618",
+      "bytes": 4755
+    },
+    {
+      "file": "dist/js/push-client.js",
+      "sha256": "ca466f46f91060286aa0423590e66ce323f59fdbb0975f81ba67725d04ce39fb",
+      "bytes": 12673
+    },
+    {
+      "file": "dist/js/push-config.js",
+      "sha256": "d84aa1867add43cea04a6e966997a9e04dd2eb0ffcfc27ece919a8bfd72a614e",
+      "bytes": 64
+    },
+    {
+      "file": "dist/js/push-ui.js",
+      "sha256": "91ad7c10b85b8c02f513df63537752034d3bd4b0902bc2d568d7546d3fc59fd2",
+      "bytes": 4409
+    },
+    {
+      "file": "dist/js/pwa-context.js",
+      "sha256": "7f716d2f910c9238b970b34b405e2d5da86ae18f10a42402731a08f4aa24d08b",
+      "bytes": 304
+    },
+    {
+      "file": "dist/js/pwa-release.js",
+      "sha256": "29cf259cd842d1c6505627f7c20149e9ac97f83744b6b5086a8b658967d7a5e1",
+      "bytes": 8864
+    },
+    {
+      "file": "dist/js/pwa.js",
+      "sha256": "5e6c24ff1e933ec5c0882ddb88654f9478b0294fe65e3c6feadc090b82941f89",
+      "bytes": 27
+    },
+    {
+      "file": "dist/js/release-info.js",
+      "sha256": "cafd252d5d1d26755f3a08c08e83c95948e0d343c41ab1ae0c92da621edd4108",
+      "bytes": 38
+    },
+    {
+      "file": "dist/js/release-worker.js",
+      "sha256": "27632c128c16351a4f9dfc84c6efd018c75e246cb862a09c5e0e1127c9f72d72",
+      "bytes": 7882
+    },
+    {
+      "file": "dist/js/session-ui.js",
+      "sha256": "eeb8b9755967fcdbe548ff965fe807d456f5d1b1a32e97d2c37aa8d65bf61163",
+      "bytes": 1018
+    },
+    {
+      "file": "dist/js/system-log.js",
+      "sha256": "2343065a46cb04b6e1ece5af6f3fb72db090dae9cf61f9a2f4bc515a53fef350",
+      "bytes": 1408
+    },
+    {
+      "file": "dist/js/system-version.js",
+      "sha256": "57ef2fc2baf96c291883ccf73f59c3bb8d5cd1b723a2e73362d1e159b4443f5a",
+      "bytes": 819
+    },
+    {
+      "file": "dist/js/update-safety.js",
+      "sha256": "de254f9a025518f5a820729346fd43b3bc6dd2e206d3b4d866d324d979cfede1",
+      "bytes": 3971
+    },
+    {
+      "file": "dist/js/usuarios.js",
+      "sha256": "bfa092680ef3467aee772aaf91428287326b28e11bff6f72f1a8775d332922d5",
+      "bytes": 3976
+    },
+    {
+      "file": "dist/js/validacion-page.js",
+      "sha256": "8fb5701919b5a8c2f9f1a27945bcb7022afa77ad2523993ced3e64c469c7758e",
+      "bytes": 2437
+    },
+    {
+      "file": "dist/js/validation.js",
+      "sha256": "adfedd17a6e9a0854c4eb8a93a0275171e440bde0bf82170ced291eb3e48ab68",
+      "bytes": 4097
+    },
+    {
+      "file": "dist/laboratorio.html",
+      "sha256": "4324aa1ef9ac848cf4f1166f9a9fbbb86bd59320e6b060d7bce40e243905fdaf",
+      "bytes": 4418
+    },
+    {
+      "file": "dist/login.html",
+      "sha256": "43b1bed41f480037f7d718a3a26f5ef08aa939f5ddbba4dd9bd37c9e9ef32e19",
+      "bytes": 3340
+    },
+    {
+      "file": "dist/manifest.webmanifest",
+      "sha256": "66e2cba6daaa9fab0a04271b8defa5aca8db9ce649e8519d915bd01887c2743f",
+      "bytes": 1543
+    },
+    {
+      "file": "dist/mantenimiento.html",
+      "sha256": "b44eed1dbac85046465e95b1dc44e9323f7a71c155e90c260beedc4b5be45ecf",
+      "bytes": 4029
+    },
+    {
+      "file": "dist/minuta.html",
+      "sha256": "4c7f28e71638eb035c65305bee39fa1c843f5038532d94faf80c2bcc500f3e13",
+      "bytes": 7650
+    },
+    {
+      "file": "dist/minuta_compartir.html",
+      "sha256": "484d4ebd12776bf92950d751273eef0045ddd6b93027c69675a79f24883b45eb",
+      "bytes": 2643
+    },
+    {
+      "file": "dist/offline.html",
+      "sha256": "b273d28c270692855f3f6f19911d77532c4d77e644ba53cf63b3df514699a2ad",
+      "bytes": 2054
+    },
+    {
+      "file": "dist/recuperacion.html",
+      "sha256": "d45f7517060a44fd74d7494944a5fb188d7505dca54a5e6ce4808821b0b9f00a",
+      "bytes": 2916
+    },
+    {
+      "file": "dist/release.json",
+      "sha256": "0bea494f22a725e3d3daee6fa9ac740b595a3acef465ce112f3a61aee71364e7",
+      "bytes": 16387
+    },
+    {
+      "file": "dist/sw.js",
+      "sha256": "01915475074207809d51ac60c3146a051f26135b8877af2af7c165375f84108a",
+      "bytes": 16843
+    },
+    {
+      "file": "dist/usuarios.html",
+      "sha256": "2403df634368d4d83d3868ab09459eab735e2591873e2e466e9890691322a7c1",
+      "bytes": 4687
+    },
+    {
+      "file": "dist/validacion.html",
+      "sha256": "8a3803cb453855365e2e0e1a9637127aec7c625c86a808a5980bed3ba2690424",
+      "bytes": 4304
+    },
+    {
+      "file": "docs/CONFIGURACION_IA.md",
+      "sha256": "c6e5c6f4461a54d3dfc28ea9921c7aa6a3f3ad224ddb89107283e125da78170a",
+      "bytes": 7038
+    },
+    {
+      "file": "docs/MANTENIMIENTO_IA.md",
+      "sha256": "a6ca2d87a232a206d35022502d528181eacdbed561a048d1f37b631e36747332",
+      "bytes": 2971
+    },
+    {
+      "file": "docs/PUBLICACION_V4.md",
+      "sha256": "034f5fb150190c6c780d13465712f99cecea65b1ac4c90622f5b94c80bdec8c0",
+      "bytes": 7969
+    },
+    {
+      "file": "docs/RESTAURACION.md",
+      "sha256": "16616baefdfe3204ad638f7ddefe7e67b7cec639bddd4ecbd6bf99b8f366936f",
+      "bytes": 3035
+    },
+    {
+      "file": "entrega/v4/AUDITORIA_INICIAL.json",
+      "sha256": "c60eb0aba385f3d6a22c3dde34fb30baf9906c07ed011d91b1db092c91b20b39",
+      "bytes": 88665
+    },
+    {
+      "file": "entrega/v4/DEPENDENCIAS.json",
+      "sha256": "f4e0182fbf6298ee7f361823719bcde403baa97d065caa9443a525566762e61b",
+      "bytes": 1444
+    },
+    {
+      "file": "entrega/v4/INFORME.md",
+      "sha256": "60ef81908508d65ecb60d57c104594eceff038866f60f4c9355defa495940838",
+      "bytes": 10667
+    },
+    {
+      "file": "entrega/v4/PRUEBAS.json",
+      "sha256": "b3f71461b2b7126a33445e794192c9face19166f8f47f0615ad4856ebb0759aa",
+      "bytes": 17173
+    },
+    {
+      "file": "entrega/v4/agenda-compacta-390.png",
+      "sha256": "4207331b162f883dd53af770af7468d7168c706dff3d5c8be107ae9be50f2b60",
+      "bytes": 34910
+    },
+    {
+      "file": "entrega/v4/asistente-escritorio.png",
+      "sha256": "ebb2d90ccedea9f69c4e018bd4bd33bd4ff9528c9b0391b577ed825ac88c021a",
+      "bytes": 97078
+    },
+    {
+      "file": "entrega/v4/asistente-movil.png",
+      "sha256": "9b5bbacbb8bea5460c02a4133a28fa6b0c06af474baa67ca07e799adecdce96e",
+      "bytes": 85251
+    },
+    {
+      "file": "entrega/v4/index-1440.png",
+      "sha256": "00c2b7eca01b68f7d70c26ccd736d5feee94decb70725ecd8c4b9100b372254e",
+      "bytes": 108782
+    },
+    {
+      "file": "functions/.env.ai.example",
+      "sha256": "e6fd87538e4adebd4db4401dddacec3e7724d5800a75df3fd1191717d0df162d",
+      "bytes": 265
+    },
+    {
+      "file": "functions/assistant-core.js",
+      "sha256": "ac70e391acb77d2c54dc17a30f135b0125793429c103e01d636d268fdbcc10ac",
+      "bytes": 7738
+    },
+    {
+      "file": "functions/assistant-service.js",
+      "sha256": "ab21b28bcaa8bef5cfe367f39b11d151d6fbf971218f3e262c4b42703f2d1061",
+      "bytes": 8103
+    },
+    {
+      "file": "js/assistant-config.js",
+      "sha256": "e1404d5b70ae1cef5dcfeae48df0d0f7b5ab3253ff00cf0af31d64f923a0102e",
+      "bytes": 76
+    },
+    {
+      "file": "js/assistant-core.js",
+      "sha256": "ac70e391acb77d2c54dc17a30f135b0125793429c103e01d636d268fdbcc10ac",
+      "bytes": 7738
+    },
+    {
+      "file": "js/assistant.js",
+      "sha256": "93adc3cbdcd3490cc11e5c332fc6ed191a491d2d6a518e812bce6b542a4907af",
+      "bytes": 8278
+    },
+    {
+      "file": "js/pwa-release.js",
+      "sha256": "29cf259cd842d1c6505627f7c20149e9ac97f83744b6b5086a8b658967d7a5e1",
+      "bytes": 8864
+    },
+    {
+      "file": "js/release-info.js",
+      "sha256": "cafd252d5d1d26755f3a08c08e83c95948e0d343c41ab1ae0c92da621edd4108",
+      "bytes": 38
+    },
+    {
+      "file": "js/release-worker.js",
+      "sha256": "27632c128c16351a4f9dfc84c6efd018c75e246cb862a09c5e0e1127c9f72d72",
+      "bytes": 7882
+    },
+    {
+      "file": "js/update-safety.js",
+      "sha256": "de254f9a025518f5a820729346fd43b3bc6dd2e206d3b4d866d324d979cfede1",
+      "bytes": 3971
+    },
+    {
+      "file": "package.json",
+      "sha256": "940321a304dc83cf86058c195885c42da34a93bafc8381a94fc50101b6ed8ef1",
+      "bytes": 389
+    },
+    {
+      "file": "pnpm-lock.yaml",
+      "sha256": "6a64c784a9cc689f35d00bdafc97ffbabd7c27f065e764b8e9475138c1e5d214",
+      "bytes": 1011
+    },
+    {
+      "file": "recuperacion.html",
+      "sha256": "d45f7517060a44fd74d7494944a5fb188d7505dca54a5e6ce4808821b0b9f00a",
+      "bytes": 2916
+    },
+    {
+      "file": "release.json",
+      "sha256": "0bea494f22a725e3d3daee6fa9ac740b595a3acef465ce112f3a61aee71364e7",
+      "bytes": 16387
+    },
+    {
+      "file": "tests/assistant.test.cjs",
+      "sha256": "0e5f7d8816aa463b3206db7acb8ec92a9212121f2c546450bac6c00996487d1d",
+      "bytes": 7903
+    },
+    {
+      "file": "tests/updates.cjs",
+      "sha256": "96a6198ee91be0eba3dd2cd69d962b485d8e41b3376e2cc7b3db93d0b7119d53",
+      "bytes": 7316
+    },
+    {
+      "file": "tools/build-release.cjs",
+      "sha256": "22a183b57d26b66aff6b36385489c91ae5cc3497e228cc498cfcf9f149a595a6",
+      "bytes": 3984
+    },
+    {
+      "file": "tools/check-project.cjs",
+      "sha256": "de2410f1a9ed259a48e49e551096c91191b6875c0a160c6200c5aace29011f53",
+      "bytes": 3320
+    },
+    {
+      "file": "tools/verify-release.cjs",
+      "sha256": "fd87eb032dd3268b1bf8ebcdb595166032367939d48df103f00130b93efc5abf",
+      "bytes": 2057
+    }
+  ],
+  "unchangedOriginalCount": 285,
+  "criticalUnchanged": [
+    "js/eventos.js",
+    "css/eventos.css",
+    "js/minuta.js",
+    "css/minuta.css",
+    "js/minuta-time.js",
+    "js/minuta-raster.js",
+    "js/minuta-share.js",
+    "js/minuta-share-preview.js",
+    "js/agenda-movil.js",
+    "js/agenda-reminders.js",
+    "js/agenda-requirements.js",
+    "js/push-client.js",
+    "js/push-ui.js",
+    "js/notifications.js",
+    "js/food-alerts-core.js",
+    "js/agenda-content.js",
+    "js/agendas.js",
+    "js/data-core.js",
+    "js/local-auth.js",
+    "js/auth-guard.js",
+    "functions/food-alerts-core.mjs",
+    "functions/food-coordinator.js",
+    "functions/food-store.js",
+    "functions/push-provider.js",
+    "functions/push-service.js",
+    "agenda.webmanifest",
+    "manifest.webmanifest",
+    "firestore.rules",
+    "data/eventos_publicos.json"
+  ],
+  "inventorySelf": "Este inventario no incluye su propia huella; se verifica dentro del ZIP completo."
+}

@@ -4,6 +4,16 @@ const META='rpt-release-meta',STATE=scope+'__rpt_state__',COMPLETE=scope+'__rpt_
 const assetUrls=new Set(RELEASE.assets.map(asset=>new URL(asset.path,scope).href));
 assetUrls.add(new URL('data/eventos_publicos.json',scope).href);
 const operations=new Map();let progress=null;
+const DETAILS=scope+'__rpt_release_details__';let details,downloaded=0;
+async function releaseDetails(){const response=await(await caches.open(META)).match(DETAILS);return response?response.json():null;}
+async function saveDetails(){if(details)await(await caches.open(META)).put(DETAILS,new Response(JSON.stringify(details),{headers:{'Content-Type':'application/json'}}));}
+async function differences(){
+ const state=await metadata(),active=await completed(state.active),old=new Map();
+ if(active?.assets)for(const item of active.assets)old.set(item.path,item.sha256);
+ else if(active){const cache=await caches.open(state.active);for(const request of await cache.keys()){const url=new URL(request.url),name=url.href.slice(scope.length);if(!url.href.startsWith(scope)||name.startsWith('__rpt_')||name==='data/eventos_publicos.json')continue;const bytes=await(await cache.match(request)).arrayBuffer();old.set(name,[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(v=>v.toString(16).padStart(2,'0')).join(''));}}
+ const next=new Map(RELEASE.assets.map(a=>[a.path,a.sha256]));return{fromVersion:active?.version||null,toVersion:RELEASE.version,added:[...next.keys()].filter(k=>!old.has(k)),modified:[...next.keys()].filter(k=>old.has(k)&&old.get(k)!==next.get(k)),removed:[...old.keys()].filter(k=>!next.has(k)),unchanged:[...next.keys()].filter(k=>old.get(k)===next.get(k)).length};
+}
+
 const FAILURE=scope+'__rpt_release_failure__';
 async function failureRecord(){const response=await(await caches.open(META)).match(FAILURE);return response?response.json():null;}
 async function clearFailure(){await(await caches.open(META)).delete(FAILURE);}
@@ -18,14 +28,14 @@ async function verifiedResponse(asset){
       if(response.redirected)throw resourceError('REDIRECT',asset);
       if(!response.ok)throw resourceError('HTTP',asset,{status:response.status});
       if(/text\/html/i.test(response.headers.get('Content-Type')||'')&&!asset.path.endsWith('.html'))throw resourceError('HTML_RESPONSE',asset);
-      const bytes=await response.clone().arrayBuffer();
+      const bytes=await response.clone().arrayBuffer();downloaded++;if(details)details.lastResource=asset.path;
       const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(value=>value.toString(16).padStart(2,'0')).join('');
       if(digest!==asset.sha256)throw resourceError('INTEGRITY',asset,{expected:asset.sha256,received:digest,bytes:bytes.byteLength});
       return response;
     }catch(error){const failure=error.detail?error:resourceError(error.name==='AbortError'?'TIMEOUT':'NETWORK',asset);if(attempt===0&&['NETWORK','TIMEOUT'].includes(failure.detail.code)||attempt===0&&failure.detail.code==='HTTP'&&[408,429,500,502,503,504].includes(failure.detail.status))continue;throw failure;}finally{clearTimeout(timer);}
   }
 }
-async function reportProgress(phase,done=0,total=RELEASE.assets.length){progress={phase,done,total,version:RELEASE.version,at:Date.now()};await broadcast({type:'RPT_RELEASE_PROGRESS',...progress});}
+async function reportProgress(phase,done=0,total=RELEASE.assets.length){const at=Date.now();if(!details){details=await releaseDetails();downloaded=details?.downloaded||downloaded;}progress={phase,done,total,downloaded,verified:['preparing','activating','activated','error'].includes(phase)?(details?.verified||done):done,version:RELEASE.version,at,resource:details?.lastResource||''};if(details){details={...details,...progress,history:[...(details.history||[]),{phase,at,downloaded,verified:progress.verified,resource:progress.resource}].slice(-80)};await saveDetails();}await broadcast({type:'RPT_RELEASE_PROGRESS',...progress});}
 async function metadata(){const response=await(await caches.open(META)).match(STATE);return response?response.json():{};}
 async function setMetadata(value){await(await caches.open(META)).put(STATE,new Response(JSON.stringify(value),{headers:{'Content-Type':'application/json'}}));}
 async function completed(name){if(!name||!await caches.has(name))return null;const response=await(await caches.open(name)).match(COMPLETE);return response?response.json():null;}
@@ -33,23 +43,23 @@ async function clientsInScope(){return(await self.clients.matchAll({type:'window
 async function broadcast(value){for(const client of await clientsInScope())client.postMessage(value);}
 async function bind(clientId,cache){if(clientId&&cache)await(await caches.open(META)).put(scope+'__rpt_client__/'+clientId,new Response(cache));}
 async function bound(clientId,fallback){const value=clientId&&await(await caches.open(META)).match(scope+'__rpt_client__/'+clientId);return value?value.text():fallback;}
-async function status(){const state=await metadata();return{active:await completed(state.active),previous:await completed(state.previous),candidate:await completed(CACHE),progress,failure:await failureRecord()};}
+async function status(){const state=await metadata();return{active:await completed(state.active),previous:await completed(state.previous),candidate:await completed(CACHE),progress,failure:await failureRecord(),details:await releaseDetails()};}
 async function prepare(){
   const existing=await completed(CACHE);if(existing?.digest===RELEASE.digest){await clearFailure();return;}
   const cache=await caches.open(CACHE);let failed=false;
   try{
-    let cursor=0,done=0;await clearFailure();await reportProgress('downloading',0);
+    let cursor=0,done=0;downloaded=0;await clearFailure();details={changes:await differences(),detectedAt:Date.now(),history:[],downloaded:0,verified:0};await saveDetails();await broadcast({type:'RPT_RELEASE_DETECTED',details});await reportProgress('downloading',0);
     const results=await Promise.allSettled(Array.from({length:6},async()=>{
       try{while(!failed&&cursor<RELEASE.assets.length){
         const asset=RELEASE.assets[cursor++],response=await verifiedResponse(asset);if(failed)return;
-        await cache.put(new URL(asset.path,scope).href,response);done++;
+        await cache.put(new URL(asset.path,scope).href,response);done++;if(details)details.verified=done;
         if(done%8===0||done===RELEASE.assets.length)await reportProgress('verifying',done);
       }}catch(error){failed=true;throw error;}
     }));
     const rejected=results.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;
     try{const url=new URL('data/eventos_publicos.json',scope),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);try{const response=await fetch(new Request(url,{cache:'no-store',signal:controller.signal}));if(response.ok&&!/text\/html/i.test(response.headers.get('Content-Type')||''))await cache.put(url.href,response);}finally{clearTimeout(timer);}}catch(_){}
-    await cache.put(COMPLETE,new Response(JSON.stringify({cache:CACHE,version:RELEASE.version,digest:RELEASE.digest,verified:true}),{headers:{'Content-Type':'application/json'}}));
-    await clearFailure();
+    await cache.put(COMPLETE,new Response(JSON.stringify({cache:CACHE,version:RELEASE.version,digest:RELEASE.digest,verified:true,assets:RELEASE.assets}),{headers:{'Content-Type':'application/json'}}));
+    await reportProgress('ready',RELEASE.assets.length);await clearFailure();
   }catch(error){failed=true;await saveFailure(error);await reportProgress('error');await caches.delete(CACHE);throw error;}
 }
 self.addEventListener('install',event=>{event.waitUntil(prepare());});
@@ -58,7 +68,7 @@ self.addEventListener('activate',event=>{event.waitUntil((async()=>{
   const previous=state.active&&state.active!==CACHE?state.active:state.previous;
   const retired=[...new Set([...(state.retired||[]),state.previous].filter(name=>name&&name!==CACHE&&name!==previous))];
   await setMetadata({active:CACHE,previous:await completed(previous)?previous:null,retired});
-  await self.clients.claim();await broadcast({type:'RPT_RELEASE_ACTIVATED',version:RELEASE.version});
+  await reportProgress('activated',RELEASE.assets.length);await self.clients.claim();await broadcast({type:'RPT_RELEASE_ACTIVATED',version:RELEASE.version});
 })());});
 self.addEventListener('fetch',event=>{
   const request=event.request,url=new URL(request.url);if(request.method!=='GET'||url.origin!==self.location.origin||!url.href.startsWith(scope))return;

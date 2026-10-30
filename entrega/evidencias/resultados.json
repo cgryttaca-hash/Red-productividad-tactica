@@ -1,0 +1,277 @@
+{
+  "checks": [
+    {
+      "name": "Solo se retiran las cuatro páginas y sus cuatro controladores exclusivos",
+      "result": "PASS",
+      "details": [
+        "auditoria.html",
+        "diagnostico.html",
+        "equipos.html",
+        "js/auditoria.js",
+        "js/diagnostico.js",
+        "js/equipos.js",
+        "js/respaldos.js",
+        "respaldos.html"
+      ]
+    },
+    {
+      "name": "Agenda Móvil y sus dependencias: 22 archivos idénticos por SHA-256",
+      "result": "PASS",
+      "details": [
+        "agenda_movil.html",
+        "css/agenda-movil.css",
+        "js/agenda-movil.js",
+        "js/agenda-reminders.js",
+        "js/agenda-requirements.js",
+        "agenda.webmanifest",
+        "js/maintenance-guard.js",
+        "mantenimiento.html",
+        "css/mantenimiento.css",
+        "js/mantenimiento.js",
+        "offline.html",
+        "js/pwa.js",
+        "js/notifications.js",
+        "js/performance-monitor.js",
+        "js/firebase-config.js",
+        "js/firebase-app-check.js",
+        "js/firebase-sync.js",
+        "js/puente_movil_eventos.js",
+        "data/eventos_publicos.json",
+        "assets/icon-180.png",
+        "assets/icon-192.png",
+        "assets/icon-512.png"
+      ]
+    },
+    {
+      "name": "Lógica operativa, lector Excel, autenticación, validaciones y servicios compartidos intactos",
+      "result": "PASS"
+    },
+    {
+      "name": "HTML de Eventos y Minuta: únicamente atributo de diseño y enlace CSS de pantalla",
+      "result": "PASS"
+    },
+    {
+      "name": "Service worker: lógica de caché, offline y notificaciones idéntica",
+      "result": "PASS"
+    },
+    {
+      "name": "Sin enlaces locales rotos ni accesos HTML a los módulos retirados",
+      "result": "PASS"
+    },
+    {
+      "name": "Diseño aislado: CSS solo para pantalla y sin carga en Agenda Móvil",
+      "result": "PASS"
+    },
+    {
+      "name": "Inicio de sesión real con autenticación local: original",
+      "result": "PASS"
+    },
+    {
+      "name": "Inicio de sesión real con autenticación local: actual",
+      "result": "PASS"
+    },
+    {
+      "name": "Eventos: resultados idénticos para todos, pisos, empresa, pago, fechas, alimentación y vista previa",
+      "result": "PASS"
+    },
+    {
+      "name": "Eventos: botón de impresión invocado y estilos/geometría de impresión idénticos al original",
+      "result": "PASS"
+    },
+    {
+      "name": "Minuta: fecha, navegación, cancelados, próximos eventos y edición/persistencia/eliminación de coworking idénticos",
+      "result": "PASS"
+    },
+    {
+      "name": "Minuta: botón de impresión invocado y estilos/geometría de impresión idénticos al original",
+      "result": "PASS"
+    },
+    {
+      "name": "Excel XLSX real: lectura, hojas, columnas, importación repetida y Laboratorio sin alterar producción idénticos",
+      "result": "PASS"
+    },
+    {
+      "name": "Servicios internos usados por Excel: copias automáticas y registro interno disponibles sin sus módulos de administración",
+      "result": "PASS"
+    },
+    {
+      "name": "Usuarios, preferencias de notificación, validación y exportación CSV funcionan",
+      "result": "PASS"
+    },
+    {
+      "name": "Agenda Móvil: acceso y pantalla operativa idénticos píxel a píxel en 390 × 844",
+      "result": "PASS"
+    },
+    {
+      "name": "Agenda Móvil: filtros, búsqueda, fecha, detalle, tamaño de texto, actualización y preferencias idénticos con Firebase simulado",
+      "result": "PASS"
+    },
+    {
+      "name": "48 revisiones adaptables: 8 pantallas × 6 anchos, sin desbordamiento de página",
+      "result": "PASS",
+      "details": [
+        1440,
+        1366,
+        1024,
+        768,
+        390,
+        360
+      ]
+    },
+    {
+      "name": "Sin excepciones JavaScript ni recursos locales faltantes durante las pruebas",
+      "result": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "missingLocal": [],
+  "notes": [
+    "Firebase interceptado con un servicio de prueba en memoria: no se leyó ni escribió en producción. Instalación y permisos de Agenda Móvil simulados únicamente para la prueba operativa.",
+    "Las bibliotecas Excel y Chart.js son las mismas URLs del proyecto original; se sirvieron copias temporales durante las pruebas."
+  ],
+  "consoleErrors": [],
+  "files": {
+    "modified": [
+      "configuracion.html",
+      "eventos.html",
+      "index.html",
+      "js/configuracion.js",
+      "js/index.js",
+      "js/system-version.js",
+      "laboratorio.html",
+      "login.html",
+      "manifest.webmanifest",
+      "minuta.html",
+      "PROTECTED_MODULES.json",
+      "README.txt",
+      "sw.js",
+      "usuarios.html",
+      "validacion.html"
+    ],
+    "removed": [
+      "auditoria.html",
+      "diagnostico.html",
+      "equipos.html",
+      "js/auditoria.js",
+      "js/diagnostico.js",
+      "js/equipos.js",
+      "js/respaldos.js",
+      "respaldos.html"
+    ],
+    "added": [
+      "css/corporate-ui.css"
+    ]
+  },
+  "protectedHashes": [
+    {
+      "file": "agenda_movil.html",
+      "original": "e02c58e55486d8d6d25d1db805efd02b92cd83f796bb9efeeea5a26652f3ecec",
+      "actual": "e02c58e55486d8d6d25d1db805efd02b92cd83f796bb9efeeea5a26652f3ecec"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "original": "a66558d230ad4ea23d2b4f5e9843ace6e70b60690820cd4e1220b57cd2043343",
+      "actual": "a66558d230ad4ea23d2b4f5e9843ace6e70b60690820cd4e1220b57cd2043343"
+    },
+    {
+      "file": "js/agenda-movil.js",
+      "original": "cfd877e4e147b41bc2d21325401ea26a546dd6f92556bc37c1a589a60825e98d",
+      "actual": "cfd877e4e147b41bc2d21325401ea26a546dd6f92556bc37c1a589a60825e98d"
+    },
+    {
+      "file": "js/agenda-reminders.js",
+      "original": "d8be19a04d835e4e798424a59a0633dbb40fa43e421188e37efe8032b7ded20a",
+      "actual": "d8be19a04d835e4e798424a59a0633dbb40fa43e421188e37efe8032b7ded20a"
+    },
+    {
+      "file": "js/agenda-requirements.js",
+      "original": "d89e560914f8d770175869b5ea83b39aec4b521d428c932b6ec8f7f012c7a899",
+      "actual": "d89e560914f8d770175869b5ea83b39aec4b521d428c932b6ec8f7f012c7a899"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "original": "3b64f284b9e5cd87001171d8cab06124d183eff23f887dd615356b7915dd988c",
+      "actual": "3b64f284b9e5cd87001171d8cab06124d183eff23f887dd615356b7915dd988c"
+    },
+    {
+      "file": "js/maintenance-guard.js",
+      "original": "343fd40ed26880756120715fc5a63d837bf931c70f4d5c2815874ef1bd86f7d2",
+      "actual": "343fd40ed26880756120715fc5a63d837bf931c70f4d5c2815874ef1bd86f7d2"
+    },
+    {
+      "file": "mantenimiento.html",
+      "original": "bb13cd5379949a8d8e93d1511feead75a7bad86f38e83945a9e3843cc572b512",
+      "actual": "bb13cd5379949a8d8e93d1511feead75a7bad86f38e83945a9e3843cc572b512"
+    },
+    {
+      "file": "css/mantenimiento.css",
+      "original": "ad7376e488be3467234b54d413b24844490467c10e48267736ba27af87e8066c",
+      "actual": "ad7376e488be3467234b54d413b24844490467c10e48267736ba27af87e8066c"
+    },
+    {
+      "file": "js/mantenimiento.js",
+      "original": "db2cbf79aa4a085b9801c98350931c7f501993d33898ed70ba544d9e6d99b8a6",
+      "actual": "db2cbf79aa4a085b9801c98350931c7f501993d33898ed70ba544d9e6d99b8a6"
+    },
+    {
+      "file": "offline.html",
+      "original": "720346bc943cb9048abdfad164b04271d68c0f2b6fe39ad32dc4faf99f0a4c38",
+      "actual": "720346bc943cb9048abdfad164b04271d68c0f2b6fe39ad32dc4faf99f0a4c38"
+    },
+    {
+      "file": "js/pwa.js",
+      "original": "1b3a1d26baeef158dedb1b42d4ac356be9f717ec3099183f40898ad0b9f66155",
+      "actual": "1b3a1d26baeef158dedb1b42d4ac356be9f717ec3099183f40898ad0b9f66155"
+    },
+    {
+      "file": "js/notifications.js",
+      "original": "4434a7857356db1d4ebb03dfa372604ba21dd617239bfcf7aeb97fc025fbf5d2",
+      "actual": "4434a7857356db1d4ebb03dfa372604ba21dd617239bfcf7aeb97fc025fbf5d2"
+    },
+    {
+      "file": "js/performance-monitor.js",
+      "original": "2f5f33d4b1f758d94c144c9d239f24ddd7e34825624d42f19d4f5719f785e979",
+      "actual": "2f5f33d4b1f758d94c144c9d239f24ddd7e34825624d42f19d4f5719f785e979"
+    },
+    {
+      "file": "js/firebase-config.js",
+      "original": "6baa8b537bc22c5a560f989d0f76275f31d8dc8f063dd18f94938951e53cc805",
+      "actual": "6baa8b537bc22c5a560f989d0f76275f31d8dc8f063dd18f94938951e53cc805"
+    },
+    {
+      "file": "js/firebase-app-check.js",
+      "original": "927ec989938e83a95560d3e1995d9ad5c1b7cc58f39d4c4607defa4cfa786b12",
+      "actual": "927ec989938e83a95560d3e1995d9ad5c1b7cc58f39d4c4607defa4cfa786b12"
+    },
+    {
+      "file": "js/firebase-sync.js",
+      "original": "3a050beecd9059260fc08485b62b7046d603655b743dc799421cd4bf334dc40b",
+      "actual": "3a050beecd9059260fc08485b62b7046d603655b743dc799421cd4bf334dc40b"
+    },
+    {
+      "file": "js/puente_movil_eventos.js",
+      "original": "2c5496cbb09fe7356ebe9c55ffbe20a565150278ebf025c01d5e92b5b37c5618",
+      "actual": "2c5496cbb09fe7356ebe9c55ffbe20a565150278ebf025c01d5e92b5b37c5618"
+    },
+    {
+      "file": "data/eventos_publicos.json",
+      "original": "fc9861c6849388891cc23932113f9829609130e2ce309cbacd6ffd6cc311834d",
+      "actual": "fc9861c6849388891cc23932113f9829609130e2ce309cbacd6ffd6cc311834d"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "original": "d3b6af6c161716b28f4d62118b2d6ee826df1b8a034f3df0ef04e1fec75d78bb",
+      "actual": "d3b6af6c161716b28f4d62118b2d6ee826df1b8a034f3df0ef04e1fec75d78bb"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "original": "e18a6f8708dd3eeefa3778c680e6437c7407afaf0fd941a7d0d2585cfcbe838c",
+      "actual": "e18a6f8708dd3eeefa3778c680e6437c7407afaf0fd941a7d0d2585cfcbe838c"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "original": "c98cecdfbd4b957b4234016f790dd5c34b827acd2929d300fb42293896274d31",
+      "actual": "c98cecdfbd4b957b4234016f790dd5c34b827acd2929d300fb42293896274d31"
+    }
+  ]
+}

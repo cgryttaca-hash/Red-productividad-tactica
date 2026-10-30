@@ -1,4 +1,5 @@
 (function(){
+  if(window.RPTNavigation?.mobile())return;
   'use strict';
 
   const DB_NAME = 'gestion-eventos-archivos';
@@ -163,9 +164,9 @@
     if(normalized.includes('HORARIO')&&normalized.includes('EVENTO')) return 'HORARIO DEL EVENTO';
     if((normalized.includes('NOMBRE')&&normalized.includes('EMPRESA'))||normalized==='EMPRESA') return 'NOMBRE DE LA EMPRESA';
     if((normalized.includes('CANTIDAD')&&normalized.includes('PERSONAS'))||normalized.includes('PAX')) return 'CANTIDAD DE PERSONAS';
-    if(normalized.includes('HORARIO')&&(normalized.includes('AYB')||normalized.includes('A&B')||normalized.includes('A Y B'))) return 'HORARIO AYB';
-    if(normalized.includes('DESCRIPCION')&&normalized.includes('ALIMENTACION')) return 'DESCRIPCION ALIMENTACION';
-    if(normalized==='ALIMENTACION') return 'DESCRIPCION ALIMENTACION';
+    if(normalized.includes('HORARIO')&&(normalized.includes('AYB')||normalized.includes('A&B')||normalized.includes('A Y B'))) return 'HORARIO AYB'+(normalized.match(/\d+$/)?' '+normalized.match(/\d+$/)[0]:'');
+    if(normalized.includes('DESCRIPCION')&&normalized.includes('ALIMENTACION')) return 'DESCRIPCION ALIMENTACION'+(normalized.match(/\d+$/)?' '+normalized.match(/\d+$/)[0]:'');
+    if(normalized==='ALIMENTACION') return 'DESCRIPCION ALIMENTACION'+(normalized.match(/\d+$/)?' '+normalized.match(/\d+$/)[0]:'');
     if(normalized.includes('ACOMODACION')) return 'ACOMODACION';
     if(normalized.includes('MODALIDAD')) return 'MODALIDAD DE SERVICIO';
     if(normalized.includes('MEDIO')&&normalized.includes('PAGO')) return 'MEDIO DE PAGO';
@@ -199,7 +200,7 @@
 
   function normalizeWorkbookRow(row,headers,sheetName,sourceRow){
     const result={};
-    headers.forEach((header,index)=>{ if(header) result[header]=row[index]??''; });
+    headers.forEach((header,index)=>{ if(header){const value=row[index]??'';result[header]=/^(HORARIO AYB|DESCRIPCION ALIMENTACION)(?: \d+)?$/.test(header)&&result[header]!==undefined&&String(result[header]).trim()&&String(value).trim()?String(result[header])+'\n'+value:value;} });
     return compactRow({
       ...result,
       HOJA_ORIGEN:sheetName,

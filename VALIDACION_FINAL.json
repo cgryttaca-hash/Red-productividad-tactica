@@ -1,0 +1,12 @@
+{
+  "version": "4.3.0",
+  "result": "PASS",
+  "resources": 130,
+  "pages": 15,
+  "responsiveChecks": 75,
+  "mobileAccess": "public",
+  "contactPersistence": "existing local browser store",
+  "productionDeployed": false,
+  "physicalDevicesVerified": false,
+  "report": "entrega/v43/PRUEBAS.json"
+}

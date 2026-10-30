@@ -1,0 +1,66 @@
+ACTUALIZACIÓN DIRIGIDA — SIN CAMBIOS EN EVENTOS NI MINUTA
+=========================================================
+
+Archivos protegidos y conservados sin cambios:
+- eventos.html
+- js/eventos.js
+- css/eventos.css
+- minuta.html
+- js/minuta.js
+- css/minuta.css
+
+CAMBIOS APLICADOS
+-----------------
+1. Firebase Authentication modular:
+   - Se corrigió el error relacionado con setPersistence.
+   - La instancia auth se valida antes del login.
+   - El login se bloquea mientras Firebase inicializa.
+   - La sesión utiliza browserLocalPersistence.
+   - No se usa código Compat.
+
+2. Index:
+   - Se eliminó completamente el calendario.
+   - Se restauró un diseño amplio para monitores.
+   - Se añadieron paneles grandes para Excel, Firebase, operación e historial.
+
+3. Excel:
+   - Mantiene el sistema actual.
+   - Comprueba primero nombre, tamaño y fecha de modificación.
+   - Solo procesa el archivo cuando detecta cambios reales.
+   - Genera diferencias por registro y por campo.
+   - Registra celda, valor anterior, valor nuevo, equipo y usuario.
+   - El historial local se guarda en IndexedDB.
+
+4. Firebase:
+   - La publicación es incremental.
+   - El historial no bloquea la publicación principal.
+   - La caché de publicación se guarda en IndexedDB.
+   - Se eliminan claves antiguas que podían saturar localStorage.
+
+5. Agenda móvil:
+   - Requiere sesión antes de consultar Firestore.
+   - No utiliza autenticación anónima.
+   - Mantiene actualizaciones en tiempo real.
+   - Rediseño exclusivo para teléfonos.
+   - Respeta el orden Horario AYB → Descripción Alimentación.
+   - Mantiene los saltos de línea y textos completos.
+
+IMPORTANTE SOBRE FIRESTORE
+--------------------------
+GitHub Pages no puede publicar reglas de seguridad remotas.
+
+Para que la Agenda Móvil quede realmente protegida, el contenido del archivo
+firestore.rules debe estar publicado en Firebase Console:
+
+Firestore Database → Reglas → pegar contenido → Publicar
+
+Sin ese paso, el código cliente puede mostrar login, pero la seguridad real
+de los datos seguirá dependiendo de las reglas que estén activas en Firebase.
+
+PUBLICACIÓN EN GITHUB
+---------------------
+1. Descomprime el ZIP.
+2. Sube el contenido de Red-productividad-tactica-main a la raíz del repositorio.
+3. Reemplaza los archivos existentes.
+4. Espera GitHub Pages.
+5. Abre el sitio con Ctrl + F5 una sola vez.

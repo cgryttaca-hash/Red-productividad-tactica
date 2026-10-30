@@ -1,0 +1,236 @@
+[
+  {
+    "file": ".gitattributes",
+    "status": "new",
+    "before": null,
+    "after": "007ebad7f2bdcf8ed23c04193519204c151bbeeebbfd58b85b8db8cbb7720764"
+  },
+  {
+    "file": ".github/workflows/publish.yml",
+    "status": "modified",
+    "before": "bd4687047f752548206aa48f2c40c6fd1266e19bc9913d2178fad1090bc32d56",
+    "after": "0d74e6a097567276d61a1fa270a08084d02758d58dec5bad758cd435c3c56f21"
+  },
+  {
+    "file": ".github/workflows/verify.yml",
+    "status": "modified",
+    "before": "24142a177ad1c205b96806745ba07737dc8541b468d6cc3997e27a63056835ff",
+    "after": "dcbe77fcc217d527b50b0e8a1a0a245faa00c808393f85f2c9ac6a186b227054"
+  },
+  {
+    "file": ".nojekyll",
+    "status": "new",
+    "before": null,
+    "after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "CHANGELOG.md",
+    "status": "modified",
+    "before": "7e7f7aa77d2bd54093b095d01b561297ed0865d4957dc75537562adba525532b",
+    "after": "92431729e35d6468ab2d6478ff1c7f7b92b1c1f398fb71008747bf295259850e"
+  },
+  {
+    "file": "LEER_PRIMERO_V421.md",
+    "status": "new",
+    "before": null,
+    "after": "abbc0b63eb403d92e22bbc8d803cef25e48a95827adb5cfccd2adf29585121d9"
+  },
+  {
+    "file": "README.txt",
+    "status": "modified",
+    "before": "c57a29f90ebd15f4da45df0e071785ece88f6ac7076651c3b734896fc8f4bade",
+    "after": "d01af44c4e897a5cbb456228a54b0e3867c9a923caa102dbeb206979be0f8ab3"
+  },
+  {
+    "file": "VALIDACION_FINAL.json",
+    "status": "modified",
+    "before": "8fd624788ecca2edf0c2cca78b963f352a111e44763b045fea61cd98ffedc70b",
+    "after": "2b84a84d2d869fc5de6cc1838c853c187e9e7a5f48a5f986e475f65b3f2fd5d7"
+  },
+  {
+    "file": "VERSION.txt",
+    "status": "modified",
+    "before": "8fb33dadbe981cf5847df269c10c2a3fe107f2b269d5ccb6db37d1f61ffc3bba",
+    "after": "e5d77a995a7d89c4b24498cb8947c3b40e53f4d2c0ba2380796cdb059d237848"
+  },
+  {
+    "file": "dist/.nojekyll",
+    "status": "new",
+    "before": null,
+    "after": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "dist/js/pwa-release.js",
+    "status": "modified",
+    "before": "7ef2a03469a01db0c406056420a8792934978addc816561d0d935a1f576775d0",
+    "after": "a1af754aac478bd9aee9d7622cf00d3ebd669270abcf1a488ab5e73019cbc059"
+  },
+  {
+    "file": "dist/js/release-info.js",
+    "status": "modified",
+    "before": "1355eaffe4404291efe6f67a0bdb866f83f83951fd0fce62f9a9effa1e87b373",
+    "after": "ad1d93a9803ff26b104ae103323b22cdf04194971b28fb51c0b848bf1fe90d87"
+  },
+  {
+    "file": "dist/js/release-worker.js",
+    "status": "modified",
+    "before": "39d100bdd8309239452836e54d0762b9a38687cc3afd74cbccff0bbe8efad519",
+    "after": "90d52fa4d222735dd0efbe8c372adc07dce709c013069a750cfbb27b612cd596"
+  },
+  {
+    "file": "dist/js/system-version.js",
+    "status": "modified",
+    "before": "fc75778ff17ca8a87b8e2fce751228a0f88d40c8dd636f32d7860ba230d4c6c7",
+    "after": "676c90c139a8440459451c67b58e275d29e819b0acdc5e395d5ea03ce130c8c4"
+  },
+  {
+    "file": "dist/js/update-page.js",
+    "status": "modified",
+    "before": "5e6e3a87dae72f67ebb988aa8397311f6f99bd10fb89a1bd2c1500a69c513a54",
+    "after": "04241f99be9f4144550c9ecb670da94a8ba8aae1ef0283d4d7882f5845e45570"
+  },
+  {
+    "file": "dist/release.json",
+    "status": "modified",
+    "before": "390aa2144f9776341eb3ef7b1408d502b96d883144f71f332353aa6b4e458dbf",
+    "after": "6dcc76f4e875e1b7613bc629c3ba3f28816fb1025f6351ef9642a7361f397710"
+  },
+  {
+    "file": "dist/sw.js",
+    "status": "modified",
+    "before": "95363cf322613d67f83cb22fe50d5ed9933b6d860cbb670eea30aaf38a2db186",
+    "after": "a71b0365a38ad4f178742a5d2677d00b34ac26211bc8b61d9329f8a23d21d511"
+  },
+  {
+    "file": "entrega/v421/AUDITORIA_INICIAL.json",
+    "status": "new",
+    "before": null,
+    "after": "991c54d68cc461a71d3096cf0dc37c726ab3e5ff3b7f4653394a86456059745c"
+  },
+  {
+    "file": "entrega/v421/INFORME.md",
+    "status": "new",
+    "before": null,
+    "after": "8ec448230374c7ac0248f05217d1d24964768d0c016db04a4bc08cfafe613b63"
+  },
+  {
+    "file": "entrega/v421/PRUEBAS.json",
+    "status": "new",
+    "before": null,
+    "after": "02a668f0a951e75765ee47c4cb3c7016adb515b44df5329ec1a37b86804f0205"
+  },
+  {
+    "file": "entrega/v421/actualizaciones-1440.png",
+    "status": "new",
+    "before": null,
+    "after": "4105608682193e456cc3646de1963ae6cce68bf2615990148983885df70a476e"
+  },
+  {
+    "file": "entrega/v421/actualizaciones-390.png",
+    "status": "new",
+    "before": null,
+    "after": "ddbe43a59dc55f98978f5bb2d6b6cf40e0d6c4fd1665e738134da83a03a17098"
+  },
+  {
+    "file": "entrega/v421/error-integridad-390.png",
+    "status": "new",
+    "before": null,
+    "after": "e955f053a9340a378e4edc95b37a7f4fde83812496a2c86deadfe7f91b2b65f5"
+  },
+  {
+    "file": "js/pwa-release.js",
+    "status": "modified",
+    "before": "7ef2a03469a01db0c406056420a8792934978addc816561d0d935a1f576775d0",
+    "after": "a1af754aac478bd9aee9d7622cf00d3ebd669270abcf1a488ab5e73019cbc059"
+  },
+  {
+    "file": "js/release-info.js",
+    "status": "modified",
+    "before": "1355eaffe4404291efe6f67a0bdb866f83f83951fd0fce62f9a9effa1e87b373",
+    "after": "ad1d93a9803ff26b104ae103323b22cdf04194971b28fb51c0b848bf1fe90d87"
+  },
+  {
+    "file": "js/release-worker.js",
+    "status": "modified",
+    "before": "39d100bdd8309239452836e54d0762b9a38687cc3afd74cbccff0bbe8efad519",
+    "after": "90d52fa4d222735dd0efbe8c372adc07dce709c013069a750cfbb27b612cd596"
+  },
+  {
+    "file": "js/system-version.js",
+    "status": "modified",
+    "before": "fc75778ff17ca8a87b8e2fce751228a0f88d40c8dd636f32d7860ba230d4c6c7",
+    "after": "676c90c139a8440459451c67b58e275d29e819b0acdc5e395d5ea03ce130c8c4"
+  },
+  {
+    "file": "js/update-page.js",
+    "status": "modified",
+    "before": "5e6e3a87dae72f67ebb988aa8397311f6f99bd10fb89a1bd2c1500a69c513a54",
+    "after": "04241f99be9f4144550c9ecb670da94a8ba8aae1ef0283d4d7882f5845e45570"
+  },
+  {
+    "file": "package.json",
+    "status": "modified",
+    "before": "ced26d5ecb3cf6ec3c05dcc861eb60d140e8a9b1c1fefe4e057fe0d0f0587500",
+    "after": "7018034d1765c303ef6849ddd4763e6c6be75d5f66f9d3f5bfc9457735430b13"
+  },
+  {
+    "file": "release.json",
+    "status": "modified",
+    "before": "390aa2144f9776341eb3ef7b1408d502b96d883144f71f332353aa6b4e458dbf",
+    "after": "6dcc76f4e875e1b7613bc629c3ba3f28816fb1025f6351ef9642a7361f397710"
+  },
+  {
+    "file": "sw.js",
+    "status": "modified",
+    "before": "95363cf322613d67f83cb22fe50d5ed9933b6d860cbb670eea30aaf38a2db186",
+    "after": "a71b0365a38ad4f178742a5d2677d00b34ac26211bc8b61d9329f8a23d21d511"
+  },
+  {
+    "file": "tests/migration.cjs",
+    "status": "new",
+    "before": null,
+    "after": "d3b4ffcb6a761cfdf2c83ab65f318461009c7810355bcdebd6d8008b3a6aef31"
+  },
+  {
+    "file": "tests/publication.cjs",
+    "status": "new",
+    "before": null,
+    "after": "befb33164075b22db2df03372c96134f0beb87911047c44562ff242a700abb3a"
+  },
+  {
+    "file": "tests/update-integrity.cjs",
+    "status": "new",
+    "before": null,
+    "after": "16e77730f70d1b05e1da896969eae0b006e0db6f5972d725eea4ebb38b18d642"
+  },
+  {
+    "file": "tests/updates.cjs",
+    "status": "modified",
+    "before": "7457440690e6cff98b88863fbeaab57edff5541320742d489de34eac7f987531",
+    "after": "da86fafae1b03a31dcdbfa7e069ea8f23e622e2b577f0d0c3d2c13a8d1b0b983"
+  },
+  {
+    "file": "tests/v42/test-offline.cjs",
+    "status": "modified",
+    "before": "73c37e4ef687049f7f0ff8ebddef2c6a5858ce4701abbeba587472056dd4b5cd",
+    "after": "b7973a487036a23d46ce17bf626636652609ea2f54e9bc6bc4231c9e3c8c2b26"
+  },
+  {
+    "file": "tools/audit-publication.cjs",
+    "status": "new",
+    "before": null,
+    "after": "e6b0c0559d017efc5a7d48bc4d0ae32808d6d66e5292615c71b3995420a1b734"
+  },
+  {
+    "file": "tools/build-release.cjs",
+    "status": "modified",
+    "before": "22a183b57d26b66aff6b36385489c91ae5cc3497e228cc498cfcf9f149a595a6",
+    "after": "9b07066ad51de00d63770e7869303aa0ce0b8e7d5c7595bb0612005abde2ce12"
+  },
+  {
+    "file": "tools/verify-release.cjs",
+    "status": "modified",
+    "before": "fd87eb032dd3268b1bf8ebcdb595166032367939d48df103f00130b93efc5abf",
+    "after": "e0783264f8f884c7c3485fb92c5de95ab72dec783c6f10382c38ad7f37b54933"
+  }
+]

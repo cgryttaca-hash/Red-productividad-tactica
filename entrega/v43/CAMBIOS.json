@@ -1,0 +1,500 @@
+[
+  {
+    "file": ".github/workflows/publish.yml",
+    "status": "modified",
+    "before": "0d74e6a097567276d61a1fa270a08084d02758d58dec5bad758cd435c3c56f21",
+    "after": "b14187c34b4f0792aaaf29387d33666a09ad955044baed112dbf5f9782de8ad2"
+  },
+  {
+    "file": ".github/workflows/verify.yml",
+    "status": "modified",
+    "before": "dcbe77fcc217d527b50b0e8a1a0a245faa00c808393f85f2c9ac6a186b227054",
+    "after": "547954278a0763e1c9ec2da13c7d2399f442690b581e0fb77f5ec6d331ec311f"
+  },
+  {
+    "file": "CHANGELOG.md",
+    "status": "modified",
+    "before": "9cffe2177ac27f44bf93910fa3d5e564695146e423cb056b247aa2061cfeb0f0",
+    "after": "d1cc2c5ef70cc346fa3282d49c9b760e872d8adf5a2be65a287ed6fe1ffb71fe"
+  },
+  {
+    "file": "LEER_PRIMERO_V43.md",
+    "status": "new",
+    "before": null,
+    "after": "a3709495273fee4cccb6c58ebcbaa255868bf97cbe135c95fe6197a5a3b34081"
+  },
+  {
+    "file": "README.txt",
+    "status": "modified",
+    "before": "3d903310ac63ec96a998ad21f44addd46811b4add5098a0add2110794a3f1c52",
+    "after": "8217720eae35d6e7f87e1e4218fc8fbf41ee4ad19a4698038941f2d04f783574"
+  },
+  {
+    "file": "VALIDACION_FINAL.json",
+    "status": "modified",
+    "before": "ba42ec9d1dd3f3b75c7c8448109a7f4575e948484155be5696824751435c3416",
+    "after": "2a5efb20f76d8eaea9fcfbf4d8d0d9f810ab23cdabd45074278657d1a68873c3"
+  },
+  {
+    "file": "VERSION.txt",
+    "status": "modified",
+    "before": "1467d465785bff74035e6f7cc652495a7a5f0c4e182e0d16c0db514beea967de",
+    "after": "1e5302003691b6fdc7bddc0736eef7ce3adc870e97afdfcfb497dde2a78ed545"
+  },
+  {
+    "file": "agendas.html",
+    "status": "modified",
+    "before": "c5dae556ab190652f89bdc6f41c305ca8ca7877e9a3f9206e5940fcf1ebf70b3",
+    "after": "4fad3cd8b05580a5c12a43464f264afb8b57e634e5b921086c2618672476f551"
+  },
+  {
+    "file": "css/enterprise-refinements.css",
+    "status": "modified",
+    "before": "24a953109d35d683924ec86a4f4c42bcd3aad6cf338482958d16cf06384ac2a6",
+    "after": "0dbed05c67176d57cb150a032be7b066e1403d98e5cdb2004e2afedeb128cad4"
+  },
+  {
+    "file": "dist/agendas.html",
+    "status": "modified",
+    "before": "c5dae556ab190652f89bdc6f41c305ca8ca7877e9a3f9206e5940fcf1ebf70b3",
+    "after": "4fad3cd8b05580a5c12a43464f264afb8b57e634e5b921086c2618672476f551"
+  },
+  {
+    "file": "dist/css/enterprise-refinements.css",
+    "status": "modified",
+    "before": "24a953109d35d683924ec86a4f4c42bcd3aad6cf338482958d16cf06384ac2a6",
+    "after": "0dbed05c67176d57cb150a032be7b066e1403d98e5cdb2004e2afedeb128cad4"
+  },
+  {
+    "file": "dist/js/agenda-content.js",
+    "status": "modified",
+    "before": "b6e8a362868160f41518c40f5f70321faece740d8d3286e6587d8a9a266f2b5c",
+    "after": "7c7882924cf66e63f06ec5eecadb7f5d622fdd39ff36da36cb729060abd24961"
+  },
+  {
+    "file": "dist/js/agenda-dialog.js",
+    "status": "modified",
+    "before": "4f4227c996e981a2cedc0429a78489efaba27074f4bbd1dae556511bad79cbe3",
+    "after": "ba2f25c754320d835209b0e102780ea03f0d59c1d2ca0fe2a1d16a2eaec9a27c"
+  },
+  {
+    "file": "dist/js/agenda-movil.js",
+    "status": "modified",
+    "before": "5edfc8a88ee987c8ade5717e20ffc90ecf676581c05fef8306bd4e0ed8901def",
+    "after": "268276562d638c123dd8d281ecd0672bc1cc2ae12317e55a09569dc6139e08a0"
+  },
+  {
+    "file": "dist/js/agenda-operations.js",
+    "status": "new",
+    "before": null,
+    "after": "68eacd8735115beae84e400fa26366ecd3b3885501c63548e64e213f7f7c213e"
+  },
+  {
+    "file": "dist/js/agenda-page.js",
+    "status": "modified",
+    "before": "0725b1248af318731571825469d2c99a1ec688a973b0c3c1cf42616b1c4d940b",
+    "after": "10cda83efa5026fbeb96fbd29a6eb71ba21bf0f88a8e8f03fa236ebcd9c3a1ad"
+  },
+  {
+    "file": "dist/js/auth-guard.js",
+    "status": "modified",
+    "before": "7bb3a8a988e8815b2dbbb18a0048e7666dc3665b87f9b9ebff517e37aa442966",
+    "after": "3613eca2c55dd5b1a866049c4a853c5e60274f3ab3b89c776dec5ef81e89c160"
+  },
+  {
+    "file": "dist/js/event-notes.js",
+    "status": "modified",
+    "before": "f47be675700e35acf551d5f8c06fb5b8f5e9dd52ac642477db573270d937719e",
+    "after": "fbd0a9d0d33cf26818016a6dbceb0be0bbae74ee0f5ffac2fcaeb13dc685e20d"
+  },
+  {
+    "file": "dist/js/event-query.js",
+    "status": "modified",
+    "before": "8e84eca3c95439754c0cbf8cd0cd2f33dcba9f276ccdacc524457a00167daea5",
+    "after": "f786763f4cad5aea18b9b10ed3db39e6828d4414af99f3e81a2c5372b9f105c8"
+  },
+  {
+    "file": "dist/js/excel-sync.js",
+    "status": "modified",
+    "before": "438b7507760aa0db02fd98d72eebfc258ee545c92420818f62b16b259bdac58e",
+    "after": "119295685e2ee2251de0fdb8fc72f8fddbf1c0122f0904e9a464e034cce8a202"
+  },
+  {
+    "file": "dist/js/firebase-sync.js",
+    "status": "modified",
+    "before": "88e6712fcc9835a48bb8d9c2f1083f8eff351e8469b04a19abd8389013021c14",
+    "after": "889e84cdca2969bb2d76072912f40a4db3cae477b7d86710c1daa52307157843"
+  },
+  {
+    "file": "dist/js/food-alerts-core.js",
+    "status": "modified",
+    "before": "8fddcfc12452eae94ae57592b5b51343be797a08537754a9c372ba10f85d3976",
+    "after": "6c58489fda866dd7024677490a3abb30dcf33c76031d8ffe8455323fd90c66a6"
+  },
+  {
+    "file": "dist/js/local-auth.js",
+    "status": "modified",
+    "before": "eb641d5b5d7d69b8282134afd7712a274d37370bc2f6fef1363ef01a016fc4ab",
+    "after": "e16f6923e912b9f78a7b91b6b0fe41911df55f5fc0d071cde6daa6946a5eaf86"
+  },
+  {
+    "file": "dist/js/minuta-share-preview.js",
+    "status": "modified",
+    "before": "c896bdc93cead02e0f894c0370f6b111cd6d617b590ba247ac197eb77a71c1ce",
+    "after": "01f20b562b3e1d7f58fc7e21bda4805ec76b6d7340589f09eb3dd107c7e04f8e"
+  },
+  {
+    "file": "dist/js/minuta-share.js",
+    "status": "modified",
+    "before": "d91273338b2c5a9b1c76bbe583633e5764fe2fefe0f1b48fae11594f4454f8a3",
+    "after": "dbc1e77a16a46a626cbd875e62f72f3d63363f69fe0555b075e53622943f5d5d"
+  },
+  {
+    "file": "dist/js/navigation-policy.js",
+    "status": "modified",
+    "before": "9b6a1e36483dced72846709a5d853bc2441043b5709ace6649093e9a3dc63e8c",
+    "after": "3219b447c93d1ed352e9260db04802959be3052825b491fb65eaf9c8e36073be"
+  },
+  {
+    "file": "dist/js/pwa-release.js",
+    "status": "modified",
+    "before": "a123d8d4b2d702aa0184bc0e5defe5a4eb315d621319e4d7bc702df369f78ff1",
+    "after": "e9816106a896f550a4190f2581805b1143f3259c628ced22611b392caf508445"
+  },
+  {
+    "file": "dist/js/release-info.js",
+    "status": "modified",
+    "before": "410542f58890b3edb62394206ac82889379d1b8df0816ca4e2404321f1c5907a",
+    "after": "177697df82ba11f85a635dc5db91518d9064a88fdf6293439c0f831dbfef8213"
+  },
+  {
+    "file": "dist/js/release-worker.js",
+    "status": "modified",
+    "before": "85c7200044fc673f14c6675c168a07d8b8c3d977e38babc1e4d176e4beed48e8",
+    "after": "ff354e7ec09529c2baf76455b5741764ae671c8992e4cdc16d4b02782c1db248"
+  },
+  {
+    "file": "dist/js/system-version.js",
+    "status": "modified",
+    "before": "7580bd63fa06b77e36eeea5532170ea44a76a8e3e808019671306ee4d422b157",
+    "after": "ada7753c7f1eda260da4431c346bbc2a7425e7c4f42c8c7b8f039cd27f2d8b07"
+  },
+  {
+    "file": "dist/js/update-page.js",
+    "status": "modified",
+    "before": "fdb252a1ddbd444b3794974b92dd955ac2d2bf30adea6abf3091e977ef00e2ff",
+    "after": "1c74cbaf591f6763d18e24d4e9074bfd7ac675112cc42306bc9d343bbd1a8266"
+  },
+  {
+    "file": "dist/js/update-safety.js",
+    "status": "modified",
+    "before": "ef58cd09eaecf58f5a55f1c75cd147e216b4fbba93a4120c18bc1c60787e0612",
+    "after": "7c5a1f45e8ad56a6ff32e8e5d4b1e5e62843b6d16395aefc9507f16e6dfb6bb2"
+  },
+  {
+    "file": "dist/minuta_compartir.html",
+    "status": "modified",
+    "before": "57ca6a613f7447b34bc6294b318a5ac3ea5503dd4d1eb06ee98cff5ef5c937ed",
+    "after": "dae42494b28729dc8fbd3db4e7af01b1bf63e64daeb2adeda8d97a55b159ab91"
+  },
+  {
+    "file": "dist/recuperacion.html",
+    "status": "modified",
+    "before": "f933a6fb86135ee0cad4e197a937e7e6141272dfc60df8cf3160137439def52f",
+    "after": "f255182d06742e3b06320178c5ce52609870a1ccecbb578c22bbf10392b5789d"
+  },
+  {
+    "file": "dist/release.json",
+    "status": "modified",
+    "before": "657f4b2fd8d78e992d3c13d5d0b6e9ca91857ff7e872222aeaa862395434b9a7",
+    "after": "299adb1edd002312480cf9a657f0188cdcfbfa7821f52d103e5f576c1168e414"
+  },
+  {
+    "file": "dist/sw.js",
+    "status": "modified",
+    "before": "ae1f5187722b3d93781d3c192848a9ae1c9d643aa79b92f5bb72ec6b6b7832e0",
+    "after": "ef986fde6ec668c83b64510da90ad44b0e92d4f205d518c90e75b048f2b9dbac"
+  },
+  {
+    "file": "entrega/v43/AUDITORIA_INICIAL.json",
+    "status": "new",
+    "before": null,
+    "after": "b3335740eda0ac4bab6d6c5c19e205a537e6f402aab14dbb89cd1ed447be9a6c"
+  },
+  {
+    "file": "entrega/v43/INFORME.md",
+    "status": "new",
+    "before": null,
+    "after": "3fa9ea2faba3f6bdbc0b0ba1974bda67e971ce7256bfa202ed9fa45844f719aa"
+  },
+  {
+    "file": "entrega/v43/PRUEBAS.json",
+    "status": "new",
+    "before": null,
+    "after": "9f733bff70d25695d3acfae74caebbe1095f16bc2838871495f83d15d222d6ee"
+  },
+  {
+    "file": "entrega/v43/actualizaciones-1440.png",
+    "status": "new",
+    "before": null,
+    "after": "86f37cd16e774b32d04c6395ae7b6893219eaecdd452dd4ecaaa4003ac62a061"
+  },
+  {
+    "file": "entrega/v43/actualizaciones-390.png",
+    "status": "new",
+    "before": null,
+    "after": "cf92eabd6f817908003bc5ff03d37587273335f55fdd3d81f1a20ed45771b2c9"
+  },
+  {
+    "file": "entrega/v43/agenda-publica-390.png",
+    "status": "new",
+    "before": null,
+    "after": "5cfd539b7419ecbe5ccd6ac792d0863084506d7e1bd67eea98d239253cff8340"
+  },
+  {
+    "file": "entrega/v43/plantilla-390.png",
+    "status": "new",
+    "before": null,
+    "after": "8dacc2c32e7c2ff175682d939447481191095016980caa2a314876799f6d4b9e"
+  },
+  {
+    "file": "functions/food-alerts-core.mjs",
+    "status": "modified",
+    "before": "8fddcfc12452eae94ae57592b5b51343be797a08537754a9c372ba10f85d3976",
+    "after": "6c58489fda866dd7024677490a3abb30dcf33c76031d8ffe8455323fd90c66a6"
+  },
+  {
+    "file": "js/agenda-content.js",
+    "status": "modified",
+    "before": "b6e8a362868160f41518c40f5f70321faece740d8d3286e6587d8a9a266f2b5c",
+    "after": "7c7882924cf66e63f06ec5eecadb7f5d622fdd39ff36da36cb729060abd24961"
+  },
+  {
+    "file": "js/agenda-dialog.js",
+    "status": "modified",
+    "before": "4f4227c996e981a2cedc0429a78489efaba27074f4bbd1dae556511bad79cbe3",
+    "after": "ba2f25c754320d835209b0e102780ea03f0d59c1d2ca0fe2a1d16a2eaec9a27c"
+  },
+  {
+    "file": "js/agenda-movil.js",
+    "status": "modified",
+    "before": "5edfc8a88ee987c8ade5717e20ffc90ecf676581c05fef8306bd4e0ed8901def",
+    "after": "268276562d638c123dd8d281ecd0672bc1cc2ae12317e55a09569dc6139e08a0"
+  },
+  {
+    "file": "js/agenda-operations.js",
+    "status": "new",
+    "before": null,
+    "after": "68eacd8735115beae84e400fa26366ecd3b3885501c63548e64e213f7f7c213e"
+  },
+  {
+    "file": "js/agenda-page.js",
+    "status": "modified",
+    "before": "0725b1248af318731571825469d2c99a1ec688a973b0c3c1cf42616b1c4d940b",
+    "after": "10cda83efa5026fbeb96fbd29a6eb71ba21bf0f88a8e8f03fa236ebcd9c3a1ad"
+  },
+  {
+    "file": "js/auth-guard.js",
+    "status": "modified",
+    "before": "7bb3a8a988e8815b2dbbb18a0048e7666dc3665b87f9b9ebff517e37aa442966",
+    "after": "3613eca2c55dd5b1a866049c4a853c5e60274f3ab3b89c776dec5ef81e89c160"
+  },
+  {
+    "file": "js/event-notes.js",
+    "status": "modified",
+    "before": "f47be675700e35acf551d5f8c06fb5b8f5e9dd52ac642477db573270d937719e",
+    "after": "fbd0a9d0d33cf26818016a6dbceb0be0bbae74ee0f5ffac2fcaeb13dc685e20d"
+  },
+  {
+    "file": "js/event-query.js",
+    "status": "modified",
+    "before": "8e84eca3c95439754c0cbf8cd0cd2f33dcba9f276ccdacc524457a00167daea5",
+    "after": "f786763f4cad5aea18b9b10ed3db39e6828d4414af99f3e81a2c5372b9f105c8"
+  },
+  {
+    "file": "js/excel-sync.js",
+    "status": "modified",
+    "before": "438b7507760aa0db02fd98d72eebfc258ee545c92420818f62b16b259bdac58e",
+    "after": "119295685e2ee2251de0fdb8fc72f8fddbf1c0122f0904e9a464e034cce8a202"
+  },
+  {
+    "file": "js/firebase-sync.js",
+    "status": "modified",
+    "before": "88e6712fcc9835a48bb8d9c2f1083f8eff351e8469b04a19abd8389013021c14",
+    "after": "889e84cdca2969bb2d76072912f40a4db3cae477b7d86710c1daa52307157843"
+  },
+  {
+    "file": "js/food-alerts-core.js",
+    "status": "modified",
+    "before": "8fddcfc12452eae94ae57592b5b51343be797a08537754a9c372ba10f85d3976",
+    "after": "6c58489fda866dd7024677490a3abb30dcf33c76031d8ffe8455323fd90c66a6"
+  },
+  {
+    "file": "js/local-auth.js",
+    "status": "modified",
+    "before": "eb641d5b5d7d69b8282134afd7712a274d37370bc2f6fef1363ef01a016fc4ab",
+    "after": "e16f6923e912b9f78a7b91b6b0fe41911df55f5fc0d071cde6daa6946a5eaf86"
+  },
+  {
+    "file": "js/minuta-share-preview.js",
+    "status": "modified",
+    "before": "c896bdc93cead02e0f894c0370f6b111cd6d617b590ba247ac197eb77a71c1ce",
+    "after": "01f20b562b3e1d7f58fc7e21bda4805ec76b6d7340589f09eb3dd107c7e04f8e"
+  },
+  {
+    "file": "js/minuta-share.js",
+    "status": "modified",
+    "before": "d91273338b2c5a9b1c76bbe583633e5764fe2fefe0f1b48fae11594f4454f8a3",
+    "after": "dbc1e77a16a46a626cbd875e62f72f3d63363f69fe0555b075e53622943f5d5d"
+  },
+  {
+    "file": "js/navigation-policy.js",
+    "status": "modified",
+    "before": "9b6a1e36483dced72846709a5d853bc2441043b5709ace6649093e9a3dc63e8c",
+    "after": "3219b447c93d1ed352e9260db04802959be3052825b491fb65eaf9c8e36073be"
+  },
+  {
+    "file": "js/pwa-release.js",
+    "status": "modified",
+    "before": "a123d8d4b2d702aa0184bc0e5defe5a4eb315d621319e4d7bc702df369f78ff1",
+    "after": "e9816106a896f550a4190f2581805b1143f3259c628ced22611b392caf508445"
+  },
+  {
+    "file": "js/release-info.js",
+    "status": "modified",
+    "before": "410542f58890b3edb62394206ac82889379d1b8df0816ca4e2404321f1c5907a",
+    "after": "177697df82ba11f85a635dc5db91518d9064a88fdf6293439c0f831dbfef8213"
+  },
+  {
+    "file": "js/release-worker.js",
+    "status": "modified",
+    "before": "85c7200044fc673f14c6675c168a07d8b8c3d977e38babc1e4d176e4beed48e8",
+    "after": "ff354e7ec09529c2baf76455b5741764ae671c8992e4cdc16d4b02782c1db248"
+  },
+  {
+    "file": "js/system-version.js",
+    "status": "modified",
+    "before": "7580bd63fa06b77e36eeea5532170ea44a76a8e3e808019671306ee4d422b157",
+    "after": "ada7753c7f1eda260da4431c346bbc2a7425e7c4f42c8c7b8f039cd27f2d8b07"
+  },
+  {
+    "file": "js/update-page.js",
+    "status": "modified",
+    "before": "fdb252a1ddbd444b3794974b92dd955ac2d2bf30adea6abf3091e977ef00e2ff",
+    "after": "1c74cbaf591f6763d18e24d4e9074bfd7ac675112cc42306bc9d343bbd1a8266"
+  },
+  {
+    "file": "js/update-safety.js",
+    "status": "modified",
+    "before": "ef58cd09eaecf58f5a55f1c75cd147e216b4fbba93a4120c18bc1c60787e0612",
+    "after": "7c5a1f45e8ad56a6ff32e8e5d4b1e5e62843b6d16395aefc9507f16e6dfb6bb2"
+  },
+  {
+    "file": "minuta_compartir.html",
+    "status": "modified",
+    "before": "57ca6a613f7447b34bc6294b318a5ac3ea5503dd4d1eb06ee98cff5ef5c937ed",
+    "after": "dae42494b28729dc8fbd3db4e7af01b1bf63e64daeb2adeda8d97a55b159ab91"
+  },
+  {
+    "file": "package.json",
+    "status": "modified",
+    "before": "bc616d9b9581d5e3100cbb3e45f8aad226ce839619dc95c21fc59d450c2e7cc0",
+    "after": "03114a0dcf109de4de4c3ce04b97b0619294a10ceaf76bee7a1ab80100b35170"
+  },
+  {
+    "file": "recuperacion.html",
+    "status": "modified",
+    "before": "f933a6fb86135ee0cad4e197a937e7e6141272dfc60df8cf3160137439def52f",
+    "after": "f255182d06742e3b06320178c5ce52609870a1ccecbb578c22bbf10392b5789d"
+  },
+  {
+    "file": "release.json",
+    "status": "modified",
+    "before": "657f4b2fd8d78e992d3c13d5d0b6e9ca91857ff7e872222aeaa862395434b9a7",
+    "after": "299adb1edd002312480cf9a657f0188cdcfbfa7821f52d103e5f576c1168e414"
+  },
+  {
+    "file": "sw.js",
+    "status": "modified",
+    "before": "ae1f5187722b3d93781d3c192848a9ae1c9d643aa79b92f5bb72ec6b6b7832e0",
+    "after": "ef986fde6ec668c83b64510da90ad44b0e92d4f205d518c90e75b048f2b9dbac"
+  },
+  {
+    "file": "tests/migration.cjs",
+    "status": "modified",
+    "before": "df4cf1a7831f44b504852269a0cfe7736112074666ddecc05fd465f0c92f8697",
+    "after": "135575959f1e64b5efe38461d4c0bc76454b5fe8d7be51f47a60127376c12cb7"
+  },
+  {
+    "file": "tests/publication.cjs",
+    "status": "modified",
+    "before": "666dcededbeb16c98508e3903cc4f6e992437747075eb9d1ae84de441d50939a",
+    "after": "2921b6fd8eaed457889de28225e121e04a6652a14c4157abfa312554d95ff178"
+  },
+  {
+    "file": "tests/v42/test-offline.cjs",
+    "status": "modified",
+    "before": "b7973a487036a23d46ce17bf626636652609ea2f54e9bc6bc4231c9e3c8c2b26",
+    "after": "073938d5143ee360e338a9df630dd5b7eb781a90ebe08038a12fa51e4b01f488"
+  },
+  {
+    "file": "tests/v42/test-performance.cjs",
+    "status": "modified",
+    "before": "910233ec547b70f05c18ef9626172bd79280233e4a05df06941b8cea9ebcf533",
+    "after": "7b276dc2b224ec3c389db665887f0b7cc8ef3dbfc87743da566ce851f0ee7479"
+  },
+  {
+    "file": "tests/v42/test-reopen.cjs",
+    "status": "modified",
+    "before": "dc3b0a6b997af700a51f1f7e65ecf6a60571d81fc0a1591d4553278da84bef20",
+    "after": "8cbb632d32ba9a3705163897f4bbd9bfa1fb2afb59fa7c037db8677b4148d43f"
+  },
+  {
+    "file": "tests/v43/fake-firestore.cjs",
+    "status": "new",
+    "before": null,
+    "after": "849c22c4ac28400e76dc78f501a77bdf464c60e3ddf39661f56e54a1c7991d3e"
+  },
+  {
+    "file": "tests/v43/food-backend.cjs",
+    "status": "new",
+    "before": null,
+    "after": "6b9ff703a3c548ec522591cda94d273b9fe0fb19196b094c0b5c389e5c3bad53"
+  },
+  {
+    "file": "tests/v43/functional.cjs",
+    "status": "new",
+    "before": null,
+    "after": "f2fbaac089e50070bd942ffd20f2f8c581ce325c60afce6353072abbcee0677e"
+  },
+  {
+    "file": "tests/v43/update-page.cjs",
+    "status": "new",
+    "before": null,
+    "after": "c5a04c6aa41e202371da8f6e0db158590c64d89b84a8573e6ba0372226b89ac0"
+  },
+  {
+    "file": "tests/v43/updates-details.cjs",
+    "status": "new",
+    "before": null,
+    "after": "b0154c098fa0576b162a67d9b2f3e8bf42e480c4b7d9d085522a38a1dc4ef6bd"
+  },
+  {
+    "file": "tests/v43/whatsapp-excel.cjs",
+    "status": "new",
+    "before": null,
+    "after": "1b2557b664383545f42c2e759e1600d1e1ade1072d93f3c0be310ec819248448"
+  },
+  {
+    "file": "tests/v42/test-current.cjs",
+    "status": "removed",
+    "before": "c615e61c5b6d41f0dea483497272772baab76688b1d251c903278c1de94d9269",
+    "after": null
+  },
+  {
+    "file": "tests/v42/tests-regression.cjs",
+    "status": "removed",
+    "before": "2b615596273c7e999aa23132eb492918238c96c886dc10bff82ee818fe1a77fb",
+    "after": null
+  }
+]

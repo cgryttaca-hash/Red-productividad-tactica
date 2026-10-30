@@ -1,3 +1,5 @@
+import {compareOperational,floorInfo,eventWindow,operationalStatus} from './agenda-operations.js';
+import {eventFoodServices,foodFields} from './food-alerts-core.js';
 import {
   FIREBASE_CONFIG,
   EVENTS_COLLECTION,
@@ -128,7 +130,7 @@ function valueFrom(row,keys){
 }
 function eventFromRow(row,index){
   const scenario=text(valueFrom(row,['escenario','ESCENARIO ASIGNADO','ESCENARIO']));
-  const isThird=/TERCER|PISO\s*3|\b3\d{2}\b/i.test(scenario);
+  const floor=floorInfo(scenario).floor,food=eventFoodServices(row);
   return{
     id:text(row.id||row.__EVENT_ID||index),
     fechaISO:dateISO(valueFrom(row,['fechaISO','FECHA'])),
@@ -136,8 +138,8 @@ function eventFromRow(row,index){
     horarioEvento:text(valueFrom(row,['horarioEvento','HORARIO DEL EVENTO','HORARIO'])),
     empresa:text(valueFrom(row,['empresa','NOMBRE DE LA EMPRESA','EMPRESA']))||'Empresa sin registrar',
     cantidadPersonas:Number(valueFrom(row,['cantidadPersonas','CANTIDAD DE PERSONAS','PAX']))||0,
-    horarioAyB:text(valueFrom(row,['horarioAyB','HORARIO AYB','HORARIO A&B'])),
-    descripcionAlimentacion:text(valueFrom(row,['descripcionAlimentacion','DESCRIPCION ALIMENTACION','DESCRIPCIÓN ALIMENTACIÓN'])),
+    horarioAyB:food.schedule,foodGroups:foodFields(row),
+    descripcionAlimentacion:food.description,
     acomodacion:text(valueFrom(row,['acomodacion','ACOMODACION','ACOMODACIÓN'])),
     modalidadServicio:text(valueFrom(row,['modalidadServicio','MODALIDAD DE SERVICIO','MODALIDAD'])),
     medioPago:text(valueFrom(row,['medioPago','MEDIO DE PAGO','PAGO'])),
@@ -145,26 +147,10 @@ function eventFromRow(row,index){
     estado:text(valueFrom(row,['estado','ESTADO'])),
     desarrolloActividad:text(valueFrom(row,['desarrolloActividad','DESARROLLO ACTIVIDAD'])),
     hojaOrigen:text(valueFrom(row,['hojaOrigen','HOJA_ORIGEN'])),
-    piso:isThird?'Tercer piso':'Segundo piso'
+    piso:floor===3?'Tercer piso':floor===2?'Segundo piso':'Otros escenarios'
   };
 }
-function roomRank(room){
-  const source=normalize(room).toUpperCase();
-  if(/TERCER|\b3\d{2}\b/.test(source)){
-    const match=source.match(/\b(\d{3})\b/);
-    return[2,match?Number(match[1]):9999,source];
-  }
-  if(/SALON\s*1\b/.test(source))return[1,1,source];
-  if(/SALON\s*2\s*(\+|Y)\s*3/.test(source))return[1,4,source];
-  if(/SALON\s*2\b/.test(source))return[1,2,source];
-  if(/SALON\s*3\b/.test(source))return[1,3,source];
-  if(/COMPLETO/.test(source))return[1,5,source];
-  return[1,20,source];
-}
-function compareEvents(a,b){
-  const first=roomRank(a.escenario),second=roomRank(b.escenario);
-  return first[0]-second[0]||first[1]-second[1]||first[2].localeCompare(second[2],'es',{numeric:true})||a.empresa.localeCompare(b.empresa,'es')||a.horarioEvento.localeCompare(b.horarioEvento,'es',{numeric:true});
-}
+function compareEvents(a,b){return compareOperational(a,b);}
 function formatDate(iso,options){
   const date=localDate(iso);
   return Number.isNaN(date.getTime())?'Fecha sin registrar':date.toLocaleDateString('es-CO',options);
@@ -214,16 +200,7 @@ function meaningfulFood(value){
 function hasFood(event){
   return meaningfulFood(event.horarioAyB)||meaningfulFood(event.descripcionAlimentacion);
 }
-function foodPairs(event){
-  if(!hasFood(event))return[];
-  const schedules=scheduleEntries(event.horarioAyB);
-  const descriptions=serviceLines(event.descripcionAlimentacion);
-  const total=Math.max(schedules.length,descriptions.length,1);
-  return Array.from({length:total},(_,index)=>({
-    time:compactSpaces(schedules[index]||'Servicio'),
-    description:compactSpaces(descriptions[index]||'Alimentación registrada')
-  })).filter(item=>item.time||item.description);
-}
+function foodPairs(event){const paired=eventFoodServices(event);if(!paired.services.length&&(paired.description||paired.schedule))return[{time:'Sin horario registrado',description:paired.description||paired.schedule}];return[...paired.services.map(item=>({time:item.originalTime,description:[item.service,item.description].filter(Boolean).join('\n')})),...paired.unassigned.map(value=>({time:'Sin relación horaria confirmada',description:value}))];}
 function foodStatusMarkup(event){
   return hasFood(event)
     ?'<span class="food-status is-with"><i></i>Con alimentación</span>'
@@ -242,7 +219,7 @@ function dataHash(events){
   return events.map(event=>[
     event.id,event.fechaISO,event.empresa,event.cantidadPersonas,event.escenario,event.horarioEvento,
     event.horarioAyB,event.descripcionAlimentacion,event.acomodacion,event.modalidadServicio,
-    event.medioPago,event.observacion,event.estado
+    event.medioPago,event.observacion,event.estado,JSON.stringify(event.foodGroups||[])
   ].join('|')).join('||');
 }
 
@@ -286,7 +263,7 @@ function eventRows(events){
     ${events.map(event=>`<button class="event-summary-row" type="button" data-id="${esc(event.id)}">
       <span class="event-summary-company">
         <strong>${esc(event.empresa)}</strong>
-        <small>Ver detalle completo</small>
+        <small>${esc(event.horarioEvento||'Horario por confirmar')} · <span data-operation-state>${esc(operationalStatus(event))}</span></small>
       </span>
       <span class="event-summary-location">
         <strong>${esc(event.escenario)}</strong>
@@ -341,6 +318,7 @@ function render(){
       </header>
       ${floorSection('Segundo piso',second,'second')}
       ${floorSection('Tercer piso',third,'third')}
+      ${floorSection('Otros escenarios',events.filter(event=>event.piso==='Otros escenarios'),'other')}
     </article>`;
   }).join('');
 }
@@ -400,6 +378,7 @@ async function applyEvents(events,updatedAt,notify=true,cloudHash='',live=true){
   window.__RPT_AGENDA_EVENTS__=state.all;
   window.dispatchEvent(new CustomEvent('rptAgendaDataReady',{detail:{events:state.all,updatedAt:state.updatedAt}}));
   render();
+  if(state.selected){const selected=state.all.find(event=>event.id===state.selected.id);if(selected)openDetail(selected);else closeDetail();}
 }
 async function loadChunks(meta,notify=false,live=true){
   const count=Number(meta?.chunkCount)||0;
@@ -618,3 +597,5 @@ setInterval(updateHeader,30000);
 updateHeader();
 render();
 initializeFirebase();
+
+const operationClock=setInterval(()=>{if(document.hidden)return;const indexed=new Map(state.all.map(event=>[event.id,event]));document.querySelectorAll('.event-summary-row[data-id]').forEach(row=>{const event=indexed.get(row.dataset.id),label=row.querySelector('[data-operation-state]');if(event&&label)label.textContent=operationalStatus(event);});},30000);window.addEventListener('pagehide',()=>clearInterval(operationClock),{once:true});

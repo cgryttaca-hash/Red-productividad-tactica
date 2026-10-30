@@ -1,3 +1,4 @@
+function privateAccess(){if(window.RPTNavigation?.mobile())throw new Error('Esta función no está disponible en Agenda Móvil.');}
 const USERS_KEY = 'rptAuthUsersV1';
 const SESSION_KEY = 'rptAuthSessionV1';
 const DEVICE_KEY = 'rptAuthDeviceV1';
@@ -79,6 +80,7 @@ function cleanUser(user){
 }
 
 export async function ensureDefaultAdmin(){
+  privateAccess();
   const users = readJson(USERS_KEY, []);
   if(users.some(user => normalizeUsername(user.username) === normalizeUsername(DEFAULT_ADMIN_USERNAME))){
     return;
@@ -118,6 +120,7 @@ export function isAuthenticated(){
 }
 
 export function logout(){
+  privateAccess();
   const session=getSession();
   localStorage.removeItem(window.RPTNavigation?.mobile()?'rptMobileAuthSessionV1':SESSION_KEY);
   import('./system-log.js').then(module=>module.addSystemLog({
@@ -127,6 +130,7 @@ export function logout(){
 }
 
 export async function login(username, password){
+  privateAccess();
   await ensureDefaultAdmin();
   const users = readJson(USERS_KEY, []);
   const normalizedUsername = normalizeUsername(username);
@@ -163,11 +167,13 @@ export async function login(username, password){
 }
 
 export async function listUsers(){
+  privateAccess();
   await ensureDefaultAdmin();
   return readJson(USERS_KEY, []).map(cleanUser);
 }
 
 export async function createUser({username, displayName, password, role='viewer'}){
+  privateAccess();
   await ensureDefaultAdmin();
   const users = readJson(USERS_KEY, []);
   const normalizedUsername = normalizeUsername(username);
@@ -199,6 +205,7 @@ export async function createUser({username, displayName, password, role='viewer'
 }
 
 export async function changePassword(userId, password){
+  privateAccess();
   if(String(password).length < 6) throw new Error('La contraseña debe tener al menos 6 caracteres.');
   const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.id === userId);
@@ -218,6 +225,7 @@ export async function changePassword(userId, password){
 }
 
 export async function updateUser(userId, changes){
+  privateAccess();
   const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.id === userId);
   if(index === -1) throw new Error('Usuario no encontrado.');
@@ -248,6 +256,7 @@ export async function updateUser(userId, changes){
 }
 
 export async function deleteUser(userId){
+  privateAccess();
   const session = getSession();
   if(session?.userId === userId) throw new Error('No puedes eliminar tu propia sesión.');
   const users = readJson(USERS_KEY, []);
@@ -261,6 +270,7 @@ export async function deleteUser(userId){
 }
 
 export async function resetDefaultAdmin(){
+  privateAccess();
   await ensureDefaultAdmin();
   const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.normalizedUsername === normalizeUsername(DEFAULT_ADMIN_USERNAME));
@@ -285,5 +295,6 @@ export async function resetDefaultAdmin(){
 }
 
 export function getDefaultCredentials(){
+  privateAccess();
   return {username:DEFAULT_ADMIN_USERNAME, password:DEFAULT_ADMIN_PASSWORD};
 }

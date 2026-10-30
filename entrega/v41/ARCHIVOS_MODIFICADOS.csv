@@ -1,0 +1,87 @@
+﻿Archivo,Tipo,Bytes,SHA256,Motivo
+CHANGELOG.md,modificado,1820,25da44da8c1919bad328fcee9af5a10d1408f72e3f854181bc9f45bb203e568e,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+LEER_PRIMERO_V41.md,nuevo,5652,e15a618c9ba77194cdb570c01eaef02e7668680072fa4111ad367357814cfb3f,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+PROTECTED_MODULES.json,modificado,524,bede7b74fe37f6965521d65d14c23b827e94d6725d4f6fe7c2614696a93b0029,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+README.txt,modificado,5234,f7097db9fb15baf5c730a6e48b2c0d3c7617d610cb74de07c7f677e49453dfb5,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+VALIDACION_FINAL.json,modificado,259,77c5bb235d23f7dff6383b052de7faf29b3d2c2d247a9dbda015cdeafcbc8a76,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+VERSION.txt,modificado,6,3b10b6ad566eadbcacadb33c591f1ec629593d6adf47442e56e0f61996829ef7,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+agenda_movil.html,modificado,7764,df2a9986b71a203500dc499ead5e4175dbc936bc6fe019ff82528821898a0735,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+agendas.html,modificado,4756,fbb207c1ad61ae3dc9267dfc795f9f4d96f645946c819a8c5b5992e3ae7d24f0,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+asistente.html,modificado,6167,599b6481a30dfe2fe28db3adc6418746473873b28337a6e75cb34f4e9fd60414,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+avisos.html,nuevo,4855,67e13110e64915c3780fc10147e528d31d725c0887bd52853d77bc7b6bf1e4b3,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+css/agenda-dialog.css,nuevo,2833,13a321c312b3b32fc164c4d69c2bb5e56aba0acd105186e233affdf4382398ab,Detalle compartido adaptable.
+css/enterprise-refinements.css,modificado,3701,e548e92b605708ccda65141fc6f2545bb74bd3913af4b659ffc273754f8bd62c,"Variables, Inicio compacto, chips, paginación y acceso a avisos."
+css/notices.css,nuevo,2043,6a689d6c14359c9150452375a834db43db00eb205f3ea35da37cb7c7c9877b82,Buzón y formulario adaptables.
+dist/agenda_movil.html,modificado,7764,df2a9986b71a203500dc499ead5e4175dbc936bc6fe019ff82528821898a0735,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/agendas.html,modificado,4756,fbb207c1ad61ae3dc9267dfc795f9f4d96f645946c819a8c5b5992e3ae7d24f0,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/asistente.html,modificado,6167,599b6481a30dfe2fe28db3adc6418746473873b28337a6e75cb34f4e9fd60414,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/avisos.html,nuevo,4855,67e13110e64915c3780fc10147e528d31d725c0887bd52853d77bc7b6bf1e4b3,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/css/agenda-dialog.css,nuevo,2833,13a321c312b3b32fc164c4d69c2bb5e56aba0acd105186e233affdf4382398ab,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/css/enterprise-refinements.css,modificado,3701,e548e92b605708ccda65141fc6f2545bb74bd3913af4b659ffc273754f8bd62c,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/css/notices.css,nuevo,2043,6a689d6c14359c9150452375a834db43db00eb205f3ea35da37cb7c7c9877b82,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/eventos.html,modificado,7193,f743c3d680576b534361ec36d380602808a1edb84eab9a1e9e2bc05015434e97,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/generacion_agenda.html,nuevo,4894,2ec4b30edabfe1210ea90335892cd58a552435d15016515dbada23cb9cf51c3b,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/index.html,modificado,11149,3223225fc130921ed54c0ef3d6cb2f8f15ca6c5dc4e5e207d48095cf5e173423,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/agenda-content.js,modificado,5946,b6e8a362868160f41518c40f5f70321faece740d8d3286e6587d8a9a266f2b5c,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/agenda-dialog.js,nuevo,12267,387f0cf4945657918f8262f9fb2e3b5df93966bd8d71f6257ad66161dbb5c138,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/agenda-page.js,nuevo,5443,f96bdc45ca9e4a73e3e240e83c2b0f41232b9eab71bebbc835146444cca9759e,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/agenda-reminders.js,modificado,2744,aa0b8ef6c9c97322ae7024ae814c98c08130559c841bfca5d3f80e3936decaf1,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/agendas.js,modificado,27,cc3e23d34eef00a4ffe8963e7331f21624e2d1ddf07157a90c01d93790176e79,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/event-notes.js,nuevo,2047,f47be675700e35acf551d5f8c06fb5b8f5e9dd52ac642477db573270d937719e,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/event-query.js,nuevo,1559,8e84eca3c95439754c0cbf8cd0cd2f33dcba9f276ccdacc524457a00167daea5,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/eventos.js,modificado,30692,dfe08a510c49769124138c4a0edd527c3d74c67a4b8fb519256bcb8de4b77149,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/local-record-store.js,nuevo,1585,b99bbecbb3eadbe6e2fa8ea9afee6618aafb78011f6a7421dd72fd23eac83c5d,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/notice-center.js,nuevo,2616,e7c542b2be896bbdc796e8aa37893ea0f9cd5ddedc7f04f3e5bd24dd3f471330,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/notices-page.js,nuevo,6941,5ac139396e6826d7a19c0c5a45e123b23118b1c41ce5f4e1d86e75bfa72f2898,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/notices-store.js,nuevo,6097,b8738f7526a7b604b35213e7ffe8bca62de376f7f950fa182831cebe99d3c951,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/push-ui.js,modificado,4685,6136a8bdf8affbe018ed8beed307a8bdd7454b4055c7bdea1988f72aeb32d003,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/release-info.js,modificado,38,05928c36f1ce974f8c2bfa57434b051c67349f57a777ec8a87abcbce88974c39,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/release-worker.js,modificado,8676,438fffc90837b03999a0ad1c04258a3d1149c2e742621dfb16237c9aacdad924,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/js/system-version.js,modificado,819,befa00c1b28feed70f3543224c174123d4d08a41ff89b0c108454ab98968e0c3,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/minuta.html,modificado,7708,1982d55f1c189af61bd3f54fd4e6ba0fdd97f622eee1dbc40d20e2fc467f101c,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/minuta_compartir.html,modificado,2701,ba925f25cff09d1f82c7e369f92ab906b6da884ba2c89d9e227e942564992d9d,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/release.json,modificado,17974,f13ff1be73da303e5795cbbee437f09c1587a29530354bfbb0adb69429ca192e,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+dist/sw.js,modificado,18118,398e447ab7ac531e59047f552acd59cc1dd8c01dc8fca9d2191253badd489499,Copia pública de recursos de la versión 4.1 y manifiesto verificado.
+entrega/v41/AUDITORIA_INICIAL.json,nuevo,118403,f80405b35c8d8f54b2b60893dc18c8aa0ddff245a5fea8634993c6cde9e30d8f,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/INFORME.md,nuevo,8106,4c28c6a3489563dcd02fc4932c086527f8351e674719a2df3b92b1cd82c59b98,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/INTEGRIDAD.json,nuevo,2269,1de44a0505d8942572d43f61b7d4c02cce667d2b5ffac0f2222fd01b811728ba,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/MATRIZ_PRUEBAS.md,nuevo,3575,cb8feb77e786cf9ac47edfb7bc9c5211203e33d985e028b3a40a192fba7a4e4f,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/PRUEBAS.json,nuevo,27506,caedda7e46c811d6cb57221d53c5343d46be7c81f39738dc315c0876ae7091ef,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/agenda-generacion-v41.pdf,nuevo,50829,35bed62fdeb2b076702bd9b666a557cf8663131ed27dfd2fea1cb35a5ed80bec,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/avisos-v41-390.png,nuevo,65502,2efebf819d18b798242558b7c2bb2584f8f4d54e2c08b0b1554e4599d6c05753,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/inicio-v41-1440.png,nuevo,68584,a810fa9aaa940fcb1e06036b033fd0d06cb09d04d96e05ae81e98d145954ae15,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/inicio-v41-390.png,nuevo,56367,5907feb72b5ecc7cc6dcc0e8267df98ca126dae96cf0ffb078dd0db4e81276ba,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/modal-agendas.html-390.png,nuevo,53664,8871cc843872fed48432ec142dbbd633490224f340ee87b0dc109f25cfe3ff12,"Informe, evidencia y resultados de esta intervención."
+entrega/v41/modal-generacion_agenda.html-1440.png,nuevo,105228,7aaf7ff57fbd2d3306bfb6f970415cb880fef00df931d307a6c6dbd887f7a111,"Informe, evidencia y resultados de esta intervención."
+eventos.html,modificado,7193,f743c3d680576b534361ec36d380602808a1edb84eab9a1e9e2bc05015434e97,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+generacion_agenda.html,nuevo,4894,2ec4b30edabfe1210ea90335892cd58a552435d15016515dbada23cb9cf51c3b,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+index.html,modificado,11149,3223225fc130921ed54c0ef3d6cb2f8f15ca6c5dc4e5e207d48095cf5e173423,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+js/agenda-content.js,modificado,5946,b6e8a362868160f41518c40f5f70321faece740d8d3286e6587d8a9a266f2b5c,Lectura de contactos específicos del registro; buildAgenda conservado.
+js/agenda-dialog.js,nuevo,12267,387f0cf4945657918f8262f9fb2e3b5df93966bd8d71f6257ad66161dbb5c138,"Detalle compartido, observación local, copia e impresión."
+js/agenda-page.js,nuevo,5443,f96bdc45ca9e4a73e3e240e83c2b0f41232b9eab71bebbc835146444cca9759e,"Consulta compartida, categorías, búsqueda, conteo y paginación."
+js/agenda-reminders.js,modificado,2744,aa0b8ef6c9c97322ae7024ae814c98c08130559c841bfca5d3f80e3936decaf1,"Siguiente instante relevante, avisos internos y reconciliación; política externa preservada."
+js/agendas.js,modificado,27,cc3e23d34eef00a4ffe8963e7331f21624e2d1ddf07157a90c01d93790176e79,Entrada compatible al controlador común de consulta/generación.
+js/event-notes.js,nuevo,2047,f47be675700e35acf551d5f8c06fb5b8f5e9dd52ac642477db573270d937719e,Persistencia local con comparación de origen y versión.
+js/event-query.js,nuevo,1559,8e84eca3c95439754c0cbf8cd0cd2f33dcba9f276ccdacc524457a00167daea5,Reglas originales de actuales/pisos y fechas compartidas.
+js/eventos.js,modificado,30692,dfe08a510c49769124138c4a0edd527c3d74c67a4b8fb519256bcb8de4b77149,"Delega fechas/categorías a reglas comunes, publica las filas visibles y protege una observación pendiente."
+js/local-record-store.js,nuevo,1585,b99bbecbb3eadbe6e2fa8ea9afee6618aafb78011f6a7421dd72fd23eac83c5d,"Lectura y escritura única con Web Locks, sesión vigente y confirmación."
+js/notice-center.js,nuevo,2616,e7c542b2be896bbdc796e8aa37893ea0f9cd5ddedc7f04f3e5bd24dd3f471330,"Acceso, contador y confirmaciones de operaciones reales."
+js/notices-page.js,nuevo,6941,5ac139396e6826d7a19c0c5a45e123b23118b1c41ce5f4e1d86e75bfa72f2898,Interfaz de administración y buzón.
+js/notices-store.js,nuevo,6097,b8738f7526a7b604b35213e7ffe8bca62de376f7f950fa182831cebe99d3c951,"Avisos locales, vigencia, administración y recibos por usuario."
+js/push-ui.js,modificado,4685,6136a8bdf8affbe018ed8beed307a8bdd7454b4055c7bdea1988f72aeb32d003,Proveedor externo opcional sin bloqueo por URL ausente.
+js/release-info.js,modificado,38,05928c36f1ce974f8c2bfa57434b051c67349f57a777ec8a87abcbce88974c39,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+js/release-worker.js,modificado,8676,438fffc90837b03999a0ad1c04258a3d1149c2e742621dfb16237c9aacdad924,Evita HTML futuro mezclado con recursos de la versión activa.
+js/system-version.js,modificado,819,befa00c1b28feed70f3543224c174123d4d08a41ff89b0c108454ab98968e0c3,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+minuta.html,modificado,7708,1982d55f1c189af61bd3f54fd4e6ba0fdd97f622eee1dbc40d20e2fc467f101c,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+minuta_compartir.html,modificado,2701,ba925f25cff09d1f82c7e369f92ab906b6da884ba2c89d9e227e942564992d9d,"Organización visual, nueva ventana o acceso al buzón según módulo; procesos existentes conservados."
+package.json,modificado,708,ea234e5bd347699cd290f055e664838fd01264d7a518698eb107ffbd8a1ba5fe,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+release.json,modificado,17974,f13ff1be73da303e5795cbbee437f09c1587a29530354bfbb0adb69429ca192e,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+sw.js,modificado,18118,398e447ab7ac531e59047f552acd59cc1dd8c01dc8fca9d2191253badd489499,"Versión, documentación, pruebas o huellas de integridad regeneradas."
+tests/updates.cjs,modificado,7831,9dfa02809d9ad308cf62119d77f998e50fc6dff66ca129bcee30281b26a2e8f1,Prueba reproducible de la versión y sus cambios.
+tests/v41/tests-local-edges.cjs,nuevo,6682,f8ce1fb2b86c0111a962e30a336ec17d26436c8916b9aaf34d4d721343e5957d,Prueba reproducible de la versión y sus cambios.
+tests/v41/tests-offline-v41.cjs,nuevo,3781,530008b2b789db1fc6444f7c12954db91d5485184821677d40d00fb090bae00f,Prueba reproducible de la versión y sus cambios.
+tests/v41/tests-performance.cjs,nuevo,2201,31ba53a4ea00e8fe2eb676208f23218d5f7c4971e18985f07ce8a5c03a540a42,Prueba reproducible de la versión y sus cambios.
+tests/v41/tests-regression.cjs,nuevo,18214,1cd120dae840903fc0ce273b86f409e9266b99335ec49a587900b53b276440db,Prueba reproducible de la versión y sus cambios.
+tests/v41/tests-v41.cjs,nuevo,13305,7f8babab3b41abf073e8e5e533d28115a10be5729a16f4705e973d7a5cfe3580,Prueba reproducible de la versión y sus cambios.
+tests/v41/tests-visual.cjs,nuevo,4376,c7f8d69e4b106d317c8ab439ce4b1d332b41f56c7c29b698f980c989b1f03b99,Prueba reproducible de la versión y sus cambios.
+tests/v41/verify-helpers.cjs,nuevo,34341,7a487417d2739b20d6eb2f4afdd2a14ebd8f4c1cfd412cf838e9a9a43410df77,Prueba reproducible de la versión y sus cambios.

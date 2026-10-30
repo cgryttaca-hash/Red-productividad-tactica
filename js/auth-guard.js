@@ -2,7 +2,8 @@
   if(window.RPTNavigation){
     let expiryTimer;
     function validate(){clearTimeout(expiryTimer);const navigation=window.RPTNavigation,session=navigation.session(),page=document.documentElement.dataset.authPage||'protected';
-      if(!session||navigation.mobile()&&!['mobile','updates'].includes(page)){if(navigation.mobile()&&!['mobile','updates'].includes(page))localStorage.removeItem('rptMobileAuthSessionV1');location.replace(navigation.loginURL());return;}
+      if(navigation.mobile()){if(!['mobile','updates'].includes(page)){location.replace('agenda_movil.html');return;}delete window.__RPT_AUTH_SESSION__;document.documentElement.classList.remove('auth-pending');document.documentElement.classList.add('auth-ready');return;}
+      if(!session){location.replace(navigation.loginURL());return;}
       if(page==='admin'&&session.role!=='admin'){location.replace('index.html');return;}
       window.__RPT_AUTH_SESSION__=session;document.documentElement.classList.remove('auth-pending');document.documentElement.classList.add('auth-ready');
       if(session.expiresAt)expiryTimer=setTimeout(validate,Math.min(2147483647,Math.max(1,Date.parse(session.expiresAt)-Date.now())));

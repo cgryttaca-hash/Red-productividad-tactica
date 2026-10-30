@@ -1,0 +1,7 @@
+{
+  "indexes": [
+    { "collectionGroup": "agenda_food_alerts", "queryScope": "COLLECTION", "fields": [{ "fieldPath": "state", "order": "ASCENDING" }, { "fieldPath": "queued", "order": "ASCENDING" }, { "fieldPath": "alertAt", "order": "ASCENDING" }] },
+    { "collectionGroup": "agenda_food_alerts", "queryScope": "COLLECTION", "fields": [{ "fieldPath": "state", "order": "ASCENDING" }, { "fieldPath": "alertAt", "order": "ASCENDING" }] }
+  ],
+  "fieldOverrides": []
+}

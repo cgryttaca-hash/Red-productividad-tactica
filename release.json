@@ -1,5 +1,5 @@
 {
-  "version": "4.2.2",
+  "version": "4.3.0",
   "assets": [
     {
       "path": "agenda.webmanifest",
@@ -11,7 +11,7 @@
     },
     {
       "path": "agendas.html",
-      "sha256": "c5dae556ab190652f89bdc6f41c305ca8ca7877e9a3f9206e5940fcf1ebf70b3"
+      "sha256": "4fad3cd8b05580a5c12a43464f264afb8b57e634e5b921086c2618672476f551"
     },
     {
       "path": "asistente.html",
@@ -171,7 +171,7 @@
     },
     {
       "path": "css/enterprise-refinements.css",
-      "sha256": "24a953109d35d683924ec86a4f4c42bcd3aad6cf338482958d16cf06384ac2a6"
+      "sha256": "0dbed05c67176d57cb150a032be7b066e1403d98e5cdb2004e2afedeb128cad4"
     },
     {
       "path": "css/estilos.css",
@@ -239,19 +239,23 @@
     },
     {
       "path": "js/agenda-content.js",
-      "sha256": "b6e8a362868160f41518c40f5f70321faece740d8d3286e6587d8a9a266f2b5c"
+      "sha256": "7c7882924cf66e63f06ec5eecadb7f5d622fdd39ff36da36cb729060abd24961"
     },
     {
       "path": "js/agenda-dialog.js",
-      "sha256": "4f4227c996e981a2cedc0429a78489efaba27074f4bbd1dae556511bad79cbe3"
+      "sha256": "ba2f25c754320d835209b0e102780ea03f0d59c1d2ca0fe2a1d16a2eaec9a27c"
     },
     {
       "path": "js/agenda-movil.js",
-      "sha256": "5edfc8a88ee987c8ade5717e20ffc90ecf676581c05fef8306bd4e0ed8901def"
+      "sha256": "268276562d638c123dd8d281ecd0672bc1cc2ae12317e55a09569dc6139e08a0"
+    },
+    {
+      "path": "js/agenda-operations.js",
+      "sha256": "68eacd8735115beae84e400fa26366ecd3b3885501c63548e64e213f7f7c213e"
     },
     {
       "path": "js/agenda-page.js",
-      "sha256": "0725b1248af318731571825469d2c99a1ec688a973b0c3c1cf42616b1c4d940b"
+      "sha256": "10cda83efa5026fbeb96fbd29a6eb71ba21bf0f88a8e8f03fa236ebcd9c3a1ad"
     },
     {
       "path": "js/agenda-reminders.js",
@@ -287,7 +291,7 @@
     },
     {
       "path": "js/auth-guard.js",
-      "sha256": "7bb3a8a988e8815b2dbbb18a0048e7666dc3665b87f9b9ebff517e37aa442966"
+      "sha256": "3613eca2c55dd5b1a866049c4a853c5e60274f3ab3b89c776dec5ef81e89c160"
     },
     {
       "path": "js/backup-store.js",
@@ -311,11 +315,11 @@
     },
     {
       "path": "js/event-notes.js",
-      "sha256": "f47be675700e35acf551d5f8c06fb5b8f5e9dd52ac642477db573270d937719e"
+      "sha256": "fbd0a9d0d33cf26818016a6dbceb0be0bbae74ee0f5ffac2fcaeb13dc685e20d"
     },
     {
       "path": "js/event-query.js",
-      "sha256": "8e84eca3c95439754c0cbf8cd0cd2f33dcba9f276ccdacc524457a00167daea5"
+      "sha256": "f786763f4cad5aea18b9b10ed3db39e6828d4414af99f3e81a2c5372b9f105c8"
     },
     {
       "path": "js/eventos.js",
@@ -323,7 +327,7 @@
     },
     {
       "path": "js/excel-sync.js",
-      "sha256": "438b7507760aa0db02fd98d72eebfc258ee545c92420818f62b16b259bdac58e"
+      "sha256": "119295685e2ee2251de0fdb8fc72f8fddbf1c0122f0904e9a464e034cce8a202"
     },
     {
       "path": "js/firebase-app-check.js",
@@ -335,11 +339,11 @@
     },
     {
       "path": "js/firebase-sync.js",
-      "sha256": "88e6712fcc9835a48bb8d9c2f1083f8eff351e8469b04a19abd8389013021c14"
+      "sha256": "889e84cdca2969bb2d76072912f40a4db3cae477b7d86710c1daa52307157843"
     },
     {
       "path": "js/food-alerts-core.js",
-      "sha256": "8fddcfc12452eae94ae57592b5b51343be797a08537754a9c372ba10f85d3976"
+      "sha256": "6c58489fda866dd7024677490a3abb30dcf33c76031d8ffe8455323fd90c66a6"
     },
     {
       "path": "js/index.js",
@@ -359,7 +363,7 @@
     },
     {
       "path": "js/local-auth.js",
-      "sha256": "eb641d5b5d7d69b8282134afd7712a274d37370bc2f6fef1363ef01a016fc4ab"
+      "sha256": "e16f6923e912b9f78a7b91b6b0fe41911df55f5fc0d071cde6daa6946a5eaf86"
     },
     {
       "path": "js/local-record-store.js",
@@ -383,11 +387,11 @@
     },
     {
       "path": "js/minuta-share-preview.js",
-      "sha256": "c896bdc93cead02e0f894c0370f6b111cd6d617b590ba247ac197eb77a71c1ce"
+      "sha256": "01f20b562b3e1d7f58fc7e21bda4805ec76b6d7340589f09eb3dd107c7e04f8e"
     },
     {
       "path": "js/minuta-share.js",
-      "sha256": "d91273338b2c5a9b1c76bbe583633e5764fe2fefe0f1b48fae11594f4454f8a3"
+      "sha256": "dbc1e77a16a46a626cbd875e62f72f3d63363f69fe0555b075e53622943f5d5d"
     },
     {
       "path": "js/minuta-time.js",
@@ -399,7 +403,7 @@
     },
     {
       "path": "js/navigation-policy.js",
-      "sha256": "9b6a1e36483dced72846709a5d853bc2441043b5709ace6649093e9a3dc63e8c"
+      "sha256": "3219b447c93d1ed352e9260db04802959be3052825b491fb65eaf9c8e36073be"
     },
     {
       "path": "js/notifications.js",
@@ -431,7 +435,7 @@
     },
     {
       "path": "js/pwa-release.js",
-      "sha256": "a123d8d4b2d702aa0184bc0e5defe5a4eb315d621319e4d7bc702df369f78ff1"
+      "sha256": "e9816106a896f550a4190f2581805b1143f3259c628ced22611b392caf508445"
     },
     {
       "path": "js/pwa.js",
@@ -439,11 +443,11 @@
     },
     {
       "path": "js/release-info.js",
-      "sha256": "410542f58890b3edb62394206ac82889379d1b8df0816ca4e2404321f1c5907a"
+      "sha256": "177697df82ba11f85a635dc5db91518d9064a88fdf6293439c0f831dbfef8213"
     },
     {
       "path": "js/release-worker.js",
-      "sha256": "85c7200044fc673f14c6675c168a07d8b8c3d977e38babc1e4d176e4beed48e8"
+      "sha256": "ff354e7ec09529c2baf76455b5741764ae671c8992e4cdc16d4b02782c1db248"
     },
     {
       "path": "js/session-ui.js",
@@ -455,15 +459,15 @@
     },
     {
       "path": "js/system-version.js",
-      "sha256": "7580bd63fa06b77e36eeea5532170ea44a76a8e3e808019671306ee4d422b157"
+      "sha256": "ada7753c7f1eda260da4431c346bbc2a7425e7c4f42c8c7b8f039cd27f2d8b07"
     },
     {
       "path": "js/update-page.js",
-      "sha256": "fdb252a1ddbd444b3794974b92dd955ac2d2bf30adea6abf3091e977ef00e2ff"
+      "sha256": "1c74cbaf591f6763d18e24d4e9074bfd7ac675112cc42306bc9d343bbd1a8266"
     },
     {
       "path": "js/update-safety.js",
-      "sha256": "ef58cd09eaecf58f5a55f1c75cd147e216b4fbba93a4120c18bc1c60787e0612"
+      "sha256": "7c5a1f45e8ad56a6ff32e8e5d4b1e5e62843b6d16395aefc9507f16e6dfb6bb2"
     },
     {
       "path": "js/usuarios.js",
@@ -499,7 +503,7 @@
     },
     {
       "path": "minuta_compartir.html",
-      "sha256": "57ca6a613f7447b34bc6294b318a5ac3ea5503dd4d1eb06ee98cff5ef5c937ed"
+      "sha256": "dae42494b28729dc8fbd3db4e7af01b1bf63e64daeb2adeda8d97a55b159ab91"
     },
     {
       "path": "offline.html",
@@ -507,7 +511,7 @@
     },
     {
       "path": "recuperacion.html",
-      "sha256": "f933a6fb86135ee0cad4e197a937e7e6141272dfc60df8cf3160137439def52f"
+      "sha256": "f255182d06742e3b06320178c5ce52609870a1ccecbb578c22bbf10392b5789d"
     },
     {
       "path": "usuarios.html",
@@ -518,5 +522,5 @@
       "sha256": "1710ab17469e0b4cdcd512a584b8d713cd68a28269c0cd7b4c2f7496bbf3955c"
     }
   ],
-  "digest": "751d734743b03b631a4f3e1b05d0f1f6540d1b52cfcf0441b7c746ea24b15e14"
+  "digest": "2b0ab0906e5a34eb7907164fd593238981d397347e728f4ed1ec0f58eb091046"
 }

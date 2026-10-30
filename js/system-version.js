@@ -1,4 +1,4 @@
-export const SYSTEM_VERSION = '4.2.2';
+export const SYSTEM_VERSION = '4.3.0';
 export const RELEASE_DATE = '2026-10-30';
 export const RELEASE_NAME = 'Operación, versiones seguras y asistente';
 export const PROTECTED_MODULES = Object.freeze({
