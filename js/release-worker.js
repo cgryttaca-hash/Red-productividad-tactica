@@ -4,6 +4,27 @@ const META='rpt-release-meta',STATE=scope+'__rpt_state__',COMPLETE=scope+'__rpt_
 const assetUrls=new Set(RELEASE.assets.map(asset=>new URL(asset.path,scope).href));
 assetUrls.add(new URL('data/eventos_publicos.json',scope).href);
 const operations=new Map();let progress=null;
+const FAILURE=scope+'__rpt_release_failure__';
+async function failureRecord(){const response=await(await caches.open(META)).match(FAILURE);return response?response.json():null;}
+async function clearFailure(){await(await caches.open(META)).delete(FAILURE);}
+function resourceError(code,asset,extra={}){return Object.assign(new Error(code),{detail:{stage:code==='INTEGRITY'||code==='HTML_RESPONSE'?'verification':'download',code,resource:asset.path,version:RELEASE.version,...extra}});}
+async function saveFailure(error){const detail={stage:'preparation',code:'PREPARATION',resource:'',version:RELEASE.version,...error.detail,at:Date.now()};await(await caches.open(META)).put(FAILURE,new Response(JSON.stringify(detail),{headers:{'Content-Type':'application/json'}}));console.error('[rpt-update]',detail);await broadcast({type:'RPT_RELEASE_FAILURE',failure:detail});}
+async function verifiedResponse(asset){
+  const canonical=new URL(asset.path,scope),url=new URL(canonical);url.searchParams.set('__rpt_release',RELEASE.digest);
+  for(let attempt=0;attempt<2;attempt++){
+    const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);
+    try{
+      const response=await fetch(new Request(url,{cache:'no-store',credentials:'same-origin',signal:controller.signal}));
+      if(response.redirected)throw resourceError('REDIRECT',asset);
+      if(!response.ok)throw resourceError('HTTP',asset,{status:response.status});
+      if(/text\/html/i.test(response.headers.get('Content-Type')||'')&&!asset.path.endsWith('.html'))throw resourceError('HTML_RESPONSE',asset);
+      const bytes=await response.clone().arrayBuffer();
+      const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(value=>value.toString(16).padStart(2,'0')).join('');
+      if(digest!==asset.sha256)throw resourceError('INTEGRITY',asset,{expected:asset.sha256,received:digest,bytes:bytes.byteLength});
+      return response;
+    }catch(error){const failure=error.detail?error:resourceError(error.name==='AbortError'?'TIMEOUT':'NETWORK',asset);if(attempt===0&&['NETWORK','TIMEOUT'].includes(failure.detail.code)||attempt===0&&failure.detail.code==='HTTP'&&[408,429,500,502,503,504].includes(failure.detail.status))continue;throw failure;}finally{clearTimeout(timer);}
+  }
+}
 async function reportProgress(phase,done=0,total=RELEASE.assets.length){progress={phase,done,total,version:RELEASE.version,at:Date.now()};await broadcast({type:'RPT_RELEASE_PROGRESS',...progress});}
 async function metadata(){const response=await(await caches.open(META)).match(STATE);return response?response.json():{};}
 async function setMetadata(value){await(await caches.open(META)).put(STATE,new Response(JSON.stringify(value),{headers:{'Content-Type':'application/json'}}));}
@@ -12,16 +33,24 @@ async function clientsInScope(){return(await self.clients.matchAll({type:'window
 async function broadcast(value){for(const client of await clientsInScope())client.postMessage(value);}
 async function bind(clientId,cache){if(clientId&&cache)await(await caches.open(META)).put(scope+'__rpt_client__/'+clientId,new Response(cache));}
 async function bound(clientId,fallback){const value=clientId&&await(await caches.open(META)).match(scope+'__rpt_client__/'+clientId);return value?value.text():fallback;}
-async function status(){const state=await metadata();return{active:await completed(state.active),previous:await completed(state.previous),candidate:await completed(CACHE),progress};}
+async function status(){const state=await metadata();return{active:await completed(state.active),previous:await completed(state.previous),candidate:await completed(CACHE),progress,failure:await failureRecord()};}
 async function prepare(){
-  const existing=await completed(CACHE);if(existing?.digest===RELEASE.digest)return;
+  const existing=await completed(CACHE);if(existing?.digest===RELEASE.digest){await clearFailure();return;}
   const cache=await caches.open(CACHE);let failed=false;
   try{
-    let cursor=0,done=0;await reportProgress('downloading',0);
-    await Promise.all(Array.from({length:6},async()=>{while(!failed&&cursor<RELEASE.assets.length){const asset=RELEASE.assets[cursor++],url=new URL(asset.path,scope);const response=await fetch(new Request(url,{cache:'no-store',credentials:'same-origin'}));if(!response.ok||response.redirected)throw new Error('Release resource unavailable');const bytes=await response.clone().arrayBuffer();const digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(value=>value.toString(16).padStart(2,'0')).join('');if(digest!==asset.sha256)throw new Error('Release integrity mismatch');if(failed)return;await cache.put(url.href,response);done++;if(done%8===0||done===RELEASE.assets.length)await reportProgress('downloading',done);}}));
-    try{const url=new URL('data/eventos_publicos.json',scope),response=await fetch(new Request(url,{cache:'no-store'}));if(response.ok)await cache.put(url.href,response);}catch(_){}
+    let cursor=0,done=0;await clearFailure();await reportProgress('downloading',0);
+    const results=await Promise.allSettled(Array.from({length:6},async()=>{
+      try{while(!failed&&cursor<RELEASE.assets.length){
+        const asset=RELEASE.assets[cursor++],response=await verifiedResponse(asset);if(failed)return;
+        await cache.put(new URL(asset.path,scope).href,response);done++;
+        if(done%8===0||done===RELEASE.assets.length)await reportProgress('verifying',done);
+      }}catch(error){failed=true;throw error;}
+    }));
+    const rejected=results.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;
+    try{const url=new URL('data/eventos_publicos.json',scope),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),10000);try{const response=await fetch(new Request(url,{cache:'no-store',signal:controller.signal}));if(response.ok&&!/text\/html/i.test(response.headers.get('Content-Type')||''))await cache.put(url.href,response);}finally{clearTimeout(timer);}}catch(_){}
     await cache.put(COMPLETE,new Response(JSON.stringify({cache:CACHE,version:RELEASE.version,digest:RELEASE.digest,verified:true}),{headers:{'Content-Type':'application/json'}}));
-  }catch(error){failed=true;await reportProgress('error');await caches.delete(CACHE);throw error;}
+    await clearFailure();
+  }catch(error){failed=true;await saveFailure(error);await reportProgress('error');await caches.delete(CACHE);throw error;}
 }
 self.addEventListener('install',event=>{event.waitUntil(prepare());});
 self.addEventListener('activate',event=>{event.waitUntil((async()=>{

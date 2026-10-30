@@ -1,0 +1,4 @@
+# La publicación y sus hashes usan finales LF en todos los sistemas.
+* text=auto eol=lf
+*.png -text
+*.ico -text
