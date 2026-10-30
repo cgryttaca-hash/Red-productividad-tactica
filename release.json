@@ -1,0 +1,486 @@
+{
+  "version": "4.0.0",
+  "assets": [
+    {
+      "path": "agenda.webmanifest",
+      "sha256": "1056bb0bb5b9123577d0bbc86a4b530ca36397e37c3401f1f4dcd4393f2ada97"
+    },
+    {
+      "path": "agenda_movil.html",
+      "sha256": "b5751c02602a877d22ca020616831b7e4e350118d2cf90ec583ee3df282e2b1b"
+    },
+    {
+      "path": "agendas.html",
+      "sha256": "95be1cc7696b2761ca6c46e3c4e1219840826dbbfe1368c6b5515d3217493f3f"
+    },
+    {
+      "path": "asistente.html",
+      "sha256": "3255c2c9e030d3c43672015e3b0ad3df61cf37835c77006cadcf7847af33de7c"
+    },
+    {
+      "path": "assets/agenda-brand/apple-touch-icon.png",
+      "sha256": "9f6d4821e49fffd4a3667d5979e5505c460a09f189db1d698807fdbd928f94b4"
+    },
+    {
+      "path": "assets/agenda-brand/badge-96.png",
+      "sha256": "cf58c8064e7c396dc55750afcafb5c30ef715f8b4f4df46e5671703b63863a34"
+    },
+    {
+      "path": "assets/agenda-brand/favicon.ico",
+      "sha256": "42d9fcae3502d8fae9c07fa4066589eab046b10153dd0940ca7cf0ea2a12629b"
+    },
+    {
+      "path": "assets/agenda-brand/favicon.svg",
+      "sha256": "a2aaee907f8b362c8eddef62d75bfd255f21e2e7529752af6a5553af01abba0d"
+    },
+    {
+      "path": "assets/agenda-brand/icon-192.png",
+      "sha256": "77aa4bbbc5828a07f9153465ffcb674ecfa0d46c2bb3ec1d42efa007e53d7e37"
+    },
+    {
+      "path": "assets/agenda-brand/icon-512.png",
+      "sha256": "45f05069506bafb0010096b9444d36f1a56caaf3827c4140ef4cd5cbf24718f5"
+    },
+    {
+      "path": "assets/agenda-brand/icon-96.png",
+      "sha256": "fda8ff22a13e517684bc385c4e802dc3c98c714662ee23e6cddcbaeb72a157b4"
+    },
+    {
+      "path": "assets/agenda-brand/icon-maskable-192.png",
+      "sha256": "5a011503a32b2cabfb1695945dabeb13cc9c2d430f6372bd25045e13d31d5ce5"
+    },
+    {
+      "path": "assets/agenda-brand/icon-maskable-512.png",
+      "sha256": "9573bad4ac3772d15f1d5dd48aeb2d14c10b3e54b387d042f6ed949ceebfd148"
+    },
+    {
+      "path": "assets/agenda-brand/logo-full-dark.png",
+      "sha256": "caa597b1464df37092eaa2106f4b74586b2d90f00482c3c235980a27f67faa63"
+    },
+    {
+      "path": "assets/agenda-brand/logo-full-dark.svg",
+      "sha256": "7b60f02585794156a227f5c7b64d928d37bf05b7abdda6b6611421d85a109027"
+    },
+    {
+      "path": "assets/agenda-brand/logo-full-light.png",
+      "sha256": "ae064cce8eb59ba17ff75101c1546524cec8e56b85085c72970d208822ce409e"
+    },
+    {
+      "path": "assets/agenda-brand/logo-full-light.svg",
+      "sha256": "14f6d0974ad2ba6c07479fbd9f86b516185c62ad2be0d0550e473236a55355d0"
+    },
+    {
+      "path": "assets/agenda-brand/logo-full-mono.png",
+      "sha256": "e7daf470ef18bae1dbc69f415db24c201a5ca8c3e699e87edca64b487b78e9dc"
+    },
+    {
+      "path": "assets/agenda-brand/logo-full-mono.svg",
+      "sha256": "1bdd96904ca918eb884d9856931a842f4d90cd6325ebbebfe45ec9c2cb8ecc17"
+    },
+    {
+      "path": "assets/agenda-brand/logo-small.svg",
+      "sha256": "6bcb8f7b6dc4de94de022d6f20d6f117cae78cd801586f6a555aab1d955c9941"
+    },
+    {
+      "path": "assets/agenda-brand/logo-symbol-dark.svg",
+      "sha256": "6e49f9a91d93f430d9e7f85ce66e86b62ee7c0c2b39f879b5afd1520574a0c98"
+    },
+    {
+      "path": "assets/agenda-brand/logo-symbol-light.svg",
+      "sha256": "e8a03a69bdeb0006359edc1aa4b029ff3ef569be8ec91a941985d71fa088f759"
+    },
+    {
+      "path": "assets/agenda-brand/logo-symbol-mono.svg",
+      "sha256": "6c1f4b3de80cfb5d390684fdbbee1fd8056718689511a367154f5e784a9a32b8"
+    },
+    {
+      "path": "assets/icon-180.png",
+      "sha256": "d3b6af6c161716b28f4d62118b2d6ee826df1b8a034f3df0ef04e1fec75d78bb"
+    },
+    {
+      "path": "assets/icon-192.png",
+      "sha256": "e18a6f8708dd3eeefa3778c680e6437c7407afaf0fd941a7d0d2585cfcbe838c"
+    },
+    {
+      "path": "assets/icon-512.png",
+      "sha256": "c98cecdfbd4b957b4234016f790dd5c34b827acd2929d300fb42293896274d31"
+    },
+    {
+      "path": "assets/vendor/LICENSE-chartjs.txt",
+      "sha256": "41a84aa2caba645f966a18d9c2056b73e6d3a81d80bc0046bc0011a2634d4cce"
+    },
+    {
+      "path": "assets/vendor/LICENSE-datalabels.txt",
+      "sha256": "075bb10eabebc9356311ffca1b18fdd470fca8e5c2ce0f6e098430c81c59a624"
+    },
+    {
+      "path": "assets/vendor/LICENSE-sheetjs.txt",
+      "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64"
+    },
+    {
+      "path": "assets/vendor/chart-4.6.1.min.js",
+      "sha256": "87364cc2b2a76a6684929e7d6b80b18a897794db38400caff1fcf1791c6925d2"
+    },
+    {
+      "path": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "sha256": "20c08f3d9c6d2ef76df6d6a6f1127c0013339fe32add24222276c398c6308c38"
+    },
+    {
+      "path": "assets/vendor/xlsx-0.20.3.min.js",
+      "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41"
+    },
+    {
+      "path": "configuracion.html",
+      "sha256": "c35137631fa50ae89e194553deb4bad96e52bfc5246a3ccc88b78240fa918219"
+    },
+    {
+      "path": "css/admin-tools.css",
+      "sha256": "e78663c82abd0a173308024639bd0fb11ea474a58c636630b013aed932e9557b"
+    },
+    {
+      "path": "css/agenda-compact.css",
+      "sha256": "18768cd82d69a81ace6ad2841f62267142d632d99037e078c9de310b138ae376"
+    },
+    {
+      "path": "css/agenda-movil.css",
+      "sha256": "a66558d230ad4ea23d2b4f5e9843ace6e70b60690820cd4e1220b57cd2043343"
+    },
+    {
+      "path": "css/agenda-premium.css",
+      "sha256": "65f6479850748bc22cfd5a4822e7158929fe43956947b8909b8d37cad43971e1"
+    },
+    {
+      "path": "css/agendas.css",
+      "sha256": "b23068b79a06c8ea7682914dc64fed33700a41a4367ff9703fe79a7b278dcdf6"
+    },
+    {
+      "path": "css/assistant.css",
+      "sha256": "ea35cce2c0ea4b4aed25777b50043764f1a94c5f29ff910d0f88f86d42eb7a64"
+    },
+    {
+      "path": "css/configuracion.css",
+      "sha256": "babf1f8b1097cc82e193129556aab3ea1f2ca82c5d9b97e17477057ba56aa80e"
+    },
+    {
+      "path": "css/corporate-ui.css",
+      "sha256": "450370f00cc10db258854b71adec459ed7d20ec6cb45f3d8e75a039d07a45e8f"
+    },
+    {
+      "path": "css/enterprise-refinements.css",
+      "sha256": "69c7b0e9419ed3ef5b8f136b9accb783f7299f1343c2b2f84d8092740aa410cd"
+    },
+    {
+      "path": "css/estilos.css",
+      "sha256": "dd0eafa2ab97e1e1e1951147c59d72e21de83454b07a74c8f5cfe9cadf54a125"
+    },
+    {
+      "path": "css/eventos.css",
+      "sha256": "9f01c8cc6b63fce8add3694d8a81c5d47a7859b394f622be0097b5c516aecba9"
+    },
+    {
+      "path": "css/excel-sync.css",
+      "sha256": "477da471392bfb42366e0c2979b30bd73d586d01f449633d66e0902655baf284"
+    },
+    {
+      "path": "css/firebase-sync.css",
+      "sha256": "2a6fc621fb000de49c8a10a01e49a810216349978bf1d31aa72ebc2d7172eefe"
+    },
+    {
+      "path": "css/index.css",
+      "sha256": "52c427d0c444c0f5b688b1ebb33c82e317de91376714fbf7c4fd63f867e5dc86"
+    },
+    {
+      "path": "css/login.css",
+      "sha256": "8b6d23f613591401660ed283a4eb523fc337b8026a038a3e8890c41cd248dfa9"
+    },
+    {
+      "path": "css/mantenimiento.css",
+      "sha256": "ad7376e488be3467234b54d413b24844490467c10e48267736ba27af87e8066c"
+    },
+    {
+      "path": "css/minuta-share.css",
+      "sha256": "2ec5a8d8fc5ff6f2ac1111ddb1ca4dceb10343fc9a80f308de671d3a5d556662"
+    },
+    {
+      "path": "css/minuta.css",
+      "sha256": "9c9074cfc87e5334ac936f8c91662568658356a535f9fac2fe0eea279d21cbd3"
+    },
+    {
+      "path": "css/nav-clean.css",
+      "sha256": "c1585a6e0664a448b2a8cce8983df9aa00d02b58f8fd1c59a752d1a728e8e550"
+    },
+    {
+      "path": "css/premium-system.css",
+      "sha256": "dad48f5b8a725a743415ae6deaed007b68e5118902d9992ab35a22ea9a227cd4"
+    },
+    {
+      "path": "css/professional-ui.css",
+      "sha256": "f27d9e36ffffd2a8b236cc6710b3e8a5adaa75eca82c1958de397f408851d8b5"
+    },
+    {
+      "path": "css/pwa-compat.css",
+      "sha256": "599cc0ae23eae12e65893bfd6670b9eeeb3fb32b0ba419ac8254e8d628357894"
+    },
+    {
+      "path": "css/usuarios.css",
+      "sha256": "53b912522e019f1682820006038c7f43b455fd5472766d88c6f1d920fd939947"
+    },
+    {
+      "path": "eventos.html",
+      "sha256": "e5a189bb555e11521dcbb04882820ca98dc2438a6159b73df01b2be730f35d0a"
+    },
+    {
+      "path": "index.html",
+      "sha256": "bb6a6b4351bef9e08d280fcebef8fb8989cb9b728e7beebe79a4e5ce66694e96"
+    },
+    {
+      "path": "js/agenda-content.js",
+      "sha256": "e166c0779ecea44dd43d8378250c415cf19a57fc36f8d1287743e3f45f10dac8"
+    },
+    {
+      "path": "js/agenda-movil.js",
+      "sha256": "21366d72b429a356971add3c4eaf9a98f984ff337e689374e33f7c79d22a3db4"
+    },
+    {
+      "path": "js/agenda-reminders.js",
+      "sha256": "7b66bb90e92c0f0d9db7ad91eb81c3a2f6f92683a18df20e9ca0f9b3d2ac397e"
+    },
+    {
+      "path": "js/agenda-requirements.js",
+      "sha256": "8b5daeb97c02165d0d3a6d507d65327d70ae875b5c0ec2d98f88fc5dd29a1082"
+    },
+    {
+      "path": "js/agendas.js",
+      "sha256": "2b0f4d2f6c2606173350258a21b8ee5ca99516174a8ecde84ba40b2fca8c6fb1"
+    },
+    {
+      "path": "js/app.js",
+      "sha256": "65d5f7249a9e8b130401b4f114d293cb1fd551445a5c106050254df387ecdbd9"
+    },
+    {
+      "path": "js/assistant-config.js",
+      "sha256": "e1404d5b70ae1cef5dcfeae48df0d0f7b5ab3253ff00cf0af31d64f923a0102e"
+    },
+    {
+      "path": "js/assistant-core.js",
+      "sha256": "ac70e391acb77d2c54dc17a30f135b0125793429c103e01d636d268fdbcc10ac"
+    },
+    {
+      "path": "js/assistant.js",
+      "sha256": "93adc3cbdcd3490cc11e5c332fc6ed191a491d2d6a518e812bce6b542a4907af"
+    },
+    {
+      "path": "js/audit-store.js",
+      "sha256": "e1f1ae415aab2982d2225dcf3b8d78ca72ef3f8da1f7254d751d21cd54023fc6"
+    },
+    {
+      "path": "js/auth-guard.js",
+      "sha256": "745317a97be685bd28608ad836163de1a87f58781daccc42ea30a360d689deda"
+    },
+    {
+      "path": "js/backup-store.js",
+      "sha256": "6a86e72cc49e652feab7f8928638a2497a61e5bec64564ee53eeeabbcde2117c"
+    },
+    {
+      "path": "js/configuracion.js",
+      "sha256": "de39b7aa8ddaa541f33c45bee18874ca74bc312affba8a41a0f057b8a1550021"
+    },
+    {
+      "path": "js/data-core.js",
+      "sha256": "3759b9bea374d28d3f7d2d8f5f970a54c3748484eb42e1bf418653c57719cbdd"
+    },
+    {
+      "path": "js/device-heartbeat.js",
+      "sha256": "9659f70c51ca272470c9fd60b346a3bae392d7420b0a29c1fc0877ff7dd4faa2"
+    },
+    {
+      "path": "js/device-registry.js",
+      "sha256": "dcbad70993ffd76f8f493ea9e0b736ff5449e3ab2374031d5db0de8e1f89bcac"
+    },
+    {
+      "path": "js/eventos.js",
+      "sha256": "c9bb432e971ba7c62c720b31178aa2e30f3f827f016aabad0820494041dd8867"
+    },
+    {
+      "path": "js/excel-sync.js",
+      "sha256": "438b7507760aa0db02fd98d72eebfc258ee545c92420818f62b16b259bdac58e"
+    },
+    {
+      "path": "js/firebase-app-check.js",
+      "sha256": "3df234cf891ec6bccb94dfaed4c616802004ce9573fd516eb294c72ab27abbe9"
+    },
+    {
+      "path": "js/firebase-config.js",
+      "sha256": "6baa8b537bc22c5a560f989d0f76275f31d8dc8f063dd18f94938951e53cc805"
+    },
+    {
+      "path": "js/firebase-sync.js",
+      "sha256": "88e6712fcc9835a48bb8d9c2f1083f8eff351e8469b04a19abd8389013021c14"
+    },
+    {
+      "path": "js/food-alerts-core.js",
+      "sha256": "9fd589ccdec78b04f86940c8c3ac4d73deaa794911a7e3b4b64a6f381727b07e"
+    },
+    {
+      "path": "js/index.js",
+      "sha256": "fdee27343e07c88f6077fd32737777950ab9b86b78dfbc1b883465e21dd3f628"
+    },
+    {
+      "path": "js/laboratorio.js",
+      "sha256": "0bfb056284c51ae1df9ea0798d0217de5be2084f205e1ad0cf2aa95c9dfcb6d1"
+    },
+    {
+      "path": "js/loader-guard.js",
+      "sha256": "f981f78b4e4b0d901a2f66481b083e4c41dc3641f8b094262d288fb4f4e42642"
+    },
+    {
+      "path": "js/local-auth.js",
+      "sha256": "b534f90b2f83ad7b2ceefd684dffbefbf31556b40b145d0b6de31f7e6c803075"
+    },
+    {
+      "path": "js/login.js",
+      "sha256": "9ce59278661314c19e0bfade6a30004d0814b3f4d5545de098c937a79884bbef"
+    },
+    {
+      "path": "js/maintenance-guard.js",
+      "sha256": "ea56bdf9166fdea618a70ed596b4072fa42b6e6aa4396045f8de56b3ba97a7dd"
+    },
+    {
+      "path": "js/mantenimiento.js",
+      "sha256": "5269c03dc117ae7b4ebdad4f881b387ba80d2f27e04e197d27a58edc132dce2e"
+    },
+    {
+      "path": "js/minuta-raster.js",
+      "sha256": "a90f8cf6cb2781a5649d8b4dd5539ef179a863659a246d1419ca0c03f36c673d"
+    },
+    {
+      "path": "js/minuta-share-preview.js",
+      "sha256": "c896bdc93cead02e0f894c0370f6b111cd6d617b590ba247ac197eb77a71c1ce"
+    },
+    {
+      "path": "js/minuta-share.js",
+      "sha256": "d91273338b2c5a9b1c76bbe583633e5764fe2fefe0f1b48fae11594f4454f8a3"
+    },
+    {
+      "path": "js/minuta-time.js",
+      "sha256": "815b29200aa6589c755ea54fa6cc42707d0228658a31cbf3d07f94da0af25ee4"
+    },
+    {
+      "path": "js/minuta.js",
+      "sha256": "7cff23054925c8563d8314366aaf79e21f751dffffdf2dd1b5c9ebd43e098cdd"
+    },
+    {
+      "path": "js/notifications.js",
+      "sha256": "5cd41f1cb5e203886a05ca3b2e2161e9e023873d3eefc2feed64b080749ad4ff"
+    },
+    {
+      "path": "js/performance-monitor.js",
+      "sha256": "2f5f33d4b1f758d94c144c9d239f24ddd7e34825624d42f19d4f5719f785e979"
+    },
+    {
+      "path": "js/puente_movil_eventos.js",
+      "sha256": "2c5496cbb09fe7356ebe9c55ffbe20a565150278ebf025c01d5e92b5b37c5618"
+    },
+    {
+      "path": "js/push-client.js",
+      "sha256": "ca466f46f91060286aa0423590e66ce323f59fdbb0975f81ba67725d04ce39fb"
+    },
+    {
+      "path": "js/push-config.js",
+      "sha256": "d84aa1867add43cea04a6e966997a9e04dd2eb0ffcfc27ece919a8bfd72a614e"
+    },
+    {
+      "path": "js/push-ui.js",
+      "sha256": "91ad7c10b85b8c02f513df63537752034d3bd4b0902bc2d568d7546d3fc59fd2"
+    },
+    {
+      "path": "js/pwa-context.js",
+      "sha256": "7f716d2f910c9238b970b34b405e2d5da86ae18f10a42402731a08f4aa24d08b"
+    },
+    {
+      "path": "js/pwa-release.js",
+      "sha256": "29cf259cd842d1c6505627f7c20149e9ac97f83744b6b5086a8b658967d7a5e1"
+    },
+    {
+      "path": "js/pwa.js",
+      "sha256": "5e6c24ff1e933ec5c0882ddb88654f9478b0294fe65e3c6feadc090b82941f89"
+    },
+    {
+      "path": "js/release-info.js",
+      "sha256": "cafd252d5d1d26755f3a08c08e83c95948e0d343c41ab1ae0c92da621edd4108"
+    },
+    {
+      "path": "js/release-worker.js",
+      "sha256": "27632c128c16351a4f9dfc84c6efd018c75e246cb862a09c5e0e1127c9f72d72"
+    },
+    {
+      "path": "js/session-ui.js",
+      "sha256": "eeb8b9755967fcdbe548ff965fe807d456f5d1b1a32e97d2c37aa8d65bf61163"
+    },
+    {
+      "path": "js/system-log.js",
+      "sha256": "2343065a46cb04b6e1ece5af6f3fb72db090dae9cf61f9a2f4bc515a53fef350"
+    },
+    {
+      "path": "js/system-version.js",
+      "sha256": "57ef2fc2baf96c291883ccf73f59c3bb8d5cd1b723a2e73362d1e159b4443f5a"
+    },
+    {
+      "path": "js/update-safety.js",
+      "sha256": "de254f9a025518f5a820729346fd43b3bc6dd2e206d3b4d866d324d979cfede1"
+    },
+    {
+      "path": "js/usuarios.js",
+      "sha256": "bfa092680ef3467aee772aaf91428287326b28e11bff6f72f1a8775d332922d5"
+    },
+    {
+      "path": "js/validacion-page.js",
+      "sha256": "8fb5701919b5a8c2f9f1a27945bcb7022afa77ad2523993ced3e64c469c7758e"
+    },
+    {
+      "path": "js/validation.js",
+      "sha256": "adfedd17a6e9a0854c4eb8a93a0275171e440bde0bf82170ced291eb3e48ab68"
+    },
+    {
+      "path": "laboratorio.html",
+      "sha256": "4324aa1ef9ac848cf4f1166f9a9fbbb86bd59320e6b060d7bce40e243905fdaf"
+    },
+    {
+      "path": "login.html",
+      "sha256": "43b1bed41f480037f7d718a3a26f5ef08aa939f5ddbba4dd9bd37c9e9ef32e19"
+    },
+    {
+      "path": "manifest.webmanifest",
+      "sha256": "66e2cba6daaa9fab0a04271b8defa5aca8db9ce649e8519d915bd01887c2743f"
+    },
+    {
+      "path": "mantenimiento.html",
+      "sha256": "b44eed1dbac85046465e95b1dc44e9323f7a71c155e90c260beedc4b5be45ecf"
+    },
+    {
+      "path": "minuta.html",
+      "sha256": "4c7f28e71638eb035c65305bee39fa1c843f5038532d94faf80c2bcc500f3e13"
+    },
+    {
+      "path": "minuta_compartir.html",
+      "sha256": "484d4ebd12776bf92950d751273eef0045ddd6b93027c69675a79f24883b45eb"
+    },
+    {
+      "path": "offline.html",
+      "sha256": "b273d28c270692855f3f6f19911d77532c4d77e644ba53cf63b3df514699a2ad"
+    },
+    {
+      "path": "recuperacion.html",
+      "sha256": "d45f7517060a44fd74d7494944a5fb188d7505dca54a5e6ce4808821b0b9f00a"
+    },
+    {
+      "path": "usuarios.html",
+      "sha256": "2403df634368d4d83d3868ab09459eab735e2591873e2e466e9890691322a7c1"
+    },
+    {
+      "path": "validacion.html",
+      "sha256": "8a3803cb453855365e2e0e1a9637127aec7c625c86a808a5980bed3ba2690424"
+    }
+  ],
+  "digest": "f48578de140cc99724a5d79850bcd85cd06d0045754ecc79c77285bc3b0bd4cb"
+}

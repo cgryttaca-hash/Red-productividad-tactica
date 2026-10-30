@@ -16,7 +16,7 @@ $('labFile').addEventListener('change',async event=>{
     $('labReport').innerHTML=`<div class="list">
       <article class="list-item"><div><strong>Archivo analizado</strong><span>${esc(file.name)} · ${(file.size/1024).toFixed(1)} KB</span></div><span class="status ${report.errorCount?'error':report.warningCount?'warn':'ok'}">${report.errorCount?'Revisar':report.warningCount?'Advertencias':'Correcto'}</span></article>
       <article class="list-item"><div><strong>Tiempo de análisis</strong><span>Lectura, normalización y validación.</span></div><code>${Math.round(performance.now()-started)} ms</code></article>
-      <article class="list-item"><div><strong>Incidencias</strong><span>${report.issues.slice(0,6).map(item=>`${item.sheet} fila ${item.row}: ${item.message}`).join(' · ')||'No se detectaron incidencias.'}</span></div><code>${report.issues.length}</code></article>
+      <article class="list-item"><div><strong>Incidencias</strong><span>${esc(report.issues.slice(0,6).map(item=>`${item.sheet} fila ${item.row}: ${item.message}`).join(' · ')||'No se detectaron incidencias.')}</span></div><code>${report.issues.length}</code></article>
     </div>`;
     $('labPreview').innerHTML=parsed.rows.slice(0,20).map(row=>`<tr><td>${esc(date(row.FECHA))}</td><td>${esc(row['NOMBRE DE LA EMPRESA'])}</td><td>${esc(row['ESCENARIO ASIGNADO'])}</td><td>${esc(row['CANTIDAD DE PERSONAS'])}</td><td>${esc(row.ESTADO)}</td></tr>`).join('');
     show('Prueba completada. El sistema productivo no fue modificado.','success');

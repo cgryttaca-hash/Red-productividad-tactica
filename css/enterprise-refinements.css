@@ -1,0 +1,12 @@
+@media screen{
+ :root{--space-xs:.25rem;--space-lg:1.5rem;--space-xl:2rem;--radius-card:12px;--shadow-raised:0 8px 24px #10283f0b}
+ html[data-visual-theme="premium"]{scroll-padding-top:88px}html[data-visual-theme="premium"] :is(h1,h2,h3,p){overflow-wrap:anywhere}
+ html[data-ui="corporate"] :is(.header-inner,.tool-header-inner,.users-header-inner){row-gap:10px}html[data-ui="corporate"] :is(.main-nav,.tool-nav){flex-wrap:wrap;gap:4px}
+ html[data-ui="corporate"] .dashboard-overview{padding-block:22px}html[data-ui="corporate"] .module-card:focus-visible{box-shadow:var(--shadow-raised)}
+ html[data-ui="corporate"] :is(.card-header,.panel-heading){gap:12px}html[data-ui="corporate"] :is(input,select,textarea){max-width:100%}
+ html[data-ui="corporate"] :is(.table-wrap,.table-container){scrollbar-width:thin;overscroll-behavior-x:contain}html[data-ui="corporate"] tbody tr:focus-within{outline:2px solid #bf9a5e;outline-offset:-2px}
+ html[data-maintenance-page="agenda_movil"] .agenda-push-panel summary{min-height:44px}html[data-maintenance-page="agenda_movil"] .agenda-search input{min-width:0}
+ #pwaUpdateNotice{flex-wrap:wrap}#pwaUpdateDescription{flex:1 1 300px}#pwaUpdateNotice[hidden]{display:none!important}#rptUpdateLock{position:fixed;inset:0;z-index:100000;background:#10283fe8;color:white;display:grid;place-items:center;padding:24px;text-align:center;font:600 16px/1.6 "Segoe UI",sans-serif}
+ @media(max-width:600px){html[data-ui="corporate"] .dashboard-overview{padding-block:15px}html[data-ui="corporate"] :is(.tool-hero,.card-header){padding:16px}html[data-ui="corporate"] .tool-nav{max-width:100%;row-gap:3px}#pwaUpdateNotice{left:8px;right:8px;padding:11px;gap:8px}#pwaUpdateNotice button{flex:1;min-height:44px}html[data-maintenance-page="agenda_movil"] .date-group-header{padding:9px 10px}html[data-maintenance-page="agenda_movil"] .event-summary-row{padding:10px}}
+}
+@media print{#pwaUpdateNotice,#rptUpdateLock{display:none!important}}

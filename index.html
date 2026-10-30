@@ -25,6 +25,7 @@
   <link rel="icon" type="image/svg+xml" href="assets/agenda-brand/favicon.svg">
   <link rel="icon" sizes="any" href="assets/agenda-brand/favicon.ico">
   <meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/enterprise-refinements.css" media="screen">
 </head>
 <body>
   <div id="loader" aria-hidden="true"><span class="loader-spinner"></span></div>
@@ -41,6 +42,8 @@
 
       <nav class="main-nav" aria-label="Navegación principal">
         <a class="active" href="index.html" aria-current="page">Inicio</a>
+        <a href="asistente.html">Asistente</a>
+        <a href="recuperacion.html">Actualizaciones</a>
         <a id="usersLink" href="usuarios.html" hidden>Usuarios</a>
         <a id="configLink" href="configuracion.html" hidden>Configuración</a>
       </nav>
@@ -178,7 +181,7 @@
 <footer class="dashboard-version"><span>Gestión de Eventos · Centro operativo</span><span>Planificación · Operación · Consulta</span></footer>
   </main>
 
-  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" defer></script>
+  <script src="assets/vendor/xlsx-0.20.3.min.js" defer></script>
   <script src="js/excel-sync.js?v=20260801-2300" defer></script>
   <script src="js/index.js?v=20260801-2300" defer></script>
   <script type="module" src="js/firebase-sync.js"></script>

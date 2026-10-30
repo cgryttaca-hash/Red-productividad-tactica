@@ -582,8 +582,8 @@
   }
 
   async function synchronize({force=false,requestPermission=false,showSuccess=false}={}){
-    if(syncInProgress||!fileHandle) return false;
-    syncInProgress=true;
+    if(syncInProgress||!fileHandle||window.RPTUpdateGuard?.locked) return false;
+    syncInProgress=true;window.__RPT_EXCEL_BUSY__=true;window.RPTUpdateGuard?.setBusy('excel-read',true);
     try{
       const permission=await getPermission(requestPermission);
       if(permission!=='granted'){
@@ -604,7 +604,7 @@
       setState('error',{fileName:fileHandle?.name,message});
       systemLog({source:'Excel',level:'error',title:'Error al comprobar el archivo',detail:message||'No fue posible leer el Excel.'});
       return false;
-    }finally{syncInProgress=false;}
+    }finally{syncInProgress=false;window.__RPT_EXCEL_BUSY__=false;window.RPTUpdateGuard?.setBusy('excel-read',false);}
   }
 
   async function unlinkFile(){
@@ -655,7 +655,7 @@
 
   window.ExcelFileSync={
     init:initialize,openPanel,chooseFile,refresh:()=>synchronize({force:true,requestPermission:true,showSuccess:true}),
-    unlink:unlinkFile,parseWorkbookBuffer,importFile:async file=>{const parsed=parseWorkbookBuffer(await file.arrayBuffer());await saveParsedData(parsed,file);return parsed;},
+    unlink:unlinkFile,parseWorkbookBuffer,importFile:async file=>{window.RPTUpdateGuard?.setBusy('excel-import',true);try{const parsed=parseWorkbookBuffer(await file.arrayBuffer());await saveParsedData(parsed,file);return parsed;}finally{window.RPTUpdateGuard?.setBusy('excel-import',false);}},
     getHandle:()=>fileHandle
   };
 

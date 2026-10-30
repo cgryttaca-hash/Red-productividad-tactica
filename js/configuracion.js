@@ -10,7 +10,7 @@ const DOC_ID='mantenimiento';
 const $=id=>document.getElementById(id);
 const labels={
   index:'Inicio',eventos:'Eventos',minuta:'Minuta',agenda_movil:'Agenda Móvil',usuarios:'Usuarios',
-  validacion:'Validación Excel',laboratorio:'Laboratorio',agendas:'Agendas'
+  validacion:'Validación Excel',laboratorio:'Laboratorio',agendas:'Agendas',asistente:'Asistente'
 };
 const templates={
   mejoras:'Estamos realizando mejoras técnicas para ofrecer una experiencia más rápida y estable.',
@@ -19,6 +19,9 @@ const templates={
   personalizado:''
 };
 let sdk=null,auth=null,db=null,currentUser=null,config={pages:{}},unsubscribe=null,ticker=null;
+let renderedConfiguration='';
+const escapeMarkup=value=>String(value??'').replace(/[&<>"']/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+const workSaved=formId=>window.dispatchEvent(new CustomEvent('rpt:work-saved',{detail:{formId}}));
 
 function message(value,type='info',target='configMessage'){
   const el=$(target);if(!el)return;el.hidden=!value;el.className=`message ${type}`;el.textContent=value||'';
@@ -47,13 +50,16 @@ function renderOwner(){
 }
 function renderList(){
   const pages=config?.pages||{};
+  const signature=JSON.stringify([pages,Object.values(pages).map(item=>itemState(item))]);
+  if(signature===renderedConfiguration){document.querySelectorAll('[data-maintenance-until]').forEach(node=>node.textContent=remaining(node.dataset.maintenanceUntil));return;}
+  renderedConfiguration=signature;
   $('maintenanceList').innerHTML=Object.entries(labels).map(([key,label])=>{
     const item=pages[key]||{};const state=itemState(item);
     const statusText=state==='active'?'En actualización':state==='scheduled'?'Programado':'Disponible';
     const detail=state==='active'
-      ?`Tiempo restante ${remaining(item.until)} · Finaliza ${formatDate(item.until)}`
+      ?`Tiempo restante <span data-maintenance-until="${escapeMarkup(item.until)}">${remaining(item.until)}</span> · Finaliza ${formatDate(item.until)}`
       :state==='scheduled'?`Inicia ${formatDate(item.startsAt)} · Finaliza ${formatDate(item.until)}`:'Sin temporizador activo';
-    return `<article class="list-item"><div><strong>${label} · ${statusText}</strong><span>${item.message||'Sin mantenimiento programado.'}<br>${detail}</span></div>
+    return `<article class="list-item"><div><strong>${label} · ${statusText}</strong><span>${escapeMarkup(item.message||'Sin mantenimiento programado.')}<br>${detail}</span></div>
       <div class="tool-actions">
         ${state==='active'?`<button class="btn" type="button" data-extend="${key}">+15 min</button>`:''}
         ${state==='active'||state==='scheduled'?`<button class="btn danger" type="button" data-stop="${key}">Finalizar</button>`:''}
@@ -84,7 +90,7 @@ async function initializeFirebase(){
 }
 function setDefaultStart(){
   const date=new Date(Date.now()+60000);date.setSeconds(0,0);
-  $('maintenanceStart').value=date.toISOString().slice(0,16);
+  $('maintenanceStart').value=new Date(date.getTime()-date.getTimezoneOffset()*60000).toISOString().slice(0,16);
 }
 $('maintenanceTemplate').addEventListener('change',()=>{
   const value=$('maintenanceTemplate').value;if(value!=='personalizado')$('maintenanceMessage').value=templates[value];
@@ -96,6 +102,7 @@ $('ownerLoginForm').addEventListener('submit',async event=>{
     $('ownerPassword').value='';
     if(result.user.uid!==FIREBASE_OWNER_UID){await sdk.authMod.signOut(auth);throw new Error('La cuenta no corresponde al propietario autorizado.');}
     message('Conexión guardada correctamente.','success','ownerLoginMessage');
+    workSaved('ownerLoginForm');
   }catch(error){message(error?.message||'No fue posible conectar Firebase.','error','ownerLoginMessage');}
   finally{$('ownerLoginButton').disabled=false;}
 });
@@ -112,6 +119,7 @@ $('maintenanceForm').addEventListener('submit',async event=>{
       message:$('maintenanceMessage').value.trim()||templates.mejoras,template:$('maintenanceTemplate').value
     };
     await saveConfig(next);
+    workSaved('maintenanceForm');
     message(`Mantenimiento ${startsAt>Date.now()+30000?'programado':'activado'} para ${labels[page]}.`,'success');
     const settings=getNotificationSettings();
     if(settings.maintenance)showNotification('Mantenimiento programado',`${labels[page]} · ${formatDate(next.pages[page].startsAt)}`,{tag:`maintenance-${page}`,url:'./configuracion.html'});
@@ -150,11 +158,13 @@ $('enableNotifications').addEventListener('click',async()=>{
 });
 $('saveNotifications').addEventListener('click',()=>{
   setNotificationSettings({excel:$('notifyExcel').checked,mobile:$('notifyMobile').checked,maintenance:$('notifyMaintenance').checked});
+  window.dispatchEvent(new CustomEvent('rpt:work-saved',{detail:{fields:['notifyExcel','notifyMobile','notifyMaintenance']}}));
   message('Preferencias guardadas.','success','notificationMessage');
 });
 const session=getSession();$('sessionName').textContent=session?.displayName||session?.username||'Administrador';
 $('logoutButton').addEventListener('click',()=>{logout();location.replace('login.html')});
 $('systemVersion').textContent=SYSTEM_VERSION;$('releaseLabel').textContent=RELEASE_NAME;
+$('deploymentHost').textContent=location.hostname||'Archivo local';
 function renderInstallation(){
   $('pwaState').textContent=isInstalledContext()?'Instalada':'Web';
   $('pwaDetail').textContent=isInstalledContext()?'Ejecutándose como aplicación':'Puedes instalarla desde el menú del navegador';

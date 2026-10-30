@@ -14,6 +14,8 @@ const { createHandler, failure, sendPublication } = require('./push-service');
 const { createFoodCoordinator } = require('./food-coordinator');
 const { createFoodStore, loadPublishedFeed } = require('./food-store');
 const { createDeviceSender } = require('./push-provider');
+const { createAssistantHandler, configuration: assistantConfiguration, quotaStore } = require('./assistant-service');
+const { getAppCheck } = require('firebase-admin/app-check');
 
 initializeApp();
 const privateKey = defineSecret('PUSH_VAPID_PRIVATE_KEY');
@@ -21,6 +23,16 @@ const publicKey = defineString('PUSH_VAPID_PUBLIC_KEY', { default: '' });
 const contact = defineString('PUSH_CONTACT', { default: '' });
 const origins = defineString('PUSH_ALLOWED_ORIGINS', { default: '' });
 const COLLECTION = 'agenda_push_subscriptions';
+const assistantKey = process.env.AI_ENABLED === 'true' ? defineSecret('OPENAI_API_KEY') : null;
+
+exports.eventAssistant = onRequest({ region: 'us-central1', secrets: assistantKey ? [assistantKey] : [], maxInstances: 2, concurrency: 10, timeoutSeconds: 60, cors: false }, (request, response) => createAssistantHandler({
+  getConfig: () => assistantConfiguration({ ...process.env, OPENAI_API_KEY: assistantKey?.value() || '' }),
+  verifyToken: token => getAuth().verifyIdToken(token, true),
+  verifyAppCheck: token => getAppCheck().verifyToken(token),
+  quota: quotaStore(getFirestore()),
+  loadFeed: () => loadPublishedFeed(getFirestore()),
+  log: value => console.info('assistant_request', value)
+})(request, response));
 
 function configuration(validate = true) {
   const value = { publicKey: publicKey.value(), privateKey: privateKey.value(), contact: contact.value(), origins: origins.value().split(',').map(origin => origin.trim()).filter(Boolean), projectId: process.env.GCLOUD_PROJECT || process.env.GOOGLE_CLOUD_PROJECT || '' };

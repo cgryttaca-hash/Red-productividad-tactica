@@ -1,9 +1,9 @@
-GESTIÓN DE EVENTOS — AGENDA MÓVIL PREMIUM
-CORRECCIÓN VIGENTE · 29 DE OCTUBRE DE 2026
-Lee LEER_PRIMERO_CORRECCION_PWA.md y entrega/correccion-pwa/.
-La consulta móvil ya funciona sin instalar ni autorizar notificaciones.
-La activación de avisos se realiza desde la PWA instalada y verifica un
-envío del backend. Su conexión real y las pruebas físicas siguen pendientes.
+GESTIÓN DE EVENTOS — VERSIÓN 4.0.0
+GUÍA VIGENTE: LEER_PRIMERO_V4.md y docs/.
+Actualizaciones verificadas, recuperación y asistente operativo.
+Publica el contenido de dist/; el backend y los secretos no son archivos públicos.
+La consulta local funciona. IA externa y Push requieren la configuración
+descrita en la guía; las pruebas físicas y el despliegue real siguen pendientes.
 La documentación que continúa se conserva como historial de versiones.
 
 Actualización vigente: LEER_PRIMERO_AGENDA_PREMIUM.md

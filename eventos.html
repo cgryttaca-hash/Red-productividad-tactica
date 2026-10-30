@@ -21,6 +21,7 @@
   <link rel="icon" sizes="any" href="assets/agenda-brand/favicon.ico">
   <meta name="theme-color" content="#10283f">
   <meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/enterprise-refinements.css" media="screen">
 </head>
 <body>
   <div id="agendaPreloader" class="agenda-preloader" role="status" aria-live="polite">
@@ -129,13 +130,14 @@
   </section>
 
   <!-- Librerías externas -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="assets/vendor/chart-4.6.1.min.js"></script>
+  <script src="assets/vendor/chartjs-datalabels-2.2.0.min.js"></script>
+  <script src="assets/vendor/xlsx-0.20.3.min.js"></script>
 
   <!-- Código de la aplicación -->
   <script src="js/excel-sync.js?v=20260801-1600"></script>
   <script src="js/eventos.js?v=20260730-001"></script>
   <script type="module" src="js/agendas.js"></script>
+<script type="module" src="js/pwa.js"></script>
 </body>
 </html>

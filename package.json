@@ -1,0 +1,13 @@
+{
+  "name":"red-productividad-tactica",
+  "version":"4.0.0",
+  "private":true,
+  "engines":{"node":">=22"},
+  "scripts":{
+    "build":"node tools/build-release.cjs",
+    "check":"node tools/check-project.cjs && node tools/verify-release.cjs",
+    "test":"node --test tests/assistant.test.cjs",
+    "test:updates":"node tests/updates.cjs"
+  },
+  "devDependencies":{"playwright":"1.62.1"}
+}

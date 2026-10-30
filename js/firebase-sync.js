@@ -316,9 +316,9 @@ async function writeAudit(entries,fireMod){
 }
 
 export async function publishIfReady(rows=null,diff=null,meta={}){
-  if(publishing)return false;
+  if(publishing||window.RPTUpdateGuard?.locked)return false;
   const operationStarted=performance.now();
-  publishing=true;updateUi();
+  publishing=true;window.__RPT_FIREBASE_PUBLISHING__=true;updateUi();window.RPTUpdateGuard?.setBusy('firebase-publish',true);
   try{
     const {fireMod}=await loadSdk();
     await authReadyPromise;
@@ -414,7 +414,7 @@ export async function publishIfReady(rows=null,diff=null,meta={}){
     await systemLog({source:'Firebase',level:'error',title:'Error de publicación',detail:message});
     if(meta.manual){openPanel();showMessage(message,'error');}
     return false;
-  }finally{publishing=false;updateUi();}
+  }finally{publishing=false;window.__RPT_FIREBASE_PUBLISHING__=false;updateUi();window.RPTUpdateGuard?.setBusy('firebase-publish',false);}
 }
 
 async function initialize(){

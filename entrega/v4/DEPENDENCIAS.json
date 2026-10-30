@@ -1,0 +1,38 @@
+[
+  {
+    "file": "assets/vendor/xlsx-0.20.3.min.js",
+    "url": "https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js",
+    "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+    "bytes": 951904
+  },
+  {
+    "file": "assets/vendor/chart-4.6.1.min.js",
+    "url": "https://cdn.jsdelivr.net/npm/chart.js@4.6.1",
+    "sha256": "87364cc2b2a76a6684929e7d6b80b18a897794db38400caff1fcf1791c6925d2",
+    "bytes": 210082
+  },
+  {
+    "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+    "url": "https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0",
+    "sha256": "20c08f3d9c6d2ef76df6d6a6f1127c0013339fe32add24222276c398c6308c38",
+    "bytes": 12937
+  },
+  {
+    "file": "assets/vendor/LICENSE-sheetjs.txt",
+    "url": "https://raw.githubusercontent.com/SheetJS/sheetjs/master/LICENSE",
+    "sha256": "4d2a38ac35cda06a555c84074a819d413339cd3691b822cae50f8f322fe01f64",
+    "bytes": 11355
+  },
+  {
+    "file": "assets/vendor/LICENSE-chartjs.txt",
+    "url": "https://raw.githubusercontent.com/chartjs/Chart.js/v4.6.1/LICENSE.md",
+    "sha256": "41a84aa2caba645f966a18d9c2056b73e6d3a81d80bc0046bc0011a2634d4cce",
+    "bytes": 1093
+  },
+  {
+    "file": "assets/vendor/LICENSE-datalabels.txt",
+    "url": "https://raw.githubusercontent.com/chartjs/chartjs-plugin-datalabels/v2.2.0/LICENSE.md",
+    "sha256": "075bb10eabebc9356311ffca1b18fdd470fca8e5c2ce0f6e098430c81c59a624",
+    "bytes": 1110
+  }
+]

@@ -16,6 +16,7 @@
   <link rel="icon" type="image/svg+xml" href="assets/agenda-brand/favicon.svg">
   <link rel="icon" sizes="any" href="assets/agenda-brand/favicon.ico">
   <meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/enterprise-refinements.css" media="screen">
 </head>
 <body>
 <header class="tool-header"><div class="tool-header-inner">
@@ -38,7 +39,7 @@
 <article class="card"><header class="card-header"><div><span>MANTENIMIENTO</span><h2>Programar actualización</h2><p>Bloquea temporalmente un módulo y lo restablece automáticamente.</p></div></header>
 <div class="card-body"><form id="maintenanceForm" class="form-grid">
 <label class="field"><span>Página</span><select id="maintenancePage">
-<option value="index">Inicio</option><option value="eventos">Eventos</option><option value="minuta">Minuta</option><option value="agendas">Agendas</option><option value="agenda_movil">Agenda Móvil</option><option value="usuarios">Usuarios</option><option value="validacion">Validación Excel</option><option value="laboratorio">Laboratorio</option>
+<option value="index">Inicio</option><option value="eventos">Eventos</option><option value="minuta">Minuta</option><option value="agendas">Agendas</option><option value="agenda_movil">Agenda Móvil</option><option value="usuarios">Usuarios</option><option value="validacion">Validación Excel</option><option value="laboratorio">Laboratorio</option><option value="asistente">Asistente</option>
 </select></label>
 <label class="field"><span>Plantilla</span><select id="maintenanceTemplate"><option value="mejoras">Mejoras técnicas</option><option value="seguridad">Actualización de seguridad</option><option value="datos">Optimización de datos</option><option value="personalizado">Mensaje personalizado</option></select></label>
 <label class="field"><span>Inicio</span><input id="maintenanceStart" type="datetime-local"></label>
@@ -59,10 +60,12 @@
 <header class="card-header"><div><span>ESTADO ACTUAL</span><h2>Páginas programadas</h2><p>Puedes finalizar o extender un mantenimiento activo.</p></div></header>
 <div class="card-body"><div id="maintenanceList" class="list"></div></div></section>
 
+<section class="card" style="margin-top:20px"><header class="card-header"><div><span>ACTUALIZACIONES</span><h2>Versiones verificadas</h2><p>La descarga es automática. La activación espera a que termines de editar en todas las pestañas.</p></div></header><div class="card-body"><div class="grid cols-2"><p>Versión activa: <strong id="activeRelease">Comprobando…</strong></p><p>Versión anterior: <strong id="previousRelease">Comprobando…</strong></p></div><div class="tool-actions"><button id="checkSystemUpdate" type="button" class="btn primary">Comprobar actualización</button><button id="restoreSystemVersion" type="button" class="btn" disabled>Volver a la versión anterior</button><a class="btn" href="recuperacion.html">Recuperación</a></div><p id="updateSystemMessage" class="message info" role="status" aria-live="polite">Preparando el gestor…</p></div></section>
+
 <section class="grid cols-3">
 <article class="card metric"><small>Versión instalada</small><strong id="systemVersion">3.0.0</strong><span id="releaseLabel">Plataforma operativa estable</span></article>
 <article class="card metric"><small>Aplicación</small><strong id="pwaState">Web</strong><span id="pwaDetail">Verificando instalación</span></article>
-<article class="card metric"><small>Entorno</small><strong>Producción</strong><span>Repositorio principal de GitHub Pages</span></article>
+<article class="card metric"><small>Servidor actual</small><strong id="deploymentHost">Comprobando…</strong><span>Comprueba la dirección antes de publicar datos.</span></article>
 </section>
 <footer class="version-footer"><span>Configuración protegida para administradores.</span><span>Los cambios de mantenimiento se guardan en Firebase.</span></footer>
 </main>
