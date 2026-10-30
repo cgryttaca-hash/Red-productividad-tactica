@@ -36,6 +36,14 @@ export function displayDate(value) {
   return match ? `${match[3]}/${match[2]}/${match[1]}` : source;
 }
 
+export function executiveForEvent(record){
+  return{
+    name:field(record,['NOMBRE COMPLETO DEL EJECUTIVO','NOMBRE DEL EJECUTIVO','NOMBRE EJECUTIVO','EJECUTIVO','ASESOR COMERCIAL']),
+    email:field(record,['CORREO ELECTRONICO DEL EJECUTIVO','CORREO ELECTRONICO EJECUTIVO','CORREO DEL EJECUTIVO','CORREO EJECUTIVO','EMAIL EJECUTIVO','EMAIL DEL EJECUTIVO','EMAIL ASESOR']),
+    phone:field(record,['TELEFONO DEL EJECUTIVO','TELEFONO EJECUTIVO','CELULAR DEL EJECUTIVO','CELULAR EJECUTIVO','TELEFONO ASESOR'])
+  };
+}
+
 export function buildAgenda(record) {
   const company = field(record, ['NOMBRE DE LA EMPRESA', 'EMPRESA', 'CLIENTE']);
   const date = field(record, ['FECHA']);

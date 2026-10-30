@@ -1,8 +1,10 @@
 {
-  "version": "4.0.0",
+  "version": "4.1.0",
   "result": "PASS",
-  "groupsPassed": 71,
-  "report": "entrega/v4/PRUEBAS.json",
-  "externalServicesVerifiedLive": false,
-  "physicalDevicesVerified": false
+  "report": "entrega/v41/PRUEBAS.json",
+  "resources": 132,
+  "responsiveChecks": 85,
+  "productionServicesVerified": false,
+  "physicalDevicesVerified": false,
+  "localStorageScope": "navegador actual"
 }

@@ -1,13 +1,21 @@
 {
-  "name":"red-productividad-tactica",
-  "version":"4.0.0",
-  "private":true,
-  "engines":{"node":">=22"},
-  "scripts":{
-    "build":"node tools/build-release.cjs",
-    "check":"node tools/check-project.cjs && node tools/verify-release.cjs",
-    "test":"node --test tests/assistant.test.cjs",
-    "test:updates":"node tests/updates.cjs"
+  "name": "red-productividad-tactica",
+  "version": "4.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
   },
-  "devDependencies":{"playwright":"1.62.1"}
+  "scripts": {
+    "build": "node tools/build-release.cjs",
+    "check": "node tools/check-project.cjs && node tools/verify-release.cjs",
+    "test": "node --test tests/assistant.test.cjs",
+    "test:updates": "node tests/updates.cjs",
+    "test:v41": "node tests/v41/tests-v41.cjs && node tests/v41/tests-local-edges.cjs",
+    "test:responsive": "node tests/v41/tests-visual.cjs",
+    "test:offline": "node tests/v41/tests-offline-v41.cjs",
+    "test:performance": "node tests/v41/tests-performance.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
 }

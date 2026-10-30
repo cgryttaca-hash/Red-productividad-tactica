@@ -83,8 +83,8 @@
       </section>
 
       <section id="mobileNotice" class="agenda-notice" hidden></section>
-      <details class="agenda-push-panel"><summary id="agendaPushSummary">Instalación y avisos</summary><div class="agenda-push-content">
-        <p id="agendaPushStatus" role="status" aria-live="polite">Comprobando compatibilidad y suscripción…</p>
+      <details class="agenda-push-panel"><summary id="agendaPushSummary">Instalación y avisos externos opcionales</summary><div class="agenda-push-content">
+        <p id="agendaPushStatus" role="status" aria-live="polite">Comprobando los avisos externos opcionales…</p>
         <div id="agendaPushActions" class="agenda-push-actions" hidden><button id="agendaEnablePush" type="button" disabled>Activar notificaciones</button><button id="agendaDisablePush" type="button" hidden>Desactivar notificaciones</button><button id="agendaTestPush" type="button" hidden>Enviar aviso de prueba</button><button id="agendaCheckPush" type="button">Comprobar estado</button></div>
         <h2>Instalar en tu dispositivo</h2>
         <ol><li>Android: abre la agenda mediante HTTPS y utiliza «Instalar aplicación» o «Añadir a pantalla de inicio» en el menú del navegador.</li><li>iPhone y iPad: abre la agenda en Safari, pulsa Compartir y «Añadir a pantalla de inicio». Si aparece, activa «Abrir como app web». Abre después el icono Agenda.</li><li>Dentro de la aplicación, pulsa el botón de notificaciones para conceder el permiso. Web Push requiere un dispositivo y navegador compatibles; en iPhone y iPad, iOS/iPadOS 16.4 o posterior.</li></ol>
@@ -114,5 +114,6 @@
   <script type="module" src="js/notifications.js"></script>
   <script type="module" src="js/push-ui.js"></script>
   <script type="module" src="js/performance-monitor.js"></script>
+<script type="module" src="js/notice-center.js"></script>
 </body>
 </html>

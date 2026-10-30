@@ -24,19 +24,7 @@ function startOfDay(d){ const x = new Date(d); x.setHours(0,0,0,0); return x; }
 function endOfDay(d){ const x = new Date(d); x.setHours(23,59,59,999); return x; }
 
 function parseExcelDate(v){
-  if(v === undefined || v === null || v === '') return null;
-  if (typeof v === 'number') {
-    const excelDate = XLSX.SSF.parse_date_code(v);
-    return new Date(excelDate.y, excelDate.m - 1, excelDate.d);
-  }
-  if(v instanceof Date && !isNaN(v)) return startOfDay(v);
-  const s = String(v).trim();
-  let m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  if(m) return startOfDay(new Date(+m[3], +m[2]-1, +m[1]));
-  m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-  if(m) return startOfDay(new Date(+m[1], +m[2]-1, +m[3]));
-  const d = new Date(s);
-  return !isNaN(d) ? startOfDay(d) : null;
+  return window.RPTEventQuery.parseExcelDate(v);
 }
 
 function parseInputDate(value){
@@ -151,6 +139,7 @@ function renderTable(rows){
     tbody.appendChild(tr);
   });
   syncPreviewTable();
+  window.__RPT_VISIBLE_EVENT_ROWS__=rows;
   window.dispatchEvent(new CustomEvent('rptEventRowsRendered', { detail: { rows } }));
 }
 
@@ -325,17 +314,7 @@ function applyFilters(){
     if(df) ok = ok && fechaOk && r.FECHA >= df;
     if(dt) ok = ok && fechaOk && r.FECHA <= dt;
 
-    if(currentFilter === 'Actuales' && !hasCustomDateRange){
-      ok = ok && fechaOk && startOfDay(r.FECHA).getTime() >= hoy.getTime();
-    }
-    if(currentFilter === 'Segundo piso'){
-      const esc = (r['ESCENARIO ASIGNADO'] || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      ok = ok && esc.includes('salon') && !esc.includes('tercer piso');
-    }
-    if(currentFilter === 'Tercer piso'){
-      const esc = (r['ESCENARIO ASIGNADO'] || '').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      ok = ok && esc.includes('tercer piso');
-    }
+    ok = ok && window.RPTEventQuery.matchesCategory(r,currentFilter,{hasCustomDateRange,now:hoy});
     if(paymentFilter) ok = ok && normalizeText(r['MEDIO DE PAGO']).includes(paymentFilter);
     if(floorFilter) ok = ok && getFloorLabel(r) === floorFilter;
     if(selectedCompany) ok = ok && r['NOMBRE DE LA EMPRESA'] === selectedCompany;
@@ -824,12 +803,13 @@ const INACTIVITY_LIMIT_MS = 5 * 60 * 1000; // 5 minutos de inactividad
 let inactivityTimer = null;
 
 function volverAlInicio(){
+  if(window.RPTAgendaDialog?.hasPendingChanges()&&!confirm('Hay una observación sin guardar. ¿Quieres volver al inicio y descartarla?'))return;
   window.location.href = HOME_URL;
 }
 
 function resetInactivityTimer(){
   clearTimeout(inactivityTimer);
-  inactivityTimer = setTimeout(volverAlInicio, INACTIVITY_LIMIT_MS);
+  inactivityTimer = setTimeout(()=>{if(window.RPTAgendaDialog?.hasPendingChanges())resetInactivityTimer();else volverAlInicio();}, INACTIVITY_LIMIT_MS);
 }
 
 window.addEventListener('DOMContentLoaded', () => {

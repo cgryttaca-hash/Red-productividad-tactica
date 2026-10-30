@@ -1,5 +1,5 @@
 {
-  "version": "4.0.0",
+  "version": "4.1.0",
   "assets": [
     {
       "path": "agenda.webmanifest",
@@ -7,15 +7,15 @@
     },
     {
       "path": "agenda_movil.html",
-      "sha256": "b5751c02602a877d22ca020616831b7e4e350118d2cf90ec583ee3df282e2b1b"
+      "sha256": "df2a9986b71a203500dc499ead5e4175dbc936bc6fe019ff82528821898a0735"
     },
     {
       "path": "agendas.html",
-      "sha256": "95be1cc7696b2761ca6c46e3c4e1219840826dbbfe1368c6b5515d3217493f3f"
+      "sha256": "fbb207c1ad61ae3dc9267dfc795f9f4d96f645946c819a8c5b5992e3ae7d24f0"
     },
     {
       "path": "asistente.html",
-      "sha256": "3255c2c9e030d3c43672015e3b0ad3df61cf37835c77006cadcf7847af33de7c"
+      "sha256": "599b6481a30dfe2fe28db3adc6418746473873b28337a6e75cb34f4e9fd60414"
     },
     {
       "path": "assets/agenda-brand/apple-touch-icon.png",
@@ -130,6 +130,10 @@
       "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41"
     },
     {
+      "path": "avisos.html",
+      "sha256": "67e13110e64915c3780fc10147e528d31d725c0887bd52853d77bc7b6bf1e4b3"
+    },
+    {
       "path": "configuracion.html",
       "sha256": "c35137631fa50ae89e194553deb4bad96e52bfc5246a3ccc88b78240fa918219"
     },
@@ -140,6 +144,10 @@
     {
       "path": "css/agenda-compact.css",
       "sha256": "18768cd82d69a81ace6ad2841f62267142d632d99037e078c9de310b138ae376"
+    },
+    {
+      "path": "css/agenda-dialog.css",
+      "sha256": "13a321c312b3b32fc164c4d69c2bb5e56aba0acd105186e233affdf4382398ab"
     },
     {
       "path": "css/agenda-movil.css",
@@ -167,7 +175,7 @@
     },
     {
       "path": "css/enterprise-refinements.css",
-      "sha256": "69c7b0e9419ed3ef5b8f136b9accb783f7299f1343c2b2f84d8092740aa410cd"
+      "sha256": "e548e92b605708ccda65141fc6f2545bb74bd3913af4b659ffc273754f8bd62c"
     },
     {
       "path": "css/estilos.css",
@@ -210,6 +218,10 @@
       "sha256": "c1585a6e0664a448b2a8cce8983df9aa00d02b58f8fd1c59a752d1a728e8e550"
     },
     {
+      "path": "css/notices.css",
+      "sha256": "6a689d6c14359c9150452375a834db43db00eb205f3ea35da37cb7c7c9877b82"
+    },
+    {
       "path": "css/premium-system.css",
       "sha256": "dad48f5b8a725a743415ae6deaed007b68e5118902d9992ab35a22ea9a227cd4"
     },
@@ -227,23 +239,35 @@
     },
     {
       "path": "eventos.html",
-      "sha256": "e5a189bb555e11521dcbb04882820ca98dc2438a6159b73df01b2be730f35d0a"
+      "sha256": "f743c3d680576b534361ec36d380602808a1edb84eab9a1e9e2bc05015434e97"
+    },
+    {
+      "path": "generacion_agenda.html",
+      "sha256": "2ec4b30edabfe1210ea90335892cd58a552435d15016515dbada23cb9cf51c3b"
     },
     {
       "path": "index.html",
-      "sha256": "bb6a6b4351bef9e08d280fcebef8fb8989cb9b728e7beebe79a4e5ce66694e96"
+      "sha256": "3223225fc130921ed54c0ef3d6cb2f8f15ca6c5dc4e5e207d48095cf5e173423"
     },
     {
       "path": "js/agenda-content.js",
-      "sha256": "e166c0779ecea44dd43d8378250c415cf19a57fc36f8d1287743e3f45f10dac8"
+      "sha256": "b6e8a362868160f41518c40f5f70321faece740d8d3286e6587d8a9a266f2b5c"
+    },
+    {
+      "path": "js/agenda-dialog.js",
+      "sha256": "387f0cf4945657918f8262f9fb2e3b5df93966bd8d71f6257ad66161dbb5c138"
     },
     {
       "path": "js/agenda-movil.js",
       "sha256": "21366d72b429a356971add3c4eaf9a98f984ff337e689374e33f7c79d22a3db4"
     },
     {
+      "path": "js/agenda-page.js",
+      "sha256": "f96bdc45ca9e4a73e3e240e83c2b0f41232b9eab71bebbc835146444cca9759e"
+    },
+    {
       "path": "js/agenda-reminders.js",
-      "sha256": "7b66bb90e92c0f0d9db7ad91eb81c3a2f6f92683a18df20e9ca0f9b3d2ac397e"
+      "sha256": "aa0b8ef6c9c97322ae7024ae814c98c08130559c841bfca5d3f80e3936decaf1"
     },
     {
       "path": "js/agenda-requirements.js",
@@ -251,7 +275,7 @@
     },
     {
       "path": "js/agendas.js",
-      "sha256": "2b0f4d2f6c2606173350258a21b8ee5ca99516174a8ecde84ba40b2fca8c6fb1"
+      "sha256": "cc3e23d34eef00a4ffe8963e7331f21624e2d1ddf07157a90c01d93790176e79"
     },
     {
       "path": "js/app.js",
@@ -298,8 +322,16 @@
       "sha256": "dcbad70993ffd76f8f493ea9e0b736ff5449e3ab2374031d5db0de8e1f89bcac"
     },
     {
+      "path": "js/event-notes.js",
+      "sha256": "f47be675700e35acf551d5f8c06fb5b8f5e9dd52ac642477db573270d937719e"
+    },
+    {
+      "path": "js/event-query.js",
+      "sha256": "8e84eca3c95439754c0cbf8cd0cd2f33dcba9f276ccdacc524457a00167daea5"
+    },
+    {
       "path": "js/eventos.js",
-      "sha256": "c9bb432e971ba7c62c720b31178aa2e30f3f827f016aabad0820494041dd8867"
+      "sha256": "dfe08a510c49769124138c4a0edd527c3d74c67a4b8fb519256bcb8de4b77149"
     },
     {
       "path": "js/excel-sync.js",
@@ -338,6 +370,10 @@
       "sha256": "b534f90b2f83ad7b2ceefd684dffbefbf31556b40b145d0b6de31f7e6c803075"
     },
     {
+      "path": "js/local-record-store.js",
+      "sha256": "b99bbecbb3eadbe6e2fa8ea9afee6618aafb78011f6a7421dd72fd23eac83c5d"
+    },
+    {
       "path": "js/login.js",
       "sha256": "9ce59278661314c19e0bfade6a30004d0814b3f4d5545de098c937a79884bbef"
     },
@@ -370,6 +406,18 @@
       "sha256": "7cff23054925c8563d8314366aaf79e21f751dffffdf2dd1b5c9ebd43e098cdd"
     },
     {
+      "path": "js/notice-center.js",
+      "sha256": "e7c542b2be896bbdc796e8aa37893ea0f9cd5ddedc7f04f3e5bd24dd3f471330"
+    },
+    {
+      "path": "js/notices-page.js",
+      "sha256": "5ac139396e6826d7a19c0c5a45e123b23118b1c41ce5f4e1d86e75bfa72f2898"
+    },
+    {
+      "path": "js/notices-store.js",
+      "sha256": "b8738f7526a7b604b35213e7ffe8bca62de376f7f950fa182831cebe99d3c951"
+    },
+    {
       "path": "js/notifications.js",
       "sha256": "5cd41f1cb5e203886a05ca3b2e2161e9e023873d3eefc2feed64b080749ad4ff"
     },
@@ -391,7 +439,7 @@
     },
     {
       "path": "js/push-ui.js",
-      "sha256": "91ad7c10b85b8c02f513df63537752034d3bd4b0902bc2d568d7546d3fc59fd2"
+      "sha256": "6136a8bdf8affbe018ed8beed307a8bdd7454b4055c7bdea1988f72aeb32d003"
     },
     {
       "path": "js/pwa-context.js",
@@ -407,11 +455,11 @@
     },
     {
       "path": "js/release-info.js",
-      "sha256": "cafd252d5d1d26755f3a08c08e83c95948e0d343c41ab1ae0c92da621edd4108"
+      "sha256": "05928c36f1ce974f8c2bfa57434b051c67349f57a777ec8a87abcbce88974c39"
     },
     {
       "path": "js/release-worker.js",
-      "sha256": "27632c128c16351a4f9dfc84c6efd018c75e246cb862a09c5e0e1127c9f72d72"
+      "sha256": "438fffc90837b03999a0ad1c04258a3d1149c2e742621dfb16237c9aacdad924"
     },
     {
       "path": "js/session-ui.js",
@@ -423,7 +471,7 @@
     },
     {
       "path": "js/system-version.js",
-      "sha256": "57ef2fc2baf96c291883ccf73f59c3bb8d5cd1b723a2e73362d1e159b4443f5a"
+      "sha256": "befa00c1b28feed70f3543224c174123d4d08a41ff89b0c108454ab98968e0c3"
     },
     {
       "path": "js/update-safety.js",
@@ -459,11 +507,11 @@
     },
     {
       "path": "minuta.html",
-      "sha256": "4c7f28e71638eb035c65305bee39fa1c843f5038532d94faf80c2bcc500f3e13"
+      "sha256": "1982d55f1c189af61bd3f54fd4e6ba0fdd97f622eee1dbc40d20e2fc467f101c"
     },
     {
       "path": "minuta_compartir.html",
-      "sha256": "484d4ebd12776bf92950d751273eef0045ddd6b93027c69675a79f24883b45eb"
+      "sha256": "ba925f25cff09d1f82c7e369f92ab906b6da884ba2c89d9e227e942564992d9d"
     },
     {
       "path": "offline.html",
@@ -482,5 +530,5 @@
       "sha256": "8a3803cb453855365e2e0e1a9637127aec7c625c86a808a5980bed3ba2690424"
     }
   ],
-  "digest": "f48578de140cc99724a5d79850bcd85cd06d0045754ecc79c77285bc3b0bd4cb"
+  "digest": "e04e89da8ffcb53653cea4854999242bc5e1964880a6ce4bc030ed9792c911ff"
 }

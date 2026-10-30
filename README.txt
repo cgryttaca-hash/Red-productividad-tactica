@@ -1,3 +1,10 @@
+GESTIÓN DE EVENTOS — VERSIÓN 4.1.0
+GUÍA VIGENTE: LEER_PRIMERO_V41.md
+Informe actual: entrega/v41/INFORME.md y PRUEBAS.json.
+Publicar el contenido de dist/ en el mismo origen y ruta actuales.
+Avisos y observaciones nuevos son locales a este navegador; sin sincronización remota.
+Los documentos que siguen se conservan como historial.
+
 GESTIÓN DE EVENTOS — VERSIÓN 4.0.0
 GUÍA VIGENTE: LEER_PRIMERO_V4.md y docs/.
 Actualizaciones verificadas, recuperación y asistente operativo.

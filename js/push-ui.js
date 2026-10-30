@@ -1,5 +1,6 @@
 import { enablePush, disablePush, inspectPush, preparePush, testPush } from './push-client.js';
 import { isInstalledContext } from './pwa-context.js';
+import { PUSH_CONFIG } from './push-config.js';
 
 const status = document.getElementById('agendaPushStatus');
 const summary = document.getElementById('agendaPushSummary');
@@ -21,16 +22,16 @@ function show(value) {
     unregistered: 'Las notificaciones necesitan volver a activarse en este dispositivo.',
     denied: 'Permiso bloqueado. Habilita Notificaciones para esta aplicación en los ajustes del navegador o del sistema y vuelve a abrirla.',
     unsupported: 'Este contexto no admite notificaciones. En iPhone/iPad usa una PWA de Inicio y una versión compatible.',
-    unconfigured: 'El administrador debe conectar el servicio de avisos. La agenda sigue disponible.',
+    unconfigured: 'Avisos externos opcionales desactivados. Los avisos internos funcionan desde la ventana Avisos, sin permisos ni servicio Push.',
     error: 'No fue posible comprobar los avisos. Puedes seguir consultando la agenda.'
   };
   window.__RPT_PUSH_STATUS__ = value;
-  status.textContent = `${descriptions[value.state] || descriptions.error}${value.detail ? ` ${value.detail}` : ''}`;
-  status.classList.toggle('push-status-error', ['error', 'unconfigured'].includes(value.state));
+  status.textContent = `${descriptions[value.state] || descriptions.error}${value.detail&&value.state!=='unconfigured' ? ` ${value.detail}` : ''}`;
+  status.classList.toggle('push-status-error', value.state==='error');
   status.dataset.state = value.state;
-  summary.textContent = value.state === 'active' ? 'Notificaciones activas' : value.state === 'registered' ? 'Notificaciones: comprobar envío' : 'Instalación y notificaciones';
+  summary.textContent = value.state === 'active' ? 'Avisos externos activos' : value.state === 'registered' ? 'Avisos externos: comprobar envío' : 'Instalación y avisos externos opcionales';
   const installed = isInstalledContext();
-  document.getElementById('agendaPushActions').hidden = !installed;
+  document.getElementById('agendaPushActions').hidden = !installed || value.state==='unconfigured';
   enableButton.hidden = ['active', 'registered', 'denied', 'unsupported'].includes(value.state);
   enableButton.disabled = busy || !readiness?.ready;
   disableButton.hidden = !value.subscribed;
@@ -51,6 +52,7 @@ async function run(operation) {
 }
 
 async function check({ synchronize = false } = {}) {
+  if (!PUSH_CONFIG.apiBaseUrl?.trim()) { readiness = null; return { state: 'unconfigured', registered: false, subscribed: false }; }
   if (!isInstalledContext()) { readiness = null; return { state: 'not-installed', registered: false, subscribed: false }; }
   readiness = await preparePush({ force: synchronize });
   if (!readiness.ready) return readiness;

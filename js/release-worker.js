@@ -33,6 +33,7 @@ self.addEventListener('activate',event=>{event.waitUntil((async()=>{
 self.addEventListener('fetch',event=>{
   const request=event.request,url=new URL(request.url);if(request.method!=='GET'||url.origin!==self.location.origin||!url.href.startsWith(scope))return;
   const canonical=new URL(url);canonical.search='';canonical.hash='';
+  if(request.mode==='navigate'&&canonical.pathname.endsWith('/'))canonical.pathname+='index.html';
   if(!assetUrls.has(canonical.href)&&request.mode!=='navigate')return;
   event.respondWith((async()=>{
     const state=await metadata(),selected=request.mode==='navigate'?state.active:await bound(event.clientId,state.active);
@@ -41,6 +42,8 @@ self.addEventListener('fetch',event=>{
     const cached=await cache.match(canonical.href);
     if(canonical.pathname.endsWith('/data/eventos_publicos.json')){try{const response=await fetch(new Request(request,{cache:'no-store'}));if(response.ok)await cache.put(canonical.href,response.clone());return response;}catch(_){return cached||Response.error();}}
     if(cached)return cached;
+    if(request.mode==='navigate'&&canonical.pathname.endsWith('.html'))return new Response('<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Actualización disponible</title><body style="font:16px/1.6 system-ui;max-width:640px;margin:10vh auto;padding:24px;color:#10283f"><h1>Esta ventana requiere una actualización</h1><p>La versión activa no incluye esta página. Abre Inicio para aplicar la actualización cuando hayas guardado tu trabajo.</p><a href="index.html">Volver a Inicio</a></body></html>',{status:409,headers:{'Content-Type':'text/html; charset=utf-8'}});
+    if(assetUrls.has(canonical.href))return Response.error();
     try{return await fetch(request);}catch(_){return request.mode==='navigate'?(await cache.match(new URL('offline.html',scope).href)||Response.error()):Response.error();}
   })());
 });
