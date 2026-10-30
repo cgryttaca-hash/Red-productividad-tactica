@@ -4,6 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#10283f"><title>Configuración | Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/navigation-policy.js"></script>
   <script src="js/auth-guard.js?v=20260801-2300"></script><script type="module" src="js/maintenance-guard.js"></script>
   <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/admin-tools.css?v=20260801-2300">
   <link rel="stylesheet" href="css/professional-ui.css?v=20260828-3630" media="print">
@@ -48,12 +49,7 @@
 <div class="full"><button id="activateMaintenance" class="btn primary" type="submit">Programar mantenimiento</button></div>
 </form><div id="configMessage" class="message info" hidden></div></div></article>
 
-<article class="card"><header class="card-header"><div><span>NOTIFICACIONES</span><h2>Avisos operativos</h2><p>Guarda tus preferencias y autoriza los avisos desde la aplicación instalada.</p></div><span id="notificationState" class="status info">Sin configurar</span></header>
-<div class="card-body"><div class="list">
-<label class="list-item"><div><strong>Actualización del Excel</strong><span>Avisa cuando cambian registros.</span></div><input id="notifyExcel" type="checkbox"></label>
-<label class="list-item"><div><strong>Publicación de Agenda Móvil</strong><span>Avisa cuando Firebase termina de publicar.</span></div><input id="notifyMobile" type="checkbox"></label>
-<label class="list-item"><div><strong>Mantenimiento</strong><span>Avisa sobre cambios programados.</span></div><input id="notifyMaintenance" type="checkbox"></label>
-</div><div class="tool-actions" style="justify-content:flex-start;margin-top:14px"><button id="enableNotifications" class="btn primary" type="button">Autorizar notificaciones</button><button id="saveNotifications" class="btn" type="button">Guardar preferencias</button></div><div id="notificationMessage" class="message info" hidden></div></div></article>
+
 </section>
 
 <section class="card" style="margin-top:20px">
@@ -70,4 +66,5 @@
 <footer class="version-footer"><span>Configuración protegida para administradores.</span><span>Los cambios de mantenimiento se guardan en Firebase.</span></footer>
 </main>
 <script type="module" src="js/configuracion.js"></script><script type="module" src="js/pwa.js"></script><script type="module" src="js/device-heartbeat.js"></script>
+<script type="module" src="js/loading.js"></script>
 </body></html>

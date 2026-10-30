@@ -4,7 +4,7 @@ const SDK='https://www.gstatic.com/firebasejs/12.16.0';
 const CACHE_KEY='rptMaintenanceCacheV1';
 const params=new URLSearchParams(location.search);
 const page=params.get('page')||'index';
-const returnPage=params.get('return')||'index.html';
+const returnPage=window.RPTNavigation.safePage(params.get('return'));
 const labels={
   index:'Inicio',
   eventos:'Eventos',

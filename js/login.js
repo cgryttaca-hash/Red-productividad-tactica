@@ -1,53 +1,9 @@
-import {
-  ensureDefaultAdmin,
-  getSession,
-  login
-} from './local-auth.js';
-
-const $ = id => document.getElementById(id);
-const returnPage = new URLSearchParams(location.search).get('return') || 'index.html';
-
-function message(value,type='error'){
-  const element=$('loginMessage');
-  element.hidden=!value;
-  element.className=`login-message is-${type}`;
-  element.textContent=value||'';
-}
-
-function showWelcome(session){
-  const overlay=$('welcomeOverlay');
-  $('welcomeTitle').textContent=`Bienvenido, ${session.displayName || session.username}`;
-  overlay.classList.add('is-open');
-  overlay.setAttribute('aria-hidden','false');
-  setTimeout(()=>location.replace(returnPage),1250);
-}
-
-async function initialize(){
-  await ensureDefaultAdmin();
-  const revoked=localStorage.getItem('rptRevokedMessageV1');
-  if(revoked){message(revoked,'error');localStorage.removeItem('rptRevokedMessageV1');}
-  const session=getSession();
-  if(session){
-    location.replace(returnPage);
-    return;
-  }
-  $('username').focus();
-}
-
-$('loginForm').addEventListener('submit',async event=>{
-  event.preventDefault();
-  message('');
-  const button=$('loginButton');
-  button.disabled=true;
-  button.textContent='Verificando…';
-  try{
-    const session=await login($('username').value,$('password').value);
-    showWelcome(session);
-  }catch(error){
-    message(error.message || 'No fue posible iniciar sesión.');
-    button.disabled=false;
-    button.textContent='Ingresar al sistema';
-  }
-});
-
+import {ensureDefaultAdmin,getSession,login} from './local-auth.js';
+const byId=id=>document.getElementById(id),navigation=window.RPTNavigation;
+const destination=()=>navigation.safePage(new URLSearchParams(location.search).get('return'));
+function message(text){byId('loginMessage').hidden=!text;byId('loginMessage').textContent=text;}
+byId('loginContext').textContent=navigation.mobile()?'Acceso a Agenda Móvil':'Acceso al sistema';
+byId('togglePassword').addEventListener('click',()=>{const field=byId('password'),visible=field.type==='password';field.type=visible?'text':'password';byId('togglePassword').textContent=visible?'Ocultar':'Mostrar';byId('togglePassword').setAttribute('aria-pressed',String(visible));byId('togglePassword').setAttribute('aria-label',visible?'Ocultar contraseña':'Mostrar contraseña');});
+byId('loginForm').addEventListener('submit',async event=>{event.preventDefault();const button=byId('loginButton');if(button.disabled)return;button.disabled=true;byId('loginForm').setAttribute('aria-busy','true');button.textContent='Verificando…';message('');try{await login(byId('username').value,byId('password').value);window.dispatchEvent(new CustomEvent('rpt:work-saved',{detail:{formId:'loginForm'}}));location.replace(destination());}catch(error){message(error.message||'No fue posible iniciar sesión.');}finally{button.disabled=false;button.textContent='Ingresar al sistema';byId('loginForm').removeAttribute('aria-busy');}});
+async function initialize(){try{await ensureDefaultAdmin();const revoked=localStorage.getItem('rptRevokedMessageV1');if(revoked){message(revoked);localStorage.removeItem('rptRevokedMessageV1');}if(getSession()){location.replace(destination());return;}byId('username').focus();}catch(error){message(error.message||'No fue posible preparar el acceso.');}}
 initialize();

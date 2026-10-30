@@ -7,6 +7,7 @@
   <meta name="description" content="Panel operativo de gestión de eventos.">
   <title>Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/navigation-policy.js"></script>
   <script src="js/auth-guard.js?v=20260801-2300"></script>
   <script type="module" src="js/maintenance-guard.js"></script>
   <link rel="manifest" href="manifest.webmanifest">
@@ -40,10 +41,7 @@
         </span>
       </a>
 
-      <nav class="main-nav" aria-label="Navegación principal">
-        <a class="active" href="index.html" aria-current="page">Inicio</a>
-        <details class="nav-more"><summary>Herramientas</summary><div><a href="generacion_agenda.html">Generar agenda</a><a href="minuta.html#coworkingSection">Coworking</a><a href="asistente.html">Asistente</a><a href="recuperacion.html">Actualizaciones</a></div></details>
-      </nav>
+      <nav class="main-nav" aria-label="Navegación principal"><a href="eventos.html">Eventos</a><a href="minuta.html">Minuta</a><a href="agendas.html">Agendas</a><a href="agenda_movil.html" target="_blank" rel="noopener">Agenda móvil</a><a id="usersLink" href="usuarios.html" hidden>Usuarios</a><a id="configLink" href="configuracion.html" hidden>Configuración</a></nav>
 
       <div class="header-tools">
         <div class="session-chip">
@@ -59,7 +57,7 @@
     <section class="dashboard-overview">
       <div>
         <span class="eyebrow">CENTRO DE OPERACIONES</span>
-        <h1>Tu operación, bien organizada.</h1>
+        <h1>Cada evento, bajo control.</h1>
         <p>Consulta, prepara y comparte la información de cada evento.</p>
       </div>
       <div class="overview-actions">
@@ -67,7 +65,7 @@
       </div>
     </section>
 
-    <nav class="module-grid operations-menu" aria-label="Módulos operativos">
+    <nav class="module-grid" aria-label="Módulos operativos">
       <a class="module-card module-primary" href="eventos.html">
         <span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18m-13 4h3m3 0h2m-8 3h3"/></svg></span>
         <span class="module-copy"><small>PLANIFICACIÓN</small><strong>Agenda de eventos</strong><span>Consulta eventos, salones y servicios.</span></span>
@@ -78,20 +76,15 @@
         <span class="module-copy"><small>OPERACIÓN DIARIA</small><strong>Minuta</strong><span>Revisa la jornada y prepara la impresión.</span></span>
         <span class="module-arrow" aria-hidden="true">↗</span>
       </a>
-      <a class="module-card" href="agendas.html">
-        <span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5H5v16h14V5h-3M9 3h6v4H9Zm-1 9h8m-8 4h6"/></svg></span>
-        <span class="module-copy"><small>CONSULTA OPERATIVA</small><strong>Agendas</strong><span>Filtra eventos y consulta sus detalles.</span></span>
-        <span class="module-arrow" aria-hidden="true">↗</span>
-      </a>
-      <a class="module-card" href="agenda_movil.html" target="_blank" rel="noopener">
+<a class="module-card" href="agenda_movil.html" target="_blank" rel="noopener">
         <span class="module-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4m-3 14h2m-4-8 2 2 4-4"/></svg></span>
         <span class="module-copy"><small>CONSULTA EN TIEMPO REAL</small><strong>Agenda Móvil</strong><span>Abre la agenda de consulta en otra pestaña.</span></span>
         <span class="module-arrow" aria-hidden="true">↗</span>
       </a>
     </nav>
 
-    <div class="dashboard-section-heading"><span class="eyebrow">SINCRONIZACIÓN</span><h2>La información de tu operación</h2></div>
-    <section class="summary-strip" aria-label="Resumen del sistema">
+    
+    <section class="summary-strip compact-summary" aria-label="Resumen del sistema">
       <article>
         <small>Registros locales</small>
         <strong id="excelRecordCount">0</strong>
@@ -109,7 +102,7 @@
       </article>
     </section>
 
-    <details class="dashboard-details"><summary>Conexiones y actividad de sincronización</summary>
+    <details class="dashboard-details"><summary>Conexiones y actividad</summary>
     <section class="sync-grid">
       <article class="sync-card">
         <header>
@@ -169,13 +162,11 @@
     </section>
     </details>
 <details class="admin-tools-panel dashboard-details" data-admin-only hidden><summary>Administración y herramientas de trabajo</summary>
-  <header>
-    <div><span>ADMINISTRACIÓN</span><h2>Herramientas de trabajo</h2><p>Revisa la calidad del archivo y administra las preferencias del sistema.</p></div>
-  </header>
+  
   <div class="admin-tools-grid">
-    <a id="usersLink" href="usuarios.html" hidden><strong>Usuarios</strong><span>Administra los accesos y permisos existentes.</span></a>
-    <a id="configLink" href="configuracion.html" hidden><strong>Configuración</strong><span>Preferencias y administración del sistema.</span></a>
-    <a href="avisos.html"><strong>Avisos internos</strong><span>Crea, publica y administra los mensajes locales.</span></a>
+    
+    
+    
     <a href="validacion.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Zm0 0v6h6m-12 6 3 3 5-6"/></svg><strong>Validación Excel</strong><span>Detecta errores, duplicados y campos incompletos.</span></a>
     <a href="laboratorio.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6m-5 0v6l-6 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-9V3M7 15h10"/></svg><strong>Laboratorio</strong><span>Prueba otro Excel sin modificar producción.</span></a>
   </div>
@@ -192,6 +183,6 @@
   <script type="module" src="js/performance-monitor.js"></script>
   <script type="module" src="js/notifications.js"></script>
   <script type="module" src="js/device-heartbeat.js"></script>
-<script type="module" src="js/notice-center.js"></script>
+<script type="module" src="js/loading.js"></script>
 </body>
 </html>

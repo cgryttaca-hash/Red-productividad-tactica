@@ -39,6 +39,7 @@ const chunkCache=new Map();
 let latestPublication='';
 function freshness(live){
   window.__RPT_AGENDA_FRESHNESS__={live:Boolean(live&&navigator.onLine),checkedAt:Date.now()};
+  queueMicrotask(()=>window.dispatchEvent(new Event('rptAgendaFreshness')));
   state._lastRefreshAt=Date.now();
   setConnection(window.__RPT_AGENDA_FRESHNESS__.live?'Sincronización activa':'Última agenda guardada',window.__RPT_AGENDA_FRESHNESS__.live);
   updateHeader();
@@ -396,13 +397,6 @@ async function applyEvents(events,updatedAt,notify=true,cloudHash='',live=true){
     cloudHash:state.cloudHash
   });
   setNotice(changed&&notify?'La agenda recibió una actualización automática.':'',changed?'success':'');
-  if(changed&&notify){
-    import('./notifications.js').then(module=>module.showNotification(
-      'Agenda actualizada',
-      `${normalized.length} eventos disponibles. Consulta los cambios recientes.`,
-      {tag:'agenda-realtime',url:'./agenda_movil.html',renotify:true}
-    )).catch(()=>{});
-  }
   window.__RPT_AGENDA_EVENTS__=state.all;
   window.dispatchEvent(new CustomEvent('rptAgendaDataReady',{detail:{events:state.all,updatedAt:state.updatedAt}}));
   render();

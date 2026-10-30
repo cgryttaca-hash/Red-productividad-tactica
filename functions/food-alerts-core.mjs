@@ -45,17 +45,33 @@ export function parseFoodTimes(value) {
   const entries = source.split(/[\n;|/]+|,(?=\s*\d{1,2}:\d{2})/).map(line => line.trim()).filter(Boolean);
   const results = [];
   for (const line of entries) {
-    const match = line.match(/^\s*(\d{1,2})(?::(\d{2}))?\s*([AP]\.?\s*M\.?)?(?=\s|[-–—:]|$)/i);
+    const match = line.match(/^\s*(\d{1,2})(?::(\d{2}))?\s*([AP]\.?\s*M\.?|M)?(?=\s|[-–—:]|$)/i);
     if (!match || (!match[2] && !match[3])) continue;
     let hour = Number(match[1]);
     const minute = Number(match[2] || 0);
     const meridiem = normalize(match[3]).replace(/[.\s]/g, '');
+    if (meridiem === 'M' && hour !== 12) continue;
     if (minute > 59 || hour > 23 || (meridiem && (hour < 1 || hour > 12))) continue;
     if (meridiem === 'PM' && hour < 12) hour += 12;
     if (meridiem === 'AM' && hour === 12) hour = 0;
     results.push({ hour, minute, originalTime: match[0].trim(), line });
   }
   return results;
+}
+
+export function pairFoodServices(schedule,description){
+  const times=parseFoodTimes(schedule),lines=text(description).replace(/\r/g,'').split('\n').map(value=>value.trim()).filter(Boolean),used=new Set();
+  const labels=times.map(item=>item.line.slice(item.originalTime.length).replace(/^[\s:–—-]+/,'').trim());
+  const matches=(label,line)=>{const a=normalize(label),b=normalize(line);return a&&b&&(a===b||b.startsWith(a+' ')||a.startsWith(b+' '));};
+  const result=times.map((item,index)=>{const label=labels[index],candidates=lines.map((line,i)=>matches(label,line)?i:-1).filter(i=>i>=0);let chosen=-1,relation='';
+    if(times.length===1)return{...item,service:label||text(description),description:label?text(description):'',relation:'single-service'};
+    if(candidates.length===1&&!used.has(candidates[0])){chosen=candidates[0];relation='service-label';}
+    else if(!label&&lines.length===times.length&&!labels.some(Boolean)){chosen=index;relation='parallel-lines';}
+    else if(lines.length===1&&!label){return{...item,service:lines[0],description:'',relation:'shared-description'};}
+    if(chosen>=0){used.add(chosen);return{...item,service:label||lines[chosen],description:label&&normalize(label)!==normalize(lines[chosen])?lines[chosen]:'',relation};}
+    return{...item,service:label,description:'',relation:label?'schedule-label':'unresolved'};
+  });
+  return{services:result,unassigned:lines.filter((line,index)=>!used.has(index)&&times.length>1&&!result.some(row=>['shared-description'].includes(row.relation)))};
 }
 
 function field(event, primary, original) {
@@ -90,14 +106,15 @@ export function planFoodAlerts(events, { timeZone = FOOD_TIME_ZONE } = {}) {
     const company = field(event, 'empresa', 'NOMBRE DE LA EMPRESA');
     if (!company) { issues.push({ eventId, reason: 'missing-company' }); continue; }
     const dateISO = field(event, 'fechaISO', 'FECHA').slice(0, 10);
-    const times = parseFoodTimes(foodSchedule);
+    const times = pairFoodServices(foodSchedule,description).services;
     if (!times.length) { issues.push({ eventId, reason: 'missing-or-invalid-food-time' }); continue; }
     const descriptions = description.replace(/\r/g, '').split(/\n+/).map(line => line.trim()).filter(Boolean);
     for (const [index, service] of times.entries()) {
       const foodAt = localTimeToEpoch(dateISO, service.hour, service.minute, timeZone);
       if (foodAt === null) { issues.push({ eventId, reason: 'invalid-or-ambiguous-food-date' }); continue; }
       const id = `food_${encodeURIComponent(eventId)}_${foodAt}`;
-      const serviceDescription = descriptions.length === times.length ? descriptions[index] : description;
+      const serviceDescription = [service.service,service.description].filter(Boolean).join('\n');
+      if(!serviceDescription){issues.push({eventId,reason:'ambiguous-food-service'});continue;}
       if (seen.has(id)) {
         const existing = alerts.find(alert => alert.id === id);
         if (existing && existing.description !== serviceDescription && !existing.description.split('\n').includes(serviceDescription)) {

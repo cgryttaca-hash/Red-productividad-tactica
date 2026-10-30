@@ -10,7 +10,7 @@ const roots = {
   original: process.env.ORIGINAL_PROJECT_PATH || path.resolve(__dirname,'../../../base-version'),
   actual: process.env.ACTUAL_PROJECT_PATH || path.resolve(__dirname,'../..')
 };
-const evidence = process.env.TEST_OUTPUT_PATH || path.resolve(__dirname,'../../test-results/v41');
+const evidence = process.env.TEST_OUTPUT_PATH || path.resolve(__dirname,'../../test-results/v42');
 const vendorPath = process.env.TEST_VENDOR_PATH || path.join(__dirname, 'vendor');
 fs.mkdirSync(evidence, { recursive: true });
 const results = { checks: [], pageErrors: [], missingLocal: [], notes: [], consoleErrors: [] };

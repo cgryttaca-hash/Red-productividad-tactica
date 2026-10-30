@@ -1,5 +1,14 @@
 # Historial de cambios
 
+## 4.2.0
+- Retirados el buzón de Avisos y la ventana adicional de generación; plantilla conservada en Agendas.
+- Tres accesos originales de Inicio, controles compactos y sincronización secundaria.
+- Horarios y alimentos emparejados con prioridad al nombre del servicio; aviso solo de alimentación.
+- Actualización automática con descarga verificada, protección de edición y espera mínima de diez segundos.
+- Página de actualizaciones con datos reales, preferencia persistente y retorno al origen seguro.
+- Login compacto, destinos validados y sesión de Agenda Móvil separada de la administrativa.
+- Indicadores de espera para operaciones reales; impresión y Minuta conservadas.
+
 ## 4.1.0 — 2026-10-29
 - Avisos internos locales independientes de Push: borradores, publicación, vigencia, lectura, cierre e historial por usuario.
 - Consulta de agendas con chips compartidos, conteos y páginas de 25; generación en ventana independiente.

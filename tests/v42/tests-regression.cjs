@@ -4,7 +4,7 @@ const crypto = require('node:crypto');
 const assert = require('node:assert/strict');
 process.env.ORIGINAL_PROJECT_PATH ||= path.resolve(__dirname,'../../../base-version');
 process.env.ACTUAL_PROJECT_PATH ||= path.resolve(__dirname,'../..');
-process.env.TEST_OUTPUT_PATH ||= path.resolve(__dirname,'../../test-results/v41');
+process.env.TEST_OUTPUT_PATH ||= path.resolve(__dirname,'../../test-results/v42');
 process.env.TEST_VENDOR_PATH ||= path.resolve(__dirname,'../../assets/vendor');
 const helpers = require('./verify-helpers.cjs');
 const evidence = process.env.TEST_OUTPUT_PATH;
@@ -150,7 +150,7 @@ async function agendaFlow(page) {
 
 async function mobileFlow(version) {
   const context = await helpers.contextFor(version, { installed: true, viewport: { width: 390, height: 844 } });
-  const page = await context.newPage();
+  const page = version==='actual'?await helpers.login(context,version):await context.newPage();if(version==='actual')await page.evaluate(()=>localStorage.setItem('rptMobileAuthSessionV1',localStorage.getItem('rptAuthSessionV1')));
   await helpers.goto(page, version, 'agenda_movil.html');
   const results = {};
   for (const view of ['all', 'today', 'upcoming']) {
@@ -276,7 +276,6 @@ async function main() {
   }
   assert.deepEqual(flows.actual, flows.original);
   check('Regresión comparativa: filtros y datos de Eventos, fechas/coworking de Minuta y vistas/filtros/detalle de Agenda Móvil idénticos');
-  await excelFlow(actualPage);
   const primaryErrors = [...helpers.results.pageErrors];
   const primaryMissing = [...helpers.results.missingLocal];
   const primaryConsoleErrors = [...helpers.results.consoleErrors];

@@ -1,0 +1,7 @@
+const active=new Map();let node;
+if(document.readyState!=='complete'){active.set('initial','Cargando aplicación…');window.addEventListener('load',()=>{active.delete('initial');render();},{once:true});}
+function render(){if(!node){node=document.createElement('div');node.id='operationStatus';node.setAttribute('role','status');node.setAttribute('aria-live','polite');document.body.append(node);}node.hidden=!active.size;node.textContent=[...active.values()].at(-1)||'';}
+window.addEventListener('rptLoading',event=>{const{id,text,busy}=event.detail||{};if(!id)return;if(busy)active.set(id,text||'Procesando…');else active.delete(id);render();});
+window.RPTLoading=Object.freeze({async run(id,text,operation){window.dispatchEvent(new CustomEvent('rptLoading',{detail:{id,text,busy:true}}));try{return await operation();}finally{window.dispatchEvent(new CustomEvent('rptLoading',{detail:{id,busy:false}}));}}});
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',()=>{active.delete('initial');render();},{once:true});}render();
+const observer=new MutationObserver(()=>{const busy=document.querySelector('[aria-busy="true"]');if(busy)active.set('form',busy.id==='loginForm'?'Validando acceso…':busy.id==='eventObservationForm'?'Guardando observación…':'Procesando información…');else active.delete('form');render();});observer.observe(document.body,{subtree:true,attributes:true,attributeFilter:['aria-busy']});window.addEventListener('pagehide',()=>observer.disconnect(),{once:true});

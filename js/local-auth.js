@@ -104,6 +104,7 @@ export async function ensureDefaultAdmin(){
 }
 
 export function getSession(){
+  if(window.RPTNavigation)return window.RPTNavigation.session();
   const session = readJson(SESSION_KEY, null);
   if(!session || session.deviceId !== deviceId()) return null;
   const users = readJson(USERS_KEY, []);
@@ -118,7 +119,7 @@ export function isAuthenticated(){
 
 export function logout(){
   const session=getSession();
-  localStorage.removeItem(SESSION_KEY);
+  localStorage.removeItem(window.RPTNavigation?.mobile()?'rptMobileAuthSessionV1':SESSION_KEY);
   import('./system-log.js').then(module=>module.addSystemLog({
     source:'Acceso',level:'info',title:'Sesión cerrada',
     detail:session?`${session.displayName||session.username} cerró sesión.`:'Sesión finalizada.'
@@ -148,7 +149,7 @@ export async function login(username, password){
     deviceId:deviceId(),
     loginAt:now
   };
-  writeJson(SESSION_KEY, session);
+  writeJson(window.RPTNavigation?.mobile()?'rptMobileAuthSessionV1':SESSION_KEY, session);
   if(!localStorage.getItem('rpt:deviceName')){
     const platform=navigator.userAgentData?.platform||navigator.platform||'Equipo';
     const browser=navigator.userAgent.includes('Edg/')?'Edge':navigator.userAgent.includes('Chrome/')?'Chrome':navigator.userAgent.includes('Firefox/')?'Firefox':'Navegador';

@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#10283f">
   <title>Agendas | Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
+  <script src="js/navigation-policy.js"></script>
   <script src="js/auth-guard.js?v=20260801-2300"></script>
   <script type="module" src="js/maintenance-guard.js"></script>
   <link rel="manifest" href="manifest.webmanifest">
@@ -30,20 +31,20 @@
     <div class="tool-session"><span id="sessionUserName">Usuario</span><button id="logoutButton" type="button">Salir</button></div>
   </div></header>
   <main class="tool-shell agendas-page">
-    <section class="tool-hero"><div><span class="tool-eyebrow">CONSULTA OPERATIVA</span><h1>Agendas</h1><p>Filtra los eventos y consulta su información completa.</p></div><a class="btn" href="generacion_agenda.html">Abrir generación de agendas</a></section>
+    <section class="tool-hero"><div><span class="tool-eyebrow">CONSULTA OPERATIVA</span><h1>Agendas</h1><p>Consulta el evento y prepara su agenda.</p></div></section>
     <section class="card agendas-list-card" aria-labelledby="agendasListTitle">
-      <header class="card-header"><div><span>EVENTOS DEL SISTEMA</span><h2 id="agendasListTitle">Consulta de agendas</h2><p>La generación de documentos tiene su propia ventana.</p></div></header>
+      <header class="card-header"><div><span>EVENTOS DEL SISTEMA</span><h2 id="agendasListTitle">Plantillas de agenda</h2><p>Selecciona un evento para abrir su plantilla.</p></div></header>
       <div class="agendas-chips" role="group" aria-label="Categorías de eventos"><button type="button" class="chip active" data-agendas-filter="Actuales" aria-pressed="true">EVENTOS ACTUALES <b>0</b></button><button type="button" class="chip" data-agendas-filter="Segundo piso" aria-pressed="false">SEGUNDO PISO <b>0</b></button><button type="button" class="chip" data-agendas-filter="Tercer piso" aria-pressed="false">TERCER PISO <b>0</b></button><button type="button" class="chip" data-agendas-filter="Todos" aria-pressed="false">TODOS <b>0</b></button></div>
       <div class="agendas-filters"><label>Buscar empresa o salón<input id="agendasSearch" type="search" placeholder="Empresa o salón"></label><label>Fecha<input id="agendasDate" type="date"></label><button id="agendasRefresh" type="button" class="btn">Actualizar lista</button></div>
-      <p id="agendasListMessage" class="message error" role="status"></p><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Empresa o cliente</th><th>Escenario</th><th>Horario</th><th>Estado</th><th>Consulta</th></tr></thead><tbody id="agendasEventList"></tbody></table></div>
+      <p id="agendasListMessage" class="message error" role="status"></p><div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Empresa o cliente</th><th>Escenario</th><th>Horario</th><th>Estado</th></tr></thead><tbody id="agendasEventList"></tbody></table></div>
       <div class="agendas-pagination"><span id="agendasCount" role="status"></span><button id="agendasPrevious" type="button" class="btn" disabled>Anterior</button><button id="agendasNext" type="button" class="btn" disabled>Siguiente</button></div>
       <div id="agendasEmpty" class="empty" hidden><strong>No hay eventos que coincidan</strong><span>Revisa la búsqueda o vincula el Excel desde Inicio. Esta vista consulta los datos existentes del sistema.</span></div>
     </section>
   </main>
   <script src="assets/vendor/xlsx-0.20.3.min.js"></script>
   <script type="module" src="js/agendas.js"></script>
-  <script type="module" src="js/notice-center.js"></script>
   <script type="module" src="js/session-ui.js"></script>
   <script type="module" src="js/pwa.js"></script>
+<script type="module" src="js/loading.js"></script>
 </body>
 </html>

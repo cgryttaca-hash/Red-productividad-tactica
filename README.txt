@@ -1,3 +1,9 @@
+GESTIÓN DE EVENTOS — VERSIÓN 4.2.0
+GUÍA VIGENTE: LEER_PRIMERO_V42.md
+Informe y pruebas: entrega/v42/.
+Publicar el contenido de dist/ y retirar los archivos indicados en la guía.
+Los documentos de versiones anteriores se conservan como historial.
+
 GESTIÓN DE EVENTOS — VERSIÓN 4.1.0
 GUÍA VIGENTE: LEER_PRIMERO_V41.md
 Informe actual: entrega/v41/INFORME.md y PRUEBAS.json.

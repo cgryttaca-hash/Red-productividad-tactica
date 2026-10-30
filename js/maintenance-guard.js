@@ -49,6 +49,7 @@ async function waitForAuth(auth,authMod){
   }
 }
 async function initialize(){
+  if(document.documentElement.classList.contains('auth-pending'))return;
   if(!pageId){release();return;}
   const cached=readCache();
   if(redirectIfNeeded(cached)) return;

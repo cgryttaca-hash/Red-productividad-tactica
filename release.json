@@ -1,5 +1,5 @@
 {
-  "version": "4.1.0",
+  "version": "4.2.0",
   "assets": [
     {
       "path": "agenda.webmanifest",
@@ -7,15 +7,15 @@
     },
     {
       "path": "agenda_movil.html",
-      "sha256": "df2a9986b71a203500dc499ead5e4175dbc936bc6fe019ff82528821898a0735"
+      "sha256": "03364223443265beece03a4aecceac17a7721ac37d15bda42a67831872c0a239"
     },
     {
       "path": "agendas.html",
-      "sha256": "fbb207c1ad61ae3dc9267dfc795f9f4d96f645946c819a8c5b5992e3ae7d24f0"
+      "sha256": "d5cea4c587a4dfd7a0e359d3ecbdb977e2e65d7dc7a5670a27a08b195805ebb2"
     },
     {
       "path": "asistente.html",
-      "sha256": "599b6481a30dfe2fe28db3adc6418746473873b28337a6e75cb34f4e9fd60414"
+      "sha256": "90d15146d3937203f1aa5778fa28957f95b2336c02896af18a344f12cf56b34a"
     },
     {
       "path": "assets/agenda-brand/apple-touch-icon.png",
@@ -130,12 +130,8 @@
       "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41"
     },
     {
-      "path": "avisos.html",
-      "sha256": "67e13110e64915c3780fc10147e528d31d725c0887bd52853d77bc7b6bf1e4b3"
-    },
-    {
       "path": "configuracion.html",
-      "sha256": "c35137631fa50ae89e194553deb4bad96e52bfc5246a3ccc88b78240fa918219"
+      "sha256": "6163bf56bf295336d6847a776aae44fbe9f0f9014477a7aa4ca69a02eff2f225"
     },
     {
       "path": "css/admin-tools.css",
@@ -175,7 +171,7 @@
     },
     {
       "path": "css/enterprise-refinements.css",
-      "sha256": "e548e92b605708ccda65141fc6f2545bb74bd3913af4b659ffc273754f8bd62c"
+      "sha256": "155682b2f20990cb226e94196c48ac04418e35fa35c0b6d29a262505c0bcb54e"
     },
     {
       "path": "css/estilos.css",
@@ -218,10 +214,6 @@
       "sha256": "c1585a6e0664a448b2a8cce8983df9aa00d02b58f8fd1c59a752d1a728e8e550"
     },
     {
-      "path": "css/notices.css",
-      "sha256": "6a689d6c14359c9150452375a834db43db00eb205f3ea35da37cb7c7c9877b82"
-    },
-    {
       "path": "css/premium-system.css",
       "sha256": "dad48f5b8a725a743415ae6deaed007b68e5118902d9992ab35a22ea9a227cd4"
     },
@@ -239,15 +231,11 @@
     },
     {
       "path": "eventos.html",
-      "sha256": "f743c3d680576b534361ec36d380602808a1edb84eab9a1e9e2bc05015434e97"
-    },
-    {
-      "path": "generacion_agenda.html",
-      "sha256": "2ec4b30edabfe1210ea90335892cd58a552435d15016515dbada23cb9cf51c3b"
+      "sha256": "e9ee3849a980f973cd134055a0c7f34e261d7d31d58ad1e4cada927627222609"
     },
     {
       "path": "index.html",
-      "sha256": "3223225fc130921ed54c0ef3d6cb2f8f15ca6c5dc4e5e207d48095cf5e173423"
+      "sha256": "dbc92a5ba4daf19cba10b1861d024017f60a513883c3f31ac68b0d2a9bcdb0d4"
     },
     {
       "path": "js/agenda-content.js",
@@ -255,19 +243,19 @@
     },
     {
       "path": "js/agenda-dialog.js",
-      "sha256": "387f0cf4945657918f8262f9fb2e3b5df93966bd8d71f6257ad66161dbb5c138"
+      "sha256": "2cb2586623b7610eb92164e44a7715510f8d1fa42c6023d88d8ee8964af36487"
     },
     {
       "path": "js/agenda-movil.js",
-      "sha256": "21366d72b429a356971add3c4eaf9a98f984ff337e689374e33f7c79d22a3db4"
+      "sha256": "a3b593e7497b0e458e0830ee0a2f33599aeff5d48930f51f6c861933278262db"
     },
     {
       "path": "js/agenda-page.js",
-      "sha256": "f96bdc45ca9e4a73e3e240e83c2b0f41232b9eab71bebbc835146444cca9759e"
+      "sha256": "6fca849a97eb2ae488977738dc8dfb4fbb89f45543bb1d9703e102ec1ac0d132"
     },
     {
       "path": "js/agenda-reminders.js",
-      "sha256": "aa0b8ef6c9c97322ae7024ae814c98c08130559c841bfca5d3f80e3936decaf1"
+      "sha256": "338ea3a38c7d44e910fda3f7d3df7e27e7fcb7bc0cc07644bd62656d8d91cc33"
     },
     {
       "path": "js/agenda-requirements.js",
@@ -299,7 +287,7 @@
     },
     {
       "path": "js/auth-guard.js",
-      "sha256": "745317a97be685bd28608ad836163de1a87f58781daccc42ea30a360d689deda"
+      "sha256": "7bb3a8a988e8815b2dbbb18a0048e7666dc3665b87f9b9ebff517e37aa442966"
     },
     {
       "path": "js/backup-store.js",
@@ -307,7 +295,7 @@
     },
     {
       "path": "js/configuracion.js",
-      "sha256": "de39b7aa8ddaa541f33c45bee18874ca74bc312affba8a41a0f057b8a1550021"
+      "sha256": "6e6b46486ef8d78fe9c828d375aa215288b3f5294901ceae78554dce8cd87b62"
     },
     {
       "path": "js/data-core.js",
@@ -351,7 +339,7 @@
     },
     {
       "path": "js/food-alerts-core.js",
-      "sha256": "9fd589ccdec78b04f86940c8c3ac4d73deaa794911a7e3b4b64a6f381727b07e"
+      "sha256": "2138d9ad9c470cc032c05d79ee02fc5bec38edb653ee3964e8c543cff9751df9"
     },
     {
       "path": "js/index.js",
@@ -366,8 +354,12 @@
       "sha256": "f981f78b4e4b0d901a2f66481b083e4c41dc3641f8b094262d288fb4f4e42642"
     },
     {
+      "path": "js/loading.js",
+      "sha256": "d61a1b895317cb9acd34fedbdaa76075e372ef8eeccccf5583b238001ec4a68b"
+    },
+    {
       "path": "js/local-auth.js",
-      "sha256": "b534f90b2f83ad7b2ceefd684dffbefbf31556b40b145d0b6de31f7e6c803075"
+      "sha256": "eb641d5b5d7d69b8282134afd7712a274d37370bc2f6fef1363ef01a016fc4ab"
     },
     {
       "path": "js/local-record-store.js",
@@ -375,15 +367,15 @@
     },
     {
       "path": "js/login.js",
-      "sha256": "9ce59278661314c19e0bfade6a30004d0814b3f4d5545de098c937a79884bbef"
+      "sha256": "541f7d3ae3b367532dec71d6fb43247ef0bd08f4be70a8558b0e603f02bc009b"
     },
     {
       "path": "js/maintenance-guard.js",
-      "sha256": "ea56bdf9166fdea618a70ed596b4072fa42b6e6aa4396045f8de56b3ba97a7dd"
+      "sha256": "f2ff286e436a2ce76ce95889c75d62ef019b6727846b4a91b3ea3bde63772a65"
     },
     {
       "path": "js/mantenimiento.js",
-      "sha256": "5269c03dc117ae7b4ebdad4f881b387ba80d2f27e04e197d27a58edc132dce2e"
+      "sha256": "85e6b958d73edea4f3bc45ebc2cf939620ee9cde7e46237f4af8e5da7d869aee"
     },
     {
       "path": "js/minuta-raster.js",
@@ -406,20 +398,12 @@
       "sha256": "7cff23054925c8563d8314366aaf79e21f751dffffdf2dd1b5c9ebd43e098cdd"
     },
     {
-      "path": "js/notice-center.js",
-      "sha256": "e7c542b2be896bbdc796e8aa37893ea0f9cd5ddedc7f04f3e5bd24dd3f471330"
-    },
-    {
-      "path": "js/notices-page.js",
-      "sha256": "5ac139396e6826d7a19c0c5a45e123b23118b1c41ce5f4e1d86e75bfa72f2898"
-    },
-    {
-      "path": "js/notices-store.js",
-      "sha256": "b8738f7526a7b604b35213e7ffe8bca62de376f7f950fa182831cebe99d3c951"
+      "path": "js/navigation-policy.js",
+      "sha256": "9b6a1e36483dced72846709a5d853bc2441043b5709ace6649093e9a3dc63e8c"
     },
     {
       "path": "js/notifications.js",
-      "sha256": "5cd41f1cb5e203886a05ca3b2e2161e9e023873d3eefc2feed64b080749ad4ff"
+      "sha256": "ae9bbc2ba5acee9e656581eb7f6d94446658f29b1320880a46b6cac3e60005dc"
     },
     {
       "path": "js/performance-monitor.js",
@@ -439,7 +423,7 @@
     },
     {
       "path": "js/push-ui.js",
-      "sha256": "6136a8bdf8affbe018ed8beed307a8bdd7454b4055c7bdea1988f72aeb32d003"
+      "sha256": "c1cf392cbf344267ef9aabdef7d6b1051172e31c59d97a3f6aee95c39d5e5465"
     },
     {
       "path": "js/pwa-context.js",
@@ -447,7 +431,7 @@
     },
     {
       "path": "js/pwa-release.js",
-      "sha256": "29cf259cd842d1c6505627f7c20149e9ac97f83744b6b5086a8b658967d7a5e1"
+      "sha256": "7ef2a03469a01db0c406056420a8792934978addc816561d0d935a1f576775d0"
     },
     {
       "path": "js/pwa.js",
@@ -455,11 +439,11 @@
     },
     {
       "path": "js/release-info.js",
-      "sha256": "05928c36f1ce974f8c2bfa57434b051c67349f57a777ec8a87abcbce88974c39"
+      "sha256": "1355eaffe4404291efe6f67a0bdb866f83f83951fd0fce62f9a9effa1e87b373"
     },
     {
       "path": "js/release-worker.js",
-      "sha256": "438fffc90837b03999a0ad1c04258a3d1149c2e742621dfb16237c9aacdad924"
+      "sha256": "39d100bdd8309239452836e54d0762b9a38687cc3afd74cbccff0bbe8efad519"
     },
     {
       "path": "js/session-ui.js",
@@ -471,11 +455,15 @@
     },
     {
       "path": "js/system-version.js",
-      "sha256": "befa00c1b28feed70f3543224c174123d4d08a41ff89b0c108454ab98968e0c3"
+      "sha256": "fc75778ff17ca8a87b8e2fce751228a0f88d40c8dd636f32d7860ba230d4c6c7"
+    },
+    {
+      "path": "js/update-page.js",
+      "sha256": "5e6e3a87dae72f67ebb988aa8397311f6f99bd10fb89a1bd2c1500a69c513a54"
     },
     {
       "path": "js/update-safety.js",
-      "sha256": "de254f9a025518f5a820729346fd43b3bc6dd2e206d3b4d866d324d979cfede1"
+      "sha256": "50eb6f18f2123b6d854d2e18648bea3c4ba071463d3bac985a508b75ed222d4a"
     },
     {
       "path": "js/usuarios.js",
@@ -491,11 +479,11 @@
     },
     {
       "path": "laboratorio.html",
-      "sha256": "4324aa1ef9ac848cf4f1166f9a9fbbb86bd59320e6b060d7bce40e243905fdaf"
+      "sha256": "24e9ff3ff68582c432a6cb2c67e1b90627953184d7747bd33d2ecc8bbbde00bd"
     },
     {
       "path": "login.html",
-      "sha256": "43b1bed41f480037f7d718a3a26f5ef08aa939f5ddbba4dd9bd37c9e9ef32e19"
+      "sha256": "5d259d7147a855a74920a4b4002b95a820936486115f7361f33acf41db552660"
     },
     {
       "path": "manifest.webmanifest",
@@ -503,32 +491,32 @@
     },
     {
       "path": "mantenimiento.html",
-      "sha256": "b44eed1dbac85046465e95b1dc44e9323f7a71c155e90c260beedc4b5be45ecf"
+      "sha256": "804ed25cca573ec308982cf37efac47e878abeabd133ab9b8b1c6f6736783dd8"
     },
     {
       "path": "minuta.html",
-      "sha256": "1982d55f1c189af61bd3f54fd4e6ba0fdd97f622eee1dbc40d20e2fc467f101c"
+      "sha256": "0020b67444f7ef48b47a0bd765a5978ff1763807bee88d647ed2b4e45fd26ed2"
     },
     {
       "path": "minuta_compartir.html",
-      "sha256": "ba925f25cff09d1f82c7e369f92ab906b6da884ba2c89d9e227e942564992d9d"
+      "sha256": "68a4f51f5387824ea3e559137f6ab70aca5a5ee6ee68a27d271aa398325222c8"
     },
     {
       "path": "offline.html",
-      "sha256": "b273d28c270692855f3f6f19911d77532c4d77e644ba53cf63b3df514699a2ad"
+      "sha256": "d9e004383f39c30e5bfbebcffbb516ba0e7c64213bb30dd2bbe25c18649bba33"
     },
     {
       "path": "recuperacion.html",
-      "sha256": "d45f7517060a44fd74d7494944a5fb188d7505dca54a5e6ce4808821b0b9f00a"
+      "sha256": "f933a6fb86135ee0cad4e197a937e7e6141272dfc60df8cf3160137439def52f"
     },
     {
       "path": "usuarios.html",
-      "sha256": "2403df634368d4d83d3868ab09459eab735e2591873e2e466e9890691322a7c1"
+      "sha256": "20b8993f339eb6a9684d83cf56b8cea372b4362e34d83a9fc2a5b67db8ec8fb6"
     },
     {
       "path": "validacion.html",
-      "sha256": "8a3803cb453855365e2e0e1a9637127aec7c625c86a808a5980bed3ba2690424"
+      "sha256": "b33075c83405c7f28d65f20bb527c02e258b05bdcc63bf76c3832c152122c3c0"
     }
   ],
-  "digest": "e04e89da8ffcb53653cea4854999242bc5e1964880a6ce4bc030ed9792c911ff"
+  "digest": "7c07c28084cc0460a83bac42b20949d92fb5a97671cfb5bd0e28104195a06f41"
 }

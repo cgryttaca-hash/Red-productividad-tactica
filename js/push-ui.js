@@ -18,11 +18,11 @@ function show(value) {
     inactive: 'Notificaciones no activadas. Si quieres recibir alertas de alimentación, pulsa Activar notificaciones.',
     configuring: 'Comprobando la configuración del servicio…',
     active: 'Avisos activos: registro confirmado y envío aceptado por el servicio. La recepción depende de la conexión y del dispositivo.',
-    registered: 'Dispositivo registrado. Falta comprobar el envío: pulsa Enviar aviso de prueba.',
+    registered: 'Dispositivo registrado. Pulsa Comprobar estado para verificar la conexión del servicio.',
     unregistered: 'Las notificaciones necesitan volver a activarse en este dispositivo.',
     denied: 'Permiso bloqueado. Habilita Notificaciones para esta aplicación en los ajustes del navegador o del sistema y vuelve a abrirla.',
     unsupported: 'Este contexto no admite notificaciones. En iPhone/iPad usa una PWA de Inicio y una versión compatible.',
-    unconfigured: 'Avisos externos opcionales desactivados. Los avisos internos funcionan desde la ventana Avisos, sin permisos ni servicio Push.',
+    unconfigured: 'Las notificaciones de alimentación con la aplicación cerrada requieren conectar el servicio existente. La consulta sigue disponible.',
     error: 'No fue posible comprobar los avisos. Puedes seguir consultando la agenda.'
   };
   window.__RPT_PUSH_STATUS__ = value;
@@ -36,8 +36,6 @@ function show(value) {
   enableButton.disabled = busy || !readiness?.ready;
   disableButton.hidden = !value.subscribed;
   disableButton.disabled = busy;
-  testButton.hidden = !value.registered;
-  testButton.disabled = busy;
   checkButton.disabled = busy;
   window.dispatchEvent(new CustomEvent('rptPushStateChanged', { detail: value }));
 }
@@ -61,8 +59,7 @@ async function check({ synchronize = false } = {}) {
 
 enableButton.addEventListener('click', () => run(enablePush));
 disableButton.addEventListener('click', () => run(disablePush));
-testButton.addEventListener('click', () => run(testPush));
-checkButton.addEventListener('click', () => run(() => check({ synchronize: true })));
+checkButton.addEventListener('click', () => run(async () => { const value=await check({ synchronize: true }); return value.state==='registered'?testPush():value; }));
 function resume() { if (!document.hidden && Date.now() - lastCheck > 60000) { lastCheck = Date.now(); run(() => check({ synchronize: true })); } }
 window.addEventListener('rptPwaReady', resume);
 window.addEventListener('rptPwaStateChanged', () => { if (!isInstalledContext()) show({ state: 'not-installed' }); else { lastCheck = 0; resume(); } });

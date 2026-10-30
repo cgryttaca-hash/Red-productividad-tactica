@@ -141,26 +141,6 @@ $('maintenanceList').addEventListener('click',async event=>{
     }
   }catch(error){message(error.message,'error');}
 });
-function renderNotifications(){
-  const settings=getNotificationSettings();
-  $('notifyExcel').checked=settings.excel!==false;$('notifyMobile').checked=settings.mobile!==false;$('notifyMaintenance').checked=settings.maintenance!==false;
-  const installed=isInstalledContext();
-  $('enableNotifications').disabled=!installed;
-  const allowed=installed&&'Notification'in window&&Notification.permission==='granted';
-  const denied='Notification'in window&&Notification.permission==='denied';
-  $('notificationState').className=`status ${allowed?'ok':denied?'error':'info'}`;
-  $('notificationState').textContent=!installed?'Disponible al instalar':allowed?'Autorizadas':denied?'Bloqueadas':'Sin autorizar';
-  if(!installed)message('Puedes guardar tus preferencias. Abre la aplicación instalada desde su icono para autorizar notificaciones.','info','notificationMessage');
-}
-$('enableNotifications').addEventListener('click',async()=>{
-  try{const permission=await requestNotificationPermission();renderNotifications();message(permission==='granted'?'Notificaciones autorizadas.':'El navegador no concedió el permiso.',permission==='granted'?'success':'error','notificationMessage');}
-  catch(error){message(error.message,'error','notificationMessage');}
-});
-$('saveNotifications').addEventListener('click',()=>{
-  setNotificationSettings({excel:$('notifyExcel').checked,mobile:$('notifyMobile').checked,maintenance:$('notifyMaintenance').checked});
-  window.dispatchEvent(new CustomEvent('rpt:work-saved',{detail:{fields:['notifyExcel','notifyMobile','notifyMaintenance']}}));
-  message('Preferencias guardadas.','success','notificationMessage');
-});
 const session=getSession();$('sessionName').textContent=session?.displayName||session?.username||'Administrador';
 $('logoutButton').addEventListener('click',()=>{logout();location.replace('login.html')});
 $('systemVersion').textContent=SYSTEM_VERSION;$('releaseLabel').textContent=RELEASE_NAME;
@@ -168,10 +148,10 @@ $('deploymentHost').textContent=location.hostname||'Archivo local';
 function renderInstallation(){
   $('pwaState').textContent=isInstalledContext()?'Instalada':'Web';
   $('pwaDetail').textContent=isInstalledContext()?'Ejecutándose como aplicación':'Puedes instalarla desde el menú del navegador';
-  renderNotifications();
+  
 }
 renderInstallation();
 window.addEventListener('rptPwaStateChanged',renderInstallation);
-setDefaultStart();renderNotifications();renderList();ticker=setInterval(renderList,1000);
+setDefaultStart();renderList();ticker=setInterval(renderList,1000);
 window.addEventListener('pagehide',()=>{unsubscribe?.();clearInterval(ticker);},{once:true});
 initializeFirebase().catch(error=>{message(error.message||'Firebase no disponible.','error','ownerLoginMessage');$('ownerLoginPanel').hidden=false;});
