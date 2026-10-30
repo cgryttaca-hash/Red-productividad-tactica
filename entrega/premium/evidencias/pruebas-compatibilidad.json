@@ -1,0 +1,12 @@
+{
+  "passed": [
+    "Cliente push con API controlada: permiso solo tras clic real, suscripción única y estado activo solo con confirmación del servidor",
+    "Cliente push: error de registro sin falso activo, baja real en el flujo controlado y permiso denegado sin solicitudes automáticas",
+    "WebKit: instrucciones de instalación en perfiles iPhone y iPad con identificación de escritorio; acceso instalado detectado por capacidades",
+    "WebKit: agenda instalada simulada, consulta, detalle, campos sin zoom, modal Agendas y copia/fallback sin excepciones"
+  ],
+  "notes": [
+    "WebKit 26.5 en Windows, perfiles de pantalla y agente de usuario. No equivale a prueba física en iPhone/iPad.",
+    "PushManager, permiso y backend se sustituyen por implementaciones controladas en el flujo del cliente. No se envió una notificación a APNs/FCM."
+  ]
+}

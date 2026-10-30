@@ -1,0 +1,302 @@
+{
+  "version": "4.0.0",
+  "result": "PASS",
+  "date": "2026-10-29",
+  "timeZone": "America/Bogota",
+  "groupsPassed": 71,
+  "suites": {
+    "asistente": {
+      "passed": [
+        "Consultas reales por fecha/empresa/salón/estado, cero PAX conservado, vacíos explícitos, duplicados solo sugeridos y datos originales intactos",
+        "Contrato Responses API controlado: esquema estricto, sin almacenamiento del proveedor ni envío de eventos, resultado construido desde la publicación real",
+        "Origen, identidad Firebase revocada, lista de autorización, usuario anónimo y App Check comprobados; el rol local no concede acceso",
+        "Desactivación sin llamadas de pago, estado de configuración, CORS y límites/forma de las solicitudes comprobados",
+        "Publicación ausente rechazada antes de llamar al proveedor y ruta HTTP con prefijo de función admitida",
+        "Cuotas, errores, JSON malicioso, respuesta incompleta y rechazo controlados; registros sin texto, datos, claves ni tokens",
+        "Reserva transaccional de consumo por usuario y total diario, con identificadores de cuota sin datos personales en claro"
+      ],
+      "limits": [
+        "Proveedor, Firebase Auth/App Check y Firestore de cuotas sustituidos por implementaciones controladas. No hubo llamada real a IA ni consumo pagado."
+      ]
+    },
+    "actualizaciones": {
+      "passed": [
+        "Instalación real con todos los recursos verificados por SHA-256 y confirmación de versión activa",
+        "Recurso de actualización corrupto: instalación rechazada y versión anterior intacta",
+        "No se activa ni recarga mientras hay un formulario pendiente",
+        "Otra pestaña con cambios impide la activación y libera la interfaz tras cancelar",
+        "Actualización segura real de dos pestañas: recarga coordinada y conservación de versión anterior",
+        "Restauración local real a la versión anterior verificada, sin borrar datos"
+      ],
+      "errors": [],
+      "cacheState": {
+        "names": [
+          "rpt-shell-aHR0cDovLzEyNy4wLjAuMTo2MTY5NC9hcHAv-4.0.0-f48578de140c",
+          "rpt-release-meta",
+          "rpt-shell-aHR0cDovLzEyNy4wLjAuMTo2MTY5NC9hcHAv-4.0.2-3ced27c3863b"
+        ],
+        "data": null
+      },
+      "limits": [
+        "Navegador Chrome local. No se probó una instalación física Android/iOS ni despliegue real."
+      ]
+    },
+    "regresion": {
+      "passed": [
+        "Regresión comparativa: filtros y datos de Eventos, fechas/coworking de Minuta y vistas/filtros/detalle de Agenda Móvil idénticos",
+        "Agenda desde el evento correcto: modal, copia real en texto y HTML, saltos de línea y registro original sin alteraciones",
+        "Datos actuales al copiar y alternativa manual con texto seleccionado cuando el portapapeles está bloqueado",
+        "Nuevo módulo Agendas: lista compartida, búsqueda, fecha e impresión aislada del evento seleccionado",
+        "Importación XLSX real: cinco identificadores originales únicos, hoja mensual y generación del evento correcto después de cargar el archivo",
+        "40 revisiones de pantalla y cinco tamaños del modal sin desbordamiento; cuatro módulos principales y secciones retiradas ausentes",
+        "PWA real: instalación del único worker, recursos versionados y manifest cacheados; Agenda Móvil visible con datos offline y mantenimiento vigente respetado",
+        "Sin excepciones JavaScript ni recursos locales inexistentes en la prueba principal"
+      ],
+      "primaryErrors": [],
+      "primaryMissing": [],
+      "primaryConsoleErrors": [],
+      "errors": [],
+      "consoleErrors": [
+        {
+          "version": "actual",
+          "url": "http://127.0.0.1:62571/actual/agenda_movil.html",
+          "message": "Failed to load resource: net::ERR_FAILED"
+        },
+        {
+          "version": "actual",
+          "url": "http://127.0.0.1:62571/actual/agenda_movil.html",
+          "message": "Firebase móvil: TypeError: Failed to fetch dynamically imported module: https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js"
+        },
+        {
+          "version": "actual",
+          "url": "http://127.0.0.1:62571/actual/agenda_movil.html",
+          "message": "Failed to load resource: net::ERR_FAILED"
+        },
+        {
+          "version": "actual",
+          "url": "http://127.0.0.1:62571/actual/agenda_movil.html",
+          "message": "Failed to load resource: net::ERR_FAILED"
+        },
+        {
+          "version": "actual",
+          "url": "http://127.0.0.1:62571/actual/mantenimiento.html?page=agenda_movil&return=agenda_movil.html",
+          "message": "Failed to load resource: net::ERR_FAILED"
+        },
+        {
+          "version": "actual",
+          "url": "http://127.0.0.1:62571/actual/mantenimiento.html?page=agenda_movil&return=agenda_movil.html",
+          "message": "Failed to load resource: net::ERR_FAILED"
+        },
+        {
+          "version": "actual",
+          "url": "http://127.0.0.1:62571/actual/mantenimiento.html?page=agenda_movil&return=agenda_movil.html",
+          "message": "Failed to load resource: net::ERR_FAILED"
+        }
+      ],
+      "notes": [
+        "Firebase sustituido por servicio controlado. Instalación y permisos se simulan salvo la instalación real del service worker local. No se probó un teléfono físico."
+      ]
+    },
+    "pwa": {
+      "passed": [
+        "Navegador sin instalar: consulta libre, cero permisos/tokens/registros push; instalación nativa única y apertura instalada diferenciadas",
+        "PWA instalada: configuración previa, permiso tras clic real, FCM con el mismo worker, registro y prueba de envío antes de indicar avisos activos",
+        "Fallo del proveedor sin falso activo; prueba posterior, baja, renovación sin suscripción duplicada y permiso denegado sin nuevas solicitudes",
+        "Configuración real pendiente visible y específica, sin solicitar permisos ni impedir filtros o detalle",
+        "Configuración funciona en navegador sin API Notification; autorización deshabilitada antes de instalar y preferencias disponibles",
+        "Agenda compacta medida frente a la base; siete anchos/orientaciones, detalle y controles preservados sin desbordamiento",
+        "Las quince páginas HTML usan el tema premium; 75 revisiones de fondo, navegación y ancho en cinco tamaños",
+        "WebKit iPhone/iPad: consulta sin permiso en navegador y PWA simulada, guía Safari, campos de 16 px, detalle y orientación horizontal"
+      ],
+      "limitations": [
+        "Proveedores, permisos y Firebase controlados. Chrome/WebKit locales; instalación y recepción en teléfonos físicos no comprobadas.",
+        "La actualización del service worker y sus cachés se ejecutó realmente sobre un servidor local con dos versiones."
+      ]
+    },
+    "backendPush": {
+      "passed": [
+        "Backend real con servicios controlados: configuración del proyecto sin secretos, prueba autenticada con FCM data-only y aceptación separada del registro",
+        "Reserva transaccional de prueba: solicitudes simultáneas y repeticiones rápidas no duplican el envío; otra sesión no puede enviarlo",
+        "Token renovado invalida la verificación anterior; rechazo del proveedor no da falso activo, limita reintentos y permite recuperación",
+        "Variables faltantes y par VAPID incorrecto devuelven errores específicos con CORS del origen autorizado, sin claves privadas en respuestas o registros",
+        "API restringida por origen y sesión; registros distinguen intentos, aceptación y errores sin afirmar recepción física"
+      ],
+      "limitations": [
+        "Se ejecuta el código real de index/store/API/proveedor con Firestore y FCM controlados. No se invocó infraestructura productiva."
+      ]
+    },
+    "alimentacion": {
+      "passed": [
+        "Cálculo exacto a −15 minutos, America/Bogota, medianoche y rechazo de fechas/horas imposibles o ambiguas",
+        "Datos reales de empresa/servicio/salón; sin horario general de respaldo, sin alertas de cancelados o sin alimentación",
+        "Repositorio transaccional y coordinador: tarea exacta, concurrencia segura, prioridad alta, registro de aceptación y una solicitud por dispositivo",
+        "Reprogramación, cancelación, retirada de alimentación, reactivación con generación nueva y rechazo de tareas viejas o vencidas",
+        "Resultado desconocido sin reenvío ciego; reintento solo tras rechazo explícito; tokens inválidos retirados, horizonte de tareas y bloques obsoletos rechazados",
+        "Proveedor FCM data-only sin doble visualización automática, TTL/urgencia correctos y compatibilidad Web Push con VAPID solo en backend"
+      ],
+      "limitations": [
+        "Firestore, Cloud Tasks y proveedor se controlan localmente; no son pruebas de servicios desplegados ni de recepción física."
+      ]
+    },
+    "minuta": {
+      "passed": [
+        "Coworking: mañana inicial y en filas nuevas; fecha manual editable, persistente y sin sobrescritura al agregar o cambiar de día; esquema de siete campos conservado",
+        "Día siguiente/anterior conservan el avance de fechas y los cambios de mes; Próximos eventos conserva su modal sin convertirse en otra acción",
+        "Ctrl + Q solo en Minuta, sin botón adicional, ignorado al editar; pulsaciones repetidas no duplican imágenes ni ventanas",
+        "Exportación de mañana independiente del selector abierto: tres eventos correctos y todas las filas de Coworking, de mañana, anteriores, posteriores y sin fecha, en el mismo orden y sin alterar sus siete campos ni registros/fecha de pantalla",
+        "PNG real descargado en carta horizontal a 2640 × 2040; Web Share recibe un File PNG y texto tras un clic real",
+        "Compartición combinada, solo archivos, API ausente, bloqueo y cancelación controlados; copia de texto con selección manual como alternativa",
+        "Enlace WhatsApp solo tras clic, mensaje codificado sin destinatario ni envío automático; bloqueo de ventanas muestra error y libera la generación",
+        "Minuta larga con 180 eventos: imágenes consecutivas, cobertura completa y última fila comprobada en los píxeles del último PNG, sin capturar solo la pantalla",
+        "Fecha inicial de Coworking usa Colombia incluso cuando el navegador está en Tokio y ya cambió de día"
+      ],
+      "limits": [
+        "Web Share, portapapeles y WhatsApp se controlan en pruebas; no se envió ningún mensaje real.",
+        "El PNG, sus píxeles y la ventana activada mediante teclado sí se ejecutan en Chrome local."
+      ]
+    },
+    "fechas": {
+      "passed": [
+        "Mañana en America/Bogota: medianoche, cambio de mes/año y año bisiesto sin depender de la zona del equipo",
+        "Saludo consistente: mañana 05:00–11:59, tarde 12:00–18:59 y noche 19:00–04:59 de Colombia, con fecha real en el mensaje",
+        "Mensaje coherente si la revisión cruza medianoche; lectura de fechas de Coworking sin aceptar fechas imposibles ni modificar sus valores"
+      ]
+    },
+    "webkit": {
+      "passed": [
+        "WebKit: imagen PNG real generada con estilos de impresión en escritorio y pantalla móvil; Ctrl + Q abre revisión de mañana sin errores"
+      ],
+      "results": [
+        {
+          "profile": "escritorio",
+          "width": 2640,
+          "height": 2040
+        },
+        {
+          "profile": "movil-larga",
+          "events": 80,
+          "images": [
+            {
+              "name": "Minuta-2026-10-28-01-de-03.png",
+              "width": 2112,
+              "height": 2326,
+              "start": 0,
+              "end": 1140.046875
+            },
+            {
+              "name": "Minuta-2026-10-28-02-de-03.png",
+              "width": 2112,
+              "height": 2305,
+              "start": 1140.046875,
+              "end": 2269.703125
+            },
+            {
+              "name": "Minuta-2026-10-28-03-de-03.png",
+              "width": 2112,
+              "height": 1632,
+              "start": 2269.703125,
+              "end": 2605
+            }
+          ],
+          "scale": 2
+        },
+        {
+          "profile": "movil",
+          "width": 2112,
+          "height": 1632
+        }
+      ],
+      "limits": [
+        "WebKit local en Windows; no equivale a prueba física de Safari, WhatsApp o menú nativo."
+      ]
+    },
+    "errores": {
+      "passed": [
+        "Datos de eventos inválidos: error visible, ninguna imagen incompleta ni opciones de envío, bloqueo liberado",
+        "Evento que excede los límites del lienzo: mensaje claro sin cortar filas y eliminación de la copia temporal",
+        "La revisión abierta directamente no genera ni expone datos: requiere Ctrl + Q desde Minuta"
+      ]
+    },
+    "interfaz": {
+      "passed": [
+        "Asistente real en navegador: datos locales, filtros, configuración observable, copia y descarga completas sin modificar eventos ni simular IA",
+        "Mantenimiento: texto remoto escapado, fecha inicial en hora local y actualización del contador sin reconstruir la lista cada segundo",
+        "El gestor detecta preferencias pendientes y reconoce su guardado real antes de permitir una actualización",
+        "Laboratorio: un XLSX real con nombre de hoja que contiene HTML se valida y muestra como texto, sin crear elementos ni ejecutar contenido",
+        "Roles existentes conservados: usuario consulta el asistente local pero no accede a Configuración de administrador"
+      ]
+    },
+    "iaNavegador": {
+      "passed": [
+        "Integración frontend controlada: clic explícito, token Firebase, pregunta/filtros sin filas y reporte de la publicación sin alterar datos",
+        "Rechazo del backend visible sin fabricar una respuesta nueva de IA",
+        "App Check: fallo inicial recuperable y llamadas simultáneas sin inicialización duplicada"
+      ],
+      "limits": [
+        "Endpoint, identidad y App Check controlados; no se llamó a un proveedor externo ni se usó una clave real."
+      ]
+    },
+    "excel": {
+      "passed": [
+        "Mismo XLSX real leído por la versión estable y por Excel 0.20.3: filas, columnas, identificadores, dos hojas mensuales, fecha bisiesta, serial Excel, fecha manual, PAX cero y texto multilínea idénticos; gráficos locales 4.6.1 cargados"
+      ],
+      "records": 7
+    },
+    "offlineMinuta": {
+      "passed": [
+        "Service worker real con los seis recursos nuevos cacheados; recarga y Ctrl + Q producen un PNG y mensaje de mañana sin conexión"
+      ],
+      "limits": [
+        "Se requiere una primera carga en línea. WhatsApp necesita conexión para enviar."
+      ]
+    },
+    "integridad": {
+      "passed": [
+        "Los 314 archivos de la copia estable coinciden con las huellas registradas antes de cambios",
+        "29 archivos críticos de lógica, impresión, permisos, manifiestos y datos idénticos por SHA-256",
+        "Lógica Push del worker conservada íntegra; alimentación a menos quince minutos preservada",
+        "Impresión de Minuta anterior y actual idéntica por SHA-256 a 180 dpi",
+        "120 recursos locales y publicación completa verificados; sin backend ni secretos en dist"
+      ],
+      "criticalFiles": [
+        "js/eventos.js",
+        "css/eventos.css",
+        "js/minuta.js",
+        "css/minuta.css",
+        "js/minuta-time.js",
+        "js/minuta-raster.js",
+        "js/minuta-share.js",
+        "js/minuta-share-preview.js",
+        "js/agenda-movil.js",
+        "js/agenda-reminders.js",
+        "js/agenda-requirements.js",
+        "js/push-client.js",
+        "js/push-ui.js",
+        "js/notifications.js",
+        "js/food-alerts-core.js",
+        "js/agenda-content.js",
+        "js/agendas.js",
+        "js/data-core.js",
+        "js/local-auth.js",
+        "js/auth-guard.js",
+        "functions/food-alerts-core.mjs",
+        "functions/food-coordinator.js",
+        "functions/food-store.js",
+        "functions/push-provider.js",
+        "functions/push-service.js",
+        "agenda.webmanifest",
+        "manifest.webmanifest",
+        "firestore.rules",
+        "data/eventos_publicos.json"
+      ],
+      "printSHA256": "6659c7414e3670749a12c32e4f16be3c9a27bc04c05f1bcbee389e578156cc51",
+      "releaseDigest": "f48578de140cc99724a5d79850bcd85cd06d0045754ecc79c77285bc3b0bd4cb"
+    }
+  },
+  "limits": [
+    "Chrome y WebKit locales; teléfono físico y recepción física Push/WhatsApp no comprobados.",
+    "IA, identidad Firebase, App Check, Firestore, Cloud Tasks y proveedores controlados en las pruebas; sin llamada pagada ni despliegue real.",
+    "Workflows revisados y preparados, sin ejecución remota ni configuración de protecciones en GitHub.",
+    "La autenticación local heredada se conserva y no autoriza operaciones de IA en el backend."
+  ]
+}

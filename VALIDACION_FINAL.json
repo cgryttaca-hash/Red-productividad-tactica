@@ -1,0 +1,9 @@
+{
+  "version": "4.2.0",
+  "result": "PASS",
+  "resources": 129,
+  "responsiveChecks": 75,
+  "report": "entrega/v42/PRUEBAS.json",
+  "productionServicesVerified": false,
+  "physicalPushVerified": false
+}

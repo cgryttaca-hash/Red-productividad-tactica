@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es" data-auth-page="mobile" class="auth-pending maintenance-pending" data-maintenance-page="agenda_movil" data-visual-theme="premium" data-page="agenda_movil">
+<head><style>html.auth-pending body{visibility:hidden}</style><script src="js/navigation-policy.js"></script><script src="js/auth-guard.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10283f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Agenda">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/agenda-brand/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="assets/agenda-brand/favicon.svg">
+  <link rel="icon" sizes="any" href="assets/agenda-brand/favicon.ico">
+  <meta name="description" content="Agenda operativa de eventos en tiempo real.">
+  <title>Agenda de eventos</title>
+  <style>html.maintenance-pending body{visibility:hidden}</style>
+  <script type="module" src="js/maintenance-guard.js"></script>
+  <link rel="manifest" href="agenda.webmanifest">
+  <link rel="stylesheet" href="css/agenda-movil.css?v=20260828-3630">
+  <link rel="stylesheet" href="css/pwa-compat.css?v=20261028" media="screen">
+  <link rel="stylesheet" href="css/agenda-premium.css?v=20261028-premium1" media="screen">
+  <link rel="stylesheet" href="css/premium-system.css?v=20261029" media="screen">
+  <link rel="stylesheet" href="css/agenda-compact.css?v=20261029" media="screen">
+  <meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/enterprise-refinements.css" media="screen">
+</head>
+<body>
+  <div class="agenda-app">
+    <header class="agenda-header">
+      <div class="agenda-topbar">
+        <div class="agenda-brand">
+          <img class="agenda-wordmark" src="assets/agenda-brand/logo-full-light.svg" alt="Agenda Móvil · Gestión de eventos" width="500" height="126">
+          <h1 class="agenda-accessible-title">Agenda de eventos</h1>
+          <p>Vista operativa clara para consultar salones y servicios.</p>
+        </div>
+        <div class="agenda-live">
+          <div class="connection-card">
+            <i id="mobileConnectionDot"></i>
+            <div>
+              <strong id="mobileConnectionText">Conectando…</strong>
+              <span id="mobileUpdatedAt">Esperando actualización</span>
+            </div>
+          </div>
+          <button id="mobileTextSize" class="agenda-text-size" type="button" aria-label="Aumentar tamaño del texto" title="Tamaño de texto">A+</button>
+          <button id="mobileRefresh" class="agenda-refresh" type="button" aria-label="Actualizar agenda" title="Actualizar agenda">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.1 9a7 7 0 0 1 11.4-2L20 9M4 15l2.5 2a7 7 0 0 0 11.4-2"/></svg>
+            <span>Actualizar</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="agenda-main">
+      <details id="agendaRequirementsGate" class="agenda-install-banner">
+        <summary>Instalar Agenda en este dispositivo</summary>
+        <div><p id="agendaInstallText">Puedes consultar la agenda aquí. Instálala para abrirla desde su icono y activar notificaciones.</p><button id="agendaInstallButton" data-install-app type="button" hidden>Instalar Agenda Móvil</button></div>
+      </details>
+      <section class="agenda-toolbar" aria-label="Filtros de la agenda">
+        <div class="agenda-tabs" role="group" aria-label="Periodo">
+          <button class="agenda-tab is-active" type="button" data-view="today">Hoy</button>
+          <button class="agenda-tab" type="button" data-view="upcoming">Próximos</button>
+          <button class="agenda-tab" type="button" data-view="all">Todos</button>
+        </div>
+        <label class="agenda-search">
+          <span>Buscar</span>
+          <input id="mobileSearch" type="search" placeholder="Buscar empresa o salón">
+        </label>
+        <label class="agenda-date-filter">
+          <span>Fecha</span>
+          <input id="mobileDateFilter" type="date">
+        </label>
+        <label class="agenda-compact-filter">
+          <span>Piso</span>
+          <select id="mobileFloorFilter"><option value="">Todos</option><option value="Segundo piso">Segundo piso</option><option value="Tercer piso">Tercer piso</option></select>
+        </label>
+        <label class="agenda-compact-filter">
+          <span>Alimentación</span>
+          <select id="mobileFoodFilter"><option value="">Todos</option><option value="with">Con alimentación</option><option value="without">Sin alimentación</option></select>
+        </label>
+        <label class="agenda-compact-filter">
+          <span>Estado</span>
+          <select id="mobileStatusFilter"><option value="">Todos</option><option value="Confirmado">Confirmado</option><option value="Programado">Programado</option><option value="Tentativo o pendiente">Pendiente</option><option value="Cancelado">Cancelado</option></select>
+        </label>
+      </section>
+
+      <section id="mobileNotice" class="agenda-notice" hidden></section>
+      <details class="agenda-push-panel"><summary id="agendaPushSummary">Instalación y avisos externos opcionales</summary><div class="agenda-push-content">
+        <p id="agendaPushStatus" role="status" aria-live="polite">Comprobando los avisos externos opcionales…</p>
+        <div id="agendaPushActions" class="agenda-push-actions" hidden><button id="agendaEnablePush" type="button" disabled>Activar notificaciones</button><button id="agendaDisablePush" type="button" hidden>Desactivar notificaciones</button><button id="agendaCheckPush" type="button">Comprobar estado</button></div>
+        <h2>Instalar en tu dispositivo</h2>
+        <ol><li>Android: abre la agenda mediante HTTPS y utiliza «Instalar aplicación» o «Añadir a pantalla de inicio» en el menú del navegador.</li><li>iPhone y iPad: abre la agenda en Safari, pulsa Compartir y «Añadir a pantalla de inicio». Si aparece, activa «Abrir como app web». Abre después el icono Agenda.</li><li>Dentro de la aplicación, pulsa el botón de notificaciones para conceder el permiso. Web Push requiere un dispositivo y navegador compatibles; en iPhone y iPad, iOS/iPadOS 16.4 o posterior.</li></ol>
+        <p>Permiso concedido y suscripción push son estados distintos. Solo se indican avisos de fondo activos cuando el navegador y el servicio de envío confirman la suscripción.</p>
+      </div></details>
+      <section id="mobileAgenda" class="agenda-content" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <div id="mobileDetailModal" class="detail-modal" aria-hidden="true">
+    <div class="detail-dialog" role="dialog" aria-modal="true" aria-labelledby="mobileDetailTitle">
+      <button id="mobileCloseDetail" class="detail-close" type="button" aria-label="Cerrar">×</button>
+      <div class="detail-heading">
+        <span>DETALLE OPERATIVO</span>
+        <h2 id="mobileDetailTitle">Evento</h2>
+        <p id="mobileDetailSubtitle"></p>
+        <button id="mobileCopyDetail" class="detail-copy" type="button">Copiar detalle</button>
+      </div>
+      <div id="mobileDetailBody" class="detail-body"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/agenda-requirements.js"></script>
+  <script type="module" src="js/agenda-reminders.js"></script>
+  <script type="module" src="js/agenda-movil.js"></script>
+  <script type="module" src="js/pwa.js"></script>
+  <script type="module" src="js/notifications.js"></script>
+  <script type="module" src="js/push-ui.js"></script>
+  <script type="module" src="js/performance-monitor.js"></script>
+<script type="module" src="js/loading.js"></script>
+</body>
+</html>

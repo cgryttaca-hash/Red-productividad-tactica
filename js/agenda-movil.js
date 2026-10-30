@@ -1,0 +1,620 @@
+import {
+  FIREBASE_CONFIG,
+  EVENTS_COLLECTION,
+  META_COLLECTION
+} from './firebase-config.js';
+
+const SDK='https://www.gstatic.com/firebasejs/12.16.0';
+const FALLBACK_INTERVAL_MS=120000;
+const CHUNK_PREFIX='agenda_chunk_';
+const CACHE_DB='agenda-movil-cache-v3';
+const CACHE_STORE='state';
+const CACHE_KEY='events';
+const $=id=>document.getElementById(id);
+
+const state={
+  all:[],
+  view:'today',
+  updatedAt:'',
+  cloudHash:'',
+  auth:null,
+  db:null,
+  sdk:null,
+  metaUnsubscribe:null,
+  fallbackTimer:null,
+  lastHash:'',
+  initialized:false,
+  refreshing:false,
+  meta:null,
+  selected:null
+};
+
+const text=value=>value===undefined||value===null?'':String(value);
+const normalize=value=>text(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+const esc=value=>text(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+const chunkId=index=>`${CHUNK_PREFIX}${String(index).padStart(4,'0')}`;
+const FILTER_KEY='rptAgendaFiltersV1';
+const pendingChunks=new Map();
+const chunkCache=new Map();
+let latestPublication='';
+function freshness(live){
+  window.__RPT_AGENDA_FRESHNESS__={live:Boolean(live&&navigator.onLine),checkedAt:Date.now()};
+  queueMicrotask(()=>window.dispatchEvent(new Event('rptAgendaFreshness')));
+  state._lastRefreshAt=Date.now();
+  setConnection(window.__RPT_AGENDA_FRESHNESS__.live?'Sincronización activa':'Última agenda guardada',window.__RPT_AGENDA_FRESHNESS__.live);
+  updateHeader();
+}
+function readFilters(){try{return JSON.parse(localStorage.getItem(FILTER_KEY)||'null')||{};}catch(_){return{};}}
+function saveFilters(){
+  const value={
+    floor:$('mobileFloorFilter')?.value||'',food:$('mobileFoodFilter')?.value||'',
+    status:$('mobileStatusFilter')?.value||'',view:state.view
+  };
+  try{localStorage.setItem(FILTER_KEY,JSON.stringify(value));}catch(_){}
+}
+function relativeTime(value){
+  const date=value?.toDate?value.toDate():new Date(value);
+  if(Number.isNaN(date.getTime()))return'Esperando actualización';
+  const seconds=Math.max(0,Math.round((Date.now()-date.getTime())/1000));
+  if(seconds<45)return'Actualizado hace unos segundos';
+  const minutes=Math.floor(seconds/60);if(minutes<60)return`Actualizado hace ${minutes} min`;
+  const hours=Math.floor(minutes/60);if(hours<24)return`Actualizado hace ${hours} h`;
+  return`Actualizado ${formatDateTime(value)}`;
+}
+
+
+function openCache(){
+  return new Promise((resolve,reject)=>{
+    const request=indexedDB.open(CACHE_DB,1);
+    request.onupgradeneeded=()=>{
+      const db=request.result;
+      if(!db.objectStoreNames.contains(CACHE_STORE))db.createObjectStore(CACHE_STORE);
+    };
+    request.onsuccess=()=>resolve(request.result);
+    request.onerror=()=>reject(request.error);
+  });
+}
+async function cacheGet(){
+  try{
+    const db=await openCache();
+    const value=await new Promise((resolve,reject)=>{
+      const request=db.transaction(CACHE_STORE,'readonly').objectStore(CACHE_STORE).get(CACHE_KEY);
+      request.onsuccess=()=>resolve(request.result||null);
+      request.onerror=()=>reject(request.error);
+    });
+    db.close();
+    return value;
+  }catch(_){
+    return null;
+  }
+}
+async function cacheSet(value){
+  try{
+    const db=await openCache();
+    await new Promise((resolve,reject)=>{
+      const tx=db.transaction(CACHE_STORE,'readwrite');
+      tx.objectStore(CACHE_STORE).put(value,CACHE_KEY);
+      tx.oncomplete=resolve;
+      tx.onerror=()=>reject(tx.error);
+    });
+    db.close();
+  }catch(_){}
+}
+
+function dateISO(value){
+  if(!value)return'';
+  if(value instanceof Date&&!Number.isNaN(value.getTime())){
+    return`${value.getFullYear()}-${String(value.getMonth()+1).padStart(2,'0')}-${String(value.getDate()).padStart(2,'0')}`;
+  }
+  const source=text(value);
+  let match=source.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if(match)return`${match[1]}-${match[2]}-${match[3]}`;
+  match=source.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})$/);
+  if(match)return`${match[3]}-${String(match[2]).padStart(2,'0')}-${String(match[1]).padStart(2,'0')}`;
+  const date=new Date(source);
+  if(Number.isNaN(date.getTime()))return'';
+  return`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
+}
+function localDate(iso){
+  const match=text(iso).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  return match?new Date(+match[1],+match[2]-1,+match[3]):new Date(iso);
+}
+function todayISO(){return dateISO(new Date())}
+function valueFrom(row,keys){
+  for(const key of keys){
+    if(row?.[key]!==undefined&&row?.[key]!==null)return row[key];
+  }
+  return'';
+}
+function eventFromRow(row,index){
+  const scenario=text(valueFrom(row,['escenario','ESCENARIO ASIGNADO','ESCENARIO']));
+  const isThird=/TERCER|PISO\s*3|\b3\d{2}\b/i.test(scenario);
+  return{
+    id:text(row.id||row.__EVENT_ID||index),
+    fechaISO:dateISO(valueFrom(row,['fechaISO','FECHA'])),
+    escenario:scenario||'Sin escenario asignado',
+    horarioEvento:text(valueFrom(row,['horarioEvento','HORARIO DEL EVENTO','HORARIO'])),
+    empresa:text(valueFrom(row,['empresa','NOMBRE DE LA EMPRESA','EMPRESA']))||'Empresa sin registrar',
+    cantidadPersonas:Number(valueFrom(row,['cantidadPersonas','CANTIDAD DE PERSONAS','PAX']))||0,
+    horarioAyB:text(valueFrom(row,['horarioAyB','HORARIO AYB','HORARIO A&B'])),
+    descripcionAlimentacion:text(valueFrom(row,['descripcionAlimentacion','DESCRIPCION ALIMENTACION','DESCRIPCIÓN ALIMENTACIÓN'])),
+    acomodacion:text(valueFrom(row,['acomodacion','ACOMODACION','ACOMODACIÓN'])),
+    modalidadServicio:text(valueFrom(row,['modalidadServicio','MODALIDAD DE SERVICIO','MODALIDAD'])),
+    medioPago:text(valueFrom(row,['medioPago','MEDIO DE PAGO','PAGO'])),
+    observacion:text(valueFrom(row,['observacion','OBSERVACION','OBSERVACIÓN'])),
+    estado:text(valueFrom(row,['estado','ESTADO'])),
+    desarrolloActividad:text(valueFrom(row,['desarrolloActividad','DESARROLLO ACTIVIDAD'])),
+    hojaOrigen:text(valueFrom(row,['hojaOrigen','HOJA_ORIGEN'])),
+    piso:isThird?'Tercer piso':'Segundo piso'
+  };
+}
+function roomRank(room){
+  const source=normalize(room).toUpperCase();
+  if(/TERCER|\b3\d{2}\b/.test(source)){
+    const match=source.match(/\b(\d{3})\b/);
+    return[2,match?Number(match[1]):9999,source];
+  }
+  if(/SALON\s*1\b/.test(source))return[1,1,source];
+  if(/SALON\s*2\s*(\+|Y)\s*3/.test(source))return[1,4,source];
+  if(/SALON\s*2\b/.test(source))return[1,2,source];
+  if(/SALON\s*3\b/.test(source))return[1,3,source];
+  if(/COMPLETO/.test(source))return[1,5,source];
+  return[1,20,source];
+}
+function compareEvents(a,b){
+  const first=roomRank(a.escenario),second=roomRank(b.escenario);
+  return first[0]-second[0]||first[1]-second[1]||first[2].localeCompare(second[2],'es',{numeric:true})||a.empresa.localeCompare(b.empresa,'es')||a.horarioEvento.localeCompare(b.horarioEvento,'es',{numeric:true});
+}
+function formatDate(iso,options){
+  const date=localDate(iso);
+  return Number.isNaN(date.getTime())?'Fecha sin registrar':date.toLocaleDateString('es-CO',options);
+}
+function formatDateTime(value){
+  const date=value?.toDate?value.toDate():new Date(value);
+  return Number.isNaN(date.getTime())?'—':date.toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'});
+}
+function serviceValue(value,fallback='Sin registrar'){return text(value).trim()||fallback}
+function compactSpaces(value){
+  return text(value)
+    .replace(/\u00a0/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function serviceLines(value){
+  return text(value)
+    .replace(/\r/g,'')
+    .split(/\n+/)
+    .map(compactSpaces)
+    .filter(Boolean);
+}
+function scheduleEntries(value){
+  const source=text(value).replace(/\r/g,'\n').trim();
+  if(!source)return[];
+  const timeStart=/^\s*\d{1,2}:\d{2}\s*(?:A\.?\s*M\.?|P\.?\s*M\.?)\s*-/i;
+  const entries=[];
+  let current='';
+  serviceLines(source).forEach(line=>{
+    if(timeStart.test(line)){
+      if(current)entries.push(compactSpaces(current));
+      current=line;
+    }else if(current){
+      current=`${current} ${line}`;
+    }else{
+      current=line;
+    }
+  });
+  if(current)entries.push(compactSpaces(current));
+  return entries;
+}
+function meaningfulFood(value){
+  const source=normalize(value).toUpperCase();
+  if(!source)return false;
+  return!/^(N\/?A|NA|NO|SIN ALIMENTACION|SIN SERVICIO|NO APLICA|CANCELADO)$/.test(source);
+}
+function hasFood(event){
+  return meaningfulFood(event.horarioAyB)||meaningfulFood(event.descripcionAlimentacion);
+}
+function foodPairs(event){
+  if(!hasFood(event))return[];
+  const schedules=scheduleEntries(event.horarioAyB);
+  const descriptions=serviceLines(event.descripcionAlimentacion);
+  const total=Math.max(schedules.length,descriptions.length,1);
+  return Array.from({length:total},(_,index)=>({
+    time:compactSpaces(schedules[index]||'Servicio'),
+    description:compactSpaces(descriptions[index]||'Alimentación registrada')
+  })).filter(item=>item.time||item.description);
+}
+function foodStatusMarkup(event){
+  return hasFood(event)
+    ?'<span class="food-status is-with"><i></i>Con alimentación</span>'
+    :'<span class="food-status is-without"><i></i>Sin alimentación</span>';
+}
+function foodMarkup(event){
+  const pairs=foodPairs(event);
+  if(!pairs.length)return'<div class="food-empty-detail">Sin alimentación registrada para este evento.</div>';
+  return`<div class="food-combo">${pairs.map(item=>`
+    <div class="food-line">
+      <b>${esc(item.time)}</b>
+      <span>${esc(item.description)}</span>
+    </div>`).join('')}</div>`;
+}
+function dataHash(events){
+  return events.map(event=>[
+    event.id,event.fechaISO,event.empresa,event.cantidadPersonas,event.escenario,event.horarioEvento,
+    event.horarioAyB,event.descripcionAlimentacion,event.acomodacion,event.modalidadServicio,
+    event.medioPago,event.observacion,event.estado
+  ].join('|')).join('||');
+}
+
+function setConnection(message,connected=false){
+  $('mobileConnectionText').textContent=message;
+  $('mobileConnectionDot').classList.toggle('is-connected',connected);
+}
+function setNotice(message,type=''){
+  const notice=$('mobileNotice');
+  notice.hidden=!message;
+  notice.className=`agenda-notice ${type?`is-${type}`:''}`;
+  notice.textContent=message||'';
+}
+function updateHeader(){
+  $('mobileUpdatedAt').textContent=state.updatedAt?`${window.__RPT_AGENDA_FRESHNESS__?.live?'':'Copia guardada · '}${relativeTime(state.updatedAt)}`:'Esperando actualización';
+}
+function filteredEvents(){
+  const query=normalize($('mobileSearch').value).toLowerCase();
+  const exactDate=$('mobileDateFilter').value;
+  const floor=$('mobileFloorFilter')?.value||'';
+  const food=$('mobileFoodFilter')?.value||'';
+  const status=$('mobileStatusFilter')?.value||'';
+  const today=todayISO();
+  return state.all.filter(event=>{
+    if(exactDate&&event.fechaISO!==exactDate)return false;
+    if(!exactDate&&state.view==='today'&&event.fechaISO!==today)return false;
+    if(!exactDate&&state.view==='upcoming'&&event.fechaISO<=today)return false;
+    if(query&&!`${event.empresa} ${event.escenario} ${event.estado} ${event.acomodacion}`.toLowerCase().includes(query))return false;
+    if(floor&&event.piso!==floor)return false;
+    if(food==='with'&&!hasFood(event))return false;
+    if(food==='without'&&hasFood(event))return false;
+    if(status&&normalize(event.estado).toLowerCase()!==normalize(status).toLowerCase())return false;
+    return true;
+  });
+}
+function eventRows(events){
+  return`<div class="event-table">
+    <div class="event-table-header" aria-hidden="true">
+      <span>Empresa</span><span>Salón y piso</span><span>Acomodación</span><span>Personas</span><span>Servicio</span>
+    </div>
+    ${events.map(event=>`<button class="event-summary-row" type="button" data-id="${esc(event.id)}">
+      <span class="event-summary-company">
+        <strong>${esc(event.empresa)}</strong>
+        <small>Ver detalle completo</small>
+      </span>
+      <span class="event-summary-location">
+        <strong>${esc(event.escenario)}</strong>
+        <small>${esc(event.piso)}</small>
+      </span>
+      <span class="event-summary-layout">
+        <small>Acomodación</small>
+        <strong>${esc(serviceValue(event.acomodacion,'Sin registrar'))}</strong>
+      </span>
+      <span class="event-summary-pax">
+        <strong>${event.cantidadPersonas.toLocaleString('es-CO')}</strong>
+        <small>personas</small>
+      </span>
+      <span class="event-summary-food">${foodStatusMarkup(event)}</span>
+    </button>`).join('')}
+  </div>`;
+}
+function floorSection(title,events,type){
+  if(!events.length)return'';
+  return`<section class="floor-section ${type==='third'?'is-third':''}">
+    <div class="floor-heading">
+      <div><span class="floor-marker">${type==='third'?'03':'02'}</span><div><small>Programación de la fecha</small><h3>${title}</h3></div></div>
+      <b>${events.length}</b>
+    </div>
+    ${eventRows(events)}
+  </section>`;
+}
+function render(){
+  updateHeader();
+  const data=filteredEvents().sort((a,b)=>a.fechaISO.localeCompare(b.fechaISO)||compareEvents(a,b));
+  const agenda=$('mobileAgenda');
+  if(!data.length){
+    agenda.innerHTML=`<div class="agenda-empty"><strong>${state.all.length?'No hay eventos para los filtros seleccionados.':'Aún no hay información publicada.'}</strong><p>${state.all.length?'Selecciona otra vista, fecha o búsqueda.':'La agenda se actualizará automáticamente cuando el equipo principal publique el Excel.'}</p></div>`;
+    return;
+  }
+  const groups=new Map();
+  data.forEach(event=>{
+    if(!groups.has(event.fechaISO))groups.set(event.fechaISO,[]);
+    groups.get(event.fechaISO).push(event);
+  });
+  agenda.innerHTML=[...groups.entries()].map(([date,events])=>{
+    const second=events.filter(event=>event.piso==='Segundo piso').sort(compareEvents);
+    const third=events.filter(event=>event.piso==='Tercer piso').sort(compareEvents);
+    const currentDate=localDate(date);
+    return`<article class="date-group">
+      <header class="date-group-header">
+        <div>
+          <span class="date-block"><strong>${String(currentDate.getDate()).padStart(2,'0')}</strong><span>${currentDate.toLocaleDateString('es-CO',{month:'short'}).replace('.','')}</span></span>
+          <div><h2>${esc(formatDate(date,{weekday:'long',day:'numeric',month:'long',year:'numeric'}))}</h2><p>Selecciona una empresa para consultar el detalle completo.</p></div>
+        </div>
+        <span class="date-group-count">${events.length} eventos</span>
+      </header>
+      ${floorSection('Segundo piso',second,'second')}
+      ${floorSection('Tercer piso',third,'third')}
+    </article>`;
+  }).join('');
+}
+function normalField(label,value,wide=false){
+  return`<div class="detail-field ${wide?'is-wide':''}"><small>${esc(label)}</small><strong>${esc(serviceValue(value))}</strong></div>`;
+}
+function openDetail(event){
+  state.selected=event;
+  $('mobileDetailTitle').textContent=event.empresa;
+  $('mobileDetailSubtitle').textContent=`${formatDate(event.fechaISO,{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${event.escenario}`;
+  $('mobileDetailBody').innerHTML=`
+    ${normalField('Fecha',formatDate(event.fechaISO,{day:'2-digit',month:'2-digit',year:'numeric'}))}
+    ${normalField('Escenario asignado',event.escenario)}
+    ${normalField('Piso',event.piso)}
+    ${normalField('Horario del evento',event.horarioEvento)}
+    ${normalField('Cantidad de personas',event.cantidadPersonas.toLocaleString('es-CO'))}
+    ${normalField('Acomodación del espacio',event.acomodacion)}
+    <div class="detail-food-card"><div class="detail-food-heading"><small>Alimentación</small>${foodStatusMarkup(event)}</div>${foodMarkup(event)}</div>
+    ${normalField('Modalidad de servicio',event.modalidadServicio)}
+    ${normalField('Medio de pago',event.medioPago)}
+    ${normalField('Estado',event.estado)}
+    ${normalField('Observación',event.observacion,true)}
+    ${normalField('Desarrollo actividad',event.desarrolloActividad,true)}
+  `;
+  $('mobileDetailModal').classList.add('is-open');
+  $('mobileDetailModal').setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+}
+function closeDetail(){
+  state.selected=null;
+  $('mobileDetailModal').classList.remove('is-open');
+  $('mobileDetailModal').setAttribute('aria-hidden','true');
+  document.body.style.overflow='';
+}
+
+async function applyEvents(events,updatedAt,notify=true,cloudHash='',live=true){
+  const normalized=events.map(eventFromRow).filter(event=>event.fechaISO);
+  const nextHash=dataHash(normalized);
+  const changed=Boolean(state.lastHash&&nextHash!==state.lastHash);
+  state.all=normalized;
+  state.lastHash=nextHash;
+  state.cloudHash=cloudHash||state.cloudHash;
+  state.updatedAt=updatedAt||state.updatedAt;
+  freshness(live);
+  const renderKey=JSON.stringify(normalized);
+  window.__RPT_AGENDA_ALERT_EVENTS__=events;
+  if(!changed&&state._renderedHash===renderKey){updateHeader();return;}
+  state._renderedHash=renderKey;
+  cacheSet({
+    events:state.all,
+    alertEvents:events,
+    updatedAt:state.updatedAt,
+    hash:state.lastHash,
+    cloudHash:state.cloudHash
+  });
+  setNotice(changed&&notify?'La agenda recibió una actualización automática.':'',changed?'success':'');
+  window.__RPT_AGENDA_EVENTS__=state.all;
+  window.dispatchEvent(new CustomEvent('rptAgendaDataReady',{detail:{events:state.all,updatedAt:state.updatedAt}}));
+  render();
+}
+async function loadChunks(meta,notify=false,live=true){
+  const count=Number(meta?.chunkCount)||0;
+  if(!count)return false;
+  const expectedCount=Number(meta?.count)||0;
+  const publication=`${meta.dataHash||''}:${count}:${expectedCount}`;
+  latestPublication=publication;
+  if(meta.dataHash&&state.cloudHash===meta.dataHash&&state.all.length===expectedCount&&window.__RPT_AGENDA_ALERT_EVENTS__?.length===expectedCount){
+    state.updatedAt=meta.publishedAt||meta.clientPublishedAt||state.updatedAt;
+    freshness(live);
+    return true;
+  }
+  if(pendingChunks.has(publication)){const pending=pendingChunks.get(publication);pending.live=pending.live||live;return pending.promise;}
+  const pending={live,promise:null};
+  const loading=(async()=>{
+  const docs=await Promise.all(
+    Array.from({length:count},async(_,index)=>{
+      const expectedHash=meta.chunkHashes?.[index];
+      const cached=chunkCache.get(index);
+      if(expectedHash&&cached?.chunkHash===expectedHash)return{exists:()=>true,data:()=>({...cached,dataHash:meta.dataHash})};
+      return state.sdk.fireMod.getDoc(state.sdk.fireMod.doc(state.db,META_COLLECTION,chunkId(index)));
+    })
+  );
+  const events=[];
+  docs.forEach((snapshot,index)=>{
+    const block=snapshot.data();
+    if(!snapshot.exists()||!Array.isArray(block?.events)||(block.dataHash&&block.dataHash!==meta.dataHash)||(meta.chunkHashes?.[index]&&block.chunkHash!==meta.chunkHashes[index]))throw new Error('La publicación está cambiando. Se volverá a consultar.');
+    events.push(...block.events);
+    if(block.chunkHash)chunkCache.set(index,{chunkHash:block.chunkHash,events:block.events});
+  });
+  if(events.length!==expectedCount)throw new Error('La publicación no contiene todos los eventos.');
+  if(latestPublication!==publication)return true;
+  await applyEvents(
+    events,
+    meta.publishedAt||meta.clientPublishedAt,
+    notify,
+    meta.dataHash||'',pending.live
+  );
+  return true;
+  })().finally(()=>pendingChunks.delete(publication));
+  pending.promise=loading;
+  pendingChunks.set(publication,pending);
+  return loading;
+}
+async function loadLegacyCollection(notify=false,live=true){
+  const snapshot=await state.sdk.fireMod.getDocs(state.sdk.fireMod.collection(state.db,EVENTS_COLLECTION));
+  const events=snapshot.docs.map(doc=>({id:doc.id,...doc.data()}));
+  await applyEvents(events,state.updatedAt,notify,`legacy:${events.length}`,live&&!snapshot.metadata?.fromCache);
+}
+async function refreshFromCloud({notify=false,force=false}={}){
+  if(state.refreshing||!state.db)return;
+  state.refreshing=true;
+  try{
+    const read=state.sdk.fireMod.getDocFromServer||state.sdk.fireMod.getDoc;
+    const metaSnap=await read(state.sdk.fireMod.doc(state.db,META_COLLECTION,'publicacion'));
+    const meta=metaSnap.exists()?metaSnap.data():{};
+    state.meta=meta;
+    const loaded=await loadChunks(meta,notify);
+    if(!loaded)await loadLegacyCollection(notify);
+    if(!state.all.length)setNotice('Todavía no se han publicado eventos desde el equipo principal.','');
+  }catch(error){
+    console.warn('Agenda refresh:',error);
+    freshness(false);
+    setConnection('Reintentando conexión…',false);
+    const cached=await cacheGet();
+    if(cached?.events?.length){
+      state.all=cached.events;
+      state.updatedAt=cached.updatedAt;
+      state.lastHash=cached.hash||dataHash(cached.events);
+      state.cloudHash=cached.cloudHash||'';
+      render();
+      setNotice('Mostrando la última información guardada mientras se restablece la conexión.','');
+    }else{
+      setNotice('No fue posible descargar la agenda. El sistema volverá a intentarlo automáticamente.','error');
+    }
+  }finally{
+    state.refreshing=false;state._lastRefreshAt=Date.now();
+  }
+}
+async function initializeFirebase(){
+  if(state.initialized)return;
+  state.initialized=true;
+  const cached=await cacheGet();
+  if(cached?.events?.length){
+    state.all=cached.events;
+    state.updatedAt=cached.updatedAt;
+    state.lastHash=cached.hash||dataHash(cached.events);
+    state.cloudHash=cached.cloudHash||'';
+    window.__RPT_AGENDA_EVENTS__=state.all;
+    window.__RPT_AGENDA_ALERT_EVENTS__=cached.alertEvents||[];
+    window.dispatchEvent(new CustomEvent('rptAgendaDataReady',{detail:{events:state.all,updatedAt:state.updatedAt}}));
+    render();
+    freshness(false);
+  }
+  try{
+    const [appMod,authMod,fireMod]=await Promise.all([
+      import(`${SDK}/firebase-app.js`),
+      import(`${SDK}/firebase-auth.js`),
+      import(`${SDK}/firebase-firestore.js`)
+    ]);
+    const app=appMod.getApps().length?appMod.getApps()[0]:appMod.initializeApp(FIREBASE_CONFIG);
+    import('./firebase-app-check.js').then(module=>module.initializeAppCheck()).catch(()=>{});
+    state.auth=authMod.getAuth(app);
+    state.db=fireMod.getFirestore(app);
+    state.sdk={appMod,authMod,fireMod};
+    try{await authMod.setPersistence(state.auth,authMod.browserLocalPersistence);}catch(_){}
+    if(!state.auth.currentUser){
+      try{await authMod.signInAnonymously(state.auth);}catch(error){console.warn('Anonymous auth:',error);}
+    }
+    const metaRef=fireMod.doc(state.db,META_COLLECTION,'publicacion');
+    let firstSnapshot=false;
+    const initialFallback=setTimeout(()=>{if(!firstSnapshot)refreshFromCloud();},8000);
+    state.initialFallback=initialFallback;
+    state.metaUnsubscribe=fireMod.onSnapshot(metaRef,{includeMetadataChanges:true},async snapshot=>{
+      firstSnapshot=true;
+      clearTimeout(initialFallback);
+      const meta=snapshot.exists()?snapshot.data():{};
+      state.meta=meta;
+      try{
+        const loaded=await loadChunks(meta,true,!snapshot.metadata?.fromCache);
+        if(!loaded)await loadLegacyCollection(true,!snapshot.metadata?.fromCache);
+      }catch(error){
+        console.warn('Realtime agenda:',error);
+        freshness(false);
+        refreshFromCloud({notify:true,force:true});
+      }
+    },error=>{
+      console.warn('Meta listener:',error);
+      refreshFromCloud();
+    });
+    state.fallbackTimer=setInterval(()=>{
+      if(!document.hidden)refreshFromCloud();
+    },FALLBACK_INTERVAL_MS);
+  }catch(error){
+    console.error('Firebase móvil:',error);
+    setConnection('Firebase no pudo iniciar',false);
+    setNotice('No fue posible iniciar la agenda. Se volverá a intentar automáticamente.','error');
+    state.initialized=false;
+    setTimeout(initializeFirebase,30000);
+  }
+}
+
+document.querySelectorAll('.agenda-tab').forEach(button=>button.addEventListener('click',()=>{
+  document.querySelectorAll('.agenda-tab').forEach(item=>item.classList.remove('is-active'));
+  button.classList.add('is-active');
+  state.view=button.dataset.view;
+  $('mobileDateFilter').value='';
+  saveFilters();
+  render();
+}));
+$('mobileSearch').addEventListener('input',render);
+$('mobileDateFilter').addEventListener('change',render);
+['mobileFloorFilter','mobileFoodFilter','mobileStatusFilter'].forEach(id=>{
+  $(id)?.addEventListener('change',()=>{saveFilters();render();});
+});
+const largeText=localStorage.getItem('rptAgendaLargeTextV1')==='1';
+document.body.classList.toggle('is-large-text',largeText);
+$('mobileTextSize').classList.toggle('is-active',largeText);
+$('mobileTextSize').addEventListener('click',()=>{
+  const active=!document.body.classList.contains('is-large-text');
+  document.body.classList.toggle('is-large-text',active);
+  $('mobileTextSize').classList.toggle('is-active',active);
+  localStorage.setItem('rptAgendaLargeTextV1',active?'1':'0');
+});
+$('mobileRefresh').addEventListener('click',()=>refreshFromCloud({notify:true,force:true}));
+$('mobileAgenda').addEventListener('click',event=>{
+  const row=event.target.closest('.event-summary-row');
+  if(!row)return;
+  const item=state.all.find(record=>record.id===row.dataset.id);
+  if(item)openDetail(item);
+});
+$('mobileCopyDetail').addEventListener('click',async()=>{
+  const event=state.selected;if(!event)return;
+  const food=foodPairs(event).map(item=>`${item.time} — ${item.description}`).join('\n')||'Sin alimentación';
+  const detail=[
+    event.empresa,formatDate(event.fechaISO,{weekday:'long',day:'numeric',month:'long',year:'numeric'}),
+    `${event.escenario} · ${event.piso}`,`Horario: ${event.horarioEvento||'Sin registrar'}`,
+    `Personas: ${event.cantidadPersonas}`,`Acomodación: ${serviceValue(event.acomodacion)}`,
+    `Alimentación:\n${food}`,`Estado: ${serviceValue(event.estado)}`
+  ].join('\n');
+  try{await navigator.clipboard.writeText(detail);$('mobileCopyDetail').textContent='Detalle copiado';setTimeout(()=>$('mobileCopyDetail').textContent='Copiar detalle',1400);}
+  catch(_){$('mobileCopyDetail').textContent='No fue posible copiar';}
+});
+$('mobileCloseDetail').addEventListener('click',closeDetail);
+$('mobileDetailModal').addEventListener('click',event=>{
+  if(event.target.id==='mobileDetailModal')closeDetail();
+});
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape')closeDetail();
+});
+window.addEventListener('rptAgendaReminder',event=>{
+  const message=event.detail?.message||'';
+  if(message)setNotice(message,'success');
+});
+window.addEventListener('offline',()=>freshness(false));
+window.addEventListener('online',()=>refreshFromCloud());
+window.addEventListener('focus',()=>{if(Date.now()-(state._lastRefreshAt||0)>60000)refreshFromCloud();},{passive:true});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-(state._lastRefreshAt||0)>60000)refreshFromCloud();});
+window.addEventListener('pageshow',event=>{if(event.persisted&&!state.metaUnsubscribe){state.initialized=false;initializeFirebase();}});
+window.addEventListener('pagehide',()=>{
+  state.metaUnsubscribe?.();
+  state.metaUnsubscribe=null;
+  clearInterval(state.fallbackTimer);
+  clearTimeout(state.initialFallback);
+});
+
+const savedFilters=readFilters();
+if(savedFilters.floor&&$('mobileFloorFilter'))$('mobileFloorFilter').value=savedFilters.floor;
+if(savedFilters.food&&$('mobileFoodFilter'))$('mobileFoodFilter').value=savedFilters.food;
+if(savedFilters.status&&$('mobileStatusFilter'))$('mobileStatusFilter').value=savedFilters.status;
+if(savedFilters.view&&['today','upcoming','all'].includes(savedFilters.view)){
+  state.view=savedFilters.view;
+  document.querySelectorAll('.agenda-tab').forEach(button=>button.classList.toggle('is-active',button.dataset.view===state.view));
+}
+setInterval(updateHeader,30000);
+updateHeader();
+render();
+initializeFirebase();

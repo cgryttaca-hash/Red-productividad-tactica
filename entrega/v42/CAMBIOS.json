@@ -1,0 +1,742 @@
+{
+  "reference": "4.1.0",
+  "version": "4.2.0",
+  "modified": 80,
+  "addedBeforeInventories": 23,
+  "removed": 19,
+  "files": [
+    {
+      "file": "CHANGELOG.md",
+      "kind": "modificado",
+      "bytes": 2521,
+      "sha256": "7e7f7aa77d2bd54093b095d01b561297ed0865d4957dc75537562adba525532b"
+    },
+    {
+      "file": "PROTECTED_MODULES.json",
+      "kind": "modificado",
+      "bytes": 524,
+      "sha256": "ba031f82a68e2150f67b77020505fc332b45592a8dcf895b02d1d8ad5d097216"
+    },
+    {
+      "file": "README.txt",
+      "kind": "modificado",
+      "bytes": 5493,
+      "sha256": "c57a29f90ebd15f4da45df0e071785ece88f6ac7076651c3b734896fc8f4bade"
+    },
+    {
+      "file": "VALIDACION_FINAL.json",
+      "kind": "modificado",
+      "bytes": 212,
+      "sha256": "8fd624788ecca2edf0c2cca78b963f352a111e44763b045fea61cd98ffedc70b"
+    },
+    {
+      "file": "VERSION.txt",
+      "kind": "modificado",
+      "bytes": 6,
+      "sha256": "8fb33dadbe981cf5847df269c10c2a3fe107f2b269d5ccb6db37d1f61ffc3bba"
+    },
+    {
+      "file": "agenda_movil.html",
+      "kind": "modificado",
+      "bytes": 7977,
+      "sha256": "03364223443265beece03a4aecceac17a7721ac37d15bda42a67831872c0a239"
+    },
+    {
+      "file": "agendas.html",
+      "kind": "modificado",
+      "bytes": 4731,
+      "sha256": "d5cea4c587a4dfd7a0e359d3ecbdb977e2e65d7dc7a5670a27a08b195805ebb2"
+    },
+    {
+      "file": "asistente.html",
+      "kind": "modificado",
+      "bytes": 6234,
+      "sha256": "90d15146d3937203f1aa5778fa28957f95b2336c02896af18a344f12cf56b34a"
+    },
+    {
+      "file": "configuracion.html",
+      "kind": "modificado",
+      "bytes": 7473,
+      "sha256": "6163bf56bf295336d6847a776aae44fbe9f0f9014477a7aa4ca69a02eff2f225"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "kind": "modificado",
+      "bytes": 10793,
+      "sha256": "155682b2f20990cb226e94196c48ac04418e35fa35c0b6d29a262505c0bcb54e"
+    },
+    {
+      "file": "dist/agenda_movil.html",
+      "kind": "modificado",
+      "bytes": 7977,
+      "sha256": "03364223443265beece03a4aecceac17a7721ac37d15bda42a67831872c0a239"
+    },
+    {
+      "file": "dist/agendas.html",
+      "kind": "modificado",
+      "bytes": 4731,
+      "sha256": "d5cea4c587a4dfd7a0e359d3ecbdb977e2e65d7dc7a5670a27a08b195805ebb2"
+    },
+    {
+      "file": "dist/asistente.html",
+      "kind": "modificado",
+      "bytes": 6234,
+      "sha256": "90d15146d3937203f1aa5778fa28957f95b2336c02896af18a344f12cf56b34a"
+    },
+    {
+      "file": "dist/configuracion.html",
+      "kind": "modificado",
+      "bytes": 7473,
+      "sha256": "6163bf56bf295336d6847a776aae44fbe9f0f9014477a7aa4ca69a02eff2f225"
+    },
+    {
+      "file": "dist/css/enterprise-refinements.css",
+      "kind": "modificado",
+      "bytes": 10793,
+      "sha256": "155682b2f20990cb226e94196c48ac04418e35fa35c0b6d29a262505c0bcb54e"
+    },
+    {
+      "file": "dist/eventos.html",
+      "kind": "modificado",
+      "bytes": 7201,
+      "sha256": "e9ee3849a980f973cd134055a0c7f34e261d7d31d58ad1e4cada927627222609"
+    },
+    {
+      "file": "dist/index.html",
+      "kind": "modificado",
+      "bytes": 10175,
+      "sha256": "dbc92a5ba4daf19cba10b1861d024017f60a513883c3f31ac68b0d2a9bcdb0d4"
+    },
+    {
+      "file": "dist/js/agenda-dialog.js",
+      "kind": "modificado",
+      "bytes": 13155,
+      "sha256": "2cb2586623b7610eb92164e44a7715510f8d1fa42c6023d88d8ee8964af36487"
+    },
+    {
+      "file": "dist/js/agenda-movil.js",
+      "kind": "modificado",
+      "bytes": 28299,
+      "sha256": "a3b593e7497b0e458e0830ee0a2f33599aeff5d48930f51f6c861933278262db"
+    },
+    {
+      "file": "dist/js/agenda-page.js",
+      "kind": "modificado",
+      "bytes": 4929,
+      "sha256": "6fca849a97eb2ae488977738dc8dfb4fbb89f45543bb1d9703e102ec1ac0d132"
+    },
+    {
+      "file": "dist/js/agenda-reminders.js",
+      "kind": "modificado",
+      "bytes": 1924,
+      "sha256": "338ea3a38c7d44e910fda3f7d3df7e27e7fcb7bc0cc07644bd62656d8d91cc33"
+    },
+    {
+      "file": "dist/js/auth-guard.js",
+      "kind": "modificado",
+      "bytes": 2569,
+      "sha256": "7bb3a8a988e8815b2dbbb18a0048e7666dc3665b87f9b9ebff517e37aa442966"
+    },
+    {
+      "file": "dist/js/configuracion.js",
+      "kind": "modificado",
+      "bytes": 10300,
+      "sha256": "6e6b46486ef8d78fe9c828d375aa215288b3f5294901ceae78554dce8cd87b62"
+    },
+    {
+      "file": "dist/js/food-alerts-core.js",
+      "kind": "modificado",
+      "bytes": 9474,
+      "sha256": "2138d9ad9c470cc032c05d79ee02fc5bec38edb653ee3964e8c543cff9751df9"
+    },
+    {
+      "file": "dist/js/local-auth.js",
+      "kind": "modificado",
+      "bytes": 10085,
+      "sha256": "eb641d5b5d7d69b8282134afd7712a274d37370bc2f6fef1363ef01a016fc4ab"
+    },
+    {
+      "file": "dist/js/login.js",
+      "kind": "modificado",
+      "bytes": 1838,
+      "sha256": "541f7d3ae3b367532dec71d6fb43247ef0bd08f4be70a8558b0e603f02bc009b"
+    },
+    {
+      "file": "dist/js/maintenance-guard.js",
+      "kind": "modificado",
+      "bytes": 3012,
+      "sha256": "f2ff286e436a2ce76ce95889c75d62ef019b6727846b4a91b3ea3bde63772a65"
+    },
+    {
+      "file": "dist/js/mantenimiento.js",
+      "kind": "modificado",
+      "bytes": 4449,
+      "sha256": "85e6b958d73edea4f3bc45ebc2cf939620ee9cde7e46237f4af8e5da7d869aee"
+    },
+    {
+      "file": "dist/js/notifications.js",
+      "kind": "modificado",
+      "bytes": 1942,
+      "sha256": "ae9bbc2ba5acee9e656581eb7f6d94446658f29b1320880a46b6cac3e60005dc"
+    },
+    {
+      "file": "dist/js/push-ui.js",
+      "kind": "modificado",
+      "bytes": 4721,
+      "sha256": "c1cf392cbf344267ef9aabdef7d6b1051172e31c59d97a3f6aee95c39d5e5465"
+    },
+    {
+      "file": "dist/js/pwa-release.js",
+      "kind": "modificado",
+      "bytes": 11805,
+      "sha256": "7ef2a03469a01db0c406056420a8792934978addc816561d0d935a1f576775d0"
+    },
+    {
+      "file": "dist/js/release-info.js",
+      "kind": "modificado",
+      "bytes": 38,
+      "sha256": "1355eaffe4404291efe6f67a0bdb866f83f83951fd0fce62f9a9effa1e87b373"
+    },
+    {
+      "file": "dist/js/release-worker.js",
+      "kind": "modificado",
+      "bytes": 10542,
+      "sha256": "39d100bdd8309239452836e54d0762b9a38687cc3afd74cbccff0bbe8efad519"
+    },
+    {
+      "file": "dist/js/system-version.js",
+      "kind": "modificado",
+      "bytes": 819,
+      "sha256": "fc75778ff17ca8a87b8e2fce751228a0f88d40c8dd636f32d7860ba230d4c6c7"
+    },
+    {
+      "file": "dist/js/update-safety.js",
+      "kind": "modificado",
+      "bytes": 4861,
+      "sha256": "50eb6f18f2123b6d854d2e18648bea3c4ba071463d3bac985a508b75ed222d4a"
+    },
+    {
+      "file": "dist/laboratorio.html",
+      "kind": "modificado",
+      "bytes": 4568,
+      "sha256": "24e9ff3ff68582c432a6cb2c67e1b90627953184d7747bd33d2ecc8bbbde00bd"
+    },
+    {
+      "file": "dist/login.html",
+      "kind": "modificado",
+      "bytes": 2316,
+      "sha256": "5d259d7147a855a74920a4b4002b95a820936486115f7361f33acf41db552660"
+    },
+    {
+      "file": "dist/mantenimiento.html",
+      "kind": "modificado",
+      "bytes": 4204,
+      "sha256": "804ed25cca573ec308982cf37efac47e878abeabd133ab9b8b1c6f6736783dd8"
+    },
+    {
+      "file": "dist/minuta.html",
+      "kind": "modificado",
+      "bytes": 7919,
+      "sha256": "0020b67444f7ef48b47a0bd765a5978ff1763807bee88d647ed2b4e45fd26ed2"
+    },
+    {
+      "file": "dist/minuta_compartir.html",
+      "kind": "modificado",
+      "bytes": 2783,
+      "sha256": "68a4f51f5387824ea3e559137f6ab70aca5a5ee6ee68a27d271aa398325222c8"
+    },
+    {
+      "file": "dist/offline.html",
+      "kind": "modificado",
+      "bytes": 2174,
+      "sha256": "d9e004383f39c30e5bfbebcffbb516ba0e7c64213bb30dd2bbe25c18649bba33"
+    },
+    {
+      "file": "dist/recuperacion.html",
+      "kind": "modificado",
+      "bytes": 2966,
+      "sha256": "f933a6fb86135ee0cad4e197a937e7e6141272dfc60df8cf3160137439def52f"
+    },
+    {
+      "file": "dist/release.json",
+      "kind": "modificado",
+      "bytes": 17581,
+      "sha256": "390aa2144f9776341eb3ef7b1408d502b96d883144f71f332353aa6b4e458dbf"
+    },
+    {
+      "file": "dist/sw.js",
+      "kind": "modificado",
+      "bytes": 17798,
+      "sha256": "95363cf322613d67f83cb22fe50d5ed9933b6d860cbb670eea30aaf38a2db186"
+    },
+    {
+      "file": "dist/usuarios.html",
+      "kind": "modificado",
+      "bytes": 4893,
+      "sha256": "20b8993f339eb6a9684d83cf56b8cea372b4362e34d83a9fc2a5b67db8ec8fb6"
+    },
+    {
+      "file": "dist/validacion.html",
+      "kind": "modificado",
+      "bytes": 4454,
+      "sha256": "b33075c83405c7f28d65f20bb527c02e258b05bdcc63bf76c3832c152122c3c0"
+    },
+    {
+      "file": "eventos.html",
+      "kind": "modificado",
+      "bytes": 7201,
+      "sha256": "e9ee3849a980f973cd134055a0c7f34e261d7d31d58ad1e4cada927627222609"
+    },
+    {
+      "file": "functions/food-alerts-core.mjs",
+      "kind": "modificado",
+      "bytes": 9474,
+      "sha256": "2138d9ad9c470cc032c05d79ee02fc5bec38edb653ee3964e8c543cff9751df9"
+    },
+    {
+      "file": "index.html",
+      "kind": "modificado",
+      "bytes": 10175,
+      "sha256": "dbc92a5ba4daf19cba10b1861d024017f60a513883c3f31ac68b0d2a9bcdb0d4"
+    },
+    {
+      "file": "js/agenda-dialog.js",
+      "kind": "modificado",
+      "bytes": 13155,
+      "sha256": "2cb2586623b7610eb92164e44a7715510f8d1fa42c6023d88d8ee8964af36487"
+    },
+    {
+      "file": "js/agenda-movil.js",
+      "kind": "modificado",
+      "bytes": 28299,
+      "sha256": "a3b593e7497b0e458e0830ee0a2f33599aeff5d48930f51f6c861933278262db"
+    },
+    {
+      "file": "js/agenda-page.js",
+      "kind": "modificado",
+      "bytes": 4929,
+      "sha256": "6fca849a97eb2ae488977738dc8dfb4fbb89f45543bb1d9703e102ec1ac0d132"
+    },
+    {
+      "file": "js/agenda-reminders.js",
+      "kind": "modificado",
+      "bytes": 1924,
+      "sha256": "338ea3a38c7d44e910fda3f7d3df7e27e7fcb7bc0cc07644bd62656d8d91cc33"
+    },
+    {
+      "file": "js/auth-guard.js",
+      "kind": "modificado",
+      "bytes": 2569,
+      "sha256": "7bb3a8a988e8815b2dbbb18a0048e7666dc3665b87f9b9ebff517e37aa442966"
+    },
+    {
+      "file": "js/configuracion.js",
+      "kind": "modificado",
+      "bytes": 10300,
+      "sha256": "6e6b46486ef8d78fe9c828d375aa215288b3f5294901ceae78554dce8cd87b62"
+    },
+    {
+      "file": "js/food-alerts-core.js",
+      "kind": "modificado",
+      "bytes": 9474,
+      "sha256": "2138d9ad9c470cc032c05d79ee02fc5bec38edb653ee3964e8c543cff9751df9"
+    },
+    {
+      "file": "js/local-auth.js",
+      "kind": "modificado",
+      "bytes": 10085,
+      "sha256": "eb641d5b5d7d69b8282134afd7712a274d37370bc2f6fef1363ef01a016fc4ab"
+    },
+    {
+      "file": "js/login.js",
+      "kind": "modificado",
+      "bytes": 1838,
+      "sha256": "541f7d3ae3b367532dec71d6fb43247ef0bd08f4be70a8558b0e603f02bc009b"
+    },
+    {
+      "file": "js/maintenance-guard.js",
+      "kind": "modificado",
+      "bytes": 3012,
+      "sha256": "f2ff286e436a2ce76ce95889c75d62ef019b6727846b4a91b3ea3bde63772a65"
+    },
+    {
+      "file": "js/mantenimiento.js",
+      "kind": "modificado",
+      "bytes": 4449,
+      "sha256": "85e6b958d73edea4f3bc45ebc2cf939620ee9cde7e46237f4af8e5da7d869aee"
+    },
+    {
+      "file": "js/notifications.js",
+      "kind": "modificado",
+      "bytes": 1942,
+      "sha256": "ae9bbc2ba5acee9e656581eb7f6d94446658f29b1320880a46b6cac3e60005dc"
+    },
+    {
+      "file": "js/push-ui.js",
+      "kind": "modificado",
+      "bytes": 4721,
+      "sha256": "c1cf392cbf344267ef9aabdef7d6b1051172e31c59d97a3f6aee95c39d5e5465"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "kind": "modificado",
+      "bytes": 11805,
+      "sha256": "7ef2a03469a01db0c406056420a8792934978addc816561d0d935a1f576775d0"
+    },
+    {
+      "file": "js/release-info.js",
+      "kind": "modificado",
+      "bytes": 38,
+      "sha256": "1355eaffe4404291efe6f67a0bdb866f83f83951fd0fce62f9a9effa1e87b373"
+    },
+    {
+      "file": "js/release-worker.js",
+      "kind": "modificado",
+      "bytes": 10542,
+      "sha256": "39d100bdd8309239452836e54d0762b9a38687cc3afd74cbccff0bbe8efad519"
+    },
+    {
+      "file": "js/system-version.js",
+      "kind": "modificado",
+      "bytes": 819,
+      "sha256": "fc75778ff17ca8a87b8e2fce751228a0f88d40c8dd636f32d7860ba230d4c6c7"
+    },
+    {
+      "file": "js/update-safety.js",
+      "kind": "modificado",
+      "bytes": 4861,
+      "sha256": "50eb6f18f2123b6d854d2e18648bea3c4ba071463d3bac985a508b75ed222d4a"
+    },
+    {
+      "file": "laboratorio.html",
+      "kind": "modificado",
+      "bytes": 4568,
+      "sha256": "24e9ff3ff68582c432a6cb2c67e1b90627953184d7747bd33d2ecc8bbbde00bd"
+    },
+    {
+      "file": "login.html",
+      "kind": "modificado",
+      "bytes": 2316,
+      "sha256": "5d259d7147a855a74920a4b4002b95a820936486115f7361f33acf41db552660"
+    },
+    {
+      "file": "mantenimiento.html",
+      "kind": "modificado",
+      "bytes": 4204,
+      "sha256": "804ed25cca573ec308982cf37efac47e878abeabd133ab9b8b1c6f6736783dd8"
+    },
+    {
+      "file": "minuta.html",
+      "kind": "modificado",
+      "bytes": 7919,
+      "sha256": "0020b67444f7ef48b47a0bd765a5978ff1763807bee88d647ed2b4e45fd26ed2"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "kind": "modificado",
+      "bytes": 2783,
+      "sha256": "68a4f51f5387824ea3e559137f6ab70aca5a5ee6ee68a27d271aa398325222c8"
+    },
+    {
+      "file": "offline.html",
+      "kind": "modificado",
+      "bytes": 2174,
+      "sha256": "d9e004383f39c30e5bfbebcffbb516ba0e7c64213bb30dd2bbe25c18649bba33"
+    },
+    {
+      "file": "package.json",
+      "kind": "modificado",
+      "bytes": 718,
+      "sha256": "ced26d5ecb3cf6ec3c05dcc861eb60d140e8a9b1c1fefe4e057fe0d0f0587500"
+    },
+    {
+      "file": "recuperacion.html",
+      "kind": "modificado",
+      "bytes": 2966,
+      "sha256": "f933a6fb86135ee0cad4e197a937e7e6141272dfc60df8cf3160137439def52f"
+    },
+    {
+      "file": "release.json",
+      "kind": "modificado",
+      "bytes": 17581,
+      "sha256": "390aa2144f9776341eb3ef7b1408d502b96d883144f71f332353aa6b4e458dbf"
+    },
+    {
+      "file": "sw.js",
+      "kind": "modificado",
+      "bytes": 17798,
+      "sha256": "95363cf322613d67f83cb22fe50d5ed9933b6d860cbb670eea30aaf38a2db186"
+    },
+    {
+      "file": "tests/updates.cjs",
+      "kind": "modificado",
+      "bytes": 9215,
+      "sha256": "7457440690e6cff98b88863fbeaab57edff5541320742d489de34eac7f987531"
+    },
+    {
+      "file": "usuarios.html",
+      "kind": "modificado",
+      "bytes": 4893,
+      "sha256": "20b8993f339eb6a9684d83cf56b8cea372b4362e34d83a9fc2a5b67db8ec8fb6"
+    },
+    {
+      "file": "validacion.html",
+      "kind": "modificado",
+      "bytes": 4454,
+      "sha256": "b33075c83405c7f28d65f20bb527c02e258b05bdcc63bf76c3832c152122c3c0"
+    },
+    {
+      "file": "LEER_PRIMERO_V42.md",
+      "kind": "nuevo",
+      "bytes": 7094,
+      "sha256": "5dda1ea476d7e74b023ccbc4e381a6bcefa3ad4a435b7d43285c4da35c92946b"
+    },
+    {
+      "file": "dist/js/loading.js",
+      "kind": "nuevo",
+      "bytes": 1525,
+      "sha256": "d61a1b895317cb9acd34fedbdaa76075e372ef8eeccccf5583b238001ec4a68b"
+    },
+    {
+      "file": "dist/js/navigation-policy.js",
+      "kind": "nuevo",
+      "bytes": 2065,
+      "sha256": "9b6a1e36483dced72846709a5d853bc2441043b5709ace6649093e9a3dc63e8c"
+    },
+    {
+      "file": "dist/js/update-page.js",
+      "kind": "nuevo",
+      "bytes": 3355,
+      "sha256": "5e6e3a87dae72f67ebb988aa8397311f6f99bd10fb89a1bd2c1500a69c513a54"
+    },
+    {
+      "file": "entrega/v42/AUDITORIA_INICIAL.json",
+      "kind": "nuevo",
+      "bytes": 91044,
+      "sha256": "5c48abfb98cd142fa533a14b893408ea11cc406d7862dbda42cfe36ab464cad5"
+    },
+    {
+      "file": "entrega/v42/INFORME.md",
+      "kind": "nuevo",
+      "bytes": 12742,
+      "sha256": "3f8d33589e063dd8f19260a7607d3e402b359649602dd380eb23fb15ca6e9854"
+    },
+    {
+      "file": "entrega/v42/PRUEBAS.json",
+      "kind": "nuevo",
+      "bytes": 22550,
+      "sha256": "2e71f55440e832d626cae1813c6282041a961b3e56671a846d664786de1ca14a"
+    },
+    {
+      "file": "entrega/v42/actualizaciones-reales-1440.png",
+      "kind": "nuevo",
+      "bytes": 36404,
+      "sha256": "da087185fc4d439f4c6fafc7aa60e3d4e1dd6305df16f16d5938a001218be91c"
+    },
+    {
+      "file": "entrega/v42/actualizaciones-reales-390.png",
+      "kind": "nuevo",
+      "bytes": 33776,
+      "sha256": "39c7584fe8054fad052d3efdcc99577e813eaea168c69ab645c45f2af0c6fe48"
+    },
+    {
+      "file": "entrega/v42/index.html-1440.png",
+      "kind": "nuevo",
+      "bytes": 51780,
+      "sha256": "5748bdf21f43015d369b41de8d1c31d47efa48401f034530a4aeab873beafc9d"
+    },
+    {
+      "file": "entrega/v42/index.html-390.png",
+      "kind": "nuevo",
+      "bytes": 46757,
+      "sha256": "01a9ba2c0cbe071c0e59671cf246559af98a169debdd172ece109eb57edd259c"
+    },
+    {
+      "file": "entrega/v42/login-1440.png",
+      "kind": "nuevo",
+      "bytes": 24414,
+      "sha256": "945a4901e58a8b323f51b9f923a64f5515cab2449094da7fea68f27e31009373"
+    },
+    {
+      "file": "entrega/v42/plantilla-390.png",
+      "kind": "nuevo",
+      "bytes": 52839,
+      "sha256": "1827e2da60c05baba57438e3061b1b8cdd073a85ace07902145fde172cbcc4c6"
+    },
+    {
+      "file": "js/loading.js",
+      "kind": "nuevo",
+      "bytes": 1525,
+      "sha256": "d61a1b895317cb9acd34fedbdaa76075e372ef8eeccccf5583b238001ec4a68b"
+    },
+    {
+      "file": "js/navigation-policy.js",
+      "kind": "nuevo",
+      "bytes": 2065,
+      "sha256": "9b6a1e36483dced72846709a5d853bc2441043b5709ace6649093e9a3dc63e8c"
+    },
+    {
+      "file": "js/update-page.js",
+      "kind": "nuevo",
+      "bytes": 3355,
+      "sha256": "5e6e3a87dae72f67ebb988aa8397311f6f99bd10fb89a1bd2c1500a69c513a54"
+    },
+    {
+      "file": "tests/v42/test-current.cjs",
+      "kind": "nuevo",
+      "bytes": 10697,
+      "sha256": "c615e61c5b6d41f0dea483497272772baab76688b1d251c903278c1de94d9269"
+    },
+    {
+      "file": "tests/v42/test-offline.cjs",
+      "kind": "nuevo",
+      "bytes": 4835,
+      "sha256": "73c37e4ef687049f7f0ff8ebddef2c6a5858ce4701abbeba587472056dd4b5cd"
+    },
+    {
+      "file": "tests/v42/test-performance.cjs",
+      "kind": "nuevo",
+      "bytes": 2171,
+      "sha256": "910233ec547b70f05c18ef9626172bd79280233e4a05df06941b8cea9ebcf533"
+    },
+    {
+      "file": "tests/v42/test-reopen.cjs",
+      "kind": "nuevo",
+      "bytes": 3135,
+      "sha256": "dc3b0a6b997af700a51f1f7e65ecf6a60571d81fc0a1591d4553278da84bef20"
+    },
+    {
+      "file": "tests/v42/test-visual.cjs",
+      "kind": "nuevo",
+      "bytes": 4098,
+      "sha256": "f4561cb67cbbbbe2230fd28375337fc28142bd0fa41921f94673e2bea1c37e2a"
+    },
+    {
+      "file": "tests/v42/tests-regression.cjs",
+      "kind": "nuevo",
+      "bytes": 18373,
+      "sha256": "2b615596273c7e999aa23132eb492918238c96c886dc10bff82ee818fe1a77fb"
+    },
+    {
+      "file": "tests/v42/verify-helpers.cjs",
+      "kind": "nuevo",
+      "bytes": 34341,
+      "sha256": "3f9bab5b4fe366033a0b82b212d4f62c63a854232c5e85378789fdd93580fd71"
+    },
+    {
+      "file": "avisos.html",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "67e13110e64915c3780fc10147e528d31d725c0887bd52853d77bc7b6bf1e4b3"
+    },
+    {
+      "file": "css/notices.css",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "6a689d6c14359c9150452375a834db43db00eb205f3ea35da37cb7c7c9877b82"
+    },
+    {
+      "file": "dist/avisos.html",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "67e13110e64915c3780fc10147e528d31d725c0887bd52853d77bc7b6bf1e4b3"
+    },
+    {
+      "file": "dist/css/notices.css",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "6a689d6c14359c9150452375a834db43db00eb205f3ea35da37cb7c7c9877b82"
+    },
+    {
+      "file": "dist/generacion_agenda.html",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "2ec4b30edabfe1210ea90335892cd58a552435d15016515dbada23cb9cf51c3b"
+    },
+    {
+      "file": "dist/js/notice-center.js",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "e7c542b2be896bbdc796e8aa37893ea0f9cd5ddedc7f04f3e5bd24dd3f471330"
+    },
+    {
+      "file": "dist/js/notices-page.js",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "5ac139396e6826d7a19c0c5a45e123b23118b1c41ce5f4e1d86e75bfa72f2898"
+    },
+    {
+      "file": "dist/js/notices-store.js",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "b8738f7526a7b604b35213e7ffe8bca62de376f7f950fa182831cebe99d3c951"
+    },
+    {
+      "file": "generacion_agenda.html",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "2ec4b30edabfe1210ea90335892cd58a552435d15016515dbada23cb9cf51c3b"
+    },
+    {
+      "file": "js/notice-center.js",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "e7c542b2be896bbdc796e8aa37893ea0f9cd5ddedc7f04f3e5bd24dd3f471330"
+    },
+    {
+      "file": "js/notices-page.js",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "5ac139396e6826d7a19c0c5a45e123b23118b1c41ce5f4e1d86e75bfa72f2898"
+    },
+    {
+      "file": "js/notices-store.js",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "b8738f7526a7b604b35213e7ffe8bca62de376f7f950fa182831cebe99d3c951"
+    },
+    {
+      "file": "tests/v41/tests-local-edges.cjs",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "f8ce1fb2b86c0111a962e30a336ec17d26436c8916b9aaf34d4d721343e5957d"
+    },
+    {
+      "file": "tests/v41/tests-offline-v41.cjs",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "530008b2b789db1fc6444f7c12954db91d5485184821677d40d00fb090bae00f"
+    },
+    {
+      "file": "tests/v41/tests-performance.cjs",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "31ba53a4ea00e8fe2eb676208f23218d5f7c4971e18985f07ce8a5c03a540a42"
+    },
+    {
+      "file": "tests/v41/tests-regression.cjs",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "1cd120dae840903fc0ce273b86f409e9266b99335ec49a587900b53b276440db"
+    },
+    {
+      "file": "tests/v41/tests-v41.cjs",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "7f8babab3b41abf073e8e5e533d28115a10be5729a16f4705e973d7a5cfe3580"
+    },
+    {
+      "file": "tests/v41/tests-visual.cjs",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "c7f8d69e4b106d317c8ab439ce4b1d332b41f56c7c29b698f980c989b1f03b99"
+    },
+    {
+      "file": "tests/v41/verify-helpers.cjs",
+      "kind": "retirado",
+      "bytes": null,
+      "sha256": "7a487417d2739b20d6eb2f4afdd2a14ebd8f4c1cfd412cf838e9a9a43410df77"
+    }
+  ],
+  "note": "Los inventarios se excluyen de sus propias huellas autorreferenciales."
+}

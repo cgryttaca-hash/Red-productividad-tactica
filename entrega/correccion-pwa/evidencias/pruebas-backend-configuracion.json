@@ -1,0 +1,12 @@
+{
+  "passed": [
+    "Backend real con servicios controlados: configuración del proyecto sin secretos, prueba autenticada con FCM data-only y aceptación separada del registro",
+    "Reserva transaccional de prueba: solicitudes simultáneas y repeticiones rápidas no duplican el envío; otra sesión no puede enviarlo",
+    "Token renovado invalida la verificación anterior; rechazo del proveedor no da falso activo, limita reintentos y permite recuperación",
+    "Variables faltantes y par VAPID incorrecto devuelven errores específicos con CORS del origen autorizado, sin claves privadas en respuestas o registros",
+    "API restringida por origen y sesión; registros distinguen intentos, aceptación y errores sin afirmar recepción física"
+  ],
+  "limitations": [
+    "Se ejecuta el código real de index/store/API/proveedor con Firestore y FCM controlados. No se invocó infraestructura productiva."
+  ]
+}
