@@ -1,0 +1,12 @@
+let dialog,previousFocus,busy=false;
+function build(){if(dialog)return;dialog=document.createElement('dialog');dialog.id='adminAccessDialog';dialog.className='admin-access-dialog';dialog.setAttribute('aria-labelledby','adminAccessTitle');dialog.innerHTML='<form id="adminAccessForm" data-update-transient novalidate><div class="admin-access-heading"><span>ACCESO PROTEGIDO</span><button type="button" id="adminAccessClose" aria-label="Cerrar">×</button></div><h2 id="adminAccessTitle">Centro de Administración</h2><p>Valida la contraseña de tu cuenta administradora.</p><label for="adminAccessPassword">Contraseña de Super Administrador</label><input id="adminAccessPassword" type="password" autocomplete="current-password" required><p id="adminAccessMessage" role="status" aria-live="polite"></p><button id="adminAccessSubmit" type="submit">Validar acceso</button></form>';
+ document.body.append(dialog);const form=dialog.querySelector('form'),field=dialog.querySelector('input'),message=dialog.querySelector('#adminAccessMessage'),submit=dialog.querySelector('#adminAccessSubmit');
+ const close=()=>{if(busy)return;field.value='';dialog.close();previousFocus?.focus();};
+ dialog.querySelector('#adminAccessClose').addEventListener('click',close);dialog.addEventListener('cancel',event=>{event.preventDefault();close();});dialog.addEventListener('close',()=>field.value='');
+ form.addEventListener('submit',async event=>{event.preventDefault();if(busy)return;busy=true;submit.disabled=true;submit.textContent='Validando…';form.setAttribute('aria-busy','true');message.textContent='';let password=field.value;field.value='';
+  try{const{verifyAdministratorPassword}=await import('./local-auth.js');const accepted=await verifyAdministratorPassword(password);password='';if(!accepted){message.textContent='Acceso no válido.';field.focus();return;}location.assign('administracion.html');}
+  catch(_){message.textContent='No se pudo validar el acceso. Intenta nuevamente.';field.focus();}
+  finally{password='';busy=false;submit.disabled=false;submit.textContent='Validar acceso';form.removeAttribute('aria-busy');}
+ });
+}
+export function openAdministrationAccess(){build();if(dialog.open){dialog.querySelector('input').focus();return;}previousFocus=document.activeElement;dialog.querySelector('input').value='';dialog.querySelector('#adminAccessMessage').textContent='';dialog.showModal();dialog.querySelector('input').focus();}

@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#10283f">
   <title>Usuarios | Gestión de Eventos</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/navigation-policy.js"></script>
+  <script src="js/navigation-policy.js"></script><script src="js/admin-access.js"></script>
   <script src="js/auth-guard.js?v=20260801-2300"></script>
   <script type="module" src="js/maintenance-guard.js"></script>
   <link rel="manifest" href="manifest.webmanifest">
@@ -25,9 +25,9 @@
 </head>
 <body>
   <header class="users-header">
-    <a href="index.html">GESTIÓN DE EVENTOS</a>
+    <a href="administracion.html">GESTIÓN DE EVENTOS</a>
     <nav>
-      <a href="index.html">Inicio</a>
+      <a href="administracion.html">Inicio</a>
       <a href="eventos.html">Eventos</a>
       <a href="minuta.html">Minuta</a>
       <a href="configuracion.html">Configuración</a>
@@ -45,7 +45,7 @@
         <h1>Usuarios del sistema</h1>
         <p>Crea, activa, desactiva o elimina accesos para este navegador y equipo.</p>
       </div>
-      <a href="index.html">Volver al panel</a>
+      <a href="administracion.html">Volver al panel</a>
     </section>
 
     <section class="users-stats">
@@ -100,5 +100,5 @@
   <script type="module" src="js/pwa.js"></script>
   <script type="module" src="js/device-heartbeat.js"></script>
 <script type="module" src="js/loading.js"></script>
-</body>
+<script src="js/admin-shortcut.js" defer></script></body>
 </html>

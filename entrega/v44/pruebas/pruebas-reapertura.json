@@ -1,0 +1,8 @@
+{
+  "passed": [
+    "Se cerró el proceso de Chrome con perfil de prueba y se reabrió: contacto y observación editados, dato local, sesión de escritorio y acceso móvil público persisten en sus ámbitos separados."
+  ],
+  "limits": [
+    "Perfil local de prueba; no se modificó el perfil real del usuario ni credenciales existentes."
+  ]
+}

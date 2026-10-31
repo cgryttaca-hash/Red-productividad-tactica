@@ -41,6 +41,9 @@ jobs:
       - run: pnpm test:v43
       - run: pnpm test:sharing
       - run: pnpm test:automatic
+      - run: pnpm test:center
+      - run: pnpm test:installed
+      - run: pnpm test:responsive
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

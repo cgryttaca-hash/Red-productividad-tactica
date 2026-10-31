@@ -473,6 +473,7 @@
   }
 
   function ensureUi(){
+    if(document.documentElement.dataset.syncUi==='background'||(document.documentElement.dataset.syncUi==='admin'&&!window.RPTAdminAccess?.hasAccess()))return;
     if(document.getElementById('excelSyncModal')) return;
     const control=document.createElement('button');
     control.id='excelSyncControl'; control.className='excel-sync-control is-unlinked'; control.type='button';
@@ -530,7 +531,7 @@
     return Number.isNaN(date.getTime())?'—':date.toLocaleString('es-CO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
   }
   function setState(state,options={}){
-    lastState=state;
+    lastState=state;if(!ui.control)return;
     const storedName=options.fileName||localStorage.getItem(FILE_NAME_KEY)||fileHandle?.name||'';
     const states={
       unlinked:['Sin conexión','Sin archivo vinculado','Sin vincular','is-unlinked'],
@@ -550,7 +551,7 @@
     ui.change.hidden=!hasHandle;ui.unlink.hidden=!hasHandle;
     if(options.message) showMessage(options.message,state==='error'||state==='unsupported'?'error':state==='ready'?'success':'info'); else showMessage('');
   }
-  function openPanel(){ensureUi();ui.modal.classList.add('is-open');ui.modal.setAttribute('aria-hidden','false');document.body.classList.add('excel-sync-modal-open');}
+  function openPanel(){ensureUi();if(!ui.modal)return;ui.modal.classList.add('is-open');ui.modal.setAttribute('aria-hidden','false');document.body.classList.add('excel-sync-modal-open');}
   function closePanel(){ui.modal.classList.remove('is-open');ui.modal.setAttribute('aria-hidden','true');document.body.classList.remove('excel-sync-modal-open');}
 
   async function chooseFile(){
@@ -635,6 +636,7 @@
   }
 
   async function initialize(){
+    if(document.documentElement.dataset.syncUi==='admin'&&!window.RPTAdminAccess?.hasAccess())return;
     if(initialized) return;
     initialized=true;
     cleanupLegacyStorage();
@@ -643,12 +645,12 @@
     bindAutomaticChecks();
     if(!supportsPersistentFileAccess()){
       setState('unsupported',{message:window.isSecureContext?'Usa Chrome o Edge para conservar el archivo vinculado.':'La página debe abrirse mediante HTTPS.'});
-      if(!localStorage.getItem('eventData')) setTimeout(openPanel,500);
+      if(!localStorage.getItem('eventData')&&document.documentElement.dataset.syncUi!=='background') setTimeout(openPanel,500);
       return;
     }
     try{
       fileHandle=await readStoredHandle();
-      if(!fileHandle){setState('unlinked');if(!localStorage.getItem('eventData')) setTimeout(openPanel,500);return;}
+      if(!fileHandle){setState('unlinked');if(!localStorage.getItem('eventData')&&document.documentElement.dataset.syncUi!=='background') setTimeout(openPanel,500);return;}
       setState('ready',{fileName:fileHandle.name,statusText:'Archivo vinculado'});
       scheduleCheck();
     }catch(error){setState('error',{message:error.message});}

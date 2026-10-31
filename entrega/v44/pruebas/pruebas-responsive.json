@@ -1,0 +1,406 @@
+{
+  "checks": [
+    {
+      "file": "index.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 360,
+      "result": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "missingLocal": []
+}

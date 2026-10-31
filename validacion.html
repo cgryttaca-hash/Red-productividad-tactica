@@ -4,7 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#10283f"><title>Validación del Excel</title>
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
-  <script src="js/navigation-policy.js"></script>
+  <script src="js/navigation-policy.js"></script><script src="js/admin-access.js"></script>
   <script src="js/auth-guard.js?v=20260801-2300"></script><script type="module" src="js/maintenance-guard.js"></script>
   <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/admin-tools.css?v=20260801-2300">
   <link rel="stylesheet" href="css/professional-ui.css?v=20260828-3630" media="print">
@@ -21,8 +21,8 @@
 </head>
 <body>
 <header class="tool-header"><div class="tool-header-inner">
-  <a class="tool-brand" href="index.html"><strong>GESTIÓN DE EVENTOS</strong><small>Validación del Excel</small></a>
-  <nav class="tool-nav"><a href="index.html">Inicio</a><a class="active" href="validacion.html" aria-current="page">Validación</a><a href="laboratorio.html">Laboratorio</a><a href="configuracion.html">Configuración</a></nav>
+  <a class="tool-brand" href="administracion.html"><strong>GESTIÓN DE EVENTOS</strong><small>Validación del Excel</small></a>
+  <nav class="tool-nav"><a href="administracion.html">Inicio</a><a class="active" href="validacion.html" aria-current="page">Validación</a><a href="laboratorio.html">Laboratorio</a><a href="configuracion.html">Configuración</a></nav>
   <div class="tool-session"><span id="sessionName">Administrador</span><button id="logoutButton" type="button">Salir</button></div>
 </div></header>
 <main class="tool-shell">
@@ -45,4 +45,4 @@
 <script type="module" src="js/validacion-page.js"></script><script type="module" src="js/pwa.js"></script>
 <script type="module" src="js/device-heartbeat.js"></script>
 <script type="module" src="js/loading.js"></script>
-</body></html>
+<script src="js/admin-shortcut.js" defer></script></body></html>

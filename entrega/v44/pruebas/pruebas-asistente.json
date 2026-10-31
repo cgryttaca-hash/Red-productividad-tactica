@@ -1,0 +1,14 @@
+{
+  "passed": [
+    "Consultas reales por fecha/empresa/salón/estado, cero PAX conservado, vacíos explícitos, duplicados solo sugeridos y datos originales intactos",
+    "Contrato Responses API controlado: esquema estricto, sin almacenamiento del proveedor ni envío de eventos, resultado construido desde la publicación real",
+    "Origen, identidad Firebase revocada, lista de autorización, usuario anónimo y App Check comprobados; el rol local no concede acceso",
+    "Desactivación sin llamadas de pago, estado de configuración, CORS y límites/forma de las solicitudes comprobados",
+    "Publicación ausente rechazada antes de llamar al proveedor y ruta HTTP con prefijo de función admitida",
+    "Cuotas, errores, JSON malicioso, respuesta incompleta y rechazo controlados; registros sin texto, datos, claves ni tokens",
+    "Reserva transaccional de consumo por usuario y total diario, con identificadores de cuota sin datos personales en claro"
+  ],
+  "limits": [
+    "Proveedor, Firebase Auth/App Check y Firestore de cuotas sustituidos por implementaciones controladas. No hubo llamada real a IA ni consumo pagado."
+  ]
+}

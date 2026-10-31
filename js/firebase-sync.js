@@ -134,7 +134,8 @@ function friendlyError(error){
 }
 
 function ensureUi(){
-  if(!/\/(?:index\.html)?$/.test(location.pathname)||document.getElementById('firebaseSyncControl'))return;
+  if(document.documentElement.dataset.syncUi==='background'||(document.documentElement.dataset.syncUi==='admin'&&!window.RPTAdminAccess?.hasAccess()))return;
+  if(!/\/(?:index\.html|administracion\.html)?$/.test(location.pathname)||document.getElementById('firebaseSyncControl'))return;
   const control=document.createElement('button');
   control.id='firebaseSyncControl';
   control.className='firebase-sync-control is-idle';
@@ -318,7 +319,7 @@ async function writeAudit(entries,fireMod){
 }
 
 export async function publishIfReady(rows=null,diff=null,meta={}){
-  if(window.RPTNavigation?.mobile())return false;
+  if(window.RPTNavigation?.mobile()||(meta.manual&&document.documentElement.dataset.syncUi==='background'&&!window.RPTAdminAccess?.hasAccess()))return false;
   if(publishing||window.RPTUpdateGuard?.locked)return false;
   const operationStarted=performance.now();
   publishing=true;window.__RPT_FIREBASE_PUBLISHING__=true;updateUi();window.RPTUpdateGuard?.setBusy('firebase-publish',true);
@@ -421,7 +422,7 @@ export async function publishIfReady(rows=null,diff=null,meta={}){
 }
 
 async function initialize(){
-  if(window.RPTNavigation?.mobile())return;
+  if(window.RPTNavigation?.mobile()||(document.documentElement.dataset.syncUi==='admin'&&!window.RPTAdminAccess?.hasAccess()))return;
   ensureUi();setState('syncing','Inicializando Firebase','Espera un momento…');
   try{
     await loadSdk();await authReadyPromise;updateUi();

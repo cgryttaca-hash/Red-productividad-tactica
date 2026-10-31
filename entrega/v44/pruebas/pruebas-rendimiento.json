@@ -1,0 +1,262 @@
+{
+  "passed": [
+    "Inicio nuevo descarga menos bytes y tiene menos elementos que 4.3 en la misma prueba local",
+    "Al aparecer una fuente vinculada se cargan los motores una sola vez, sin crear paneles y manteniendo la publicación manual protegida"
+  ],
+  "measurements": {
+    "original": {
+      "resources": [
+        {
+          "path": "/original/js/navigation-policy.js",
+          "bytes": 2485
+        },
+        {
+          "path": "/original/js/auth-guard.js",
+          "bytes": 2671
+        },
+        {
+          "path": "/original/js/maintenance-guard.js",
+          "bytes": 2919
+        },
+        {
+          "path": "/original/css/excel-sync.css",
+          "bytes": 7766
+        },
+        {
+          "path": "/original/css/firebase-sync.css",
+          "bytes": 5184
+        },
+        {
+          "path": "/original/css/index.css",
+          "bytes": 12665
+        },
+        {
+          "path": "/original/css/corporate-ui.css",
+          "bytes": 30783
+        },
+        {
+          "path": "/original/css/premium-system.css",
+          "bytes": 8795
+        },
+        {
+          "path": "/original/css/enterprise-refinements.css",
+          "bytes": 11804
+        },
+        {
+          "path": "/original/assets/agenda-brand/logo-symbol-light.svg",
+          "bytes": 615
+        },
+        {
+          "path": "/original/assets/vendor/xlsx-0.20.3.min.js",
+          "bytes": 951904
+        },
+        {
+          "path": "/original/js/excel-sync.js",
+          "bytes": 33484
+        },
+        {
+          "path": "/original/js/index.js",
+          "bytes": 6527
+        },
+        {
+          "path": "/original/js/firebase-sync.js",
+          "bytes": 20874
+        },
+        {
+          "path": "/original/js/session-ui.js",
+          "bytes": 1018
+        },
+        {
+          "path": "/original/js/pwa.js",
+          "bytes": 27
+        },
+        {
+          "path": "/original/js/performance-monitor.js",
+          "bytes": 1823
+        },
+        {
+          "path": "/original/js/notifications.js",
+          "bytes": 1915
+        },
+        {
+          "path": "/original/js/device-heartbeat.js",
+          "bytes": 838
+        },
+        {
+          "path": "/original/js/loading.js",
+          "bytes": 1525
+        },
+        {
+          "path": "/original/css/professional-ui.css",
+          "bytes": 12343
+        },
+        {
+          "path": "/original/js/firebase-config.js",
+          "bytes": 666
+        },
+        {
+          "path": "/original/js/local-auth.js",
+          "bytes": 10407
+        },
+        {
+          "path": "/original/js/pwa-release.js",
+          "bytes": 15158
+        },
+        {
+          "path": "/original/js/food-alerts-core.js",
+          "bytes": 11520
+        },
+        {
+          "path": "/original/js/pwa-context.js",
+          "bytes": 304
+        },
+        {
+          "path": "/original/js/device-registry.js",
+          "bytes": 5142
+        },
+        {
+          "path": "/original/js/release-info.js",
+          "bytes": 38
+        },
+        {
+          "path": "/original/js/update-safety.js",
+          "bytes": 4949
+        },
+        {
+          "path": "/original/js/system-log.js",
+          "bytes": 1408
+        },
+        {
+          "path": "/original/js/firebase-app-check.js",
+          "bytes": 848
+        },
+        {
+          "path": "/original/assets/agenda-brand/favicon.ico",
+          "bytes": 0
+        },
+        {
+          "path": "/original/assets/agenda-brand/favicon.svg",
+          "bytes": 598
+        }
+      ],
+      "navigationMs": 126.5,
+      "nodes": 283,
+      "firebaseReads": {
+        "eventos_meta/mantenimiento": 1
+      },
+      "firebaseListeners": {
+        "eventos_meta/mantenimiento": 1
+      }
+    },
+    "actual": {
+      "resources": [
+        {
+          "path": "/actual/js/navigation-policy.js",
+          "bytes": 2549
+        },
+        {
+          "path": "/actual/js/admin-access.js",
+          "bytes": 980
+        },
+        {
+          "path": "/actual/js/auth-guard.js",
+          "bytes": 2830
+        },
+        {
+          "path": "/actual/js/maintenance-guard.js",
+          "bytes": 2919
+        },
+        {
+          "path": "/actual/css/enterprise-refinements.css",
+          "bytes": 13237
+        },
+        {
+          "path": "/actual/css/operating-center.css",
+          "bytes": 6896
+        },
+        {
+          "path": "/actual/assets/agenda-brand/logo-symbol-light.svg",
+          "bytes": 615
+        },
+        {
+          "path": "/actual/js/operating-center.js",
+          "bytes": 2088
+        },
+        {
+          "path": "/actual/js/admin-shortcut.js",
+          "bytes": 704
+        },
+        {
+          "path": "/actual/js/pwa.js",
+          "bytes": 27
+        },
+        {
+          "path": "/actual/js/device-heartbeat.js",
+          "bytes": 838
+        },
+        {
+          "path": "/actual/js/loading.js",
+          "bytes": 1525
+        },
+        {
+          "path": "/actual/js/firebase-config.js",
+          "bytes": 666
+        },
+        {
+          "path": "/actual/js/pwa-release.js",
+          "bytes": 15357
+        },
+        {
+          "path": "/actual/js/local-auth.js",
+          "bytes": 11824
+        },
+        {
+          "path": "/actual/js/device-registry.js",
+          "bytes": 5142
+        },
+        {
+          "path": "/actual/js/pwa-context.js",
+          "bytes": 304
+        },
+        {
+          "path": "/actual/js/release-info.js",
+          "bytes": 38
+        },
+        {
+          "path": "/actual/js/update-safety.js",
+          "bytes": 4949
+        },
+        {
+          "path": "/actual/assets/agenda-brand/favicon.svg",
+          "bytes": 598
+        }
+      ],
+      "navigationMs": 67.30000000447035,
+      "nodes": 95,
+      "firebaseReads": {
+        "eventos_meta/mantenimiento": 1
+      },
+      "firebaseListeners": {
+        "eventos_meta/mantenimiento": 1
+      }
+    }
+  },
+  "totals": {
+    "original": 1169003,
+    "actual": 74086
+  },
+  "background": {
+    "xlsxScripts": 1,
+    "excelScripts": 1,
+    "panels": 0,
+    "reads": {
+      "eventos_meta/mantenimiento": 1
+    },
+    "listeners": {
+      "eventos_meta/mantenimiento": 1
+    }
+  },
+  "limits": [
+    "Medición local orientativa, no garantiza el mismo tiempo de red en el equipo del usuario. Firebase está interceptado por un adaptador en memoria."
+  ]
+}

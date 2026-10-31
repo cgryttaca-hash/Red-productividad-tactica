@@ -1,3 +1,4 @@
+function requireAdministration(){privateAccess();if(!window.RPTAdminAccess?.hasAccess())throw new Error('Se requiere validación administrativa.');}
 function privateAccess(){if(window.RPTNavigation?.mobile())throw new Error('Esta función no está disponible en Agenda Móvil.');}
 const USERS_KEY = 'rptAuthUsersV1';
 const SESSION_KEY = 'rptAuthSessionV1';
@@ -23,6 +24,7 @@ function readJson(key, fallback){
 
 function writeJson(key, value){
   localStorage.setItem(key, JSON.stringify(value));
+  window.dispatchEvent(new CustomEvent('rptAuthStateChanged'));
 }
 
 function bytesToBase64(bytes){
@@ -120,7 +122,7 @@ export function isAuthenticated(){
 }
 
 export function logout(){
-  privateAccess();
+  privateAccess();window.RPTAdminAccess?.revoke();
   const session=getSession();
   localStorage.removeItem(window.RPTNavigation?.mobile()?'rptMobileAuthSessionV1':SESSION_KEY);
   import('./system-log.js').then(module=>module.addSystemLog({
@@ -167,13 +169,13 @@ export async function login(username, password){
 }
 
 export async function listUsers(){
-  privateAccess();
+  requireAdministration();
   await ensureDefaultAdmin();
   return readJson(USERS_KEY, []).map(cleanUser);
 }
 
 export async function createUser({username, displayName, password, role='viewer'}){
-  privateAccess();
+  requireAdministration();
   await ensureDefaultAdmin();
   const users = readJson(USERS_KEY, []);
   const normalizedUsername = normalizeUsername(username);
@@ -205,7 +207,7 @@ export async function createUser({username, displayName, password, role='viewer'
 }
 
 export async function changePassword(userId, password){
-  privateAccess();
+  requireAdministration();
   if(String(password).length < 6) throw new Error('La contraseña debe tener al menos 6 caracteres.');
   const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.id === userId);
@@ -225,7 +227,7 @@ export async function changePassword(userId, password){
 }
 
 export async function updateUser(userId, changes){
-  privateAccess();
+  requireAdministration();
   const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.id === userId);
   if(index === -1) throw new Error('Usuario no encontrado.');
@@ -256,7 +258,7 @@ export async function updateUser(userId, changes){
 }
 
 export async function deleteUser(userId){
-  privateAccess();
+  requireAdministration();
   const session = getSession();
   if(session?.userId === userId) throw new Error('No puedes eliminar tu propia sesión.');
   const users = readJson(USERS_KEY, []);
@@ -270,7 +272,7 @@ export async function deleteUser(userId){
 }
 
 export async function resetDefaultAdmin(){
-  privateAccess();
+  requireAdministration();
   await ensureDefaultAdmin();
   const users = readJson(USERS_KEY, []);
   const index = users.findIndex(item => item.normalizedUsername === normalizeUsername(DEFAULT_ADMIN_USERNAME));
@@ -297,4 +299,12 @@ export async function resetDefaultAdmin(){
 export function getDefaultCredentials(){
   privateAccess();
   return {username:DEFAULT_ADMIN_USERNAME, password:DEFAULT_ADMIN_PASSWORD};
+}
+
+export async function verifyAdministratorPassword(password){
+ privateAccess();const active=getSession();if(active?.user?.role!=='admin'||typeof password!=='string'||!password)return false;
+ const user=readJson(USERS_KEY,[]).find(item=>item.id===active.userId&&item.active&&item.role==='admin');if(!user)return false;
+ const derived=await deriveHash(password,user.salt);let difference=derived.length^user.passwordHash.length;for(let i=0;i<derived.length;i++)difference|=derived.charCodeAt(i)^user.passwordHash.charCodeAt(i);if(difference!==0)return false;
+ const latest=getSession(),fresh=readJson(USERS_KEY,[]).find(item=>item.id===user.id);if(!latest||latest.userId!==active.userId||latest.loginAt!==active.loginAt||fresh?.passwordHash!==user.passwordHash)return false;
+ const receipt=JSON.stringify({userId:latest.userId,deviceId:latest.deviceId,loginAt:latest.loginAt,passwordChangedAt:latest.user.passwordChangedAt||null,validatedAt:Date.now()});sessionStorage.setItem('rptAdminAccessV1',receipt);if(sessionStorage.getItem('rptAdminAccessV1')!==receipt)throw new Error('No se confirmó la validación.');return true;
 }

@@ -1,0 +1,225 @@
+{
+  "passed": [
+    "Sondeo automático real de 60 segundos detecta la publicación desde una página normal, sin entrar a Actualizaciones ni pulsar comprobar/aplicar",
+    "Comparación exacta: un archivo nuevo, uno retirado y uno modificado, obtenidos del manifiesto",
+    "Al terminar la edición, la actualización se reanuda sola; dos pestañas activan tras diez segundos con datos intactos",
+    "Descargados/verificados medidos, detección, etapas, finalización y diferencias persisten tras la recarga"
+  ],
+  "summary": {
+    "fromVersion": "7.0.0",
+    "toVersion": "7.0.1",
+    "added": [
+      "qa-added.txt"
+    ],
+    "modified": [
+      "js/release-info.js"
+    ],
+    "removed": [
+      "qa-removed.txt"
+    ],
+    "unchanged": 137
+  },
+  "state": {
+    "phase": "completed",
+    "version": "7.0.1",
+    "newVersion": "7.0.1",
+    "checkedAt": 1793415490098,
+    "online": true,
+    "last": {
+      "startedAt": 1793415490110,
+      "target": "7.0.1",
+      "until": 1793415500110,
+      "finishedAt": 1793415501514,
+      "durationMs": 11404,
+      "version": "7.0.1"
+    },
+    "startedAt": 1793415490110,
+    "finishedAt": 1793415501514,
+    "changes": {
+      "fromVersion": "7.0.0",
+      "toVersion": "7.0.1",
+      "added": [
+        "qa-added.txt"
+      ],
+      "modified": [
+        "js/release-info.js"
+      ],
+      "removed": [
+        "qa-removed.txt"
+      ],
+      "unchanged": 137
+    },
+    "detectedAt": 1793415489659,
+    "downloaded": 139,
+    "verified": 139,
+    "total": 139,
+    "history": [
+      {
+        "phase": "downloading",
+        "at": 1793415489660,
+        "downloaded": 0,
+        "verified": 0,
+        "resource": ""
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489684,
+        "downloaded": 12,
+        "verified": 8,
+        "resource": "assets/agenda-brand/icon-96.png"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489694,
+        "downloaded": 19,
+        "verified": 16,
+        "resource": "assets/agenda-brand/logo-full-mono.png"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489701,
+        "downloaded": 27,
+        "verified": 24,
+        "resource": "assets/icon-512.png"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489716,
+        "downloaded": 36,
+        "verified": 32,
+        "resource": "css/agenda-compact.css"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489727,
+        "downloaded": 44,
+        "verified": 40,
+        "resource": "css/enterprise-refinements.css"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489733,
+        "downloaded": 50,
+        "verified": 48,
+        "resource": "css/login.css"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489744,
+        "downloaded": 59,
+        "verified": 56,
+        "resource": "css/usuarios.css"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489750,
+        "downloaded": 66,
+        "verified": 64,
+        "resource": "js/agenda-content.js"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489760,
+        "downloaded": 73,
+        "verified": 72,
+        "resource": "js/agendas.js"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489768,
+        "downloaded": 82,
+        "verified": 80,
+        "resource": "js/data-core.js"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489777,
+        "downloaded": 90,
+        "verified": 88,
+        "resource": "js/firebase-config.js"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489785,
+        "downloaded": 98,
+        "verified": 96,
+        "resource": "js/local-record-store.js"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489795,
+        "downloaded": 107,
+        "verified": 104,
+        "resource": "js/navigation-policy.js"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489802,
+        "downloaded": 114,
+        "verified": 112,
+        "resource": "js/push-ui.js"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489810,
+        "downloaded": 121,
+        "verified": 120,
+        "resource": "js/system-log.js"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489817,
+        "downloaded": 131,
+        "verified": 128,
+        "resource": "mantenimiento.html"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489824,
+        "downloaded": 139,
+        "verified": 136,
+        "resource": "qa-added.txt"
+      },
+      {
+        "phase": "verifying",
+        "at": 1793415489825,
+        "downloaded": 139,
+        "verified": 139,
+        "resource": "qa-added.txt"
+      },
+      {
+        "phase": "ready",
+        "at": 1793415489829,
+        "downloaded": 139,
+        "verified": 139,
+        "resource": "qa-added.txt"
+      },
+      {
+        "phase": "preparing",
+        "at": 1793415490111,
+        "downloaded": 139,
+        "verified": 139,
+        "resource": "qa-added.txt"
+      },
+      {
+        "phase": "activating",
+        "at": 1793415500127,
+        "downloaded": 139,
+        "verified": 139,
+        "resource": "qa-added.txt"
+      },
+      {
+        "phase": "activated",
+        "at": 1793415501431,
+        "downloaded": 139,
+        "verified": 139,
+        "resource": "qa-added.txt"
+      }
+    ],
+    "until": null,
+    "message": "Versión 7.0.1 activa. Recursos verificados."
+  },
+  "limits": [
+    "HTTP local y dos pestañas Chrome. Sin despliegue de producción."
+  ]
+}

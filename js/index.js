@@ -3,7 +3,7 @@ const text=value=>value===undefined||value===null?'':String(value);
 
 let refreshPending=false;
 let lastFingerprint='';
-let eventCountCache={stamp:'',count:0};
+let eventCountCache={stamp:null,count:0};
 let activityTab='excel';
 
 function formatDateTime(value,fallback='—'){
@@ -136,6 +136,7 @@ function activateTab(tab){
   });
 }
 
+if(window.RPTAdminAccess?.hasAccess()){
 document.querySelectorAll('[data-activity-tab]').forEach(button=>{
   button.addEventListener('click',()=>activateTab(button.dataset.activityTab));
 });
@@ -153,3 +154,5 @@ setInterval(updateClock,30000);
 setInterval(()=>scheduleRefresh(false),15000);
 activateTab(activityTab);
 scheduleRefresh(true);
+
+}

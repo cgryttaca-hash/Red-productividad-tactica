@@ -1,0 +1,41 @@
+{
+  "passed": [
+    "Inicio muestra solo los tres módulos, sin paneles ni accesos administrativos y sin cargar sus scripts en una sesión sin fuente vinculada",
+    "Las seis rutas administrativas y sus funciones de usuarios rechazan una sesión sin revalidación, aunque su rol sea administrador",
+    "Ctrl+M no se activa al escribir; muestra contraseña oculta y el intento incorrecto no concede acceso ni conserva el texto",
+    "Contraseña correcta abre los controles originales, sin cambiar usuarios, hashes o sesión y sin guardar la contraseña",
+    "Registros y archivo se muestran dentro de administración con datos locales reales; Usuarios conserva su funcionamiento",
+    "Volver a la operación finaliza el permiso administrativo de la pestaña y volver a escribir la ruta exige Ctrl+M otra vez",
+    "La validación usa la contraseña actual almacenada: cambiarla en el perfil de prueba revoca el permiso; la antigua falla y la nueva funciona",
+    "Un usuario operativo conserva sus accesos y no obtiene administración con su contraseña ni cambia de rol"
+  ],
+  "initialResources": [
+    "http://127.0.0.1:58385/actual/js/navigation-policy.js",
+    "http://127.0.0.1:58385/actual/js/admin-access.js",
+    "http://127.0.0.1:58385/actual/js/auth-guard.js",
+    "http://127.0.0.1:58385/actual/js/maintenance-guard.js",
+    "http://127.0.0.1:58385/actual/css/enterprise-refinements.css",
+    "http://127.0.0.1:58385/actual/css/operating-center.css",
+    "http://127.0.0.1:58385/actual/assets/agenda-brand/logo-symbol-light.svg",
+    "http://127.0.0.1:58385/actual/js/operating-center.js",
+    "http://127.0.0.1:58385/actual/js/admin-shortcut.js",
+    "http://127.0.0.1:58385/actual/js/pwa.js",
+    "http://127.0.0.1:58385/actual/js/device-heartbeat.js",
+    "http://127.0.0.1:58385/actual/js/loading.js",
+    "http://127.0.0.1:58385/actual/js/firebase-config.js",
+    "http://127.0.0.1:58385/actual/js/pwa-release.js",
+    "http://127.0.0.1:58385/actual/js/local-auth.js",
+    "http://127.0.0.1:58385/actual/js/device-registry.js",
+    "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js",
+    "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js",
+    "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js",
+    "http://127.0.0.1:58385/actual/js/pwa-context.js",
+    "http://127.0.0.1:58385/actual/js/release-info.js",
+    "http://127.0.0.1:58385/actual/js/update-safety.js",
+    "http://127.0.0.1:58385/actual/assets/agenda-brand/favicon.svg"
+  ],
+  "pageErrors": [],
+  "limits": [
+    "Autenticación local existente; no es una autenticación de servidor. Perfil efímero de prueba y Firebase interceptado, sin cambios de cuentas reales."
+  ]
+}

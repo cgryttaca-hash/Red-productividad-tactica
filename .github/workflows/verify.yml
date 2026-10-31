@@ -26,6 +26,9 @@ jobs:
       - run: pnpm test:v43
       - run: pnpm test:sharing
       - run: pnpm test:automatic
+      - run: pnpm test:center
+      - run: pnpm test:installed
+      - run: pnpm test:responsive
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -1,0 +1,11 @@
+{
+  "passed": [
+    "Ctrl+Q navegador: PNG, texto completo y todas las filas Coworking; WhatsApp Web sin exigir Desktop y enlace funcional cuando se bloquea window.open",
+    "Ctrl+Q PWA emulada: PNG, texto completo y todas las filas Coworking; WhatsApp Web sin exigir Desktop y enlace funcional cuando se bloquea window.open",
+    "XLSX real generado: encabezados variantes y columnas numeradas preservan ambos servicios; libro y hoja auxiliar intactos"
+  ],
+  "pageErrors": [],
+  "limits": [
+    "WhatsApp interceptado: no se enviaron mensajes. PWA emulada, sin instalación física. Excel de prueba, no se adjuntó un libro nuevo de operación."
+  ]
+}

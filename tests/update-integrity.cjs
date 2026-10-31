@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),
 const{chromium}=require(process.env.PLAYWRIGHT_PATH||'playwright');
 const app=path.resolve(process.env.TEST_APP_PATH||path.join(__dirname,'..')),output=path.join(__dirname,'../test-results'),baseline=process.env.BASELINE_MODE==='1';fs.mkdirSync(output,{recursive:true});
 const initial=JSON.parse(fs.readFileSync(path.join(app,'release.json'))),hash=b=>crypto.createHash('sha256').update(b).digest('hex'),tail=fs.readFileSync(path.join(app,'sw.js'),'utf8').split('function notificationUrl')[1];
-const pageHtml=fs.readFileSync(path.join(app,'recuperacion.html'),'utf8');
+const pageHtml=fs.readFileSync(path.join(app,'recuperacion.html'),'utf8').replace(/<script src="js\/(?:admin-access|auth-guard)\.js"[^>]*><\/script>/g,'').replace('class="auth-pending"','').replace('<head>','<head><script>window.RPTAdminAccess=Object.freeze({hasAccess:()=>true});</script>');
 let phase,server,browser,transient=0;const passed=[],failures=[],requests=[],pageErrors=[];
 function release(version,mode='ok'){
  const resources=new Map(initial.assets.map(a=>[a.path,fs.readFileSync(path.join(app,a.path))]));resources.set('harness.html',Buffer.from(pageHtml));resources.set('js/release-info.js',Buffer.from(`export const RELEASE_VERSION='${version}';\n`));

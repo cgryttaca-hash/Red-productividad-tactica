@@ -1,3 +1,5 @@
+Entrega vigente 4.4.0: leer LEER_PRIMERO_V44.md y entrega/v44/INFORME.md. Centro Operativo y administración mediante Ctrl+M con la cuenta local actual. Los textos siguientes son históricos.
+
 Entrega vigente 4.3.0: leer LEER_PRIMERO_V43.md y entrega/v43/INFORME.md. Agenda Móvil pública y ajustes funcionales del complemento. Los textos siguientes son históricos.
 
 Entrega vigente 4.2.2: leer LEER_PRIMERO_V422.md y entrega/v422/INFORME.md. Diagnóstico confirmado del sitio y corrección CRLF/LF. Los textos siguientes son históricos.

@@ -7,8 +7,8 @@ const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
 
 const workspace = path.resolve(__dirname, '..');
 const roots = {
-  original: process.env.ORIGINAL_PROJECT_PATH || path.resolve(__dirname,'../../../base-version'),
-  actual: process.env.ACTUAL_PROJECT_PATH || path.resolve(__dirname,'../..')
+  original: path.resolve(process.env.ORIGINAL_PROJECT_PATH || path.resolve(__dirname,'../../../base-version')),
+  actual: path.resolve(process.env.ACTUAL_PROJECT_PATH || path.resolve(__dirname,'../..'))
 };
 const evidence = process.env.TEST_OUTPUT_PATH || path.resolve(__dirname,'../../test-results/v42');
 const vendorPath = process.env.TEST_VENDOR_PATH || path.join(__dirname, 'vendor');
@@ -197,18 +197,18 @@ async function login(context, version) {
   await page.locator('#loginButton').click();
   await page.waitForURL(`**/${version}/index.html`);
   await page.waitForFunction(() => !document.documentElement.classList.contains('maintenance-pending'));
-  await page.waitForFunction(() => document.getElementById('excelSyncModal'));
-  await page.evaluate(rows => {
+  const center=await page.locator('.ops-layout').count()>0;
+  if(!center)await page.waitForFunction(() => document.getElementById('excelSyncModal'));
+  await page.evaluate(({rows,center}) => {
     localStorage.setItem('eventData', JSON.stringify(rows));
     localStorage.setItem('eventDataUpdatedAt', '2026-10-27T15:00:00Z');
     localStorage.setItem('eventDataSheets', '["OCTUBRE"]');
-    localStorage.setItem('excelSync:fileName', 'Operación octubre.xlsx');
-    localStorage.setItem('excelSync:lastCheck', '2026-10-27T15:00:00Z');
+    if(!center){localStorage.setItem('excelSync:fileName', 'Operación octubre.xlsx');localStorage.setItem('excelSync:lastCheck', '2026-10-27T15:00:00Z');}
     window.dispatchEvent(new CustomEvent('eventDataUpdated'));
     document.getElementById('excelSyncClose')?.click();
-  }, fixtureRows);
+  }, {rows:fixtureRows,center});
   await page.reload();
-  await page.waitForFunction(() => !document.documentElement.classList.contains('maintenance-pending') && document.getElementById('loader')?.classList.contains('is-hidden'));
+  await page.waitForFunction(() => !document.documentElement.classList.contains('maintenance-pending') && (document.querySelector('.ops-layout')||document.getElementById('loader')?.classList.contains('is-hidden')));
   return page;
 }
 

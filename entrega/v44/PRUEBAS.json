@@ -1,0 +1,191 @@
+{
+  "version": "4.4.0",
+  "result": "PASS",
+  "releaseDigest": "bf5366863dafa28e918f00378d4a818b8c16e5b1219bd0ed91facb3c1e626079",
+  "runtimeResources": 137,
+  "htmlPages": 16,
+  "javascriptFiles": 74,
+  "responsiveChecks": 80,
+  "responsiveWidths": [
+    1440,
+    1024,
+    768,
+    390,
+    360
+  ],
+  "productionDeployed": false,
+  "physicalDevicesVerified": false,
+  "suites": {
+    "administracion": {
+      "result": "PASS",
+      "groups": 8,
+      "evidence": "pruebas/pruebas-centro.json",
+      "passed": [
+        "Inicio muestra solo los tres módulos, sin paneles ni accesos administrativos y sin cargar sus scripts en una sesión sin fuente vinculada",
+        "Las seis rutas administrativas y sus funciones de usuarios rechazan una sesión sin revalidación, aunque su rol sea administrador",
+        "Ctrl+M no se activa al escribir; muestra contraseña oculta y el intento incorrecto no concede acceso ni conserva el texto",
+        "Contraseña correcta abre los controles originales, sin cambiar usuarios, hashes o sesión y sin guardar la contraseña",
+        "Registros y archivo se muestran dentro de administración con datos locales reales; Usuarios conserva su funcionamiento",
+        "Volver a la operación finaliza el permiso administrativo de la pestaña y volver a escribir la ruta exige Ctrl+M otra vez",
+        "La validación usa la contraseña actual almacenada: cambiarla en el perfil de prueba revoca el permiso; la antigua falla y la nueva funciona",
+        "Un usuario operativo conserva sus accesos y no obtiene administración con su contraseña ni cambia de rol"
+      ]
+    },
+    "rendimiento": {
+      "result": "PASS",
+      "groups": 2,
+      "evidence": "pruebas/pruebas-rendimiento.json",
+      "passed": [
+        "Inicio nuevo descarga menos bytes y tiene menos elementos que 4.3 en la misma prueba local",
+        "Al aparecer una fuente vinculada se cargan los motores una sola vez, sin crear paneles y manteniendo la publicación manual protegida"
+      ]
+    },
+    "responsive": {
+      "result": "PASS",
+      "groups": 80,
+      "evidence": "pruebas/pruebas-responsive.json",
+      "passed": []
+    },
+    "instalacion_y_sin_red": {
+      "result": "PASS",
+      "groups": 3,
+      "evidence": "pruebas/pruebas-instaladas.json",
+      "passed": [
+        "Centro y página existente de Actualizaciones con worker real: versión activa verificada 4.4.0 y 137 recursos",
+        "Preferencia de actualizaciones guardada realmente y retorno al Centro de Administración protegido",
+        "Sin red: Inicio operativo, Ctrl+M con contraseña local, permiso y datos técnicos persistentes"
+      ]
+    },
+    "migracion": {
+      "result": "PASS",
+      "groups": 1,
+      "evidence": "pruebas/pruebas-migracion.json",
+      "passed": [
+        "Migración local de archivos reales 4.3.0 a 4.4.0: dos pestañas, mínimo diez segundos, usuarios/sesión/datos intactos; nueva ruta administrativa exige Ctrl+M y conserva la contraseña existente"
+      ]
+    },
+    "funciones_operativas": {
+      "result": "PASS",
+      "groups": 9,
+      "evidence": "pruebas/pruebas-funcionales.json",
+      "passed": [
+        "Agenda Móvil pública en navegador y contexto PWA, sin login; Inicio se bloquea y las funciones privadas no cambian usuarios ni sesiones",
+        "Agenda por pisos: segundo cronológico, tercero 301/302/305 numérico y horario; inicio, fin y estado operativo reales",
+        "Ejecutivo, correo, teléfono y observación se guardan automáticamente, sobreviven al cierre y recarga, y no escriben eventData/Excel",
+        "Servicios completos y emparejados por nombre, con cantidades multilínea; plantilla copiada con fecha, empresa, pago, observación y contactos",
+        "Cambios del origen actualizan y reordenan la agenda sin borrar contactos, vacíos intencionales ni observaciones internas",
+        "Fallo de guardado: no anuncia éxito, conserva la edición y evita cerrarla; permite reintentar",
+        "Columnas con acentos, espacios y grupos numerados conservan todos los servicios y sus descripciones",
+        "Agenda Móvil ordenada con la publicación existente y sesión privada de otra pestaña intacta",
+        "Adaptador de publicación en memoria y red deshabilitada: actualiza orden, personas, alimentación y detalle abierto sin duplicados ni escrituras remotas"
+      ]
+    },
+    "ctrl_q_y_excel": {
+      "result": "PASS",
+      "groups": 3,
+      "evidence": "pruebas/pruebas-whatsapp-excel.json",
+      "passed": [
+        "Ctrl+Q navegador: PNG, texto completo y todas las filas Coworking; WhatsApp Web sin exigir Desktop y enlace funcional cuando se bloquea window.open",
+        "Ctrl+Q PWA emulada: PNG, texto completo y todas las filas Coworking; WhatsApp Web sin exigir Desktop y enlace funcional cuando se bloquea window.open",
+        "XLSX real generado: encabezados variantes y columnas numeradas preservan ambos servicios; libro y hoja auxiliar intactos"
+      ]
+    },
+    "alimentacion": {
+      "result": "PASS",
+      "groups": 6,
+      "evidence": "pruebas/pruebas-alimentacion.json",
+      "passed": [
+        "Cálculo exacto a −15 minutos, America/Bogota, medianoche y rechazo de fechas/horas imposibles o ambiguas",
+        "Datos reales de empresa/servicio/salón; sin horario general de respaldo, sin alertas de cancelados o sin alimentación",
+        "Repositorio transaccional y coordinador: tarea exacta, concurrencia segura, prioridad alta, registro de aceptación y una solicitud por dispositivo",
+        "Reprogramación, cancelación, retirada de alimentación, reactivación con generación nueva y rechazo de tareas viejas o vencidas",
+        "Resultado desconocido sin reenvío ciego; reintento solo tras rechazo explícito; tokens inválidos retirados, horizonte de tareas y bloques obsoletos rechazados",
+        "Proveedor FCM data-only sin doble visualización automática, TTL/urgencia correctos y compatibilidad Web Push con VAPID solo en backend"
+      ]
+    },
+    "actualizador": {
+      "result": "PASS",
+      "groups": 9,
+      "evidence": "pruebas/pruebas-actualizaciones.json",
+      "passed": [
+        "Instalación real con todos los recursos verificados por SHA-256 y confirmación de versión activa",
+        "Una página HTML que no pertenece a la versión activa se bloquea antes de mezclar archivos de versiones distintas",
+        "Recurso de actualización corrupto: instalación rechazada y versión anterior intacta",
+        "No se activa ni recarga mientras hay un formulario pendiente",
+        "Otra pestaña con cambios impide la activación y libera la interfaz tras cancelar",
+        "Cuenta regresiva real de 00:10 a 00:00 y espera mínima de diez segundos antes de activar y recargar",
+        "Actualización segura real de dos pestañas: recarga coordinada y conservación de versión anterior",
+        "Restauración local real a la versión anterior verificada, sin borrar datos",
+        "Actualización automática activada con preferencia persistente: dos páginas pasan a la nueva versión tras diez segundos, sin ciclos de recarga"
+      ]
+    },
+    "integridad": {
+      "result": "PASS",
+      "groups": 8,
+      "evidence": "pruebas/pruebas-integridad.json",
+      "passed": [
+        "missing: se identifica css/assistant.css y HTTP, persiste el diagnóstico al recargar y se conserva la versión activa",
+        "html: se identifica css/assistant.css y HTML_RESPONSE, persiste el diagnóstico al recargar y se conserva la versión activa",
+        "truncated: se identifica css/assistant.css y INTEGRITY, persiste el diagnóstico al recargar y se conserva la versión activa",
+        "crlf: se identifica css/assistant.css y INTEGRITY, persiste el diagnóstico al recargar y se conserva la versión activa",
+        "redirect: se identifica css/assistant.css y REDIRECT, persiste el diagnóstico al recargar y se conserva la versión activa",
+        "Reintento de la MISMA versión fallida: descarga, verifica, activa después de diez segundos y conserva datos",
+        "Una URL antigua puede devolver bytes obsoletos: la descarga identificada por digest obtiene los archivos íntegros y actualiza automáticamente",
+        "HTTP 503 transitorio: reintento limitado del recurso, sin desactivar integridad ni bloquear la versión anterior"
+      ]
+    },
+    "publicacion": {
+      "result": "PASS",
+      "groups": 3,
+      "evidence": "pruebas/pruebas-publicacion.json",
+      "passed": [
+        "La auditoría HTTP verifica los recursos de la versión; convertir CRLF a LF no modifica sus huellas porque se normalizaron antes de calcularlas",
+        "La auditoría HTTP identifica el CSS alterado sin aceptar su hash",
+        "Git real con autocrlf: se reproduce alteración de recursos sin .gitattributes y los hashes de todos los recursos se conservan con la corrección"
+      ]
+    },
+    "sondeo_automatico": {
+      "result": "PASS",
+      "groups": 4,
+      "evidence": "pruebas/pruebas-automaticas-detalle.json",
+      "passed": [
+        "Sondeo automático real de 60 segundos detecta la publicación desde una página normal, sin entrar a Actualizaciones ni pulsar comprobar/aplicar",
+        "Comparación exacta: un archivo nuevo, uno retirado y uno modificado, obtenidos del manifiesto",
+        "Al terminar la edición, la actualización se reanuda sola; dos pestañas activan tras diez segundos con datos intactos",
+        "Descargados/verificados medidos, detección, etapas, finalización y diferencias persisten tras la recarga"
+      ]
+    },
+    "reapertura": {
+      "result": "PASS",
+      "groups": 1,
+      "evidence": "pruebas/pruebas-reapertura.json",
+      "passed": [
+        "Se cerró el proceso de Chrome con perfil de prueba y se reabrió: contacto y observación editados, dato local, sesión de escritorio y acceso móvil público persisten en sus ámbitos separados."
+      ]
+    },
+    "asistente_existente": {
+      "result": "PASS",
+      "groups": 7,
+      "evidence": "pruebas/pruebas-asistente.json",
+      "passed": [
+        "Consultas reales por fecha/empresa/salón/estado, cero PAX conservado, vacíos explícitos, duplicados solo sugeridos y datos originales intactos",
+        "Contrato Responses API controlado: esquema estricto, sin almacenamiento del proveedor ni envío de eventos, resultado construido desde la publicación real",
+        "Origen, identidad Firebase revocada, lista de autorización, usuario anónimo y App Check comprobados; el rol local no concede acceso",
+        "Desactivación sin llamadas de pago, estado de configuración, CORS y límites/forma de las solicitudes comprobados",
+        "Publicación ausente rechazada antes de llamar al proveedor y ruta HTTP con prefijo de función admitida",
+        "Cuotas, errores, JSON malicioso, respuesta incompleta y rechazo controlados; registros sin texto, datos, claves ni tokens",
+        "Reserva transaccional de consumo por usuario y total diario, con identificadores de cuota sin datos personales en claro"
+      ]
+    }
+  },
+  "conservation": "CONSERVACION.json",
+  "limits": [
+    "Comprobaciones locales en Chrome de Windows y vistas de dispositivos emuladas; no pruebas físicas de Android/iOS.",
+    "Firebase interceptado mediante adaptadores en memoria y proveedores simulados; no hubo conexión, escritura ni cambio de cuentas en producción.",
+    "WhatsApp se interceptó: se verificaron imagen, texto y destino, sin enviar mensajes.",
+    "No se publicaron archivos ni se habilitaron servicios Push; la recepción con la aplicación cerrada requiere el despliegue y configuración ya documentados.",
+    "La autorización conserva la arquitectura local solicitada; no es una autenticación nueva de servidor ni protege frente al control manual del almacenamiento del propio navegador.",
+    "No se recibió una imagen de referencia utilizable en este adjunto; el diseño sigue los criterios escritos y la marca existente.",
+    "La medición de recursos de Inicio excluye HTML y tráfico de un proveedor real: suma decodedBodySize de subrecursos locales con caché/contexto nuevos, sin fuente vinculada. No es un compromiso de tiempo de carga en otras redes."
+  ]
+}

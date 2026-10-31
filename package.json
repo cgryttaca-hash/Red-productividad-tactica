@@ -1,6 +1,6 @@
 {
   "name": "red-productividad-tactica",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "private": true,
   "engines": {
     "node": ">=22"
@@ -10,7 +10,7 @@
     "check": "node tools/check-project.cjs && node tools/verify-release.cjs",
     "test": "node --test tests/assistant.test.cjs",
     "test:updates": "node tests/updates.cjs",
-    "test:responsive": "node tests/v42/test-visual.cjs",
+    "test:responsive": "node tests/v44/responsive.cjs",
     "test:offline": "node tests/v42/test-offline.cjs",
     "test:performance": "node tests/v42/test-performance.cjs",
     "test:v42": "node tests/v43/functional.cjs",
@@ -20,7 +20,11 @@
     "test:v43": "node tests/v43/functional.cjs",
     "test:automatic": "node tests/v43/updates-details.cjs",
     "test:sharing": "node tests/v43/whatsapp-excel.cjs",
-    "test:food": "node tests/v43/food-backend.cjs"
+    "test:food": "node tests/v43/food-backend.cjs",
+    "test:center": "node tests/v44/center.cjs",
+    "test:home-performance": "node tests/v44/performance.cjs",
+    "test:installed": "node tests/v44/installed.cjs",
+    "test:migration": "node tests/v44/migration.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

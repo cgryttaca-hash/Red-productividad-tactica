@@ -1,0 +1,4850 @@
+{
+  "passed": [
+    "missing: se identifica css/assistant.css y HTTP, persiste el diagnóstico al recargar y se conserva la versión activa",
+    "html: se identifica css/assistant.css y HTML_RESPONSE, persiste el diagnóstico al recargar y se conserva la versión activa",
+    "truncated: se identifica css/assistant.css y INTEGRITY, persiste el diagnóstico al recargar y se conserva la versión activa",
+    "crlf: se identifica css/assistant.css y INTEGRITY, persiste el diagnóstico al recargar y se conserva la versión activa",
+    "redirect: se identifica css/assistant.css y REDIRECT, persiste el diagnóstico al recargar y se conserva la versión activa",
+    "Reintento de la MISMA versión fallida: descarga, verifica, activa después de diez segundos y conserva datos",
+    "Una URL antigua puede devolver bytes obsoletos: la descarga identificada por digest obtiene los archivos íntegros y actualiza automáticamente",
+    "HTTP 503 transitorio: reintento limitado del recurso, sin desactivar integridad ni bloquear la versión anterior"
+  ],
+  "failures": [
+    {
+      "stage": "download",
+      "code": "HTTP",
+      "resource": "css/assistant.css",
+      "version": "8.0.1",
+      "status": 404,
+      "at": 1793414667723
+    },
+    {
+      "stage": "verification",
+      "code": "HTML_RESPONSE",
+      "resource": "css/assistant.css",
+      "version": "8.0.2",
+      "at": 1793414667995
+    },
+    {
+      "stage": "verification",
+      "code": "INTEGRITY",
+      "resource": "css/assistant.css",
+      "version": "8.0.3",
+      "expected": "ea35cce2c0ea4b4aed25777b50043764f1a94c5f29ff910d0f88f86d42eb7a64",
+      "received": "100f2e0fefdc69b60de81a24bcad886ab154f865909ae3c93dfa1d1e2a0b0f29",
+      "bytes": 30,
+      "at": 1793414668285
+    },
+    {
+      "stage": "verification",
+      "code": "INTEGRITY",
+      "resource": "css/assistant.css",
+      "version": "8.0.4",
+      "expected": "ea35cce2c0ea4b4aed25777b50043764f1a94c5f29ff910d0f88f86d42eb7a64",
+      "received": "fd56dac7a315821ceb5031d539f6e2b3a9fe6ac61de9623e64d9291a98a621fd",
+      "bytes": 1348,
+      "at": 1793414668490
+    },
+    {
+      "stage": "download",
+      "code": "REDIRECT",
+      "resource": "css/assistant.css",
+      "version": "8.0.5",
+      "at": 1793414668693
+    }
+  ],
+  "pageErrors": [],
+  "requests": [
+    {
+      "file": "harness.html",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/navigation-policy.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/premium-system.css",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/loading.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/update-page.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-shortcut.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa-context.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/release-info.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/update-safety.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/configuracion.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/estilos.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/eventos.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/excel-sync.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/firebase-sync.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/index.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/login.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/mantenimiento.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/minuta-share.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/minuta.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/nav-clean.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/operating-center.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/premium-system.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/professional-ui.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/pwa-compat.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "css/usuarios.css",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "eventos.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "index.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-access.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-center.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-modal.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-shortcut.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-content.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-dialog.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-movil.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-operations.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-page.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-reminders.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-requirements.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agendas.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/app.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/assistant-config.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/assistant-core.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/assistant.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/audit-store.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/auth-guard.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/backup-store.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/configuracion.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/data-core.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/device-heartbeat.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/device-registry.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/event-notes.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/event-query.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/eventos.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/excel-sync.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/firebase-app-check.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/firebase-config.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/firebase-sync.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/food-alerts-core.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/index.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/laboratorio.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/loader-guard.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/loading.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/local-auth.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/local-record-store.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/login.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/maintenance-guard.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/mantenimiento.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta-raster.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta-share-preview.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta-share.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta-time.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/navigation-policy.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/notifications.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/operating-center.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/performance-monitor.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/puente_movil_eventos.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/push-client.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/push-config.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/push-ui.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa-context.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/release-info.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/release-worker.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/session-ui.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/system-log.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/system-version.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/update-page.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/update-safety.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/usuarios.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/validacion-page.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "js/validation.js",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "laboratorio.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "login.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "mantenimiento.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "minuta.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "offline.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "recuperacion.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "usuarios.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "validacion.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "harness.html",
+      "query": "?__rpt_release=b1b496b81cdc68976fcc3c7a9ccb933508d2ece44e2c61519f03da4ffd6c6ee6",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "data/eventos_publicos.json",
+      "query": "",
+      "version": "8.0.0",
+      "mode": "ok"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=c6b1b522c82934765ae8238199efbc7abf4f96d57852a13cd31f61ff96f8a402",
+      "version": "8.0.1",
+      "mode": "missing"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=f7b5e254223e7405c0cc14ae90c37b0323ae31472116a6fa28e79ebf39f04b54",
+      "version": "8.0.2",
+      "mode": "html"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/configuracion.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "query": "?__rpt_release=e22e19ad3705da5a3ec29ce6fead795c267f0796bc2a3b5231c97c6d5092aa50",
+      "version": "8.0.3",
+      "mode": "truncated"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/configuracion.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "query": "?__rpt_release=f258a9c4d32d7dbe5806d14b97d25a0117e5a38810e3264dd53739676f73b0a7",
+      "version": "8.0.4",
+      "mode": "crlf"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/configuracion.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/replacement.css",
+      "query": "",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "css/estilos.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "redirect"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/configuracion.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/estilos.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/eventos.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/excel-sync.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/firebase-sync.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/index.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/login.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/mantenimiento.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/minuta-share.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/minuta.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/nav-clean.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/operating-center.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/premium-system.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/professional-ui.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/pwa-compat.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "css/usuarios.css",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "eventos.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "index.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-access.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-center.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-modal.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/admin-shortcut.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-content.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-dialog.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-movil.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-operations.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-page.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-reminders.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agenda-requirements.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/agendas.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/app.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/assistant-config.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/assistant-core.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/assistant.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/audit-store.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/auth-guard.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/backup-store.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/configuracion.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/data-core.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/device-heartbeat.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/device-registry.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/event-notes.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/event-query.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/eventos.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/excel-sync.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/firebase-app-check.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/firebase-config.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/firebase-sync.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/food-alerts-core.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/index.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/laboratorio.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/loader-guard.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/loading.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/local-auth.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/local-record-store.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/login.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/maintenance-guard.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/mantenimiento.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta-raster.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta-share-preview.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta-share.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta-time.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/minuta.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/navigation-policy.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/notifications.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/operating-center.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/performance-monitor.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/puente_movil_eventos.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/push-client.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/push-config.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/push-ui.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa-context.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/pwa.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/release-info.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/release-worker.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/session-ui.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/system-log.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/system-version.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/update-page.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/update-safety.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/usuarios.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/validacion-page.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "js/validation.js",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "laboratorio.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "login.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "mantenimiento.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "minuta.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "offline.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "recuperacion.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "usuarios.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "validacion.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "harness.html",
+      "query": "?__rpt_release=0dc4e1ecfc540b90a889e903628e728122f7b225507e97b16af27f54e5e4d504",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "data/eventos_publicos.json",
+      "query": "",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.5",
+      "mode": "ok"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/configuracion.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/estilos.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/eventos.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/excel-sync.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/firebase-sync.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/index.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/login.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/mantenimiento.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/minuta-share.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/minuta.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/nav-clean.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/operating-center.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/premium-system.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/professional-ui.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/pwa-compat.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "css/usuarios.css",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "eventos.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "index.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/admin-access.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/admin-center.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/admin-modal.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/admin-shortcut.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/agenda-content.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/agenda-dialog.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/agenda-movil.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/agenda-operations.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/agenda-page.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/agenda-reminders.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/agenda-requirements.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/agendas.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/app.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/assistant-config.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/assistant-core.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/assistant.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/audit-store.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/auth-guard.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/backup-store.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/configuracion.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/data-core.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/device-heartbeat.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/device-registry.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/event-notes.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/event-query.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/eventos.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/excel-sync.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/firebase-app-check.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/firebase-config.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/firebase-sync.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/food-alerts-core.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/index.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/laboratorio.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/loader-guard.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/loading.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/local-auth.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/local-record-store.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/login.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/maintenance-guard.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/mantenimiento.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/minuta-raster.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/minuta-share-preview.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/minuta-share.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/minuta-time.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/minuta.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/navigation-policy.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/notifications.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/operating-center.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/performance-monitor.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/puente_movil_eventos.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/push-client.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/push-config.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/push-ui.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/pwa-context.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/pwa.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/release-info.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/release-worker.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/session-ui.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/system-log.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/system-version.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/update-page.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/update-safety.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/usuarios.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/validacion-page.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "js/validation.js",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "laboratorio.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "login.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "mantenimiento.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "minuta.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "offline.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "recuperacion.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "usuarios.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "validacion.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "harness.html",
+      "query": "?__rpt_release=98a81c99f4f70651ef2408d116cdc777c201e042e02da8fb6a65b32794add1bd",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "data/eventos_publicos.json",
+      "query": "",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.6",
+      "mode": "stale-bare"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "administracion.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "agenda_movil.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "agendas.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "asistente.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "configuracion.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/agendas.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/configuracion.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/assistant.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/estilos.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/eventos.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/excel-sync.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/firebase-sync.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/index.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/login.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/mantenimiento.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/minuta-share.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/minuta.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/nav-clean.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/operating-center.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/premium-system.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/professional-ui.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/pwa-compat.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "css/usuarios.css",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "eventos.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "index.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/admin-access.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/admin-center.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/admin-modal.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/admin-shortcut.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/agenda-content.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/agenda-dialog.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/agenda-movil.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/agenda-operations.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/agenda-page.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/agenda-reminders.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/agenda-requirements.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/agendas.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/app.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/assistant-config.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/assistant-core.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/assistant.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/audit-store.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/auth-guard.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/backup-store.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/configuracion.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/data-core.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/device-heartbeat.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/device-registry.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/event-notes.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/event-query.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/eventos.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/excel-sync.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/firebase-app-check.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/firebase-config.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/firebase-sync.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/food-alerts-core.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/index.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/laboratorio.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/loader-guard.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/loading.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/local-auth.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/local-record-store.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/login.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/maintenance-guard.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/mantenimiento.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/minuta-raster.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/minuta-share-preview.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/minuta-share.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/minuta-time.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/minuta.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/navigation-policy.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/notifications.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/operating-center.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/performance-monitor.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/puente_movil_eventos.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/push-client.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/push-config.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/push-ui.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/pwa-context.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/pwa.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/release-info.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/release-worker.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/session-ui.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/system-log.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/system-version.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/update-page.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/update-safety.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/usuarios.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/validacion-page.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "js/validation.js",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "laboratorio.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "login.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "mantenimiento.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "minuta.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "offline.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "recuperacion.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "usuarios.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "validacion.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "harness.html",
+      "query": "?__rpt_release=6fb12879d7019540860bb8a37f2e8ec9b4185b7e4ef9c8cafaa8f3fbc881bc1f",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "data/eventos_publicos.json",
+      "query": "",
+      "version": "8.0.7",
+      "mode": "transient"
+    },
+    {
+      "file": "sw.js",
+      "query": "",
+      "version": "8.0.7",
+      "mode": "transient"
+    }
+  ],
+  "limits": [
+    "Servicios HTTP locales controlados. No demuestra la causa exacta de un alojamiento no recibido."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "passed": [
+    "Instalación real con todos los recursos verificados por SHA-256 y confirmación de versión activa",
+    "Una página HTML que no pertenece a la versión activa se bloquea antes de mezclar archivos de versiones distintas",
+    "Recurso de actualización corrupto: instalación rechazada y versión anterior intacta",
+    "No se activa ni recarga mientras hay un formulario pendiente",
+    "Otra pestaña con cambios impide la activación y libera la interfaz tras cancelar",
+    "Cuenta regresiva real de 00:10 a 00:00 y espera mínima de diez segundos antes de activar y recargar",
+    "Actualización segura real de dos pestañas: recarga coordinada y conservación de versión anterior",
+    "Restauración local real a la versión anterior verificada, sin borrar datos",
+    "Actualización automática activada con preferencia persistente: dos páginas pasan a la nueva versión tras diez segundos, sin ciclos de recarga"
+  ],
+  "errors": [],
+  "cacheState": {
+    "names": [
+      "rpt-shell-aHR0cDovLzEyNy4wLjAuMTo2NDY3OC9hcHAv-4.0.0-b17c7292994b",
+      "rpt-release-meta",
+      "rpt-shell-aHR0cDovLzEyNy4wLjAuMTo2NDY3OC9hcHAv-4.0.3-04ad7550569c"
+    ],
+    "data": null
+  },
+  "limits": [
+    "Navegador Chrome local. No se probó una instalación física Android/iOS ni despliegue real."
+  ]
+}

@@ -1,3 +1,7 @@
+# 4.4.0 — Centro Operativo y administración protegida
+
+Inicio con tres módulos operativos, navegación compacta y motores diferidos. Información técnica trasladada al Centro de Administración; Ctrl+M revalida la contraseña administradora local existente. Rutas y funciones administrativas protegidas, móvil y negocio conservados. 80 vistas responsive y pruebas de actualización, migración y persistencia. Detalles en entrega/v44.
+
 # 4.3.0 — ajustes funcionales solicitados
 
 Agenda Móvil pública y aislada; contactos y observaciones con guardado automático local; orden y estado operativo; alimentación completa por grupos; actualización con diferencias reales y reanudación automática; Ctrl+Q con texto completo, WhatsApp Web y alternativa al bloqueo de ventanas.
