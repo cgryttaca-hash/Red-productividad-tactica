@@ -41,6 +41,9 @@ jobs:
       - run: pnpm test:v43
       - run: pnpm test:sharing
       - run: pnpm test:automatic
+      - run: pnpm test:food-display
+      - run: pnpm test:ai-statistics
+      - run: pnpm test:background
       - run: pnpm test:center
       - run: pnpm test:installed
       - run: pnpm test:responsive

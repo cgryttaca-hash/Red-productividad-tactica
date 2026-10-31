@@ -1,0 +1,11 @@
+{
+  "passed": [
+    "La IA solo interpreta filtros; empresa principal, salones, promedio y PAX faltante se calculan desde la publicación suministrada al backend, sin enviar filas al proveedor",
+    "Una publicación vacía devuelve cero coincidencias y ninguna empresa ni cifra supuesta",
+    "Una respuesta del modelo con hechos o campos no permitidos se rechaza en lugar de mostrarse"
+  ],
+  "calls": 3,
+  "limits": [
+    "Proveedor y publicación simulados de forma explícita en la prueba; cero llamadas a un proveedor real, sin credenciales reales. La configuración distribuida de IA continúa deshabilitada."
+  ]
+}

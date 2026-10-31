@@ -1,6 +1,6 @@
 (function(scope){
   const ZONE='America/Bogota';
-  const ACTIONS=['list','summary','issues','duplicates','whatsapp','minuta','configuration','suggestions'];
+  const ACTIONS=['list','summary','issues','duplicates','whatsapp','minuta','configuration','suggestions','statistics'];
   const text=value=>value===null||value===undefined?'':String(value).trim();
   const fold=value=>text(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es');
   function date(value){
@@ -26,6 +26,11 @@
     if(['company','room','status'].some(key=>query[key].length>160))throw new Error('El filtro es demasiado largo.');
     return query;
   }
+  function statistics(events){
+    const group=key=>{const counts=new Map();for(const event of events){const label=typeof key==='function'?key(event):event[key];if(!label)continue;const id=fold(label),entry=counts.get(id)||{label,count:0};entry.count++;counts.set(id,entry);}return[...counts.values()].sort((a,b)=>b.count-a.count||a.label.localeCompare(b.label,'es',{numeric:true}));};
+    const known=events.filter(event=>event.pax!==null),pax=known.reduce((sum,event)=>sum+event.pax,0);
+    return{events:events.length,knownPax:pax,missingPax:events.length-known.length,averagePax:known.length?pax/known.length:null,companies:group('company'),rooms:group('room'),states:group(event=>event.status||'Sin estado registrado'),days:group('date').sort((a,b)=>a.label.localeCompare(b.label)),months:group(event=>event.date.slice(0,7)).sort((a,b)=>a.label.localeCompare(b.label))};
+  }
   function run(rows,value={},now=Date.now()){
     if(!Array.isArray(rows)||rows.length>20000)throw new Error('Los datos no son una lista de eventos válida.');
     const query=validateQuery(value);
@@ -40,22 +45,26 @@
     }
     const duplicates=[...groups.values()].filter(ids=>ids.length>1);
     const knownPax=events.filter(event=>event.pax!==null).reduce((sum,event)=>sum+event.pax,0);
-    const title={list:'Consulta de eventos',summary:'Resumen operativo',issues:'Campos por revisar',duplicates:'Posibles duplicados',whatsapp:'Mensaje para el equipo',minuta:'Preparación de minuta',configuration:'Comprobación de datos',suggestions:'Sugerencias de operación'}[query.action];
+    const title={list:'Consulta de eventos',summary:'Resumen operativo',issues:'Campos por revisar',duplicates:'Posibles duplicados',whatsapp:'Mensaje para el equipo',minuta:'Preparación de minuta',configuration:'Comprobación de datos',suggestions:'Sugerencias de operación',statistics:'Estadísticas de los registros'}[query.action];
     const missingPax=events.filter(event=>event.pax===null).length;
     const lines=[title.toUpperCase(),`Fecha de consulta: ${today(now)} · Colombia`,`Rango: ${query.from||'sin inicio'} a ${query.to||'sin fin'}`,`Filtros: empresa ${query.company||'todas'} · salón ${query.room||'todos'} · estado ${query.status||'todos'}`,`Eventos encontrados: ${events.length}`,`Personas registradas: ${knownPax}${missingPax?` · ${missingPax} evento(s) sin cantidad`:''}`,''];
     if(query.action==='whatsapp'){
       const hour=Number(new Intl.DateTimeFormat('en',{timeZone:ZONE,hour:'2-digit',hourCycle:'h23'}).format(new Date(now)));
       lines.push(`Equipo, ${hour>=5&&hour<12?'buenos días':hour>=12&&hour<19?'buenas tardes':'buenas noches'}. Comparto la programación registrada para ${query.from&&query.from===query.to?query.from:'el rango indicado'}.`,'');
     }
-    if(['issues','configuration','suggestions'].includes(query.action)){
+    const calculated=query.action==='statistics'?statistics(events):null;
+    if(calculated){
+      lines.push('CIFRAS CALCULADAS DESDE LOS REGISTROS · NO SON HECHOS GENERADOS POR IA',`Promedio de PAX por evento con cantidad: ${calculated.averagePax===null?'No disponible':calculated.averagePax.toLocaleString('es-CO',{maximumFractionDigits:1})}`,'PAX corresponde a personas registradas; no acredita asistencia real.');
+      for(const[section,values]of [['EMPRESAS CON MÁS EVENTOS',calculated.companies],['SALONES MÁS UTILIZADOS',calculated.rooms],['EVENTOS POR ESTADO',calculated.states],['EVENTOS POR DÍA',calculated.days],['EVENTOS POR MES',calculated.months]])lines.push('',section,...(values.length?values.map(item=>`${item.label}: ${item.count}`):['No hay información suficiente.']));
+    }else if(['issues','configuration','suggestions'].includes(query.action)){
       lines.push(...(issues.length?issues.map(issue=>`• ${issue.company||'Empresa sin dato'} [${issue.id}]: ${issue.missing.join(', ')}.`):['No se encontraron campos faltantes entre los campos comprobados.']));
       if(query.action==='suggestions')lines.push('Revisa los campos señalados antes de publicar. Usa los filtros de fecha para preparar el turno. Comprueba los avisos desde la aplicación instalada; no se inventan horarios.');
     }else if(query.action==='duplicates')lines.push(...(duplicates.length?duplicates.map(ids=>`Coinciden fecha, empresa, salón y horario: ${ids.join(', ')}. Revisar manualmente; no se eliminó nada.`):['No se encontraron coincidencias exactas en fecha, empresa, salón y horario.']));
     else for(const event of events)lines.push(`• ${event.date||'Fecha sin dato'} · ${event.company||'Empresa sin dato'} [${event.id}]`,`  Salón: ${event.room||'Sin dato'} · Horario: ${event.time||'Sin dato'} · PAX: ${event.pax??'Sin dato'} · Estado: ${event.status||'Sin dato'}`,`  Alimentación: ${event.food||'Sin dato'} · Horario A&B: ${event.foodTime||'Sin dato'}`,`  Acomodación: ${event.layout||'Sin dato'} · Servicio: ${event.service||'Sin dato'} · Pago: ${event.payment||'Sin dato'}`,`  Observación: ${event.notes||'Sin dato'}`,'');
     if(!events.length)lines.push('No hay eventos que coincidan. No se completan datos por suposición.');
     if(query.action==='minuta')lines.push('Para la imagen oficial a color, abre Minuta y pulsa Ctrl + Q. La imagen corresponde a mañana en Colombia e incluye todas las filas de Coworking.');
-    return{title,query,count:events.length,knownPax,missingPax,events,issues,duplicates,text:lines.join('\n')};
+    return{title,query,count:events.length,knownPax,missingPax,events,issues,duplicates,text:lines.join('\n'),...(calculated?{statistics:calculated}:{})};
   }
-  const api=Object.freeze({ACTIONS,ZONE,date,today,tomorrow,normalize,validateQuery,run});
+  const api=Object.freeze({ACTIONS,ZONE,date,today,tomorrow,normalize,validateQuery,statistics,run});
   if(typeof module==='object'&&module.exports)module.exports=api;else scope.RPTAssistantCore=api;
 })(typeof window==='undefined'?globalThis:window);

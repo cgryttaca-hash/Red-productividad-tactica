@@ -1,0 +1,47 @@
+@media screen{
+ html[data-page="agenda_movil"]{--header:#10283f;--header-2:#10283f;--second:#245c81;--second-soft:#edf3f8;--third:#315d7b;--third-soft:#edf3f8;--food:#245c81;--food-soft:#edf4f9;--shadow:0 3px 12px #10283f06}
+ html[data-page="agenda_movil"] .agenda-header{background:#10283f!important;border-bottom:2px solid #b99653!important}
+ html[data-page="agenda_movil"] .agenda-topbar{min-height:80px;padding-block:15px}
+ html[data-page="agenda_movil"] .agenda-toolbar{box-shadow:none!important;border-radius:8px!important;border-color:#d9e3ec!important}
+ html[data-page="agenda_movil"] .agenda-tab.is-active{background:#245c81!important;color:#fff!important;box-shadow:none!important}
+ html[data-page="agenda_movil"] .date-group{border-radius:8px!important;box-shadow:none!important;border-color:#d9e3ec!important}
+ html[data-page="agenda_movil"] .date-group-header{background:#f6f9fb!important;padding:12px 15px;border-bottom-color:#dbe5ed!important}
+ html[data-page="agenda_movil"] .date-group-header h2{font-size:16px;font-weight:650}
+ html[data-page="agenda_movil"] .floor-section,html[data-page="agenda_movil"] .floor-section.is-third{background:#fff!important;border-left-width:2px;border-left-color:#245c81}
+ html[data-page="agenda_movil"] .floor-section.is-third{border-left-color:#b99653}
+ html[data-page="agenda_movil"] .floor-marker,html[data-page="agenda_movil"] .floor-section.is-third .floor-marker{background:#e8f0f6!important;color:#245c81!important;border-radius:6px}
+ html[data-page="agenda_movil"] .floor-section.is-third .floor-header{background:#eef3f7!important;color:#245c81!important}
+ html[data-page="agenda_movil"] .event-summary-row{min-height:70px;border-radius:6px!important}
+ html[data-page="agenda_movil"] .event-summary-row:hover{background:#f6f9fc!important;border-color:#8ca9bf!important}
+ html[data-page="agenda_movil"] .event-summary-company strong{font-weight:650;color:#10283f!important}
+ html[data-page="agenda_movil"] .food-status.is-with{background:#edf4fa!important;color:#245c81!important;border-color:#cbdde9!important}
+ html[data-page="agenda_movil"] .detail-dialog{border-radius:10px!important;box-shadow:0 12px 36px #10283f20!important}
+ html[data-page="agenda_movil"] .detail-heading{background:#f0f5f9!important;border-bottom:1px solid #d9e3ec!important}
+ html[data-page="agenda_movil"] .detail-heading h2{color:#10283f!important;font-size:23px}
+ html[data-page="agenda_movil"] .detail-heading p{color:#52697d!important}
+ html[data-page="agenda_movil"] .detail-heading>span{color:#896b35!important}
+ html[data-page="agenda_movil"] .detail-field{border-radius:6px!important;box-shadow:none!important}
+ html[data-page="agenda_movil"] .detail-food-card{background:#f3f7fb!important;border-color:#ccdae6!important;border-radius:7px!important}
+ html[data-page="agenda_movil"] .food-combo{gap:0}
+ html[data-page="agenda_movil"] .food-line{grid-template-columns:90px minmax(0,1fr);gap:12px;padding:11px 0;border-color:#d6e1eb}
+ html[data-page="agenda_movil"] .food-line b{color:#245c81!important;font-size:12px;line-height:1.6}
+ html[data-page="agenda_movil"] .food-line span{white-space:pre-line;font-size:13px;line-height:1.65;color:#243d52;overflow-wrap:anywhere}
+ html[data-page="agenda_movil"] .detail-copy{border-radius:5px!important;background:#fff!important;border-color:#bacddd!important;color:#245c81!important}
+ @media(max-width:700px){
+  html[data-page="agenda_movil"] .agenda-topbar{min-height:0;padding:14px 12px 10px;gap:8px}
+  html[data-page="agenda_movil"] .agenda-wordmark{max-height:43px;width:190px}
+  html[data-page="agenda_movil"] .agenda-main{padding-top:9px}
+  html[data-page="agenda_movil"] .date-group-header{padding:10px}
+  html[data-page="agenda_movil"] .date-group-header h2{font-size:14px}
+  html[data-page="agenda_movil"] .event-summary-row{min-height:0;padding:10px;margin-bottom:7px}
+  html[data-page="agenda_movil"] .event-summary-company strong{font-size:14px;line-height:1.4}
+  html[data-page="agenda_movil"] .event-summary-pax strong{font-size:20px}
+  html[data-page="agenda_movil"] .detail-heading{padding:15px 46px 14px 12px}
+  html[data-page="agenda_movil"] .detail-heading h2{font-size:20px}
+  html[data-page="agenda_movil"] .food-line{grid-template-columns:76px minmax(0,1fr);gap:9px;padding:10px 0}
+  html[data-page="agenda_movil"] .food-line :is(b,span){font-size:12px}
+  html[data-page="agenda_movil"] .agenda-toolbar :is(input,select){font-size:16px;min-height:44px}
+  html[data-page="agenda_movil"] body.is-large-text .food-line span{font-size:14px}
+ }
+ @media(prefers-reduced-motion:reduce){html[data-page="agenda_movil"] *{transition:none!important;scroll-behavior:auto!important}}
+}

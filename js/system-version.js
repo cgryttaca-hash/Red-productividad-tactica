@@ -1,5 +1,5 @@
-export const SYSTEM_VERSION = '4.4.0';
-export const RELEASE_DATE = '2026-10-31';
+export const SYSTEM_VERSION = '4.5.0';
+export const RELEASE_DATE = '2026-10-30';
 export const RELEASE_NAME = 'Operación, versiones seguras y asistente';
 export const PROTECTED_MODULES = Object.freeze({
   "eventos.html": "d78de619a1cc5575824cc36a6f2bd98e23ad959038d06e4641083643d5042a03",

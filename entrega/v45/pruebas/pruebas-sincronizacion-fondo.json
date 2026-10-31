@@ -1,0 +1,12 @@
+{
+  "passed": [
+    "Archivo XLSX real de prueba vinculado mediante el selector existente y un handle persistente del almacenamiento temporal del navegador",
+    "Al volver a Resumen, lectura automática del archivo modificado y actualización de las cifras sin abrir Sistema ni importar manualmente",
+    "Publicación Firebase automática confirmada solo en el adaptador en memoria; controles ocultos en Resumen, reutilizados una vez al abrir Sistema y bytes del libro intactos"
+  ],
+  "sourcePreserved": true,
+  "pageErrors": [],
+  "limits": [
+    "Perfil efímero, libro de ensayo en almacenamiento privado del navegador y Firebase totalmente simulado. No se abrió ni escribió un Excel operativo ni se contactó producción."
+  ]
+}

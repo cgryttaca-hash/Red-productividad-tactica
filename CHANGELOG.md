@@ -1,3 +1,7 @@
+# 4.5.0 — Alimentación móvil y centro de control
+
+Proyección de alimentación móvil que respeta las líneas y horarios originales, sin cambiar contratos usados por escritorio. Minuta y Agenda de Eventos permanecen idénticos. Siete secciones administrativas bajo demanda con estadísticas, informes, calidad e integración de asistente existentes; fuentes vinculadas conservan sincronización de fondo. Sin credenciales, datos operativos o librerías nuevas. Informe, pruebas y límites en entrega/v45.
+
 # 4.4.0 — Centro Operativo y administración protegida
 
 Inicio con tres módulos operativos, navegación compacta y motores diferidos. Información técnica trasladada al Centro de Administración; Ctrl+M revalida la contraseña administradora local existente. Rutas y funciones administrativas protegidas, móvil y negocio conservados. 80 vistas responsive y pruebas de actualización, migración y persistencia. Detalles en entrega/v44.

@@ -1,0 +1,586 @@
+{
+  "checks": [
+    {
+      "file": "index.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "index.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "eventos.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "agendas.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "offline.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "administracion.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "usuarios.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "configuracion.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "validacion.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "asistente.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "login.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 360,
+      "result": "PASS"
+    }
+  ],
+  "sections": [
+    {
+      "section": "summary",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "section": "statistics",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "section": "assistant",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "section": "quality",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "section": "reports",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "section": "system",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "section": "administration",
+      "width": 1440,
+      "result": "PASS"
+    },
+    {
+      "section": "summary",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "section": "statistics",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "section": "assistant",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "section": "quality",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "section": "reports",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "section": "system",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "section": "administration",
+      "width": 1024,
+      "result": "PASS"
+    },
+    {
+      "section": "summary",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "section": "statistics",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "section": "assistant",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "section": "quality",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "section": "reports",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "section": "system",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "section": "administration",
+      "width": 768,
+      "result": "PASS"
+    },
+    {
+      "section": "summary",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "section": "statistics",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "section": "assistant",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "section": "quality",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "section": "reports",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "section": "system",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "section": "administration",
+      "width": 390,
+      "result": "PASS"
+    },
+    {
+      "section": "summary",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "section": "statistics",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "section": "assistant",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "section": "quality",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "section": "reports",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "section": "system",
+      "width": 360,
+      "result": "PASS"
+    },
+    {
+      "section": "administration",
+      "width": 360,
+      "result": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "missingLocal": [],
+  "limits": [
+    "Vistas Chrome emuladas en cinco tamaños. No son dispositivos físicos. Minuta/Eventos solo se probaron, sin cambios de sus archivos ni estilos."
+  ]
+}

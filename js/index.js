@@ -119,6 +119,7 @@ async function refreshDashboard(force=false){
   await renderActivity();
 }
 function scheduleRefresh(force=false){
+  if(document.getElementById('admin-panel-system')?.hidden)return;
   if(refreshPending&&!force)return;
   refreshPending=true;
   requestAnimationFrame(async()=>{
@@ -145,6 +146,7 @@ window.addEventListener('eventDataUpdated',()=>scheduleRefresh(true));
 window.addEventListener('firebaseEventsPublished',()=>scheduleRefresh(true));
 window.addEventListener('rptSystemLogUpdated',()=>scheduleRefresh(true));
 window.addEventListener('storage',()=>scheduleRefresh(true));
+window.addEventListener('rptAdminSectionChanged',event=>{if(event.detail?.section==='system')scheduleRefresh(true);});
 window.addEventListener('load',()=>{
   setTimeout(()=>$('loader')?.classList.add('is-hidden'),160);
 });

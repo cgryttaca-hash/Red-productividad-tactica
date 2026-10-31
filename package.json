@@ -1,6 +1,6 @@
 {
   "name": "red-productividad-tactica",
-  "version": "4.4.0",
+  "version": "4.5.0",
   "private": true,
   "engines": {
     "node": ">=22"
@@ -10,9 +10,9 @@
     "check": "node tools/check-project.cjs && node tools/verify-release.cjs",
     "test": "node --test tests/assistant.test.cjs",
     "test:updates": "node tests/updates.cjs",
-    "test:responsive": "node tests/v44/responsive.cjs",
-    "test:offline": "node tests/v42/test-offline.cjs",
-    "test:performance": "node tests/v42/test-performance.cjs",
+    "test:responsive": "node tests/v45/responsive.cjs",
+    "test:offline": "node tests/v45/installed.cjs",
+    "test:performance": "node tests/v45/performance.cjs",
     "test:v42": "node tests/v43/functional.cjs",
     "test:reopen": "node tests/v42/test-reopen.cjs",
     "test:integrity": "node tests/update-integrity.cjs",
@@ -21,10 +21,16 @@
     "test:automatic": "node tests/v43/updates-details.cjs",
     "test:sharing": "node tests/v43/whatsapp-excel.cjs",
     "test:food": "node tests/v43/food-backend.cjs",
-    "test:center": "node tests/v44/center.cjs",
-    "test:home-performance": "node tests/v44/performance.cjs",
-    "test:installed": "node tests/v44/installed.cjs",
-    "test:migration": "node tests/v44/migration.cjs"
+    "test:center": "node tests/v45/control.cjs",
+    "test:home-performance": "node tests/v45/performance.cjs",
+    "test:installed": "node tests/v45/installed.cjs",
+    "test:migration": "node tests/v45/migration.cjs",
+    "test:control": "node tests/v45/control.cjs",
+    "test:food-display": "node tests/v45/food.cjs",
+    "test:preservation": "node tests/v45/preservation.cjs",
+    "test:ai-statistics": "node tests/v45/assistant.cjs",
+    "test:mobile": "node tests/v45/mobile.cjs",
+    "test:background": "node tests/v45/background.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

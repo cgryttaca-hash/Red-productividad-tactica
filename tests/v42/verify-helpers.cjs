@@ -155,7 +155,8 @@ const server = http.createServer((request, response) => {
 let baseUrl;
 let browser;
 async function contextFor(version, options = {}) {
-  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, locale: 'es-CO', timezoneId: 'America/Bogota', serviceWorkers: 'block', ...options });
+  const {engineBrowser,...contextOptions}=options;
+  const context = await (engineBrowser||browser).newContext({ viewport: { width: 1440, height: 1000 }, locale: 'es-CO', timezoneId: 'America/Bogota', serviceWorkers: 'block', ...contextOptions });
   await context.route('**/*', async route => {
     const url = new URL(route.request().url());
     if (url.origin === baseUrl) return route.continue();
@@ -525,5 +526,5 @@ async function finish() {
   server.close();
 }
 
-module.exports = { start, finish, contextFor, login, goto, roots, evidence, fixtureRows, results, check };
+module.exports = { appMock, authMock, firestoreMock, eventsFlow, minuteFlow, printSignature, start, finish, contextFor, login, goto, roots, evidence, fixtureRows, results, check };
 

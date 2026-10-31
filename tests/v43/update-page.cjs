@@ -1,2 +1,2 @@
-// La página real ahora requiere revalidación local mediante Ctrl+M.
-require('../v44/installed.cjs');
+// Página instalada con revalidación administrativa y carga bajo demanda.
+require('../v45/installed.cjs');

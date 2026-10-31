@@ -1,13 +1,17 @@
 {
-  "version": "4.4.0",
+  "version": "4.5.0",
+  "dateBogota": "2026-10-30",
   "result": "PASS",
-  "resources": 137,
+  "resources": 149,
   "pages": 16,
   "responsiveChecks": 80,
-  "mobileAccess": "public, unchanged",
-  "adminAccess": "Ctrl+M, current local admin password",
+  "controlSectionChecks": 35,
+  "mobileAccess": "public, same architecture",
+  "eventAndMinuteFiles": "unchanged; source hashes and print comparison verified",
+  "adminAccess": "Ctrl+M, current local admin account",
+  "externalAIConfigured": false,
   "productionDeployed": false,
   "physicalDevicesVerified": false,
-  "report": "entrega/v44/PRUEBAS.json",
-  "digest": "bf5366863dafa28e918f00378d4a818b8c16e5b1219bd0ed91facb3c1e626079"
+  "report": "entrega/v45/PRUEBAS.json",
+  "digest": "a9846431cdb2cb80f530d8904e473d8d85edf52f2e97314182a9531a54ed8ac1"
 }

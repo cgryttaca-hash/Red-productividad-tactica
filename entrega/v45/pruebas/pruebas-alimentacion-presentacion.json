@@ -1,0 +1,43 @@
+{
+  "passed": [
+    "Las dos líneas indicadas por el usuario se conservan completas: repetición original de café, pastel/jugo a las 9:30 y datos fuente intactos",
+    "Cuando las líneas ya están completas en una sola celda se muestran tal cual, sin volver a concatenarlas ni crear una descripción",
+    "Bloques multilínea con nombres inequívocos se conservan completos aunque estén en otro orden; su encabezado idéntico no se duplica por concatenación",
+    "Texto sin correspondencia inequívoca permanece visible y sin horario supuesto; no se absorbe bajo el primer nombre coincidente",
+    "Servicio único, cantidades, números de Excel, grupos numerados y duplicación de presentación se manejan sin perder texto ni modificar horas",
+    "Avisos solo de alimentación: misma regla de −15 minutos Bogotá, sin duplicados/cancelados y texto del servicio correspondiente",
+    "Causa reproducida frente a 4.4: la primera coincidencia absorbía la segunda descripción. Contratos usados por escritorio, fechas/identificadores de alertas y archivos de Minuta/Eventos permanecen idénticos"
+  ],
+  "sourceReference": [
+    "7:00 AM ESTACION DE CAFÉ ESTACION DE CAFÉ SENCILLA",
+    "9:30 AM - REFRIGERIO AM PASTEL POLLO Y JUGO"
+  ],
+  "projection": {
+    "services": [
+      {
+        "hour": 7,
+        "minute": 0,
+        "originalTime": "7:00 AM",
+        "serviceLabel": "ESTACION DE CAFÉ",
+        "text": "ESTACION DE CAFÉ ESTACION DE CAFÉ SENCILLA",
+        "sourceSchedule": "7:00 AM ESTACION DE CAFÉ",
+        "sourceDescription": "ESTACION DE CAFÉ SENCILLA",
+        "relation": "parallel-source-lines"
+      },
+      {
+        "hour": 9,
+        "minute": 30,
+        "originalTime": "9:30 AM",
+        "serviceLabel": "REFRIGERIO AM",
+        "text": "- REFRIGERIO AM PASTEL POLLO Y JUGO",
+        "sourceSchedule": "9:30 AM - REFRIGERIO AM",
+        "sourceDescription": "PASTEL POLLO Y JUGO",
+        "relation": "parallel-source-lines"
+      }
+    ],
+    "unassigned": []
+  },
+  "limits": [
+    "Caso de regresión basado en las líneas suministradas por el usuario. La división en dos campos es una comprobación estructural adicional, no una lectura de un Excel operativo nuevo. No se incorporan registros de prueba a los datos distribuidos."
+  ]
+}

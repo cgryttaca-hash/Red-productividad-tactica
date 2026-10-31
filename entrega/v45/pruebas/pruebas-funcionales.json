@@ -1,0 +1,17 @@
+{
+  "passed": [
+    "Agenda Móvil pública en navegador y contexto PWA, sin login; Inicio se bloquea y las funciones privadas no cambian usuarios ni sesiones",
+    "Agenda por pisos: segundo cronológico, tercero 301/302/305 numérico y horario; inicio, fin y estado operativo reales",
+    "Ejecutivo, correo, teléfono y observación se guardan automáticamente, sobreviven al cierre y recarga, y no escriben eventData/Excel",
+    "Servicios completos y emparejados por nombre, con cantidades multilínea; plantilla copiada con fecha, empresa, pago, observación y contactos",
+    "Cambios del origen actualizan y reordenan la agenda sin borrar contactos, vacíos intencionales ni observaciones internas",
+    "Fallo de guardado: no anuncia éxito, conserva la edición y evita cerrarla; permite reintentar",
+    "Columnas con acentos, espacios y grupos numerados conservan todos los servicios y sus descripciones",
+    "Agenda Móvil ordenada con la publicación existente y sesión privada de otra pestaña intacta",
+    "Adaptador de publicación en memoria y red deshabilitada: actualiza orden, personas, alimentación y detalle abierto sin duplicados ni escrituras remotas"
+  ],
+  "pageErrors": [],
+  "limits": [
+    "PWA emulada en navegador Chrome. Firebase controlado; sin escrituras de producción."
+  ]
+}

@@ -1,3 +1,5 @@
+Entrega vigente 4.5.0: leer LEER_PRIMERO_V45.md y entrega/v45/INFORME.md. Alimentación móvil respetando la fuente y centro de control bajo demanda. Minuta y Agenda de Eventos sin cambios. Los textos siguientes son históricos.
+
 Entrega vigente 4.4.0: leer LEER_PRIMERO_V44.md y entrega/v44/INFORME.md. Centro Operativo y administración mediante Ctrl+M con la cuenta local actual. Los textos siguientes son históricos.
 
 Entrega vigente 4.3.0: leer LEER_PRIMERO_V43.md y entrega/v43/INFORME.md. Agenda Móvil pública y ajustes funcionales del complemento. Los textos siguientes son históricos.

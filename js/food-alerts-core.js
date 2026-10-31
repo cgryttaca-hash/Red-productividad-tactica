@@ -76,6 +76,63 @@ export function eventFoodServices(record){
  for(const group of groups){const paired=pairFoodServices(group.schedule,group.description);services.push(...paired.services);unassigned.push(...paired.unassigned);if(!paired.services.length&&group.schedule)unassigned.push(group.schedule);}
  return{services,unassigned:services.length?[...new Set(unassigned)]:[],schedule:groups.map(g=>g.schedule).filter(Boolean).join('\n'),description:groups.map(g=>g.description).filter(Boolean).join('\n')};
 }
+
+// Proyección de lectura para Agenda Móvil. No altera los campos ni el contrato
+// de eventFoodServices, utilizado por las páginas de escritorio existentes.
+export function presentFoodServices(record){
+  const services=[],unassigned=[];
+  const clean=value=>text(value).replace(/\r\n?/g,'\n').replace(/_x000D_|<br\s*\/?\s*>/gi,'\n');
+  const same=(a,b)=>normalize(a)===normalize(b);
+  const combine=(a,b)=>{
+    if(!a)return b;if(!b||same(a,b)||normalize(a).endsWith(' '+normalize(b)))return a;
+    const newline=b.indexOf('\n');
+    if(newline>=0&&!a.includes('\n')&&same(a.replace(/^[\s:–—-]+/,''),b.slice(0,newline).replace(/^[\s:–—-]+/,'')))return a+b.slice(newline);
+    return`${a} ${b}`;
+  };
+  for(const group of foodFields(record)){
+    const entries=[],other=[];
+    for(const raw of clean(group.schedule).split('\n')){
+      const line=raw.trim();if(!line)continue;
+      const times=parseFoodTimes(line),item=times[0];
+      if(times.length===1&&line.startsWith(item.originalTime))entries.push({...item,body:line.slice(item.originalTime.length).trim(),sourceSchedule:line});
+      else if(entries.length&&times.length===0){const last=entries[entries.length-1];last.body+='\n'+line;last.sourceSchedule+='\n'+line;}
+      else other.push(line);
+    }
+    const descriptions=clean(group.description).split('\n').map(v=>v.trim()).filter(Boolean);
+    const used=new Set();
+    const targets=descriptions.map(line=>{
+      const explicit=parseFoodTimes(line);
+      if(explicit.length===1&&line.startsWith(explicit[0].originalTime))return entries.map((entry,index)=>entry.hour===explicit[0].hour&&entry.minute===explicit[0].minute?index:-1).filter(index=>index>=0);
+      return entries.map((entry,index)=>{
+        const label=normalize(entry.body.replace(/^[\s:–—-]+/,'')),content=normalize(line);
+        return label&&(content===label||content.startsWith(label+' '))?index:-1;
+      }).filter(index=>index>=0);
+    });
+    // Filas paralelas de ambas celdas: no absorber la segunda descripción
+    // como continuación del primer nombre de servicio.
+    const parallel=entries.length>1&&descriptions.length===entries.length&&targets.every((indices,index)=>!indices.length||(indices.length===1&&indices[0]===index));
+    const everyServiceAnchored=entries.length>1&&entries.every((_,index)=>targets.filter(indices=>indices.length===1&&indices[0]===index).length===1);
+    for(const[entryIndex,entry]of entries.entries()){
+      let selected=[];let relation='schedule';
+      if(entries.length===1){selected=descriptions.map((line,index)=>{const explicit=parseFoodTimes(line);return explicit.length===1&&line.startsWith(explicit[0].originalTime)&&(explicit[0].hour!==entry.hour||explicit[0].minute!==entry.minute)?-1:index;}).filter(index=>index>=0);relation='single-service';}
+      else if(parallel){selected=[entryIndex];relation='parallel-source-lines';}
+      else{
+        const anchors=targets.map((indices,index)=>indices.length===1&&indices[0]===entryIndex?index:-1).filter(index=>index>=0);
+        if(anchors.length===1){selected=[anchors[0]];relation='explicit-source-match';
+          if(everyServiceAnchored)for(let next=anchors[0]+1;next<descriptions.length&&!targets[next].length;next++)selected.push(next);
+        }
+      }
+      selected.forEach(index=>used.add(index));
+      const sourceDescription=selected.map(index=>descriptions[index]).join('\n');
+      let description=sourceDescription;
+      const explicit=parseFoodTimes(description);
+      if(explicit.length===1&&description.startsWith(explicit[0].originalTime)&&explicit[0].hour===entry.hour&&explicit[0].minute===entry.minute)description=description.slice(explicit[0].originalTime.length).trim();
+      services.push({hour:entry.hour,minute:entry.minute,originalTime:entry.originalTime,serviceLabel:entry.body.replace(/^[\s:–—-]+/,''),text:combine(entry.body,description),sourceSchedule:entry.sourceSchedule,sourceDescription,relation});
+    }
+    unassigned.push(...other,...descriptions.filter((_,index)=>!used.has(index)));
+  }
+  return{services,unassigned};
+}
 export function pairFoodServices(schedule,description){
   const times=parseFoodTimes(schedule),lines=text(description).replace(/\r/g,'').split('\n').map(value=>value.trim()).filter(Boolean),used=new Set();
   const labels=times.map(item=>item.line.replace(item.originalTime,'').replace(/^[\s:–—-]+|[\s:–—-]+$/g,'').trim());
@@ -125,13 +182,15 @@ export function planFoodAlerts(events, { timeZone = FOOD_TIME_ZONE } = {}) {
     if (!company) { issues.push({ eventId, reason: 'missing-company' }); continue; }
     const dateISO = field(event, 'fechaISO', 'FECHA').slice(0, 10);
     const times = food.services;
+    const presentation = presentFoodServices(event);
     if (!times.length) { issues.push({ eventId, reason: 'missing-or-invalid-food-time' }); continue; }
     const descriptions = description.replace(/\r/g, '').split(/\n+/).map(line => line.trim()).filter(Boolean);
     for (const [index, service] of times.entries()) {
       const foodAt = localTimeToEpoch(dateISO, service.hour, service.minute, timeZone);
       if (foodAt === null) { issues.push({ eventId, reason: 'invalid-or-ambiguous-food-date' }); continue; }
       const id = `food_${encodeURIComponent(eventId)}_${foodAt}`;
-      const serviceDescription = [service.service,service.description].filter(Boolean).join('\n');
+      const corresponding = presentation.services.filter(item=>item.hour===service.hour&&item.minute===service.minute);
+      const serviceDescription = corresponding.length ? corresponding.map(item=>item.text).filter(Boolean).join('\n') : [service.service,service.description].filter(Boolean).join('\n');
       if(!serviceDescription){issues.push({eventId,reason:'ambiguous-food-service'});continue;}
       if (seen.has(id)) {
         const existing = alerts.find(alert => alert.id === id);

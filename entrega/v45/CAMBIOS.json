@@ -1,0 +1,940 @@
+[
+  {
+    "file": ".github/workflows/publish.yml",
+    "status": "modified",
+    "category": "integracion",
+    "before": "a3d994f0903243242f4682f804bb2d574e3f96d75ef4b2d1a6205a91d943a213",
+    "after": "046bba42d5281c72b287f3f65e01308b63222505b3f1b6857163a224b70f00c4"
+  },
+  {
+    "file": ".github/workflows/verify.yml",
+    "status": "modified",
+    "category": "integracion",
+    "before": "3372ad259af0f9e7a8aff28d713a08030aefc79c170a91b01a167af9d1bbc960",
+    "after": "d9e31b2aff293e60aac0aeb94e2ed761de621194b51d9f3493a36b688074d58c"
+  },
+  {
+    "file": "CHANGELOG.md",
+    "status": "modified",
+    "category": "documentacion",
+    "before": "310b5d77b21e33fa6a51040ff595784efefb15be8291eeae65883cafe02761f3",
+    "after": "07ba9fd6af80644965c64bef67f664acfd25b2f06e992bdc20121ee275cae0c3"
+  },
+  {
+    "file": "LEER_PRIMERO_V45.md",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "b8b998af45b64c8ab6a595c793a85b00c683847d4fc2e932fe6efcb25b6aa674"
+  },
+  {
+    "file": "README.txt",
+    "status": "modified",
+    "category": "documentacion",
+    "before": "686dd586dddd34e5bd30c237416a2afc80d90e0d82bf297477835086cadb51a7",
+    "after": "523c34be2f7383a3b31b9f7ccbbaa9943a04b89969d8944eb8a9aa7a2ef87b5e"
+  },
+  {
+    "file": "VALIDACION_FINAL.json",
+    "status": "modified",
+    "category": "documentacion",
+    "before": "472607a77dbee7b72ea2e5240d5e6568ccf5b93c4986dfa5c900105f5ff1b705",
+    "after": "bbf3d5db8a7b9401d6c679e5ab5d7f81bdaa90e362b0ac6de7f7ab931146586a"
+  },
+  {
+    "file": "VERSION.txt",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "d4e4d4e812e1dafc4e760f5ee12c48ef76f8af41d27cbf3bf2ff065505b9cfe6",
+    "after": "195790f73af85f22cd306965e5fa5f5a73399c51b74065aa3ee1d4d571d6eef4"
+  },
+  {
+    "file": "administracion.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "cd3050290c86f109e878028a67aaf815b44844f9b399849827e5bef0cb3bdf69",
+    "after": "640623097f58b4bf87a13b02cb86fcf80e4450fb970749fb3e61df49e68dfd80"
+  },
+  {
+    "file": "agenda_movil.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "af1f4db8ed6872c707e1b2a57adbf967fca7ffa5e346bae513f5e9f87d8ccf50",
+    "after": "c413183a9241a9f277c8d8d84d2deb36d61962798389f4b8e69dc78b5a0934c4"
+  },
+  {
+    "file": "agendas.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "e7a70ea61282bbdb6eeb77aeda4b457f7f74c87ff28c2c4fd1f03b298e3f4765",
+    "after": "899c6edd0da9e0679091807d35fc19aecbc836db5df2e677c898475c816c23bc"
+  },
+  {
+    "file": "asistente.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "b6101f4abb6bbb2c7ff2c5cca1678effb9e92516d4f03dc8651216ddcf86f02d",
+    "after": "ed5253fdfe6a95db53a252c1db940eea1298f02b322fd692053d99e39b881850"
+  },
+  {
+    "file": "configuracion.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "33e7e3674442646a220247e1295ed38bc206294396b31bc0e9429168ded5d7a7",
+    "after": "2d9cf4030165332f505216d9a3f17056d9e265ee5af864caff2b059a9440c862"
+  },
+  {
+    "file": "css/control-center.css",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "c8d5be5f923811f56247051e45d93be7da114b19791001287e4beef62544674f"
+  },
+  {
+    "file": "css/interface-polish.css",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "be074386c128e05090950f9d98ecf732450e8f28d81a251a0e75311b7696145e"
+  },
+  {
+    "file": "css/mobile-operating.css",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "ea95e047c211fbdbe909eb05eb4f5e99d0a9feecceb574d3d8fc7e1da577941a"
+  },
+  {
+    "file": "dist/administracion.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "cd3050290c86f109e878028a67aaf815b44844f9b399849827e5bef0cb3bdf69",
+    "after": "640623097f58b4bf87a13b02cb86fcf80e4450fb970749fb3e61df49e68dfd80"
+  },
+  {
+    "file": "dist/agenda_movil.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "af1f4db8ed6872c707e1b2a57adbf967fca7ffa5e346bae513f5e9f87d8ccf50",
+    "after": "c413183a9241a9f277c8d8d84d2deb36d61962798389f4b8e69dc78b5a0934c4"
+  },
+  {
+    "file": "dist/agendas.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "e7a70ea61282bbdb6eeb77aeda4b457f7f74c87ff28c2c4fd1f03b298e3f4765",
+    "after": "899c6edd0da9e0679091807d35fc19aecbc836db5df2e677c898475c816c23bc"
+  },
+  {
+    "file": "dist/asistente.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "b6101f4abb6bbb2c7ff2c5cca1678effb9e92516d4f03dc8651216ddcf86f02d",
+    "after": "ed5253fdfe6a95db53a252c1db940eea1298f02b322fd692053d99e39b881850"
+  },
+  {
+    "file": "dist/configuracion.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "33e7e3674442646a220247e1295ed38bc206294396b31bc0e9429168ded5d7a7",
+    "after": "2d9cf4030165332f505216d9a3f17056d9e265ee5af864caff2b059a9440c862"
+  },
+  {
+    "file": "dist/css/control-center.css",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "c8d5be5f923811f56247051e45d93be7da114b19791001287e4beef62544674f"
+  },
+  {
+    "file": "dist/css/interface-polish.css",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "be074386c128e05090950f9d98ecf732450e8f28d81a251a0e75311b7696145e"
+  },
+  {
+    "file": "dist/css/mobile-operating.css",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "ea95e047c211fbdbe909eb05eb4f5e99d0a9feecceb574d3d8fc7e1da577941a"
+  },
+  {
+    "file": "dist/js/admin-access.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "7ae574d3cc96f320eed73d40725d0dd728a9bc2b149618f4b5ae48b6ae914484",
+    "after": "4ad97ed6cc77b9875841302bc8f284b5a380d37f26d538bcb37814ad64f35c69"
+  },
+  {
+    "file": "dist/js/admin-analytics.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "16d727621454245058dc7162e61461b0250f6396e8b23e5b8f467343ab08f293"
+  },
+  {
+    "file": "dist/js/admin-data.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "13a0a2a127fb90905edc71ea24e46a03b7f56954d16683e3f651303088ee66ca"
+  },
+  {
+    "file": "dist/js/admin-quality.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "317f84a0f0170f3cfd9eb42bbb1ea08990e6e20d17d166fbb2d36aeb8bf73dd7"
+  },
+  {
+    "file": "dist/js/admin-records.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "ba1dc1c08af5fdbc6c13882597ad5af3b26934ef40629b2f6b644fcf62ae78bf"
+  },
+  {
+    "file": "dist/js/admin-reports.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "87fe02140e0583809df70aeba10fdbf21bc899321b4a4f893ff12b4cd059a602"
+  },
+  {
+    "file": "dist/js/admin-statistics.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "7d3a784c7c533082071cc4aec8f16be53dca21dd02096bef0898c5f5d1812134"
+  },
+  {
+    "file": "dist/js/admin-summary.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "786f95848c226f72a0431243418e3ba07aee0b44464695c1b3206f7b0872b7d1"
+  },
+  {
+    "file": "dist/js/admin-ui.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "7a6ce142f9a03dcf82ee7713f808a0271801c7cb4667acc58338e2eeb9aa6817"
+  },
+  {
+    "file": "dist/js/agenda-movil.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "268276562d638c123dd8d281ecd0672bc1cc2ae12317e55a09569dc6139e08a0",
+    "after": "66f1488e9a16d6492a2598436367bfb6ac12518bc48cb7f0bee13fea16d06084"
+  },
+  {
+    "file": "dist/js/assistant-core.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "ac70e391acb77d2c54dc17a30f135b0125793429c103e01d636d268fdbcc10ac",
+    "after": "626470abb68d5cb5cbfb7f16e53b06bf2d7bcc2bab4d7abe05cd69b9a8dc6405"
+  },
+  {
+    "file": "dist/js/assistant.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "93adc3cbdcd3490cc11e5c332fc6ed191a491d2d6a518e812bce6b542a4907af",
+    "after": "e43910e5308454a09fadf3ff05824cfd76ae82becfbd9b93b51fea5eb1b4934b"
+  },
+  {
+    "file": "dist/js/control-center.js",
+    "status": "added",
+    "category": "publicacion-generada",
+    "before": null,
+    "after": "67d79c131f337b4f4fc42d1b96b60c1b336b77961baee1bdbf4c9d6a93afe061"
+  },
+  {
+    "file": "dist/js/food-alerts-core.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "6c58489fda866dd7024677490a3abb30dcf33c76031d8ffe8455323fd90c66a6",
+    "after": "9b382efa477b8c5d613a3d18110598ef087fb95016a57df5f2478da2a15e160f"
+  },
+  {
+    "file": "dist/js/index.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "c8fafd29fca7a940861012aa1de80be4b16cbc7fdaaacf667166fe18fc28ea89",
+    "after": "f4869e678fcb1cabb39ba0f0ccae434bf5b63946ac3d6f82bc16c25cc185d461"
+  },
+  {
+    "file": "dist/js/navigation-policy.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "ada94150879dd65d0a582c822eae9fc06ddbf0f286965b8b874d4cfbab21cac9",
+    "after": "6e20d6f89671bee97757f84c9dba71ab0347995f1df15378e6737a7876dcddfc"
+  },
+  {
+    "file": "dist/js/release-info.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "073966f3aef76c0122fa0dc27bdb203fbb33759fef112b6356c349270d908811",
+    "after": "9b86cf6811bbb667e400dbb859732a9a477466953758558722440d9a0805b7c3"
+  },
+  {
+    "file": "dist/js/system-version.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "fbd236f736ce312745685a03984e3965ce7cec2b6b98bdbf190b613a68a1c4d3",
+    "after": "1c317069374b7856827b49f4e7ca2374fc9a32afd5c0c978222b748c75fd22f0"
+  },
+  {
+    "file": "dist/laboratorio.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "ff71d7df9027d153f6dce8d35d5038d7e921f297ba5d96477abc0f1b23196a98",
+    "after": "08e617b11c904e259f10d886cf1ac32010db82d1d4b7b78ecc407c3843c39dc1"
+  },
+  {
+    "file": "dist/login.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "0c643c092d3b91c857b757e2085999bf042c153a263fbd15ec1823384c24c1ed",
+    "after": "e2facad213e509e79e15a162f94541f060ad93a7c35ed51645222d3d58c71ece"
+  },
+  {
+    "file": "dist/mantenimiento.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "8fc297a0acb8e3a93a39c42eade2e011f1d4dac7b9a04e9a356e79f532d0da60",
+    "after": "9d317d4a5d3a8faa7ba015bf0fc36e1e7a29f1bee70ad6a317a888273821473d"
+  },
+  {
+    "file": "dist/offline.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "e3dbee9cc3e2c8b9c4cc1211a9c2ee3e3f34f19a70399becaf3bd652fadf6423",
+    "after": "29505032514fe5c90a7e62f068f9085a89741ed2b2a087c919dbe1da79e43681"
+  },
+  {
+    "file": "dist/recuperacion.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "07376586f9a88f3017a682f4d582b91a1804b7315fd3621a0b1e7c19ae1cf5a5",
+    "after": "73ad7f4859db77f2ed0144326403208e4d442fa12be0049a2f49f32d16ae5e64"
+  },
+  {
+    "file": "dist/release.json",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "07ac533765cad12fc91cb40c273ff5253f2e533d325a5eaccac246c2b7173ed1",
+    "after": "aa1568435c1d7c0af32885ecb1d39718821492f3c276f28bfe36f7c7138adf27"
+  },
+  {
+    "file": "dist/sw.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "94f22a7687cf694289f4bd6f0bd74c032f50c2c640d97a807ea389fda61730c7",
+    "after": "0143c46274a10f7e70a0373054a29d2e1b06d05fb2ad0fd252eb069b2a272a77"
+  },
+  {
+    "file": "dist/usuarios.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "6378f5c28d37f1202ee45e0b0604b4fc71a311e4124d7508939487d5e32e98ca",
+    "after": "8195437135028740b1f74c1c48fef17d54f927f2a38e54f9a27ebe26808bd9be"
+  },
+  {
+    "file": "dist/validacion.html",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "d72acb7e311c75f816feab6baffef4836156e96c7a27c527c3e3b63e08af2384",
+    "after": "a4e9a41e750d58713cf31cade42cebf58dfc6d11fd5bf91262dd3020a74f0d25"
+  },
+  {
+    "file": "entrega/v45/ARCHIVOS.csv",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": null
+  },
+  {
+    "file": "entrega/v45/AUDITORIA_INICIAL.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "73a5ed6efe38a70fc2a246dccb0955c6cc2bc9bbfcf8b2396f8654d54cd813fe"
+  },
+  {
+    "file": "entrega/v45/CAMBIOS.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": null
+  },
+  {
+    "file": "entrega/v45/CONSERVACION.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "0584fa8e845fa2b4504b2b12f249f1ee49e54381e506f0fef22ceca08e58d98c"
+  },
+  {
+    "file": "entrega/v45/GUIA.md",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "b8b998af45b64c8ab6a595c793a85b00c683847d4fc2e932fe6efcb25b6aa674"
+  },
+  {
+    "file": "entrega/v45/INFORME.md",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "a666e726f0d9eb9ddcb6b3cfcd27a6eafbdf5ffb1255a069437448535369b169"
+  },
+  {
+    "file": "entrega/v45/MANIFIESTO_SHA256.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": null
+  },
+  {
+    "file": "entrega/v45/PRUEBAS.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "1337e44645b1750b53384a0484d5d958a512e6977dc3c14a91de8c969f4c76d8"
+  },
+  {
+    "file": "entrega/v45/capturas/LEER.md",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "9bfcfad86f8526c7dd9e9525cf7b99382b7babb9e64a27980cfd411a588c89ea"
+  },
+  {
+    "file": "entrega/v45/capturas/alimentacion-android.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "e4aae3f188d026190c9bfe60182f30224334b1f89db038188a01c5822637081b"
+  },
+  {
+    "file": "entrega/v45/capturas/alimentacion-ipad.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "4aed51f2791e9a8581b35b3a36db02071054c2b2f187a2602808e370b175f093"
+  },
+  {
+    "file": "entrega/v45/capturas/alimentacion-iphone.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "6c6b32ea88229e0607d7c81e1b67ae296d950f2af4bc685f277a656191d5c271"
+  },
+  {
+    "file": "entrega/v45/capturas/control-assistant-1440.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "153982151d6098f0b8777117013c608790ae5b63bc97207e26dd16c51b2ab618"
+  },
+  {
+    "file": "entrega/v45/capturas/control-assistant-390.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "3ea70b8951c3038a554e8994f49d0f1c1e41726e2074c13e1ee52f2973f9b7e5"
+  },
+  {
+    "file": "entrega/v45/capturas/control-quality-390.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "d6b0cfe3a1342d6cb7952c77b82941256931495784b21ae2194cd71c546d4c61"
+  },
+  {
+    "file": "entrega/v45/capturas/control-reports-390.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "12fa8b2cc55e8767b5ea995c3e361ed66961094e435e0b2519bde6a87b126274"
+  },
+  {
+    "file": "entrega/v45/capturas/control-statistics-1440.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "ea85c3a3bfa00ff15ec8643c24ea3494e5c0e6b379014cd04f281227d8e4785c"
+  },
+  {
+    "file": "entrega/v45/capturas/control-statistics-390.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "65aa88539ef84eb5f1cd2ee69353cf5cf84d09fd5637032fda5bff4aff2d0ccb"
+  },
+  {
+    "file": "entrega/v45/capturas/control-summary-1440.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "9a463153100072564921dbe07a7c33bc0dd3afed3a180e351a798423bc4c1cee"
+  },
+  {
+    "file": "entrega/v45/capturas/control-summary-390.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "c2f4b6c3cb6331e12b82ef6fb6de313315b4656c461ef51f8f118a19bf33fd58"
+  },
+  {
+    "file": "entrega/v45/capturas/control-system-1440.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "f61f1019f4a12190527d50581793a6a440a56b966faf41a632805969da20a01f"
+  },
+  {
+    "file": "entrega/v45/capturas/control-system-390.png",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "d58ab6d20ce130bfcbb387b5430d8f25518b0e512393b16516fe2cfcfdc1d58d"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-actualizaciones.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "91f71b4a9d01d1ecb13260a9fd24b7d3dc9c1cd4ece6ec07226fb014394ccc17"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-alimentacion-presentacion.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "ad0acd96523d29c6119ad880f137f49997c0ea0580850bde1f92ee28365721aa"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-alimentacion.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "2a3aa905cfb09abc56fbbc8a84a84aeaddd5dd548992270bd50f017f02f4bd51"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-asistente-estadisticas.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "68fc31db7862577f867e21dd534e9a61fa859ccc0e9fa2f9c4d8732102f9fcaf"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-asistente.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "112961362e218f11091e062358a5b8c36440f076edb5a21c810263ce5ec08e31"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-automaticas-detalle.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "83ad34a1c7cd2226f942f344da723bc4cbef9eeaad3640e588b2e265f0f88a67"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-conservacion-operativa.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "392cfdb20287e6da0df2d3e46a029c683aa42bd732925638421b7e606c65cceb"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-control.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "32e28b7433a6e97b652b717d7eac3f653dd3bc9b4a6e1077262d2b502cdacd79"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-funcionales.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "c6d20f4295d1f9fc349675a2bf664660fd27379fad06128572f96e8138a20d0e"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-instaladas.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "68568677ce1e0637b612b21ea60a2149f7843d473b6e9808c5eb0a962108a1e0"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-integridad.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "d549cee1ff790dfaffb52dbb6eca8bd166890d60adb46cf23efebe837503a749"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-migracion.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "c9c5f80f55045cfbb815f653988a961da45c1b08566ce16e0d8677a6e7ead7b8"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-movil-compatibilidad.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "ae5190a4cbeff20012c41b7d7ad97acaf778419b504ac3b3f1f87a45eba8ffb4"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-publicacion.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "9afa16efab00c5cd287ffd8e8319b49e533b886e7ba63d739cf5be85dad6fdd0"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-rendimiento.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "0b9726de34c0e25294a023facebfbb7b258969ef86cd9686bfbc32660e8bd139"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-responsive.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "6aaf0da37dd8b08f3220ef2a4d4b44d29535d9f015665be29468e27120de51f7"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-sincronizacion-fondo.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "88acb938fa28c92fb7787278171f3ad69b7fe334005dd9154443eb706ac315d8"
+  },
+  {
+    "file": "entrega/v45/pruebas/pruebas-whatsapp-excel.json",
+    "status": "added",
+    "category": "documentacion",
+    "before": null,
+    "after": "7fcacdb70182ad37ad2c2af17e3928a04c06edfe64ba32ac158c2ab996accf33"
+  },
+  {
+    "file": "functions/assistant-core.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "ac70e391acb77d2c54dc17a30f135b0125793429c103e01d636d268fdbcc10ac",
+    "after": "626470abb68d5cb5cbfb7f16e53b06bf2d7bcc2bab4d7abe05cd69b9a8dc6405"
+  },
+  {
+    "file": "functions/assistant-service.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "ab21b28bcaa8bef5cfe367f39b11d151d6fbf971218f3e262c4b42703f2d1061",
+    "after": "9badc0fbcee269c438bc839f353a04e2c3d277de86e04331441f2525293250a5"
+  },
+  {
+    "file": "functions/food-alerts-core.mjs",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "6c58489fda866dd7024677490a3abb30dcf33c76031d8ffe8455323fd90c66a6",
+    "after": "9b382efa477b8c5d613a3d18110598ef087fb95016a57df5f2478da2a15e160f"
+  },
+  {
+    "file": "js/admin-access.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "7ae574d3cc96f320eed73d40725d0dd728a9bc2b149618f4b5ae48b6ae914484",
+    "after": "4ad97ed6cc77b9875841302bc8f284b5a380d37f26d538bcb37814ad64f35c69"
+  },
+  {
+    "file": "js/admin-analytics.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "16d727621454245058dc7162e61461b0250f6396e8b23e5b8f467343ab08f293"
+  },
+  {
+    "file": "js/admin-data.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "13a0a2a127fb90905edc71ea24e46a03b7f56954d16683e3f651303088ee66ca"
+  },
+  {
+    "file": "js/admin-quality.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "317f84a0f0170f3cfd9eb42bbb1ea08990e6e20d17d166fbb2d36aeb8bf73dd7"
+  },
+  {
+    "file": "js/admin-records.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "ba1dc1c08af5fdbc6c13882597ad5af3b26934ef40629b2f6b644fcf62ae78bf"
+  },
+  {
+    "file": "js/admin-reports.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "87fe02140e0583809df70aeba10fdbf21bc899321b4a4f893ff12b4cd059a602"
+  },
+  {
+    "file": "js/admin-statistics.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "7d3a784c7c533082071cc4aec8f16be53dca21dd02096bef0898c5f5d1812134"
+  },
+  {
+    "file": "js/admin-summary.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "786f95848c226f72a0431243418e3ba07aee0b44464695c1b3206f7b0872b7d1"
+  },
+  {
+    "file": "js/admin-ui.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "7a6ce142f9a03dcf82ee7713f808a0271801c7cb4667acc58338e2eeb9aa6817"
+  },
+  {
+    "file": "js/agenda-movil.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "268276562d638c123dd8d281ecd0672bc1cc2ae12317e55a09569dc6139e08a0",
+    "after": "66f1488e9a16d6492a2598436367bfb6ac12518bc48cb7f0bee13fea16d06084"
+  },
+  {
+    "file": "js/assistant-core.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "ac70e391acb77d2c54dc17a30f135b0125793429c103e01d636d268fdbcc10ac",
+    "after": "626470abb68d5cb5cbfb7f16e53b06bf2d7bcc2bab4d7abe05cd69b9a8dc6405"
+  },
+  {
+    "file": "js/assistant.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "93adc3cbdcd3490cc11e5c332fc6ed191a491d2d6a518e812bce6b542a4907af",
+    "after": "e43910e5308454a09fadf3ff05824cfd76ae82becfbd9b93b51fea5eb1b4934b"
+  },
+  {
+    "file": "js/control-center.js",
+    "status": "added",
+    "category": "aplicacion",
+    "before": null,
+    "after": "67d79c131f337b4f4fc42d1b96b60c1b336b77961baee1bdbf4c9d6a93afe061"
+  },
+  {
+    "file": "js/food-alerts-core.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "6c58489fda866dd7024677490a3abb30dcf33c76031d8ffe8455323fd90c66a6",
+    "after": "9b382efa477b8c5d613a3d18110598ef087fb95016a57df5f2478da2a15e160f"
+  },
+  {
+    "file": "js/index.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "c8fafd29fca7a940861012aa1de80be4b16cbc7fdaaacf667166fe18fc28ea89",
+    "after": "f4869e678fcb1cabb39ba0f0ccae434bf5b63946ac3d6f82bc16c25cc185d461"
+  },
+  {
+    "file": "js/navigation-policy.js",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "ada94150879dd65d0a582c822eae9fc06ddbf0f286965b8b874d4cfbab21cac9",
+    "after": "6e20d6f89671bee97757f84c9dba71ab0347995f1df15378e6737a7876dcddfc"
+  },
+  {
+    "file": "js/release-info.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "073966f3aef76c0122fa0dc27bdb203fbb33759fef112b6356c349270d908811",
+    "after": "9b86cf6811bbb667e400dbb859732a9a477466953758558722440d9a0805b7c3"
+  },
+  {
+    "file": "js/system-version.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "fbd236f736ce312745685a03984e3965ce7cec2b6b98bdbf190b613a68a1c4d3",
+    "after": "1c317069374b7856827b49f4e7ca2374fc9a32afd5c0c978222b748c75fd22f0"
+  },
+  {
+    "file": "laboratorio.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "ff71d7df9027d153f6dce8d35d5038d7e921f297ba5d96477abc0f1b23196a98",
+    "after": "08e617b11c904e259f10d886cf1ac32010db82d1d4b7b78ecc407c3843c39dc1"
+  },
+  {
+    "file": "login.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "0c643c092d3b91c857b757e2085999bf042c153a263fbd15ec1823384c24c1ed",
+    "after": "e2facad213e509e79e15a162f94541f060ad93a7c35ed51645222d3d58c71ece"
+  },
+  {
+    "file": "mantenimiento.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "8fc297a0acb8e3a93a39c42eade2e011f1d4dac7b9a04e9a356e79f532d0da60",
+    "after": "9d317d4a5d3a8faa7ba015bf0fc36e1e7a29f1bee70ad6a317a888273821473d"
+  },
+  {
+    "file": "offline.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "e3dbee9cc3e2c8b9c4cc1211a9c2ee3e3f34f19a70399becaf3bd652fadf6423",
+    "after": "29505032514fe5c90a7e62f068f9085a89741ed2b2a087c919dbe1da79e43681"
+  },
+  {
+    "file": "package.json",
+    "status": "modified",
+    "category": "integracion",
+    "before": "2f8839989cfaca776009142fe4dcbcec5c2c0152d003ed3005316d209b82a998",
+    "after": "a64b829d1422dd0c54c0a3e4c75674c40c0d23a4f4307700496ed450cf495630"
+  },
+  {
+    "file": "recuperacion.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "07376586f9a88f3017a682f4d582b91a1804b7315fd3621a0b1e7c19ae1cf5a5",
+    "after": "73ad7f4859db77f2ed0144326403208e4d442fa12be0049a2f49f32d16ae5e64"
+  },
+  {
+    "file": "release.json",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "07ac533765cad12fc91cb40c273ff5253f2e533d325a5eaccac246c2b7173ed1",
+    "after": "aa1568435c1d7c0af32885ecb1d39718821492f3c276f28bfe36f7c7138adf27"
+  },
+  {
+    "file": "sw.js",
+    "status": "modified",
+    "category": "publicacion-generada",
+    "before": "94f22a7687cf694289f4bd6f0bd74c032f50c2c640d97a807ea389fda61730c7",
+    "after": "0143c46274a10f7e70a0373054a29d2e1b06d05fb2ad0fd252eb069b2a272a77"
+  },
+  {
+    "file": "tests/migration.cjs",
+    "status": "modified",
+    "category": "pruebas",
+    "before": "1d7007feeb1783297ac2e10a38c11beb25890917ad178c220424c98584b18d74",
+    "after": "d5e7fd3c5e5f065a5d370387f68743d207b6f8285d39ca5a1731a50866b28ec2"
+  },
+  {
+    "file": "tests/v42/verify-helpers.cjs",
+    "status": "modified",
+    "category": "pruebas",
+    "before": "376f574e660b6591a9c697679950e11dd5ba8558cbe9450c4b779998a62c378b",
+    "after": "623e9a1e1db70cf6590b57c4860972bc41c77464cc81d42279bfa6320f3b14d1"
+  },
+  {
+    "file": "tests/v43/update-page.cjs",
+    "status": "modified",
+    "category": "pruebas",
+    "before": "c110de6f5d0041f56658a278ca3ae2de4d22ef19cbec9e02f0bdbe2fb6af6051",
+    "after": "352380711ee38215b07debe9dc5d84de320e750b30c002ac693b75287f0de358"
+  },
+  {
+    "file": "tests/v45/assistant.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "b8bf22f635f10bda967e6bc14a4ba7d6a83abeeae608d69e8b1dddd2812710e6"
+  },
+  {
+    "file": "tests/v45/background.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "1262f572239e805058a7595ae8648a70788bd9ea55e4d59fbecee4c42a9cb87a"
+  },
+  {
+    "file": "tests/v45/control.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "6b84ee04fb92e89f66d00414cd143f51e6c3f831fcf9ed04f05f75c548375669"
+  },
+  {
+    "file": "tests/v45/food.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "4f002b4c2bc6a481bbddc652787b0c4086fd7021cac73facb210276caaf52786"
+  },
+  {
+    "file": "tests/v45/installed.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "57c03c6e932832f5720001ed8e05340666558445a5e98f86ae57e0d732ad22c3"
+  },
+  {
+    "file": "tests/v45/migration.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "55e7653dec567b388588d86fbab39d71b623d4c731c733d74a82753d77fc9c92"
+  },
+  {
+    "file": "tests/v45/mobile.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "cadfe2108599ab57257e51553f8a314883f5203fb8ed70841d2c0c0944b82be4"
+  },
+  {
+    "file": "tests/v45/performance.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "9647d338c5ef73f56c2e1444a35126c887d83d64e114d879ac1bb5cb09ff9588"
+  },
+  {
+    "file": "tests/v45/preservation.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "5c1f1a2cffa6e935733890b8e11f1721a83e069224255899b350999455fb96e4"
+  },
+  {
+    "file": "tests/v45/responsive.cjs",
+    "status": "added",
+    "category": "pruebas",
+    "before": null,
+    "after": "b0adefa57260c7ec5f5da0e9836c6b891797adeb0291b07b4e1ad36a9a1d3f10"
+  },
+  {
+    "file": "usuarios.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "6378f5c28d37f1202ee45e0b0604b4fc71a311e4124d7508939487d5e32e98ca",
+    "after": "8195437135028740b1f74c1c48fef17d54f927f2a38e54f9a27ebe26808bd9be"
+  },
+  {
+    "file": "validacion.html",
+    "status": "modified",
+    "category": "aplicacion",
+    "before": "d72acb7e311c75f816feab6baffef4836156e96c7a27c527c3e3b63e08af2384",
+    "after": "a4e9a41e750d58713cf31cade42cebf58dfc6d11fd5bf91262dd3020a74f0d25"
+  }
+]

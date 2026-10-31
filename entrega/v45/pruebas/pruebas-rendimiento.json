@@ -1,0 +1,216 @@
+{
+  "passed": [
+    "Inicio mantiene los mismos elementos y recursos operativos de 4.4; solo crece el control de acceso por la ruta de Asistente protegida, sin cargar estadísticas/IA",
+    "Resumen, análisis y calidad trabajan sobre el origen local sin nuevas lecturas ni listeners de Firebase",
+    "20.000 registros calculados y revisados sin alterar la fuente; agrupaciones y duplicados no generan procesamiento cuadrático"
+  ],
+  "measurements": {
+    "original": {
+      "resources": [
+        {
+          "path": "/original/js/navigation-policy.js",
+          "bytes": 2549
+        },
+        {
+          "path": "/original/js/admin-access.js",
+          "bytes": 980
+        },
+        {
+          "path": "/original/js/auth-guard.js",
+          "bytes": 2830
+        },
+        {
+          "path": "/original/js/maintenance-guard.js",
+          "bytes": 2919
+        },
+        {
+          "path": "/original/css/enterprise-refinements.css",
+          "bytes": 13237
+        },
+        {
+          "path": "/original/css/operating-center.css",
+          "bytes": 6896
+        },
+        {
+          "path": "/original/assets/agenda-brand/logo-symbol-light.svg",
+          "bytes": 615
+        },
+        {
+          "path": "/original/js/admin-shortcut.js",
+          "bytes": 704
+        },
+        {
+          "path": "/original/js/operating-center.js",
+          "bytes": 2088
+        },
+        {
+          "path": "/original/js/pwa.js",
+          "bytes": 27
+        },
+        {
+          "path": "/original/js/device-heartbeat.js",
+          "bytes": 838
+        },
+        {
+          "path": "/original/js/loading.js",
+          "bytes": 1525
+        },
+        {
+          "path": "/original/js/firebase-config.js",
+          "bytes": 666
+        },
+        {
+          "path": "/original/js/pwa-release.js",
+          "bytes": 15357
+        },
+        {
+          "path": "/original/js/local-auth.js",
+          "bytes": 11824
+        },
+        {
+          "path": "/original/js/device-registry.js",
+          "bytes": 5142
+        },
+        {
+          "path": "/original/js/pwa-context.js",
+          "bytes": 304
+        },
+        {
+          "path": "/original/js/release-info.js",
+          "bytes": 38
+        },
+        {
+          "path": "/original/js/update-safety.js",
+          "bytes": 4949
+        },
+        {
+          "path": "/original/assets/agenda-brand/favicon.svg",
+          "bytes": 598
+        }
+      ],
+      "navigationMs": 50.19999999552965,
+      "nodes": 95,
+      "reads": {
+        "eventos_meta/mantenimiento": 1
+      },
+      "listeners": {
+        "eventos_meta/mantenimiento": 1
+      }
+    },
+    "actual": {
+      "resources": [
+        {
+          "path": "/actual/js/navigation-policy.js",
+          "bytes": 2566
+        },
+        {
+          "path": "/actual/js/admin-access.js",
+          "bytes": 997
+        },
+        {
+          "path": "/actual/js/auth-guard.js",
+          "bytes": 2830
+        },
+        {
+          "path": "/actual/js/maintenance-guard.js",
+          "bytes": 2919
+        },
+        {
+          "path": "/actual/css/enterprise-refinements.css",
+          "bytes": 13237
+        },
+        {
+          "path": "/actual/css/operating-center.css",
+          "bytes": 6896
+        },
+        {
+          "path": "/actual/js/operating-center.js",
+          "bytes": 2088
+        },
+        {
+          "path": "/actual/assets/agenda-brand/logo-symbol-light.svg",
+          "bytes": 615
+        },
+        {
+          "path": "/actual/js/admin-shortcut.js",
+          "bytes": 704
+        },
+        {
+          "path": "/actual/js/pwa.js",
+          "bytes": 27
+        },
+        {
+          "path": "/actual/js/device-heartbeat.js",
+          "bytes": 838
+        },
+        {
+          "path": "/actual/js/loading.js",
+          "bytes": 1525
+        },
+        {
+          "path": "/actual/js/firebase-config.js",
+          "bytes": 666
+        },
+        {
+          "path": "/actual/js/pwa-release.js",
+          "bytes": 15357
+        },
+        {
+          "path": "/actual/js/local-auth.js",
+          "bytes": 11824
+        },
+        {
+          "path": "/actual/js/device-registry.js",
+          "bytes": 5142
+        },
+        {
+          "path": "/actual/js/pwa-context.js",
+          "bytes": 304
+        },
+        {
+          "path": "/actual/js/release-info.js",
+          "bytes": 38
+        },
+        {
+          "path": "/actual/js/update-safety.js",
+          "bytes": 4949
+        },
+        {
+          "path": "/actual/assets/agenda-brand/favicon.svg",
+          "bytes": 598
+        }
+      ],
+      "navigationMs": 47,
+      "nodes": 95,
+      "reads": {
+        "eventos_meta/mantenimiento": 1
+      },
+      "listeners": {
+        "eventos_meta/mantenimiento": 1
+      }
+    }
+  },
+  "totals": {
+    "original": 74086,
+    "actual": 74120
+  },
+  "benchmark": {
+    "milliseconds": 2038.6000000014901,
+    "records": 20000,
+    "pax": 700000,
+    "days": 28,
+    "issues": 20000,
+    "sourceUnchanged": true
+  },
+  "initial": {
+    "reads": {},
+    "listeners": {}
+  },
+  "after": {
+    "reads": {},
+    "listeners": {}
+  },
+  "limits": [
+    "Medición local orientativa en Chrome, sin proveedor de producción. Los 20.000 registros son un conjunto aislado de carga para esta prueba y no se guardan en la aplicación. Los tiempos no garantizan el mismo resultado en otro dispositivo o red."
+  ]
+}

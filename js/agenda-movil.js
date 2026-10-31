@@ -1,5 +1,5 @@
 import {compareOperational,floorInfo,eventWindow,operationalStatus} from './agenda-operations.js';
-import {eventFoodServices,foodFields} from './food-alerts-core.js';
+import {eventFoodServices,foodFields,presentFoodServices} from './food-alerts-core.js';
 import {
   FIREBASE_CONFIG,
   EVENTS_COLLECTION,
@@ -200,7 +200,7 @@ function meaningfulFood(value){
 function hasFood(event){
   return meaningfulFood(event.horarioAyB)||meaningfulFood(event.descripcionAlimentacion);
 }
-function foodPairs(event){const paired=eventFoodServices(event);if(!paired.services.length&&(paired.description||paired.schedule))return[{time:'Sin horario registrado',description:paired.description||paired.schedule}];return[...paired.services.map(item=>({time:item.originalTime,description:[item.service,item.description].filter(Boolean).join('\n')})),...paired.unassigned.map(value=>({time:'Sin relación horaria confirmada',description:value}))];}
+function foodPairs(event){const paired=presentFoodServices(event);return[...paired.services.map(item=>({time:item.originalTime,description:item.text})),...paired.unassigned.map(value=>({time:'Sin horario asociado en el origen',description:value}))];}
 function foodStatusMarkup(event){
   return hasFood(event)
     ?'<span class="food-status is-with"><i></i>Con alimentación</span>'
@@ -552,7 +552,7 @@ $('mobileAgenda').addEventListener('click',event=>{
 });
 $('mobileCopyDetail').addEventListener('click',async()=>{
   const event=state.selected;if(!event)return;
-  const food=foodPairs(event).map(item=>`${item.time} — ${item.description}`).join('\n')||'Sin alimentación';
+  const food=foodPairs(event).map(item=>`${item.time} ${item.description}`.trim()).join('\n')||'Sin alimentación';
   const detail=[
     event.empresa,formatDate(event.fechaISO,{weekday:'long',day:'numeric',month:'long',year:'numeric'}),
     `${event.escenario} · ${event.piso}`,`Horario: ${event.horarioEvento||'Sin registrar'}`,

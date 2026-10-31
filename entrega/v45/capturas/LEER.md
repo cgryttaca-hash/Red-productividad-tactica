@@ -1,0 +1,1 @@
+Capturas de perfiles temporales de prueba, no cifras de operación real. Las dos líneas de alimentación proceden de la referencia textual proporcionada por el usuario. Los demás registros y cantidades solo pertenecen al ensayo aislado y no se incorporan al archivo público ni al sistema entregado.
