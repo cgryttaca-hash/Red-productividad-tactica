@@ -1,12 +1,12 @@
-export const SYSTEM_VERSION = '4.7.0';
+export const SYSTEM_VERSION = '4.8.0';
 export const RELEASE_DATE = '2026-11-01';
 export const RELEASE_NAME = 'Operación y administración técnica';
 export const PROTECTED_MODULES = Object.freeze({
-  "eventos.html": "6ab000f5ced55b8b9e38488c120317b5ab387800f89b9250a14513c4363f9f7e",
-  "js/eventos.js": "cc0b9392c5c91ace26eca4289c7696bc555f2c03738b0a21dd9a5bba7f263e60",
+  "eventos.html": "57136dba64307eef1863f5d1989b7bf3da747f375216adbbc1d6cf9c1f95896b",
+  "js/eventos.js": "334d4ba5c3cf730377b76bbf60b7111e9dce472dfc5a6084a753d7e547e7d4db",
   "css/eventos.css": "9f01c8cc6b63fce8add3694d8a81c5d47a7859b394f622be0097b5c516aecba9",
-  "minuta.html": "70fb090cfde6cdf10a05e5af91158ce03e65e1dd219f64d4dc5b8b08a415028f",
-  "js/minuta.js": "c34668a73e7a88d3ccbafa3e7574e2f8e906603c592e1fc134e826b084a6612b",
+  "minuta.html": "a839450381bf79f88549b1dbe7809ae0b396573f1475ccfc310dba88357b0cf0",
+  "js/minuta.js": "3b4499e08e341e31bcdbbacadf96f66d8ca60282044c86c78bb2fa779a328dc0",
   "css/minuta.css": "9c9074cfc87e5334ac936f8c91662568658356a535f9fac2fe0eea279d21cbd3"
 });
 export function versionLabel(){

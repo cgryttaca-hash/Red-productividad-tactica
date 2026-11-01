@@ -12,13 +12,14 @@
  },true);
  window.addEventListener('unhandledrejection',()=>{if(!value.ready)window.RPTPageLoad.fail();});
  const explicit=new Set(['login','index','eventos','minuta','agenda_movil','administracion']);
- const ready=()=>{if(!explicit.has(page))window.RPTPageLoad.ready();};
+ const ready=()=>{if(!explicit.has(page)&&(!window.RPTDeviceAccess||window.__RPT_PAGE_SCRIPTS_READY__))window.RPTPageLoad.ready();};
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+ window.addEventListener('rptPageScriptsReady',ready);
  // La representación se puede iniciar antes que el módulo de la página.
  function paint(){
   if(!document.body)return;let host=document.getElementById('rptPagePreloader');
   if(!host){host=document.createElement('div');host.id='rptPagePreloader';host.setAttribute('role','status');host.setAttribute('aria-live','polite');document.documentElement.append(host);}
-  if(host.dataset.enhanced)return;host.hidden=value.ready&&!value.error&&!document.documentElement.matches('.auth-pending,.maintenance-pending');host.replaceChildren();
+  if(host.dataset.enhanced)return;host.hidden=value.ready&&!value.error&&!document.documentElement.matches('.auth-pending,.maintenance-pending,.device-starting');host.replaceChildren();
   const content=document.createElement('div');content.className='rpt-loading-content';const label=document.createElement('strong');label.className='rpt-loading-text';label.textContent=value.text;content.append(label);
   if(value.error){const error=document.createElement('p');error.className='rpt-loading-error';error.textContent=value.error;const button=document.createElement('button');button.id='rptPageRetry';button.type='button';button.textContent='Reintentar carga';button.addEventListener('click',()=>location.reload());content.append(error,button);}
   host.append(content);

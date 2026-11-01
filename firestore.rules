@@ -27,23 +27,26 @@ service cloud.firestore {
     }
 
     match /equipos_autorizados/{deviceId} {
-      allow create: if signedIn()
+      function ownDevice() {
+        return signedIn() && deviceId == request.auth.uid;
+      }
+      allow create: if ownDevice()
+        && request.resource.data.keys().hasOnly(['schema', 'deviceId', 'authUid', 'localDeviceId', 'deviceName', 'platform', 'browser', 'status', 'authorized', 'revoked', 'createdAt', 'clientCreatedAt', 'lastSeenAt', 'clientLastSeenAt'])
+        && request.resource.data.schema == 2
+        && request.resource.data.deviceId == request.auth.uid
         && request.resource.data.authUid == request.auth.uid
-        && request.resource.data.revoked == false;
-
-      allow get: if isOwner()
-        || (signedIn() && resource.data.authUid == request.auth.uid);
-
+        && request.resource.data.status == 'pending'
+        && request.resource.data.authorized == false
+        && request.resource.data.revoked == false
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.lastSeenAt == request.time;
+      allow get: if isOwner() || ownDevice();
       allow list: if isOwner();
-
-      allow update: if isOwner()
-        || (
-          signedIn()
-          && resource.data.authUid == request.auth.uid
-          && request.resource.data.authUid == request.auth.uid
-          && request.resource.data.revoked == resource.data.revoked
-        );
-
+      allow update: if isOwner() || (
+        ownDevice() && resource.data.authUid == request.auth.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['lastSeenAt', 'clientLastSeenAt', 'localUsername', 'localDisplayName'])
+        && request.resource.data.lastSeenAt == request.time
+      );
       allow delete: if isOwner();
     }
 

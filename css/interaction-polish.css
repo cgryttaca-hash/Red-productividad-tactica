@@ -57,3 +57,23 @@
  @media(prefers-reduced-motion:reduce){.rpt-loading-spinner{animation:none}}
 }
 @media print{#rptPagePreloader,#operationStatus{display:none!important}}
+
+@media screen{html[data-page] #controlNavigation [data-control-section=devices]::before{mask-image:url('../assets/ui/shield.svg')}}
+
+@media screen{
+ html[data-page] :is(.workspace-intro,.technical-intro,.tool-hero,.users-hero,.users-intro) h1::before,
+ html[data-page="minuta"] .minute-title-row h2::before,
+ html[data-page="minuta"] .cowork-title h3::before,
+ .technical-heading h2::before{content:"";display:inline-block;width:20px;height:20px;margin-right:9px;vertical-align:-2px;background:currentColor;mask:url('../assets/ui/file.svg') center/contain no-repeat}
+ html[data-page="index"] .workspace-intro h1::before{mask-image:url('../assets/ui/home.svg')}
+ html[data-page="administracion"] .technical-intro h1::before{mask-image:url('../assets/ui/shield.svg')}
+ html[data-page="usuarios"] h1::before{mask-image:url('../assets/ui/users.svg')}
+ html[data-page="configuracion"] h1::before{mask-image:url('../assets/ui/settings.svg')}
+ html[data-page="agendas"] h1::before{mask-image:url('../assets/ui/calendar.svg')}
+ html[data-page="minuta"] .minute-title-row h2::before{mask-image:url('../assets/ui/minute.svg')}
+ html[data-page="minuta"] .cowork-title h3::before{mask-image:url('../assets/ui/building.svg')}
+ #admin-panel-system .technical-heading h2::before{mask-image:url('../assets/ui/cloud.svg')}
+ #admin-panel-updates .technical-heading h2::before{mask-image:url('../assets/ui/update.svg')}
+ #admin-panel-maintenance .technical-heading h2::before{mask-image:url('../assets/ui/tools.svg')}
+ #admin-panel-devices .technical-heading h2::before{mask-image:url('../assets/ui/users.svg')}
+}

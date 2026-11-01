@@ -1,4 +1,4 @@
-function technicalAccess(){return Boolean(window.RPTAdminAccess?.hasAccess());}
+function technicalAccess(){return Boolean(window.RPTAdminAccess?.hasAccess()&&window.RPTDeviceAccess?.allowed);}
 function requestTechnicalAccess(){window.dispatchEvent(new CustomEvent('rptTechnicalAccessRequired',{detail:{message:'La activación o el cambio de archivos y conexiones se realiza en Super Administrador (Ctrl + M).'}}));return false;}
 import {eventFoodServices,foodFields} from './food-alerts-core.js';
 import {
@@ -323,6 +323,7 @@ async function writeAudit(entries,fireMod){
 }
 
 export async function publishIfReady(rows=null,diff=null,meta={}){
+  if(window.RPTDeviceAccess&&!window.RPTDeviceAccess.allowed)return false;
   if(meta.manual&&!technicalAccess())return requestTechnicalAccess();
   if(window.RPTNavigation?.mobile())return false;
   if(publishing||window.RPTUpdateGuard?.locked)return false;

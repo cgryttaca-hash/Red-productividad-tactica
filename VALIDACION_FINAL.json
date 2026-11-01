@@ -1,12 +1,12 @@
 {
-  "version": "4.7.0",
+  "version": "4.8.0",
   "result": "PASS",
   "dateBogota": "2026-11-01",
-  "suites": 19,
-  "checks": 165,
-  "resources": 177,
-  "digest": "f3922d12c1b8c187c80c180dd45c634eddccfa435c8591c1926a07e086fc1429",
-  "scope": "Se conserva la seguridad y el acceso actuales, según la aclaración posterior del usuario. La activación o sustitución manual de Excel/Firebase queda dentro de la sesión administrativa validada con Ctrl+M, sin controles ni modales técnicos al inicio. Las fuentes previamente vinculadas conservan la sincronización automática. No se añade autorización remota de dispositivos ni se cambia el acceso público/sin conexión de Agenda Móvil.",
+  "suites": 16,
+  "checks": 187,
+  "resources": 181,
+  "digest": "b8fd54c882d7625bfcec755a063d41513972ae4fc8952f9650234eb7b4cf845c",
   "productionDeployed": false,
-  "report": "entrega/v47/PRUEBAS.json"
+  "report": "entrega/v48/PRUEBAS.json",
+  "firstDevice": "Aprobacion desde consola Firebase confirmada por el usuario"
 }

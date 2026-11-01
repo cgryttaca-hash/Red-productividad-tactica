@@ -644,7 +644,7 @@ function bindEvents(){
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+window.RPTPageInit.onReady(() => {
   selectedMinuteDate = addDays(new Date(), 1);
   bindEvents();
   if(!loadCoworking()){

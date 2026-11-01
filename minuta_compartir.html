@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es" class="auth-pending maintenance-pending" data-auth-page="protected" data-maintenance-page="minuta" data-visual-theme="premium">
-<head>
+<head><link rel="stylesheet" href="css/device-access.css"><script src="js/device-access.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#10283f">
@@ -8,7 +8,7 @@
   <style>html.auth-pending body,html.maintenance-pending body{visibility:hidden}</style>
   <script src="js/navigation-policy.js"></script><script src="js/admin-access.js"></script>
   <script src="js/auth-guard.js?v=20260801-1600"></script>
-  <script type="module" src="js/maintenance-guard.js"></script>
+  <script type="application/x-rpt-protected" data-device-src="js/maintenance-guard.js" data-device-type="module"></script>
   
   <link rel="stylesheet" href="css/premium-system.css" media="screen">
   <link rel="stylesheet" href="css/minuta-share.css">
@@ -30,9 +30,9 @@
     </section>
     <section id="shareImages" class="share-images" aria-label="Imágenes de la Minuta"></section>
   </main>
-  <script src="js/minuta-time.js"></script>
-  <script type="module" src="js/minuta-share-preview.js"></script>
-<script type="module" src="js/pwa.js"></script>
-<script type="module" src="js/loading.js"></script>
+  <script type="application/x-rpt-protected" data-device-src="js/minuta-time.js" data-device-type="classic"></script>
+  <script type="application/x-rpt-protected" data-device-src="js/minuta-share-preview.js" data-device-type="module"></script>
+<script type="application/x-rpt-protected" data-device-src="js/pwa.js" data-device-type="module"></script>
+<script type="application/x-rpt-protected" data-device-src="js/loading.js" data-device-type="module"></script>
 </body>
 </html>

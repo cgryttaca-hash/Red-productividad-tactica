@@ -612,7 +612,7 @@ function processWorkbook(workbook){
 }
 
 function loadWorkbookFromArrayBuffer(buffer){
-  if(!window.RPTAdminAccess?.hasAccess()){showToast('El Archivo Maestro se activa en Super Administrador (Ctrl + M).','info');return;}
+  if(!window.RPTAdminAccess?.hasAccess())return;
   const data = new Uint8Array(buffer);
   const wb = XLSX.read(data, { type: 'array', cellDates: false, cellText: false });
   processWorkbook(wb);
@@ -770,7 +770,7 @@ function refreshRowsFromSharedStorage(showMessage=false){
   }
 }
 
-window.addEventListener('DOMContentLoaded',()=>{
+window.RPTPageInit.onReady(()=>{
   syncFoodFilterStatus();
   syncFilterPanelButton();
   if(refreshRowsFromSharedStorage(false)) showToast('Datos cargados del historial');
@@ -779,9 +779,14 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 window.addEventListener('eventDataUpdated', () => refreshRowsFromSharedStorage(true));
 
-document.getElementById('btnLoad').addEventListener('click', () => {
-  if(!window.RPTAdminAccess?.hasAccess()){showToast('El Archivo Maestro se activa en Super Administrador (Ctrl + M).','info');return;}
-  if(window.ExcelFileSync) window.ExcelFileSync.chooseFile();
+document.getElementById('btnLoad').addEventListener('click', async () => {
+  if(!window.RPTAdminAccess?.hasAccess()){
+    const status=await window.ExcelFileSync?.resumeConfiguredFile();
+    if(status?.state==='ready')return;
+    if(status?.state==='permission'||status?.message)return;
+    showToast('La configuración inicial del Archivo Maestro se realiza en Super Administrador (Ctrl + M).','info');return;
+  }
+  if(window.ExcelFileSync)window.ExcelFileSync.chooseFile();
   else document.getElementById('fileInput').click();
 });
 
@@ -816,7 +821,7 @@ function resetInactivityTimer(){
   inactivityTimer = setTimeout(()=>{if(window.RPTAgendaDialog?.hasPendingChanges())resetInactivityTimer();else volverAlInicio();}, INACTIVITY_LIMIT_MS);
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+window.RPTPageInit.onReady(() => {
   document.getElementById('btnInicio')?.addEventListener('click', volverAlInicio);
   document.getElementById('btnPrint')?.addEventListener('click', () => window.print());
 

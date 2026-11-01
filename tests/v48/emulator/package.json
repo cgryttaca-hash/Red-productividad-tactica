@@ -1,0 +1,16 @@
+{
+  "name": "rpt-v48-local-emulator-qa",
+  "private": true,
+  "scripts": {
+    "prepare:qa": "node prepare.cjs",
+    "test": "node prepare.cjs && firebase emulators:exec --only firestore,auth --project demo-rpt-devices --config firebase.json \"node run-emulated.cjs\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "6.0.0",
+    "esbuild": "0.28.2",
+    "firebase": "13.1.0",
+    "firebase-admin": "14.5.0",
+    "firebase-runtime": "npm:firebase@12.16.0",
+    "firebase-tools": "15.34.2"
+  }
+}
