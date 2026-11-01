@@ -1,9 +1,9 @@
 {
-  "version": "4.5.0",
+  "version": "4.6.0",
   "assets": [
     {
       "path": "administracion.html",
-      "sha256": "640623097f58b4bf87a13b02cb86fcf80e4450fb970749fb3e61df49e68dfd80"
+      "sha256": "35a914dba0dd387c60c2bb91b73be4eb98a73f755c5139d273ab4e5911cb5186"
     },
     {
       "path": "agenda.webmanifest",
@@ -135,7 +135,7 @@
     },
     {
       "path": "configuracion.html",
-      "sha256": "2d9cf4030165332f505216d9a3f17056d9e265ee5af864caff2b059a9440c862"
+      "sha256": "93d28d279a09afb10a00425cc2ac78dbbf54b17032a89a090b5f67f8348f48a3"
     },
     {
       "path": "css/admin-tools.css",
@@ -179,7 +179,7 @@
     },
     {
       "path": "css/enterprise-refinements.css",
-      "sha256": "1ccc7caeb0bbf37008a27f7a1ae54021a24baacf76551ae757dfd5b0e1fa71a3"
+      "sha256": "803920ae3b3238498e00e28230c53d0dcd140355b664366f28c0baf873260e51"
     },
     {
       "path": "css/estilos.css",
@@ -210,6 +210,10 @@
       "sha256": "8b6d23f613591401660ed283a4eb523fc337b8026a038a3e8890c41cd248dfa9"
     },
     {
+      "path": "css/maintenance-special.css",
+      "sha256": "8d5e54c7b6b61fc00bc73423916a7cd6186fe790641bc134b5ed1caeaaf23fe5"
+    },
+    {
       "path": "css/mantenimiento.css",
       "sha256": "ad7376e488be3467234b54d413b24844490467c10e48267736ba27af87e8066c"
     },
@@ -223,7 +227,7 @@
     },
     {
       "path": "css/mobile-operating.css",
-      "sha256": "ea95e047c211fbdbe909eb05eb4f5e99d0a9feecceb574d3d8fc7e1da577941a"
+      "sha256": "882869910023474bac6e40af287ce99fee5d10092f7a822412d02d684ff620c3"
     },
     {
       "path": "css/nav-clean.css",
@@ -246,6 +250,10 @@
       "sha256": "599cc0ae23eae12e65893bfd6670b9eeeb3fb32b0ba419ac8254e8d628357894"
     },
     {
+      "path": "css/technical-workspace.css",
+      "sha256": "e34feef16d1ecc973411fff588f37c043f870d2b935c66677f87d8e673f83671"
+    },
+    {
       "path": "css/usuarios.css",
       "sha256": "53b912522e019f1682820006038c7f43b455fd5472766d88c6f1d920fd939947"
     },
@@ -255,7 +263,7 @@
     },
     {
       "path": "index.html",
-      "sha256": "654646b8e8c4425bc14cdc49d09eab089294d86c3e074f855649b4de23797f5f"
+      "sha256": "b0f58fb42e71a6d9e19f6dd65a6acf63da8183772e68ec336da309cf0978d26f"
     },
     {
       "path": "js/admin-access.js",
@@ -367,7 +375,7 @@
     },
     {
       "path": "js/configuracion.js",
-      "sha256": "6284b5b36f01e7a94b3b3710dc481b2f542d8e2455f6cfcbf92fcdabeb402595"
+      "sha256": "e6dec3d92b9fb5f949f05029624d172cb2a88620655c3d8ec295467ac2b999d5"
     },
     {
       "path": "js/control-center.js",
@@ -431,7 +439,7 @@
     },
     {
       "path": "js/loading.js",
-      "sha256": "d61a1b895317cb9acd34fedbdaa76075e372ef8eeccccf5583b238001ec4a68b"
+      "sha256": "adf744a6cc06395d4e557dcb1c326d1c2f395bd3724777edb9974d2a7609dddc"
     },
     {
       "path": "js/local-auth.js",
@@ -446,12 +454,24 @@
       "sha256": "48c96588231fc7e7f5d73e538b0140a3599b9709a390b1f7003c7eb7c63d9f89"
     },
     {
+      "path": "js/maintenance-admin.js",
+      "sha256": "44dd0372b6ea2b1f76c72f60cfd9777695e595ee06d51f25ca380672de94462f"
+    },
+    {
+      "path": "js/maintenance-client.js",
+      "sha256": "f18aab9020aeaa74daee4a2e27d1d6371cb93b6750a0fcf1321a63acda97760c"
+    },
+    {
       "path": "js/maintenance-guard.js",
-      "sha256": "a6d831f42abe06605a5eec559d638e1d5636b58663584b99e967d781aa555201"
+      "sha256": "bd7760c30d241cc7b041f671f92cabfd4e2407d6fab0e3565f2fe0e279fbe9f2"
+    },
+    {
+      "path": "js/maintenance-state.js",
+      "sha256": "7a151f1b75cfd410dbfd7fda65a64a5423c43ebb31fad349c331f1a601279dcd"
     },
     {
       "path": "js/mantenimiento.js",
-      "sha256": "a3afc9bcdea732273d3eb6fea1f3a9a8d5fdf68d6838c68edf451ec926bc3a94"
+      "sha256": "a8aac619b6ecd7df8c0f5485d12538b530ef2cd7ff1fd53a821b2551d57deb0d"
     },
     {
       "path": "js/minuta-raster.js",
@@ -483,7 +503,7 @@
     },
     {
       "path": "js/operating-center.js",
-      "sha256": "05d3e42fdbf0b6163543b7d1e24c3cc113868ff1817428b8eb19f06ca0039207"
+      "sha256": "972514fbf5024235529323a55f57a446b87cfe271b4fde49fa852dd25984256b"
     },
     {
       "path": "js/performance-monitor.js",
@@ -519,7 +539,7 @@
     },
     {
       "path": "js/release-info.js",
-      "sha256": "9b86cf6811bbb667e400dbb859732a9a477466953758558722440d9a0805b7c3"
+      "sha256": "475ebcf428dbbb4c2d10a12f0712dd1f67d67f0fa6d5510dca025fa09257f1fa"
     },
     {
       "path": "js/release-worker.js",
@@ -535,7 +555,15 @@
     },
     {
       "path": "js/system-version.js",
-      "sha256": "1c317069374b7856827b49f4e7ca2374fc9a32afd5c0c978222b748c75fd22f0"
+      "sha256": "27127d8314d9ee916b173a1fdd830a162b6019e66088062eb645c37a32e02ddd"
+    },
+    {
+      "path": "js/technical-center.js",
+      "sha256": "4530bd66d2a3f7a908788fe162525c7c8a29c339f6e1f2d679fd9cfd3529a36a"
+    },
+    {
+      "path": "js/technical-log.js",
+      "sha256": "1c7357e696305851d45a900a102ec3f60859bbea0487c482d762a981b42eb650"
     },
     {
       "path": "js/update-page.js",
@@ -559,7 +587,7 @@
     },
     {
       "path": "laboratorio.html",
-      "sha256": "08e617b11c904e259f10d886cf1ac32010db82d1d4b7b78ecc407c3843c39dc1"
+      "sha256": "6017df9ff1349a952da2e9d38c88126a712ce52cc24a8b0345a00d436e0ec782"
     },
     {
       "path": "login.html",
@@ -571,7 +599,7 @@
     },
     {
       "path": "mantenimiento.html",
-      "sha256": "9d317d4a5d3a8faa7ba015bf0fc36e1e7a29f1bee70ad6a317a888273821473d"
+      "sha256": "9ade7f9ff1c1833f6bb3e9e00ad5859e51f3c3f00ebd522dda235b50d0d65196"
     },
     {
       "path": "minuta.html",
@@ -595,8 +623,8 @@
     },
     {
       "path": "validacion.html",
-      "sha256": "a4e9a41e750d58713cf31cade42cebf58dfc6d11fd5bf91262dd3020a74f0d25"
+      "sha256": "497ba8671791571257f1a27d68b780ef06970f479d7830867076d8b53efc4d8b"
     }
   ],
-  "digest": "a9846431cdb2cb80f530d8904e473d8d85edf52f2e97314182a9531a54ed8ac1"
+  "digest": "ee4f62d61595803d745e3a34315e26e0ab603ff7ac218817944a3dc1ec82bcd0"
 }

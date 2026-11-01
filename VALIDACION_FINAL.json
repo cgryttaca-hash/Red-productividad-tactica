@@ -1,17 +1,11 @@
 {
-  "version": "4.5.0",
-  "dateBogota": "2026-10-30",
+  "version": "4.6.0",
+  "dateBogota": "2026-11-01",
   "result": "PASS",
-  "resources": 149,
-  "pages": 16,
-  "responsiveChecks": 80,
-  "controlSectionChecks": 35,
-  "mobileAccess": "public, same architecture",
-  "eventAndMinuteFiles": "unchanged; source hashes and print comparison verified",
-  "adminAccess": "Ctrl+M, current local admin account",
-  "externalAIConfigured": false,
+  "digest": "ee4f62d61595803d745e3a34315e26e0ab603ff7ac218817944a3dc1ec82bcd0",
+  "resources": 156,
+  "suites": 15,
+  "checks": 167,
   "productionDeployed": false,
-  "physicalDevicesVerified": false,
-  "report": "entrega/v45/PRUEBAS.json",
-  "digest": "a9846431cdb2cb80f530d8904e473d8d85edf52f2e97314182a9531a54ed8ac1"
+  "report": "entrega/v46/PRUEBAS.json"
 }

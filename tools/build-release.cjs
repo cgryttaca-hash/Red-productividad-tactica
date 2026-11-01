@@ -17,7 +17,7 @@ const hashes=JSON.parse(fs.readFileSync(path.join(root,'PROTECTED_MODULES.json')
 for(const file of Object.keys(hashes))hashes[file]=hash(fs.readFileSync(path.join(root,file)));
 fs.writeFileSync(path.join(root,'PROTECTED_MODULES.json'),JSON.stringify(hashes,null,2)+'\n');
 const oldVersion=fs.readFileSync(path.join(root,'js/system-version.js'),'utf8');
-const updated=oldVersion.replace(/export const SYSTEM_VERSION = '[^']+';/,`export const SYSTEM_VERSION = '${version}';`).replace(/export const RELEASE_DATE = '[^']+';/,`export const RELEASE_DATE = '${releaseDate}';`).replace(/export const RELEASE_NAME = '[^']+';/,"export const RELEASE_NAME = 'Operación, versiones seguras y asistente';").replace(/export const PROTECTED_MODULES = Object.freeze\(\{[\s\S]*?\}\);/,'export const PROTECTED_MODULES = Object.freeze('+JSON.stringify(hashes,null,2)+');');
+const updated=oldVersion.replace(/export const SYSTEM_VERSION = '[^']+';/,`export const SYSTEM_VERSION = '${version}';`).replace(/export const RELEASE_DATE = '[^']+';/,`export const RELEASE_DATE = '${releaseDate}';`).replace(/export const RELEASE_NAME = '[^']+';/,"export const RELEASE_NAME = 'Operación y administración técnica';").replace(/export const PROTECTED_MODULES = Object.freeze\(\{[\s\S]*?\}\);/,'export const PROTECTED_MODULES = Object.freeze('+JSON.stringify(hashes,null,2)+');');
 fs.writeFileSync(path.join(root,'js/system-version.js'),updated);
 const assets=runtime.sort().map(file=>({path:file,sha256:hash(fs.readFileSync(path.join(root,file)))}));
 const descriptor={version,assets};descriptor.digest=hash(JSON.stringify(descriptor));

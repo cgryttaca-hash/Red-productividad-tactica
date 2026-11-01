@@ -1,3 +1,4 @@
+import './technical-log.js';
 const active=new Map();let node;
 if(document.readyState!=='complete'){active.set('initial','Cargando aplicación…');window.addEventListener('load',()=>{active.delete('initial');render();},{once:true});}
 function render(){if(!node){node=document.createElement('div');node.id='operationStatus';node.setAttribute('role','status');node.setAttribute('aria-live','polite');document.body.append(node);}node.hidden=!active.size;node.textContent=[...active.values()].at(-1)||'';}

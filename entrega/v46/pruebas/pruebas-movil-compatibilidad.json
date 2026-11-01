@@ -1,0 +1,18 @@
+{
+  "passed": [
+    "android: alimentación exacta y copiada, fuente Excel normalizada, consulta pública, filtros, texto, actualización y ausencia de acceso administrativo/desbordamiento",
+    "android-pwa: alimentación exacta y copiada, fuente Excel normalizada, consulta pública, filtros, texto, actualización y ausencia de acceso administrativo/desbordamiento",
+    "iphone: alimentación exacta y copiada, fuente publicada con foodGroups, consulta pública, filtros, texto, actualización y ausencia de acceso administrativo/desbordamiento",
+    "iphone-pwa: alimentación exacta y copiada, fuente publicada con foodGroups, consulta pública, filtros, texto, actualización y ausencia de acceso administrativo/desbordamiento",
+    "ipad: alimentación exacta y copiada, fuente publicada con foodGroups, consulta pública, filtros, texto, actualización y ausencia de acceso administrativo/desbordamiento"
+  ],
+  "expected": [
+    "7:00 AM ESTACION DE CAFÉ ESTACION DE CAFÉ SENCILLA",
+    "9:30 AM - REFRIGERIO AM PASTEL POLLO Y JUGO"
+  ],
+  "pageErrors": [],
+  "missingLocal": [],
+  "limits": [
+    "Chrome y WebKit en Windows con perfiles móviles. Estado PWA emulado; no instalación física de iOS/Android ni recepción real de notificaciones. Los registros de ensayo solo viven en adaptadores de prueba; no se distribuyen como datos."
+  ]
+}

@@ -133,9 +133,10 @@ function snapshot(ref){
  return{id:ref.path.split('/').pop(),exists:()=>value!==undefined,data:()=>value};
 }
 export const getDoc=async ref=>{window.__testReads=window.__testReads||{};window.__testReads[ref.path]=(window.__testReads[ref.path]||0)+1;return snapshot(ref);};
+export const getDocFromServer=getDoc;
 export const getDocs=async()=>({docs:window.__testEvents.map((row,index)=>({id:String(index),data:()=>row}))});
 export function onSnapshot(ref,options,callback){if(typeof options==='function')callback=options;listeners.set(ref.path,callback);window.__testListeners=window.__testListeners||{};window.__testListeners[ref.path]=(window.__testListeners[ref.path]||0)+1;queueMicrotask(()=>callback(snapshot(ref)));return()=>{listeners.delete(ref.path);window.__testListeners[ref.path]--;};}
-export async function setDoc(ref,value,options){store.set(ref.path,options?.merge?{...store.get(ref.path),...value}:value);listeners.get(ref.path)?.(snapshot(ref));}
+export async function setDoc(ref,value,options){const prior=store.get(ref.path)||snapshot(ref).data()||{};store.set(ref.path,options?.merge?{...prior,...value,...(value.pages?{pages:{...prior.pages,...value.pages}}:{})}:value);listeners.get(ref.path)?.(snapshot(ref));}
 export async function deleteDoc(ref){store.delete(ref.path);}
 export function writeBatch(){return{set:(ref,value)=>store.set(ref.path,value),delete:ref=>store.delete(ref.path),commit:async()=>{}};}
 `;
@@ -198,7 +199,7 @@ async function login(context, version) {
   await page.locator('#loginButton').click();
   await page.waitForURL(`**/${version}/index.html`);
   await page.waitForFunction(() => !document.documentElement.classList.contains('maintenance-pending'));
-  const center=await page.locator('.ops-layout').count()>0;
+  const center=await page.locator('.ops-layout,.workspace-v46').count()>0;
   if(!center)await page.waitForFunction(() => document.getElementById('excelSyncModal'));
   await page.evaluate(({rows,center}) => {
     localStorage.setItem('eventData', JSON.stringify(rows));
@@ -209,7 +210,7 @@ async function login(context, version) {
     document.getElementById('excelSyncClose')?.click();
   }, {rows:fixtureRows,center});
   await page.reload();
-  await page.waitForFunction(() => !document.documentElement.classList.contains('maintenance-pending') && (document.querySelector('.ops-layout')||document.getElementById('loader')?.classList.contains('is-hidden')));
+  await page.waitForFunction(() => !document.documentElement.classList.contains('maintenance-pending') && (document.querySelector('.ops-layout,.workspace-v46')||document.getElementById('loader')?.classList.contains('is-hidden')));
   return page;
 }
 

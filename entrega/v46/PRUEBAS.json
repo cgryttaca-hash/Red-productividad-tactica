@@ -1,0 +1,98 @@
+{
+  "version": "4.6.0",
+  "dateBogota": "2026-11-01",
+  "result": "PASS",
+  "suites": {
+    "administracion": {
+      "result": "PASS",
+      "checks": 7,
+      "evidence": "pruebas/administracion.json"
+    },
+    "mantenimiento": {
+      "result": "PASS",
+      "checks": 11,
+      "evidence": "pruebas/mantenimiento.json"
+    },
+    "conservacion": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/conservacion.json"
+    },
+    "responsive": {
+      "result": "PASS",
+      "checks": 100,
+      "evidence": "pruebas/responsive.json"
+    },
+    "sincronizacion": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/pruebas-sincronizacion-fondo.json"
+    },
+    "instalacion": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/instalada-offline.json"
+    },
+    "migracion": {
+      "result": "PASS",
+      "checks": 1,
+      "evidence": "pruebas/pruebas-migracion.json"
+    },
+    "rendimiento": {
+      "result": "PASS",
+      "checks": 2,
+      "evidence": "pruebas/rendimiento.json"
+    },
+    "integridad": {
+      "result": "PASS",
+      "checks": 8,
+      "evidence": "pruebas/pruebas-integridad.json"
+    },
+    "movil": {
+      "result": "PASS",
+      "checks": 5,
+      "evidence": "pruebas/pruebas-movil-compatibilidad.json"
+    },
+    "alimentacion_presentacion": {
+      "result": "PASS",
+      "checks": 6,
+      "evidence": "pruebas/pruebas-alimentacion-presentacion.json"
+    },
+    "alimentacion_servidor": {
+      "result": "PASS",
+      "checks": 6,
+      "evidence": "pruebas/pruebas-alimentacion.json"
+    },
+    "minuta_excel": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/pruebas-whatsapp-excel.json"
+    },
+    "asistente_conservado": {
+      "result": "PASS",
+      "checks": 7,
+      "evidence": "pruebas/pruebas-asistente.json"
+    },
+    "estructura": {
+      "result": "PASS",
+      "checks": 2,
+      "evidence": "pruebas/estructura.json"
+    }
+  },
+  "suiteCount": 15,
+  "checks": 167,
+  "releaseDigest": "ee4f62d61595803d745e3a34315e26e0ab603ff7ac218817944a3dc1ec82bcd0",
+  "runtimeResources": 156,
+  "productionDeployed": false,
+  "limits": [
+    "Firebase/Auth/App Check, publicación, proveedor IA y notificaciones se probaron con adaptadores controlados o con las conexiones externas bloqueadas. No se leyó ni escribió producción.",
+    "Se utilizaron perfiles temporales y libros de ensayo. No se abrió ni modificó un Excel operativo del usuario ni se añadieron eventos de muestra a la publicación.",
+    "Las pruebas móviles usan Chrome y WebKit con perfiles de Android/iPhone/iPad, incluida PWA emulada; no hubo instalación física ni recepción de Push en teléfonos.",
+    "La migración y las cachés sí usaron Service Workers reales en HTTP local, con dos pestañas y espera mínima de diez segundos. No son una publicación en el sitio real.",
+    "El mantenimiento solo se distribuye mediante el documento existente de Firebase cuando la cuenta propietaria está conectada y el cambio se confirma. Sin conexión, los equipos solo conocen su último estado guardado.",
+    "Las programaciones nuevas requieren finalización administrativa confirmada: el final estimado no libera una página. Las programaciones antiguas conservan su vencimiento anterior para no reactivar bloqueos históricos.",
+    "El log es local, de solo lectura desde la interfaz, con hasta 120 entradas; no se presenta como auditoría de servidor ni como almacenamiento inalterable.",
+    "La IA externa permanece desactivada y fuera de la navegación principal. Los servicios y rutas anteriores se conservan sin convertirse en módulos principales.",
+    "Los paquetes se entregan sin publicar el sitio, desplegar funciones, habilitar cuentas, cambiar reglas Firebase ni enviar mensajes de WhatsApp."
+  ]
+}
