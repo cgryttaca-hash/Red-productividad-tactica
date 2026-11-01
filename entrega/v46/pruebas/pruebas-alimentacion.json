@@ -1,0 +1,13 @@
+{
+  "passed": [
+    "Cálculo exacto a −15 minutos, America/Bogota, medianoche y rechazo de fechas/horas imposibles o ambiguas",
+    "Datos reales de empresa/servicio/salón; sin horario general de respaldo, sin alertas de cancelados o sin alimentación",
+    "Repositorio transaccional y coordinador: tarea exacta, concurrencia segura, prioridad alta, registro de aceptación y una solicitud por dispositivo",
+    "Reprogramación, cancelación, retirada de alimentación, reactivación con generación nueva y rechazo de tareas viejas o vencidas",
+    "Resultado desconocido sin reenvío ciego; reintento solo tras rechazo explícito; tokens inválidos retirados, horizonte de tareas y bloques obsoletos rechazados",
+    "Proveedor FCM data-only sin doble visualización automática, TTL/urgencia correctos y compatibilidad Web Push con VAPID solo en backend"
+  ],
+  "limitations": [
+    "Firestore, Cloud Tasks y proveedor se controlan localmente; no son pruebas de servicios desplegados ni de recepción física."
+  ]
+}

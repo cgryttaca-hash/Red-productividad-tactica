@@ -1,0 +1,13 @@
+{
+  "passed": [
+    "Inicio sin columna lateral, tres accesos operativos y sin motores Excel no vinculados",
+    "Acceso administrativo directo sin revalidación sigue bloqueado",
+    "Administración con cuatro áreas técnicas y controles de sincronización originales únicos y legibles en escritorio/móvil",
+    "Permiso local no concede escritura Firebase a una cuenta anónima",
+    "Log de eventos reales, sin edición ni borrado, texto seguro y deduplicación del mismo aviso",
+    "Sin Service Worker no simula una versión instalada verificada ni porcentajes de descarga",
+    "Navegar repetidamente no duplica controles ni inicializa de nuevo Excel"
+  ],
+  "pageErrors": [],
+  "productionTested": false
+}
