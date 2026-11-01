@@ -1,5 +1,4 @@
-(function runAuthGuard(){
-  if(window.RPTDeviceAccess&&!window.RPTDeviceAccess.allowed){window.RPTDeviceAccess.ready.then(runAuthGuard);return;}
+(function(){
   if(window.RPTNavigation){
     let expiryTimer;
     function validate(){clearTimeout(expiryTimer);const navigation=window.RPTNavigation,session=navigation.session(),page=document.documentElement.dataset.authPage||'protected';

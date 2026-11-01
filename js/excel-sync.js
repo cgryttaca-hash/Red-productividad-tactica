@@ -21,7 +21,6 @@
   let ui = {};
   let initialized = false;
   let lastState = 'idle';
-  let availabilityTask,masterNotice='';
 
   const text = value => value === undefined || value === null ? '' : String(value);
   const normalizeText = value => text(value)
@@ -473,37 +472,7 @@
     return Boolean(meta&&meta.name===file.name&&meta.size===file.size&&meta.lastModified===file.lastModified);
   }
 
-  function publishAvailability(state,message=''){
-    const detail={state,fileName:localStorage.getItem(FILE_NAME_KEY)||fileHandle?.name||'',message};
-    window.__RPT_MASTER_STATUS__=detail;
-    const key=JSON.stringify(detail);if(key!==masterNotice){masterNotice=key;window.dispatchEvent(new CustomEvent('rptMasterStatus',{detail}));}
-    return detail;
-  }
-  async function resumeConfiguredFile(){
-    if(window.RPTDeviceAccess&&!window.RPTDeviceAccess.allowed)return{state:'blocked'};
-    if(availabilityTask)return availabilityTask;
-    availabilityTask=(async()=>{
-      try{
-        if(!fileHandle)fileHandle=await readStoredHandle();
-        if(!fileHandle)return publishAvailability('missing',localStorage.getItem(FILE_NAME_KEY)?'No se encontró la referencia guardada del Archivo Maestro. Revisa la vinculación desde Ctrl + M.':'');
-        const permission=await getPermission(false);
-        if(permission!=='granted')return publishAvailability('permission','El navegador necesita recuperar el permiso de lectura del Archivo Maestro ya vinculado.');
-        await fileHandle.getFile();
-        await synchronize({force:false,requestPermission:false});
-        return publishAvailability(lastState==='permission'?'permission':lastState==='error'?'error':'ready',lastState==='error'?'No fue posible leer el Archivo Maestro. Revisa su disponibilidad.':'');
-      }catch(error){return publishAvailability(error?.name==='NotFoundError'?'missing':'error',error?.name==='NotFoundError'?'El Archivo Maestro fue eliminado, movido o renombrado. Revisa su vinculación desde Ctrl + M.':'No fue posible recuperar la referencia del Archivo Maestro. Se conservan los datos existentes.');}
-    })().finally(()=>availabilityTask=null);return availabilityTask;
-  }
-  async function recoverReadPermission(){
-    if(!window.RPTDeviceAccess?.allowed||!fileHandle)return false;
-    // Gesto del usuario sobre el mismo handle; nunca selecciona o sustituye un archivo.
-    try{const permission=await fileHandle.requestPermission({mode:'read'});if(permission!=='granted'){publishAvailability('permission','El permiso de lectura no fue concedido. El archivo sigue vinculado.');return false;}return await resumeConfiguredFile();}
-    catch(_){publishAvailability('permission','El navegador requiere conceder el permiso desde su diálogo de acceso al archivo.');return false;}
-  }
-  function technicalAccess(){return Boolean(window.RPTAdminAccess?.hasAccess()&&window.RPTDeviceAccess?.allowed);}
-  function requestTechnicalAccess(){window.dispatchEvent(new CustomEvent('rptTechnicalAccessRequired',{detail:{message:'La activación o el cambio de archivos y conexiones se realiza en Super Administrador (Ctrl + M).'}}));return false;}
-    function ensureUi(){
-    if(!technicalAccess())return;
+  function ensureUi(){
     if(document.documentElement.dataset.syncUi==='background'||(document.documentElement.dataset.syncUi==='admin'&&!window.RPTAdminAccess?.hasAccess()))return;
     if(document.getElementById('excelSyncModal')) return;
     const control=document.createElement('button');
@@ -542,7 +511,6 @@
     ui.refresh.addEventListener('click',()=>synchronize({force:true,requestPermission:true,showSuccess:true}));
     ui.unlink.addEventListener('click',unlinkFile);
     ui.fallbackInput.addEventListener('change',async event=>{
-      if(!technicalAccess()){event.target.value='';requestTechnicalAccess();return;}
       const file=event.target.files?.[0]; if(!file) return;
       try{
         setState('syncing',{fileName:file.name});
@@ -563,10 +531,7 @@
     return Number.isNaN(date.getTime())?'—':date.toLocaleString('es-CO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
   }
   function setState(state,options={}){
-    lastState=state;
-    if(state==='ready'||state==='fallback')publishAvailability('ready');
-    else if((state==='permission'||state==='error')&&(fileHandle||localStorage.getItem(FILE_NAME_KEY)))publishAvailability(state,state==='permission'?'El navegador necesita recuperar el permiso de lectura del Archivo Maestro ya vinculado.':options.message||'No fue posible leer el Archivo Maestro.');
-    if(!ui.control)return;
+    lastState=state;if(!ui.control)return;
     const storedName=options.fileName||localStorage.getItem(FILE_NAME_KEY)||fileHandle?.name||'';
     const states={
       unlinked:['Sin conexión','Sin archivo vinculado','Sin vincular','is-unlinked'],
@@ -586,11 +551,10 @@
     ui.change.hidden=!hasHandle;ui.unlink.hidden=!hasHandle;
     if(options.message) showMessage(options.message,state==='error'||state==='unsupported'?'error':state==='ready'?'success':'info'); else showMessage('');
   }
-  function openPanel(){if(!technicalAccess())return requestTechnicalAccess();ensureUi();if(!ui.modal)return;ui.modal.classList.add('is-open');ui.modal.setAttribute('aria-hidden','false');document.body.classList.add('excel-sync-modal-open');}
+  function openPanel(){ensureUi();if(!ui.modal)return;ui.modal.classList.add('is-open');ui.modal.setAttribute('aria-hidden','false');document.body.classList.add('excel-sync-modal-open');}
   function closePanel(){ui.modal.classList.remove('is-open');ui.modal.setAttribute('aria-hidden','true');document.body.classList.remove('excel-sync-modal-open');}
 
   async function chooseFile(){
-    if(!technicalAccess()){if(fileHandle||localStorage.getItem(FILE_NAME_KEY))return resumeConfiguredFile();return requestTechnicalAccess();}
     if(!supportsPersistentFileAccess()){ui.fallbackInput.click();return;}
     try{
       const handles=await window.showOpenFilePicker({
@@ -615,13 +579,11 @@
     return permission;
   }
   async function authorizeAccess(){
-    if(!technicalAccess())return requestTechnicalAccess();
     const ok=await synchronize({force:true,requestPermission:true,showSuccess:true});
     if(ok) setTimeout(closePanel,650);
   }
 
   async function synchronize({force=false,requestPermission=false,showSuccess=false}={}){
-    if(requestPermission&&!technicalAccess())return requestTechnicalAccess();
     if(syncInProgress||!fileHandle||window.RPTUpdateGuard?.locked) return false;
     syncInProgress=true;window.__RPT_EXCEL_BUSY__=true;window.RPTUpdateGuard?.setBusy('excel-read',true);
     try{
@@ -648,7 +610,6 @@
   }
 
   async function unlinkFile(){
-    if(!technicalAccess())return requestTechnicalAccess();
     try{await removeStoredHandle();}catch(_){}
     fileHandle=null;[META_KEY,FILE_NAME_KEY,LAST_CHECK_KEY].forEach(key=>localStorage.removeItem(key));
     setState('unlinked',{message:'Vinculación eliminada. Los datos ya cargados permanecen disponibles.'});
@@ -684,20 +645,20 @@
     bindAutomaticChecks();
     if(!supportsPersistentFileAccess()){
       setState('unsupported',{message:window.isSecureContext?'Usa Chrome o Edge para conservar el archivo vinculado.':'La página debe abrirse mediante HTTPS.'});
-      
+      if(!localStorage.getItem('eventData')&&document.documentElement.dataset.syncUi!=='background') setTimeout(openPanel,500);
       return;
     }
     try{
       fileHandle=await readStoredHandle();
-      if(!fileHandle){setState('unlinked');if(localStorage.getItem(FILE_NAME_KEY))publishAvailability('missing','No se encontró la referencia guardada del Archivo Maestro. Revisa la vinculación desde Ctrl + M.');return;}
+      if(!fileHandle){setState('unlinked');if(!localStorage.getItem('eventData')&&document.documentElement.dataset.syncUi!=='background') setTimeout(openPanel,500);return;}
       setState('ready',{fileName:fileHandle.name,statusText:'Archivo vinculado'});
       scheduleCheck();
     }catch(error){setState('error',{message:error.message});}
   }
 
   window.ExcelFileSync={
-    init:initialize,openPanel,chooseFile,refresh:()=>synchronize({force:true,requestPermission:technicalAccess(),showSuccess:true}),resumeConfiguredFile,recoverReadPermission,
-    unlink:unlinkFile,parseWorkbookBuffer,importFile:async file=>{if(!technicalAccess()){requestTechnicalAccess();throw new Error('Se requiere validación administrativa para importar el Archivo Maestro.');}window.RPTUpdateGuard?.setBusy('excel-import',true);try{const parsed=parseWorkbookBuffer(await file.arrayBuffer());await saveParsedData(parsed,file);return parsed;}finally{window.RPTUpdateGuard?.setBusy('excel-import',false);}},
+    init:initialize,openPanel,chooseFile,refresh:()=>synchronize({force:true,requestPermission:true,showSuccess:true}),
+    unlink:unlinkFile,parseWorkbookBuffer,importFile:async file=>{window.RPTUpdateGuard?.setBusy('excel-import',true);try{const parsed=parseWorkbookBuffer(await file.arrayBuffer());await saveParsedData(parsed,file);return parsed;}finally{window.RPTUpdateGuard?.setBusy('excel-import',false);}},
     getHandle:()=>fileHandle
   };
 

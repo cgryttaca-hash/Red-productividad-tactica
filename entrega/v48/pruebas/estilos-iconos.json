@@ -1,8 +1,0 @@
-{
-  "passed": [
-    "16 páginas con icono SVG propio de la misma familia, sin dependencias nuevas ni cambios de los manifiestos de instalación",
-    "Revisión visual de Usuarios, Configuración, Validación, Actualizaciones y acceso en escritorio/móvil, sin desbordamiento"
-  ],
-  "pageErrors": [],
-  "productionTested": false
-}

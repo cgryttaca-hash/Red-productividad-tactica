@@ -30,8 +30,7 @@ function showToast(message, type='ok'){
 }
 
 function hideLoader(){
-  $('loader')?.classList.add('hidden');
-  window.RPTPageLoad?.ready();
+  setTimeout(()=> $('loader')?.classList.add('hidden'), 450);
 }
 
 function startOfDay(date){
@@ -644,7 +643,7 @@ function bindEvents(){
   });
 }
 
-window.RPTPageInit.onReady(() => {
+document.addEventListener('DOMContentLoaded', () => {
   selectedMinuteDate = addDays(new Date(), 1);
   bindEvents();
   if(!loadCoworking()){

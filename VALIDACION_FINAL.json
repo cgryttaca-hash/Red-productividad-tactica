@@ -1,12 +1,17 @@
 {
-  "version": "4.8.0",
+  "version": "4.5.0",
+  "dateBogota": "2026-10-30",
   "result": "PASS",
-  "dateBogota": "2026-11-01",
-  "suites": 16,
-  "checks": 187,
-  "resources": 181,
-  "digest": "b8fd54c882d7625bfcec755a063d41513972ae4fc8952f9650234eb7b4cf845c",
+  "resources": 149,
+  "pages": 16,
+  "responsiveChecks": 80,
+  "controlSectionChecks": 35,
+  "mobileAccess": "public, same architecture",
+  "eventAndMinuteFiles": "unchanged; source hashes and print comparison verified",
+  "adminAccess": "Ctrl+M, current local admin account",
+  "externalAIConfigured": false,
   "productionDeployed": false,
-  "report": "entrega/v48/PRUEBAS.json",
-  "firstDevice": "Aprobacion desde consola Firebase confirmada por el usuario"
+  "physicalDevicesVerified": false,
+  "report": "entrega/v45/PRUEBAS.json",
+  "digest": "a9846431cdb2cb80f530d8904e473d8d85edf52f2e97314182a9531a54ed8ac1"
 }

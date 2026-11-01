@@ -1,24 +1,97 @@
-import {subscribe,connect,refresh,getState} from './maintenance-client.js';
-import {PAGE_LABELS,MESSAGES,isBlocked,stateOf,remaining,duration,formatBogota} from './maintenance-state.js';
-const $=id=>document.getElementById(id),params=new URLSearchParams(location.search),requested=params.get('page');
-const page=Object.hasOwn(PAGE_LABELS,requested||'')?requested:'index',returnPage=window.RPTNavigation.safePage(page+'.html'),moduleLabel=PAGE_LABELS[page];
-let lastCheck=Date.now(),checking=false,endingChecked=false;
-async function verify(){if(checking||!navigator.onLine)return;checking=true;lastCheck=Date.now();$('maintenanceCheck').disabled=true;try{await refresh();}catch(_){}finally{checking=false;$('maintenanceCheck').disabled=false;render();}}
+import {FIREBASE_CONFIG,META_COLLECTION} from './firebase-config.js';
+
+const SDK='https://www.gstatic.com/firebasejs/12.16.0';
+const CACHE_KEY='rptMaintenanceCacheV1';
+const params=new URLSearchParams(location.search);
+const page=params.get('page')||'index';
+const returnPage=window.RPTNavigation.safePage(params.get('return'));
+const labels={
+  index:'Inicio',
+  eventos:'Eventos',
+  minuta:'Minuta',
+  agenda_movil:'Agenda Móvil',
+  usuarios:'Usuarios',
+  validacion:'Validación',laboratorio:'Laboratorio',agendas:'Agendas'
+};
+let config=null;
+let timer=null;
+
+function readCache(){try{return JSON.parse(localStorage.getItem(CACHE_KEY)||'null');}catch(_){return null;}}
+function writeCache(value){try{localStorage.setItem(CACHE_KEY,JSON.stringify(value));}catch(_){}}
+function currentItem(){return config?.pages?.[page]||null;}
+function goBack(){location.replace(returnPage);}
 function render(){
- const state=getState(),item=state.config?.pages?.[page],active=isBlocked(item),ms=remaining(item);
- $('maintenanceTitle').textContent=`${moduleLabel} en mantenimiento`;$('maintenanceModule').textContent=moduleLabel;$('maintenanceMessage').textContent=item?.message||MESSAGES.mejoras;
- $('maintenanceState').textContent=active?'Mantenimiento activo':state.confirmed?'Sección disponible':'Comprobando disponibilidad';
- $('maintenanceEstimate').textContent=item?.until?formatBogota(item.until)+' · America/Bogota':'Sin hora estimada de finalización';
- $('maintenanceCountdown').hidden=!active||ms===null;$('maintenanceClock').textContent=duration(ms);$('maintenanceCountdownLabel').textContent=ms===0?'Estimación cumplida · comprobando disponibilidad':'Tiempo hasta la finalización estimada';
- const confirmed=state.confirmed&&!state.error;
- $('maintenanceStatus').textContent=state.error||(!confirmed?'Pendiente de confirmación con el servidor.':active&&ms===0?'La estimación terminó. El mantenimiento sigue activo; estamos esperando su finalización.':active?'El módulo está temporalmente cerrado. Su acceso se restablecerá cuando se confirme la finalización.':'El servidor confirma que el módulo está disponible.');
- $('maintenanceVerifiedAt').textContent=state.checkedAt?formatBogota(state.checkedAt)+' · America/Bogota':'Sin lectura confirmada';
- $('returnToModule').hidden=!confirmed||active;$('returnToModule').href=returnPage;
- if(confirmed&&!active&&stateOf(item)!=='invalid'){location.replace(returnPage);return;}
- if(active&&ms===0&&!endingChecked){endingChecked=true;verify();}if(ms!==0)endingChecked=false;
+  const item=currentItem();
+  if(!item?.active || !item.until){goBack();return;}
+  const nowTime=Date.now();
+  const startsAt=item.startsAt?new Date(item.startsAt).getTime():0;
+  if(startsAt&&startsAt>nowTime){goBack();return;}
+  const until=new Date(item.until).getTime();
+  const remaining=Math.max(0,until-nowTime);
+  if(!remaining){goBack();return;}
+
+  const total=Math.max(1000,Number(item.durationMs)||remaining);
+  const completed=Math.min(100,Math.max(0,100-(remaining/total)*100));
+  const hours=Math.floor(remaining/3600000);
+  const minutes=Math.floor((remaining%3600000)/60000);
+  const seconds=Math.floor((remaining%60000)/1000);
+  const totalMinutes=Math.max(1,Math.ceil(remaining/60000));
+  const moduleLabel=labels[page]||'Página';
+
+  document.getElementById('hours').textContent=String(hours).padStart(2,'0');
+  document.getElementById('minutes').textContent=String(minutes).padStart(2,'0');
+  document.getElementById('seconds').textContent=String(seconds).padStart(2,'0');
+  document.getElementById('maintenanceTitle').textContent=`${moduleLabel} en actualización`;
+  document.getElementById('maintenanceModule').textContent=moduleLabel;
+  document.getElementById('maintenanceMessage').textContent=item.message||'Estamos aplicando mejoras técnicas para ofrecer una experiencia más rápida y estable.';
+  document.getElementById('maintenanceStatus').textContent=`Regreso automático: ${new Date(until).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'})}`;
+  document.getElementById('progressBar').style.width=`${completed.toFixed(1)}%`;
+  document.getElementById('progressPercent').textContent=`${Math.round(completed)}%`;
+  document.getElementById('estimatedTime').textContent=hours?`${hours} h ${minutes} min`:`${totalMinutes} min`;
+
+  const now=new Date();
+  [1,2,3,4,5].forEach((index)=>{
+    const value=new Date(now.getTime()-(5-index)*60000);
+    const target=document.getElementById(`activityTime${index}`);
+    if(target)target.textContent=value.toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
+  });
+
+  const cpu=Math.round(35+completed*.18);
+  const memory=Math.round(48+completed*.15);
+  const disk=Math.round(28+completed*.12);
+  const network=Math.round(62+completed*.24);
+  [
+    ['cpu',cpu],['memory',memory],['disk',disk],['network',network]
+  ].forEach(([name,value])=>{
+    const label=document.getElementById(`${name}Value`);
+    const bar=document.getElementById(`${name}Bar`);
+    if(label)label.textContent=`${value}%`;
+    if(bar)bar.style.width=`${value}%`;
+  });
 }
-subscribe(render);connect().catch(()=>{});
-function tick(){if(document.hidden)return;render();if(Date.now()-lastCheck>=30000)verify();}
-let ticker=setInterval(tick,1000);
-$('maintenanceCheck').addEventListener('click',verify);window.addEventListener('online',()=>connect().catch(()=>{}));window.addEventListener('focus',verify);window.addEventListener('pagehide',()=>clearInterval(ticker));
-window.addEventListener('pageshow',event=>{if(event.persisted){clearInterval(ticker);ticker=setInterval(tick,1000);verify();}});
+async function connect(){
+  config=readCache()||{pages:{}};
+  render();
+  clearInterval(timer);timer=setInterval(render,1000);
+  try{
+    const [appMod,authMod,fireMod]=await Promise.all([
+      import(`${SDK}/firebase-app.js`),
+      import(`${SDK}/firebase-auth.js`),
+      import(`${SDK}/firebase-firestore.js`)
+    ]);
+    const app=appMod.getApps().length?appMod.getApps()[0]:appMod.initializeApp(FIREBASE_CONFIG);
+    const auth=authMod.getAuth(app);
+    const db=fireMod.getFirestore(app);
+    try{await authMod.setPersistence(auth,authMod.browserLocalPersistence);}catch(_){}
+    if(!auth.currentUser){
+      try{await authMod.signInAnonymously(auth);}catch(_){}
+    }
+    const ref=fireMod.doc(db,META_COLLECTION,'mantenimiento');
+    fireMod.onSnapshot(ref,snapshot=>{
+      config=snapshot.exists()?snapshot.data():{pages:{}};
+      writeCache(config);
+      render();
+    });
+  }catch(_){}
+}
+connect();

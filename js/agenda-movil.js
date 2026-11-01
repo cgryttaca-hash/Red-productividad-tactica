@@ -461,7 +461,6 @@ async function refreshFromCloud({notify=false,force=false}={}){
 async function initializeFirebase(){
   if(state.initialized)return;
   state.initialized=true;
-  window.dispatchEvent(new CustomEvent('rptLoading',{detail:{id:'firebase-agenda',busy:true}}));
   const cached=await cacheGet();
   if(cached?.events?.length){
     state.all=cached.events;
@@ -519,7 +518,7 @@ async function initializeFirebase(){
     setNotice('No fue posible iniciar la agenda. Se volverá a intentar automáticamente.','error');
     state.initialized=false;
     setTimeout(initializeFirebase,30000);
-  }finally{window.dispatchEvent(new CustomEvent('rptLoading',{detail:{id:'firebase-agenda',busy:false}}));}
+  }
 }
 
 document.querySelectorAll('.agenda-tab').forEach(button=>button.addEventListener('click',()=>{
@@ -597,7 +596,6 @@ if(savedFilters.view&&['today','upcoming','all'].includes(savedFilters.view)){
 setInterval(updateHeader,30000);
 updateHeader();
 render();
-window.RPTPageLoad?.ready();
 initializeFirebase();
 
 const operationClock=setInterval(()=>{if(document.hidden)return;const indexed=new Map(state.all.map(event=>[event.id,event]));document.querySelectorAll('.event-summary-row[data-id]').forEach(row=>{const event=indexed.get(row.dataset.id),label=row.querySelector('[data-operation-state]');if(event&&label)label.textContent=operationalStatus(event);});},30000);window.addEventListener('pagehide',()=>clearInterval(operationClock),{once:true});

@@ -9,7 +9,6 @@ function showPreloader(){
 
 function hidePreloader(){
   document.getElementById('agendaPreloader')?.classList.add('preloader-hide');
-  window.RPTPageLoad?.ready();
 }
 
 function showToast(message, type='success'){
@@ -612,7 +611,6 @@ function processWorkbook(workbook){
 }
 
 function loadWorkbookFromArrayBuffer(buffer){
-  if(!window.RPTAdminAccess?.hasAccess())return;
   const data = new Uint8Array(buffer);
   const wb = XLSX.read(data, { type: 'array', cellDates: false, cellText: false });
   processWorkbook(wb);
@@ -620,7 +618,6 @@ function loadWorkbookFromArrayBuffer(buffer){
 
 // Carga y procesamiento de archivos Excel
 document.getElementById('fileInput').addEventListener('change', e => {
-  if(!window.RPTAdminAccess?.hasAccess()){e.target.value='';showToast('La carga de archivos requiere Super Administrador (Ctrl + M).','info');return;}
   const f = e.target.files[0];
   if (!f) return;
   const reader = new FileReader();
@@ -770,23 +767,17 @@ function refreshRowsFromSharedStorage(showMessage=false){
   }
 }
 
-window.RPTPageInit.onReady(()=>{
+window.addEventListener('DOMContentLoaded',()=>{
   syncFoodFilterStatus();
   syncFilterPanelButton();
   if(refreshRowsFromSharedStorage(false)) showToast('Datos cargados del historial');
-  hidePreloader();
+  setTimeout(hidePreloader, 650);
 });
 
 window.addEventListener('eventDataUpdated', () => refreshRowsFromSharedStorage(true));
 
-document.getElementById('btnLoad').addEventListener('click', async () => {
-  if(!window.RPTAdminAccess?.hasAccess()){
-    const status=await window.ExcelFileSync?.resumeConfiguredFile();
-    if(status?.state==='ready')return;
-    if(status?.state==='permission'||status?.message)return;
-    showToast('La configuración inicial del Archivo Maestro se realiza en Super Administrador (Ctrl + M).','info');return;
-  }
-  if(window.ExcelFileSync)window.ExcelFileSync.chooseFile();
+document.getElementById('btnLoad').addEventListener('click', () => {
+  if(window.ExcelFileSync) window.ExcelFileSync.chooseFile();
   else document.getElementById('fileInput').click();
 });
 
@@ -821,7 +812,7 @@ function resetInactivityTimer(){
   inactivityTimer = setTimeout(()=>{if(window.RPTAgendaDialog?.hasPendingChanges())resetInactivityTimer();else volverAlInicio();}, INACTIVITY_LIMIT_MS);
 }
 
-window.RPTPageInit.onReady(() => {
+window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btnInicio')?.addEventListener('click', volverAlInicio);
   document.getElementById('btnPrint')?.addEventListener('click', () => window.print());
 
