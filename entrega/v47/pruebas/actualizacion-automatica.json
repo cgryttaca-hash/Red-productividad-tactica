@@ -1,0 +1,1726 @@
+{
+  "passed": [
+    "Nueva versión detectada por sondeo tras restaurar la página, sin recargar, pulsar Comprobar ni llamar a check(); aviso único y edición intacta",
+    "La detección no interrumpe el formulario pendiente ni sustituye la versión activa",
+    "Tras descartar la edición, el mecanismo existente activa automáticamente la versión verificada y confirma su número",
+    "La publicación dañada se detecta sin recarga, informa INTEGRITY y conserva la versión funcional"
+  ],
+  "requests": [
+    {
+      "file": "harness.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/pwa-context.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/release-info.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/update-safety.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "/favicon.ico",
+      "version": "9.0.0"
+    },
+    {
+      "file": "sw.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "administracion.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "version": "9.0.0"
+    },
+    {
+      "file": "agenda_movil.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "agendas.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "asistente.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/building.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/calendar.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/chart.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/clock.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/cloud.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/file.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/home.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/message.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/minute.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/mobile.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/payment.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/print.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/search.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/settings.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/shield.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/tools.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/update.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/ui/users.svg",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "configuracion.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/agendas.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/assistant.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/configuracion.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/control-center.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/estilos.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/eventos.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/excel-sync.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/firebase-sync.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/index.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/interaction-polish.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/interface-polish.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/login.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/maintenance-special.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/mantenimiento.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/minuta-share.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/minuta.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/mobile-operating.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/nav-clean.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/operating-center.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/premium-system.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/professional-ui.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/pwa-compat.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/technical-workspace.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "css/usuarios.css",
+      "version": "9.0.0"
+    },
+    {
+      "file": "eventos.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "index.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-access.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-analytics.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-center.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-data.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-modal.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-quality.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-records.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-reports.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-shortcut.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-statistics.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-summary.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/admin-ui.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/agenda-content.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/agenda-dialog.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/agenda-movil.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/agenda-operations.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/agenda-page.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/agenda-reminders.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/agenda-requirements.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/agendas.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/app.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/assistant-config.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/assistant-core.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/assistant.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/audit-store.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/auth-guard.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/backup-store.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/configuracion.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/control-center.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/data-core.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/device-heartbeat.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/device-registry.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/event-notes.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/event-query.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/eventos.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/excel-sync.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/firebase-app-check.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/firebase-config.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/firebase-sync.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/food-alerts-core.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/index.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/laboratorio.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/loader-guard.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/loading.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/local-auth.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/local-record-store.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/login.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/maintenance-admin.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/maintenance-client.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/maintenance-guard.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/maintenance-state.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/mantenimiento.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/minuta-raster.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/minuta-share-preview.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/minuta-share.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/minuta-time.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/minuta.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/navigation-policy.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/notifications.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/operating-center.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/page-start.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/performance-monitor.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/puente_movil_eventos.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/push-client.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/push-config.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/push-ui.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/pwa-context.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/pwa.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/release-info.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/release-worker.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/session-ui.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/system-log.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/system-version.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/technical-center.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/technical-log.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/ui-icons.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/update-page.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/update-safety.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/usuarios.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/validacion-page.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "js/validation.js",
+      "version": "9.0.0"
+    },
+    {
+      "file": "laboratorio.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "login.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "version": "9.0.0"
+    },
+    {
+      "file": "mantenimiento.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "minuta.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "offline.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "recuperacion.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "usuarios.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "validacion.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "harness.html",
+      "version": "9.0.0"
+    },
+    {
+      "file": "data/eventos_publicos.json",
+      "version": "9.0.0"
+    },
+    {
+      "file": "sw.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "administracion.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "version": "9.0.1"
+    },
+    {
+      "file": "agenda_movil.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "agendas.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "asistente.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/building.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/calendar.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/chart.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/clock.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/cloud.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/file.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/home.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/message.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/minute.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/mobile.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/payment.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/print.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/search.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/settings.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/shield.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/tools.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/update.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/ui/users.svg",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "configuracion.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/agendas.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/assistant.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/configuracion.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/control-center.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/corporate-ui.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/enterprise-refinements.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/estilos.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/eventos.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/excel-sync.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/firebase-sync.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/index.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/interaction-polish.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/interface-polish.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/login.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/maintenance-special.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/mantenimiento.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/minuta-share.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/minuta.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/mobile-operating.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/nav-clean.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/operating-center.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/premium-system.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/professional-ui.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/pwa-compat.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/technical-workspace.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "css/usuarios.css",
+      "version": "9.0.1"
+    },
+    {
+      "file": "eventos.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "index.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-access.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-analytics.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-center.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-data.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-modal.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-quality.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-records.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-reports.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-shortcut.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-statistics.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-summary.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/admin-ui.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/agenda-content.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/agenda-dialog.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/agenda-movil.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/agenda-operations.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/agenda-page.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/agenda-reminders.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/agenda-requirements.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/agendas.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/app.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/assistant-config.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/assistant-core.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/assistant.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/audit-store.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/auth-guard.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/backup-store.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/configuracion.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/control-center.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/data-core.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/device-heartbeat.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/device-registry.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/event-notes.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/event-query.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/eventos.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/excel-sync.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/firebase-app-check.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/firebase-config.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/firebase-sync.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/food-alerts-core.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/index.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/laboratorio.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/loader-guard.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/loading.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/local-auth.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/local-record-store.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/login.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/maintenance-admin.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/maintenance-client.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/maintenance-guard.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/maintenance-state.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/mantenimiento.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/minuta-raster.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/minuta-share-preview.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/minuta-share.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/minuta-time.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/minuta.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/navigation-policy.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/notifications.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/operating-center.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/page-start.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/performance-monitor.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/puente_movil_eventos.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/push-client.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/push-config.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/push-ui.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/pwa-context.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/pwa-release.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/pwa.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/release-info.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/release-worker.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/session-ui.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/system-log.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/system-version.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/technical-center.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/technical-log.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/ui-icons.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/update-page.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/update-safety.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/usuarios.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/validacion-page.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "js/validation.js",
+      "version": "9.0.1"
+    },
+    {
+      "file": "laboratorio.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "login.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "manifest.webmanifest",
+      "version": "9.0.1"
+    },
+    {
+      "file": "mantenimiento.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "minuta.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "minuta_compartir.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "offline.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "recuperacion.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "usuarios.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "validacion.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "harness.html",
+      "version": "9.0.1"
+    },
+    {
+      "file": "data/eventos_publicos.json",
+      "version": "9.0.1"
+    },
+    {
+      "file": "sw.js",
+      "version": "9.0.2"
+    },
+    {
+      "file": "administracion.html",
+      "version": "9.0.2"
+    },
+    {
+      "file": "agenda.webmanifest",
+      "version": "9.0.2"
+    },
+    {
+      "file": "agenda_movil.html",
+      "version": "9.0.2"
+    },
+    {
+      "file": "agendas.html",
+      "version": "9.0.2"
+    },
+    {
+      "file": "asistente.html",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/apple-touch-icon.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/badge-96.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.ico",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/favicon.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/icon-192.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/icon-512.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/icon-96.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-192.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/icon-maskable-512.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-dark.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-light.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-full-mono.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-small.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-dark.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-light.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/agenda-brand/logo-symbol-mono.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/icon-180.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/icon-192.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/icon-512.png",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/building.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/calendar.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/chart.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/clock.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/cloud.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/file.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/home.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/message.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/minute.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/mobile.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/payment.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/print.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/search.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/settings.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/shield.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/tools.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/update.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/ui/users.svg",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/vendor/LICENSE-chartjs.txt",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/vendor/LICENSE-datalabels.txt",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/vendor/LICENSE-sheetjs.txt",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/vendor/chart-4.6.1.min.js",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/vendor/chartjs-datalabels-2.2.0.min.js",
+      "version": "9.0.2"
+    },
+    {
+      "file": "assets/vendor/xlsx-0.20.3.min.js",
+      "version": "9.0.2"
+    },
+    {
+      "file": "configuracion.html",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/admin-tools.css",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/agenda-compact.css",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/agenda-dialog.css",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/agenda-movil.css",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/agenda-premium.css",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/agendas.css",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/assistant.css",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/configuracion.css",
+      "version": "9.0.2"
+    },
+    {
+      "file": "css/control-center.css",
+      "version": "9.0.2"
+    }
+  ],
+  "manualCheckInvoked": false,
+  "manualReloadInvoked": false,
+  "browserTimersAccelerated": true,
+  "productionTested": false
+}

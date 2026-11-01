@@ -1,11 +1,12 @@
 {
-  "version": "4.6.0",
-  "dateBogota": "2026-11-01",
+  "version": "4.7.0",
   "result": "PASS",
-  "digest": "ee4f62d61595803d745e3a34315e26e0ab603ff7ac218817944a3dc1ec82bcd0",
-  "resources": 156,
-  "suites": 15,
-  "checks": 167,
+  "dateBogota": "2026-11-01",
+  "suites": 19,
+  "checks": 165,
+  "resources": 177,
+  "digest": "f3922d12c1b8c187c80c180dd45c634eddccfa435c8591c1926a07e086fc1429",
+  "scope": "Se conserva la seguridad y el acceso actuales, según la aclaración posterior del usuario. La activación o sustitución manual de Excel/Firebase queda dentro de la sesión administrativa validada con Ctrl+M, sin controles ni modales técnicos al inicio. Las fuentes previamente vinculadas conservan la sincronización automática. No se añade autorización remota de dispositivos ni se cambia el acceso público/sin conexión de Agenda Móvil.",
   "productionDeployed": false,
-  "report": "entrega/v46/PRUEBAS.json"
+  "report": "entrega/v47/PRUEBAS.json"
 }

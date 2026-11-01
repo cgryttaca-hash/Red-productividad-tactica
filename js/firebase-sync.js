@@ -1,3 +1,5 @@
+function technicalAccess(){return Boolean(window.RPTAdminAccess?.hasAccess());}
+function requestTechnicalAccess(){window.dispatchEvent(new CustomEvent('rptTechnicalAccessRequired',{detail:{message:'La activación o el cambio de archivos y conexiones se realiza en Super Administrador (Ctrl + M).'}}));return false;}
 import {eventFoodServices,foodFields} from './food-alerts-core.js';
 import {
   FIREBASE_CONFIG,
@@ -134,13 +136,14 @@ function friendlyError(error){
 }
 
 function ensureUi(){
+  if(!technicalAccess())return;
   if(document.documentElement.dataset.syncUi==='background'||(document.documentElement.dataset.syncUi==='admin'&&!window.RPTAdminAccess?.hasAccess()))return;
   if(!/\/(?:index\.html|administracion\.html)?$/.test(location.pathname)||document.getElementById('firebaseSyncControl'))return;
   const control=document.createElement('button');
   control.id='firebaseSyncControl';
   control.className='firebase-sync-control is-idle';
   control.type='button';
-  control.innerHTML=`<span class="firebase-sync-icon">☁</span><span><small>Agenda móvil</small><strong id="firebaseSyncControlText">Inicializando…</strong></span><i></i>`;
+  control.innerHTML=`<span class="firebase-sync-icon"><svg class="rpt-ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18a4 4 0 1 1 1-8 6 6 0 0 1 11-2 5 5 0 0 1 0 10M9 16l3-3 3 3m-3-3v8"/></svg></span><span><small>Agenda móvil</small><strong id="firebaseSyncControlText">Inicializando…</strong></span><i></i>`;
   const target=document.querySelector('[data-firebase-sync-slot]')||document.querySelector('.header-tools');
   target?.appendChild(control);
 
@@ -148,7 +151,7 @@ function ensureUi(){
   modal.id='firebaseSyncModal';modal.className='firebase-sync-modal';modal.setAttribute('aria-hidden','true');
   modal.innerHTML=`<div class="firebase-sync-dialog" role="dialog" aria-modal="true" aria-labelledby="firebaseSyncTitle">
     <button class="firebase-sync-close" type="button" aria-label="Cerrar">×</button>
-    <div class="firebase-sync-heading"><span>☁</span><div><small>Firebase · tiempo real</small><h2 id="firebaseSyncTitle">Publicación móvil</h2><p>La cuenta propietaria se recuerda en este navegador.</p></div></div>
+    <div class="firebase-sync-heading"><span><svg class="rpt-ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18a4 4 0 1 1 1-8 6 6 0 0 1 11-2 5 5 0 0 1 0 10M9 16l3-3 3 3m-3-3v8"/></svg></span><div><small>Firebase · tiempo real</small><h2 id="firebaseSyncTitle">Publicación móvil</h2><p>La cuenta propietaria se recuerda en este navegador.</p></div></div>
     <div id="firebaseSyncState" class="firebase-sync-state is-syncing"><i></i><div><small>Estado</small><strong>Inicializando Firebase</strong><span>Espera un momento…</span></div></div>
     <form id="firebaseLoginForm" hidden>
       <label>Correo<input id="firebaseEmail" type="email" autocomplete="username" required></label>
@@ -180,7 +183,7 @@ function ensureUi(){
   refreshMetrics();
 }
 
-function openPanel(){ui.modal?.classList.add('is-open');ui.modal?.setAttribute('aria-hidden','false');refreshMetrics();}
+function openPanel(){if(!technicalAccess())return requestTechnicalAccess();ui.modal?.classList.add('is-open');ui.modal?.setAttribute('aria-hidden','false');refreshMetrics();}
 function closePanel(){ui.modal?.classList.remove('is-open');ui.modal?.setAttribute('aria-hidden','true');}
 function showMessage(message,type='info'){
   if(!ui.message)return;
@@ -220,7 +223,7 @@ function updateUi(){
   }
 }
 async function login(event){
-  event.preventDefault();showMessage('');ui.loginButton.disabled=true;
+  event.preventDefault();if(!technicalAccess())return requestTechnicalAccess();showMessage('');ui.loginButton.disabled=true;
   try{
     const {authMod}=await loadSdk();
     localStorage.setItem(OWNER_EMAIL_KEY,ui.email.value.trim());
@@ -233,6 +236,7 @@ async function login(event){
   finally{ui.loginButton.disabled=false;}
 }
 async function logout(){
+  if(!technicalAccess())return requestTechnicalAccess();
   try{const {authMod}=await loadSdk();if(auth)await authMod.signOut(auth);}
   catch(error){showMessage(friendlyError(error),'error');}
 }
@@ -319,7 +323,8 @@ async function writeAudit(entries,fireMod){
 }
 
 export async function publishIfReady(rows=null,diff=null,meta={}){
-  if(window.RPTNavigation?.mobile()||(meta.manual&&document.documentElement.dataset.syncUi==='background'&&!window.RPTAdminAccess?.hasAccess()))return false;
+  if(meta.manual&&!technicalAccess())return requestTechnicalAccess();
+  if(window.RPTNavigation?.mobile())return false;
   if(publishing||window.RPTUpdateGuard?.locked)return false;
   const operationStarted=performance.now();
   publishing=true;window.__RPT_FIREBASE_PUBLISHING__=true;updateUi();window.RPTUpdateGuard?.setBusy('firebase-publish',true);
@@ -424,6 +429,7 @@ export async function publishIfReady(rows=null,diff=null,meta={}){
 async function initialize(){
   if(window.RPTNavigation?.mobile()||(document.documentElement.dataset.syncUi==='admin'&&!window.RPTAdminAccess?.hasAccess()))return;
   ensureUi();setState('syncing','Inicializando Firebase','Espera un momento…');
+  window.dispatchEvent(new CustomEvent('rptLoading',{detail:{id:'firebase-connect',busy:true}}));
   try{
     await loadSdk();await authReadyPromise;updateUi();
     if(isOwner(currentUser)&&currentRows().length){
@@ -438,7 +444,7 @@ async function initialize(){
     setState('error','Firebase no disponible',message);
     await systemLog({source:'Firebase',level:'error',title:'Error de inicialización',detail:message});
     if(ui.loginButton)ui.loginButton.disabled=true;
-  }
+  }finally{window.dispatchEvent(new CustomEvent('rptLoading',{detail:{id:'firebase-connect',busy:false}}));}
 }
 window.addEventListener('eventDataUpdated',event=>{
   if(!isOwner(currentUser))return;

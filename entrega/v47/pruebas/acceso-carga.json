@@ -1,0 +1,13 @@
+{
+  "passed": [
+    "Inicio/Eventos no crean modales técnicos ni abren el selector; operaciones manuales requieren Ctrl+M",
+    "Ctrl+M conserva cuenta, sesión y datos; ambos controles se abren solo a petición dentro de Administración",
+    "El estado de Excel permanece durante una promesa real y desaparece al resolver, sin duración artificial",
+    "Error real de proceso y reintento único, sin listeners ni operaciones duplicadas",
+    "La contraseña incorrecta no abre la administración ni habilita archivos",
+    "Un usuario de consulta conserva su rol y no obtiene acceso administrativo ni controles de activación",
+    "Fallo de recurso inicial muestra un error y reintento, sin dar por lista la página"
+  ],
+  "scope": "Seguridad existente conservada según la aclaración del usuario; no se añade autorización remota de dispositivos.",
+  "productionTested": false
+}
