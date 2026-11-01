@@ -1,11 +1,12 @@
 {
-  "version": "4.6.0",
-  "dateBogota": "2026-11-01",
+  "version": "4.9.0",
   "result": "PASS",
-  "digest": "ee4f62d61595803d745e3a34315e26e0ab603ff7ac218817944a3dc1ec82bcd0",
-  "resources": 156,
-  "suites": 15,
-  "checks": 167,
+  "dateBogota": "2026-11-01",
+  "suites": 18,
+  "checks": 158,
+  "resources": 177,
+  "digest": "a6307c37f1815d5df7db9416124621fd09954bfe6ac225f1476350be2c82d561",
+  "deviceAuthorizationRequired": false,
   "productionDeployed": false,
-  "report": "entrega/v46/PRUEBAS.json"
+  "report": "entrega/v49/PRUEBAS.json"
 }

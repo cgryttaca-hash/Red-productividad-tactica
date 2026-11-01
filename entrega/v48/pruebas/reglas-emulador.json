@@ -1,0 +1,12 @@
+{
+  "passed": [
+    "Primer ingreso: consulta propia inexistente y creación de solicitud pendiente con identidad autenticada y fechas de servidor",
+    "No se permite autoaprobarse, crear la identidad de otro equipo ni crear una solicitud ya autorizada",
+    "Un dispositivo solo consulta su documento; listar o consultar dispositivos ajenos requiere la cuenta propietaria",
+    "La cuenta propietaria autoriza; el heartbeat del equipo conserva la aprobación sin poder modificarla",
+    "La revocación solo la cambia el propietario; el propio equipo no puede eliminarla ni reautorizarse"
+  ],
+  "engine": "Firestore Emulator real",
+  "projectId": "demo-rpt-devices",
+  "productionAccessed": false
+}

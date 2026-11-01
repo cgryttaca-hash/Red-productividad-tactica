@@ -1,0 +1,115 @@
+{
+  "version": "4.9.0",
+  "dateBogota": "2026-11-01",
+  "result": "PASS",
+  "suiteCount": 18,
+  "checks": 158,
+  "suites": {
+    "acceso-restaurado": {
+      "result": "PASS",
+      "checks": 7,
+      "evidence": "pruebas/acceso-restaurado.json"
+    },
+    "cargas": {
+      "result": "PASS",
+      "checks": 6,
+      "evidence": "pruebas/cargas.json"
+    },
+    "conservacion": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/conservacion.json"
+    },
+    "nucleos-operativos": {
+      "result": "PASS",
+      "checks": 1,
+      "evidence": "pruebas/nucleos-operativos.json"
+    },
+    "responsive": {
+      "result": "PASS",
+      "checks": 95,
+      "evidence": "pruebas/responsive.json"
+    },
+    "estilos-iconos": {
+      "result": "PASS",
+      "checks": 2,
+      "evidence": "pruebas/estilos-iconos.json"
+    },
+    "pruebas-sincronizacion-fondo": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/pruebas-sincronizacion-fondo.json"
+    },
+    "pruebas-movil-compatibilidad": {
+      "result": "PASS",
+      "checks": 5,
+      "evidence": "pruebas/pruebas-movil-compatibilidad.json"
+    },
+    "pruebas-alimentacion-presentacion": {
+      "result": "PASS",
+      "checks": 6,
+      "evidence": "pruebas/pruebas-alimentacion-presentacion.json"
+    },
+    "instalada-offline": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/instalada-offline.json"
+    },
+    "pruebas-migracion": {
+      "result": "PASS",
+      "checks": 1,
+      "evidence": "pruebas/pruebas-migracion.json"
+    },
+    "actualizacion-automatica": {
+      "result": "PASS",
+      "checks": 4,
+      "evidence": "pruebas/actualizacion-automatica.json"
+    },
+    "pruebas-integridad": {
+      "result": "PASS",
+      "checks": 8,
+      "evidence": "pruebas/pruebas-integridad.json"
+    },
+    "reapertura": {
+      "result": "PASS",
+      "checks": 1,
+      "evidence": "pruebas/reapertura.json"
+    },
+    "rendimiento": {
+      "result": "PASS",
+      "checks": 2,
+      "evidence": "pruebas/rendimiento.json"
+    },
+    "persistencia-firebase-excel": {
+      "result": "PASS",
+      "checks": 6,
+      "evidence": "pruebas/persistencia-firebase-excel.json"
+    },
+    "recuperacion-48": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/recuperacion-48.json"
+    },
+    "estructura": {
+      "result": "PASS",
+      "checks": 2,
+      "evidence": "pruebas/estructura.json"
+    }
+  },
+  "resources": 177,
+  "digest": "a6307c37f1815d5df7db9416124621fd09954bfe6ac225f1476350be2c82d561",
+  "deviceAuthorizationRequired": false,
+  "productionDeployed": false,
+  "limits": [
+    "No se publico 4.9 ni se modifico el repositorio GitHub, reglas o cuentas de produccion. La publicacion del ZIP estatico y, solo si se desplegaron las reglas 4.8, su restauracion son pasos pendientes en la instalacion real.",
+    "El ingreso desde otro computador se ensaya con dos perfiles aislados de Chrome. No se utilizaron dos computadores fisicos ni los perfiles personales del usuario.",
+    "Auth 12.16.0 y su persistencia se probaron con SDK y Auth Emulator reales; Firestore/publicacion usa adaptadores en memoria. No se utiliza ninguna contrasena o cuenta operativa.",
+    "El XLSX, sus cambios y su handle persistente en OPFS son reales. La perdida/concesion de permiso se simula en la prueba; no se abre un Excel operativo ni se prueba el dialogo fisico de un archivo externo del sistema operativo.",
+    "La recuperacion desde 4.8 usa Service Workers y caches reales en HTTP local. La primera descarga que evita el worker viejo se controla con Network.setBypassServiceWorker de Chrome; no demuestra un atajo fisico en produccion. Despues se fuerza la comprobacion existente y se confirma el worker 4.9 antes de la reapertura normal.",
+    "Agenda Movil se verifica en perfiles Chrome/WebKit Android, iPhone e iPad, incluida PWA emulada. No se instalo en telefonos fisicos ni se verifico una entrega real de Push.",
+    "Los registros y cifras de las capturas son de ensayo. El feed publicado sigue vacio y no incorpora datos de esas pruebas.",
+    "Se conserva el inicio local, sus usuarios, roles y contrasenas, y los permisos originales. El identificador local anterior que vincula una sesion con su perfil permanece porque pertenece al acceso original; no requiere una aprobacion en Firebase.",
+    "Mantenimiento, usuarios, configuracion y otros modulos retirados de la navegacion conservan archivos, controladores y datos. El menu no agrega accesos alternativos ni modulos nuevos.",
+    "La aplicacion sigue siendo el sitio estatico original. Retirar el control nuevo restaura su alcance anterior; no cambia credenciales, proveedores ni las reglas de lectura/publicacion de eventos."
+  ]
+}

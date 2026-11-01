@@ -1,0 +1,53 @@
+{
+  "files": {
+    "js/auth-guard.js": {
+      "restoredFrom": "4.7.0 anterior al bloqueo",
+      "sha256": "944f8ba23dc68cc2c6e33b13d777e464eb91749497a63fa7822b3b2c6b196277",
+      "sameAs46": true
+    },
+    "js/device-registry.js": {
+      "restoredFrom": "4.7.0 anterior al bloqueo",
+      "sha256": "dcbad70993ffd76f8f493ea9e0b736ff5449e3ab2374031d5db0de8e1f89bcac",
+      "sameAs46": true
+    },
+    "js/device-heartbeat.js": {
+      "restoredFrom": "4.7.0 anterior al bloqueo",
+      "sha256": "9659f70c51ca272470c9fd60b346a3bae392d7420b0a29c1fc0877ff7dd4faa2",
+      "sameAs46": true
+    },
+    "js/eventos.js": {
+      "restoredFrom": "4.7.0 anterior al bloqueo",
+      "sha256": "cc0b9392c5c91ace26eca4289c7696bc555f2c03738b0a21dd9a5bba7f263e60",
+      "sameAs46": false
+    },
+    "js/minuta.js": {
+      "restoredFrom": "4.7.0 anterior al bloqueo",
+      "sha256": "c34668a73e7a88d3ccbafa3e7574e2f8e906603c592e1fc134e826b084a6612b",
+      "sameAs46": false
+    },
+    "js/excel-sync.js": {
+      "restoredFrom": "4.7.0 anterior al bloqueo",
+      "sha256": "fece3b0cabcebb8fb64e0d081bf30d35e9c898a591e965028aa8e0bfa142457c",
+      "sameAs46": false
+    },
+    "js/firebase-sync.js": {
+      "restoredFrom": "4.7.0 anterior al bloqueo",
+      "sha256": "89d7896bb3f91a7330bbcbd6aa7a8ef5c42a20f2048b01676dc57b666dc851db",
+      "sameAs46": false
+    },
+    "firestore.rules": {
+      "restoredFrom": "4.6.0",
+      "sha256": "3e131989f1067996eb0ae1e2d809f88ea2bf77b1214c0acfbdeafcb9e1d97112",
+      "sameAs46": true
+    }
+  },
+  "archived": {
+    "js/device-access.js": "codigo-retirado/v48/js/device-access.js",
+    "js/device-approval-store.js": "codigo-retirado/v48/js/device-approval-store.js",
+    "js/device-admin.js": "codigo-retirado/v48/js/device-admin.js",
+    "css/device-access.css": "codigo-retirado/v48/css/device-access.css"
+  },
+  "deviceBootstrapRemovedFromAllPages": true,
+  "deviceHeartbeatUnlinked": true,
+  "rulesOutsideDeviceRegistryUnchanged": true
+}

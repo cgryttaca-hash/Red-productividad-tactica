@@ -1,0 +1,249 @@
+{
+  "passed": [
+    "Inicio sin fuentes vinculadas: sin Excel, IA ni análisis en la carga inicial; aumento local menor de 45 KB frente a 4.6.0",
+    "Quince cambios de sección no añaden consultas de análisis ni listeners Firebase y conservan un solo motor Excel"
+  ],
+  "measurements": {
+    "original": {
+      "resources": [
+        {
+          "path": "/original/js/navigation-policy.js",
+          "bytes": 2566
+        },
+        {
+          "path": "/original/js/admin-access.js",
+          "bytes": 997
+        },
+        {
+          "path": "/original/js/auth-guard.js",
+          "bytes": 2830
+        },
+        {
+          "path": "/original/css/enterprise-refinements.css",
+          "bytes": 16059
+        },
+        {
+          "path": "/original/js/maintenance-guard.js",
+          "bytes": 1361
+        },
+        {
+          "path": "/original/css/operating-center.css",
+          "bytes": 6896
+        },
+        {
+          "path": "/original/css/technical-workspace.css",
+          "bytes": 12501
+        },
+        {
+          "path": "/original/assets/agenda-brand/logo-symbol-light.svg",
+          "bytes": 615
+        },
+        {
+          "path": "/original/js/operating-center.js",
+          "bytes": 2140
+        },
+        {
+          "path": "/original/js/pwa.js",
+          "bytes": 27
+        },
+        {
+          "path": "/original/js/device-heartbeat.js",
+          "bytes": 838
+        },
+        {
+          "path": "/original/js/admin-shortcut.js",
+          "bytes": 704
+        },
+        {
+          "path": "/original/js/loading.js",
+          "bytes": 1554
+        },
+        {
+          "path": "/original/js/maintenance-client.js",
+          "bytes": 2909
+        },
+        {
+          "path": "/original/js/maintenance-state.js",
+          "bytes": 3192
+        },
+        {
+          "path": "/original/js/pwa-release.js",
+          "bytes": 15357
+        },
+        {
+          "path": "/original/js/local-auth.js",
+          "bytes": 11824
+        },
+        {
+          "path": "/original/js/device-registry.js",
+          "bytes": 5142
+        },
+        {
+          "path": "/original/js/technical-log.js",
+          "bytes": 1340
+        },
+        {
+          "path": "/original/js/firebase-config.js",
+          "bytes": 666
+        },
+        {
+          "path": "/original/js/pwa-context.js",
+          "bytes": 304
+        },
+        {
+          "path": "/original/js/release-info.js",
+          "bytes": 38
+        },
+        {
+          "path": "/original/js/update-safety.js",
+          "bytes": 4949
+        },
+        {
+          "path": "/original/js/system-log.js",
+          "bytes": 1408
+        },
+        {
+          "path": "/original/assets/agenda-brand/favicon.svg",
+          "bytes": 598
+        }
+      ],
+      "nodes": 90,
+      "reads": {
+        "eventos_meta/mantenimiento": 1
+      },
+      "listeners": {
+        "eventos_meta/mantenimiento": 1
+      }
+    },
+    "actual": {
+      "resources": [
+        {
+          "path": "/actual/js/navigation-policy.js",
+          "bytes": 2566
+        },
+        {
+          "path": "/actual/js/admin-access.js",
+          "bytes": 997
+        },
+        {
+          "path": "/actual/js/auth-guard.js",
+          "bytes": 2830
+        },
+        {
+          "path": "/actual/js/maintenance-guard.js",
+          "bytes": 1361
+        },
+        {
+          "path": "/actual/css/enterprise-refinements.css",
+          "bytes": 16059
+        },
+        {
+          "path": "/actual/css/operating-center.css",
+          "bytes": 6896
+        },
+        {
+          "path": "/actual/css/technical-workspace.css",
+          "bytes": 12653
+        },
+        {
+          "path": "/actual/css/interaction-polish.css",
+          "bytes": 9114
+        },
+        {
+          "path": "/actual/js/page-start.js",
+          "bytes": 3057
+        },
+        {
+          "path": "/actual/js/operating-center.js",
+          "bytes": 2170
+        },
+        {
+          "path": "/actual/js/pwa.js",
+          "bytes": 27
+        },
+        {
+          "path": "/actual/js/loading.js",
+          "bytes": 6542
+        },
+        {
+          "path": "/actual/js/admin-shortcut.js",
+          "bytes": 704
+        },
+        {
+          "path": "/actual/assets/agenda-brand/logo-symbol-light.svg",
+          "bytes": 615
+        },
+        {
+          "path": "/actual/js/maintenance-client.js",
+          "bytes": 2909
+        },
+        {
+          "path": "/actual/js/maintenance-state.js",
+          "bytes": 3192
+        },
+        {
+          "path": "/actual/assets/ui/home.svg",
+          "bytes": 213
+        },
+        {
+          "path": "/actual/js/pwa-release.js",
+          "bytes": 16631
+        },
+        {
+          "path": "/actual/js/technical-log.js",
+          "bytes": 1340
+        },
+        {
+          "path": "/actual/js/ui-icons.js",
+          "bytes": 2231
+        },
+        {
+          "path": "/actual/js/firebase-config.js",
+          "bytes": 666
+        },
+        {
+          "path": "/actual/js/pwa-context.js",
+          "bytes": 304
+        },
+        {
+          "path": "/actual/js/release-info.js",
+          "bytes": 38
+        },
+        {
+          "path": "/actual/js/update-safety.js",
+          "bytes": 4949
+        },
+        {
+          "path": "/actual/js/system-log.js",
+          "bytes": 1408
+        },
+        {
+          "path": "/actual/assets/ui/home.svg",
+          "bytes": 213
+        }
+      ],
+      "nodes": 101,
+      "reads": {
+        "eventos_meta/mantenimiento": 1
+      },
+      "listeners": {
+        "eventos_meta/mantenimiento": 1
+      }
+    }
+  },
+  "totals": {
+    "original": 96815,
+    "actual": 99685
+  },
+  "before": {
+    "reads": {},
+    "listeners": {}
+  },
+  "after": {
+    "reads": {},
+    "listeners": {}
+  },
+  "limits": [
+    "Medición orientativa de bytes decodificados de recursos locales, sin descargas de instalación del Service Worker ni latencia de producción. No se inicia el registro ni la vigilancia remota de equipos en las rutas de la aplicación."
+  ]
+}

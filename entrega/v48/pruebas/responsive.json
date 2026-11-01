@@ -1,0 +1,429 @@
+{
+  "checks": [
+    {
+      "file": "index.html",
+      "width": 1440
+    },
+    {
+      "file": "eventos.html",
+      "width": 1440
+    },
+    {
+      "file": "minuta.html",
+      "width": 1440
+    },
+    {
+      "file": "agendas.html",
+      "width": 1440
+    },
+    {
+      "file": "offline.html",
+      "width": 1440
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 1440
+    },
+    {
+      "file": "administracion.html",
+      "width": 1440
+    },
+    {
+      "file": "usuarios.html",
+      "width": 1440
+    },
+    {
+      "file": "configuracion.html",
+      "width": 1440
+    },
+    {
+      "file": "validacion.html",
+      "width": 1440
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 1440
+    },
+    {
+      "file": "asistente.html",
+      "width": 1440
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 1440
+    },
+    {
+      "file": "index.html",
+      "width": 1024
+    },
+    {
+      "file": "eventos.html",
+      "width": 1024
+    },
+    {
+      "file": "minuta.html",
+      "width": 1024
+    },
+    {
+      "file": "agendas.html",
+      "width": 1024
+    },
+    {
+      "file": "offline.html",
+      "width": 1024
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 1024
+    },
+    {
+      "file": "administracion.html",
+      "width": 1024
+    },
+    {
+      "file": "usuarios.html",
+      "width": 1024
+    },
+    {
+      "file": "configuracion.html",
+      "width": 1024
+    },
+    {
+      "file": "validacion.html",
+      "width": 1024
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 1024
+    },
+    {
+      "file": "asistente.html",
+      "width": 1024
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 1024
+    },
+    {
+      "file": "index.html",
+      "width": 768
+    },
+    {
+      "file": "eventos.html",
+      "width": 768
+    },
+    {
+      "file": "minuta.html",
+      "width": 768
+    },
+    {
+      "file": "agendas.html",
+      "width": 768
+    },
+    {
+      "file": "offline.html",
+      "width": 768
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 768
+    },
+    {
+      "file": "administracion.html",
+      "width": 768
+    },
+    {
+      "file": "usuarios.html",
+      "width": 768
+    },
+    {
+      "file": "configuracion.html",
+      "width": 768
+    },
+    {
+      "file": "validacion.html",
+      "width": 768
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 768
+    },
+    {
+      "file": "asistente.html",
+      "width": 768
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 768
+    },
+    {
+      "file": "index.html",
+      "width": 390
+    },
+    {
+      "file": "eventos.html",
+      "width": 390
+    },
+    {
+      "file": "minuta.html",
+      "width": 390
+    },
+    {
+      "file": "agendas.html",
+      "width": 390
+    },
+    {
+      "file": "offline.html",
+      "width": 390
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 390
+    },
+    {
+      "file": "administracion.html",
+      "width": 390
+    },
+    {
+      "file": "usuarios.html",
+      "width": 390
+    },
+    {
+      "file": "configuracion.html",
+      "width": 390
+    },
+    {
+      "file": "validacion.html",
+      "width": 390
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 390
+    },
+    {
+      "file": "asistente.html",
+      "width": 390
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 390
+    },
+    {
+      "file": "index.html",
+      "width": 360
+    },
+    {
+      "file": "eventos.html",
+      "width": 360
+    },
+    {
+      "file": "minuta.html",
+      "width": 360
+    },
+    {
+      "file": "agendas.html",
+      "width": 360
+    },
+    {
+      "file": "offline.html",
+      "width": 360
+    },
+    {
+      "file": "minuta_compartir.html",
+      "width": 360
+    },
+    {
+      "file": "administracion.html",
+      "width": 360
+    },
+    {
+      "file": "usuarios.html",
+      "width": 360
+    },
+    {
+      "file": "configuracion.html",
+      "width": 360
+    },
+    {
+      "file": "validacion.html",
+      "width": 360
+    },
+    {
+      "file": "laboratorio.html",
+      "width": 360
+    },
+    {
+      "file": "asistente.html",
+      "width": 360
+    },
+    {
+      "file": "recuperacion.html",
+      "width": 360
+    },
+    {
+      "file": "login.html",
+      "width": 1440
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 1440
+    },
+    {
+      "file": "login.html",
+      "width": 1024
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 1024
+    },
+    {
+      "file": "login.html",
+      "width": 768
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 768
+    },
+    {
+      "file": "login.html",
+      "width": 390
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 390
+    },
+    {
+      "file": "login.html",
+      "width": 360
+    },
+    {
+      "file": "agenda_movil.html",
+      "width": 360
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 1440
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 1024
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 768
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 390
+    },
+    {
+      "file": "mantenimiento.html",
+      "width": 360
+    }
+  ],
+  "sections": [
+    {
+      "key": "system",
+      "width": 1440
+    },
+    {
+      "key": "activity",
+      "width": 1440
+    },
+    {
+      "key": "updates",
+      "width": 1440
+    },
+    {
+      "key": "maintenance",
+      "width": 1440
+    },
+    {
+      "key": "devices",
+      "width": 1440
+    },
+    {
+      "key": "system",
+      "width": 1024
+    },
+    {
+      "key": "activity",
+      "width": 1024
+    },
+    {
+      "key": "updates",
+      "width": 1024
+    },
+    {
+      "key": "maintenance",
+      "width": 1024
+    },
+    {
+      "key": "devices",
+      "width": 1024
+    },
+    {
+      "key": "system",
+      "width": 768
+    },
+    {
+      "key": "activity",
+      "width": 768
+    },
+    {
+      "key": "updates",
+      "width": 768
+    },
+    {
+      "key": "maintenance",
+      "width": 768
+    },
+    {
+      "key": "devices",
+      "width": 768
+    },
+    {
+      "key": "system",
+      "width": 390
+    },
+    {
+      "key": "activity",
+      "width": 390
+    },
+    {
+      "key": "updates",
+      "width": 390
+    },
+    {
+      "key": "maintenance",
+      "width": 390
+    },
+    {
+      "key": "devices",
+      "width": 390
+    },
+    {
+      "key": "system",
+      "width": 360
+    },
+    {
+      "key": "activity",
+      "width": 360
+    },
+    {
+      "key": "updates",
+      "width": 360
+    },
+    {
+      "key": "maintenance",
+      "width": 360
+    },
+    {
+      "key": "devices",
+      "width": 360
+    }
+  ],
+  "pageErrors": [],
+  "missingLocal": [],
+  "productionTested": false
+}

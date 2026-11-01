@@ -1,0 +1,11 @@
+{
+  "passed": [
+    "Preparando Archivo Maestro de Eventos: estado ligado a una promesa de trabajo, sin pausa ni porcentaje inventado",
+    "Estableciendo conexión: estado ligado a una promesa de trabajo, sin pausa ni porcentaje inventado",
+    "Validando acceso: estado ligado a una promesa de trabajo, sin pausa ni porcentaje inventado",
+    "Validando acceso administrativo: estado ligado a una promesa de trabajo, sin pausa ni porcentaje inventado",
+    "Error de proceso y reintento único conservados",
+    "El error de un recurso real permite reintentar la carga sin pantalla de autorización de equipos"
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,1 @@
+require('esbuild').buildSync({entryPoints:[require('node:path').join(__dirname,'browser-sdk-entry.js')],bundle:true,format:'esm',platform:'browser',outfile:require('node:path').join(__dirname,'browser-sdk.js')});

@@ -1,9 +1,9 @@
 {
-  "version": "4.6.0",
+  "version": "4.9.0",
   "assets": [
     {
       "path": "administracion.html",
-      "sha256": "35a914dba0dd387c60c2bb91b73be4eb98a73f755c5139d273ab4e5911cb5186"
+      "sha256": "b563006ed21ea00e97abab079b2a223f9ea000a0a0cc03490a8203f8816a2003"
     },
     {
       "path": "agenda.webmanifest",
@@ -11,15 +11,15 @@
     },
     {
       "path": "agenda_movil.html",
-      "sha256": "c413183a9241a9f277c8d8d84d2deb36d61962798389f4b8e69dc78b5a0934c4"
+      "sha256": "564c01620806f2ae5b06c4f25dfb145f14f784b05fe470455feb7127a3578f6e"
     },
     {
       "path": "agendas.html",
-      "sha256": "899c6edd0da9e0679091807d35fc19aecbc836db5df2e677c898475c816c23bc"
+      "sha256": "3a94dc506dce023372f80882525d1e22e772ef52786a5a9fc4b5467531750ed8"
     },
     {
       "path": "asistente.html",
-      "sha256": "ed5253fdfe6a95db53a252c1db940eea1298f02b322fd692053d99e39b881850"
+      "sha256": "2cfe899cc4f435d34055b4324cba1df27405e7d8a29e932dda412a03ff430910"
     },
     {
       "path": "assets/agenda-brand/apple-touch-icon.png",
@@ -110,6 +110,78 @@
       "sha256": "c98cecdfbd4b957b4234016f790dd5c34b827acd2929d300fb42293896274d31"
     },
     {
+      "path": "assets/ui/building.svg",
+      "sha256": "1b71f9ef8cb346ecd1ff950b1c6b721fbef88f54ffbcab8d28d4120ae3f40f16"
+    },
+    {
+      "path": "assets/ui/calendar.svg",
+      "sha256": "52a094fdedc89720a7e9d1f7a355946b0d85c56d51447ad4b948177aaccdba2e"
+    },
+    {
+      "path": "assets/ui/chart.svg",
+      "sha256": "b849e4411eebac57f7660e25ae63e43cacb825ad8e33c236164c9bbde1dabdb2"
+    },
+    {
+      "path": "assets/ui/clock.svg",
+      "sha256": "b8e617499ca4ec41c6a2f13a5bf62710a2ffd4c8e0c40d4cf279ad1e3c57c15f"
+    },
+    {
+      "path": "assets/ui/cloud.svg",
+      "sha256": "4a872bf1fd00fec29aa41eecb7b9a08c32b7047d5bcbc13f8f3d602e1e3ddfab"
+    },
+    {
+      "path": "assets/ui/file.svg",
+      "sha256": "47948891c4f28ce090ea50b4a003dc6a4a92195c50db8cb8472a7adb870a17c6"
+    },
+    {
+      "path": "assets/ui/home.svg",
+      "sha256": "823d4827f6dcaeff4449eb414b52e0a3df9868ea329e3cb36399da96a02ed022"
+    },
+    {
+      "path": "assets/ui/message.svg",
+      "sha256": "1f7d4c0c5d6864584035db577c7f001f92c5dcb7773a27a855cac0b7dab25cc5"
+    },
+    {
+      "path": "assets/ui/minute.svg",
+      "sha256": "eca15807a06ca0a085de921b9bee24458b52aff8c502e15b68f2550a2fdf7306"
+    },
+    {
+      "path": "assets/ui/mobile.svg",
+      "sha256": "c0377121178268194fccbb084730e75ec5f0c0e1502dbdbc2abdf1adf7979d13"
+    },
+    {
+      "path": "assets/ui/payment.svg",
+      "sha256": "a79b9b751d11f3df9a2b411e8f6c0d448666adc568fd9fb089a00290583e9a37"
+    },
+    {
+      "path": "assets/ui/print.svg",
+      "sha256": "fa78285a3a4045ff0c34a1f5bf56353581cd12c59b3342b81e9670adfe202d34"
+    },
+    {
+      "path": "assets/ui/search.svg",
+      "sha256": "cd1193967036adf9a4818597a2a8bbe1c6e261469ec7d3c11b28ed26d69ff3dd"
+    },
+    {
+      "path": "assets/ui/settings.svg",
+      "sha256": "192eeef77b786a61549c3f1449fc9ff7aea5e6dab0a504276366a06e95e677e8"
+    },
+    {
+      "path": "assets/ui/shield.svg",
+      "sha256": "9ce6942cd99ddebb33249ef8991de915dd5138c96a794f840f34c55d3420ce8c"
+    },
+    {
+      "path": "assets/ui/tools.svg",
+      "sha256": "1d0736e6686898a256093c22aae0d8353093e2f3a990d703764e346a29d19852"
+    },
+    {
+      "path": "assets/ui/update.svg",
+      "sha256": "1701d63a3fbc8e5d1d1a923ed867191afd6bbad603f9d20078f2041dac3b4c77"
+    },
+    {
+      "path": "assets/ui/users.svg",
+      "sha256": "20e5c40b2a6a089eb05f399f3aa02059a900907bcea10611c352385ab8d2f490"
+    },
+    {
       "path": "assets/vendor/LICENSE-chartjs.txt",
       "sha256": "41a84aa2caba645f966a18d9c2056b73e6d3a81d80bc0046bc0011a2634d4cce"
     },
@@ -135,7 +207,7 @@
     },
     {
       "path": "configuracion.html",
-      "sha256": "93d28d279a09afb10a00425cc2ac78dbbf54b17032a89a090b5f67f8348f48a3"
+      "sha256": "c0a4cfc21ecccb4e1517b35d1598b22ec91f99ac065a96f0768b5e2a1f266b5e"
     },
     {
       "path": "css/admin-tools.css",
@@ -202,6 +274,10 @@
       "sha256": "52c427d0c444c0f5b688b1ebb33c82e317de91376714fbf7c4fd63f867e5dc86"
     },
     {
+      "path": "css/interaction-polish.css",
+      "sha256": "9ca396c705a2ab7580a9168bce08ace489de517b83a44a726d21f015babfa13c"
+    },
+    {
       "path": "css/interface-polish.css",
       "sha256": "be074386c128e05090950f9d98ecf732450e8f28d81a251a0e75311b7696145e"
     },
@@ -251,7 +327,7 @@
     },
     {
       "path": "css/technical-workspace.css",
-      "sha256": "e34feef16d1ecc973411fff588f37c043f870d2b935c66677f87d8e673f83671"
+      "sha256": "5570a6da8fd14dd8b238b5fd0fb32eb4ef968e79fa7c776d23a19063f27d1a9a"
     },
     {
       "path": "css/usuarios.css",
@@ -259,11 +335,11 @@
     },
     {
       "path": "eventos.html",
-      "sha256": "d78de619a1cc5575824cc36a6f2bd98e23ad959038d06e4641083643d5042a03"
+      "sha256": "e9f813f81845e3985864e65b95ebee46e188e477d0f75f9241a5e3ed65d00125"
     },
     {
       "path": "index.html",
-      "sha256": "b0f58fb42e71a6d9e19f6dd65a6acf63da8183772e68ec336da309cf0978d26f"
+      "sha256": "1e7db794565e3ef74c0e922be77edd610dc2ef671b62b3db4e1152dc99b5aa20"
     },
     {
       "path": "js/admin-access.js",
@@ -323,7 +399,7 @@
     },
     {
       "path": "js/agenda-movil.js",
-      "sha256": "66f1488e9a16d6492a2598436367bfb6ac12518bc48cb7f0bee13fea16d06084"
+      "sha256": "cab67e0af47277825142c48694ef12dc424475e2465353f878a1c70f390b3b39"
     },
     {
       "path": "js/agenda-operations.js",
@@ -403,11 +479,11 @@
     },
     {
       "path": "js/eventos.js",
-      "sha256": "dfe08a510c49769124138c4a0edd527c3d74c67a4b8fb519256bcb8de4b77149"
+      "sha256": "cc0b9392c5c91ace26eca4289c7696bc555f2c03738b0a21dd9a5bba7f263e60"
     },
     {
       "path": "js/excel-sync.js",
-      "sha256": "460ec06c0c1df0a2cd789cc7c5078f2115125793651b37bc42abf2db24803c8e"
+      "sha256": "fece3b0cabcebb8fb64e0d081bf30d35e9c898a591e965028aa8e0bfa142457c"
     },
     {
       "path": "js/firebase-app-check.js",
@@ -419,7 +495,7 @@
     },
     {
       "path": "js/firebase-sync.js",
-      "sha256": "8c44ec636977784a264896ba0dec3dc34dc90a26495fb8f5b19156ca8cae723c"
+      "sha256": "89d7896bb3f91a7330bbcbd6aa7a8ef5c42a20f2048b01676dc57b666dc851db"
     },
     {
       "path": "js/food-alerts-core.js",
@@ -435,11 +511,11 @@
     },
     {
       "path": "js/loader-guard.js",
-      "sha256": "f981f78b4e4b0d901a2f66481b083e4c41dc3641f8b094262d288fb4f4e42642"
+      "sha256": "42ddbdad8c09bc549a82403689ff8cdaafcde9cc49a10476d7194e7b747bf66c"
     },
     {
       "path": "js/loading.js",
-      "sha256": "adf744a6cc06395d4e557dcb1c326d1c2f395bd3724777edb9974d2a7609dddc"
+      "sha256": "811ebc41a0892e1e7b14cfcdd15b13a6e113a34dc1e15479cb86c16b2734144a"
     },
     {
       "path": "js/local-auth.js",
@@ -451,7 +527,7 @@
     },
     {
       "path": "js/login.js",
-      "sha256": "48c96588231fc7e7f5d73e538b0140a3599b9709a390b1f7003c7eb7c63d9f89"
+      "sha256": "eae96c3ed7d03e8b2a2afa7e55b270c5835cd971bda71b5ad5842710dd6fa0ae"
     },
     {
       "path": "js/maintenance-admin.js",
@@ -491,7 +567,7 @@
     },
     {
       "path": "js/minuta.js",
-      "sha256": "7cff23054925c8563d8314366aaf79e21f751dffffdf2dd1b5c9ebd43e098cdd"
+      "sha256": "c34668a73e7a88d3ccbafa3e7574e2f8e906603c592e1fc134e826b084a6612b"
     },
     {
       "path": "js/navigation-policy.js",
@@ -503,7 +579,11 @@
     },
     {
       "path": "js/operating-center.js",
-      "sha256": "972514fbf5024235529323a55f57a446b87cfe271b4fde49fa852dd25984256b"
+      "sha256": "c64431a8d8e133b3be2262aac422896f72e261373acfdda428f0214b858e159f"
+    },
+    {
+      "path": "js/page-start.js",
+      "sha256": "c6754677bc4c3a1c663f4b9da94ff3fcbf07374c8a697e8659f451f73e874dad"
     },
     {
       "path": "js/performance-monitor.js",
@@ -531,7 +611,7 @@
     },
     {
       "path": "js/pwa-release.js",
-      "sha256": "23467335582f98d6fca329dd26dd9f68bba62da8ac1800eb9345c6aab6d97c29"
+      "sha256": "125f9c1af46103f2e19a541f5c2c507d96a115a882619f366ff6d0ee531997c0"
     },
     {
       "path": "js/pwa.js",
@@ -539,7 +619,7 @@
     },
     {
       "path": "js/release-info.js",
-      "sha256": "475ebcf428dbbb4c2d10a12f0712dd1f67d67f0fa6d5510dca025fa09257f1fa"
+      "sha256": "cd2e99064b362ec79e98632077c24763dd4777e7343e449ddf9c9e5cd2a55c5d"
     },
     {
       "path": "js/release-worker.js",
@@ -555,15 +635,19 @@
     },
     {
       "path": "js/system-version.js",
-      "sha256": "27127d8314d9ee916b173a1fdd830a162b6019e66088062eb645c37a32e02ddd"
+      "sha256": "6ba38c3dcca4c8a3548cbd831a54afa7a46e41c519ff26267aa8f2999851e9d6"
     },
     {
       "path": "js/technical-center.js",
-      "sha256": "4530bd66d2a3f7a908788fe162525c7c8a29c339f6e1f2d679fd9cfd3529a36a"
+      "sha256": "f6ebcf99ce5ca2b1ce6b23dbead7cdfe70d6601245d93732c7ab94fa4768c07a"
     },
     {
       "path": "js/technical-log.js",
       "sha256": "1c7357e696305851d45a900a102ec3f60859bbea0487c482d762a981b42eb650"
+    },
+    {
+      "path": "js/ui-icons.js",
+      "sha256": "aa35c865ad9959accb5c1d955122003888e9269893381356fc2f71600bb8f094"
     },
     {
       "path": "js/update-page.js",
@@ -587,11 +671,11 @@
     },
     {
       "path": "laboratorio.html",
-      "sha256": "6017df9ff1349a952da2e9d38c88126a712ce52cc24a8b0345a00d436e0ec782"
+      "sha256": "39cd3c94f23ee2921508cb2f56ac8188bce2d9941ba7d28ae767539773e2152c"
     },
     {
       "path": "login.html",
-      "sha256": "e2facad213e509e79e15a162f94541f060ad93a7c35ed51645222d3d58c71ece"
+      "sha256": "df4922bf6df888194b2da37a438130c9c96a0eb39f96d0c6555779f5537f9567"
     },
     {
       "path": "manifest.webmanifest",
@@ -599,32 +683,32 @@
     },
     {
       "path": "mantenimiento.html",
-      "sha256": "9ade7f9ff1c1833f6bb3e9e00ad5859e51f3c3f00ebd522dda235b50d0d65196"
+      "sha256": "2b2423deb6b1d7e63968161fa7088735eec675d34d43d65ca495186f4a563b6e"
     },
     {
       "path": "minuta.html",
-      "sha256": "8a2109f8256bdc3a741b62941a4c4274bbd079eeaccf5b20e741d4e6937305b3"
+      "sha256": "c90802740fa09ba586e1a40043688a3bd41a3cac043451e58569acf0f878b278"
     },
     {
       "path": "minuta_compartir.html",
-      "sha256": "aee658b2570c646c92463db9bef3e3dd63bd96a920326417b4529353b3c4ce35"
+      "sha256": "76c517e1c4a82b8968b3c4ed76dd0a0d5036213c00f15d51ec1a0c9df29e863b"
     },
     {
       "path": "offline.html",
-      "sha256": "29505032514fe5c90a7e62f068f9085a89741ed2b2a087c919dbe1da79e43681"
+      "sha256": "b5571d07e9d58f003f57dee2da434fc0bec28ba3ddd4c1941622f1452278c520"
     },
     {
       "path": "recuperacion.html",
-      "sha256": "73ad7f4859db77f2ed0144326403208e4d442fa12be0049a2f49f32d16ae5e64"
+      "sha256": "9f089538fb38279e4608d549bc362e389b832e83a4a4546c74768c212ff3bf39"
     },
     {
       "path": "usuarios.html",
-      "sha256": "8195437135028740b1f74c1c48fef17d54f927f2a38e54f9a27ebe26808bd9be"
+      "sha256": "1950e69c0520660f08fbe59da8608447a2f26477dc9e8d4a1ce3e5af482881b0"
     },
     {
       "path": "validacion.html",
-      "sha256": "497ba8671791571257f1a27d68b780ef06970f479d7830867076d8b53efc4d8b"
+      "sha256": "9176f36c3dcb30b2e77a9a8fba5e5564d569663741e4453ed4d316909d68cda3"
     }
   ],
-  "digest": "ee4f62d61595803d745e3a34315e26e0ab603ff7ac218817944a3dc1ec82bcd0"
+  "digest": "a6307c37f1815d5df7db9416124621fd09954bfe6ac225f1476350be2c82d561"
 }

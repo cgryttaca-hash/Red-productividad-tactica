@@ -12,3 +12,5 @@ async function background(){
 }
 if('requestIdleCallback'in window)requestIdleCallback(background,{timeout:1500});else setTimeout(background,0);
 window.addEventListener('storage',event=>{if(['excelSync:fileName','firebase:ownerEmail','firebase:lastPublishedAt'].includes(event.key))background();});
+
+window.RPTPageLoad?.ready();

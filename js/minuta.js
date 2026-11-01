@@ -30,7 +30,8 @@ function showToast(message, type='ok'){
 }
 
 function hideLoader(){
-  setTimeout(()=> $('loader')?.classList.add('hidden'), 450);
+  $('loader')?.classList.add('hidden');
+  window.RPTPageLoad?.ready();
 }
 
 function startOfDay(date){

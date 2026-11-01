@@ -1,0 +1,15 @@
+{
+  "passed": [
+    "Retirada real del bootstrap y sus dependencias: no hay bloqueo, carga de scripts condicionada ni pantalla nueva en los recursos de la publicación",
+    "Primer perfil aislado: acceso local original y tres módulos principales, sin solicitar autorización ni configuración técnica",
+    "Ctrl+M y contraseña actuales abren exactamente tres apartados; Firebase y Excel usan sus controles anteriores y no cambian la cuenta ni los datos",
+    "Log interno consulta registros existentes en orden reciente y no ofrece edición ni borrado",
+    "La recuperación no cambia la autenticación: una contraseña incorrecta sigue sin abrir Super Administrador",
+    "El usuario de consulta conserva sus permisos originales y no obtiene Administración",
+    "Segundo perfil aislado, con Firebase inaccesible: acceso local, Inicio, Eventos y Minuta disponibles sin registro obligatorio"
+  ],
+  "pageErrors": [],
+  "limits": [
+    "Dos perfiles aislados de Chrome, sin dos computadores físicos. Adaptadores o bloqueo de Firebase; sin producción."
+  ]
+}

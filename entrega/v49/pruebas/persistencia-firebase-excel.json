@@ -1,0 +1,17 @@
+{
+  "passed": [
+    "Firebase se activa con el formulario anterior dentro de Ctrl+M y Auth 12.16.0 real contra el emulador, sin aprobación ni registro obligatorio de equipos",
+    "El selector original de Excel vincula y lee un XLSX real con el procedimiento anterior, usando el handle y almacén existentes",
+    "Cierre y reapertura reales de Chrome: misma sesión, usuarios, configuración y referencia al Excel, sin pedir autorización ni abrir configuración al inicio",
+    "Guardar cambios en el mismo libro actualiza los datos por el lector original, sin selector ni nueva persistencia",
+    "La conexión propietaria de Firebase se conserva al cerrar Chrome; no se vuelve a solicitar su formulario",
+    "Permiso perdido simulado: Reconectar dentro de Ctrl+M conserva el flujo anterior, el mismo handle y los bytes del Excel"
+  ],
+  "authSDK": "12.16.0",
+  "authServer": "Auth Emulator real",
+  "productionDeployed": false,
+  "limits": [
+    "XLSX y handle reales en OPFS de un perfil temporal, sin Excel operativo del usuario. La pérdida y concesión de permiso se simulan; no se prueba el diálogo físico del sistema operativo.",
+    "Auth y su persistencia usan SDK/emulador reales. Firestore/publicación usa el adaptador de ensayo en memoria. No se escribe producción."
+  ]
+}
