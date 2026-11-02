@@ -1,6 +1,6 @@
 {
   "name": "red-productividad-tactica",
-  "version": "4.9.2",
+  "version": "4.9.3",
   "private": true,
   "engines": {
     "node": ">=22"
@@ -38,7 +38,8 @@
     "test:core": "node tests/v49/core.cjs",
     "test:firebase": "npm --prefix tests/v49/emulator test",
     "test:recovery-48": "node tests/v49/recovery-48.cjs",
-    "test:agenda-shortcut": "node tests/v492/agenda.cjs"
+    "test:agenda-shortcut": "node tests/v492/agenda.cjs",
+    "test:update-recovery": "node tests/v493/updater.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

@@ -1,5 +1,5 @@
 {
-  "version": "4.9.2",
+  "version": "4.9.3",
   "assets": [
     {
       "path": "administracion.html",
@@ -611,7 +611,7 @@
     },
     {
       "path": "js/pwa-release.js",
-      "sha256": "125f9c1af46103f2e19a541f5c2c507d96a115a882619f366ff6d0ee531997c0"
+      "sha256": "87da42e1e6346b7672419adaa8c19f290cb4858cf1e5bd92c934b918e8bc68d3"
     },
     {
       "path": "js/pwa.js",
@@ -619,11 +619,11 @@
     },
     {
       "path": "js/release-info.js",
-      "sha256": "dab6ecbacf6dfaeded7c288785c2a4245fc1547b8f7644b47bf2fdc55ba2a05b"
+      "sha256": "dc9477f15a5262c921a9a3793efb2de3f8f4d7f003873158a42f0341238eda08"
     },
     {
       "path": "js/release-worker.js",
-      "sha256": "ff354e7ec09529c2baf76455b5741764ae671c8992e4cdc16d4b02782c1db248"
+      "sha256": "4142b7abc47501d8083aebc0040fb8f65c31a53a1e764a4abdd8e0615f0f5299"
     },
     {
       "path": "js/session-ui.js",
@@ -635,7 +635,7 @@
     },
     {
       "path": "js/system-version.js",
-      "sha256": "138574445756fb58bcdf7e4ea20a62ae2a7aefe5a30e4efa90f6e2651763664c"
+      "sha256": "18c9553f4660441c0e024d83d4089d34420dc992299c2635a87ab1e8164f5b87"
     },
     {
       "path": "js/technical-center.js",
@@ -655,7 +655,7 @@
     },
     {
       "path": "js/update-safety.js",
-      "sha256": "7c5a1f45e8ad56a6ff32e8e5d4b1e5e62843b6d16395aefc9507f16e6dfb6bb2"
+      "sha256": "9036b1f4ffbb8a585eed25f327e25bd2f9e44b38863ec282d0d4ed81ebefa6e0"
     },
     {
       "path": "js/usuarios.js",
@@ -710,5 +710,5 @@
       "sha256": "9176f36c3dcb30b2e77a9a8fba5e5564d569663741e4453ed4d316909d68cda3"
     }
   ],
-  "digest": "b05ecd9fe1d7f3249429d71ea793a1371844fb959b85b33290e76971305bc86d"
+  "digest": "9babb1e65fb29c2d072f5a22b159774175b74e2d6d8a17d7b829f5b032ea60ce"
 }

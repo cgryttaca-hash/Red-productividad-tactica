@@ -1,0 +1,28 @@
+{
+  "version": "4.9.3",
+  "baseline": "4.9.2",
+  "dateBogota": "2026-11-01",
+  "result": "PASS",
+  "functionalChecks": 17,
+  "legacyDefectsReproduced": 3,
+  "structuralChecks": 3,
+  "resourcesVerified": 177,
+  "runtimeFilesUnchanged": 172,
+  "digest": "9babb1e65fb29c2d072f5a22b159774175b74e2d6d8a17d7b829f5b032ea60ce",
+  "productionDeployed": false,
+  "personalPwaVerified": false,
+  "evidence": [
+    "pruebas/actualizador.json",
+    "pruebas/estructura.json",
+    "CONSERVACION.json"
+  ],
+  "limits": [
+    "Las causas se reprodujeron en el codigo local 4.9.2; no se obtuvo la version publicada desde la direccion GitHub mediante la herramienta web.",
+    "Pruebas del protocolo del service worker en Node con CacheStorage y clientes simulados, y reloj controlado. No son una migracion real del service worker en la PWA personal.",
+    "Las pruebas de interfaz usan Chrome real sin red con DOM y formularios reales. Se simulan la mensajeria del gestor, el almacenamiento y las respuestas de registro; no se accede a perfiles personales.",
+    "Se comprueban los diez segundos de preparacion en el reloj del protocolo, y los noventa segundos de recuperacion mediante el reloj controlado de Chrome.",
+    "No se publico ni se modifico GitHub, Firebase, permisos, credenciales ni Excel operativo.",
+    "Las ventanas antiguas conservan su codigo hasta recargarse. Para instalar el parche puede ser necesario guardar el trabajo y cerrar las demas ventanas del sistema; no se omiten ventanas con cambios o sin respuesta.",
+    "Los 172 recursos de ejecucion ajenos al actualizador y metadatos son identicos a 4.9.2. Las pruebas funcionales anteriores no se presentan como ejecutadas de nuevo en este parche."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "baseline": "4.9.2",
+  "version": "4.9.3",
+  "reproduced": [
+    "4.9.2 admite dos activaciones simultaneas al comprobar la exclusividad antes de una espera asincrona.",
+    "4.9.2 confunde el foco conservado en una busqueda de una ventana inactiva con una edicion pendiente.",
+    "4.9.2 conserva el estado preparando despues de una respuesta negativa del gestor."
+  ],
+  "passed": [
+    "Las solicitudes simultaneas esperan la misma transaccion; solo se prepara y activa una vez, sin desbloquear ventanas antiguas.",
+    "Una Minuta con cambios reales cancela el intento, identifica la ventana y conserva la version activa y sus recursos verificados.",
+    "El mismo gestor permite reintentar correctamente despues de guardar, sin borrar datos ni caches.",
+    "Una ventana sin respuesta produce un aviso concreto y libera la transaccion; no se fuerza la recarga.",
+    "La activacion conserva la espera minima de diez segundos.",
+    "Revocar una preparacion cancela la activacion y conserva la version anterior.",
+    "Abrir una nueva ventana durante la preparacion cancela la activacion con seguridad.",
+    "La recuperacion de la version anterior y el protocolo de las ventanas 4.9.2 siguen funcionando.",
+    "Una busqueda sin cambios en una ventana inactiva permite actualizar.",
+    "Los formularios con cambios siguen bloqueando tambien desde ventanas inactivas.",
+    "Lecturas Excel, publicacion Firebase, generacion, compartir, importacion y plantillas pendientes conservan sus bloqueos.",
+    "Preparar dos veces no duplica el bloqueo; cancelar recupera la interfaz completa.",
+    "El temporizador real del bloqueo vence a los 90 segundos comprobados con reloj controlado y libera toda la interfaz.",
+    "Un intento rechazado termina en disponible, con el motivo visible y la interfaz desbloqueada.",
+    "Una solicitud simultanea no desbloquea la transaccion de otra ventana; CANCEL libera la interfaz y el estado temporal.",
+    "Una cancelacion antigua no interrumpe una preparacion nueva.",
+    "El vencimiento de una preparacion interrumpida devuelve control y permite reintentar sin recargar ni borrar datos."
+  ],
+  "limits": [
+    "Pruebas aisladas sin red; no se modifica ni comprueba la instalacion personal o la publicacion GitHub."
+  ],
+  "result": "PASS"
+}

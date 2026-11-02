@@ -1,0 +1,20 @@
+{
+  "checks": [
+    {
+      "result": "PASS",
+      "scripts": 90,
+      "pages": 16,
+      "protectedFiles": 6,
+      "manifests": 2,
+      "assistant": "disabled"
+    },
+    {
+      "result": "PASS",
+      "version": "4.9.3",
+      "resources": 177,
+      "workerDigest": "9babb1e65fb29c2d072f5a22b159774175b74e2d6d8a17d7b829f5b032ea60ce",
+      "manifests": 2
+    }
+  ],
+  "workerSyntax": "PASS"
+}

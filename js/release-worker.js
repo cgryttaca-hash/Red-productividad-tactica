@@ -3,7 +3,7 @@ const CACHE=`rpt-shell-${scopeId}-${RELEASE.version}-${RELEASE.digest.slice(0,12
 const META='rpt-release-meta',STATE=scope+'__rpt_state__',COMPLETE=scope+'__rpt_complete__';
 const assetUrls=new Set(RELEASE.assets.map(asset=>new URL(asset.path,scope).href));
 assetUrls.add(new URL('data/eventos_publicos.json',scope).href);
-const operations=new Map();let progress=null;
+const operations=new Map();let progress=null,transitioning=false,transitionTask,transitionKind;
 const DETAILS=scope+'__rpt_release_details__';let details,downloaded=0;
 async function releaseDetails(){const response=await(await caches.open(META)).match(DETAILS);return response?response.json():null;}
 async function saveDetails(){if(details)await(await caches.open(META)).put(DETAILS,new Response(JSON.stringify(details),{headers:{'Content-Type':'application/json'}}));}
@@ -35,7 +35,7 @@ async function verifiedResponse(asset){
     }catch(error){const failure=error.detail?error:resourceError(error.name==='AbortError'?'TIMEOUT':'NETWORK',asset);if(attempt===0&&['NETWORK','TIMEOUT'].includes(failure.detail.code)||attempt===0&&failure.detail.code==='HTTP'&&[408,429,500,502,503,504].includes(failure.detail.status))continue;throw failure;}finally{clearTimeout(timer);}
   }
 }
-async function reportProgress(phase,done=0,total=RELEASE.assets.length){const at=Date.now();if(!details){details=await releaseDetails();downloaded=details?.downloaded||downloaded;}progress={phase,done,total,downloaded,verified:['preparing','activating','activated','error'].includes(phase)?(details?.verified||done):done,version:RELEASE.version,at,resource:details?.lastResource||''};if(details){details={...details,...progress,history:[...(details.history||[]),{phase,at,downloaded,verified:progress.verified,resource:progress.resource}].slice(-80)};await saveDetails();}await broadcast({type:'RPT_RELEASE_PROGRESS',...progress});}
+async function reportProgress(phase,done=0,total=RELEASE.assets.length){const at=Date.now();if(!details){details=await releaseDetails();downloaded=details?.downloaded||downloaded;}progress={phase,done,total,downloaded,verified:['available','preparing','activating','activated','error'].includes(phase)?(details?.verified||done):done,version:RELEASE.version,at,resource:details?.lastResource||''};if(details){details={...details,...progress,history:[...(details.history||[]),{phase,at,downloaded,verified:progress.verified,resource:progress.resource}].slice(-80)};await saveDetails();}await broadcast({type:'RPT_RELEASE_PROGRESS',...progress});}
 async function metadata(){const response=await(await caches.open(META)).match(STATE);return response?response.json():{};}
 async function setMetadata(value){await(await caches.open(META)).put(STATE,new Response(JSON.stringify(value),{headers:{'Content-Type':'application/json'}}));}
 async function completed(name){if(!name||!await caches.has(name))return null;const response=await(await caches.open(name)).match(COMPLETE);return response?response.json():null;}
@@ -88,32 +88,51 @@ self.addEventListener('fetch',event=>{
     try{return await fetch(request);}catch(_){return request.mode==='navigate'?(await cache.match(new URL('offline.html',scope).href)||Response.error()):Response.error();}
   })());
 });
-async function transition(kind){
-  if(operations.size)return{ok:false,message:'Otra actualización está en curso.'};
-  const state=await metadata(),target=kind==='rollback'?state.previous:CACHE;
-  const destination=await completed(target);if(!destination)return{ok:false,message:'No hay una versión completa verificada para aplicar.'};
-  const clients=await clientsInScope(),nonce=crypto.randomUUID();let resolveVotes;
-  const ready=new Promise(resolve=>{resolveVotes=resolve;});
-  const operation={protocols:new Map(),votes:new Map(),clients:new Set(clients.map(client=>client.id)),resolve:resolveVotes};operations.set(nonce,operation);
-  for(const client of clients)client.postMessage({type:'RPT_RELEASE_PREPARE',nonce,kind,version:destination.version,startedAt:Date.now(),until:Date.now()+10000});
-  let timer;try{
+function transition(kind){
+  // Las páginas antiguas desbloquean al recibir un rechazo: responder solo
+  // cuando termine la transacción real también mantiene seguro ese protocolo.
+  if(transitionTask){const sameKind=transitionKind===kind;return transitionTask.then(result=>sameKind?{...result,joined:true}:{ok:false,code:'IN_PROGRESS',message:'La operación en curso terminó. Comprueba la versión activa antes de volver a intentar.'});}
+  transitionKind=kind;transitionTask=runTransition(kind).finally(()=>{transitionTask=null;transitionKind=null;});return transitionTask;
+}
+async function runTransition(kind){
+  // Reservar antes del primer await: dos ventanas pueden solicitarlo a la vez.
+  if(transitioning)return{ok:false,code:'IN_PROGRESS',message:'Otra actualización está en curso.'};
+  transitioning=true;let nonce,timer;
+  const cancel=async(message,code='CLIENTS_BLOCKED',blockers=[])=>{
+    await reportProgress('available',details?.verified||0);
+    await broadcast({type:'RPT_RELEASE_CANCEL',nonce,message});
+    return{ok:false,code,message,blockers};
+  };
+  try{
+    const state=await metadata(),target=kind==='rollback'?state.previous:CACHE;
+    const destination=await completed(target);if(!destination)return{ok:false,code:'INCOMPLETE',message:'No hay una versión completa verificada para aplicar.'};
+    const clients=await clientsInScope();nonce=crypto.randomUUID();let resolveVotes;
+    const ready=new Promise(resolve=>{resolveVotes=resolve;});
+    const operation={protocols:new Map(),votes:new Map(),reasons:new Map(),clients:new Set(clients.map(client=>client.id)),resolve:resolveVotes};operations.set(nonce,operation);
+    const startedAt=Date.now(),until=startedAt+10000;
+    for(const client of clients)client.postMessage({type:'RPT_RELEASE_PREPARE',nonce,kind,version:destination.version,startedAt,until});
     if(!clients.length)resolveVotes();
     await Promise.race([ready,new Promise(resolve=>{timer=setTimeout(resolve,3500);})]);
     const current=await clientsInScope();const safe=current.every(client=>operation.clients.has(client.id)&&operation.votes.get(client.id)===true);
-    if(!safe){await broadcast({type:'RPT_RELEASE_CANCEL',nonce});return{ok:false,message:'Hay otra pestaña con cambios, una tarea en curso o una versión que no puede comprobarse. Guarda el trabajo y cierra las otras pestañas para actualizar.'};}
+    if(!safe){
+      const blockers=current.filter(client=>!operation.clients.has(client.id)||operation.votes.get(client.id)!==true).map(client=>({page:new URL(client.url).pathname.split('/').pop()||'Inicio',reasons:operation.reasons.get(client.id)||[],responded:operation.votes.has(client.id)}));
+      const description=blockers.map(item=>`${item.page}: ${item.reasons.join(' ')||(item.responded?'hay una edición o tarea pendiente.':'esta ventana no respondió a la comprobación. Guarda el trabajo y cierra solo esa ventana.')}`).join(' ');
+      return await cancel('Actualización pendiente. '+description,'CLIENTS_BLOCKED',blockers);
+    }
     const modern=current.every(client=>operation.protocols.get(client.id)>=2);
-    if(modern){await reportProgress('preparing');await new Promise(resolve=>setTimeout(resolve,10000));const latest=await clientsInScope();if(!latest.every(client=>operation.clients.has(client.id)&&operation.votes.get(client.id)===true)){await broadcast({type:'RPT_RELEASE_CANCEL',nonce});return{ok:false,message:'Cambió el conjunto de pestañas abiertas. Vuelve a intentar la actualización.'};}}
+    if(modern){await reportProgress('preparing');await new Promise(resolve=>setTimeout(resolve,10000));const latest=await clientsInScope();if(!latest.every(client=>operation.clients.has(client.id)&&operation.votes.get(client.id)===true))return await cancel('Cambió el estado de las ventanas abiertas. Se conservó la versión activa. Vuelve a intentar la actualización.');}
     await reportProgress('activating');if(modern)await new Promise(resolve=>setTimeout(resolve,250));
+    if(!(await clientsInScope()).every(client=>operation.clients.has(client.id)&&operation.votes.get(client.id)===true))return await cancel('Cambió el estado de las ventanas abiertas. Se conservó la versión activa. Vuelve a intentar la actualización.');
     for(const client of current)await bind(client.id,state.active);
     if(kind==='rollback')await setMetadata({...state,active:target,previous:state.active});
     await broadcast({type:'RPT_RELEASE_SWITCH',nonce,kind,version:destination.version});
     if(kind==='rollback')await broadcast({type:'RPT_RELEASE_RELOAD',nonce,version:destination.version});else await self.skipWaiting();
     return{ok:true,version:destination.version};
-  }catch(error){await broadcast({type:'RPT_RELEASE_CANCEL',nonce});return{ok:false,message:'No se pudo activar la versión. Se conserva la versión guardada. Reintenta con conexión.'};}finally{clearTimeout(timer);operations.delete(nonce);}
+  }catch(error){return await cancel('No se pudo activar la versión. Se conserva la versión guardada. Reintenta con conexión.','ACTIVATION_FAILED');}finally{clearTimeout(timer);operations.delete(nonce);transitioning=false;}
 }
 self.addEventListener('message',event=>{
   const value=event.data||{};if(!event.source?.id)return;
-  if(value.type==='RPT_RELEASE_VOTE'){const operation=operations.get(value.nonce);if(operation?.clients.has(event.source.id)){operation.votes.set(event.source.id,value.safe===true);operation.protocols.set(event.source.id,value.protocol||1);if(operation.votes.size===operation.clients.size)operation.resolve();}return;}
+  if(value.type==='RPT_RELEASE_VOTE'){const operation=operations.get(value.nonce);if(operation?.clients.has(event.source.id)){operation.votes.set(event.source.id,value.safe===true);operation.protocols.set(event.source.id,value.protocol||1);operation.reasons.set(event.source.id,Array.isArray(value.reasons)?value.reasons.filter(reason=>typeof reason==='string').slice(0,4).map(reason=>reason.slice(0,240)):[]);if(operation.votes.size===operation.clients.size)operation.resolve();}return;}
   const reply=value=>event.ports[0]?.postMessage(value);
   if(value.type==='RPT_RELEASE_STATUS')event.waitUntil(status().then(reply));
   if(value.type==='RPT_RELEASE_APPLY')event.waitUntil(transition('activate').then(reply));

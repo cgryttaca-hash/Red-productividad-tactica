@@ -1,4 +1,4 @@
-export const SYSTEM_VERSION = '4.9.2';
+export const SYSTEM_VERSION = '4.9.3';
 export const RELEASE_DATE = '2026-11-01';
 export const RELEASE_NAME = 'Operación y administración técnica';
 export const PROTECTED_MODULES = Object.freeze({
