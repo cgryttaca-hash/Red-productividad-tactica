@@ -1,0 +1,31 @@
+{
+  "baseline": "4.9.0",
+  "version": "4.9.1",
+  "modified": [
+    "VALIDACION_FINAL.json",
+    "VERSION.txt",
+    "dist/js/admin-shortcut.js",
+    "dist/js/release-info.js",
+    "dist/js/system-version.js",
+    "dist/release.json",
+    "dist/sw.js",
+    "js/admin-shortcut.js",
+    "js/release-info.js",
+    "js/system-version.js",
+    "package.json",
+    "release.json",
+    "sw.js"
+  ],
+  "sourceModified": [
+    "VALIDACION_FINAL.json",
+    "VERSION.txt",
+    "js/admin-shortcut.js",
+    "js/release-info.js",
+    "js/system-version.js",
+    "package.json",
+    "release.json",
+    "sw.js"
+  ],
+  "removed": [],
+  "onlyFunctionalFileChanged": "js/admin-shortcut.js"
+}

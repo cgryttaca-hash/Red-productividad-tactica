@@ -1,0 +1,16 @@
+{
+  "passed": [
+    "Todos los recursos de Eventos, Minuta, Agenda Móvil, Agendas, Excel, Firebase, impresión, usuarios, PWA y notificaciones idénticos a 4.9; solo cambia el acceso compartido y sus metadatos de versión",
+    "Evento Ctrl+W entregado a la página abre la Agendas existente en una ventana independiente y conserva la página de origen; organización y categorías originales, con las categorías y el contenido originales de 4.9",
+    "Copia y selección existentes conservan la información completa del evento elegido, sin cruzar servicios ni escribir los eventos originales",
+    "Cambio de la fuente en otra ventana actualiza lista, detalle y copia por los listeners existentes, sin duplicar filas ni modificar la fuente",
+    "Repetir Ctrl+W reutiliza la ventana de Agendas y no crea copias adicionales",
+    "Ctrl+M mantiene su código original, contraseña y apartados, sin alterar usuarios ni sesión",
+    "Ctrl+W solo apunta a agendas.html; sin integración externa ni cambios de PWA, pantalla completa u otros atajos"
+  ],
+  "pageErrors": [],
+  "limits": [
+    "Datos de ensayo en el almacenamiento de dos ventanas del mismo origen; no son eventos de producción.",
+    "Control+w por CDP prueba el manejador cuando la página recibe el evento. La reserva del atajo físico por Chrome se verifica separadamente con ventanas reales."
+  ]
+}

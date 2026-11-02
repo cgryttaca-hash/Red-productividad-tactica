@@ -1,0 +1,40 @@
+{
+  "version": "4.9.1",
+  "dateBogota": "2026-11-01",
+  "result": "PASS",
+  "suiteCount": 4,
+  "checks": 13,
+  "suites": {
+    "agenda-copia": {
+      "result": "PASS",
+      "checks": 7,
+      "evidence": "pruebas/agenda-copia.json"
+    },
+    "ventana-aplicacion": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/ventana-aplicacion.json"
+    },
+    "pruebas-migracion": {
+      "result": "PASS",
+      "checks": 1,
+      "evidence": "pruebas/pruebas-migracion.json"
+    },
+    "estructura": {
+      "result": "PASS",
+      "checks": 2,
+      "evidence": "pruebas/estructura.json"
+    }
+  },
+  "resources": 177,
+  "digest": "02802d902e11d060ef797efb8070c5300941c81b4edec0f753b59c2b0529d77a",
+  "physicalKeyboardVerified": false,
+  "productionDeployed": false,
+  "limits": [
+    "El usuario confirmó que utiliza la aplicación instalada. Chrome reserva Ctrl+W en pestañas normales; esta intervención no cambia las reservas del navegador, no solicita Keyboard Lock ni pantalla completa y no añade otro atajo.",
+    "La prueba de aplicación usa una ventana Chrome --app de un perfil temporal, que confirmó display-mode: standalone. La entrada de teclado se envió por Chrome DevTools Protocol.",
+    "No se verificaron teclas físicas en la PWA del usuario: la autorización de la herramienta de control nativo agotó su tiempo. Esa comprobación queda identificada como pendiente, sin sustituirla por una afirmación de éxito físico.",
+    "Datos y cuentas son de ensayo; la copia utiliza la información guardada por las fuentes existentes. No se abrió ni se modificó el Excel operativo ni Firebase de producción.",
+    "No se publicó automáticamente ni se modificaron credenciales, reglas, instalación PWA o perfiles personales."
+  ]
+}

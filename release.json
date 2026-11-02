@@ -1,5 +1,5 @@
 {
-  "version": "4.9.0",
+  "version": "4.9.1",
   "assets": [
     {
       "path": "administracion.html",
@@ -375,7 +375,7 @@
     },
     {
       "path": "js/admin-shortcut.js",
-      "sha256": "bdcf9e5630ee2d7f1efbcab4b4422ac3e6ac5ec85f714dbb1095d6dc8c57f548"
+      "sha256": "cde03161feaf083fdcc1b2769e767f5cdee925ea1d0c2165f1e60491ef77af31"
     },
     {
       "path": "js/admin-statistics.js",
@@ -619,7 +619,7 @@
     },
     {
       "path": "js/release-info.js",
-      "sha256": "cd2e99064b362ec79e98632077c24763dd4777e7343e449ddf9c9e5cd2a55c5d"
+      "sha256": "a7518e45a9c485dab67766df15dea5530d70be9e2a22b3f69b4432a66b45e2c5"
     },
     {
       "path": "js/release-worker.js",
@@ -635,7 +635,7 @@
     },
     {
       "path": "js/system-version.js",
-      "sha256": "6ba38c3dcca4c8a3548cbd831a54afa7a46e41c519ff26267aa8f2999851e9d6"
+      "sha256": "e951e7d2f30e51f1d597524b801838c8e7b403369baeceeb51afcd62142a585c"
     },
     {
       "path": "js/technical-center.js",
@@ -710,5 +710,5 @@
       "sha256": "9176f36c3dcb30b2e77a9a8fba5e5564d569663741e4453ed4d316909d68cda3"
     }
   ],
-  "digest": "a6307c37f1815d5df7db9416124621fd09954bfe6ac225f1476350be2c82d561"
+  "digest": "02802d902e11d060ef797efb8070c5300941c81b4edec0f753b59c2b0529d77a"
 }

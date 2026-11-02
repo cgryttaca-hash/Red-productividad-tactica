@@ -1,0 +1,22 @@
+{
+  "uniqueFilesExamined": 374,
+  "versionsExamined": [
+    "base",
+    "actual",
+    "premium",
+    "premium-base",
+    "pwa-fix",
+    "operations-v41",
+    "functional-v43",
+    "center-v44",
+    "control-v45",
+    "technical-v46",
+    "controlled-v47",
+    "final-v48",
+    "restored-v49"
+  ],
+  "ctrlWMatches": [],
+  "copyPage": "agendas.html",
+  "existingRenderer": "js/agenda-page.js",
+  "existingCopy": "js/agenda-dialog.js"
+}
