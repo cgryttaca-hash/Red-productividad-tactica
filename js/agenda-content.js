@@ -46,7 +46,7 @@ export function executiveForEvent(record){
   };for(const key of Object.keys(result))if(/^(no registrado|sin registrar)$/i.test(result[key]))result[key]='';return result;
 }
 
-export function buildAgenda(record) {
+export function buildAgenda(record, {sourceServices=false}={}) {
   const company = field(record, ['NOMBRE DE LA EMPRESA', 'EMPRESA', 'CLIENTE']);
   const date = field(record, ['FECHA']);
   const room = field(record, ['ESCENARIO ASIGNADO', 'ESCENARIO', 'SALON']);
@@ -72,6 +72,14 @@ export function buildAgenda(record) {
   add('Control del evento', [{ label: 'Estado', value: field(record, ['ESTADO']) || 'No registrado' }, { label: 'Medio de pago', value: field(record, ['MEDIO DE PAGO', 'FORMA DE PAGO']) }]);
   const title = 'AGENDA OPERATIVA DEL EVENTO';
   const text = [title, ...sections.map((section, index) => `${index + 1}. ${section.title.toUpperCase()}\n${section.entries.map(entry => `- ${entry.label}: ${entry.value.replace(/\n/g, '\n  ')}`).join('\n')}`)].join('\n\n');
-  const html = `<article><h1>${title}</h1>${sections.map((section, index) => `<section><h2>${index + 1}. ${escapeHtml(section.title)}</h2><dl>${section.entries.map(entry => `<dt>${escapeHtml(entry.label)}</dt><dd>${escapeHtml(entry.value).replace(/\n/g, '<br>')}</dd>`).join('')}</dl></section>`).join('')}</article>`;
+  let html = `<article><h1>${title}</h1>${sections.map((section, index) => `<section><h2>${index + 1}. ${escapeHtml(section.title)}</h2><dl>${section.entries.map(entry => `<dt>${escapeHtml(entry.label)}</dt><dd>${escapeHtml(entry.value).replace(/\n/g, '<br>')}</dd>`).join('')}</dl></section>`).join('')}</article>`;
+  if(sourceServices){
+    const cellStyle='vertical-align:top;white-space:pre-wrap;overflow-wrap:anywhere;padding:8px;text-align:left;border-bottom:1px solid #dce4eb';
+    const services=`<table style="width:100%;border-collapse:collapse;table-layout:fixed"><thead><tr><th style="${cellStyle};width:42%">HORARIO AYB</th><th style="${cellStyle}">DESCRIPCION ALIMENTACION</th></tr></thead><tbody><tr><td style="${cellStyle}">${escapeHtml(food.schedule)}</td><td style="${cellStyle}">${escapeHtml(food.description)}</td></tr></tbody></table>`;
+    html=`<article><h1>${title}</h1>${sections.map((section,index)=>{
+      const entries=section.entries.filter(entry=>!['Horarios A/B','Descripción de alimentos'].includes(entry.label));
+      return `<section><h2>${index+1}. ${escapeHtml(section.title)}</h2><dl>${entries.map(entry=>`<dt>${escapeHtml(entry.label)}</dt><dd>${escapeHtml(entry.value).replace(/\n/g,'<br>')}</dd>`).join('')}</dl>${section.title==='Programación y horarios'?services:''}</section>`;
+    }).join('')}</article>`;
+  }
   return { company, date: displayDate(date), room, sections, text, html };
 }

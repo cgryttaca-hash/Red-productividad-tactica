@@ -1,0 +1,18 @@
+{
+  "passed": [
+    "170 recursos de ejecución intactos, incluidos HTML/JS/CSS de los tres módulos protegidos, lector Excel, Firebase, alimentación, PWA y notificaciones; Ctrl+M conserva su bloque original",
+    "Ctrl+A abre Agendas: vista de dos columnas originales como la imagen, con cuatro líneas completas y ambos 12:30 AM, sin agrupar las descripciones bajo el café",
+    "El generador sin la opción visual nueva devuelve exactamente el resultado anterior; no cambian identidades, lecturas, cálculos ni otros consumidores",
+    "Copia normal completa y copia con formato en dos columnas, sin cruzar eventos ni escribir el origen",
+    "Guardar el mismo XLSX actualiza automáticamente la lista, la Agenda abierta, su copia y el hash de publicación del adaptador existente, con la ventana de Inicio cerrada, sin recarga ni reimportación manual; bytes del libro intactos",
+    "Ctrl+A conserva Seleccionar todo en búsqueda y texto de copia; no abre ventanas al editar ni altera Ctrl+M",
+    "Cinco anchos sin desbordar la página y Ctrl+M con usuarios, sesión, contraseña y tres apartados conservados"
+  ],
+  "sourcePreserved": true,
+  "defaultsPreserved": true,
+  "pageErrors": [],
+  "limits": [
+    "Libro XLSX y handle reales en OPFS de un perfil de ensayo; datos de referencia tomados de las imágenes y un segundo evento ficticio. No se abrió el Excel operativo del usuario.",
+    "Firestore/publicación controlados con adaptador en memoria y teclado automatizado; no se publica ni se escribe producción."
+  ]
+}

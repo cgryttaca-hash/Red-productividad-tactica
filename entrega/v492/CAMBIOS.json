@@ -1,0 +1,49 @@
+{
+  "baseline": "4.9.1",
+  "version": "4.9.2",
+  "modified": [
+    "VALIDACION_FINAL.json",
+    "VERSION.txt",
+    "css/agenda-dialog.css",
+    "dist/css/agenda-dialog.css",
+    "dist/js/admin-shortcut.js",
+    "dist/js/agenda-content.js",
+    "dist/js/agenda-dialog.js",
+    "dist/js/agendas.js",
+    "dist/js/release-info.js",
+    "dist/js/system-version.js",
+    "dist/release.json",
+    "dist/sw.js",
+    "js/admin-shortcut.js",
+    "js/agenda-content.js",
+    "js/agenda-dialog.js",
+    "js/agendas.js",
+    "js/release-info.js",
+    "js/system-version.js",
+    "package.json",
+    "release.json",
+    "sw.js"
+  ],
+  "sourceModified": [
+    "VALIDACION_FINAL.json",
+    "VERSION.txt",
+    "css/agenda-dialog.css",
+    "js/admin-shortcut.js",
+    "js/agenda-content.js",
+    "js/agenda-dialog.js",
+    "js/agendas.js",
+    "js/release-info.js",
+    "js/system-version.js",
+    "package.json",
+    "release.json",
+    "sw.js"
+  ],
+  "functionalFiles": [
+    "css/agenda-dialog.css",
+    "js/admin-shortcut.js",
+    "js/agenda-content.js",
+    "js/agenda-dialog.js",
+    "js/agendas.js"
+  ],
+  "removed": []
+}

@@ -1,5 +1,5 @@
 {
-  "version": "4.9.1",
+  "version": "4.9.2",
   "assets": [
     {
       "path": "administracion.html",
@@ -219,7 +219,7 @@
     },
     {
       "path": "css/agenda-dialog.css",
-      "sha256": "13a321c312b3b32fc164c4d69c2bb5e56aba0acd105186e233affdf4382398ab"
+      "sha256": "568fb297289e20496a48f1348902a4aa6966c3187cef2c249e815afc65e59c79"
     },
     {
       "path": "css/agenda-movil.css",
@@ -375,7 +375,7 @@
     },
     {
       "path": "js/admin-shortcut.js",
-      "sha256": "cde03161feaf083fdcc1b2769e767f5cdee925ea1d0c2165f1e60491ef77af31"
+      "sha256": "20b01402e4a1711deca0edba17d759c4e49d34b115d7d2663ef91aefbf6a1c28"
     },
     {
       "path": "js/admin-statistics.js",
@@ -391,11 +391,11 @@
     },
     {
       "path": "js/agenda-content.js",
-      "sha256": "7c7882924cf66e63f06ec5eecadb7f5d622fdd39ff36da36cb729060abd24961"
+      "sha256": "a70534ada9c32e0bb58d9f3d8649cd0d2b1a7e8022efaac7894f3d9476cd5862"
     },
     {
       "path": "js/agenda-dialog.js",
-      "sha256": "ba2f25c754320d835209b0e102780ea03f0d59c1d2ca0fe2a1d16a2eaec9a27c"
+      "sha256": "a2e3d2aceac5aaad6f659ce03425a23e0adbb6393ad0d4aa1d25a753ba0abe08"
     },
     {
       "path": "js/agenda-movil.js",
@@ -419,7 +419,7 @@
     },
     {
       "path": "js/agendas.js",
-      "sha256": "cc3e23d34eef00a4ffe8963e7331f21624e2d1ddf07157a90c01d93790176e79"
+      "sha256": "ff70cb59f46aee5f5970d4bd82e43198a8f91e05e2247f372c573eda30e16a65"
     },
     {
       "path": "js/app.js",
@@ -619,7 +619,7 @@
     },
     {
       "path": "js/release-info.js",
-      "sha256": "a7518e45a9c485dab67766df15dea5530d70be9e2a22b3f69b4432a66b45e2c5"
+      "sha256": "dab6ecbacf6dfaeded7c288785c2a4245fc1547b8f7644b47bf2fdc55ba2a05b"
     },
     {
       "path": "js/release-worker.js",
@@ -635,7 +635,7 @@
     },
     {
       "path": "js/system-version.js",
-      "sha256": "e951e7d2f30e51f1d597524b801838c8e7b403369baeceeb51afcd62142a585c"
+      "sha256": "138574445756fb58bcdf7e4ea20a62ae2a7aefe5a30e4efa90f6e2651763664c"
     },
     {
       "path": "js/technical-center.js",
@@ -710,5 +710,5 @@
       "sha256": "9176f36c3dcb30b2e77a9a8fba5e5564d569663741e4453ed4d316909d68cda3"
     }
   ],
-  "digest": "02802d902e11d060ef797efb8070c5300941c81b4edec0f753b59c2b0529d77a"
+  "digest": "b05ecd9fe1d7f3249429d71ea793a1371844fb959b85b33290e76971305bc86d"
 }

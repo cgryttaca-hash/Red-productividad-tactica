@@ -1,12 +1,12 @@
 {
-  "version": "4.9.1",
+  "version": "4.9.2",
   "result": "PASS",
   "dateBogota": "2026-11-01",
   "suites": 4,
   "checks": 13,
   "resources": 177,
-  "digest": "02802d902e11d060ef797efb8070c5300941c81b4edec0f753b59c2b0529d77a",
-  "physicalKeyboardVerified": false,
+  "digest": "b05ecd9fe1d7f3249429d71ea793a1371844fb959b85b33290e76971305bc86d",
   "productionDeployed": false,
-  "report": "entrega/v491/PRUEBAS.json"
+  "physicalKeyboardVerified": false,
+  "report": "entrega/v492/PRUEBAS.json"
 }

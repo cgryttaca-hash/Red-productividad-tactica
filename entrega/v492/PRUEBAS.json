@@ -1,0 +1,41 @@
+{
+  "version": "4.9.2",
+  "dateBogota": "2026-11-01",
+  "result": "PASS",
+  "suiteCount": 4,
+  "checks": 13,
+  "suites": {
+    "agenda-excel": {
+      "result": "PASS",
+      "checks": 7,
+      "evidence": "pruebas/agenda-excel.json"
+    },
+    "ventana-aplicacion": {
+      "result": "PASS",
+      "checks": 3,
+      "evidence": "pruebas/ventana-aplicacion.json"
+    },
+    "pruebas-migracion": {
+      "result": "PASS",
+      "checks": 1,
+      "evidence": "pruebas/pruebas-migracion.json"
+    },
+    "estructura": {
+      "result": "PASS",
+      "checks": 2,
+      "evidence": "pruebas/estructura.json"
+    }
+  },
+  "resources": 177,
+  "digest": "b05ecd9fe1d7f3249429d71ea793a1371844fb959b85b33290e76971305bc86d",
+  "productionDeployed": false,
+  "physicalKeyboardVerified": false,
+  "limits": [
+    "No se publico ni se modifico GitHub, Firebase, credenciales, reglas o Excel operativo del usuario.",
+    "El libro y handle XLSX son reales en OPFS de un perfil temporal. Los datos de referencia se reprodujeron de las imagenes; un segundo evento ficticio se usa solo para comprobar que no se mezclen servicios.",
+    "La lectura/sincronizacion usa el lector original; se dispara su comprobacion existente al recuperar foco y se verifica la actualizacion de la Agenda abierta, copia y hash de publicacion. Firestore usa un adaptador en memoria.",
+    "La ventana Chrome de ensayo confirmo modo standalone y uso teclado automatizado por CDP. No se prueba el teclado fisico o la PWA personal del usuario.",
+    "Se conserva la frecuencia y disponibilidad de la comprobacion original de Excel. No se instala un monitor de archivos ni se prometen notificaciones instantaneas del sistema operativo.",
+    "No se modifica la fuente ni se deducen asociaciones nuevas entre horarios y descripciones. Se muestran las dos columnas completas con sus lineas originales."
+  ]
+}

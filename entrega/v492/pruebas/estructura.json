@@ -1,0 +1,17 @@
+[
+  {
+    "result": "PASS",
+    "scripts": 90,
+    "pages": 16,
+    "protectedFiles": 6,
+    "manifests": 2,
+    "assistant": "disabled"
+  },
+  {
+    "result": "PASS",
+    "version": "4.9.2",
+    "resources": 177,
+    "workerDigest": "b05ecd9fe1d7f3249429d71ea793a1371844fb959b85b33290e76971305bc86d",
+    "manifests": 2
+  }
+]

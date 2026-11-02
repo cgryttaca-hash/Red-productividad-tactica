@@ -10,3 +10,10 @@
  @media(max-width:600px){.event-agenda-modal{padding:8px}.event-agenda-dialog{max-height:calc(100dvh - 16px)}.event-agenda-heading{padding:14px}.generated-agenda-content{padding:12px;gap:9px}.agenda-detail-block{padding:12px}.agenda-field-grid{grid-template-columns:1fr;gap:3px}.agenda-field-grid dd{margin-bottom:7px;font-size:13px}#eventObservation{font-size:16px}.event-agenda-actions{padding:10px 12px}.agenda-note-actions>*{flex:1 1 140px}}
 }
 @media print{.agenda-details-action,.event-agenda-modal{display:none!important}}
+
+@media screen{
+ html[data-page="agendas"] .agenda-source-scroll{max-width:100%;overflow-x:auto}
+ html[data-page="agendas"] .agenda-source-services{min-width:560px!important}
+ html[data-page="agendas"] .agenda-source-services th:first-child{width:42%}
+ html[data-page="agendas"] .agenda-source-services td{vertical-align:top;line-height:1.7;white-space:pre-wrap}
+}

@@ -1,0 +1,17 @@
+{
+  "passed": [
+    "Ventana real de Chrome iniciada con --app: Ctrl+A enviado por CDP abre Agendas, conserva el origen y muestra los datos de ensayo con el código existente",
+    "En la ventana de aplicación, Ctrl+M conserva su validación y los tres apartados administrativos de 4.9",
+    "El acceso de Agenda no reincorpora autorización de dispositivos ni cambia la instalación PWA"
+  ],
+  "modes": {
+    "standalone": true,
+    "browser": false
+  },
+  "keyboardInput": "Chrome DevTools Protocol",
+  "physicalKeyboardVerified": false,
+  "limits": [
+    "Ventana Chrome --app en perfil de ensayo, sin instalar o cambiar la PWA del usuario.",
+    "Teclado automatizado por CDP; no se prueba el teclado físico del usuario. Ctrl+A abre la consulta desde Inicio y conserva Seleccionar todo en los campos de texto."
+  ]
+}
